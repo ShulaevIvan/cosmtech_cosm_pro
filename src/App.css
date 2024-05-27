@@ -123,9 +123,9 @@ section, .hero-section {
 }
 @media (min-width: 400px) and (max-width: 993px) { 
   .container {
-      width: 900px;
-      max-width: 100%;
-      min-width: 400px;
+      width: 100%;
+      max-width: 900px;
+      min-width: 100%
   }
 }
 .container-center {
