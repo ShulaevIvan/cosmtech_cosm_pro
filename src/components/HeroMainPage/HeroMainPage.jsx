@@ -1,13 +1,25 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import MainPageOrderForm from "../MainPageOrderForm/MainPageOrderForm";
+import { openOrderFrom } from "../../redux/slices/mainPageSlice";
 
 const HeroMainPage = () => {
+    const dispatch = useDispatch();
+    const calculatorPopup = useSelector((state) => state.mainPage.calculatorForm);
+    const orderForm = useSelector((state) => state.mainPage.orderForm);
+
+    const orderFormHandler = (status) => {
+        dispatch(openOrderFrom({status: status}));
+    };
+
     return (
         <React.Fragment>
-            <section class="hero-section">
-                <div class="hero-img-wrap">
-                    <div class="hero-img-main-title-wrap">
+            <section className="hero-section">
+               {orderForm.popupOpen ?  <MainPageOrderForm orderFormHandler={orderFormHandler} /> : null}
+                <div className="hero-img-wrap">
+                    <div className="hero-img-main-title-wrap">
                         <h1>Контрактное Производство косметики в Санкт-Петербурге</h1>
-                        <div class="hero-img-main-title-description">
+                        <div className="hero-img-main-title-description">
                             <p>
                                 Рыбатекст используется дизайнерами, 
                                 проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. 
@@ -15,12 +27,15 @@ const HeroMainPage = () => {
                                 никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.
                             </p>
                         </div>
-                        <div class="hero-img-main-title-controls-wrap">
-                            <div class="hero-img-action-button-wrap">
-                                <span class="hero-img-action-button-main">Кальклулятор</span>
+                        <div className="hero-img-main-title-controls-wrap">
+                            <div className="hero-img-action-button-wrap">
+                                <span className="hero-img-action-button-main">Кальклулятор</span>
                             </div>
-                            <div class="hero-img-action-button-wrap">
-                                <span class="hero-img-action-button-main">Получить рассчет</span>
+                            <div className="hero-img-action-button-wrap">
+                                <span
+                                    className="hero-img-action-button-main"
+                                    onClick={() => orderFormHandler(true)}
+                                >Получить рассчет</span>
                             </div>
                         </div>
                     </div>

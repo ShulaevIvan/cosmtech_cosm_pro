@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import footerLogo from '../../img/logo_cosm.jpeg';
 import telegramLogo from '../../img/telegram_footer.svg';
 import whatsappLogo from '../../img/whatsapp_footer.svg';
@@ -14,7 +15,7 @@ const Footer = () => {
                         <div class="main-footer-logo">
                             <div class="footer-logo-social-row">
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src={footerLogo} alt="logo footer" /></a>
+                                    <Link to={'/'}><img src={footerLogo} alt="logo footer" /></Link>
                                 </div>
                             <div class="footer-socials-row">
                                 <div class="social-item"><a href="#"><img src={telegramLogo}  alt="telegram logo"/></a></div>

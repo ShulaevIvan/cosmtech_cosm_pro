@@ -1,9 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
-import menuSlice from '../slices/menuSlice';
+import innerPageSlice from '../slices/innerPageSlice';
+import mainPageSlice from '../slices/mainPageSlice';
 
 export const store = configureStore({
     reducer: {
-        mainMenu: menuSlice,
+        innerPage: innerPageSlice,
+        mainPage: mainPageSlice,
     },
     middleware: (getDefaultMiddleware)  => getDefaultMiddleware(),
 });

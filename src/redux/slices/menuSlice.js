@@ -1,11 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
+import { createAction } from "@reduxjs/toolkit";
 
 const initialState = { 
     mobileMenuActive: false,
 };
 
 const menuSlice = createSlice({
-    name: 'subMenu',
+    name: 'menu',
     initialState,
     reducers: {
         mobileMenuActive(state, action) {

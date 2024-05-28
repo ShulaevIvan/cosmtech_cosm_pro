@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import callbackIcon from '../../img/callback.svg';
 import sendmailIcon from '../../img/send_mail.svg';
 import mainLogoIcon from '../../img/logo_cosm.jpeg';
@@ -13,14 +14,14 @@ const Header = () => {
                 <MobileMenu logo={mainLogoMinIcon}  />
                 <div className="container-center-header">
                     <div className="main-header-row">
-                        <div className="logo-wrap"><a href="index.html"><img src={mainLogoIcon}  alt="logo"/></a></div>
+                        <div className="logo-wrap"><Link to={'/'}><img src={mainLogoIcon}  alt="logo"/></Link></div>
                         <div className="main-nav-wrap">
                             <nav className="main-nav">
                                 <ul className="main-nav-list">
-                                    <li><a href="index.html">Контрактное производство</a></li>
-                                    <li><a href="services.html">Услуги</a></li>
-                                    <li><a href="about.html">О Нас</a></li>
-                                    <li><a href="contacts.html">Контакты</a></li>
+                                    <li><Link to={'/'}>Контрактное производство</Link></li>
+                                    <li><Link to={'/services'}>Услуги</Link></li>
+                                    <li><Link to={'/about'}>О Нас</Link></li>
+                                    <li><Link to={'/contacts'}>Контакты</Link></li>
                                 </ul>
                             </nav>
                         </div>
