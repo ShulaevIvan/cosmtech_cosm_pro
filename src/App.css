@@ -480,6 +480,7 @@ section, .hero-section {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  max-width: 1080px;
   justify-content: center;
 }
 .independence-main-item:nth-child(2) {
@@ -560,6 +561,7 @@ section, .hero-section {
   flex-wrap: wrap;
   font-size: 20px;
   width: 100%;
+  margin-left: 2%;
 }
 .contact-form-order-main-row {
   display: flex;
@@ -586,7 +588,7 @@ section, .hero-section {
   margin-left: 20px;
 }
 .contact-form-order-main-item input {
-  min-height: 25px;
+  min-height: 27px;
 }
 .contact-form-order-main-input-wrap,
 .contact-form-order-main-label-wrap {
@@ -1132,7 +1134,7 @@ section, .hero-section {
   max-width: 380px;
 }
 .main-footer-input-wrap input {
-  min-height: 24px;
+  min-height: 26px;
   min-width: 250px;
   max-width: 250px;
   max-height: 24px;
