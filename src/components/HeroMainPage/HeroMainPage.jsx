@@ -8,7 +8,8 @@ const HeroMainPage = () => {
     const calculatorPopup = useSelector((state) => state.mainPage.calculatorForm);
     const orderForm = useSelector((state) => state.mainPage.orderForm);
 
-    const orderFormHandler = (status) => {
+    const orderFormHandler = (e, status) => {
+        const mousePosition = e.clientRect()
         dispatch(openOrderFrom({status: status}));
     };
 
@@ -34,7 +35,7 @@ const HeroMainPage = () => {
                             <div className="hero-img-action-button-wrap">
                                 <span
                                     className="hero-img-action-button-main"
-                                    onClick={() => orderFormHandler(true)}
+                                    onClick={(e) => orderFormHandler(e, true)}
                                 >Получить рассчет</span>
                             </div>
                         </div>
