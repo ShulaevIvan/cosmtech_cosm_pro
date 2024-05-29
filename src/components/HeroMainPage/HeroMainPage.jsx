@@ -9,7 +9,6 @@ const HeroMainPage = () => {
     const orderForm = useSelector((state) => state.mainPage.orderForm);
 
     const orderFormHandler = (e, status) => {
-        const mousePosition = e.clientRect()
         dispatch(openOrderFrom({status: status}));
     };
 
