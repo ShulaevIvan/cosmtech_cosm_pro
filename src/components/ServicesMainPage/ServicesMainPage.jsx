@@ -1,15 +1,40 @@
 import React from "react";
-import imgHolder250 from '../../img/250.png';
+import { useSelector, useDispatch } from "react-redux";
+import { serviceShowBtn, showAllServices, serviceOrderPopup } from "../../redux/slices/mainPageSlice";
+import { useEffect } from "react";
+
+import ServicesMainPagePopup from "../ServiceMainPagePopup/ServiceMainPagePopup";
 
 const ServicesMainPage = () => {
+
+    const dispatch = useDispatch();
+    const servicesState = useSelector((state) => state.mainPage.services);
+
+    const serviceBtnHandler = (service, status) => {
+        dispatch(serviceShowBtn({status: status, targetId: service.id}));
+    };
+
+    const showAllServicesHandler = (status) => {
+        dispatch(showAllServices({status: status}));
+    };
+
+    const serviceOrderPopupHandler = (status) => {
+        dispatch(serviceOrderPopup({status: status}));
+    };
+
+    useEffect(() => {
+        dispatch(showAllServices({status: false}));
+    }, []);
+    
+    
     return (
         <React.Fragment>
             <section>
-                <div class="container">
-                    <div class="services-main-wrap">
-                        <div class="container-center">
-                            <div class="services-mainpage-title-wrap">
-                                <h2 class="main-color-title">Что мы производим</h2>
+                <div className="container">
+                    <div className="services-main-wrap">
+                        <div className="container-center">
+                            <div className="services-mainpage-title-wrap">
+                                <h2 className="main-color-title">Что мы производим</h2>
                             </div>
                             <div class="services-mainpage-description-wrap">
                                 <p>
@@ -18,47 +43,42 @@ const ServicesMainPage = () => {
                             </div>
                         </div>
 
-                        <div class="services-main-row">
-                            <div class="services-main-item">
-                                <div class="service-background-wrap">
-                                    <div class="service-background-title">
-                                        <h4 class="off-color-title">Product Title</h4>
-                                    </div>
-                                    <img src={imgHolder250} alt="holder1"/>
-                                    <div class="service-background-order-btn-wrap">
-                                        <span class="service-background-order-btn">Рассчитать стоимость</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="services-main-item">
-                                <div class="service-background-wrap">
-                                    <div class="service-background-title">
-                                        <h4 class="off-color-title">Product Title</h4>
-                                    </div>
-                                    <img src={imgHolder250} alt="holder2"/>
-                                </div>
-                            </div>
-                            <div class="services-main-item">
-                                <div class="service-background-wrap">
-                                    <div class="service-background-title">
-                                        <h4 class="off-color-title">Product Title</h4>
-                                    </div>
-                                    <img src={imgHolder250} alt="holder3"/>
-                                </div>
-                            </div>
-                            <div class="services-main-item">
-                                <div class="service-background-wrap">
-                                    <div class="service-background-title">
-                                        <h4 class="off-color-title">Product Title</h4>
-                                    </div>
-                                    <img src={imgHolder250} alt="holder4"/>
-                                </div>
-                            </div>
+                        <div className="services-main-row">
+                            {servicesState.servicePopupShow ? <ServicesMainPagePopup popupHandler={serviceOrderPopupHandler} /> : null}
+                            {Array.from(servicesState.servicesItems).map((serviceItem) => {
+                                return (
+                                    <React.Fragment key={Math.random()}>
+                                        <div 
+                                            className={serviceItem.amimate ? "services-main-item service-main-item-animate" : "services-main-item"}
+                                            onMouseOver={() => serviceBtnHandler(serviceItem, 'show')}
+                                            onMouseLeave={() => serviceBtnHandler(serviceItem, 'reset')}
+                                            
+                                        >
+                                            <div className="service-background-wrap">
+                                                <div className="service-background-title">
+                                                    <h4 className="off-color-title">{serviceItem.name}</h4>
+                                                </div>
+                                                <img src={serviceItem.serviceImg} alt="holder1"/>
+                                                {serviceItem.serviceOrderActive ? 
+                                                    <div className="service-background-order-btn-wrap">
+                                                        <span
+                                                            onClick={() => serviceOrderPopupHandler(true)}
+                                                            className="service-background-order-btn">Рассчитать стоимость</span>
+                                                    </div>
+                                                : null}
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
+                                )
+                            })}
                         </div>
 
-                        <div class="services-view-all-btn-wrap-btn-wrap">
-                            <span class="services-view-all-btn-text">Посмотрите все наши продукты</span>
-                            <span class="services-view-all-services-btn">Все продукты</span>
+                        <div className="services-view-all-btn-wrap-btn-wrap">
+                            <span className="services-view-all-btn-text">Посмотрите все наши продукты</span>
+                            <span 
+                                className="services-view-all-services-btn"
+                                onClick={() => showAllServicesHandler(servicesState.showAll ? false : true)}
+                            >{servicesState.showAllBtnText}</span>
                         </div>
 
                     </div>

@@ -6,7 +6,6 @@ import VideoMainPage from "../VideoMainPage/VideoMainPage";
 import ServicesMainPage from "../ServicesMainPage/ServicesMainPage";
 import ProductionMainPage from "../ProductionMainPage/ProductionMainPage";
 import ClientsMainPage from "../ClientsMainPage/ClientsMainPage";
-import PrefooterMainPage from "../PrefooterMainPage/PrefooterMainPage";
 
 const MainPage = () => {
     return (

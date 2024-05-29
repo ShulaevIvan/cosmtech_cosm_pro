@@ -1,16 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import callbackIcon from '../../img/callback.svg';
 import sendmailIcon from '../../img/send_mail.svg';
 import mainLogoIcon from '../../img/logo_cosm.jpeg';
 import mainLogoMinIcon from '../../img/logo_cosm.png';
+
+import CallbackRequestPopup from "../CallbackRequestPopup/CallbackRequestPopup";
 import MobileMenu from "../MobileMenu/MobileMenu";
+
+import { callbackPopupShow } from "../../redux/slices/headerSlice";
 
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const callbackPopup = useSelector((state) => state.header.callbackPopupActive);
+
+    const callbackPopupHandler = (status) => {
+        dispatch(callbackPopupShow({ status: status }));
+    };
+    
+
     return (
         <React.Fragment>
             <header className="main-header">
+                {callbackPopup ?  <CallbackRequestPopup callbackPopupHander = {callbackPopupHandler} /> : null}
                 <MobileMenu logo={mainLogoMinIcon}  />
                 <div className="container-center-header">
                     <div className="main-header-row">
@@ -27,7 +41,10 @@ const Header = () => {
                         </div>
                         <div className="contacts-header-row">
                             <div className="callback-btn-wrap">
-                                <span className="callback-btn">Консультация</span>
+                                <span 
+                                    className="callback-btn"
+                                    onClick={() => callbackPopupHandler(true)}
+                                >Консультация</span>
                                 <span className="header-worktime">пн-пт с 10:00 - 18:00</span>
                             </div>
                             <div class="callback-wrap">

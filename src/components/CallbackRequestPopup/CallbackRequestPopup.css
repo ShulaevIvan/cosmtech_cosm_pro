@@ -1,0 +1,107 @@
+.callback-request-popup {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    background-color: gray;
+    width: 500px;
+    max-width: 800px;
+    min-height: 250px;
+    position: fixed;
+    left: 30%;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #00458B;
+    animation-duration: 0.3s;
+    animation-name: grow;
+    border-radius: 10px;
+}
+.callback-request-popup h3 {
+    color: #00458B;
+    font-size: 24px;
+}
+.callback-request-popup-close {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 40px;
+}
+.callback-input-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    color: #00458B;
+    font-family: gothampro bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.callback-request-popup-from-wrap,
+.callback-request-popup-from-wrap form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+}
+.callback-request-popup-from-wrap {
+    margin-bottom: 20px;
+}
+.callback-request-popup-from-wrap form input {
+    min-height: 30px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.callback-request-inputs-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.callback-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 50%;
+    width: 40%;
+    margin-right: 20px;
+    margin-bottom: 30px;
+}
+.callback-from-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.callback-send-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 35px;
+    padding: 0 30px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
+}
+.callback-send-btn:hover{
+    background-color: #00458B;
+    transition: background .4s ease;
+}

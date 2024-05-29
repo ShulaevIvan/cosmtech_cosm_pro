@@ -754,14 +754,18 @@
 .service-popup-wrap {
     max-width: 600px;
     min-height: 400px;
+    width: 400px;
     background-color: white;
     color: #1E1E1E;
     position: absolute;
-    z-index: 2;
+    z-index: 5;
     border: 1px solid;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 20px;
+    animation-duration: 0.3s;
+    animation-name: grow;
+    border-radius: 10px;
 }
 .service-popup-close-wrap {
     display: flex;

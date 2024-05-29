@@ -4,12 +4,10 @@ import { orderFormAdditionalFields } from "../../redux/slices/mainPageSlice";
 const MainPageOrderForm = (props) => {
     const dispatch = useDispatch();
     const orderFormState = useSelector((state) => state.mainPage.orderForm);
-    console.log(orderFormState.additionalFields.fieldsActive)
     
     const additionalFieldsHandler = (status) => {
         dispatch(orderFormAdditionalFields({status: status}));
     };
-    console.log(orderFormState.additionalFields.fieldsActive)
 
     return (
         <React.Fragment>

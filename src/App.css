@@ -1,4 +1,5 @@
 
+
 @font-face {
   font-family: 'centurygothic';
   src: local('centurygothic'),
@@ -16,8 +17,20 @@
 }
 input[type='radio'] {
   accent-color: #18A099;
-
 }
+input, textarea {
+  outline-color: #3FD2C7;
+}
+input:focus, textarea:focus {
+  background-color: #141414;
+  opacity: 0.6;
+  color: white;
+}
+input {
+  border: 1px solid #00458B;
+  text-shadow: 1px 1px 0px rgba( 255, 255, 255, 0.1);
+}
+
 header { 
   margin: 0 auto;
   max-width: 1920px;
@@ -226,6 +239,7 @@ section, .hero-section {
   cursor: pointer;
   font-size: 16px;
   min-height: 18px;
+  border-radius: 2px;
 }
 .contacts-header-row {
   display: flex;
@@ -376,6 +390,7 @@ section, .hero-section {
   padding: 0 40px;
   outline: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 .hero-img-action-button-main:hover,
 .callback-btn:hover,
@@ -597,7 +612,7 @@ section, .hero-section {
   align-items: center;
   justify-content: center;
   width: 85px;
-  height: 30px;
+  height: 32px;
   padding: 0 40px;
   font-size: 18px;
   color: #fff;
@@ -607,6 +622,7 @@ section, .hero-section {
   padding: 0 40px;
   outline: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 .contact-form-order-main-label-wrap label {
   margin-bottom: 5px;
@@ -660,7 +676,12 @@ section, .hero-section {
   max-height: 250px;
   border: 1px solid;
   margin-right: 20px;
+  margin-bottom: 20px;
   cursor: pointer;
+}
+.service-main-item-animate {
+  animation-name:  fadeInUp;
+  animation-duration: 0.8s;
 }
 .service-background-wrap {
   display: flex;
@@ -678,6 +699,9 @@ section, .hero-section {
   top: 0;
   left: 25%;
   font-size: 22px;
+}
+.service-background-title h4 {
+  text-transform: capitalize;
 }
 .service-background-order-btn-wrap {
   position: absolute;
@@ -722,7 +746,7 @@ section, .hero-section {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
+  width: 170px;
   height: 40px;
   padding: 0 40px;
   font-size: 18px;
@@ -733,6 +757,7 @@ section, .hero-section {
   padding: 0 40px;
   outline: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 .our-facts-mainpage-wrap {
   display: flex;
@@ -835,7 +860,7 @@ section, .hero-section {
   line-height: 22px;
 }
 
-.timeline li:before{
+.timeline li:before {
   counter-increment: year;
   /* content: ''; */
   font-size: 32px;
@@ -853,7 +878,6 @@ section, .hero-section {
   transition: all ease-in-out .3s;
   cursor: pointer;
 }
-
 .timeline li:after{
   content: "";
   position: absolute;
@@ -872,7 +896,7 @@ section, .hero-section {
 .timeline li.active{
   color: #555555;
 }
-.timeline li.active:before{
+.timeline li.active:before {
   background: #00458B;
   color: #F1F1F1;
 }
@@ -1118,6 +1142,7 @@ section, .hero-section {
   width: 100px;
   min-height: 24px;
   height: 30px;
+  border-radius: 2px;
 }
 .main-footer-btn-send {
   display: flex;
@@ -1348,6 +1373,7 @@ section, .hero-section {
   padding: 0 40px;
   outline: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 .footer-copy-text {
   display: flex;
@@ -1376,12 +1402,13 @@ section, .hero-section {
   width: 500px;
   max-width: 500px;
   min-height: 400px;
-  position: absolute;
-  top: 5%;
+  position: fixed;
   left: 30%;
   background-color: white;
   padding: 35px 25px;
   border: 1px solid #00458B;
+  animation-duration: 0.3s;
+  animation-name: grow;
 }
 .hero-order-form-options-title {
   display: flex;
@@ -2033,4 +2060,54 @@ section, .hero-section {
 @keyframes default_ani {
   0% {opacity: 0;}
   100% {opacity: 1;}
+}
+
+@keyframes fade_in {
+  from {
+    width: 0;
+
+  }
+  to {
+    width: 100%;
+    transition: height 2s;
+  }
+}
+@keyframes shift {
+  10% {
+      transform: translate3d(0, 0, 0);
+  }
+  20% {
+      transform: translate3d(-20px, 0, 0);
+  }
+  50% {
+      transform: translate3d(10px, 0, 0);
+  }
+  75% {
+      transform: translate3d(-7px, 0, 0);
+  }
+  100% {
+      transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes fadeInUp {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.box {
+  animation: drop-in 1000ms;
 }
