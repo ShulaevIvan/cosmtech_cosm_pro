@@ -6,6 +6,44 @@ const initialState = {
     },
     orderForm: {
         popupOpen: false,
+        baseFields: [
+            {
+                id: 1,
+                name: 'Имя',
+                fieldName: 'name', 
+                value: '',
+                type: 'text',
+                selected: false,
+                err: false,
+            },
+            {
+                id: 2,
+                name: 'Телефон', 
+                value: '',
+                fieldName: 'phone', 
+                type: 'tel',
+                selected: false,
+                err: false,
+            },
+            {
+                id: 3,
+                name: 'Email', 
+                value: '',
+                type: 'email',
+                fieldName: 'email', 
+                selected: false,
+                err: false,
+            },
+            {
+                id: 4,
+                name: 'Комментарий', 
+                value: '',
+                type: 'textarea',
+                fieldName: 'comment', 
+                selected: false,
+                err: false,
+            },
+        ],
         additionalFields: {
             fieldsActive: false,
             fieldsTypes: [
@@ -194,7 +232,20 @@ const mainPageSlice = createSlice({
             }
             state.orderForm.additionalFields.fieldsActive = status;
         },
-
+        orderFormSelectInput(state, action) {
+            const { fieldId, fieldType, fieldName } = action.payload;
+            state.orderForm.baseFields.map((fieldItem) => {
+                if (fieldItem.id === fieldId && fieldType === fieldType && fieldItem.name === fieldName) {
+                    return {
+                        ...fieldItem,
+                        selected: true,
+                    }
+                }
+                return {
+                    ...fieldItem
+                }
+            });
+        },
         serviceShowBtn(state, action) {
             const { status, targetId } = action.payload;
             const targetService = state.services.servicesItems.find((item) => item.id === targetId);
@@ -266,6 +317,7 @@ export const {
     serviceShowBtn,
     showAllServices,
     serviceOrderPopup,
-    selectProduction
+    selectProduction,
+    orderFormSelectInput,
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

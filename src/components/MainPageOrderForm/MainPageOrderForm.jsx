@@ -1,10 +1,18 @@
 import React from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { orderFormAdditionalFields } from "../../redux/slices/mainPageSlice";
+import { orderFormAdditionalFields, validateOrderForm } from "../../redux/slices/mainPageSlice";
+
+
 const MainPageOrderForm = (props) => {
     const dispatch = useDispatch();
     const orderFormState = useSelector((state) => state.mainPage.orderForm);
-    
+    const baseFields = useSelector((state) => state.mainPage.orderForm.baseFields);
+    const nameInputRef = useRef(null);
+    const phoneInputRef = useRef(null);
+    const emailInputRef = useRef(null);
+    const commentInputRef = useRef(null);
+
     const additionalFieldsHandler = (status) => {
         dispatch(orderFormAdditionalFields({status: status}));
     };
@@ -54,33 +62,32 @@ const MainPageOrderForm = (props) => {
                             </div>
 
                         : null}
-                       
-                        <div className="hero-order-main-fields-wrap">
-                            <div className="hero-order-main-fields-title-wrap">
-                                <label>Имя</label>
-                            </div>
-                            <div className="hero-order-main-fields-input-wrap">
-                                <input type="text" />
-                            </div>
-                            <div className="hero-order-main-fields-title-wrap">
-                                <label>Телефон</label>
-                            </div>
-                            <div className="hero-order-main-fields-input-wrap">
-                                <input type="tel" />
-                            </div>
-                            <div className="hero-order-main-fields-title-wrap">
-                                <label>Email</label>
-                            </div>
-                            <div className="hero-order-main-fields-input-wrap">
-                                <input type="email" />
-                            </div>
-                            <div className="hero-order-main-fields-title-wrap">
-                                <label>Комментарий</label>
-                            </div>
-                            <div className="hero-order-main-fields-input-wrap">
-                                <textarea></textarea>
-                            </div>
+
+                        <div className="hero-order-main-fields-title-wrap">
+                            <label>Имя</label>
                         </div>
+                        <div className="hero-order-main-fields-input-wrap">
+                            <input type="text" />
+                        </div>
+                        <div className="hero-order-main-fields-title-wrap">
+                            <label>Телефон</label>
+                        </div>
+                        <div className="hero-order-main-fields-input-wrap">
+                            <input type="tel" />
+                        </div>
+                        <div className="hero-order-main-fields-title-wrap">
+                            <label>Email</label>
+                        </div>
+                        <div className="hero-order-main-fields-input-wrap">
+                            <input type="email" />
+                        </div>
+                        <div className="hero-order-main-fields-title-wrap">
+                            <label>Комментарий</label>
+                        </div>
+                        <div className="hero-order-main-fields-input-wrap">
+                            <textarea></textarea>
+                        </div>
+
                         <div className="hero-order-main-fields-checkbox-wrap">
                             <div className="form-mode-checkbox">
                                 <input type="checkbox" id="checkbox-custom-hero-form-policy" class="checkbox-custom-hero-form-policy" />

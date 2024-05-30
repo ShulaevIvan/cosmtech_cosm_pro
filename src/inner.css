@@ -814,6 +814,12 @@
 .service-popup-form-title {
     margin-bottom: 5px;
 }
+.service-popup-form-title label,
+.service-form-options-title {
+    color: #00458B;
+    font-size: 18px;
+    font-family: gothampro bold;
+}
 .service-popup-form-wrap form input {
     min-width: 250px;
     min-height: 30px;

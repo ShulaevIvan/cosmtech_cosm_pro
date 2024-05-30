@@ -18,17 +18,28 @@
 input[type='radio'] {
   accent-color: #18A099;
 }
-input, textarea {
+input, textarea, .input-selected input {
   outline-color: #3FD2C7;
 }
-input:focus, textarea:focus {
+input:focus, textarea:focus, .input-selected input:focus {
   background-color: #141414;
-  opacity: 0.6;
+  opacity: 0.9;
   color: white;
 }
-input {
+input, textarea {
   border: 1px solid #00458B;
-  text-shadow: 1px 1px 0px rgba( 255, 255, 255, 0.1);
+  padding: 0 5px;
+  font-size: 16px;
+}
+.input-err {
+  border: 1px solid #CD5C5C;
+}
+.input-selected {
+  border: none;
+  outline: 2px solid #3FD2C7;
+  background-color: #141414;
+  opacity: 0.9;
+  color: white;
 }
 
 header { 
@@ -1239,9 +1250,13 @@ section, .hero-section {
 .prefooter-form-wrap form textarea {
   min-height: 60px;
   margin-bottom: 20px;
+  padding: 5px;
 }
 .prefooter-form-wrap form label {
   font-size: 18px;
+  margin-bottom: 5px;
+  color: #00458B;
+  font-family: gothampro bold;
 }
 .prefooter-form-checkbox-row {
   display: flex;
@@ -1404,7 +1419,7 @@ section, .hero-section {
   width: 500px;
   max-width: 500px;
   min-height: 400px;
-  position: fixed;
+  position: absolute;
   left: 30%;
   background-color: white;
   padding: 35px 25px;
@@ -1423,7 +1438,7 @@ section, .hero-section {
   font-size: 18px;
 }
 .hero-order-main-fields-title-wrap {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   color: #00458B;
   font-family: gothampro bold;
   font-size: 18px;
@@ -1439,18 +1454,19 @@ section, .hero-section {
 .hero-order-form select {
   min-height: 30px;
   margin-bottom: 5px;
-  min-width: 398px;
+  min-width: 250px;
   min-height: 30px;
   width: 100%;
-  max-width: 398px;
+  max-width: 270px;
 }
 .hero-order-form select {
-  min-width: 406px;
+  min-width: 280px;
   min-height: 37px;
 }
 .hero-order-form textarea {
   min-width: 400px;
   min-height: 75px;
+  padding: 5px;
 }
 .hero-order-form-mode-wrap {
   display: flex;
