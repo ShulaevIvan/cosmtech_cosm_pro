@@ -232,18 +232,23 @@ const mainPageSlice = createSlice({
             }
             state.orderForm.additionalFields.fieldsActive = status;
         },
-        orderFormSelectInput(state, action) {
-            const { fieldId, fieldType, fieldName } = action.payload;
-            state.orderForm.baseFields.map((fieldItem) => {
-                if (fieldItem.id === fieldId && fieldType === fieldType && fieldItem.name === fieldName) {
+        orderFormInputValidate(state, action) {
+            const { fieldId, fieldName, fieldType, fieldValue } = action.payload;
+            let checkErr;
+
+            if (fieldName === 'name') checkErr = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]/g.test(fieldValue);
+            if (fieldName === 'phone') {
+                console.log(fieldValue)
+            }
+            state.orderForm.baseFields = state.orderForm.baseFields.map((baseField) => {
+                if (baseField.id === Number(fieldId) && baseField.type === fieldType) {
                     return {
-                        ...fieldItem,
-                        selected: true,
+                        ...baseField,
+                        value: fieldValue,
+                        err: checkErr,
                     }
                 }
-                return {
-                    ...fieldItem
-                }
+                return baseField;
             });
         },
         serviceShowBtn(state, action) {
@@ -318,6 +323,6 @@ export const {
     showAllServices,
     serviceOrderPopup,
     selectProduction,
-    orderFormSelectInput,
+    orderFormInputValidate
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;
