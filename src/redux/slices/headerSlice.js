@@ -49,6 +49,7 @@ const headerSlice = createSlice({
         clearCallbackInput(state) {
             state.callbackHeader.callbackInputValue = '';
             state.callbackHeader.callbackInputValid = false;
+            state.callbackHeader.callbackSendBtnStatus = false;
         },
         callbackSendBtn(state) {
             if (state.callbackHeader.callbackInputValid && state.callbackHeader.checkboxPolicyActive) {
