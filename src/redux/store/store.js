@@ -11,5 +11,5 @@ export const store = configureStore({
         mainPage: mainPageSlice,
         footer: footerSlice,
     },
-    middleware: (getDefaultMiddleware)  => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware)  => getDefaultMiddleware({serializableCheck: false}),
 });

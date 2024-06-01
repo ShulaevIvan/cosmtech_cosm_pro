@@ -14,7 +14,8 @@ import { callbackPopupShow } from "../../redux/slices/headerSlice";
 
 const Header = () => {
     const dispatch = useDispatch();
-    const callbackPopup = useSelector((state) => state.header.callbackPopupActive);
+    const headerState = useSelector((state) => state.header);
+    const callbackPopup = useSelector((state) => state.header.callbackHeader.callbackPopupActive);
 
     const callbackPopupHandler = (status) => {
         dispatch(callbackPopupShow({ status: status }));
@@ -24,7 +25,12 @@ const Header = () => {
     return (
         <React.Fragment>
             <header className="main-header">
-                {callbackPopup ?  <CallbackRequestPopup callbackPopupHander = {callbackPopupHandler} /> : null}
+                {callbackPopup ?  
+                    <CallbackRequestPopup 
+                        callbackPopupHander = {callbackPopupHandler}
+                        callbackState = {headerState.callbackHeader}
+                    /> 
+                : null}
                 <MobileMenu logo={mainLogoMinIcon}  />
                 <div className="container-center-header">
                     <div className="main-header-row">
@@ -49,11 +55,11 @@ const Header = () => {
                             </div>
                             <div class="callback-wrap">
                                 <span className="callback-icon"><img src={callbackIcon} alt="callback-icon" class="filter-green" /></span>
-                                <span><a href="#">+7 (812) XXX-XX-XX</a></span>
+                                <span><a href="#">+7 (812) 363-06-14</a></span>
                             </div>
                             <div class="email-wrap">
                                 <span className="email-icon"><img src={sendmailIcon} alt="callback-icon" /></span>
-                                <span><a href="#">test@cosmtech.ru</a></span>
+                                <span><a href="#">pro@cosmtech.ru</a></span>
                             </div>
                         </div>
                     </div>

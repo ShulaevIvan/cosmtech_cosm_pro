@@ -6,6 +6,8 @@ const initialState = {
     },
     orderForm: {
         popupOpen: false,
+        allFieldsValid: false,
+        policyChecked: false,
         baseFields: [
             {
                 id: 1,
@@ -14,6 +16,7 @@ const initialState = {
                 value: '',
                 type: 'text',
                 selected: false,
+                placeholder: 'Ваше имя',
                 err: false,
             },
             {
@@ -23,6 +26,7 @@ const initialState = {
                 fieldName: 'phone', 
                 type: 'tel',
                 selected: false,
+                placeholder: '812 xxx xx xx',
                 err: false,
             },
             {
@@ -32,6 +36,7 @@ const initialState = {
                 type: 'email',
                 fieldName: 'email', 
                 selected: false,
+                placeholder: 'demo@....ru',
                 err: false,
             },
             {
@@ -235,10 +240,15 @@ const mainPageSlice = createSlice({
         orderFormInputValidate(state, action) {
             const { fieldId, fieldName, fieldType, fieldValue } = action.payload;
             let checkErr;
-
-            if (fieldName === 'name') checkErr = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]/g.test(fieldValue);
-            if (fieldName === 'phone') {
-                console.log(fieldValue)
+            //eslint-disable-next-line
+            if (fieldName === 'name') {
+                checkErr = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]/g.test(fieldValue);
+                if (fieldValue.length < 3 || fieldValue === ' ') checkErr = true;
+                
+            }
+            if (fieldName === 'email') {
+                const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                checkErr = !emailPattern.test(fieldValue);
             }
             state.orderForm.baseFields = state.orderForm.baseFields.map((baseField) => {
                 if (baseField.id === Number(fieldId) && baseField.type === fieldType) {
@@ -250,6 +260,64 @@ const mainPageSlice = createSlice({
                 }
                 return baseField;
             });
+        },
+        orderFormPhoneInputValidate(state, action) {
+            const { fieldId, fieldType, ref } = action.payload;
+            //eslint-disable-next-line
+            const pattern = /^[0-9]\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})([0-9]{2})$/;
+            //eslint-disable-next-line
+            const symPattern = /[`!@№#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g;
+            const enRuPattern = /[a-zA-Zа-яА-Я]+/;
+
+            if (ref.current.value.replace(symPattern, '').length > 11) ref.current.value = ref.current.value.replace(/.$/, '');
+            ref.current.value = ref.current.value.replace(/\s/g, '').replace(symPattern, '');
+            ref.current.value = ref.current.value.replace(enRuPattern, '');
+            if (ref.current.value.length === 1 && (Number(ref.current.value[0]) <= 9)) ref.current.value = `7${ref.current.value}`;
+            if (ref.current.value.length < 8 || ref.current.value === ' ') {
+                state.orderForm.baseFields = state.orderForm.baseFields.map((baseField) => {
+                    if (baseField.id === Number(fieldId) && baseField.type === fieldType) {
+                        return {
+                            ...baseField,
+                            err: true,
+                        }
+                    }
+                    return baseField;
+                });
+            }
+            if ((pattern.test(ref.current.value)) && /^[7|8]/.test(ref.current.value)) {
+                ref.current.value.replace(pattern, (all, group2, group3, group4, group5) => {
+                    ref.current.value = `+7 (${group2}) ${group3}-${group4}-${group5}`;
+                    return `+7 (${group2})-${group3}-${group4}-${group5}`
+                });
+                
+                state.orderForm.baseFields = state.orderForm.baseFields.map((baseField) => {
+                    if (baseField.id === Number(fieldId) && baseField.type === fieldType) {
+                        return {
+                            ...baseField,
+                            value: ref.current.value,
+                            err: false,
+                        }
+                    }
+                    return baseField;
+                });
+            }
+        },
+        checkOrderFrom(state, action) {
+            const { formRefs } = action.payload;
+            const checkFields = state.orderForm.baseFields.filter((item) => !item.err);
+            const checkRefs = formRefs.filter(
+                (item) => item.ref.current.value !== '' && (item.name === 'phone' || item.name === 'name' || item.name === 'email')
+            );
+            if (checkRefs.length >= 2 && checkFields.length === 4 && state.orderForm.policyChecked) {
+                state.orderForm.allFieldsValid = true;
+                return;
+            }
+            state.orderForm.allFieldsValid = false;
+            
+        },
+        orderFormPolicyCheckbox(state, action) {
+            const { status } = action.payload;
+            state.orderForm.policyChecked = status;
         },
         serviceShowBtn(state, action) {
             const { status, targetId } = action.payload;
@@ -323,6 +391,9 @@ export const {
     showAllServices,
     serviceOrderPopup,
     selectProduction,
-    orderFormInputValidate
+    orderFormInputValidate,
+    orderFormPhoneInputValidate,
+    checkOrderFrom,
+    orderFormPolicyCheckbox
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

@@ -18,9 +18,17 @@
     animation-name: grow;
     border-radius: 10px;
 }
-.callback-request-popup h3 {
+.callback-request-popup h3,
+.callback-request-popup-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
     color: #00458B;
     font-size: 24px;
+    margin: 0;
 }
 .callback-request-popup-close {
     width: 100%;
@@ -35,11 +43,24 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    max-width: 260px;
     align-items: center;
     color: #00458B;
     font-family: gothampro bold;
     font-size: 18px;
     margin-bottom: 5px;
+}
+.callback-input-title label {
+    cursor: pointer;
+}
+.callback-request-description {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 300px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .callback-request-popup-from-wrap,
 .callback-request-popup-from-wrap form {
@@ -58,12 +79,14 @@
     min-height: 30px;
     margin-bottom: 5px;
     width: 100%;
+    max-width: 250px;
 }
 .callback-request-inputs-row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    max-width: 400px;
     justify-content: center;
     align-items: center;
 }
@@ -71,10 +94,11 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-width: 50%;
-    width: 40%;
-    margin-right: 20px;
-    margin-bottom: 30px;
+    width: 100%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
 }
 .callback-from-btn-wrap {
     display: flex;
@@ -88,7 +112,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 130px;
+    width: 150px;
+    max-width: 200px;
     height: 35px;
     padding: 0 30px;
     font-size: 18px;
@@ -104,4 +129,25 @@
 .callback-send-btn:hover{
     background-color: #00458B;
     transition: background .4s ease;
+}
+.callback-input-name {
+    width: 150px;
+    max-width: 130px;
+}
+.form-mode-checkbox-callback-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.callback-policy-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 250px;
 }
