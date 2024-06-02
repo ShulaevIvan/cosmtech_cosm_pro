@@ -304,7 +304,7 @@ const mainPageSlice = createSlice({
         },
         checkOrderFrom(state, action) {
             const { formRefs } = action.payload;
-            const checkFields = state.orderForm.baseFields.filter((item) => !item.err);
+            const checkFields = state.orderForm.baseFields.filter((item) => !item.err && item.value !== ' ');
             const checkRefs = formRefs.filter(
                 (item) => item.ref.current.value !== '' && (item.name === 'phone' || item.name === 'name' || item.name === 'email')
             );
@@ -312,8 +312,7 @@ const mainPageSlice = createSlice({
                 state.orderForm.allFieldsValid = true;
                 return;
             }
-            state.orderForm.allFieldsValid = false;
-            
+            state.orderForm.allFieldsValid = false; 
         },
         orderFormPolicyCheckbox(state, action) {
             const { status } = action.payload;

@@ -7,7 +7,7 @@ const AboutPage = () => {
     return (
         <React.Fragment>
             <InnerPageHeader />
-            <div class="inner-page-main-wrapper">
+            <div className="inner-page-main-wrapper">
             <section>
                 <div className="container">
                     <div className="about-title-wrap">

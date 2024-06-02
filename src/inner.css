@@ -685,6 +685,8 @@
     width: 100%;
     align-items: flex-start;
     margin-bottom: 80px;
+    animation:  slide-in 800ms;
+    animation-timing-function: linear;
 }
 .main-service-item-row p {
     max-width: 500px;
@@ -699,6 +701,7 @@
 .main-service-description-box {
     max-width: 100%;
     align-items: center;
+    justify-content: center;
     display: flex;
 }
 .main-service-img-wrap img p {
@@ -1117,6 +1120,30 @@
         margin-bottom: 20px;
     }
 }
+.slide-left {
+    animation:  slide-in-left 900ms;
+    animation-timing-function: linear;
+}
+.slide-right {
+    animation:  slide-in-right 900ms;
+    animation-timing-function: linear;
+}
 
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+@keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
 
 

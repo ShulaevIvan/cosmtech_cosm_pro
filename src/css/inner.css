@@ -368,8 +368,10 @@
     font-size: 20px;
     margin-bottom: 20px;
 }
-.contact-contact-page-form-file-input input[type='file'] {
+.contact-contact-page-form-file-input input {
     min-height: 30px;
+    outline: none;
+    border: none;
 }
 .contact-contact-page-form-file-input label {
     margin-bottom: 10px;
@@ -685,6 +687,8 @@
     width: 100%;
     align-items: flex-start;
     margin-bottom: 80px;
+    animation: showLeft 1s;
+    position: relative;
 }
 .main-service-item-row p {
     max-width: 500px;
@@ -1107,6 +1111,3 @@
         margin-bottom: 20px;
     }
 }
-
-
-

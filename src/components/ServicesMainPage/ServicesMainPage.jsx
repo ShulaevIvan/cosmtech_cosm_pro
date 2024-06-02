@@ -36,7 +36,7 @@ const ServicesMainPage = () => {
                             <div className="services-mainpage-title-wrap">
                                 <h2 className="main-color-title">Что мы производим</h2>
                             </div>
-                            <div class="services-mainpage-description-wrap">
+                            <div className="services-mainpage-description-wrap">
                                 <p>
                                     Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста.
                                 </p>

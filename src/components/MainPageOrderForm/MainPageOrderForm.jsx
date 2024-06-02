@@ -14,6 +14,7 @@ const MainPageOrderForm = (props) => {
     const dispatch = useDispatch();
     const orderFormState = useSelector((state) => state.mainPage.orderForm);
     const baseFields = useSelector((state) => state.mainPage.orderForm.baseFields);
+    const policyCheckboxRef = useRef(null);
     const formRefs = [
         {name: 'name', ref: useRef(null)},
         {name: 'phone', ref: useRef(null)},
@@ -28,6 +29,8 @@ const MainPageOrderForm = (props) => {
     const clearInputHandler = (e, ref) => {
         if (e.key === 'Backspace') {
             ref.current.value = '';
+            if (orderFormState.policyChecked) policyCheckboxRef.current.click();
+            dispatch(orderFormPolicyCheckbox({status: false}));
             dispatch(checkOrderFrom({formRefs: formRefs}));
         }
     };
@@ -74,7 +77,7 @@ const MainPageOrderForm = (props) => {
                     <form className="hero-order-form">
                         <div className="hero-order-form-mode-wrap">
                             <div className="form-mode-checkbox">
-                                <input type="checkbox" id="checkbox-custom-hero-form" class="checkbox-custom-hero-form" />
+                                <input type="checkbox" id="checkbox-custom-hero-form" className="checkbox-custom-hero-form" />
                                 <label 
                                     htmlFor="checkbox-custom-hero-form"
                                     onClick={() => additionalFieldsHandler({status: true})}
@@ -88,7 +91,7 @@ const MainPageOrderForm = (props) => {
                                     return (
                                         <React.Fragment key={Math.random()}>
                                              <div className="hero-order-form-options-wrap">
-                                                <div class="hero-order-form-options-title">{fieldBlock.name}</div>
+                                                <div className="hero-order-form-options-title">{fieldBlock.name}</div>
                                                     <select className="hero">
                                                         <option selected>Выберите</option>
                                                         {fieldBlock.options.map((optionItem) => {
@@ -136,9 +139,10 @@ const MainPageOrderForm = (props) => {
                             <div className="form-mode-checkbox">
                                 <input 
                                     type="checkbox" 
-                                    id="checkbox-custom-hero-form-policy" class="checkbox-custom-hero-form-policy" />
-                                <label 
-                                    onClick={() => policyCheckboxHandler(true)} 
+                                    id="checkbox-custom-hero-form-policy" className="checkbox-custom-hero-form-policy" />
+                                <label
+                                    ref={policyCheckboxRef} 
+                                    onClick={() => policyCheckboxHandler(orderFormState.policyChecked ? false : true)} 
                                     for="checkbox-custom-hero-form-policy"
                                 ></label>
                                 <span>согласен с <a href="#">политикой конфидициальности</a></span>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import callbackIcon from '../../img/callback.svg';
 import sendmailIcon from '../../img/send_mail.svg';
-import mainLogoIcon from '../../img/logo_cosm.jpeg';
+import mainLogoIcon from '../../img/logo_cosm_back.jpeg';
 import mainLogoMinIcon from '../../img/logo_cosm.png';
 
 import CallbackRequestPopup from "../CallbackRequestPopup/CallbackRequestPopup";
@@ -53,13 +53,13 @@ const Header = () => {
                                 >Консультация</span>
                                 <span className="header-worktime">пн-пт с 10:00 - 18:00</span>
                             </div>
-                            <div class="callback-wrap">
-                                <span className="callback-icon"><img src={callbackIcon} alt="callback-icon" class="filter-green" /></span>
-                                <span><a href="#">+7 (812) 363-06-14</a></span>
+                            <div className="callback-wrap">
+                                <span className="callback-icon"><img src={callbackIcon} alt="callback-icon" className="filter-green" /></span>
+                                <span><Link to={"tel:+78123630614"}>+7 (812) 363-06-14</Link></span>
                             </div>
-                            <div class="email-wrap">
+                            <div className="email-wrap">
                                 <span className="email-icon"><img src={sendmailIcon} alt="callback-icon" /></span>
-                                <span><a href="#">pro@cosmtech.ru</a></span>
+                                <span><Link to={"mailto:pro@cosmtech.ru&body=text?subject=Вопрос"} target="_blank">pro@cosmtech.ru</Link></span>
                             </div>
                         </div>
                     </div>

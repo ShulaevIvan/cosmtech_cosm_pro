@@ -3,13 +3,13 @@ import React from "react";
 const PrefooterMainPage = () => {
     return (
         <React.Fragment>
-            <section class="prefooter-order-section">
-                <div class="prefooter-order-form-wrap">
-                    <div class="prefooter-order-form-background">
-                        <div class="prefooter-form-wrap">
+            <section className="prefooter-order-section">
+                <div className="prefooter-order-form-wrap">
+                    <div className="prefooter-order-form-background">
+                        <div className="prefooter-form-wrap">
                    
-                            <form class="prefooter-form">
-                                <div class="prefooter-from-title">
+                            <form className="prefooter-form">
+                                <div className="prefooter-from-title">
                                     <h3>Быстрый способ уточнить детали</h3>
                                 </div>
                                 <label>Имя</label>
@@ -22,12 +22,12 @@ const PrefooterMainPage = () => {
                                 <input type="text" />
                                 <label>Сообщение</label>
                                 <textarea></textarea>
-                                <div class="prefooter-form-checkbox-row">
-                                    <div class="prefooter-checkbox-wrap">
-                                        <input type="checkbox" id="custom-checkbox" class="checkbox-custom" />
-                                        <label for="custom-checkbox"></label>
+                                <div className="prefooter-form-checkbox-row">
+                                    <div className="prefooter-checkbox-wrap">
+                                        <input type="checkbox" id="custom-checkbox" className="checkbox-custom" />
+                                        <label htmlFor="custom-checkbox"></label>
                                     </div>
-                                    <div class="prefooter-form-checkbox-text">
+                                    <div className="prefooter-form-checkbox-text">
                                         <p>Рыбатекст используется дизайнерами, 
                                             проектировщиками и фронтендерами, 
                                             когда нужно быстро заполнить макеты или прототипы содержимым
@@ -35,8 +35,8 @@ const PrefooterMainPage = () => {
                                     </div>
                             
                                 </div>
-                                <div class="prefooter-form-btn-wrap">
-                                    <span class="prefooter-order-form-btn">Отправить</span>
+                                <div className="prefooter-form-btn-wrap">
+                                    <span className="prefooter-order-form-btn">Отправить</span>
                                 </div>
                             </form>
                         </div>

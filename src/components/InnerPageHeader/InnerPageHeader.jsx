@@ -11,25 +11,25 @@ const InnerPageHeader = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const activeBackground = useSelector((state) => state.innerPage.activeBackground);
+    const headerContent = useSelector((state) => state.innerPage.headerBackgrounds);
 
     useEffect(() => {
         dispatch(changeHeaderBackground({currentPage: location.pathname}));
-        console.log(activeBackground)
     }, [location.pathname]);
 
 
     return (
         <React.Fragment>
-            <div class="inner-page-header-title-wrap">
+            <div className="inner-page-header-title-wrap">
                 <InnerPageBreadcrumbs />
-                <div class="inner-page-main-title-wrap">
+                <div className="inner-page-main-title-wrap">
                 
-                    <h1>О Компании</h1>
-                    <div class="inner-page-main-title-description">
-                        <p>Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.</p>
+                    <h1>{headerContent.find((header) => header.page === location.pathname).title}</h1>
+                    <div className="inner-page-main-title-description">
+                        <p>{headerContent.find((header) => header.page === location.pathname).description}</p>
                     </div>
                 </div>
-                <div class="inner-page-background-wrap">
+                <div className="inner-page-background-wrap">
                     <img src={activeBackground} alt="background" />
                 </div>
             </div>

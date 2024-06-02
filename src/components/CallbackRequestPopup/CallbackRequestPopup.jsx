@@ -37,7 +37,7 @@ const CallbackRequestPopup = (props) => {
             <div className="callback-request-popup">
                 <div className="callback-request-popup-close">
                     <span 
-                        class="close-popup-btn"
+                        className="close-popup-btn"
                         onClick={() => props.callbackPopupHander(false)}
                     ></span>
                 </div>
@@ -68,7 +68,7 @@ const CallbackRequestPopup = (props) => {
                             </div>
                         </div>
                         <div className="form-mode-checkbox-callback-wrap">
-                                <input id="checkbox-custom-hero-form-policy" class="checkbox-custom-hero-form-policy" type="checkbox" />
+                                <input id="checkbox-custom-hero-form-policy" className="checkbox-custom-hero-form-policy" type="checkbox" />
                                 <label
                                     ref={policyRef} 
                                     onClick={() => callbackCheckboxHandler(callbackState.checkboxPolicyActive === true ? false : true)}

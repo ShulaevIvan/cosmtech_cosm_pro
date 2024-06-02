@@ -1,11 +1,14 @@
 import React from "react";
 
-const ServicePopup = () => {
+const ServicePopup = (props) => {
     return (
         <React.Fragment>
             <div className="service-popup-wrap">
                 <div className="service-popup-close-wrap">
-                    <span className="service-popup-close-btn"></span>
+                    <span 
+                        className="service-popup-close-btn"
+                        onClick={() => props.formHandler(false)}
+                    ></span>
                 </div>
                 <div className="service-popup-form-wrap">
                     <form>
@@ -17,7 +20,7 @@ const ServicePopup = () => {
                                 <input type="text" />
                             </div>
                         </div>
-                        <div class="service-form-input-wrap">
+                        <div className="service-form-input-wrap">
                             <div className="service-popup-form-title">
                                 <label>Телефон</label>
                             </div>
@@ -25,7 +28,7 @@ const ServicePopup = () => {
                                 <input type="tel" />
                             </div>
                         </div>
-                        <div class="service-form-input-wrap">
+                        <div className="service-form-input-wrap">
                             <div className="service-popup-form-title">
                                 <label>Email</label>
                             </div>

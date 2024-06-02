@@ -9,7 +9,7 @@ const ProductionMainPageHover = (props) => {
             >
                 <div className="callback-request-popup-close">
                     <span 
-                        class="production-close-hover-btn"
+                        className="production-close-hover-btn"
                         onClick={(e) => props.closeHandler(e, false, props.productionId)}
                     ></span>
                 </div>
