@@ -1121,12 +1121,10 @@
     }
 }
 .slide-left {
-    animation:  slide-in-left 900ms;
-    animation-timing-function: linear;
+    animation:  slide-in-left 1000ms;
 }
 .slide-right {
-    animation:  slide-in-right 900ms;
-    animation-timing-function: linear;
+    animation:  slide-in-right 1000ms;
 }
 
 @keyframes slide-in-left {

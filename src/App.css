@@ -236,7 +236,7 @@ section, .hero-section {
   position: relative;
   /* text-decoration: none; */
 }
-/* .main-nav-list li a::before {
+.main-nav-list li a::before {
   content: "";
   position: absolute;
   display: flex;
@@ -251,7 +251,7 @@ section, .hero-section {
 }
 .main-nav-list li a:hover::before {
   transform: scaleX(1);
-} */
+}
 .callback-btn-wrap {
   display: flex;
   flex-direction: row;
@@ -1111,7 +1111,10 @@ section, .hero-section {
   flex-wrap: wrap;
   margin-right: 10px;
   cursor: pointer;
-
+}
+.social-item a::before, 
+.footer-logo a::before {
+  width: 0%;
 }
 .social-item img {
   max-height: 30px;
