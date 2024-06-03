@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import imgHolder250 from '../../img/250.png';
+import independenceIconOne from '../../img/independence_1.svg';
+import independenceIconTwo from '../../img/independence_2.svg';
+import independenceIconThree from '../../img/independence_3.svg';
+import independenceIconFour from '../../img/independence_4.svg';
+import independenceIconFive from '../../img/independence_5.svg';
+import independenceIconSix from '../../img/independence_6.svg';
 const initialState = { 
     calculatorForm: {
         popupOpen: false,
@@ -214,6 +220,55 @@ const initialState = {
                 active: false
             }
         ]
+    },
+    independence: {
+        independenceItems: [
+            {
+                id: 1,
+                title: 'Современные технологии',
+                image: independenceIconOne,
+                description: 'Можем производить продукцию линейки от масс маркета до премиума в короткие сроки.',
+            },
+            {
+                id: 2,
+                title: 'Современные технологии',
+                image: independenceIconTwo,
+                description: 'Можем производить продукцию линейки от масс маркета до премиума в короткие сроки.',
+            },
+            {
+                id: 3,
+                title: 'Современные технологии',
+                image: independenceIconThree,
+                description: 'Можем производить продукцию линейки от масс маркета до премиума в короткие сроки.',
+            },
+            {
+                id: 4,
+                title: 'Современные технологии',
+                image: independenceIconFour,
+                description: 'Можем производить продукцию линейки от масс маркета до премиума в короткие сроки.',
+            },
+            {
+                id: 5,
+                title: 'Современные технологии',
+                image: independenceIconFive,
+                description: 'Можем производить продукцию линейки от масс маркета до премиума в короткие сроки.',
+            },
+            {
+                id: 6,
+                title: 'Современные технологии',
+                image: independenceIconSix,
+                description: 'Можем производить продукцию линейки от масс маркета до премиума в короткие сроки.',
+            },
+        ],
+        independenceForm: {
+           nameFieldValid: true,
+           phoneFieldValid: true,
+           commentFieldValid: true,
+           nameFieldValue: '',
+           phoneFieldValue: '',
+           commentFieldValue: '',
+           allFieldsValid: false,
+        }
     }
 };
 
@@ -239,11 +294,13 @@ const mainPageSlice = createSlice({
         },
         orderFormInputValidate(state, action) {
             const { fieldId, fieldName, fieldType, fieldValue } = action.payload;
+            if (fieldValue === '') return;
             let checkErr;
             //eslint-disable-next-line
             if (fieldName === 'name') {
                 checkErr = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]/g.test(fieldValue);
-                if (fieldValue.length < 3 || fieldValue === ' ') checkErr = true;
+                const checkEmpty = /\s/;
+                if (fieldValue.length < 3 || checkEmpty.test(fieldValue)) checkErr = true;
                 
             }
             if (fieldName === 'email') {
@@ -371,8 +428,58 @@ const mainPageSlice = createSlice({
                 if (productionId === item.id) {
                     return {...item, active: status}
                 }
-                return {...item, active: false }
+                return { ...item, active: false }
             });
+        },
+        independenceFromInputValidate(state, action) {
+            const { fieldType, fieldValue } = action.payload;
+            const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
+            //eslint-disable-next-line
+            const validPhone = /^[0-9]\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})([0-9]{2})$/.test(fieldValue);
+            //eslint-disable-next-line
+            const symPattern = /[`!@№#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g.test(fieldValue);
+            const enRuPattern = /[a-zA-Zа-яА-Я]+/.test(fieldValue);
+            if (fieldType === 'name') {
+                state.independence.independenceForm.nameFieldValue = fieldValue;
+                state.independence.independenceForm.nameFieldValid = !notValidName;
+                return;
+            }
+            else if (fieldType === 'phone' && fieldValue.length <= 11 && !symPattern && !enRuPattern) {
+                if (fieldValue.length <= 11) {
+                    state.independence.independenceForm.phoneFieldValue = fieldValue;
+                    state.independence.independenceForm.phoneFieldValid = validPhone;
+                    return
+                }
+                state.independence.independenceForm.phoneFieldValue = state.independence.independenceForm.phoneFieldValue.replace(/.$/, '');
+                state.independence.independenceForm.phoneFieldValid = false;
+                
+                return;
+            }
+            else if (fieldType === 'comment' && fieldValue.length > 3 && !/\^s+/.test(fieldValue)) {
+                state.independence.independenceForm.commentFieldValue = fieldValue;
+                state.independence.independenceForm.commentFieldValid = true;
+                return;
+            }
+            state.independence.independenceForm.allFieldsValid = false;
+        },
+        clearIndependenceFormInput(state, action) {
+            const { fieldType, fieldValue } = action.payload;
+            if (fieldType === 'name') {
+                state.independence.independenceForm.nameFieldValue = '';
+                state.independence.independenceForm.nameFieldValid = true;
+                return;
+            }
+            else if (fieldType === 'phone') {
+                state.independence.independenceForm.phoneFieldValue = '';
+                state.independence.independenceForm.phoneFieldValid = true;
+                return;
+            }
+            else if (fieldType === 'comment') {
+                state.independence.independenceForm.commentFieldValue = '';
+                state.independence.independenceForm.commentFieldValid = true
+                return;
+            }
+
         },
         mobileMenuActive(state, action) {
             state.mobileMenuActive = action.payload;
@@ -393,6 +500,8 @@ export const {
     orderFormInputValidate,
     orderFormPhoneInputValidate,
     checkOrderFrom,
-    orderFormPolicyCheckbox
+    orderFormPolicyCheckbox,
+    independenceFromInputValidate,
+    clearIndependenceFormInput
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

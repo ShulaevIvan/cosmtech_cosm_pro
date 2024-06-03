@@ -57,6 +57,7 @@ const MainPageOrderForm = (props) => {
         dispatch(orderFormPolicyCheckbox({status: status}));
         dispatch(checkOrderFrom({formRefs: formRefs}));
     };
+    console.log(orderFormState)
 
     useEffect(() => {
         if (baseFields.filter((item) => !item.err).length === 4 && orderFormState.policyChecked) {
@@ -66,7 +67,7 @@ const MainPageOrderForm = (props) => {
     
     return (
         <React.Fragment>
-            <div className="hero-order-form-popup-wrap">
+            <div className='hero-order-form-popup-wrap'>
                 <div className="hero-order-form-popup-close-wrap">
                     <span 
                         className="close-popup-btn"
@@ -143,7 +144,7 @@ const MainPageOrderForm = (props) => {
                                 <label
                                     ref={policyCheckboxRef} 
                                     onClick={() => policyCheckboxHandler(orderFormState.policyChecked ? false : true)} 
-                                    for="checkbox-custom-hero-form-policy"
+                                    htmlFor="checkbox-custom-hero-form-policy"
                                 ></label>
                                 <span>согласен с <a href="#">политикой конфидициальности</a></span>
                             </div>
