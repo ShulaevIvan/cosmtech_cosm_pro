@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-
+import { Link } from "react-router-dom";
 import { callbackPolicy, callbackValidatePhone, callbackSendBtn, clearCallbackInput } from "../../redux/slices/headerSlice";
+
 
 const CallbackRequestPopup = (props) => {
     const callbackState = props.callbackState;
@@ -74,7 +75,7 @@ const CallbackRequestPopup = (props) => {
                                     onClick={() => callbackCheckboxHandler(callbackState.checkboxPolicyActive === true ? false : true)}
                                     for="checkbox-custom-hero-form-policy"
                                 ></label>
-                                <span className="callback-policy-wrap">согласен с <a href="#">политикой конфидициальности</a></span>
+                                <span className="callback-policy-wrap">согласен с <Link target={'_blank'} to={'/about/policy'}>политикой конфидициальности</Link></span>
                             </div>
                     </form>
                     <div className="callback-from-btn-wrap">

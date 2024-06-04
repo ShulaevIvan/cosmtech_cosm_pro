@@ -24,7 +24,13 @@ const initialState = {
             backgroundImg: backgroundContacts, 
             title: 'Контакты',
             description: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.'
-        }
+        },
+        { 
+            page: '/about/policy', 
+            backgroundImg: backgroundAbout, 
+            title: 'Политика',
+            description: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.', 
+        },
     ],
     activeBackground: innerHeaderImg,
     servicesPage: {

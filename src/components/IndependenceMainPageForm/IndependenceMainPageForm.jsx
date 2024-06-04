@@ -30,10 +30,11 @@ const IndependenceMainPageForm = (props) => {
                     <div className="contact-form-order-main-row">
                         <div className="contact-form-order-main-item">
                             <div className="contact-form-order-main-label-wrap">
-                                <label>Имя</label>
+                                <label htmlFor="independenceFormName">Имя</label>
                             </div>
                             <div className="contact-form-order-main-input-wrap">
                                 <input
+                                    id={'independenceFormName'}
                                     className={!independenceFormState.nameFieldValid ? 'input-err' : null} 
                                     ref={nameInputRef} 
                                     type="text" 
@@ -46,10 +47,11 @@ const IndependenceMainPageForm = (props) => {
 
                         <div className="contact-form-order-main-item">
                             <div className="contact-form-order-main-label-wrap">
-                                <label>Телефон</label>
+                                <label htmlFor="independenceFormPhone">Телефон</label>
                             </div>
                             <div className="contact-form-order-main-input-wrap">
                                 <input
+                                    id={'independenceFormPhone'}
                                     className={!independenceFormState.phoneFieldValid ? 'input-err' : null} 
                                     ref={phoneInputRef} 
                                     type="tel" 
@@ -62,10 +64,11 @@ const IndependenceMainPageForm = (props) => {
                         </div>
                         <div className="contact-form-order-main-item contact-form-order-main-item-text">
                             <div className="contact-form-order-main-label-wrap">
-                                <label>Комментарий</label>
+                                <label htmlFor="independenceFormComment">Комментарий</label>
                             </div>
                             <div className="contact-form-order-main-input-wrap">
                                 <input
+                                    id={'independenceFormComment'}
                                     className={independenceFormState.commentFieldValid ? "main-form-message" : "main-form-message input-err" }
                                     type="text" 
                                     ref={comentInputRef}

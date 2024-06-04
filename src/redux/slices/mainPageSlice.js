@@ -6,6 +6,11 @@ import independenceIconThree from '../../img/independence_3.svg';
 import independenceIconFour from '../../img/independence_4.svg';
 import independenceIconFive from '../../img/independence_5.svg';
 import independenceIconSix from '../../img/independence_6.svg';
+
+import validatePhone from "../../functions/validatePhone";
+import validateMail from "../../functions/validateMail";
+
+
 const initialState = { 
     calculatorForm: {
         popupOpen: false,
@@ -434,23 +439,18 @@ const mainPageSlice = createSlice({
         independenceFromInputValidate(state, action) {
             const { fieldType, fieldValue } = action.payload;
             const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
-            //eslint-disable-next-line
-            const validPhone = /^[0-9]\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})([0-9]{2})$/.test(fieldValue);
-            //eslint-disable-next-line
-            const symPattern = /[`!@№#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g.test(fieldValue);
-            const enRuPattern = /[a-zA-Zа-яА-Я]+/.test(fieldValue);
+
             if (fieldType === 'name') {
                 state.independence.independenceForm.nameFieldValue = fieldValue;
                 state.independence.independenceForm.nameFieldValid = !notValidName;
                 return;
             }
-            else if (fieldType === 'phone' && fieldValue.length <= 11 && !symPattern && !enRuPattern) {
-                if (fieldValue.length <= 11) {
-                    state.independence.independenceForm.phoneFieldValue = fieldValue;
-                    state.independence.independenceForm.phoneFieldValid = validPhone;
-                    return
+            else if (fieldType === 'phone') {
+                state.independence.independenceForm.phoneFieldValue = validatePhone(fieldValue);
+                if (state.independence.independenceForm.phoneFieldValue.length === 18) {
+                    state.independence.independenceForm.phoneFieldValid = true;
+                    return;
                 }
-                state.independence.independenceForm.phoneFieldValue = state.independence.independenceForm.phoneFieldValue.replace(/.$/, '');
                 state.independence.independenceForm.phoneFieldValid = false;
                 
                 return;
@@ -463,7 +463,7 @@ const mainPageSlice = createSlice({
             state.independence.independenceForm.allFieldsValid = false;
         },
         clearIndependenceFormInput(state, action) {
-            const { fieldType, fieldValue } = action.payload;
+            const { fieldType } = action.payload;
             if (fieldType === 'name') {
                 state.independence.independenceForm.nameFieldValue = '';
                 state.independence.independenceForm.nameFieldValid = true;

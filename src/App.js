@@ -11,7 +11,7 @@ import MainPage from './components/MainPage/MainPage';
 import ServicesPage from './components/ServicesPage/ServicesPage';
 import AboutPage from './components/AboutPage/AboutPage';
 import ContactsPage from './components/ContactsPage/ContactsPage';
-import InnerPage from './components/InnerPage/InnerPage';
+import PolicyPage from './components/PolicyPage/PolicyPage';
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
               <Route path='/services' element = {<ServicesPage />} />
               <Route path='/about' element = {<AboutPage />} />
               <Route path='/contacts' element = {<ContactsPage />} />
+              <Route path='/about/policy' element={<PolicyPage />}/>
           </Route>
         </Routes>
       </BrowserRouter>

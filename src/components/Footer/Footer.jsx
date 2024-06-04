@@ -70,7 +70,7 @@ const Footer = () => {
                                 <h4>Услуги</h4>
                             </div>
                             <ul className="main-footer-submenu">
-                                <li><Link to={"#"}>Производство</Link></li>
+                                <li><Link onClick={goToTopHandler} to={"/"}>Производство</Link></li>
                                 <li><Link to={"#"}>Собственная торовая марка</Link></li>
                                 <li><Link to={"#"}>Частные вопросы</Link></li>
                             </ul>
@@ -91,7 +91,7 @@ const Footer = () => {
                 </div>
                 <div className="main-footer-copy-wrap">
                     <span className="footer-copy-text">© 2024 ООО Космотех все права защищены</span>
-                    <span className="footer-policy-text"><Link to={'#'} target={'_blank'}>Политика конфидициальности</Link></span>
+                    <span className="footer-policy-text"><Link target={'_blank'} to={'/about/policy'}>Политика конфидициальности</Link></span>
                 </div>
                 </div>
             <GoToTop goToTopHandler={goToTopHandler} />

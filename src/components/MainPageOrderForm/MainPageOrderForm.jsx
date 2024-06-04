@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { 
     orderFormAdditionalFields, 
     orderFormInputValidate, 
@@ -8,6 +9,7 @@ import {
     checkOrderFrom,
     orderFormPolicyCheckbox
 } from "../../redux/slices/mainPageSlice";
+
 
 
 const MainPageOrderForm = (props) => {
@@ -146,7 +148,7 @@ const MainPageOrderForm = (props) => {
                                     onClick={() => policyCheckboxHandler(orderFormState.policyChecked ? false : true)} 
                                     htmlFor="checkbox-custom-hero-form-policy"
                                 ></label>
-                                <span>согласен с <a href="#">политикой конфидициальности</a></span>
+                                <span>согласен с <Link target={'_blank'} to={'/about/policy'}>политикой конфидициальности</Link></span>
                             </div>
                         </div>
                         <div className="hero-order-main-fields-send-btn-wrap">
