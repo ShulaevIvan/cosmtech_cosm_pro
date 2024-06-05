@@ -2,13 +2,14 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { serviceShowBtn, showAllServices, serviceOrderPopup } from "../../redux/slices/mainPageSlice";
 import { useEffect } from "react";
-
+import getPopupCords from "../../functions/getPopupCords";
 import ServicesMainPagePopup from "../ServiceMainPagePopup/ServiceMainPagePopup";
 
 const ServicesMainPage = () => {
 
     const dispatch = useDispatch();
     const servicesState = useSelector((state) => state.mainPage.services);
+    const mouseCords = useSelector((state) => state.mainPage.mouseCords);
 
     const serviceBtnHandler = (service, status) => {
         dispatch(serviceShowBtn({status: status, targetId: service.id}));
@@ -18,8 +19,9 @@ const ServicesMainPage = () => {
         dispatch(showAllServices({status: status}));
     };
 
-    const serviceOrderPopupHandler = (status) => {
-        dispatch(serviceOrderPopup({status: status}));
+    const serviceOrderPopupHandler = (e, status) => {
+        const cords = getPopupCords(e.pageX, e.pageY, e.target.offsetLeft, e.target.offsetTop);
+        dispatch(serviceOrderPopup({status: status, left: cords.x, top: cords.y}));
     };
 
     useEffect(() => {
@@ -44,7 +46,7 @@ const ServicesMainPage = () => {
                         </div>
 
                         <div className="services-main-row">
-                            {servicesState.servicePopupShow ? <ServicesMainPagePopup popupHandler={serviceOrderPopupHandler} /> : null}
+                            {servicesState.servicePopupShow ? <ServicesMainPagePopup popupHandler={serviceOrderPopupHandler} cords={mouseCords} /> : null}
                             {Array.from(servicesState.servicesItems).map((serviceItem) => {
                                 return (
                                     <React.Fragment key={Math.random()}>
@@ -62,7 +64,7 @@ const ServicesMainPage = () => {
                                                 {serviceItem.serviceOrderActive ? 
                                                     <div className="service-background-order-btn-wrap">
                                                         <span
-                                                            onClick={() => serviceOrderPopupHandler(true)}
+                                                            onClick={(e) => serviceOrderPopupHandler(e, true)}
                                                             className="service-background-order-btn">Рассчитать стоимость</span>
                                                     </div>
                                                 : null}

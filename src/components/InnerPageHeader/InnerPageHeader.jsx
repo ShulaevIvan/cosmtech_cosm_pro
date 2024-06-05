@@ -12,6 +12,7 @@ const InnerPageHeader = () => {
     const dispatch = useDispatch();
     const activeBackground = useSelector((state) => state.innerPage.activeBackground);
     const headerContent = useSelector((state) => state.innerPage.headerBackgrounds);
+    const breadcrumbs = headerContent.filter((item) => item.page === location.pathname)[0].breadcrumbs;
 
     useEffect(() => {
         dispatch(changeHeaderBackground({currentPage: location.pathname}));
@@ -21,7 +22,7 @@ const InnerPageHeader = () => {
     return (
         <React.Fragment>
             <div className="inner-page-header-title-wrap">
-                <InnerPageBreadcrumbs />
+                <InnerPageBreadcrumbs breadcrumbs={breadcrumbs} />
                 <div className="inner-page-main-title-wrap">
                 
                     <h1>{headerContent.find((header) => header.page === location.pathname).title}</h1>

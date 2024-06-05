@@ -1,5 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { validateFooterCallback } from "../../redux/slices/footerSlice";
+
 import footerLogo from '../../img/logo_cosm.jpeg';
 import telegramLogo from '../../img/telegram_footer.svg';
 import whatsappLogo from '../../img/whatsapp_footer.svg';
@@ -8,9 +13,23 @@ import vkLogo from '../../img/vk_footer.svg';
 import GoToTop from "../GoToTopBtn/GoToTopBtn";
 
 const Footer = () => {
+    const dispatch = useDispatch();
+    const footerState = useSelector((state) => state.footer);
+    const footerCallbackRef = useRef(null);
 
     const goToTopHandler = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+
+    const footerCallbackHandler = () => {
+        dispatch(validateFooterCallback({inputValue: footerCallbackRef.current.value}));
+    };
+
+    const clearInputFooterCallback = (e) => {
+        if (e.key === 'Backspace') {
+            footerCallbackRef.current.value = '';
+            dispatch(validateFooterCallback({inputValue: footerCallbackRef.current.value}));
+        }
     };
 
     return (
@@ -26,7 +45,9 @@ const Footer = () => {
                             <div className="footer-socials-row">
                                 <div className="social-item"><Link to={'#'}><img src={telegramLogo}  alt="telegram logo"/></Link></div>
                                 <div className="social-item whatsapp-footer-icon"><Link to={'#'}><img src={whatsappLogo}  alt="whatsapp logo"/></Link></div>
-                                <div className="social-item"><Link to={'#'}><img src={vkLogo}  alt="vk logo"/></Link></div>
+                                <div className="social-item">
+                                    <Link to={'https://vk.com/cosmtech'} target={'_blank'}><img src={vkLogo}  alt="vk logo"/></Link>
+                                </div>
                             </div>
                         </div>
                 
@@ -39,7 +60,13 @@ const Footer = () => {
                             <div className="main-footer-form-label-wrap"><h5>Перезвоните мне</h5></div>
                             <div className="main-footer-input-wrap">
                                 <div className="main-footer-input">
-                                    <input type="text" />
+                                    <input
+                                        className={footerState.footerFormCallbackValid ? null : 'input-err'}
+                                        ref={footerCallbackRef}
+                                        value={footerState.footerFormCallbackValue}
+                                        onChange={footerCallbackHandler} type="tel"
+                                        onKeyDown={(e) => clearInputFooterCallback(e)}
+                                    />
                                 </div>
                                 <div className="main-footer-btn-send-wrap">
                                     <div className="main-footer-btn-send">Отправить</div>

@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createAction } from "@reduxjs/toolkit";
+
+import validateName from "../../functions/validateName";
+import validatePhone from "../../functions/validatePhone";
+import validateMail from "../../functions/validateMail";
+import validateCity from "../../functions/validateCity";
 
 const initialState = { 
     callbackPopupActive: false,
@@ -11,7 +15,8 @@ const initialState = {
                 fieldType: 'name',
                 type: 'text',
                 fieldValue: '',
-                fieldValid: false,
+                placeholder: 'Имя',
+                fieldValid: true,
             },
             {
                 id: 2,
@@ -19,7 +24,8 @@ const initialState = {
                 fieldType: 'phone',
                 type: 'tel',
                 fieldValue: '',
-                fieldValid: false,
+                placeholder: '8 xxx xxx-xx-xx',
+                fieldValid: true,
             },
             {
                 id: 3,
@@ -27,7 +33,8 @@ const initialState = {
                 fieldType: 'email',
                 type: 'email',
                 fieldValue: '',
-                fieldValid: false,
+                placeholder: 'test@yandex.ru',
+                fieldValid: true,
             },
             {
                 id: 4,
@@ -35,7 +42,8 @@ const initialState = {
                 fieldType: 'city',
                 type: 'text',
                 fieldValue: '',
-                fieldValid: false,
+                placeholder: 'Москва',
+                fieldValid: true,
             },
             {
                 id: 5,
@@ -43,11 +51,15 @@ const initialState = {
                 fieldType: 'comment',
                 type: 'textarea',
                 fieldValue: '',
-                fieldValid: false,
+                placeholder: 'Комментарий ...',
+                fieldValid: true,
             }
         ],
+        policyCheckboxStatus: false,
         allInputsValid: true,
-    }
+    },
+    footerFormCallbackValid: true,
+    footerFormCallbackValue: '',
 };
 
 const footerSlice = createSlice({
@@ -59,10 +71,63 @@ const footerSlice = createSlice({
         },
         validatePrefooterForm(state, action) {
             const { fieldId, fieldType, fieldValue } = action.payload;
-            console.log(fieldType)
-            if (fieldType === 'name') {
-                console.log('test')
+            if (fieldType === 'phone' && fieldValue.length > 18) return;
+            let isValid = false;
+            let phoneNumber;
+            console.log(fieldValue.length)
+            if (fieldType === 'name') isValid = validateName(fieldValue);
+            else if (fieldType === 'phone') {
+                phoneNumber = validatePhone(fieldValue);
+                isValid = false;
+                if (phoneNumber.length === 18) isValid = true;
+
+                
             }
+            else if (fieldType === 'email') isValid = !validateMail(fieldValue);
+            else if (fieldType === 'city') isValid = (validateCity(fieldValue));
+            else if (fieldType === 'comment') isValid = !/^\s|\s+/.test(fieldValue);
+
+            state.preFooterForm.inputs = state.preFooterForm.inputs.map((fieldObj) => {
+                if (fieldObj.id === fieldId && fieldObj.fieldType === fieldType) {
+                    return {
+                        ...fieldObj,
+                        fieldValue: fieldType === 'phone' ? phoneNumber : fieldValue,
+                        fieldValid: isValid,
+                    }
+                }
+                return fieldObj;
+            });
+        },
+        prefooterClearInput(state, action) {
+            const { inputId, inputType, inputValue } = action.payload;
+            console.log(inputValue)
+            state.preFooterForm.inputs = state.preFooterForm.inputs.map((fieldItem) => {
+                console.log(inputType)
+                if (inputId === fieldItem.id && inputType === fieldItem.fieldType) {
+                    return {
+                        ...fieldItem,
+                        fieldValue: inputValue,
+                    }
+                }
+                return fieldItem;
+            })
+        },
+        prefooterFormCheckbox(state, action) {
+            const { status } = action.payload;
+            state.preFooterForm.policyCheckboxStatus = status;
+        },
+        validateFooterCallback(state, action) {
+            const { inputValue } = action.payload;
+            if (inputValue.length > 18) return;
+            const phone = validatePhone(inputValue);
+            if (phone.length < 18) {
+                state.footerFormCallbackValue = phone;
+                state.footerFormCallbackValid = false;
+                return;
+            }
+            state.footerFormCallbackValue = phone;
+            state.footerFormCallbackValid = true;
+
         }
     }
 });
@@ -70,6 +135,9 @@ const footerSlice = createSlice({
 
 export const {
     goToTop,
-    validatePrefooterForm, 
+    validatePrefooterForm,
+    prefooterClearInput,
+    prefooterFormCheckbox,
+    validateFooterCallback
 } = footerSlice.actions;
 export default footerSlice.reducer;

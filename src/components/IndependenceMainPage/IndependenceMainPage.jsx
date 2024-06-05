@@ -1,12 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import IndependenceMainPageForm from "../IndependenceMainPageForm/IndependenceMainPageForm";
-import independenceIconOne from '../../img/independence_1.svg';
-import independenceIconTwo from '../../img/independence_2.svg';
-import independenceIconThree from '../../img/independence_3.svg';
-import independenceIconFour from '../../img/independence_4.svg';
-import independenceIconFive from '../../img/independence_5.svg';
-import independenceIconSix from '../../img/independence_6.svg';
+
 
 const IndependenceMainPage = () => {
     const independenceState = useSelector((state) => state.mainPage.independence);

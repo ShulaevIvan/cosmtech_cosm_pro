@@ -1,12 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const InnerPageBreadcrumbs = () => {
+const InnerPageBreadcrumbs = (props) => {
     return (
         <React.Fragment>
             <div className="inner-page-bradcrumbs-wrap">
                 <ul>
-                    <li className="mainpage"><a href="index.html">Контрактное производство</a></li>
-                    <li className="current"><a href="#">Контакты</a></li>
+                    {props.breadcrumbs.map((breadcrumbItem) => {
+                        return (
+                            <React.Fragment key={breadcrumbItem.id}>
+                                <li className={breadcrumbItem.main || !breadcrumbItem.active ? "mainpage" : 'current'}>
+                                    <Link to={breadcrumbItem.url}>{breadcrumbItem.name}</Link>
+                                </li>
+                            </React.Fragment>
+                        )
+                    })}
                 </ul>
             </div>
         </React.Fragment>

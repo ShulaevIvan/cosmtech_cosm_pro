@@ -1,13 +1,14 @@
 import React from "react";
 
 const ServicePopup = (props) => {
+
     return (
         <React.Fragment>
-            <div className="service-popup-wrap">
+            <div className="service-popup-wrap" style={{left: window.screen.width < 800 ? `${0}%` : `${33}%`, top: `${props.cords.top}px`, position: 'fixed'}}>
                 <div className="service-popup-close-wrap">
                     <span 
                         className="service-popup-close-btn"
-                        onClick={() => props.formHandler(false)}
+                        onClick={(e) => props.formHandler(e, false)}
                     ></span>
                 </div>
                 <div className="service-popup-form-wrap">
@@ -39,7 +40,7 @@ const ServicePopup = (props) => {
                         <div className="service-form-options-wrap">
                             <div className="service-form-options-title">Услуга</div>
                             <select name="hero">
-                                <option selected>Выбранная услуга</option>
+                                <option value={'default'}>Выбранная услуга</option>
                                 <option value="t1">Опция 1</option>
                                 <option value="t2">Опция 2</option>
                                 <option value="t3">Опция 3</option>

@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { validatePrefooterForm } from "../../redux/slices/footerSlice";
+import { 
+    validatePrefooterForm, 
+    prefooterClearInput,
+    prefooterFormCheckbox
+} from "../../redux/slices/footerSlice";
+import { Link } from "react-router-dom";
 
 const PrefooterMainPage = () => {
     const dispatch = useDispatch();
@@ -22,6 +27,22 @@ const PrefooterMainPage = () => {
         dispatch(validatePrefooterForm({fieldId: inputId, fieldType: inputType, fieldValue: targetRef.current.value}));
     };
 
+    const findFieldValue = (formField) => {
+        return footerState.preFooterForm.inputs.find((item) => item.id === formField.id && item.name === formField.fieldName).fieldValue;
+    };
+
+    const clearInputHandler = (e, inputId, inputType) => {
+        if (e.key === 'Backspace') {
+            const targetRef = findRef(inputId, inputType);
+            targetRef.current.value = '';
+            dispatch(prefooterClearInput({inputId: inputId, inputType: inputType, inputValue: targetRef.current.value}));
+        }
+    };
+
+    const policyCheckboxHandler = (status) => {
+        dispatch(prefooterFormCheckbox({status: status}));
+        console.log(footerState.preFooterForm.policyCheckboxStatus)
+    };
 
 
     return (
@@ -40,14 +61,22 @@ const PrefooterMainPage = () => {
                                         <React.Fragment key={formField.id}>
                                             <label htmlFor={`prefooter-form-${formField.fieldType}`}>{formField.title}</label>
                                             {formField.type === 'textarea' ? 
-                                                <textarea 
+                                                <textarea
+                                                    className={!formField.fieldValid ? 'input-err' : null} 
                                                     ref={findRef(formField.id, formField.fieldType)}
-                                                    onChange={() => formInputHandler(formField.id, formField.fieldType)} 
+                                                    value={findFieldValue(formField)}
+                                                    placeholder={formField.placeholder}
+                                                    onChange={() => formInputHandler(formField.id, formField.fieldType)}
+                                                    onKeyDown={(e) => clearInputHandler(e, formField.id, formField.fieldType)}
                                                     id={`prefooter-form-${formField.fieldType}`}
                                                 ></textarea> : 
-                                                <input 
+                                                <input
+                                                    className={!formField.fieldValid ? 'input-err' : null} 
                                                     ref={findRef(formField.id, formField.fieldType)}
+                                                    value={findFieldValue(formField)}
+                                                    placeholder={formField.placeholder}
                                                     onChange={() => formInputHandler(formField.id, formField.fieldType)}
+                                                    onKeyDown={(e) => clearInputHandler(e, formField.id, formField.fieldType)}
                                                     id={`prefooter-form-${formField.fieldType}`} 
                                                     type={formField.type}
                                                 />
@@ -58,13 +87,13 @@ const PrefooterMainPage = () => {
                                 <div className="prefooter-form-checkbox-row">
                                     <div className="prefooter-checkbox-wrap">
                                         <input type="checkbox" id="custom-checkbox" className="checkbox-custom" />
-                                        <label htmlFor="custom-checkbox"></label>
+                                        <label 
+                                            htmlFor="custom-checkbox"
+                                            onClick={() => policyCheckboxHandler(footerState.preFooterForm.policyCheckboxStatus ? false : true)}
+                                        ></label>
                                     </div>
                                     <div className="prefooter-form-checkbox-text">
-                                        <p>Рыбатекст используется дизайнерами, 
-                                            проектировщиками и фронтендерами, 
-                                            когда нужно быстро заполнить макеты или прототипы содержимым
-                                        </p>
+                                        <p>Я ознакомлен и согласен с <Link target={'_blank'} to={'about/policy'}>политикой конфидициальности</Link></p>
                                     </div>
                             
                                 </div>

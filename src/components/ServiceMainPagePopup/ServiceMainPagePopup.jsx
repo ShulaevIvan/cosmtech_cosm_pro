@@ -1,14 +1,14 @@
 import React from "react";
-
+import getPopupCords from "../../functions/getPopupCords";
 
 const ServicesMainPagePopup = (props) => {
     return (
         <React.Fragment>
-        <div className="service-popup-wrap">
+        <div className="service-popup-wrap" style={{'left': props.cords.left, 'top': props.cords.top}}>
             <div className="service-popup-close-wrap">
                 <span 
                     className="service-popup-close-btn"
-                    onClick={() => props.popupHandler(false)}
+                    onClick={(e) => props.popupHandler(e, false)}
                 ></span>
             </div>
             <div className="service-popup-form-wrap">

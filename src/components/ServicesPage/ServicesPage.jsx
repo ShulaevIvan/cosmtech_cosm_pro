@@ -4,17 +4,21 @@ import ServicePopup from "../ServicePopup/ServicePopup";
 
 import { useSelector, useDispatch } from "react-redux";
 import { servicePageOrderPopup } from "../../redux/slices/innerPageSlice";
+import getPopupCords from "../../functions/getPopupCords";
 
 const ServicesPage = () => {
     const dispatch = useDispatch();
     const servicesState = useSelector((state) => state.innerPage.servicesPage);
+    const mouseCords = useSelector((state) => state.innerPage.mousePosition);
 
-    const servicePopupHandler = (status) => {
-        dispatch(servicePageOrderPopup({status: status}))
+    const servicePopupHandler = (e, status) => {
+        const cords = getPopupCords(e.pageX, e.pageY, e.target.offsetLeft, e.target.offsetTop);
+        dispatch(servicePageOrderPopup({status: status, left: cords.left, top: cords.top}));
     };
 
     return (
         <React.Fragment>
+            {servicesState.serviceFormActive ?  <ServicePopup formHandler={servicePopupHandler} cords={mouseCords} /> : null}
             <InnerPageHeader />
             <div className="inner-page-main-wrapper">
             <section>
@@ -23,7 +27,7 @@ const ServicesPage = () => {
                         {servicesState.servicesItems.map((serviceItem) => {
                             return (
                                 <React.Fragment key={serviceItem.id}>
-                                    {servicesState.serviceFormActive ?  <ServicePopup formHandler={servicePopupHandler} /> : null}
+                                    
                                     <div className={serviceItem.position === 'left' ? 
                                         'main-service-item-row slide-left' : "main-service-item-row reverseService slide-right"}>
                                         <div className="main-service-img-box">
@@ -40,7 +44,10 @@ const ServicesPage = () => {
                                                     когда нужно быстро заполнить макеты или прототипы содержимым
                                                 </p>
                                                 <div className="main-service-order-btn-wrap">
-                                                    <span onClick={() => servicePopupHandler(true)} className="main-service-order-btn">Заказать</span>
+                                                    <span 
+                                                        onClick={(e) => servicePopupHandler(e, true, serviceItem)} 
+                                                        className="main-service-order-btn"
+                                                    >Заказать</span>
                                                 </div>
                                             </div>
                                         </div>

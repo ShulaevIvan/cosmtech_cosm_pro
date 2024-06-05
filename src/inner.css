@@ -129,7 +129,8 @@
     cursor: default;
     color: white;
 }
-.inner-page-bradcrumbs-wrap ul li:nth-child(1)::after {
+.inner-page-bradcrumbs-wrap ul li:nth-child(1)::after,
+.inner-page-bradcrumbs-wrap ul li:nth-child(2)::after {
     content: '/';
     margin: 0 10px;
 }
@@ -1120,6 +1121,13 @@
         margin-bottom: 20px;
     }
 }
+@media  (min-width: 200px) and (max-width: 600px) {
+    .inner-page-bradcrumbs-wrap {
+        display: none;
+    }
+}
+
+
 .slide-left {
     animation:  slide-in-left 1000ms;
 }

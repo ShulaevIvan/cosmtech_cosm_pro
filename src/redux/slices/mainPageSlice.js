@@ -8,7 +8,6 @@ import independenceIconFive from '../../img/independence_5.svg';
 import independenceIconSix from '../../img/independence_6.svg';
 
 import validatePhone from "../../functions/validatePhone";
-import validateMail from "../../functions/validateMail";
 
 
 const initialState = { 
@@ -119,52 +118,80 @@ const initialState = {
         servicesItems: [
             {
                 id: 1,
-                name: 'product title',
+                name: 'Очищающие средства для лица ',
                 serviceImg: imgHolder250,
                 serviceOrderActive: false,
             },
             {
                 id: 2,
-                name: 'product title',
+                name: ' Уходовая косметика для лица',
                 serviceImg: imgHolder250,
                 serviceOrderActive: false,
             },
             {
                 id: 3,
-                name: 'product title',
+                name: 'Средства для ухода за волосами',
                 serviceImg: imgHolder250,
                 serviceOrderActive: false,
             },
             {
                 id: 4,
-                name: 'product title',
+                name: 'Уходовая косметика для тела',
                 serviceImg: imgHolder250,
                 serviceOrderActive: false,
             },
             {
                 id: 5,
-                name: 'product title',
+                name: 'Средства для ухода за кожей рук',
                 serviceImg: imgHolder250,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 6,
-                name: 'product title',
+                name: 'Средства для ухода за кожей ног',
                 serviceImg: imgHolder250,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 7,
-                name: 'product title',
+                name: 'Солнцезащитные средства',
                 serviceImg: imgHolder250,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 8,
-                name: 'product title',
+                name: 'Очищающая косметика для тела',
+                serviceImg: imgHolder250,
+                serviceOrderActive: false,
+                amimate: true
+            },
+            {
+                id: 9,
+                name: 'Детская косметика',
+                serviceImg: imgHolder250,
+                serviceOrderActive: false,
+                amimate: true
+            },
+            {
+                id: 10,
+                name: 'Аппаратная косметика',
+                serviceImg: imgHolder250,
+                serviceOrderActive: false,
+                amimate: true
+            },
+            {
+                id: 11,
+                name: 'Профессиональная косметика',
+                serviceImg: imgHolder250,
+                serviceOrderActive: false,
+                amimate: true
+            },
+            {
+                id: 12,
+                name: 'Пилинги',
                 serviceImg: imgHolder250,
                 serviceOrderActive: false,
                 amimate: true
@@ -273,7 +300,11 @@ const initialState = {
            phoneFieldValue: '',
            commentFieldValue: '',
            allFieldsValid: false,
-        }
+        },
+    },
+    mouseCords: {
+        left: 0,
+        top: 0,
     }
 };
 
@@ -303,6 +334,7 @@ const mainPageSlice = createSlice({
             let checkErr;
             //eslint-disable-next-line
             if (fieldName === 'name') {
+                //eslint-disable-next-line
                 checkErr = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]/g.test(fieldValue);
                 const checkEmpty = /\s/;
                 if (fieldValue.length < 3 || checkEmpty.test(fieldValue)) checkErr = true;
@@ -420,7 +452,9 @@ const mainPageSlice = createSlice({
             state.services.showAll = status;
         },
         serviceOrderPopup(state, action) {
-            const { status } = action.payload;
+            const { status, left, top } = action.payload;
+            state.mouseCords.left = left;
+            state.mouseCords.top = top;
             state.services.servicePopupShow = status;
         },
         selectProduction(state, action) {
@@ -438,6 +472,7 @@ const mainPageSlice = createSlice({
         },
         independenceFromInputValidate(state, action) {
             const { fieldType, fieldValue } = action.payload;
+            //eslint-disable-next-line
             const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
 
             if (fieldType === 'name') {
