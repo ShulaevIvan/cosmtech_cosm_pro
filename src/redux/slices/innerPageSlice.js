@@ -131,6 +131,90 @@ const initialState = {
             }
         ]
     },
+    contacts: {
+        contactsForm: {
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    placeholder: 'Имя',
+                    value: '',
+                    fieldType: 'text',
+                    fieldName: 'name',
+                    fieldValid: true
+                },
+                {
+                    id: 2,
+                    title: 'Тип обращения',
+                    fieldType: 'select',
+                    fieldName: 'select',
+                    options: [
+                        { id: 1, name: 'тип обращения 1', selected: true},
+                        { id: 2, name: 'тип обращения 2', selected: false},
+                        { id: 3, name: 'тип обращения 3', selected: false},
+                        { id: 4, name: 'тип обращения 4', selected: false},
+                        { id: 5, name: 'тип обращения 5', selected: false},
+                    ],
+                    fieldValid: true
+                },
+                {
+                    id: 3,
+                    title: 'Телефон',
+                    placeholder: '8 xxx-xxx-xx-xx',
+                    value: '',
+                    fieldType: 'tel',
+                    fieldName: 'phone',
+                    fieldValid: true
+                },
+                {
+                    id: 4,
+                    title: 'Город',
+                    placeholder: 'Москва',
+                    value: '',
+                    fieldType: 'text',
+                    fieldName: 'city',
+                    fieldValid: true
+                },
+                {
+                    id: 5,
+                    title: 'email',
+                    placeholder: 'test@yandex.ru',
+                    value: '',
+                    fieldType: 'email',
+                    fieldName: 'email',
+                    fieldValid: true
+                },
+                {
+                    id: 6,
+                    title: 'Предпочтительный способ связи',
+                    fieldType: 'options',
+                    fieldName: 'options',
+                    options: [
+                        {id: 1, name: 'Телефон', selected: true}, 
+                        {id: 2, name: 'Telegram', selected: false}, 
+                        {id: 3, name: 'Whatsapp', selected: false}
+                    ],
+                    fieldValid: true
+                },
+                {
+                    id: 7,
+                    title: 'Прикрепить файл',
+                    fieldType: 'file',
+                    fieldName: 'file',
+                    fieldValid: true
+                },
+                {
+                    id: 8,
+                    title: 'Комментарий',
+                    placeholder: '',
+                    value: '',
+                    fieldType: 'textarea',
+                    fieldName: 'comment',
+                    fieldValid: true
+                },
+            ]
+        }
+    },
     mousePosition: {
         left: 0,
         top: 0,

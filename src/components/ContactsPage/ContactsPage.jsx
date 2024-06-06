@@ -1,5 +1,6 @@
 import React from "react";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
+import ContactsPageOrderForm from "../ContactsPageOrderForm/ContactPageOrderForm";
 import { Link } from "react-router-dom";
 import telegramLogo from '../../img/telegram_footer.svg'
 import whatsappLogo from '../../img/whatsapp_footer.svg'
@@ -18,8 +19,9 @@ const ContactsPage = () => {
                                 <div className="contact-list-content">
                                     <h3>Производство</h3>
                                     <ul>
-                                        <li><span>Телефон:</span> <Link href="#">+7 (812) XXX-XX-XX</Link></li>
-                                        <li><span>Email:</span> <Link href="#">test@mail.ru</Link></li>
+                                        <li><span className="span-title-bold">Телефон: </span> <Link to={'+78123630614'}>+7 (812) 363-06-14</Link></li>
+                                        <li><span className="span-title-bold">Email: </span> 
+                                         <Link to={"mailto:pro@cosmtech.ru&body=text?subject=Вопрос"} target={'_blank'}>pro@cosmtech</Link></li>
                                     </ul>
                                     <ul>
                                         <li className="contact-list-social">
@@ -31,11 +33,11 @@ const ContactsPage = () => {
                                             <span>
                                                 <Link href="#"><img src={telegramLogo} alt="social" /></Link>
                                             </span>  
-                                            <a href="#">+7 (921)-XXX-XX-XX</a>
+                                            <Link to={'#'}>+7 (921)-XXX-XX-XX</Link>
                                         </li>
                                         <li className="contact-list-social">
-                                            <span><Link href="#"><img src={vkLogo} alt="social" /></Link></span>
-                                            <a href="#">Группа Вконтакте</a>
+                                            <span><Link><img src={vkLogo} alt="social" /></Link></span>
+                                            <Link to={'https://vk.com/cosmtech'} target={'_blank'}>Группа Вконтакте</Link>
                                                 
                                         </li>
                                     </ul>
@@ -60,108 +62,7 @@ const ContactsPage = () => {
                                     <Link href="#">Скачать полные реквизиты</Link>
                                 </div>
                             </div>
-
-                            <div className="contacts-form-wrap">
-                                <div className="contact-page-form-wrap">
-                                    <form>
-                                        <div className="contact-page-form-row">
-                                            <div className="contact-page-input-wrap-left">
-                                                <div className="contact-page-input-left-title">Имя</div>
-                                                <div className="contact-page-input-left">
-                                                    <input type="text" />
-                                                </div>
-                                            </div>
-
-                                            <div className="contact-page-input-wrap-right">
-                                                <div className="contact-page-input-left-title">
-                                                    <label for="req-type">Тип обращения</label>
-                                                </div>
-                                                <select id="req-type">
-                                                    <option value="">--Тип обращения--</option>
-                                                    <option value="">--Тип обращения--</option>
-                                                    <option value="">--Тип обращения--</option>
-                                                    <option value="">--Тип обращения--</option>
-                                                    <option value="">--Тип обращения--</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div className="contact-page-form-row">
-                                            <div className="contact-page-input-wrap-left">
-                                                <div className="contact-page-input-left-title">Телефон</div>
-                                                <div className="contact-page-input-left">
-                                                    <input type="tel" />
-                                                </div>
-                                            </div>
-
-                                            <div className="contact-page-input-wrap-right">
-                                                <div className="contact-page-input-right-title">
-                                                    <label>Ваш Город</label>
-                                                </div>
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div className="contact-page-form-row">
-                                            <div className="contact-page-input-wrap-left">
-                                                <div className="contact-page-input-left-title">Email</div>
-                                                <div className="contact-page-input-left">
-                                                    <input type="text" />
-                                                </div>
-                                            </div>
-
-                                            <div className="contact-page-input-wrap-right">
-                                                <div className="contact-page-input-right-title">
-                                                    <label>Предпочтительный способ связи</label>
-                                                </div>
-
-                                                <fieldset className="contact-page-radioset-wrap">
-                                                        
-                                                    <div className="contact-page-radioset-item">
-                                                        <input type="radio" id="phone" name="radio" value="Телефон" checked />
-                                                        <label for="phone">Телефон</label>
-                                                    </div>
-                                                      
-                                                    <div className="contact-page-radioset-item">
-                                                        <input type="radio" id="email" name="radio" value="Email" />
-                                                        <label for="email">Email</label>
-                                                    </div>
-                                                      
-                                                    <div className="contact-page-radioset-item">
-                                                        <input type="radio" id="msg" name="radio" value="Telegram" />
-                                                        <label for="msg">Мессанджеры</label>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-                                        </div>
-
-                                        <div className="contact-contact-page-form-file-input">
-                                            <label>Прикрепить файл</label>
-                                            <input type="file" />
-                                        </div>
-
-                                        <div className="contact-page-form-full-row">
-                                            <div className="contact-page-input-left-title">Комментарий</div>
-                                            <div className="contact-page-input-textarea-wrap">
-                                                <textarea></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div className="contact-page-form-btns-row">
-                                            <div className="contact-page-form-checkbox-wrap">
-                                                <input type="checkbox" id="checkbox-custom-hero-form-policy" className="checkbox-custom-hero-form-policy" />
-                                                <label for="checkbox-custom-hero-form-policy"></label>
-                                                <span className="contact-page-form-checkbox-description">
-                                                    Рыбатекст используется дизайнерами, проектировщиками и фронтендерами. 
-                                                </span>
-                                            </div>
-                                            <div className="contact-page-form-btn-wrap">
-                                                <span className="contact-page-form-btn-send">Отправить</span>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            <ContactsPageOrderForm />
                         </div>
                     </div>
                 </section>

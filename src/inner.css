@@ -1134,6 +1134,9 @@
 .slide-right {
     animation:  slide-in-right 1000ms;
 }
+.span-title-bold {
+    font-weight: 700;
+}
 
 @keyframes slide-in-left {
   from {
