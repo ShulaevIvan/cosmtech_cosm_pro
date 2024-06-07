@@ -14,12 +14,14 @@ const initialState = {
             description: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
             breadcrumbs: [
                 {
+                    id: 1,
                     name: 'Контрактное производство',
                     url: '/',
                     main: true,
                     active: false,
                 },
                 {
+                    id: 2,
                     name: 'Услуги',
                     url: '/services',
                     main: false,
@@ -34,12 +36,14 @@ const initialState = {
             description: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
             breadcrumbs: [
                 {
+                    id: 1,
                     name: 'Контрактное производство',
                     url: '/',
                     main: true,
                     active: false,
                 },
                 {
+                    id: 2,
                     name: 'О нас',
                     url: '/about',
                     main: false,
@@ -54,12 +58,14 @@ const initialState = {
             description: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
             breadcrumbs: [
                 {
+                    id: 1,
                     name: 'Контрактное производство',
                     url: '/',
                     main: true,
                     active: false,
                 },
                 {
+                    id: 2,
                     name: 'Контакты',
                     url: '/contacts',
                     main: false,
@@ -137,8 +143,6 @@ const initialState = {
                 {
                     id: 1,
                     title: 'Имя',
-                    placeholder: 'Имя',
-                    value: '',
                     fieldType: 'text',
                     fieldName: 'name',
                     fieldValid: true
@@ -147,7 +151,7 @@ const initialState = {
                     id: 2,
                     title: 'Тип обращения',
                     fieldType: 'select',
-                    fieldName: 'select',
+                    fieldName: 'orderType',
                     options: [
                         { id: 1, name: 'тип обращения 1', selected: true},
                         { id: 2, name: 'тип обращения 2', selected: false},
@@ -160,8 +164,6 @@ const initialState = {
                 {
                     id: 3,
                     title: 'Телефон',
-                    placeholder: '8 xxx-xxx-xx-xx',
-                    value: '',
                     fieldType: 'tel',
                     fieldName: 'phone',
                     fieldValid: true
@@ -169,8 +171,6 @@ const initialState = {
                 {
                     id: 4,
                     title: 'Город',
-                    placeholder: 'Москва',
-                    value: '',
                     fieldType: 'text',
                     fieldName: 'city',
                     fieldValid: true
@@ -178,8 +178,6 @@ const initialState = {
                 {
                     id: 5,
                     title: 'email',
-                    placeholder: 'test@yandex.ru',
-                    value: '',
                     fieldType: 'email',
                     fieldName: 'email',
                     fieldValid: true
@@ -188,7 +186,7 @@ const initialState = {
                     id: 6,
                     title: 'Предпочтительный способ связи',
                     fieldType: 'options',
-                    fieldName: 'options',
+                    fieldName: 'callOption',
                     options: [
                         {id: 1, name: 'Телефон', selected: true}, 
                         {id: 2, name: 'Telegram', selected: false}, 
@@ -206,8 +204,6 @@ const initialState = {
                 {
                     id: 8,
                     title: 'Комментарий',
-                    placeholder: '',
-                    value: '',
                     fieldType: 'textarea',
                     fieldName: 'comment',
                     fieldValid: true
@@ -234,6 +230,12 @@ const innerPageSlice = createSlice({
             state.mousePosition.left = left;
             state.mousePosition.top = top;
             state.servicesPage.serviceFormActive = status;
+        },
+        validateContactsInput(state, action) {
+            const { inputType, inputValue } = action.payload;
+            console.log(state.contacts.contactsForm.fields.find((fieldItem) => fieldItem.fieldName === inputType).fieldType);
+            console.log(inputType);
+            console.log(inputValue);
         }
     }
 });
@@ -241,6 +243,7 @@ const innerPageSlice = createSlice({
 
 export const {
     changeHeaderBackground,
-    servicePageOrderPopup
+    servicePageOrderPopup,
+    validateContactsInput
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

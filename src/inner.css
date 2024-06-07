@@ -190,6 +190,7 @@
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 20px;
+    justify-content: center;
 }
 .contacts-content-wrap {
     display: flex;
@@ -271,6 +272,14 @@
     flex-wrap: wrap;
     width: 100%;
 }
+.contact-page-form-row label,
+.contact-contact-page-form-file-input label,
+.contact-page-form-full-row label {
+    color: #00458B;
+    font-family: gothampro bold;
+    font-size: 20px;
+    cursor: pointer;
+}
 .contact-page-form-row input,
 .contact-page-form-row select {
     min-width: 250px;
@@ -284,6 +293,7 @@
 .contact-page-radioset-item input {
     min-width: 20px;
     width: 20px;
+    cursor: pointer;
 }
 .contact-page-form-full-row textarea {
     display: flex;
@@ -356,7 +366,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-family: gothampro bold;
     font-size: 20px;
 }
@@ -821,7 +831,7 @@
 .service-popup-form-title label,
 .service-form-options-title {
     color: #00458B;
-    font-size: 18px;
+    font-size: 20px;
     font-family: gothampro bold;
 }
 .service-popup-form-wrap form input {

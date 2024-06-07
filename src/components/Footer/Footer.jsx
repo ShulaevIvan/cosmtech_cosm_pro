@@ -43,8 +43,16 @@ const Footer = () => {
                                     <Link to={'/'}><img src={footerLogo} alt="logo footer" /></Link>
                                 </div>
                             <div className="footer-socials-row">
-                                <div className="social-item"><Link to={'#'}><img src={telegramLogo}  alt="telegram logo"/></Link></div>
-                                <div className="social-item whatsapp-footer-icon"><Link to={'#'}><img src={whatsappLogo}  alt="whatsapp logo"/></Link></div>
+                                <div className="social-item">
+                                    <Link to={'https://t.me/+79643637272'} target={'_blank'}>
+                                        <img src={telegramLogo}  alt="telegram logo"/>
+                                    </Link>
+                                </div>
+                                <div className="social-item whatsapp-footer-icon">
+                                    <Link to={'https://wa.me/+79643637272'} target={'_blank'}>
+                                        <img src={whatsappLogo}  alt="whatsapp logo"/>
+                                    </Link>
+                                </div>
                                 <div className="social-item">
                                     <Link to={'https://vk.com/cosmtech'} target={'_blank'}><img src={vkLogo}  alt="vk logo"/></Link>
                                 </div>

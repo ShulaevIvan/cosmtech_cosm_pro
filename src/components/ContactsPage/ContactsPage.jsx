@@ -19,21 +19,21 @@ const ContactsPage = () => {
                                 <div className="contact-list-content">
                                     <h3>Производство</h3>
                                     <ul>
-                                        <li><span className="span-title-bold">Телефон: </span> <Link to={'+78123630614'}>+7 (812) 363-06-14</Link></li>
+                                        <li><span className="span-title-bold">Телефон: </span> <Link to={'tel:+78123630614'}>+7 (812) 363-06-14</Link></li>
                                         <li><span className="span-title-bold">Email: </span> 
                                          <Link to={"mailto:pro@cosmtech.ru&body=text?subject=Вопрос"} target={'_blank'}>pro@cosmtech</Link></li>
                                     </ul>
                                     <ul>
                                         <li className="contact-list-social">
                                             <span>
-                                                <Link href="#"><img src={whatsappLogo} alt="social" /></Link>
-                                            </span>  <Link href="#">+7 (921)-XXX-XX-XX</Link>
+                                                <Link to={'https://wa.me/+79643637272'} target={'_blank'}><img src={whatsappLogo} alt="social" /></Link>
+                                            </span>  <Link to={'https://wa.me/+79643637272'} target={'_blank'}>+7 (964)-363-72-72</Link>
                                         </li>
                                         <li className="contact-list-social">
                                             <span>
-                                                <Link href="#"><img src={telegramLogo} alt="social" /></Link>
+                                                <Link to={'https://t.me/+79643637272'} target={'_blank'}><img src={telegramLogo} alt="social" /></Link>
                                             </span>  
-                                            <Link to={'#'}>+7 (921)-XXX-XX-XX</Link>
+                                            <Link to={'https://t.me/+79643637272'} target={'_blank'}>+7 (964)-363-72-72</Link>
                                         </li>
                                         <li className="contact-list-social">
                                             <span><Link><img src={vkLogo} alt="social" /></Link></span>
@@ -81,7 +81,7 @@ const ContactsPage = () => {
                         </div>
                             
                         <div className="map-wrap">
-                            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A9a3094a0d3acf49f8de23d10b6f24ef1ff95d76a1cce0e8e7f9ed4255f854a32&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+                            {/* <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A9a3094a0d3acf49f8de23d10b6f24ef1ff95d76a1cce0e8e7f9ed4255f854a32&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script> */}
                         </div>
                     </div>
                 </section>

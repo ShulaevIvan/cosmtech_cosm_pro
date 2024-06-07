@@ -8,7 +8,7 @@ const ClientsMainPage = () => {
             <div className="container">
                 <div className="our-clients-wrap">
                     <div className="our-clients-title-wrap">
-                        <h3 className="main-color-title">Наши клиенты</h3>
+                        <h3 className="main-color-title">Наши Партнеры</h3>
                     </div>
 
                     <div className="our-clients-map-background">

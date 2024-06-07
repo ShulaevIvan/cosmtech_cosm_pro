@@ -7,7 +7,7 @@ const VideoMainPage = () => {
                 <div className="container">
                     <div className="video-mainpage-title-wrap">
                         <div className="video-mainpage-title">
-                            <h2 className="main-color-title">Текст-рыба на русском языке</h2>
+                            <h2 className="main-color-title">Где качество сочетается с точностью.</h2>
                         </div>
                         <div className="video-mainpage-description">
                             <p>

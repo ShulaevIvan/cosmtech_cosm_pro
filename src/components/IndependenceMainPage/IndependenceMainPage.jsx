@@ -28,7 +28,7 @@ const IndependenceMainPage = () => {
                                             </div>
                                             <div className="independence-description-wrap">
                                                 <p>
-                                                    Можем производить продукцию линейки от масс маркета до премиума в короткие сроки.
+                                                    {independenceItem.description}
                                                 </p>
                                             </div>
                                         </div>
