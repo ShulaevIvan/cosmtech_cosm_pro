@@ -1,4 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import validateName from '../../functions/validateName';
+import validatePhone from '../../functions/validatePhone';
+import validateMail from "../../functions/validateMail";
+import validateCity from "../../functions/validateCity";
+
 import backgroundServices from '../../img/services_bg.jpg';
 import backgroundAbout from '../../img/about.jpg';
 import backgroundContacts from '../../img/contacts.jpg';
@@ -145,6 +150,7 @@ const initialState = {
                     title: 'Имя',
                     fieldType: 'text',
                     fieldName: 'name',
+                    fieldValue: '',
                     fieldValid: true
                 },
                 {
@@ -152,12 +158,13 @@ const initialState = {
                     title: 'Тип обращения',
                     fieldType: 'select',
                     fieldName: 'orderType',
+                    fieldValue: '',
                     options: [
-                        { id: 1, name: 'тип обращения 1', selected: true},
-                        { id: 2, name: 'тип обращения 2', selected: false},
-                        { id: 3, name: 'тип обращения 3', selected: false},
-                        { id: 4, name: 'тип обращения 4', selected: false},
-                        { id: 5, name: 'тип обращения 5', selected: false},
+                        { id: 1, name: 'тип обращения 1', value: 'тип обращения 1', selected: true},
+                        { id: 2, name: 'тип обращения 2', value: 'тип обращения 2', selected: false},
+                        { id: 3, name: 'тип обращения 3', value: 'тип обращения 3', selected: false},
+                        { id: 4, name: 'тип обращения 4', value: 'тип обращения 4', selected: false},
+                        { id: 5, name: 'тип обращения 5', value: 'тип обращения 5', selected: false},
                     ],
                     fieldValid: true
                 },
@@ -166,6 +173,7 @@ const initialState = {
                     title: 'Телефон',
                     fieldType: 'tel',
                     fieldName: 'phone',
+                    fieldValue: '',
                     fieldValid: true
                 },
                 {
@@ -173,6 +181,7 @@ const initialState = {
                     title: 'Город',
                     fieldType: 'text',
                     fieldName: 'city',
+                    fieldValue: '',
                     fieldValid: true
                 },
                 {
@@ -180,6 +189,7 @@ const initialState = {
                     title: 'email',
                     fieldType: 'email',
                     fieldName: 'email',
+                    fieldValue: '',
                     fieldValid: true
                 },
                 {
@@ -187,10 +197,11 @@ const initialState = {
                     title: 'Предпочтительный способ связи',
                     fieldType: 'options',
                     fieldName: 'callOption',
+                    fieldValue: '',
                     options: [
-                        {id: 1, name: 'Телефон', selected: true}, 
-                        {id: 2, name: 'Telegram', selected: false}, 
-                        {id: 3, name: 'Whatsapp', selected: false}
+                        {id: 1, name: 'phone', selected: false}, 
+                        {id: 2, name: 'email', selected: false}, 
+                        {id: 3, name: 'msg', selected: false}
                     ],
                     fieldValid: true
                 },
@@ -199,6 +210,7 @@ const initialState = {
                     title: 'Прикрепить файл',
                     fieldType: 'file',
                     fieldName: 'file',
+                    fieldValue: '',
                     fieldValid: true
                 },
                 {
@@ -206,9 +218,16 @@ const initialState = {
                     title: 'Комментарий',
                     fieldType: 'textarea',
                     fieldName: 'comment',
+                    fieldValue: '',
                     fieldValid: true
                 },
-            ]
+            ],
+            contactFormFileUpload: {
+                fileUploaded: false,
+                fileName: '',
+            },
+            checkboxPolicyStatus: false,
+            allFieldsValid: true,
         }
     },
     mousePosition: {
@@ -233,9 +252,115 @@ const innerPageSlice = createSlice({
         },
         validateContactsInput(state, action) {
             const { inputType, inputValue } = action.payload;
-            console.log(state.contacts.contactsForm.fields.find((fieldItem) => fieldItem.fieldName === inputType).fieldType);
-            console.log(inputType);
-            console.log(inputValue);
+            state.contacts.contactsForm.fields = state.contacts.contactsForm.fields.map((fieldItem) => {
+                if (fieldItem.fieldName === inputType && inputType === 'name') {
+                    return {
+                        ...fieldItem,
+                        fieldValue: inputValue,
+                        fieldValid: validateName(inputValue),
+                    }
+                }
+                else if (fieldItem.fieldName === inputType && inputType === 'phone' && fieldItem.fieldValue.length < 18) {
+                    const phoneNumber = validatePhone(inputValue);
+                    return {
+                        ...fieldItem,
+                        fieldValid: phoneNumber.length === 18 ? true : false,
+                        fieldValue: phoneNumber,
+                    };
+                }
+                else if (fieldItem.fieldName === inputType && inputType === 'email') {
+                    return {
+                        ...fieldItem,
+                        fieldValue: inputValue,
+                        fieldValid: !validateMail(inputValue) ? true : false,
+                    }
+                }
+                else if (fieldItem.fieldName === inputType && inputType === 'city') {
+                    return {
+                        ...fieldItem,
+                        fieldValue: inputValue,
+                        fieldValid: validateCity(inputValue),
+                    }
+                }
+                else if (fieldItem.fieldName === inputType && inputType === 'comment') {
+                    return {
+                        ...fieldItem,
+                        fieldValue: inputValue,
+                        fieldValid: inputValue.length >= 3 ? true : false,
+                    }
+                }
+                
+                return fieldItem;
+            });
+        },
+        selectFieldContactsForm(state, action) {
+            const { inputType, optionName, status, inputValue } = action.payload;
+            state.contacts.contactsForm.fields = state.contacts.contactsForm.fields.map((fieldItem) => {
+                if (fieldItem.options && fieldItem.fieldName === inputType && fieldItem.fieldType !== 'select') {
+                    
+                    return {
+                        ...fieldItem,
+                        options: fieldItem.options.map((optionItem) => {
+                            if (optionItem.name === optionName) {
+                                return {
+                                    ...optionItem,
+                                    selected: true
+                                }
+                            }
+                            return {
+                                ...optionItem,
+                                selected: false
+                            }
+                        })
+                    }
+                }
+                else if (fieldItem.options && fieldItem.fieldName === inputType &&  fieldItem.fieldType === 'select') {
+                    return {
+                        ...fieldItem,
+                        options: fieldItem.options.map((optionItem) => {
+                            if (optionItem.name === inputValue) {
+                                return {
+                                    ...optionItem,
+                                    selected: true
+                                }
+                            }
+                            return {
+                                ...optionItem,
+                                selected: false
+                            }
+                        })
+                    }
+                }
+                return fieldItem;
+            });
+        },
+        clearContactsInput(state, action) {
+            const { inputType, inputValue } = action.payload;
+            state.contacts.contactsForm.fields = state.contacts.contactsForm.fields.map((fieldItem) => {
+                if (fieldItem.fieldName === inputType) {
+                    return {
+                        ...fieldItem,
+                        fieldValue: '',
+                        fieldValid: true,
+                    };
+                }
+                return fieldItem;
+            });
+        },
+        contactsCheckboxPolicy(state, action) {
+            const { status } = action.payload;
+            state.contacts.contactsForm.checkboxPolicyStatus = status;
+        },
+        uploadFile(state, action) {
+            const { file } = action.payload;
+            if (file) {
+                state.contacts.contactsForm.contactFormFileUpload = {
+                    ...state.contacts.contactsForm.contactFormFileUpload,
+                    fileUploaded: true,
+                    fileName: 'test',
+                }
+            }
+            
         }
     }
 });
@@ -244,6 +369,10 @@ const innerPageSlice = createSlice({
 export const {
     changeHeaderBackground,
     servicePageOrderPopup,
-    validateContactsInput
+    validateContactsInput,
+    clearContactsInput,
+    selectFieldContactsForm,
+    contactsCheckboxPolicy,
+    uploadFile
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

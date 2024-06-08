@@ -1,8 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useEffect } from "react";
-
-import { validateContactsInput } from "../../redux/slices/innerPageSlice";
+import { Link } from "react-router-dom";
+import { 
+    validateContactsInput, 
+    clearContactsInput,
+    selectFieldContactsForm,
+    contactsCheckboxPolicy,
+    uploadFile
+} from "../../redux/slices/innerPageSlice";
 
 const ContactsPageOrderForm = () => {
     const dispatch = useDispatch();
@@ -14,21 +20,55 @@ const ContactsPageOrderForm = () => {
         orderType: useRef(null),
         city: useRef(null),
         callOption: {
-            telegram: useRef(null),
-            whatsapp: useRef(null),
-            mail: useRef(null),
+            phone: useRef(null),
+            email: useRef(null),
+            msg: useRef(null),
         },
         file: useRef(null),
         comment: useRef(null)
     };
 
-    const contactInputHandler = (inputType, social) => {
-        if (social) {
-            // dispatch(validateContactsInput({inputType: inputType, inputValue: contactsRefs[inputType][social].current.value }));
-            return;
-        }
+    const contactInputHandler = (inputType) => {
         dispatch(validateContactsInput({inputType: inputType, inputValue: contactsRefs[inputType].current.value }));
     };
+
+    const contactSelectHandler = (inputType, callOption) => {
+        if (callOption) {
+            dispatch(selectFieldContactsForm({inputType: inputType, optionName: callOption, status: true, inputValue: '' }));
+            return
+        }
+
+        dispatch(selectFieldContactsForm({
+            inputType: inputType, 
+            optionName: callOption, 
+            status: true, 
+            inputValue: contactsRefs[inputType].current.value
+        }));
+        // dispatch(selectFieldContactsForm({inputType: inputType, optionName, status }))
+    };
+    
+    const findField = (fieldType) => {
+        return orderFormState.contactsForm.fields.find((item) => item.fieldName === fieldType);
+    };
+
+    const clearInputHandler = (e, inputType) => {
+        if (e.key === 'Backspace' && inputType) {
+            dispatch(clearContactsInput({inputType: inputType, inputValue: contactsRefs[inputType].current.value}))
+        }
+    };
+
+    const checkboxPolicyHandler = (status) => {
+        dispatch(contactsCheckboxPolicy({status: status}));
+    };
+
+    const loadFileHandler = () => {
+        dispatch(uploadFile({file: contactsRefs.file.current.value}));
+        console.log(contactsRefs.file.current.value)
+    };
+
+    useEffect(() => {
+        console.log(orderFormState.contactsForm.fields)
+    }, [orderFormState.contactsForm.fields, orderFormState.contactsForm.checkboxPolicyStatus])
 
     return (
         <React.Fragment>
@@ -41,11 +81,14 @@ const ContactsPageOrderForm = () => {
                                     <label htmlFor="contact-page-form-name">Имя</label>
                                 </div>
                                 <div className="contact-page-input-left">
-                                    <input 
-                                        onChange={() => contactInputHandler('name')} 
+                                    <input
+                                        className={findField('name').fieldValid ? '' : 'input-err'} 
+                                        onChange={() => contactInputHandler('name')}
+                                        onKeyDown={(e) => clearInputHandler(e, 'name')}
                                         ref={contactsRefs.name} 
                                         id='contact-page-form-name' 
-                                        type="text" 
+                                        type="text"
+                                        value={findField('name').fieldValue}
                                     />
                                 </div>
                             </div>
@@ -57,13 +100,15 @@ const ContactsPageOrderForm = () => {
                                 <select
                                     ref={contactsRefs.orderType} 
                                     id="req-type"
-                                    onChange={() => contactInputHandler('orderType')} 
-                                >
-                                    <option selected value="--Тип обращения 1--">--Тип обращения 1--</option>
-                                    <option value="--Тип обращения 2--">--Тип обращения 2--</option>
-                                    <option value="--Тип обращения 3--">--Тип обращения 3--</option>
-                                    <option value="--Тип обращения 4--">--Тип обращения 4--</option>
-                                    <option value="--Тип обращения 5--">--Тип обращения 5--</option>
+                                    onChange={(e) => contactSelectHandler('orderType')} 
+                                >   
+                                    {findField('orderType').options.map((optionItem) => {
+                                        return (
+                                            <React.Fragment key={optionItem.id}>
+                                                <option value={optionItem.value}>{optionItem.name}</option>
+                                            </React.Fragment>
+                                        )
+                                    })}
                                 </select>
                             </div>
                         </div>
@@ -75,10 +120,13 @@ const ContactsPageOrderForm = () => {
                             </div>
                                 <div className="contact-page-input-left">
                                     <input
+                                        className={findField('phone').fieldValid ? '' : 'input-err'} 
                                         ref={contactsRefs.phone}  
                                         id="contact-page-form-phone" 
                                         type="tel"
-                                        onChange={() => contactInputHandler('phone')} 
+                                        value={findField('phone').fieldValue}
+                                        onChange={() => contactInputHandler('phone')}
+                                        onKeyDown={(e) => clearInputHandler(e, 'phone')}
 
                                     />
                                 </div>
@@ -89,10 +137,13 @@ const ContactsPageOrderForm = () => {
                                     <label htmlFor="contact-page-form-city">Ваш Город</label>
                                 </div>
                                 <input
+                                    className={findField('city').fieldValid ? '' : 'input-err'} 
+                                    onChange={() => contactInputHandler('city')}
+                                    onKeyDown={(e) => clearInputHandler(e, 'city')}
                                     ref={contactsRefs.city} 
                                     id="contact-page-form-city" 
                                     type="text"
-                                    onChange={() => contactInputHandler('city')}  
+                                    value={findField('city').fieldValue}
                                 />
                             </div>
                         </div>
@@ -104,10 +155,12 @@ const ContactsPageOrderForm = () => {
                                 </div>
                                 <div className="contact-page-input-left">
                                     <input
+                                        className={findField('email').fieldValid ? '' : 'input-err'} 
+                                        onChange={() => contactInputHandler('email')}
+                                        onKeyDown={(e) => clearInputHandler(e, 'email')}
                                         ref={contactsRefs.email}  
                                         id="contact-page-form-email" 
                                         type="text"
-                                        onChange={() => contactInputHandler('email')} 
                                     />
                                 </div>
                             </div>
@@ -121,8 +174,8 @@ const ContactsPageOrderForm = () => {
                                             
                                     <div className="contact-page-radioset-item">
                                         <input 
-                                            ref={contactsRefs.callOption.whatsapp}
-                                            onChange={() => contactInputHandler('callOption', 'whatsapp')} 
+                                            ref={contactsRefs.callOption.phone}
+                                            onChange={() => contactSelectHandler('callOption', 'phone')} 
                                             type="radio" 
                                             id="phone" 
                                             name="radio" 
@@ -133,8 +186,8 @@ const ContactsPageOrderForm = () => {
                                                       
                                     <div className="contact-page-radioset-item">
                                         <input 
-                                            ref={contactsRefs.callOption.mail}
-                                            onChange={() => contactInputHandler('callOption', 'mail')}  
+                                            ref={contactsRefs.callOption.email}
+                                            onChange={() => contactSelectHandler('callOption', 'email')}  
                                             type="radio" 
                                             id="email" 
                                             name="radio" 
@@ -145,12 +198,12 @@ const ContactsPageOrderForm = () => {
                                                       
                                     <div className="contact-page-radioset-item">
                                         <input 
-                                            ref={contactsRefs.callOption.telegram}
-                                            onChange={() => contactInputHandler('callOption', 'telegram')}  
+                                            ref={contactsRefs.callOption.msg}
+                                            onChange={() => contactSelectHandler('callOption', 'msg')}  
                                             type="radio" 
                                             id="msg" 
                                             name="radio" 
-                                            value="Telegram" 
+                                            value="Мессанджеры" 
                                         />
                                         <label htmlFor="msg">Мессанджеры</label>
                                     </div>
@@ -159,11 +212,19 @@ const ContactsPageOrderForm = () => {
                         </div>
 
                         <div className="contact-contact-page-form-file-input">
-                            <label htmlFor="contact-page-form-file">Прикрепить файл</label>
-                            <input 
-                                id="contact-page-form-file" 
-                                type="file" 
-                            />
+                            <label class="input-file">
+	   	                        <span class="input-file-text" type="text"></span>
+	   	                            <input
+                                        ref={contactsRefs.file} 
+                                        type="file" 
+                                        name="file"
+                                        onChange={loadFileHandler}
+                                    />        
+ 	   	                            <span class="input-file-btn">Прикрепить файл</span>
+ 	                        </label>
+                            <div className="contact-page-form-file file-loaded">
+                                {contactsRefs.file.current ? contactsRefs.file.current.value : null}
+                            </div>
                         </div>
 
                         <div className="contact-page-form-full-row">
@@ -171,16 +232,26 @@ const ContactsPageOrderForm = () => {
                                 <label htmlFor="contact-page-form-comment">Комментарий</label>
                             </div>
                             <div className="contact-page-input-textarea-wrap">
-                                <textarea id="contact-page-form-comment"></textarea>
+                                <textarea
+                                    className={findField('comment').fieldValid ? '' : 'input-err'} 
+                                    onChange={() => contactInputHandler('comment')}
+                                    onKeyDown={(e) => clearInputHandler(e, 'comment')}
+                                    ref={contactsRefs.comment}
+                                    value={findField('comment').fieldValue}
+                                    id="contact-page-form-comment"
+                                ></textarea>
                             </div>
                         </div>
 
                         <div className="contact-page-form-btns-row">
                             <div className="contact-page-form-checkbox-wrap">
                                 <input type="checkbox" id="checkbox-custom-hero-form-policy" className="checkbox-custom-hero-form-policy" />
-                                <label htmlFor="checkbox-custom-hero-form-policy"></label>
+                                <label 
+                                    htmlFor="checkbox-custom-hero-form-policy"
+                                    onClick={() => checkboxPolicyHandler(orderFormState.contactsForm.checkboxPolicyStatus ? false : true)}
+                                ></label>
                                 <span className="contact-page-form-checkbox-description">
-                                    Рыбатекст используется дизайнерами, проектировщиками и фронтендерами. 
+                                    согласен с <Link target={'_blank'} to={'/about/policy'}>политикой конфидициальности</Link>
                                 </span>
                             </div>
                             <div className="contact-page-form-btn-wrap">
