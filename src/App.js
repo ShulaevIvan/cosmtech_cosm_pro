@@ -5,15 +5,15 @@ import './components/CallbackRequestPopup/CallbackRequestPopup.css'
 import './components/ProductionMainPageHover/ProductionMainPageHover.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import Layout from './components/Layout/Layout';
 import MainPage from './components/MainPage/MainPage';
 import ServicesPage from './components/ServicesPage/ServicesPage';
 import AboutPage from './components/AboutPage/AboutPage';
 import ContactsPage from './components/ContactsPage/ContactsPage';
 import PolicyPage from './components/PolicyPage/PolicyPage';
+import { useLocation } from 'react-router-dom';
 
-function App() {
+function App() {  
   return (
     <div className="App">
       <BrowserRouter>

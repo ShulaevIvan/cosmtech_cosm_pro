@@ -1,12 +1,17 @@
 import React from "react";
-import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
-import ContactsPageOrderForm from "../ContactsPageOrderForm/ContactPageOrderForm";
-import { Link } from "react-router-dom";
+
 import telegramLogo from '../../img/telegram_footer.svg'
 import whatsappLogo from '../../img/whatsapp_footer.svg'
 import vkLogo from '../../img/vk_footer.svg'
+import findUsPhoto from '../../img/contacts_enter_to_us.jpg';
+import cosmtechReq from '../../doc/cosmtech_req.doc';
+import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
+import ContactsPageOrderForm from "../ContactsPageOrderForm/ContactPageOrderForm";
+import YandexMap from "../YandexMap/YandexMap";
+import { Link } from "react-router-dom";
 
 const ContactsPage = () => {
+
     return (
         <React.Fragment>
             <InnerPageHeader />
@@ -59,7 +64,7 @@ const ContactsPage = () => {
                                             <li><span className="req-list-name">Корреспондентский счет:</span> 40702810355000000126</li>
                                         </ul>
                                     </div>
-                                    <Link href="#">Скачать полные реквизиты</Link>
+                                    <Link to={cosmtechReq} download={true} target={"_blank"}>Скачать полные реквизиты</Link>
                                 </div>
                             </div>
                             <ContactsPageOrderForm />
@@ -70,18 +75,34 @@ const ContactsPage = () => {
                 <section>
                     <div className="container">
                         <div className="contact-page-map-title">
-                            <h2>Мы на карте</h2>
-                            <div className="contact-page-map-description">
-                                <p>Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, 
-                                    когда нужно быстро заполнить макеты или прототипы содержимым. 
-                                    Это тестовый контент, который не должен нести никакого смысла, 
-                                    лишь показать наличие самого текста или продемонстрировать типографику в деле.
-                                </p>
+                            <h2>Как добраться</h2>
+                            <div className="contact-page-map-description-wrap">
+                                <div className="contact-page-map-description-content">
+                                    <p> 
+                                        Вход со стороны ул. Салова, оранжевая крыша с козырьком, 
+                                        внизу вывеска с верблюдами, правая стеклянная дверь, 
+                                        далее через вертушку с охраной и справа лифт, 
+                                        7 этаж, компания "Косметические технологии".
+                                    </p>
+                                </div>
+                                <div className="contact-page-map-description-btn-wrap">
+                                    <Link
+                                        target={'_blank'} 
+                                        to={"https://yandex.ru/maps/?rtext=~59.895998,30.374016"} 
+                                        className="contact-page-map-description-btn"
+                                    >проложить маршрут</Link>
+                                </div>
+                               
                             </div>
-                        </div>
-                            
-                        <div className="map-wrap">
-                            {/* <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A9a3094a0d3acf49f8de23d10b6f24ef1ff95d76a1cce0e8e7f9ed4255f854a32&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script> */}
+                            <div className="contact-page-find-us-row">
+                                <div className="contact-page-find-us-image-wrap">
+                                    <img src={findUsPhoto} alt="как нас найти" />
+                                </div>
+                                <div className="contact-page-find-us-description">
+                                    <YandexMap />
+                                </div>
+                            </div>
+                           
                         </div>
                     </div>
                 </section>

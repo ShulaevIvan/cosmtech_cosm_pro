@@ -1,5 +1,4 @@
 import React from "react";
-
 import HeroMainPage from "../HeroMainPage/HeroMainPage";
 import IndependenceMainPage from "../IndependenceMainPage/IndependenceMainPage";
 import VideoMainPage from "../VideoMainPage/VideoMainPage";

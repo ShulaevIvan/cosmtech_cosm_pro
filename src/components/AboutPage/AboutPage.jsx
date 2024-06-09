@@ -1,6 +1,7 @@
 import React from "react";
 import demo80Img from '../../img/80x80.png';
 import demo500Img from '../../img/500x500.png';
+import promo_video from '../../video/promo_video.mp4';
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 
 const AboutPage = () => {
@@ -52,9 +53,7 @@ const AboutPage = () => {
                     </div>
                     <div className="about-company-video-wrap">
                         <video controls>
-                            <source src="video.mp4" type="video/mp4" />
-                            <source src="video.webm" type="video/webm" />
-                            <source src="video.ogv" type="video/ogg" />
+                            <source src={promo_video} type="video/mp4" />
                         </video>
                     </div>
                 </div>

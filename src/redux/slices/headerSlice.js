@@ -7,8 +7,46 @@ const initialState = {
         callbackInputValue: '',
         callbackInputValid: true,
         callbackSendBtnStatus: false,
-    }
+    },
+    pageTitles: [
+        {
+            id: 1,
+            name: 'Контрактное производство в Санкт-Петербурге',
+            path: '/',
+            title: 'test',
+            description: 'Контрактное производство',
+        },
+        {
+            id: 2,
+            name: 'Услуги косметическое производство',
+            path: '/services',
+            title: 'test',
+            description: 'Контрактное производство',
+        },
+        {
+            id: 3,
+            name: 'О компании ООО Косметические Технологии',
+            path: '/about',
+            title: 'test',
+            description: 'Контрактное производство',
+        },
+        {
+            id: 4,
+            name: 'Контакты ООО Косметические Технологии',
+            path: '/contacts',
+            title: 'test',
+            description: 'Контрактное производство',
+        },
+        {
+            id: 5,
+            name: 'Политика конфиденциальности Косметические Технологии',
+            path: '/about/policy',
+            title: 'test',
+            description: 'Контрактное производство',
+        }
+    ]
 };
+
 
 const headerSlice = createSlice({
     name: 'header',
@@ -17,6 +55,10 @@ const headerSlice = createSlice({
         callbackPopupShow(state, action) {
             const { status } = action.payload;
             state.callbackHeader.callbackPopupActive = status;
+            state.callbackHeader.callbackInputValid = true;
+            state.callbackHeader.callbackInputValue = '';
+            state.callbackHeader.checkboxPolicyActive = false;
+            state.callbackHeader.callbackSendBtnStatus = false;
         },
         callbackPolicy(state, action) {
             const { status } = action.payload;

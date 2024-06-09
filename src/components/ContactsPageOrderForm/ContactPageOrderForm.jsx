@@ -63,12 +63,7 @@ const ContactsPageOrderForm = () => {
 
     const loadFileHandler = () => {
         dispatch(uploadFile({file: contactsRefs.file.current.value}));
-        console.log(contactsRefs.file.current.value)
     };
-
-    useEffect(() => {
-        console.log(orderFormState.contactsForm.fields)
-    }, [orderFormState.contactsForm.fields, orderFormState.contactsForm.checkboxPolicyStatus])
 
     return (
         <React.Fragment>
@@ -89,6 +84,7 @@ const ContactsPageOrderForm = () => {
                                         id='contact-page-form-name' 
                                         type="text"
                                         value={findField('name').fieldValue}
+                                        placeholder={'Имя'}
                                     />
                                 </div>
                             </div>
@@ -127,6 +123,7 @@ const ContactsPageOrderForm = () => {
                                         value={findField('phone').fieldValue}
                                         onChange={() => contactInputHandler('phone')}
                                         onKeyDown={(e) => clearInputHandler(e, 'phone')}
+                                        placeholder={'+7 812 xxx-xx-xx'}
 
                                     />
                                 </div>
@@ -144,6 +141,7 @@ const ContactsPageOrderForm = () => {
                                     id="contact-page-form-city" 
                                     type="text"
                                     value={findField('city').fieldValue}
+                                    placeholder={'Москва'}
                                 />
                             </div>
                         </div>
@@ -161,6 +159,7 @@ const ContactsPageOrderForm = () => {
                                         ref={contactsRefs.email}  
                                         id="contact-page-form-email" 
                                         type="text"
+                                        placeholder={'test@yandex.ru'}
                                     />
                                 </div>
                             </div>
@@ -179,7 +178,7 @@ const ContactsPageOrderForm = () => {
                                             type="radio" 
                                             id="phone" 
                                             name="radio" 
-                                            value="Телефон" 
+                                            value="Телефон"
                                         />
                                         <label htmlFor="phone">Телефон</label>
                                     </div>
@@ -191,7 +190,7 @@ const ContactsPageOrderForm = () => {
                                             type="radio" 
                                             id="email" 
                                             name="radio" 
-                                            value="Email" 
+                                            value="Email"
                                         />
                                         <label htmlFor="email">Email</label>
                                     </div>
@@ -212,15 +211,15 @@ const ContactsPageOrderForm = () => {
                         </div>
 
                         <div className="contact-contact-page-form-file-input">
-                            <label class="input-file">
-	   	                        <span class="input-file-text" type="text"></span>
+                            <label className="input-file">
+	   	                        <span className="input-file-text" type="text"></span>
 	   	                            <input
                                         ref={contactsRefs.file} 
                                         type="file" 
                                         name="file"
                                         onChange={loadFileHandler}
                                     />        
- 	   	                            <span class="input-file-btn">Прикрепить файл</span>
+ 	   	                            <span className="input-file-btn">Прикрепить файл</span>
  	                        </label>
                             <div className="contact-page-form-file file-loaded">
                                 {contactsRefs.file.current ? contactsRefs.file.current.value : null}
@@ -238,6 +237,7 @@ const ContactsPageOrderForm = () => {
                                     onKeyDown={(e) => clearInputHandler(e, 'comment')}
                                     ref={contactsRefs.comment}
                                     value={findField('comment').fieldValue}
+                                    placeholder={'Комментарий...'}
                                     id="contact-page-form-comment"
                                 ></textarea>
                             </div>

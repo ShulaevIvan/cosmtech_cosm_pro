@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import callbackIcon from '../../img/callback.svg';
 import sendmailIcon from '../../img/send_mail.svg';
 import mainLogoIcon from '../../img/logo_cosm_back.jpeg';
@@ -14,12 +15,18 @@ import { callbackPopupShow } from "../../redux/slices/headerSlice";
 
 const Header = () => {
     const dispatch = useDispatch();
+    const location = useLocation();
     const headerState = useSelector((state) => state.header);
     const callbackPopup = useSelector((state) => state.header.callbackHeader.callbackPopupActive);
 
     const callbackPopupHandler = (status) => {
         dispatch(callbackPopupShow({ status: status }));
     };
+
+    useEffect(() => {
+        const targetTitle = headerState.pageTitles.find((headerTitleObj) => headerTitleObj.path === location.pathname);
+        document.title = targetTitle ? targetTitle.name : 'Test';
+    }, [location.pathname])
     
 
     return (

@@ -305,6 +305,10 @@ const initialState = {
     mouseCords: {
         left: 0,
         top: 0,
+    },
+    videoMainPage: {
+        videoMainPageBlob: '',
+        loadEnd: false,
     }
 };
 
@@ -318,6 +322,10 @@ const mainPageSlice = createSlice({
         },
         openOrderFrom(state, action) {
             const { status } = action.payload;
+            if (!status) {
+                state.orderForm = initialState.orderForm;
+                return;
+            }
             state.orderForm.popupOpen = status;
         },
         orderFormAdditionalFields(state, action) {
@@ -516,15 +524,16 @@ const mainPageSlice = createSlice({
             }
 
         },
-        mobileMenuActive(state, action) {
-            state.mobileMenuActive = action.payload;
-        },
+        addVideoBlob(state, action) {
+            const { blobData } = action.payload;
+            if (!blobData) return;
+            state.videoMainPage.videoMainPageBlob = blobData;
+        }
     }
 });
 
 
 export const {
-    mobileMenuActive,
     openCalculatior,
     openOrderFrom,
     orderFormAdditionalFields,
@@ -537,6 +546,7 @@ export const {
     checkOrderFrom,
     orderFormPolicyCheckbox,
     independenceFromInputValidate,
-    clearIndependenceFormInput
+    clearIndependenceFormInput,
+    addVideoBlob
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

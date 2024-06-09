@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { useLocation, Outlet } from "react-router-dom";
 
 import Header from "../Header/Header";
@@ -9,7 +8,6 @@ import Footer from "../Footer/Footer";
 
 const Layout = () => {
     const location = useLocation();
-
     return (
         <React.Fragment>
             <Header />

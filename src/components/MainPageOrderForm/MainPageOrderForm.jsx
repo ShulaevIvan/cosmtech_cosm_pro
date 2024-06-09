@@ -59,7 +59,6 @@ const MainPageOrderForm = (props) => {
         dispatch(orderFormPolicyCheckbox({status: status}));
         dispatch(checkOrderFrom({formRefs: formRefs}));
     };
-    console.log(orderFormState)
 
     useEffect(() => {
         if (baseFields.filter((item) => !item.err).length === 4 && orderFormState.policyChecked) {

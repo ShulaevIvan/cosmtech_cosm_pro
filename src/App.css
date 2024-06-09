@@ -492,19 +492,21 @@ section, .hero-section {
   font-size: 20px;
   margin: 0;
   padding: 0 40px;
-  max-width: 520px;
+  max-width: 90%;
+  text-align: center;
 }
 .video-mainpage-wrap {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 100%;
+  width: 95%;
+  margin: 0 20px;
   justify-content: center;
   align-items: center;
 }
 .video-mainpage-wrap video {
-  width: 800px;
-  height: 400px;
+  /* width: 800px; */
+  /* height: 400px; */
 }
 /* independence */
 .independence-main-wrap {
@@ -722,6 +724,11 @@ section, .hero-section {
 .services-mainpage-description-wrap p {
   font-size: 20px;
   margin: 0;
+  font-size: 20px;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  max-width: 89%;
 }
 .services-main-row {
   display: flex;
@@ -1496,13 +1503,15 @@ section, .hero-section {
   width: 500px;
   max-width: 500px;
   min-height: 400px;
-  position: absolute;
+  position: fixed;
   left: 30%;
   background-color: white;
   padding: 35px 25px;
   border: 1px solid #00458B;
+  border-radius: 10px;
   animation-duration: 0.3s;
   animation-name: grow;
+  top: 5%;
 }
 .hero-order-form-options-title,
 .hero-order-form-options-title {
@@ -1653,7 +1662,7 @@ section, .hero-section {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  z-index: 10;
+  z-index: 2;
   align-items: center;
   justify-content: flex-end;
   position: absolute;
@@ -1666,6 +1675,11 @@ section, .hero-section {
 .contact-phone-mobile-wrap,
 .contact-email-mobile-wrap {
   margin-right: 10%;
+}
+.contact-phone-mobile-wrap a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
 }
 .container-mobile ul {
   padding: 0;
@@ -1728,15 +1742,18 @@ section, .hero-section {
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 100%;
   max-height: 300px;
-  min-height: 150px;
+  min-height: 290px;
   background-color: #3FD2C7;
   z-index: 6;
   padding: 20px;
   border-top: none;
   top: 25px;
-  left: -25px
+  left: -25px;
+  border-bottom: 1px solid #00458B;
+  animation-name: fadeInDown;
+  animation-duration: 0.3s;
 }
 #menu-mobile a {
   text-decoration: none;
@@ -1744,6 +1761,52 @@ section, .hero-section {
 }
 #menu-mobile a:hover {
   color: #00458B;
+}
+#mobile-contacts-wrap-li {
+  padding: 0;
+  width: 100%;
+}
+.mobile-contacts-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: absolute;
+  width: 100%;
+  bottom: 5%;
+}
+.mobile-contacts-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-bottom: 20px;
+}
+.mobile-social-item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 40px;
+  width: 30%;
+  margin-right: 10px;
+}
+.mobile-social-item img {
+  opacity: 0.9;
+  cursor: pointer;
+}
+.mobile-social-item-whatsapp {
+  background-color: white;
+}
+.mobile-email-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 @media (max-width: 991px)  {
   .hero-img-main-title-wrap {
@@ -1902,7 +1965,7 @@ section, .hero-section {
 }
 @media (max-width: 1100px) {
   .timeline {
-      flex-direction: column;
+      flex-direction: row;
       flex-wrap: wrap;
       align-items: center;
       max-width: 300px;
@@ -1912,10 +1975,12 @@ section, .hero-section {
   .timeline li {
       display: flex;
       flex-direction: column;
-      flex-wrap: wrap;
-      max-width: 300px;
-      width: 300px;
-      margin-bottom: 10px;
+      flex-wrap: nowrap;
+      max-width: 150px;
+      width: 150px;
+      min-height: 130px;
+      max-height: 150px;
+      margin-bottom: 20px;
   }
 }
 @media (max-width: 991px)  {
@@ -2152,10 +2217,15 @@ section, .hero-section {
 @media (min-width: 380px) and (max-width: 1024px) { 
   .video-mainpage-wrap {
       align-items: normal;
+      margin: 0 10px;
   }
 }
 
-
+@media (min-width: 280px) and (max-width: 1024px) { 
+  .hero-order-form-popup-wrap{
+    top: 10%;
+  }
+}
 
 
 
@@ -2203,6 +2273,16 @@ section, .hero-section {
 @keyframes fadeInUp {
   from {
     transform: translateY(100vh);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeInDown {
+  from {
+    transform: translateY(-5vh);
     opacity: 0;
   }
   to {

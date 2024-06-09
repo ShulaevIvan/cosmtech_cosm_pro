@@ -1,6 +1,8 @@
 import React from "react";
+import promo_video from '../../video/compress_promo_video.mp4';
 
 const VideoMainPage = () => {
+
     return (
         <React.Fragment>
             <section>
@@ -11,14 +13,13 @@ const VideoMainPage = () => {
                         </div>
                         <div className="video-mainpage-description">
                             <p>
-                                Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. 
-                                Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.
+                                ООО "Космотех" - это производственная компания, специализирующаяся на разработке и изготовлении высокотехнологичной продукции в области космических технологий.
                             </p>
                         </div>
                     </div>
                     <div className="video-mainpage-wrap">
                         <video controls>
-                            <source src="video.mp4" type="video/mp4" />
+                            <source src={promo_video} type="video/mp4" />
                         </video>
                     </div>
                 </div>

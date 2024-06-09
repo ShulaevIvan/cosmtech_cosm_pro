@@ -10,7 +10,9 @@ const menuSlice = createSlice({
     initialState,
     reducers: {
         mobileMenuActive(state, action) {
-            state.mobileMenuActive = action.payload;
+            const { status } = action.payload;
+            console.log(status)
+            state.mobileMenuActive = status;
         },
     }
 });
