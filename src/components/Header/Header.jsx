@@ -10,7 +10,7 @@ import mainLogoMinIcon from '../../img/logo_cosm.png';
 import CallbackRequestPopup from "../CallbackRequestPopup/CallbackRequestPopup";
 import MobileMenu from "../MobileMenu/MobileMenu";
 
-import { callbackPopupShow } from "../../redux/slices/headerSlice";
+import { callbackPopupShow, activeStickyHeader } from "../../redux/slices/headerSlice";
 
 
 const Header = () => {
@@ -25,13 +25,13 @@ const Header = () => {
 
     useEffect(() => {
         const targetTitle = headerState.pageTitles.find((headerTitleObj) => headerTitleObj.path === location.pathname);
-        document.title = targetTitle ? targetTitle.name : 'Test';
-    }, [location.pathname])
+        document.title = targetTitle ? targetTitle.name : '';
+    }, [location.pathname]);
     
 
     return (
         <React.Fragment>
-            <header className="main-header">
+            <header className={"main-header"}>
                 {callbackPopup ?  
                     <CallbackRequestPopup 
                         callbackPopupHander = {callbackPopupHandler}

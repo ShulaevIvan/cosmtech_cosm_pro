@@ -512,6 +512,7 @@
     overflow-x: hidden;
 }
 .about-company-textcontent-image-wrap img {
+    width: 100%;
     max-width: 400px;
 }
 .about-company-textcontent-texta-wrap {
@@ -527,6 +528,9 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+}
+.about-company-description p {
+    margin-top: 0px;
 }
 .about-title-wrap {
     display: flex;

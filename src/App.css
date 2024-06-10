@@ -52,11 +52,19 @@ header {
   max-width: 1920px;
   width: 100%;
   display: flex;
+  /* position: fixed;
+  background-color: white;
+  z-index: 11; */
   justify-content: space-evenly;
   max-height: 85px;
-  padding: 20px;
+  padding: 10px;
   border-bottom: 1px solid;
   border-color: #00458B;
+}
+.sticky-header {
+  position: fixed;
+  background-color: white;
+  z-index: 10;
 }
 @media (max-width: 1024px) {
   header {
@@ -79,6 +87,7 @@ body{
   position: relative;
   min-height: 100vh;
   scroll-behavior: smooth;
+  line-height: 1.5;
 }
 main {
   display: flex;
@@ -129,6 +138,16 @@ section, .inner-page-main-title-wrap {
 }
 section, .hero-section {
   margin-bottom: 80px;
+}
+.section-buff {
+  width: 100%;
+  padding-top: 350px;
+  padding-bottom: 150px;
+  min-height: 300px;
+  background: #4BB5E3;
+  clip-path: polygon(0 15%, 100% 0, 100% 87%, 0% 100%);
+  width: 100%;
+  opacity: 0;
 }
 .hero-section {
   animation: none;
@@ -400,6 +419,7 @@ section, .hero-section {
   font-weight: 700;
   text-align: left;
   margin: 0;
+  line-height: 1.2;
   color: white;
 }
 .hero-img-main-title-description {
@@ -412,7 +432,7 @@ section, .hero-section {
   background-color: #141414;
   color: white;
   padding: 20px;
-  line-height: 1.6;
+  line-height: 1.5;
   opacity: 0.7;
 }
 .hero-img-main-title-controls-wrap {
@@ -499,7 +519,7 @@ section, .hero-section {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 95%;
+  width: 100%;
   margin: 0 20px;
   justify-content: center;
   align-items: center;
@@ -715,6 +735,8 @@ section, .hero-section {
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 40px;
+  width: 80%;
+  justify-content: center;
 }
 .services-mainpage-title-wrap h2 {
   font-size: 46px;
@@ -1006,7 +1028,6 @@ section, .hero-section {
   background-size: cover;
   background-repeat:no-repeat;
   background-position: center center;
-  filter: grayscale();
   justify-content: center;
   align-items: center;
 }
@@ -1026,6 +1047,16 @@ section, .hero-section {
   justify-content: center;
   align-items: center;
   min-width: 16.6%;
+  margin-bottom: 20px;
+  cursor: pointer;
+  filter: grayscale();
+}
+.client-item img {
+  max-width: 150px;
+  max-height: 50px;
+}
+.client-item:hover {
+  filter: none;
 }
 .client-item h5 {
   font-size: 16px;
@@ -1500,10 +1531,10 @@ section, .hero-section {
   align-items: center;
   z-index: 5;
   background-color: gray;
-  width: 500px;
-  max-width: 500px;
+  width: 450px;
+  max-width: 450px;
   min-height: 400px;
-  position: fixed;
+  position: absolute;
   left: 30%;
   background-color: white;
   padding: 35px 25px;
@@ -1511,7 +1542,7 @@ section, .hero-section {
   border-radius: 10px;
   animation-duration: 0.3s;
   animation-name: grow;
-  top: 5%;
+  top: 2%;
 }
 .hero-order-form-options-title,
 .hero-order-form-options-title {
@@ -2223,7 +2254,8 @@ section, .hero-section {
 
 @media (min-width: 280px) and (max-width: 1024px) { 
   .hero-order-form-popup-wrap{
-    top: 10%;
+    top: 2%;
+    left: 5%;
   }
 }
 

@@ -24,7 +24,7 @@ const IndependenceMainPageForm = (props) => {
     return (
         <React.Fragment>
             <div className="independence-main-order-form">
-                <h3 className="main-color-title">Текст-рыба на русском языке</h3>
+                <h3 className="main-color-title">Получить консультацию по нашим услугам</h3>
 
                 <form className="contact-form-order-main">
                     <div className="contact-form-order-main-row">

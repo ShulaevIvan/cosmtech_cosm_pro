@@ -21,7 +21,7 @@ const ServicesMainPagePopup = (props) => {
                             <input type="text" />
                         </div>
                     </div>
-                    <div class="service-form-input-wrap">
+                    <div className="service-form-input-wrap">
                         <div className="service-popup-form-title">
                             <label>Телефон</label>
                         </div>
@@ -29,7 +29,7 @@ const ServicesMainPagePopup = (props) => {
                             <input type="tel" />
                         </div>
                     </div>
-                    <div class="service-form-input-wrap">
+                    <div className="service-form-input-wrap">
                         <div className="service-popup-form-title">
                             <label>Email</label>
                         </div>
@@ -40,7 +40,7 @@ const ServicesMainPagePopup = (props) => {
                     <div className="service-form-options-wrap">
                         <div className="service-form-options-title">Услуга</div>
                         <select name="hero">
-                            <option selected>Выбранная услуга</option>
+                            <option value={'default'}>Выбранная услуга</option>
                             <option value="t1">Опция 1</option>
                             <option value="t2">Опция 2</option>
                             <option value="t3">Опция 3</option>

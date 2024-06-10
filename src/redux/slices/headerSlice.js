@@ -44,7 +44,11 @@ const initialState = {
             title: 'test',
             description: 'Контрактное производство',
         }
-    ]
+    ],
+    stickyHeader: {
+        scrollPercent: 0,
+        stickyActive: false,
+    }
 };
 
 
@@ -110,6 +114,6 @@ export const {
     callbackPolicy,
     callbackValidatePhone,
     callbackSendBtn,
-    clearCallbackInput
+    clearCallbackInput,
 } = headerSlice.actions;
 export default headerSlice.reducer;

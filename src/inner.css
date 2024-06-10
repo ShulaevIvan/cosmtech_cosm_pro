@@ -16,9 +16,10 @@
     vertical-align: middle;
     filter: brightness(0.7);
 }
-.inner-page-background-wrap img {
+/* .inner-page-background-wrap img {
+    width: 100%;
     max-height: 400px;
-}
+} */
 .inner-page-background-wrap .filter-blur-img {
     filter: blur(3px);
 }
@@ -39,7 +40,7 @@
     width: 500px;
     position: absolute;
     left: 17%;
-    top: 25%;
+    top: 15%;
     color: white;
     z-index: 1;
 }
@@ -554,6 +555,7 @@
     font-size: 14px;
     max-width: 500px;
     padding: 0 16px;
+    line-height: 1.5;
 }
 .about-company-video-wrap {
     display: flex;
@@ -581,7 +583,7 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 40px;
 }
 .about-company-textcontent-image-wrap {
@@ -612,6 +614,10 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    line-height: 1.5;
+}
+.about-company-description p {
+    margin-top: 0px;
 }
 .about-title-wrap {
     display: flex;
