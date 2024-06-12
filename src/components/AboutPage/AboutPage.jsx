@@ -1,9 +1,13 @@
 import React from "react";
 import demo80Img from '../../img/80x80.png';
 import demo500Img from '../../img/500x500.png';
-import promo_video from '../../video/promo_video.mp4';
+import promo_video from '../../video/compress_promo_video.mp4';
 import aboutImg from '../../img/about_test.jpg';
 import aboutImg2 from '../../img/about_test2.jpg';
+import aboutIconPrize from '../../img/prize_cosm.svg';
+import aboutIconProduction from '../../img/production_cosm.svg';
+import ordersIcon from '../../img/orders.svg';
+import labIcon from '../../img/lab_cosm.svg';
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 
 const AboutPage = () => {
@@ -18,29 +22,29 @@ const AboutPage = () => {
                     </div>
                     <div className="about-company-facts-row">
                         <div className="about-company-fact-item-wrap">
-                            <div className="about-conpany-fact-icon-wrap"><img src={demo80Img} alt="demo 80x80" /></div>
+                            <div className="about-conpany-fact-icon-wrap"><img src={aboutIconPrize} alt="demo 80x80" /></div>
                             <div className="about-conpany-fact-text">100% </div>
                             <div className="about-conpany-fact-descr">
                                 качество продукции полный цикл контроля качества, сертификаты ИСО 9001:2015 и 14001:2015
                             </div>
                         </div>
                         <div className="about-company-fact-item-wrap">
-                            <div className="about-conpany-fact-icon-wrap"><img src={demo80Img} alt="demo 80x80" /></div>
-                            <div className="about-conpany-fact-text">1 000000 ед</div>
+                            <div className="about-conpany-fact-icon-wrap"><img src={aboutIconProduction} alt="demo 80x80" /></div>
+                            <div className="about-conpany-fact-text">1 МЛН</div>
                             <div className="about-conpany-fact-descr">
                                 Мощности производства до 1 миллиона единиц продукции в сутки
                             </div>
                         </div>
                         <div className="about-company-fact-item-wrap">
-                            <div className="about-conpany-fact-icon-wrap"><img src={demo80Img} alt="demo 80x80" /></div>
-                            <div className="about-conpany-fact-text">1000+</div>
+                            <div className="about-conpany-fact-icon-wrap"><img src={ordersIcon} alt="demo 80x80" /></div>
+                            <div className="about-conpany-fact-text">100+</div>
                             <div className="about-conpany-fact-descr">
-                                Налаженные связи с лучшими мировыми поставщиками сырья и упаковки
+                                Контактов и налаженные связи с лучшими мировыми поставщиками сырья и упаковки
                             </div>
                         </div>
                         <div className="about-company-fact-item-wrap">
-                            <div className="about-conpany-fact-icon-wrap"><img src={demo80Img} alt="demo 80x80" /></div>
-                            <div className="about-conpany-fact-text">{'25 > лет'}</div>
+                            <div className="about-conpany-fact-icon-wrap"><img src={labIcon} alt="demo 80x80" /></div>
+                            <div className="about-conpany-fact-text">{'3 > лет'}</div>
                             <div className="about-conpany-fact-descr">
                                 опыта в области разработки и реализации косметической продукции.
                             </div>

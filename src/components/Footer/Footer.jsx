@@ -72,6 +72,7 @@ const Footer = () => {
                                         className={footerState.footerFormCallbackValid ? null : 'input-err'}
                                         ref={footerCallbackRef}
                                         value={footerState.footerFormCallbackValue}
+                                        placeholder={'+7 812 xxx-xx-xx'}
                                         onChange={footerCallbackHandler} type="tel"
                                         onKeyDown={(e) => clearInputFooterCallback(e)}
                                     />
@@ -81,7 +82,7 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="main-footer-description-wrap">
-                                <p>Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.</p>
+                                <p>Отправьте запрос и менеджер перезвонит вам в течении 30 мин</p>
                             </div>
                         </form>
                     </div>
@@ -95,7 +96,7 @@ const Footer = () => {
                             <ul>
                                 <li>Адрес: <Link to={"https://yandex.ru/maps/?rtext=~59.895998,30.374016"} target={'_blank'}>Санкт-Петербург ул Салова 27 АБ</Link></li>
                                 <li>Телефон: <Link to={"tel:+78123630614"}>+7 (812) 363-06-14</Link></li>
-                                <li>email: <Link to={"mailto:pro@cosmtech.ru&body=text?subject=Вопрос"} target={'_blank'}>pro@cosmtech.ru</Link></li>
+                                <li>Email: <Link to={"mailto:pro@cosmtech.ru&body=text?subject=Вопрос"} target={'_blank'}>pro@cosmtech.ru</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -118,7 +119,7 @@ const Footer = () => {
                             </div>
                             <ul className="main-footer-submenu">
                                 <li><Link onClick={goToTopHandler} to={'/about'}>О Компании</Link></li>
-                                <li><Link to={"#"}>Реквизиты</Link></li>
+                                <li><Link to={"#"}>Вакансии</Link></li>
                                 <li><Link onClick={goToTopHandler} to={'/contacts'}>Контакты</Link></li>
                             </ul>
                         </div>

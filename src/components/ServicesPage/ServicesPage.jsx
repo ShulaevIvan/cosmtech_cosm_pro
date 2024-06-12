@@ -30,7 +30,7 @@ const ServicesPage = () => {
                                     
                                     <div className={serviceItem.position === 'left' ? 
                                         'main-service-item-row slide-left' : "main-service-item-row reverseService slide-right"}>
-                                        <div className="main-service-img-box">
+                                        <div className={`main-service-img-box img-service-align-${serviceItem.position}`}>
                                             <div className="main-service-img-wrap">
                                                 <img src={serviceItem.image} alt={serviceItem.name} />
                                             </div>
@@ -40,8 +40,7 @@ const ServicesPage = () => {
                                                 <h2>{serviceItem.name}</h2>
                                                 <p>{serviceItem.description}</p>
                                                 <p>
-                                                    Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, 
-                                                    когда нужно быстро заполнить макеты или прототипы содержимым
+                                                    {serviceItem.descriptionMini}
                                                 </p>
                                                 <div className="main-service-order-btn-wrap">
                                                     <span 

@@ -21,7 +21,8 @@ const ServicesMainPage = () => {
 
     const serviceOrderPopupHandler = (e, status) => {
         const cords = getPopupCords(e.pageX, e.pageY, e.target.offsetLeft, e.target.offsetTop);
-        dispatch(serviceOrderPopup({status: status, left: cords.x, top: cords.y}));
+        console.log(cords)
+        dispatch(serviceOrderPopup({status: status, left: cords.left, top: cords.top}));
     };
 
     useEffect(() => {

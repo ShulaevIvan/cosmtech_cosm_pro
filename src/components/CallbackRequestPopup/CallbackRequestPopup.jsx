@@ -73,7 +73,7 @@ const CallbackRequestPopup = (props) => {
                                 <label
                                     ref={policyRef} 
                                     onClick={() => callbackCheckboxHandler(callbackState.checkboxPolicyActive === true ? false : true)}
-                                    for="checkbox-custom-hero-form-policy"
+                                    htmlFor="checkbox-custom-hero-form-policy"
                                 ></label>
                                 <span className="callback-policy-wrap">согласен с <Link target={'_blank'} to={'/about/policy'}>политикой конфидициальности</Link></span>
                             </div>

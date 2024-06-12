@@ -26,7 +26,11 @@ const ContactsPage = () => {
                                     <ul>
                                         <li><span className="span-title-bold">Телефон: </span> <Link to={'tel:+78123630614'}>+7 (812) 363-06-14</Link></li>
                                         <li><span className="span-title-bold">Email: </span> 
-                                         <Link to={"mailto:pro@cosmtech.ru&body=text?subject=Вопрос"} target={'_blank'}>pro@cosmtech</Link></li>
+                                            <Link to={"mailto:pro@cosmtech.ru&body=text?subject=Вопрос"} target={'_blank'}>pro@cosmtech.ru</Link>
+                                        </li>
+                                        <li><span className="span-title-bold">Адрес производства: </span>
+                                            <Link to={"https://yandex.ru/maps/?rtext=~59.895998,30.374016"} target={'_blank'}>Санкт-Петербург, ул Салова 27 АБ</Link>
+                                        </li>
                                     </ul>
                                     <ul>
                                         <li className="contact-list-social">

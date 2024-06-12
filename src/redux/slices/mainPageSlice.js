@@ -462,8 +462,8 @@ const mainPageSlice = createSlice({
         },
         serviceOrderPopup(state, action) {
             const { status, left, top } = action.payload;
-            state.mouseCords.left = left;
-            state.mouseCords.top = top;
+            state.mouseCords.left = left - 200;
+            state.mouseCords.top = top - 400;
             state.services.servicePopupShow = status;
         },
         selectProduction(state, action) {
