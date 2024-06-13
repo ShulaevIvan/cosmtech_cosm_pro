@@ -162,6 +162,7 @@ section, .hero-section {
   }
 }
 .main-color-title {
+  font-size: 28px;
   color: #00458B;
 }
 .off-color-title {
@@ -2711,3 +2712,4 @@ section, .hero-section {
     width: 55%!important;
   }
 }
+

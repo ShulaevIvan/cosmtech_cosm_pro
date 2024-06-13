@@ -10,7 +10,10 @@ import ordersIcon from '../../img/orders.svg';
 import labIcon from '../../img/lab_cosm.svg';
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 
+import { useSelector, useDispatch } from "react-redux";
+
 const AboutPage = () => {
+    const aboutState = useSelector((state) => state.innerPage.about);
     return (
         <React.Fragment>
             <InnerPageHeader />
@@ -21,34 +24,17 @@ const AboutPage = () => {
                         <h1>Косметические технологии в Цифрах</h1>
                     </div>
                     <div className="about-company-facts-row">
-                        <div className="about-company-fact-item-wrap">
-                            <div className="about-conpany-fact-icon-wrap"><img src={aboutIconPrize} alt="demo 80x80" /></div>
-                            <div className="about-conpany-fact-text">100% </div>
-                            <div className="about-conpany-fact-descr">
-                                качество продукции полный цикл контроля качества, сертификаты ИСО 9001:2015 и 14001:2015
-                            </div>
-                        </div>
-                        <div className="about-company-fact-item-wrap">
-                            <div className="about-conpany-fact-icon-wrap"><img src={aboutIconProduction} alt="demo 80x80" /></div>
-                            <div className="about-conpany-fact-text">1 МЛН</div>
-                            <div className="about-conpany-fact-descr">
-                                Мощности производства до 1 миллиона единиц продукции в сутки
-                            </div>
-                        </div>
-                        <div className="about-company-fact-item-wrap">
-                            <div className="about-conpany-fact-icon-wrap"><img src={ordersIcon} alt="demo 80x80" /></div>
-                            <div className="about-conpany-fact-text">100+</div>
-                            <div className="about-conpany-fact-descr">
-                                Контактов и налаженные связи с лучшими мировыми поставщиками сырья и упаковки
-                            </div>
-                        </div>
-                        <div className="about-company-fact-item-wrap">
-                            <div className="about-conpany-fact-icon-wrap"><img src={labIcon} alt="demo 80x80" /></div>
-                            <div className="about-conpany-fact-text">{'3 > лет'}</div>
-                            <div className="about-conpany-fact-descr">
-                                опыта в области разработки и реализации косметической продукции.
-                            </div>
-                        </div>
+                        {aboutState.companyFacts.map((companyFact) => {
+                            return (
+                                <React.Fragment key={companyFact.id}>
+                                    <div className="about-company-fact-item-wrap">
+                                        <div className="about-conpany-fact-icon-wrap"><img src={companyFact.image} alt={companyFact.name} /></div>
+                                            <div className="about-conpany-fact-text">{companyFact.name}</div>
+                                            <div className="about-conpany-fact-descr">{companyFact.description}</div>
+                                        </div>
+                                </React.Fragment>
+                            )
+                        })}
                     </div>
                 </div>
             </section>

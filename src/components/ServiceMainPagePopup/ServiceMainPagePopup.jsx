@@ -15,26 +15,26 @@ const ServicesMainPagePopup = (props) => {
                 <form>
                     <div className="service-form-input-wrap">
                         <div className="service-popup-form-title">
-                            <label>Имя</label>
+                            <label htmlFor="service-popup-name-input">Имя</label>
                         </div>
                         <div className="service-popup-form-title">
-                            <input type="text" />
-                        </div>
-                    </div>
-                    <div className="service-form-input-wrap">
-                        <div className="service-popup-form-title">
-                            <label>Телефон</label>
-                        </div>
-                        <div className="service-popup-form-title">
-                            <input type="tel" />
+                            <input id="service-popup-name-input" type="text" />
                         </div>
                     </div>
                     <div className="service-form-input-wrap">
                         <div className="service-popup-form-title">
-                            <label>Email</label>
+                            <label htmlFor="service-popup-phone-input">Телефон</label>
                         </div>
                         <div className="service-popup-form-title">
-                            <input type="email" />
+                            <input id="service-popup-phone-input" type="tel" />
+                        </div>
+                    </div>
+                    <div className="service-form-input-wrap">
+                        <div className="service-popup-form-title">
+                            <label htmlFor="service-popup-form-email">Email</label>
+                        </div>
+                        <div className="service-popup-form-title">
+                            <input id="service-popup-form-email" type="email" />
                         </div>
                     </div>
                     <div className="service-form-options-wrap">
@@ -51,8 +51,10 @@ const ServicesMainPagePopup = (props) => {
                         <span className="service-plus-icon"></span>
                     </div>
                     <div className="service-form-options-wrap">
-                        <div className="service-form-options-title">Коментарий</div>
-                        <textarea></textarea>
+                        <div className="service-form-options-title">
+                            <label htmlFor="service-popup-form-comment">Коментарий</label>
+                        </div>
+                        <textarea id="service-popup-form-comment"></textarea>
                     </div>
                     <div className="service-form-order-btn-wrap">
                         <span className="service-form-order-btn">Отправить</span>

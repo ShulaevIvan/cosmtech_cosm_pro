@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProduction } from "../../redux/slices/mainPageSlice";
-
 import ProductionMainPageHover from "../ProductionMainPageHover/ProductionMainPageHover";
 
 const ProductionMainPage = () => {
@@ -10,8 +9,7 @@ const ProductionMainPage = () => {
 
     const selectProductionHandler = (e, id, status) => {
         const rect = e.target.getBoundingClientRect();
-        console.log(rect)
-        dispatch(selectProduction({status: status, productionId: id, left: rect.x - 200, right: rect.y - 500}))
+        dispatch(selectProduction({status: status, productionId: id, left: rect.x / 2, right: rect.y}))
     };
 
     return (

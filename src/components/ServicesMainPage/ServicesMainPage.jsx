@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { serviceShowBtn, showAllServices, serviceOrderPopup } from "../../redux/slices/mainPageSlice";
 import { useEffect } from "react";
+
 import getPopupCords from "../../functions/getPopupCords";
 import ServicesMainPagePopup from "../ServiceMainPagePopup/ServiceMainPagePopup";
 
@@ -21,7 +22,6 @@ const ServicesMainPage = () => {
 
     const serviceOrderPopupHandler = (e, status) => {
         const cords = getPopupCords(e.pageX, e.pageY, e.target.offsetLeft, e.target.offsetTop);
-        console.log(cords)
         dispatch(serviceOrderPopup({status: status, left: cords.left, top: cords.top}));
     };
 

@@ -8,11 +8,15 @@ import backgroundServices from '../../img/services_bg.jpg';
 import backgroundAbout from '../../img/about.jpg';
 import backgroundContacts from '../../img/contacts.jpg';
 import innerHeaderImg from '../../img/1920x400.png';
-import serviceImg from '../../img/575x400.png';
 import serviceLabImg from '../../img/service_lab.jpg';
 import serviceStm from '../../img/service_stm.jpg';
 import serviceTestLab from '../../img/service_test_lab.jpg';
 import servicePacking from '../../img/service_packing.jpg';
+
+import aboutFactFirst from '../../img/prize_cosm.svg';
+import aboutFactSecond from '../../img/production_cosm.svg';
+import aboutFactThird from '../../img/orders.svg';
+import aboutFactFourth  from '../../img/lab_cosm.svg';
 
 const initialState = { 
     headerBackgrounds: [
@@ -115,6 +119,57 @@ const initialState = {
     activeBackground: innerHeaderImg,
     servicesPage: {
         serviceFormActive: false,
+        serviceForm: {
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    fieldType: 'text',
+                    fieldName: 'name',
+                    fieldValue: '',
+                    fieldValid: true
+                },
+                {
+                    id: 2,
+                    title: 'Телефон',
+                    fieldType: 'tel',
+                    fieldName: 'phone',
+                    fieldValue: '',
+                    fieldValid: true
+                },
+                {
+                    id: 3,
+                    title: 'email',
+                    fieldType: 'email',
+                    fieldName: 'email',
+                    fieldValue: '',
+                    fieldValid: true
+                },
+                {
+                    id: 4,
+                    title: 'Тип Услуги',
+                    fieldType: 'select',
+                    fieldName: 'serviceType',
+                    fieldValue: '',
+                    options: [
+                        { id: 1, name: 'Тип услуги 1', value: 'тип услуги 1', selected: true},
+                        { id: 2, name: 'Тип услуги 2', value: 'тип услуги 2', selected: false},
+                        { id: 3, name: 'Тип услуги 3', value: 'тип услуги 3', selected: false},
+                        { id: 4, name: 'Тип услуги 4', value: 'тип услуги 4', selected: false},
+                        { id: 5, name: 'Тип услуги 5', value: 'тип услуги 5', selected: false},
+                    ],
+                    fieldValid: true
+                },
+                {
+                    id: 5,
+                    title: 'Комментарий',
+                    fieldType: 'textarea',
+                    fieldName: 'comment',
+                    fieldValue: '',
+                    fieldValid: true
+                },
+            ]
+        },
         servicesItems: [
             
             {
@@ -239,6 +294,34 @@ const initialState = {
             checkboxPolicyStatus: false,
             allFieldsValid: true,
         }
+    },
+    about: {
+        companyFacts: [
+            {
+                id: 1,
+                name: '100%',
+                description: 'качество продукции полный цикл контроля качества, сертификаты ИСО 9001:2015 и 14001:2015.',
+                image: aboutFactFirst,
+            },
+            {
+                id: 2,
+                name: '1 МЛН',
+                description: 'Мощности производства до 1 миллиона единиц продукции в сутки.',
+                image: aboutFactSecond,
+            },
+            {
+                id: 3,
+                name: '100+',
+                description: 'Контактов и налаженные связи с лучшими мировыми поставщиками сырья и упаковки.',
+                image: aboutFactThird,
+            },
+            {
+                id: 4,
+                name: '3 > лет',
+                description: 'опыта в области разработки и реализации косметической продукции.',
+                image: aboutFactFourth,
+            }
+        ],
     },
     mousePosition: {
         left: 0,
