@@ -46,7 +46,9 @@ const ServicesMainPage = () => {
                         </div>
 
                         <div className="services-main-row">
-                            {servicesState.servicePopupShow ? <ServicesMainPagePopup popupHandler={serviceOrderPopupHandler} cords={mouseCords} /> : null}
+                            {servicesState.servicePopupShow ? 
+                                <ServicesMainPagePopup popupHandler={serviceOrderPopupHandler} cords={mouseCords} /> 
+                            : null}
                             {Array.from(servicesState.servicesItems).map((serviceItem) => {
                                 return (
                                     <React.Fragment key={Math.random()}>

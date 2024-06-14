@@ -9,7 +9,7 @@
 .inner-page-background-wrap {
     display: flex;
     max-width: 100%;
-    width: 1920px;
+    width: 100%;
     min-width: 1024px;
     justify-content: center;
     max-width: 100%;
@@ -782,6 +782,7 @@
     margin-bottom: 80px;
     animation:  slide-in 800ms;
     animation-timing-function: linear;
+    /* box-shadow: 0px 4px 32px 0px rgba(50,38,5,.06); */
 }
 .main-service-item-row p {
     max-width: 500px;
@@ -806,6 +807,13 @@
     height: 400px;
     max-height: 400px;
     border-radius: 10px;
+    box-shadow: 0px 4px 32px 0px rgba(50,38,5,.06);
+}
+.align-img-left {
+    justify-content: flex-start;
+}
+.align-img-right {
+    justify-content: flex-end;
 }
 .main-service-img-wrap img p {
     max-width: 100%;
@@ -1405,6 +1413,12 @@
 @media  (min-width: 800px) and (max-width: 1200px) {
     .about-company-textcontent-image-wrap {
         width: 45%;
+    }
+}
+@media  (min-width: 600px) and (max-width: 1100px) {
+    .align-img-left,
+    .align-img-right {
+        justify-content: center;
     }
 }
 

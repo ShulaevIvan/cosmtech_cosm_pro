@@ -31,7 +31,7 @@ const ServicesPage = () => {
                                     <div className={serviceItem.position === 'left' ? 
                                         'main-service-item-row slide-left' : "main-service-item-row reverseService slide-right"}>
                                         <div className={`main-service-img-box img-service-align-${serviceItem.position}`}>
-                                            <div className="main-service-img-wrap">
+                                            <div className={`main-service-img-wrap align-img-${serviceItem.position}`}>
                                                 <img src={serviceItem.image} alt={serviceItem.name} />
                                             </div>
                                         </div>
