@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = { 
     callbackHeader: {
+        loadStatus: false,
         callbackPopupActive: false,
         checkboxPolicyActive: false,
         callbackInputValue: '',
@@ -51,6 +52,25 @@ const initialState = {
     }
 };
 
+export const fetchCallbackThunk = createAsyncThunk(
+    'api/callbackreq/',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/callbackreq/`, {
+            method:'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            
+            body: JSON.stringify({phone: sendData.phone, type: 'callback', time: '30min'})
+        });
+        console.log(response.json())
+        const data = await response.json();
+
+        return data;
+    }
+);
+
 
 const headerSlice = createSlice({
     name: 'header',
@@ -70,22 +90,23 @@ const headerSlice = createSlice({
         },
         callbackValidatePhone(state, action) {
             let { inputValue } = action.payload;
-            if (inputValue.length > 11 && state.callbackHeader.callbackInputValue) return;
+            if (inputValue.length > 11 && state.callbackHeader.callbackInputValue) {
+                state.callbackHeader.callbackInputValid = true;
+                return;
+            }
             //eslint-disable-next-line
             const pattern = /^[0-9]\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})([0-9]{2})$/;
             //eslint-disable-next-line
             const symPattern = /[`!@№#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|\w|\s/g;
-            const checkSevenPattern = /^7/;
+            const checkSevenPattern = /^7|^8/;
 
             if ((inputValue.length === 10) && !checkSevenPattern.test(inputValue)) inputValue = `8${inputValue}`;
             if (pattern.test(inputValue) && symPattern.test(inputValue)) {
                 const resultValue = inputValue.replace(pattern, (all, group2, group3, group4, group5) => {
                     return `+7 (${group2}) ${group3}-${group4}-${group5}`
                 });
-                console.log(resultValue)
                 state.callbackHeader.callbackInputValue = resultValue;
                 state.callbackHeader.callbackInputValid = true;
-                state.callbackHeader.checkboxPolicyActive = false;
                 return;
             }
             state.callbackHeader.callbackInputValue = inputValue;
@@ -104,8 +125,20 @@ const headerSlice = createSlice({
             }
             state.callbackHeader.callbackSendBtnStatus = false;
             return;
-        }
-    }
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+          .addCase(fetchCallbackThunk.pending, (state) => {
+            state.loadingStatus = 'loading';
+            state.error = null;
+          })
+          .addCase(fetchCallbackThunk.fulfilled, (state, action) => {
+            console.log(action.payload)
+            state.loadingStatus = 'ready';
+            state.error = null;
+          })
+      },
 });
 
 

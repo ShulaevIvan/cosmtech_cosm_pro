@@ -2,7 +2,13 @@ import React from "react";
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { callbackPolicy, callbackValidatePhone, callbackSendBtn, clearCallbackInput } from "../../redux/slices/headerSlice";
+import { 
+    callbackPolicy, 
+    callbackValidatePhone, 
+    callbackSendBtn, 
+    clearCallbackInput,
+    fetchCallbackThunk 
+} from "../../redux/slices/headerSlice";
 
 
 const CallbackRequestPopup = (props) => {
@@ -24,14 +30,24 @@ const CallbackRequestPopup = (props) => {
             if (callbackState.checkboxPolicyActive) policyRef.current.click();
             phoneRef.current.value = '';
             dispatch(clearCallbackInput());
-           
+        }
+    };
+
+    const sendCallbackReq = () => {
+        if (callbackState.callbackInputValid && callbackState.checkboxPolicyActive) {
+            dispatch(fetchCallbackThunk({phone: callbackState.callbackInputValue}));
         }
     };
     
     useEffect(() => {
         if (!phoneRef.current.value) return;
         dispatch(callbackSendBtn());
-    }, [phoneRef.current,callbackState.callbackInputValue, callbackState.checkboxPolicyActive, callbackState.callbackInputValue]);
+    }, [
+        phoneRef.current,
+        callbackState.callbackInputValue,
+        callbackState.checkboxPolicyActive, 
+        callbackState.callbackInputValue
+    ]);
 
     return (
         <React.Fragment>
@@ -72,14 +88,20 @@ const CallbackRequestPopup = (props) => {
                                 <input id="checkbox-custom-hero-form-policy" className="checkbox-custom-hero-form-policy" type="checkbox" />
                                 <label
                                     ref={policyRef} 
-                                    onClick={() => callbackCheckboxHandler(callbackState.checkboxPolicyActive === true ? false : true)}
+                                    onClick={() => callbackCheckboxHandler(callbackState.checkboxPolicyActive ? false : true)}
                                     htmlFor="checkbox-custom-hero-form-policy"
                                 ></label>
                                 <span className="callback-policy-wrap">согласен с <Link target={'_blank'} to={'/about/policy'}>политикой конфидициальности</Link></span>
                             </div>
                     </form>
                     <div className="callback-from-btn-wrap">
-                        <span className={callbackState.callbackSendBtnStatus ? "callback-send-btn" : "callback-send-btn btnDisabled"}>Отправить</span>
+                        <span
+                            onClick={sendCallbackReq}
+                            className={
+                                callbackState.callbackSendBtnStatus ? 
+                                    "callback-send-btn" : "callback-send-btn btnDisabled"
+                            }
+                        >Отправить</span>
                     </div>
                 </div>
             </div>
