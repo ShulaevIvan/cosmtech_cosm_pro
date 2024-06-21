@@ -8,6 +8,8 @@ const initialState = {
         callbackInputValue: '',
         callbackInputValid: true,
         callbackSendBtnStatus: false,
+        callbackHappyState: false,
+        callbackHappyStateMsg: '',
     },
     pageTitles: [
         {
@@ -64,7 +66,6 @@ export const fetchCallbackThunk = createAsyncThunk(
             
             body: JSON.stringify({phone: sendData.phone, type: 'callback', time: '30min'})
         });
-        console.log(response.json())
         const data = await response.json();
 
         return data;
@@ -79,6 +80,7 @@ const headerSlice = createSlice({
         callbackPopupShow(state, action) {
             const { status } = action.payload;
             state.callbackHeader.callbackPopupActive = status;
+            state.callbackHeader.callbackHappyState = false;
             state.callbackHeader.callbackInputValid = true;
             state.callbackHeader.callbackInputValue = '';
             state.callbackHeader.checkboxPolicyActive = false;
@@ -137,6 +139,9 @@ const headerSlice = createSlice({
             console.log(action.payload)
             state.loadingStatus = 'ready';
             state.error = null;
+            // state.callbackHeader.callbackPopupActive = false;
+            state.callbackHeader.callbackHappyState = true;
+            state.callbackHeader.callbackHappyStateMsg = action.payload.description ? action.payload.description : '';
           })
       },
 });
