@@ -139,7 +139,6 @@ const headerSlice = createSlice({
             console.log(action.payload)
             state.loadingStatus = 'ready';
             state.error = null;
-            // state.callbackHeader.callbackPopupActive = false;
             state.callbackHeader.callbackHappyState = true;
             state.callbackHeader.callbackHappyStateMsg = action.payload.description ? action.payload.description : '';
           })

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import validateName from "../../functions/validateName";
 import validatePhone from "../../functions/validatePhone";
@@ -61,6 +61,24 @@ const initialState = {
     footerFormCallbackValid: true,
     footerFormCallbackValue: '',
 };
+
+export const fetchFooterCallback = createAsyncThunk(
+    'api/callbackreq/',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/callbackreq/`, {
+            method:'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            
+            body: JSON.stringify({phone: sendData.phone, type: 'callback', time: '30min'})
+        });
+        const data = await response.json();
+
+        return data;
+    }
+)
 
 const footerSlice = createSlice({
     name: 'footer',
@@ -127,9 +145,22 @@ const footerSlice = createSlice({
             }
             state.footerFormCallbackValue = phone;
             state.footerFormCallbackValid = true;
-
         }
-    }
+    },
+    extraReducers: (builder) => {
+        builder
+          .addCase(fetchFooterCallback.pending, (state) => {
+            state.loadingStatus = 'loading';
+            state.error = null;
+          })
+          .addCase(fetchFooterCallback.fulfilled, (state, action) => {
+            console.log(state.footerFormCallbackValue)
+            state.loadingStatus = 'ready';
+            state.error = null;
+            state.footerFormCallbackValue = '';
+            state.footerFormCallbackValid = true;
+          })
+    },
 });
 
 

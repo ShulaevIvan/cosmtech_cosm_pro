@@ -3,7 +3,6 @@ const validatePhone = (phoneString) => {
     const symPattern = /[`!@№#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g.test(phoneString);
     const enRuPattern = /[a-zA-Zа-яА-Я]+/.test(phoneString);
     
-
     if (phoneString.length <= 11 && !symPattern && !enRuPattern) {
         return phoneString.replace(phonePattern, (all, group2, group3, group4, group5) => {
                 return `+7 (${group2})-${group3}-${group4}-${group5}`

@@ -84,7 +84,7 @@ const CallbackRequestPopup = (props) => {
                                             value={callbackState.callbackInputValue}
                                             onChange={callbackInputHandler}
                                             onKeyDown={clearInputHandler}
-                                            placeholder="812 xxx xx xx"
+                                            placeholder="8 812 xxx xx xx"
                                         />
                                     </div>
                                 </div>

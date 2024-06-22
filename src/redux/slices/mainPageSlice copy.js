@@ -37,7 +37,7 @@ const initialState = {
                 fieldName: 'phone', 
                 type: 'tel',
                 selected: false,
-                placeholder: '8 812 xxx xx xx',
+                placeholder: '812 xxx xx xx',
                 err: false,
             },
             {
@@ -375,7 +375,7 @@ const mainPageSlice = createSlice({
             if (ref.current.value.replace(symPattern, '').length > 11) ref.current.value = ref.current.value.replace(/.$/, '');
             ref.current.value = ref.current.value.replace(/\s/g, '').replace(symPattern, '');
             ref.current.value = ref.current.value.replace(enRuPattern, '');
-
+            if (ref.current.value.length === 1 && (Number(ref.current.value[0]) <= 9)) ref.current.value = `7${ref.current.value}`;
             if (ref.current.value.length < 8 || ref.current.value === ' ') {
                 state.orderForm.baseFields = state.orderForm.baseFields.map((baseField) => {
                     if (baseField.id === Number(fieldId) && baseField.type === fieldType) {
@@ -387,7 +387,7 @@ const mainPageSlice = createSlice({
                     return baseField;
                 });
             }
-            if ((pattern.test(ref.current.value))) {
+            if ((pattern.test(ref.current.value)) && /^[7|8]/.test(ref.current.value)) {
                 ref.current.value.replace(pattern, (all, group2, group3, group4, group5) => {
                     ref.current.value = `+7 (${group2}) ${group3}-${group4}-${group5}`;
                     return `+7 (${group2})-${group3}-${group4}-${group5}`

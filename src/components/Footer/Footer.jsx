@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { validateFooterCallback } from "../../redux/slices/footerSlice";
+import { validateFooterCallback, fetchFooterCallback } from "../../redux/slices/footerSlice";
 
 import footerLogo from '../../img/logo_cosm.jpeg';
 import telegramLogo from '../../img/telegram_footer.svg';
@@ -21,7 +21,7 @@ const Footer = () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
     };
 
-    const footerCallbackHandler = () => {
+    const footerCallbackInputHandler = () => {
         dispatch(validateFooterCallback({inputValue: footerCallbackRef.current.value}));
     };
 
@@ -29,6 +29,12 @@ const Footer = () => {
         if (e.key === 'Backspace') {
             footerCallbackRef.current.value = '';
             dispatch(validateFooterCallback({inputValue: footerCallbackRef.current.value}));
+        }
+    };
+
+    const footerCallbackSendHandler = () => {
+        if (footerState.footerFormCallbackValid) {
+            dispatch(fetchFooterCallback({phone: footerState.footerFormCallbackValue}));
         }
     };
 
@@ -73,12 +79,15 @@ const Footer = () => {
                                         ref={footerCallbackRef}
                                         value={footerState.footerFormCallbackValue}
                                         placeholder={'+7 812 xxx-xx-xx'}
-                                        onChange={footerCallbackHandler} type="tel"
+                                        onChange={footerCallbackInputHandler} type="tel"
                                         onKeyDown={(e) => clearInputFooterCallback(e)}
                                     />
                                 </div>
                                 <div className="main-footer-btn-send-wrap">
-                                    <div className="main-footer-btn-send">Отправить</div>
+                                    <div 
+                                        className="main-footer-btn-send"
+                                        onClick={footerCallbackSendHandler}
+                                    >Отправить</div>
                                 </div>
                             </div>
                             <div className="main-footer-description-wrap">
