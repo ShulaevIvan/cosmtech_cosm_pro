@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-import imgHolder250 from '../../img/250.png';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import imgVolos from '../../img/product_volos.jpg';
 import independenceIconOne from '../../img/independence_1.svg';
 import independenceIconTwo from '../../img/independence_2.svg';
@@ -19,6 +18,8 @@ const initialState = {
         popupOpen: false,
         allFieldsValid: false,
         policyChecked: false,
+        happyState: false,
+        happyStateDescription: '',
         baseFields: [
             {
                 id: 1,
@@ -37,7 +38,7 @@ const initialState = {
                 fieldName: 'phone', 
                 type: 'tel',
                 selected: false,
-                placeholder: '8 812 xxx xx xx',
+                placeholder: '8 xxx xxx xx xx',
                 err: false,
             },
             {
@@ -116,6 +117,64 @@ const initialState = {
         showAll: false,
         showAllBtnText: 'Все продукты',
         servicePopupShow: false,
+        servicePopupForm: {
+            formFields: [
+                {
+                    id: 1,
+                    name: 'Имя',
+                    fieldName: 'name', 
+                    value: '',
+                    type: 'text',
+                    selected: false,
+                    placeholder: 'Ваше имя',
+                    err: false,
+                },
+                {
+                    id: 2,
+                    name: 'Телефон', 
+                    value: '',
+                    fieldName: 'phone', 
+                    type: 'tel',
+                    selected: false,
+                    placeholder: '8 xxx xxx xx xx',
+                    err: false,
+                },
+                {
+                    id: 3,
+                    name: 'Email', 
+                    value: '',
+                    type: 'email',
+                    fieldName: 'email', 
+                    selected: false,
+                    placeholder: 'demo@....ru',
+                    err: false,
+                },
+                {
+                    id: 4,
+                    name: 'Услуга', 
+                    value: '',
+                    type: 'options',
+                    fieldName: 'options', 
+                    selected: false,
+                    err: false,
+                    options: [
+                        {id: 1, name: 'Опция 1'},
+                        {id: 2, name: 'Опция 2'},
+                        {id: 3, name: 'Опция 3'},
+                        {id: 4, name: 'Опция 4'},
+                    ]
+                },
+                {
+                    id: 5,
+                    name: 'Комментарий', 
+                    value: '',
+                    type: 'textarea',
+                    fieldName: 'comment', 
+                    selected: false,
+                    err: false,
+                },
+            ]
+        },
         servicesItems: [
             {
                 id: 1,
@@ -301,6 +360,7 @@ const initialState = {
            phoneFieldValue: '',
            commentFieldValue: '',
            allFieldsValid: false,
+           sendBtnActive: false,
         },
     },
     mouseCords: {
@@ -312,6 +372,55 @@ const initialState = {
         loadEnd: false,
     }
 };
+
+export const sendOrderThunk = createAsyncThunk(
+    'api/order/',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: sendData.name,
+                email: sendData.email,
+                phone: sendData.phone,
+                comment: sendData.comment,
+                options: false,
+            })
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+);
+
+export const sendConsultRequest = createAsyncThunk(
+    'api/consultreq/',
+    async (sendData) => {
+        console.log(sendData)
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/consultreq/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: sendData.name,
+                email: sendData.email,
+                phone: sendData.phone,
+                city: sendData.city,
+                comment: sendData.comment,
+            })
+        });
+
+        const data = response.json();
+
+        return data;
+    }
+);
 
 const mainPageSlice = createSlice({
     name: 'mainPage',
@@ -479,14 +588,29 @@ const mainPageSlice = createSlice({
                 return { ...item, active: false }
             });
         },
+        validateServiceFormMainPage(state, action) {
+            const { fieldType, fieldValue } = action.payload;
+            const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
+
+            state.services.servicePopupForm.formFields = state.services.servicePopupForm.formFields.map((formField) => {
+                if (formField.fieldName === fieldType && fieldType === 'name') {
+                    return {
+                        ...formField,
+                        value: fieldValue,
+                        err: notValidName | fieldValue.length < 3 ? true : false
+                    }
+                }
+                // add other validations
+                return formField;
+            });
+        },
         independenceFromInputValidate(state, action) {
             const { fieldType, fieldValue } = action.payload;
             //eslint-disable-next-line
             const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
-
             if (fieldType === 'name') {
                 state.independence.independenceForm.nameFieldValue = fieldValue;
-                state.independence.independenceForm.nameFieldValid = !notValidName;
+                state.independence.independenceForm.nameFieldValid = !notValidName && fieldValue.length >= 3;
                 return;
             }
             else if (fieldType === 'phone') {
@@ -504,32 +628,63 @@ const mainPageSlice = createSlice({
                 state.independence.independenceForm.commentFieldValid = true;
                 return;
             }
-            state.independence.independenceForm.allFieldsValid = false;
         },
         clearIndependenceFormInput(state, action) {
             const { fieldType } = action.payload;
+            
             if (fieldType === 'name') {
                 state.independence.independenceForm.nameFieldValue = '';
                 state.independence.independenceForm.nameFieldValid = true;
+                state.independence.independenceForm.sendBtnActive = false;
                 return;
             }
             else if (fieldType === 'phone') {
                 state.independence.independenceForm.phoneFieldValue = '';
                 state.independence.independenceForm.phoneFieldValid = true;
+                state.independence.independenceForm.sendBtnActive = false;
                 return;
             }
             else if (fieldType === 'comment') {
                 state.independence.independenceForm.commentFieldValue = '';
-                state.independence.independenceForm.commentFieldValid = true
+                state.independence.independenceForm.commentFieldValid = true;
+                state.independence.independenceForm.sendBtnActive = false;
                 return;
             }
-
         },
         addVideoBlob(state, action) {
             const { blobData } = action.payload;
             if (!blobData) return;
             state.videoMainPage.videoMainPageBlob = blobData;
+        },
+        mainOrderFormHappyState(state, action) {
+            const { status } = action.payload;
+            state.orderForm.happyState = status;
+            state.orderForm = initialState.orderForm;
         }
+    },
+    extraReducers: (builder) => {
+        builder
+          .addCase(sendOrderThunk.pending, (state) => {
+            state.loadingStatus = 'loading';
+            state.error = null;
+          })
+          .addCase(sendOrderThunk.fulfilled, (state, action) => {
+            const { message, description } = action.payload;
+            state.loadingStatus = 'ready';
+            state.error = null;
+            state.orderForm.happyState = true;
+            state.orderForm.happyStateDescription = description;
+            state.orderForm.popupOpen = false;
+          })
+          .addCase(sendConsultRequest.pending, (state) => {
+            state.loadingStatus = 'loading';
+            state.error = null;
+          })
+          .addCase(sendConsultRequest.fulfilled, (state, action) => {
+            state.loadingStatus = 'ready';
+            state.error = null;
+            state.independence.independenceForm = initialState.independence.independenceForm;
+          });
     }
 });
 
@@ -548,6 +703,9 @@ export const {
     orderFormPolicyCheckbox,
     independenceFromInputValidate,
     clearIndependenceFormInput,
-    addVideoBlob
+    addVideoBlob,
+    mainOrderFormHappyState,
+    sendIndependenceFormBtnStatus,
+    validateServiceFormMainPage
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

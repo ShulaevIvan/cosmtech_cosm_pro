@@ -51,8 +51,8 @@ const ServicesPage = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    </React.Fragment>
-                                )
+                                </React.Fragment>
+                            )
                         })}
                     </div>
                 </div>

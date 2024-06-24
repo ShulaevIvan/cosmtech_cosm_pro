@@ -7,7 +7,8 @@ import {
     orderFormInputValidate, 
     orderFormPhoneInputValidate,
     checkOrderFrom,
-    orderFormPolicyCheckbox
+    orderFormPolicyCheckbox,
+    sendOrderThunk
 } from "../../redux/slices/mainPageSlice";
 
 
@@ -52,12 +53,23 @@ const MainPageOrderForm = (props) => {
     };
 
     const sendFormHandler = () => {
-        dispatch(checkOrderFrom({formRefs: formRefs}));
+        const data = formRefs.reduce((sendObj, refItem) => {
+            sendObj[refItem.name] = refItem.ref.current.value;
+            return sendObj;
+        }, {});
+        dispatch(sendOrderThunk(data));
+        clearOrderForm();
     };
 
     const policyCheckboxHandler = (status) => {
         dispatch(orderFormPolicyCheckbox({status: status}));
         dispatch(checkOrderFrom({formRefs: formRefs}));
+    };
+
+    const clearOrderForm = () => {
+        formRefs.forEach((item) => {
+            item.ref.current.value = '';
+        });
     };
 
     useEffect(() => {
@@ -131,6 +143,7 @@ const MainPageOrderForm = (props) => {
                                             type={field.type} onChange={(e) => baseFieldInputHandler(e, field)}
                                             id={`id-order-${field.fieldName}`}
                                             placeholder={field.placeholder}
+                                            autoComplete={'off'}
                                         />}
                                     </div>
                                 </React.Fragment>

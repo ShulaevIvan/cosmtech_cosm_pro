@@ -1,14 +1,18 @@
 import React from "react";
 import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { independenceFromInputValidate, clearIndependenceFormInput } from "../../redux/slices/mainPageSlice";
+import { 
+    independenceFromInputValidate, 
+    clearIndependenceFormInput,
+    sendConsultRequest
+} from "../../redux/slices/mainPageSlice";
 
 const IndependenceMainPageForm = (props) => {
     const independenceFormState = props.formState;
     const dispatch = useDispatch();
-    const nameInputRef = useRef(null);
-    const phoneInputRef = useRef(null);
-    const comentInputRef = useRef(null);
+    const nameInputRef = useRef(independenceFormState.nameFieldValue);
+    const phoneInputRef = useRef(independenceFormState.phoneFieldValue);
+    const comentInputRef = useRef(independenceFormState.commentFieldValue);
 
     const formInputHandler = (fieldType, fieldValue) => {
         dispatch(independenceFromInputValidate({fieldType: fieldType, fieldValue: fieldValue}));
@@ -20,7 +24,29 @@ const IndependenceMainPageForm = (props) => {
             dispatch(clearIndependenceFormInput({fieldType: fieldType, fieldValue: fieldRef.current.value}));
         }
     };
-    
+
+    const sendConsultReqHandler = () => {
+        if (independenceFormState.nameFieldValid && 
+            independenceFormState.nameFieldValue !== '' && 
+                independenceFormState.phoneFieldValid && independenceFormState.phoneFieldValue !== '') {
+                    const  data = {
+                        name: independenceFormState.nameFieldValue,
+                        phone: independenceFormState.phoneFieldValue,
+                        email: '',
+                        comment: independenceFormState.commentFieldValue,
+                        city: '',
+                    }
+                dispatch(sendConsultRequest(data));
+        }
+        
+    };
+
+    useEffect(() => {
+        nameInputRef.current.value = independenceFormState.nameFieldValue;
+        phoneInputRef.current.value = independenceFormState.phoneFieldValue;
+        comentInputRef.current.value = independenceFormState.commentFieldValue;
+    }, [independenceFormState]);
+
     return (
         <React.Fragment>
             <div className="independence-main-order-form">
@@ -39,6 +65,7 @@ const IndependenceMainPageForm = (props) => {
                                     ref={nameInputRef} 
                                     type="text" 
                                     placeholder="Ваше имя"
+                                    autoComplete={'off'}
                                     onChange={() => formInputHandler('name', nameInputRef.current.value)}
                                     onKeyDown={(e) => clearInputHandler(e, 'name', nameInputRef)}
                                 />
@@ -55,7 +82,8 @@ const IndependenceMainPageForm = (props) => {
                                     className={!independenceFormState.phoneFieldValid ? 'input-err' : null} 
                                     ref={phoneInputRef} 
                                     type="tel" 
-                                    placeholder="+7 xxx xx xx"
+                                    placeholder="8 xxx xx xx"
+                                    autoComplete={'off'}
                                     value={independenceFormState.phoneFieldValue}
                                     onChange={() => formInputHandler('phone', phoneInputRef.current.value)}
                                     onKeyDown={(e) => clearInputHandler(e, 'phone', phoneInputRef)}
@@ -73,6 +101,7 @@ const IndependenceMainPageForm = (props) => {
                                     type="text" 
                                     ref={comentInputRef}
                                     placeholder="Комментарий ..."
+                                    autoComplete={'off'}
                                     onChange={() => formInputHandler('comment', comentInputRef.current.value)}
                                     onKeyDown={(e) => clearInputHandler(e, 'comment', comentInputRef)}
                                 />
@@ -80,7 +109,9 @@ const IndependenceMainPageForm = (props) => {
                         </div>
                         <div className="contact-form-order-main-item-end">
                             <div className="contact-form-order-main-btn-send">
-                                <span>Отправить</span>
+                                <span 
+                                    onClick={sendConsultReqHandler}
+                                >Отправить</span>
                             </div>
                         </div>
                     </div>

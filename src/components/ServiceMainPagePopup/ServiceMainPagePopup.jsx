@@ -1,7 +1,31 @@
-import React from "react";
-import getPopupCords from "../../functions/getPopupCords";
+import React, { useEffect } from "react";
+import { useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { validateServiceFormMainPage } from "../../redux/slices/mainPageSlice";
 
 const ServicesMainPagePopup = (props) => {
+    const dispatch = useDispatch();
+    const serviceState = props.serviceState;
+    const formRefs = [
+        { name: 'name', ref: useRef(null)},
+        { name: 'phone', ref: useRef(null)},
+        { name: 'email', ref: useRef(null)},
+        { name: 'options', ref: useRef(null)},
+        { name: 'comment', ref: useRef(null)},
+    ];
+    const formInputHandler = (fieldName, targetRef) => {
+        dispatch(validateServiceFormMainPage({fieldType: fieldName, fieldValue: targetRef.current.value}));
+    };
+    
+    const findFormRef = (inputName) => {
+        return formRefs.find((item) => item.name === inputName).ref;
+    };
+    
+    const sendFormHandler = () => {
+        console.log(formRefs)
+    };
+
     return (
         <React.Fragment>
         <div className="service-popup-wrap" style={{'left': props.cords.left, 'top': props.cords.top}}>
@@ -13,51 +37,71 @@ const ServicesMainPagePopup = (props) => {
             </div>
             <div className="service-popup-form-wrap">
                 <form>
-                    <div className="service-form-input-wrap">
-                        <div className="service-popup-form-title">
-                            <label htmlFor="service-popup-name-input">Имя</label>
-                        </div>
-                        <div className="service-popup-form-title">
-                            <input id="service-popup-name-input" type="text" />
-                        </div>
-                    </div>
-                    <div className="service-form-input-wrap">
-                        <div className="service-popup-form-title">
-                            <label htmlFor="service-popup-phone-input">Телефон</label>
-                        </div>
-                        <div className="service-popup-form-title">
-                            <input id="service-popup-phone-input" type="tel" />
-                        </div>
-                    </div>
-                    <div className="service-form-input-wrap">
-                        <div className="service-popup-form-title">
-                            <label htmlFor="service-popup-form-email">Email</label>
-                        </div>
-                        <div className="service-popup-form-title">
-                            <input id="service-popup-form-email" type="email" />
-                        </div>
-                    </div>
-                    <div className="service-form-options-wrap">
-                        <div className="service-form-options-title">Услуга</div>
-                        <select name="hero">
-                            <option value={'default'}>Выбранная услуга</option>
-                            <option value="t1">Опция 1</option>
-                            <option value="t2">Опция 2</option>
-                            <option value="t3">Опция 3</option>
-                            <option value="t4">Опция 4</option>
-                        </select>
-                    </div>
-                    <div className="service-form-options-add-btn-wrap">
-                        <span className="service-plus-icon"></span>
-                    </div>
-                    <div className="service-form-options-wrap">
-                        <div className="service-form-options-title">
-                            <label htmlFor="service-popup-form-comment">Коментарий</label>
-                        </div>
-                        <textarea id="service-popup-form-comment"></textarea>
-                    </div>
+                    {serviceState.servicePopupForm.formFields.map((serviceInputItem) => {
+                        if (serviceInputItem.type === 'options') {
+                            return (
+                                <React.Fragment key={serviceInputItem.id}>
+                                    <div className="service-form-options-wrap">
+                                        <div className="service-form-options-title">Услуга</div>
+                                        <select 
+                                            ref={findFormRef(serviceInputItem.fieldName)} name="hero"
+                                            onChange={() => formInputHandler(serviceInputItem.fieldName, findFormRef(serviceInputItem.fieldName))}
+                                        >
+                                            {serviceInputItem.options.map((optionItem) => {
+                                                return (
+                                                    <React.Fragment key={optionItem.id}>
+                                                        <option value="t1">{optionItem.name}</option>
+                                                    </React.Fragment>
+                                                )
+                                            })}
+                                        </select>
+                                    </div>
+                                </React.Fragment>
+                            )
+                        }
+                        if (serviceInputItem.type === 'textarea') {
+                            return (
+                                <React.Fragment key={serviceInputItem.id}>
+                                    <div className="service-form-options-wrap">
+                                        <div className="service-form-options-title">
+                                            <label htmlFor="service-popup-form-comment">Коментарий</label>
+                                        </div>
+                                        <textarea 
+                                            ref={findFormRef(serviceInputItem.fieldName)} 
+                                            id="service-popup-form-comment"
+                                            onChange={() => formInputHandler(serviceInputItem.fieldName, findFormRef(serviceInputItem.fieldName))}
+                                        ></textarea>
+                                    </div>
+                                </React.Fragment>
+                            )
+                        }
+                        return (
+                            <React.Fragment key={serviceInputItem.id}>
+                                <div className="service-form-input-wrap">
+                                    <div className="service-popup-form-title">
+                                        <label htmlFor={`service-popup-${serviceInputItem.fieldName}-input`}>{serviceInputItem.name}</label>
+                                    </div>
+                                    <div className="service-popup-form-title">
+                                        <input
+                                            ref={findFormRef(serviceInputItem.fieldName)}
+                                            onChange={() => formInputHandler(serviceInputItem.fieldName, findFormRef(serviceInputItem.fieldName))}
+                                            id={`service-popup-${serviceInputItem.fieldName}-input`} 
+                                            type={serviceInputItem.type}
+                                            value={serviceInputItem.value}
+                                            className={serviceInputItem.err ? 'input-err' : null} 
+                                            autoComplete={'off'}
+                                        />
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        )
+                    })}
+                   
                     <div className="service-form-order-btn-wrap">
-                        <span className="service-form-order-btn">Отправить</span>
+                        <span 
+                            className="service-form-order-btn"
+                            onClick={sendFormHandler}
+                        >Отправить</span>
                     </div>
                 
                 </form>

@@ -47,7 +47,7 @@ const ServicesMainPage = () => {
 
                         <div className="services-main-row">
                             {servicesState.servicePopupShow ? 
-                                <ServicesMainPagePopup popupHandler={serviceOrderPopupHandler} cords={mouseCords} /> 
+                                <ServicesMainPagePopup popupHandler={serviceOrderPopupHandler} serviceState={servicesState} cords={mouseCords} /> 
                             : null}
                             {Array.from(servicesState.servicesItems).map((serviceItem) => {
                                 return (

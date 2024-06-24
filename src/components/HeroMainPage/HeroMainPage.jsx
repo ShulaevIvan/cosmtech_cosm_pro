@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MainPageOrderForm from "../MainPageOrderForm/MainPageOrderForm";
+import MainPageOrderFormHappy from "../MainPageOrderForm/MainPageOrderFormHappy";
 import { openOrderFrom } from "../../redux/slices/mainPageSlice";
 
 const HeroMainPage = () => {
@@ -11,11 +12,12 @@ const HeroMainPage = () => {
     const orderFormHandler = (e, status) => {
         dispatch(openOrderFrom({status: status}));
     };
-
+    console.log(orderForm.happyState)
     return (
         <React.Fragment>
             <section className="hero-section">
                {orderForm.popupOpen ?  <MainPageOrderForm orderFormHandler={orderFormHandler} /> : null}
+               {orderForm.happyState ? <MainPageOrderFormHappy /> : null}
                 <div className="hero-img-wrap">
                     <div className="hero-img-main-title-wrap">
                         <h1>Контрактное Производство косметики в Санкт-Петербурге</h1>

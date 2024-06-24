@@ -5,7 +5,7 @@ const validatePhone = (phoneString) => {
     
     if (phoneString.length <= 11 && !symPattern && !enRuPattern) {
         return phoneString.replace(phonePattern, (all, group2, group3, group4, group5) => {
-                return `+7 (${group2})-${group3}-${group4}-${group5}`
+                return `+7 (${group2}) ${group3}-${group4}-${group5}`
         });
     }
     return phoneString.replace(/.$/, '').replace(phonePattern, (all, group2, group3, group4, group5) => {
