@@ -29,7 +29,7 @@ const HeroMainPage = () => {
                         </div>
                         <div className="hero-img-main-title-controls-wrap">
                             <div className="hero-img-action-button-wrap">
-                                <span className="hero-img-action-button-main">Кальклулятор</span>
+                                <span className="hero-img-action-button-main">Калькулятор</span>
                             </div>
                             <div className="hero-img-action-button-wrap">
                                 <span

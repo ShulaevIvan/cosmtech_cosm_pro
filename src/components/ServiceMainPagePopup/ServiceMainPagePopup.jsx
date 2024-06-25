@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { validateServiceFormMainPage } from "../../redux/slices/mainPageSlice";
+import { validateServiceFormMainPage, serviceFormMainPageClearInput } from "../../redux/slices/mainPageSlice";
 
 const ServicesMainPagePopup = (props) => {
     const dispatch = useDispatch();
@@ -14,8 +14,18 @@ const ServicesMainPagePopup = (props) => {
         { name: 'options', ref: useRef(null)},
         { name: 'comment', ref: useRef(null)},
     ];
+
+    const selectRef = useRef(null);
+
     const formInputHandler = (fieldName, targetRef) => {
+        console.log(targetRef.current.value)
         dispatch(validateServiceFormMainPage({fieldType: fieldName, fieldValue: targetRef.current.value}));
+    };
+
+    const clearFormInput = (e, fieldName) => {
+        if (e.key === 'Backspace') {
+            dispatch(serviceFormMainPageClearInput({fieldType: fieldName}));
+        }
     };
     
     const findFormRef = (inputName) => {
@@ -24,6 +34,12 @@ const ServicesMainPagePopup = (props) => {
     
     const sendFormHandler = () => {
         console.log(formRefs)
+    };
+
+    const findSelectService = () => {
+        const optionsObj = serviceState.servicePopupForm.formFields.find((item) => item.fieldName === 'options')
+        const findSelected = optionsObj.options.find((item) => item.selected);
+        console.log(findSelected)
     };
 
     return (
@@ -46,11 +62,14 @@ const ServicesMainPagePopup = (props) => {
                                         <select 
                                             ref={findFormRef(serviceInputItem.fieldName)} name="hero"
                                             onChange={() => formInputHandler(serviceInputItem.fieldName, findFormRef(serviceInputItem.fieldName))}
+                                            
                                         >
                                             {serviceInputItem.options.map((optionItem) => {
                                                 return (
                                                     <React.Fragment key={optionItem.id}>
-                                                        <option value="t1">{optionItem.name}</option>
+                                                        <option
+                                                            value={optionItem.name}
+                                                        >{optionItem.name}</option>
                                                     </React.Fragment>
                                                 )
                                             })}
@@ -85,6 +104,7 @@ const ServicesMainPagePopup = (props) => {
                                         <input
                                             ref={findFormRef(serviceInputItem.fieldName)}
                                             onChange={() => formInputHandler(serviceInputItem.fieldName, findFormRef(serviceInputItem.fieldName))}
+                                            onKeyDown={(e) => clearFormInput(e, serviceInputItem.fieldName)}
                                             id={`service-popup-${serviceInputItem.fieldName}-input`} 
                                             type={serviceInputItem.type}
                                             value={serviceInputItem.value}

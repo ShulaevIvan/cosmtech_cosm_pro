@@ -7,7 +7,8 @@ import independenceIconFour from '../../img/independence_4.svg';
 import independenceIconFive from '../../img/independence_5.svg';
 import independenceIconSix from '../../img/independence_6.svg';
 
-import validatePhone from "../../functions/validatePhone";
+import validatePhone from '../../functions/validatePhone';
+import validateMail from '../../functions/validateMail';
 
 
 const initialState = { 
@@ -158,10 +159,17 @@ const initialState = {
                     selected: false,
                     err: false,
                     options: [
-                        {id: 1, name: 'Опция 1'},
-                        {id: 2, name: 'Опция 2'},
-                        {id: 3, name: 'Опция 3'},
-                        {id: 4, name: 'Опция 4'},
+                        {id: 1, name: 'Очищающие средства для лица', selected: false},
+                        {id: 2, name: 'Уходовая косметика для лица', selected: false},
+                        {id: 3, name: 'Средства для ухода за волосами', selected: false},
+                        {id: 4, name: 'Уходовая косметика для тела', selected: false},
+                        {id: 5, name: 'Средства для ухода за кожей рук', selected: false},
+                        {id: 6, name: 'Солнцезащитные средства', selected: false},
+                        {id: 7, name: 'Очищающая косметика для тела', selected: false},
+                        {id: 8, name: 'Детская косметика', selected: false},
+                        {id: 9, name: 'Аппаратная косметика', selected: false},
+                        {id: 10, name: 'Профессиональная косметика', selected: false},
+                        {id: 11, name: 'Пилинги', selected: false},
                     ]
                 },
                 {
@@ -184,7 +192,7 @@ const initialState = {
             },
             {
                 id: 2,
-                name: ' Уходовая косметика для лица',
+                name: 'Уходовая косметика для лица',
                 serviceImg: imgVolos,
                 serviceOrderActive: false,
             },
@@ -590,17 +598,63 @@ const mainPageSlice = createSlice({
         },
         validateServiceFormMainPage(state, action) {
             const { fieldType, fieldValue } = action.payload;
-            const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
 
             state.services.servicePopupForm.formFields = state.services.servicePopupForm.formFields.map((formField) => {
                 if (formField.fieldName === fieldType && fieldType === 'name') {
+                    const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
                     return {
                         ...formField,
                         value: fieldValue,
                         err: notValidName | fieldValue.length < 3 ? true : false
                     }
                 }
-                // add other validations
+                else if (formField.fieldName === fieldType && fieldType === 'phone') {
+                    return {
+                        ...formField,
+                        value: validatePhone(fieldValue),
+                        err: formField.value.length === 18 ? false : true
+                    }
+                }
+                else if (formField.fieldName === fieldType && fieldType === 'email') {
+                    return {
+                        ...formField,
+                        value: fieldValue,
+                        err: validateMail(fieldValue),
+                    }
+                }
+                return formField;
+            });
+        },
+        selectServiceOptionMainPage(state, action) {
+            const { optionName } = action.payload;
+            state.services.servicePopupForm.formFields = state.services.servicePopupForm.formFields.map((formField) => {
+                if (formField.options) {
+                    formField.options = formField.options.map((option) => {
+                        if (option.name === optionName) {
+                            return {
+                                ...option,
+                                selected: true,
+                            }
+                        }
+                        return {
+                            ...option,
+                            selected: false,
+                        }
+                    });
+                }
+                return formField;
+            });
+        },
+        serviceFormMainPageClearInput(state, action) {
+            const { fieldType } = action.payload;
+            state.services.servicePopupForm.formFields = state.services.servicePopupForm.formFields.map((formField) => {
+                if (formField.fieldName === fieldType) {
+                    return {
+                        ...formField,
+                        value: '',
+                        err: false
+                    }
+                }
                 return formField;
             });
         },
@@ -706,6 +760,8 @@ export const {
     addVideoBlob,
     mainOrderFormHappyState,
     sendIndependenceFormBtnStatus,
-    validateServiceFormMainPage
+    validateServiceFormMainPage,
+    serviceFormMainPageClearInput,
+    selectServiceOptionMainPage
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

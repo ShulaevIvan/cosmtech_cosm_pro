@@ -1,7 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { serviceShowBtn, showAllServices, serviceOrderPopup } from "../../redux/slices/mainPageSlice";
 import { useEffect } from "react";
+import { 
+    serviceShowBtn, 
+    showAllServices, 
+    serviceOrderPopup,
+    selectServiceOptionMainPage 
+} from "../../redux/slices/mainPageSlice";
+
 
 import getPopupCords from "../../functions/getPopupCords";
 import ServicesMainPagePopup from "../ServiceMainPagePopup/ServiceMainPagePopup";
@@ -20,9 +26,13 @@ const ServicesMainPage = () => {
         dispatch(showAllServices({status: status}));
     };
 
-    const serviceOrderPopupHandler = (e, status) => {
+    const serviceOrderPopupHandler = (e, status, service) => {
+        if (status && service) {
+            dispatch(selectServiceOptionMainPage({optionName: service.name}));
+        }
         const cords = getPopupCords(e.pageX, e.pageY, e.target.offsetLeft, e.target.offsetTop);
         dispatch(serviceOrderPopup({status: status, left: cords.left, top: cords.top}));
+        
     };
 
     useEffect(() => {
@@ -66,7 +76,7 @@ const ServicesMainPage = () => {
                                                 {serviceItem.serviceOrderActive ? 
                                                     <div className="service-background-order-btn-wrap">
                                                         <span
-                                                            onClick={(e) => serviceOrderPopupHandler(e, true)}
+                                                            onClick={(e) => serviceOrderPopupHandler(e, true, serviceItem)}
                                                             className="service-background-order-btn">Рассчитать стоимость</span>
                                                     </div>
                                                 : null}
