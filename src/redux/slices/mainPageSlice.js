@@ -119,6 +119,9 @@ const initialState = {
         showAllBtnText: 'Все продукты',
         servicePopupShow: false,
         servicePopupForm: {
+            sendBtnActive: false,
+            servicePopupHappyState: false,
+            servicePopupHappyStateDescription: '',
             formFields: [
                 {
                     id: 1,
@@ -405,10 +408,33 @@ export const sendOrderThunk = createAsyncThunk(
     }
 );
 
+export const sendOrderThunkServiceMainPage = createAsyncThunk(
+    'serviceMainPageOrder',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: sendData.name,
+                email: sendData.email,
+                phone: sendData.phone,
+                comment: sendData.comment,
+                options: sendData.options,
+            })
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+);
+
 export const sendConsultRequest = createAsyncThunk(
     'api/consultreq/',
     async (sendData) => {
-        console.log(sendData)
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/consultreq/`, {
             method: 'POST',
             headers: {
@@ -579,8 +605,14 @@ const mainPageSlice = createSlice({
         },
         serviceOrderPopup(state, action) {
             const { status, left, top } = action.payload;
+            state.services.servicePopupForm.servicePopupHappyState = false;
+            state.services.servicePopupForm.servicePopupHappyStateDescription = '';
+            state.services.servicePopupForm.sendBtnActive = false;
             state.mouseCords.left = left - 200;
             state.mouseCords.top = top - 400;
+            state.services.servicePopupForm.formFields = state.services.servicePopupForm.formFields.map((formField) => {
+                return { ...formField, value: '' }
+            });
             state.services.servicePopupShow = status;
         },
         selectProduction(state, action) {
@@ -598,7 +630,8 @@ const mainPageSlice = createSlice({
         },
         validateServiceFormMainPage(state, action) {
             const { fieldType, fieldValue } = action.payload;
-
+            const phoneValue = validatePhone(fieldValue);
+            
             state.services.servicePopupForm.formFields = state.services.servicePopupForm.formFields.map((formField) => {
                 if (formField.fieldName === fieldType && fieldType === 'name') {
                     const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
@@ -611,8 +644,8 @@ const mainPageSlice = createSlice({
                 else if (formField.fieldName === fieldType && fieldType === 'phone') {
                     return {
                         ...formField,
-                        value: validatePhone(fieldValue),
-                        err: formField.value.length === 18 ? false : true
+                        value: phoneValue,
+                        err: phoneValue.length === 18 ? false : true
                     }
                 }
                 else if (formField.fieldName === fieldType && fieldType === 'email') {
@@ -647,6 +680,7 @@ const mainPageSlice = createSlice({
         },
         serviceFormMainPageClearInput(state, action) {
             const { fieldType } = action.payload;
+            state.services.servicePopupForm.sendBtnActive = false;
             state.services.servicePopupForm.formFields = state.services.servicePopupForm.formFields.map((formField) => {
                 if (formField.fieldName === fieldType) {
                     return {
@@ -657,6 +691,18 @@ const mainPageSlice = createSlice({
                 }
                 return formField;
             });
+        },
+        serviceFormSendBtnActive(state) {
+            const checkEmpty = state.services.servicePopupForm.formFields.filter((item) => item.value === '');
+            const checkFieldsErr = state.services.servicePopupForm.formFields.filter(
+                (formField) => formField.err && (formField.fieldName === 'email' | formField.fieldName === 'phone')
+            );
+            if (checkFieldsErr.length === 0 && checkEmpty.length < 3) {
+                state.services.servicePopupForm.sendBtnActive = true;
+                return;
+            }
+            state.services.servicePopupForm.sendBtnActive = false;
+            
         },
         independenceFromInputValidate(state, action) {
             const { fieldType, fieldValue } = action.payload;
@@ -738,6 +784,18 @@ const mainPageSlice = createSlice({
             state.loadingStatus = 'ready';
             state.error = null;
             state.independence.independenceForm = initialState.independence.independenceForm;
+          })
+           .addCase(sendOrderThunkServiceMainPage.pending, (state) => {
+            state.loadingStatus = 'loading';
+            state.error = null;
+          })
+          .addCase(sendOrderThunkServiceMainPage.fulfilled, (state, action) => {
+            const { message, description } = action.payload;
+            console.log(description)
+            state.loadingStatus = 'ready';
+            state.error = null;
+            state.services.servicePopupForm.servicePopupHappyState = true;
+            state.services.servicePopupForm.servicePopupHappyStateDescription = description;
           });
     }
 });
@@ -762,6 +820,7 @@ export const {
     sendIndependenceFormBtnStatus,
     validateServiceFormMainPage,
     serviceFormMainPageClearInput,
-    selectServiceOptionMainPage
+    selectServiceOptionMainPage,
+    serviceFormSendBtnActive
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

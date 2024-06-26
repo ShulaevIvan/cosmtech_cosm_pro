@@ -1,7 +1,6 @@
 import React from "react";
 
 const ProductionMainPageHover = (props) => {
-    console.log(props)
     return (
         <React.Fragment>
             <div 

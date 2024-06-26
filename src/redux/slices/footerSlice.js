@@ -55,7 +55,7 @@ const initialState = {
                 fieldValid: true,
             }
         ],
-        policyCheckboxStatus: false,
+        policyCheckboxStatus: true,
         allInputsValid: true,
     },
     footerFormCallbackValid: true,
@@ -65,6 +65,7 @@ const initialState = {
 export const fetchFooterCallback = createAsyncThunk(
     'api/callbackreq/',
     async (sendData) => {
+        console.log(sendData)
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/callbackreq/`, {
             method:'POST',
             headers: {
@@ -92,7 +93,6 @@ const footerSlice = createSlice({
             if (fieldType === 'phone' && fieldValue.length > 18) return;
             let isValid = false;
             let phoneNumber;
-            console.log(fieldValue.length)
             if (fieldType === 'name') isValid = validateName(fieldValue);
             else if (fieldType === 'phone') {
                 phoneNumber = validatePhone(fieldValue);
@@ -118,9 +118,7 @@ const footerSlice = createSlice({
         },
         prefooterClearInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
-            console.log(inputValue)
             state.preFooterForm.inputs = state.preFooterForm.inputs.map((fieldItem) => {
-                console.log(inputType)
                 if (inputId === fieldItem.id && inputType === fieldItem.fieldType) {
                     return {
                         ...fieldItem,
@@ -152,9 +150,9 @@ const footerSlice = createSlice({
           .addCase(fetchFooterCallback.pending, (state) => {
             state.loadingStatus = 'loading';
             state.error = null;
+            state.preFooterForm = initialState.preFooterForm;
           })
           .addCase(fetchFooterCallback.fulfilled, (state, action) => {
-            console.log(state.footerFormCallbackValue)
             state.loadingStatus = 'ready';
             state.error = null;
             state.footerFormCallbackValue = '';

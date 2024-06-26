@@ -3,13 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { 
     validatePrefooterForm, 
     prefooterClearInput,
-    prefooterFormCheckbox
+    prefooterFormCheckbox,
+    fetchFooterCallback
 } from "../../redux/slices/footerSlice";
 import { Link } from "react-router-dom";
 
 const PrefooterMainPage = () => {
     const dispatch = useDispatch();
     const footerState = useSelector((state) => state.footer);
+    const policyRef = useRef(null);
     const footerFormRefs = [
         { id: 1, nameRef: 'name', inputRef: useRef(null)},
         { id: 2, nameRef: 'phone', inputRef: useRef(null)},
@@ -41,8 +43,19 @@ const PrefooterMainPage = () => {
 
     const policyCheckboxHandler = (status) => {
         dispatch(prefooterFormCheckbox({status: status}));
-        console.log(footerState.preFooterForm.policyCheckboxStatus)
     };
+
+    const sendFormHandler = () => {
+        const data = footerFormRefs.reduce((formObj, item) => {
+            formObj[item.nameRef] = item.inputRef.current.value;
+            return formObj;
+        }, {});
+        dispatch(fetchFooterCallback(data));
+        if (footerState.preFooterForm.policyCheckboxStatus) {
+            policyRef.current.click();
+        }
+    };
+
 
 
     return (
@@ -69,6 +82,7 @@ const PrefooterMainPage = () => {
                                                     onChange={() => formInputHandler(formField.id, formField.fieldType)}
                                                     onKeyDown={(e) => clearInputHandler(e, formField.id, formField.fieldType)}
                                                     id={`prefooter-form-${formField.fieldType}`}
+                                                    autoComplete={'off'}
                                                 ></textarea> : 
                                                 <input
                                                     className={!formField.fieldValid ? 'input-err' : null} 
@@ -79,6 +93,7 @@ const PrefooterMainPage = () => {
                                                     onKeyDown={(e) => clearInputHandler(e, formField.id, formField.fieldType)}
                                                     id={`prefooter-form-${formField.fieldType}`} 
                                                     type={formField.type}
+                                                    autoComplete={'off'}
                                                 />
                                             }
                                         </React.Fragment>
@@ -87,7 +102,8 @@ const PrefooterMainPage = () => {
                                 <div className="prefooter-form-checkbox-row">
                                     <div className="prefooter-checkbox-wrap">
                                         <input type="checkbox" id="custom-checkbox" className="checkbox-custom" />
-                                        <label 
+                                        <label
+                                            ref={policyRef} 
                                             htmlFor="custom-checkbox"
                                             onClick={() => policyCheckboxHandler(footerState.preFooterForm.policyCheckboxStatus ? false : true)}
                                         ></label>
@@ -98,7 +114,10 @@ const PrefooterMainPage = () => {
                             
                                 </div>
                                 <div className="prefooter-form-btn-wrap">
-                                    <span className="prefooter-order-form-btn">Отправить</span>
+                                    <span 
+                                        className="prefooter-order-form-btn"
+                                        onClick={sendFormHandler}
+                                    >Отправить</span>
                                 </div>
                             </form>
                         </div>

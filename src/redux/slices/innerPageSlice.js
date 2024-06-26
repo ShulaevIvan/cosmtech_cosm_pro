@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import validateName from '../../functions/validateName';
 import validatePhone from '../../functions/validatePhone';
 import validateMail from "../../functions/validateMail";
@@ -120,6 +120,9 @@ const initialState = {
     servicesPage: {
         serviceFormActive: false,
         serviceForm: {
+            serviceFormSendBtnActive: false,
+            serviceFormHappyState: false,
+            serviceFormHappyStateDescription: '',
             fields: [
                 {
                     id: 1,
@@ -127,7 +130,8 @@ const initialState = {
                     fieldType: 'text',
                     fieldName: 'name',
                     fieldValue: '',
-                    fieldValid: true
+                    placeholder: 'Ваше имя',
+                    err: false
                 },
                 {
                     id: 2,
@@ -135,15 +139,17 @@ const initialState = {
                     fieldType: 'tel',
                     fieldName: 'phone',
                     fieldValue: '',
-                    fieldValid: true
+                    placeholder: '8 xxx xxx xx xx',
+                    err: false
                 },
                 {
                     id: 3,
-                    title: 'email',
+                    title: 'Email',
                     fieldType: 'email',
                     fieldName: 'email',
                     fieldValue: '',
-                    fieldValid: true
+                    placeholder: 'demo@....ru',
+                    err: false
                 },
                 {
                     id: 4,
@@ -152,13 +158,12 @@ const initialState = {
                     fieldName: 'serviceType',
                     fieldValue: '',
                     options: [
-                        { id: 1, name: 'Тип услуги 1', value: 'тип услуги 1', selected: true},
-                        { id: 2, name: 'Тип услуги 2', value: 'тип услуги 2', selected: false},
-                        { id: 3, name: 'Тип услуги 3', value: 'тип услуги 3', selected: false},
-                        { id: 4, name: 'Тип услуги 4', value: 'тип услуги 4', selected: false},
-                        { id: 5, name: 'Тип услуги 5', value: 'тип услуги 5', selected: false},
+                        { id: 1, name: 'Разработка косметики под СТМ', value: 'Разработка косметики под СТМ', selected: true },
+                        { id: 2, name: 'Разработка косметических рецептур', value: 'Разработка косметических рецептур', selected: false },
+                        { id: 3, name: 'Химический анализ', value: 'Химический анализ', selected: false },
+                        { id: 4, name: 'Упаковка и соправождение', value: 'Упаковка и соправождение', selected: false },
                     ],
-                    fieldValid: true
+                    err: false
                 },
                 {
                     id: 5,
@@ -166,12 +171,11 @@ const initialState = {
                     fieldType: 'textarea',
                     fieldName: 'comment',
                     fieldValue: '',
-                    fieldValid: true
+                    err: false
                 },
             ]
         },
         servicesItems: [
-            
             {
                 id: 1,
                 name: 'Разработка косметики под СТМ',
@@ -329,6 +333,30 @@ const initialState = {
     }
 };
 
+export const sendServiceOrderThunk = createAsyncThunk(
+    'sendServiceOrder',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/order/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: sendData.name,
+                email: sendData.email,
+                phone: sendData.phone,
+                comment: sendData.comment,
+                options: sendData.serviceType,
+            })
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+)
+
 const innerPageSlice = createSlice({
     name: 'innerPage',
     initialState,
@@ -339,6 +367,8 @@ const innerPageSlice = createSlice({
         },
         servicePageOrderPopup(state, action) {
             const { status, left, top } = action.payload;
+            state.servicesPage.serviceForm.fields = initialState.servicesPage.serviceForm.fields;
+            state.servicesPage.serviceForm.serviceFormHappyState = false;
             state.mousePosition.left = left;
             state.mousePosition.top = top;
             state.servicesPage.serviceFormActive = status;
@@ -454,7 +484,70 @@ const innerPageSlice = createSlice({
                 }
             }
             
-        }
+        },
+        serviceOrderValidateInput(state, action) {
+            const { fieldType, fieldValue } = action.payload;
+            state.servicesPage.serviceForm.fields = state.servicesPage.serviceForm.fields.map((formField) => {
+                if (formField.fieldName === fieldType && fieldType === 'name') {
+                    const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
+                    return {
+                        ...formField,
+                        fieldValue: fieldValue,
+                        err: notValidName | fieldValue.length < 3 ? true : false
+                    }
+                }
+                else if (formField.fieldName === fieldType && fieldType === 'phone') {
+                    const phoneValue = validatePhone(fieldValue);
+                    return {
+                        ...formField,
+                        fieldValue: phoneValue,
+                        err: phoneValue.length === 18 ? false : true
+                    }
+                }
+                else if (formField.fieldName === fieldType && fieldType === 'email') {
+                    return {
+                        ...formField,
+                        fieldValue: fieldValue,
+                        err: validateMail(fieldValue),
+                    }
+                }
+                else if (formField.fieldName === fieldType && fieldType === 'comment') {
+                    return {
+                        ...formField,
+                        fieldValue: fieldValue,
+                        err: false,
+                    }
+                }
+                return formField;
+            });
+        },
+        serviceOrderSendBtnActive(state) {
+            const checkEmpty = state.servicesPage.serviceForm.fields.filter((item) => item.fieldValue === '');
+            const checkFieldsErr = state.servicesPage.serviceForm.fields.filter(
+                (formField) => formField.err && (formField.fieldName === 'email' | formField.fieldName === 'phone')
+            );
+            if (checkFieldsErr.length === 0 && checkEmpty.length < 3) {
+                state.servicesPage.serviceForm.serviceFormSendBtnActive = true;
+                return;
+            }
+            state.servicesPage.serviceForm.serviceFormSendBtnActive = false;
+        },
+    },
+    
+    extraReducers: (builder) => {
+        builder
+        .addCase(sendServiceOrderThunk.pending, (state) => {
+          state.loadingStatus = 'loading';
+          state.error = null;
+        })
+        .addCase(sendServiceOrderThunk.fulfilled, (state, action) => {
+          const { message, description } = action.payload;
+          state.loadingStatus = 'ready';
+          state.error = null;
+          state.servicesPage.serviceForm.serviceFormHappyState = true;
+          state.servicesPage.serviceForm.serviceFormHappyStateDescription = description;
+          state.servicesPage.serviceForm.fields = initialState.servicesPage.serviceForm.fields;
+        })
     }
 });
 
@@ -466,6 +559,8 @@ export const {
     clearContactsInput,
     selectFieldContactsForm,
     contactsCheckboxPolicy,
-    uploadFile
+    uploadFile,
+    serviceOrderValidateInput,
+    serviceOrderSendBtnActive
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

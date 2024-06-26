@@ -12,7 +12,6 @@ const HeroMainPage = () => {
     const orderFormHandler = (e, status) => {
         dispatch(openOrderFrom({status: status}));
     };
-    console.log(orderForm.happyState)
     return (
         <React.Fragment>
             <section className="hero-section">
