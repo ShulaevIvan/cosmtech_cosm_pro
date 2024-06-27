@@ -7,8 +7,10 @@ import {
     clearContactsInput,
     selectFieldContactsForm,
     contactsCheckboxPolicy,
-    uploadFile
+    uploadFile,
+    contactsAddFiles
 } from "../../redux/slices/innerPageSlice";
+import fileToBase64 from "../../functions/fileToBase64";
 
 const ContactsPageOrderForm = () => {
     const dispatch = useDispatch();
@@ -44,7 +46,6 @@ const ContactsPageOrderForm = () => {
             status: true, 
             inputValue: contactsRefs[inputType].current.value
         }));
-        // dispatch(selectFieldContactsForm({inputType: inputType, optionName, status }))
     };
     
     const findField = (fieldType) => {
@@ -64,6 +65,42 @@ const ContactsPageOrderForm = () => {
     const loadFileHandler = () => {
         dispatch(uploadFile({file: contactsRefs.file.current.value}));
     };
+
+    const sendFormHandler = () => {
+        const data = orderFormState.contactsForm.fields.reduce((fieldObj, item) => {
+            if (item.fieldName === 'orderType') {
+                const selectedOrder = item.options.find((orderItem) => orderItem.selected);
+                fieldObj['orderType'] = selectedOrder ? selectedOrder.name : '';
+                return fieldObj;
+            }
+            if (item.fieldName === 'callOption') {
+                const selectedOption = item.options.find((optionItem) => optionItem.selected);
+                fieldObj[item.fieldName] = selectedOption ? selectedOption.name : '';
+                return fieldObj;
+            }
+            fieldObj[item.fieldName] = item.fieldValue;
+            return fieldObj;
+        }, {});
+        data.file = orderFormState.contactsForm.contactFormFileUpload;
+        console.log(data)
+    };
+    const getFileNames = () => {
+        const names = Object.entries(contactsRefs.file.current.files).map((item, i) => {
+            if (item[1]) return {id: i, fileName: item[1].name};
+        });
+        return names;
+    }
+    useEffect(() => {
+        if (contactsRefs.file.current.files && contactsRefs.file.current.files.length > 0) {
+            const promises = Object.entries(contactsRefs.file.current.files).map((fileItem, i) => {
+                const filePromise = fileToBase64(fileItem[1]);
+                return filePromise;
+            });
+            Promise.all(promises).then((data) => {
+                dispatch(contactsAddFiles({files: data}));
+            });
+        }
+    }, [contactsRefs.file.current])
 
     return (
         <React.Fragment>
@@ -85,6 +122,7 @@ const ContactsPageOrderForm = () => {
                                         type="text"
                                         value={findField('name').fieldValue}
                                         placeholder={'Имя'}
+                                        autoComplete={'off'}
                                     />
                                 </div>
                             </div>
@@ -123,8 +161,8 @@ const ContactsPageOrderForm = () => {
                                         value={findField('phone').fieldValue}
                                         onChange={() => contactInputHandler('phone')}
                                         onKeyDown={(e) => clearInputHandler(e, 'phone')}
-                                        placeholder={'+7 812 xxx-xx-xx'}
-
+                                        placeholder={'8 xxx xxx xx xx'}
+                                        autoComplete={'off'}
                                     />
                                 </div>
                             </div>
@@ -142,6 +180,7 @@ const ContactsPageOrderForm = () => {
                                     type="text"
                                     value={findField('city').fieldValue}
                                     placeholder={'Москва'}
+                                    autoComplete={'off'}
                                 />
                             </div>
                         </div>
@@ -159,7 +198,8 @@ const ContactsPageOrderForm = () => {
                                         ref={contactsRefs.email}  
                                         id="contact-page-form-email" 
                                         type="text"
-                                        placeholder={'test@yandex.ru'}
+                                        placeholder={'demo@......ru'}
+                                        autoComplete={'off'}
                                     />
                                 </div>
                             </div>
@@ -179,6 +219,7 @@ const ContactsPageOrderForm = () => {
                                             id="phone" 
                                             name="radio" 
                                             value="Телефон"
+                                            autoComplete={'off'}
                                         />
                                         <label htmlFor="phone">Телефон</label>
                                     </div>
@@ -191,6 +232,7 @@ const ContactsPageOrderForm = () => {
                                             id="email" 
                                             name="radio" 
                                             value="Email"
+                                            autoComplete={'off'}
                                         />
                                         <label htmlFor="email">Email</label>
                                     </div>
@@ -202,7 +244,8 @@ const ContactsPageOrderForm = () => {
                                             type="radio" 
                                             id="msg" 
                                             name="radio" 
-                                            value="Мессанджеры" 
+                                            value="Мессанджеры"
+                                            autoComplete={'off'}
                                         />
                                         <label htmlFor="msg">Мессанджеры</label>
                                     </div>
@@ -218,11 +261,21 @@ const ContactsPageOrderForm = () => {
                                         type="file" 
                                         name="file"
                                         onChange={loadFileHandler}
+                                        multiple={true}
                                     />        
  	   	                            <span className="input-file-btn">Прикрепить файл</span>
  	                        </label>
                             <div className="contact-page-form-file file-loaded">
-                                {contactsRefs.file.current ? contactsRefs.file.current.value : null}
+                                {contactsRefs.file.current ? getFileNames().map((item) => {
+                                    return (
+                                        <React.Fragment key={item.id}>
+                                            <div>{item.fileName}</div>
+                                        </React.Fragment>
+                                    )
+                                }) : null}
+                                <div>{orderFormState.contactsForm.contactFormFileUpload.length ? 
+                                    `Количество файлов:${orderFormState.contactsForm.contactFormFileUpload.length}`: null}
+                                </div>
                             </div>
                         </div>
 
@@ -255,7 +308,10 @@ const ContactsPageOrderForm = () => {
                                 </span>
                             </div>
                             <div className="contact-page-form-btn-wrap">
-                                <span className="contact-page-form-btn-send">Отправить</span>
+                                <span 
+                                    className="contact-page-form-btn-send"
+                                    onClick={sendFormHandler}
+                                >Отправить</span>
                             </div>
                         </div>
                     </form>

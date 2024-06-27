@@ -11,9 +11,9 @@ const ServicesPage = () => {
     const servicesState = useSelector((state) => state.innerPage.servicesPage);
     const mouseCords = useSelector((state) => state.innerPage.mousePosition);
 
-    const servicePopupHandler = (e, status) => {
+    const servicePopupHandler = (e, status, service) => {
         const cords = getPopupCords(e.pageX, e.pageY, e.target.offsetLeft, e.target.offsetTop);
-        dispatch(servicePageOrderPopup({status: status, left: cords.left, top: cords.top}));
+        dispatch(servicePageOrderPopup({status: status, left: cords.left, top: cords.top, service: service ? service.name : ''}));
     };
 
     return (

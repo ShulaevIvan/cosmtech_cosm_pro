@@ -1,14 +1,8 @@
 import React from "react";
-import demo80Img from '../../img/80x80.png';
-import demo500Img from '../../img/500x500.png';
 import promo_video from '../../video/compress_promo_video.mp4';
-import aboutImg from '../../img/about_test.jpg';
 import aboutImg2 from '../../img/about_test2.jpg';
-import aboutIconPrize from '../../img/prize_cosm.svg';
-import aboutIconProduction from '../../img/production_cosm.svg';
-import ordersIcon from '../../img/orders.svg';
-import labIcon from '../../img/lab_cosm.svg';
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
+import InnerPageConsultForm from "../InnerPageConsultForm/InnerPageConsultForm";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -102,41 +96,7 @@ const AboutPage = () => {
             </section>
 
             <section>
-                <div className="inner-page-consult-form-wrap">
-                    <div className="inner-page-form-background"></div>
-                    <div className="inner-page-form-text">
-                        <h3>Оставьте заявку для расчёта заказа</h3>
-                        <div className="inner-page-form-description">
-                            <p>Мы отправим образцы бла бла Рыбатекст используется дизайнерами, проектировщиками и фронтендерами</p>
-                        </div>
-                    </div>
-                    <div className="inner-page-form-wrap">
-                        
-                        <div className="inner-page-form">
-                            <form>
-                               <div className="inner-page-form-row">
-                                    <div className="inner-page-form-item">
-                                        <label>Имя</label>
-                                        <input type="text" />
-                                    </div>
-                                    <div className="inner-page-form-item">
-                                        <label>Телефон</label>
-                                        <input type="tel" />
-                                    </div>
-                                    <div className="inner-page-form-item">
-                                        <label>Email</label>
-                                        <input type="email" />
-                                    </div>
-                               </div>
-                               <div className="inner-page-form-controls">
-                                    <div className="inner-page-form-btn-wrap">
-                                        <span className="inner-page-from-btn">Отправить</span>
-                                    </div>
-                               </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <InnerPageConsultForm />
             </section>
             </div>
         </React.Fragment>

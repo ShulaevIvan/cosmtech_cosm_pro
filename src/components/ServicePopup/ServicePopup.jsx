@@ -4,8 +4,9 @@ import { useEffect, useRef } from "react";
 import ServiceMainPagePopupHappy from "../ServiceMainPagePopup/ServiceMainPagePopupHappy";
 import { 
     serviceOrderValidateInput, 
-    serviceOrderSendBtnActive, 
-    sendServiceOrderThunk 
+    serviceOrderSendBtnActive,
+    serviceOrderInputClear, 
+    sendServiceOrderThunk
 } from "../../redux/slices/innerPageSlice";
 
 
@@ -24,6 +25,12 @@ const ServicePopup = (props) => {
         dispatch(serviceOrderValidateInput({fieldType: fieldName, fieldValue: targetRef.current.value}));
     };
 
+    const clearInputHandler = (e, fieldName) => {
+        if (e.key === 'Backspace') {
+            dispatch(serviceOrderInputClear({fieldName: fieldName}))
+        }
+    };
+
     const findFormRef = (inputName) => {
         return formRefs.find((item) => item.name === inputName).ref;
     };
@@ -37,9 +44,20 @@ const ServicePopup = (props) => {
     };
 
     useEffect(() => {
+        const optionsObj = servicesFormState.fields.find((item) => item.fieldName === 'serviceType');
+        const findSelected = optionsObj.options.find((item) => item.name === servicesFormState.selectedService);
+        const selectRef = findFormRef('serviceType');
+        if (findSelected) {
+            selectRef.current.value = findSelected.name;
+            return;
+        }
+    }, []);
+
+    useEffect(() => {
         dispatch(serviceOrderSendBtnActive());
-        console.log(servicesFormState.serviceFormSendBtnActive)
     }, [formRefs]);
+
+    
 
     return (
         <React.Fragment>
@@ -69,7 +87,7 @@ const ServicePopup = (props) => {
                                                         {formField.options.map((optionObj) => {
                                                             return (
                                                                 <React.Fragment key={optionObj.id}>
-                                                                    <option value={optionObj.value}>{optionObj.name}</option>
+                                                                    <option>{optionObj.name}</option>
                                                                 </React.Fragment>
                                                             )
                                                         })}
@@ -101,19 +119,19 @@ const ServicePopup = (props) => {
                                         <React.Fragment key={formField.id}>
                                             <div className="service-form-input-wrap">
                                                 <div className="service-popup-form-title">
-                                                    <label htmlFor="service-popup-name-input">{formField.title}</label>
+                                                    <label htmlFor={`service-popup-${formField.fieldName}-input`}>{formField.title}</label>
                                                 </div>
                                                 <div className="service-popup-form-title">
                                                     <input
+                                                        id={`service-popup-${formField.fieldName}-input`}
                                                         className={formField.err ? 'input-err' : null} 
                                                         ref={findFormRef(formField.fieldName)}
                                                         onChange={() => formInputHandler(formField.fieldName, findFormRef(formField.fieldName))}
-                                                        id="service-popup-name-input" 
+                                                        onKeyDown={(e) => clearInputHandler(e, formField.fieldName)}
                                                         type={formField.fieldType}
                                                         value={formField.fieldValue}
                                                         placeholder={formField.placeholder}
                                                         autoComplete={'off'}
-                                                    
                                                     />
                                                 </div>
                                             </div>

@@ -342,7 +342,7 @@
     align-items: center;
 }
 .contact-page-form-checkbox-description {
-    max-width: 80%;
+    max-width: 100%;
     font-size: 14px;
 }
 .contact-page-radioset-wrap {
@@ -672,6 +672,7 @@
     font-family: gothampro bold;
     font-size: 20px;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 .inner-page-form input {
     min-width: 250px;
@@ -1057,7 +1058,7 @@
 }
 .contact-page-form-file {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
     margin: 10px 0;
@@ -1456,5 +1457,3 @@
 .img-service-align-right {
     align-items: flex-end;
 }
-
-

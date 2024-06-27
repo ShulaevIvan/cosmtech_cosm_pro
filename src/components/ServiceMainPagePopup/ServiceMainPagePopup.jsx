@@ -22,8 +22,6 @@ const ServicesMainPagePopup = (props) => {
         { name: 'comment', ref: useRef(null)},
     ];
 
-    const selectRef = useRef(null);
-
     const formInputHandler = (fieldName, targetRef) => {
         dispatch(validateServiceFormMainPage({fieldType: fieldName, fieldValue: targetRef.current.value}));
     };

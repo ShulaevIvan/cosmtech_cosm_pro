@@ -123,6 +123,7 @@ const initialState = {
             serviceFormSendBtnActive: false,
             serviceFormHappyState: false,
             serviceFormHappyStateDescription: '',
+            selectedService: '',
             fields: [
                 {
                     id: 1,
@@ -160,8 +161,8 @@ const initialState = {
                     options: [
                         { id: 1, name: 'Разработка косметики под СТМ', value: 'Разработка косметики под СТМ', selected: true },
                         { id: 2, name: 'Разработка косметических рецептур', value: 'Разработка косметических рецептур', selected: false },
-                        { id: 3, name: 'Химический анализ', value: 'Химический анализ', selected: false },
-                        { id: 4, name: 'Упаковка и соправождение', value: 'Упаковка и соправождение', selected: false },
+                        { id: 3, name: 'Химический анализ косметической продукции согласно ГОСТ', value: 'Химический анализ', selected: false },
+                        { id: 4, name: 'Консультации по выбору упаковки и сопровождение на этапе сертификации готовой продукции', value: 'Упаковка и соправождение', selected: false },
                     ],
                     err: false
                 },
@@ -229,11 +230,12 @@ const initialState = {
                     fieldName: 'orderType',
                     fieldValue: '',
                     options: [
-                        { id: 1, name: 'тип обращения 1', value: 'тип обращения 1', selected: true},
-                        { id: 2, name: 'тип обращения 2', value: 'тип обращения 2', selected: false},
-                        { id: 3, name: 'тип обращения 3', value: 'тип обращения 3', selected: false},
-                        { id: 4, name: 'тип обращения 4', value: 'тип обращения 4', selected: false},
-                        { id: 5, name: 'тип обращения 5', value: 'тип обращения 5', selected: false},
+                        { id: 1, name: 'Контрактное производство', value: 'Контрактное производство', selected: true},
+                        { id: 2, name: 'Услуги лаборатории', value: 'Химический анализ', selected: false},
+                        { id: 3, name: 'Упаковка и сопровождение', value: 'Упаковка и сопровождение', selected: false},
+                        { id: 4, name: 'Сертификация продукции', value: 'Сертификация продукции', selected: false},
+                        { id: 5, name: 'Торговое предложение', value: 'Торговое предложение', selected: false},
+                        { id: 6, name: 'Сотрудничество', value: 'Сотрудничество', selected: false},
                     ],
                     fieldValid: true
                 },
@@ -326,6 +328,40 @@ const initialState = {
                 image: aboutFactFourth,
             }
         ],
+        innerForm: {
+            sendBtnActive: false,
+            innerConsultFormHappyState: false,
+            innerConsultFormHappyStateDescription: '',
+            fields: [
+                {
+                    id: 1,
+                    fieldTitle: 'Имя',
+                    fieldType: 'text',
+                    fieldName: 'name',
+                    fieldValue: '',
+                    placeholder: 'Ваше Имя',
+                    err: false
+                },
+                {
+                    id: 2,
+                    fieldTitle: 'Телефон',
+                    fieldType: 'phone',
+                    fieldName: 'phone',
+                    fieldValue: '',
+                    placeholder: '8 xxx xxx xx xx',
+                    err: false
+                },
+                {
+                    id: 3,
+                    fieldTitle: 'Email',
+                    fieldType: 'email',
+                    fieldName: 'email',
+                    fieldValue: '',
+                    placeholder: 'demo@......ru',
+                    err: false
+                },
+            ]
+        }
     },
     mousePosition: {
         left: 0,
@@ -355,8 +391,53 @@ export const sendServiceOrderThunk = createAsyncThunk(
 
         return data;
     }
-)
+);
 
+export const sendInnerConsultThunk = createAsyncThunk(
+    'sendInnerConsult',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/consultreq/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: sendData.name,
+                email: sendData.email,
+                phone: sendData.phone,
+            })
+        });
+
+        const data = await response.json();
+        return data;
+    }
+);
+
+export const sendContactUsOrder = createAsyncThunk(
+    'serndContactUs',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: sendData.name,
+                email: sendData.email,
+                phone: sendData.phone,
+                callOption: sendData.callOption,
+                city: sendData.city,
+                orderType: sendData.orderType,
+                comment: sendData.comment,
+                file: sendData.file
+            }),
+        });
+        const data = await response.json();
+        return data;
+    }
+);
 const innerPageSlice = createSlice({
     name: 'innerPage',
     initialState,
@@ -366,9 +447,11 @@ const innerPageSlice = createSlice({
             state.activeBackground = state.headerBackgrounds.find((background) => background.page === currentPage).backgroundImg;
         },
         servicePageOrderPopup(state, action) {
-            const { status, left, top } = action.payload;
+            const { status, left, top, service } = action.payload;
             state.servicesPage.serviceForm.fields = initialState.servicesPage.serviceForm.fields;
             state.servicesPage.serviceForm.serviceFormHappyState = false;
+            state.servicesPage.serviceForm.selectedService = '';
+            if (service) state.servicesPage.serviceForm.selectedService = service;
             state.mousePosition.left = left;
             state.mousePosition.top = top;
             state.servicesPage.serviceFormActive = status;
@@ -474,6 +557,10 @@ const innerPageSlice = createSlice({
             const { status } = action.payload;
             state.contacts.contactsForm.checkboxPolicyStatus = status;
         },
+        contactsAddFiles(state, action) {
+            const { files } = action.payload;
+            state.contacts.contactsForm.contactFormFileUpload = files;
+        },
         uploadFile(state, action) {
             const { file } = action.payload;
             if (file) {
@@ -521,6 +608,19 @@ const innerPageSlice = createSlice({
                 return formField;
             });
         },
+        serviceOrderInputClear(state, action) {
+            const { fieldName } = action.payload;
+            state.servicesPage.serviceForm.fields = state.servicesPage.serviceForm.fields.map((formField) => {
+                if (formField.fieldName === fieldName) {
+                    return {
+                        ...formField,
+                        fieldValue: ''
+                    }
+                }
+                return formField;
+            });
+            
+        },
         serviceOrderSendBtnActive(state) {
             const checkEmpty = state.servicesPage.serviceForm.fields.filter((item) => item.fieldValue === '');
             const checkFieldsErr = state.servicesPage.serviceForm.fields.filter(
@@ -532,6 +632,56 @@ const innerPageSlice = createSlice({
             }
             state.servicesPage.serviceForm.serviceFormSendBtnActive = false;
         },
+        validateInnerConsultForm(state, action) {
+            const { fieldName, fieldValue } = action.payload;
+            state.about.innerForm.fields = state.about.innerForm.fields.map((formField) => {
+                if (formField.fieldName === fieldName && fieldName === 'name') {
+                    const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
+                    return {
+                        ...formField,
+                        fieldValue: fieldValue,
+                        err: notValidName | fieldValue.length < 3 ? true : false
+                    }
+                }
+                else if (formField.fieldName === fieldName && fieldName === 'phone') {
+                    const phoneValue = validatePhone(fieldValue);
+                    return {
+                        ...formField,
+                        fieldValue: phoneValue,
+                        err: phoneValue.length === 18 ? false : true
+                    }
+                }
+                else if (formField.fieldName === fieldName && fieldName === 'email') {
+                    return {
+                        ...formField,
+                        fieldValue: fieldValue,
+                        err: validateMail(fieldValue),
+                    }
+                }
+                return formField;
+            });
+        },
+        clearInnerConsultInput(state, action) {
+            const { fieldName } = action.payload;
+            state.about.innerForm.fields = state.about.innerForm.fields.map((formField) => {
+                if (formField.fieldName === fieldName) {
+                    return {
+                        ...formField,
+                        fieldValue: '',
+                        err: false
+                    }
+                }
+                return formField;
+            });
+        },
+        innerCounsultSendBtn(state) {
+            const checkEmpty = state.about.innerForm.fields.filter((item) => item.fieldValue === '' || item.err).length;
+            if (checkEmpty === 0) {
+                state.about.innerForm.sendBtnActive = true;
+                return;
+            }
+            state.about.innerForm.sendBtnActive = false;
+        }
     },
     
     extraReducers: (builder) => {
@@ -548,6 +698,18 @@ const innerPageSlice = createSlice({
           state.servicesPage.serviceForm.serviceFormHappyStateDescription = description;
           state.servicesPage.serviceForm.fields = initialState.servicesPage.serviceForm.fields;
         })
+        .addCase(sendInnerConsultThunk.pending, (state) => {
+            state.loadingStatus = 'loading';
+            state.error = null;
+          })
+        .addCase(sendInnerConsultThunk.fulfilled, (state, action) => {
+            const { message, description } = action.payload;
+            state.loadingStatus = 'ready';
+            state.error = null;
+            state.about.innerForm.innerConsultFormHappyState = true;
+            state.about.innerForm.innerConsultFormHappyStateDescription = description;
+            state.about.innerForm.fields = initialState.about.innerForm.fields;
+        })
     }
 });
 
@@ -560,7 +722,12 @@ export const {
     selectFieldContactsForm,
     contactsCheckboxPolicy,
     uploadFile,
+    contactsAddFiles,
     serviceOrderValidateInput,
-    serviceOrderSendBtnActive
+    serviceOrderSendBtnActive,
+    serviceOrderInputClear,
+    validateInnerConsultForm,
+    clearInnerConsultInput,
+    innerCounsultSendBtn
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
