@@ -8,7 +8,9 @@ import {
     selectFieldContactsForm,
     contactsCheckboxPolicy,
     uploadFile,
-    contactsAddFiles
+    contactsAddFiles,
+    contactsSendBtnActive,
+    sendContactUsOrder
 } from "../../redux/slices/innerPageSlice";
 import fileToBase64 from "../../functions/fileToBase64";
 
@@ -39,11 +41,12 @@ const ContactsPageOrderForm = () => {
             dispatch(selectFieldContactsForm({inputType: inputType, optionName: callOption, status: true, inputValue: '' }));
             return
         }
+        const orderName = orderFormState.contactsForm.fields[1].options.find((item) => item.value === contactsRefs[inputType].current.value);
 
         dispatch(selectFieldContactsForm({
             inputType: inputType, 
             optionName: callOption, 
-            status: true, 
+            orderName: orderName ? orderName.name : '', 
             inputValue: contactsRefs[inputType].current.value
         }));
     };
@@ -63,13 +66,14 @@ const ContactsPageOrderForm = () => {
     };
 
     const loadFileHandler = () => {
-        dispatch(uploadFile({file: contactsRefs.file.current.value}));
+        dispatch(uploadFile({status: true}));
     };
 
     const sendFormHandler = () => {
         const data = orderFormState.contactsForm.fields.reduce((fieldObj, item) => {
             if (item.fieldName === 'orderType') {
                 const selectedOrder = item.options.find((orderItem) => orderItem.selected);
+                console.log(item.options)
                 fieldObj['orderType'] = selectedOrder ? selectedOrder.name : '';
                 return fieldObj;
             }
@@ -82,25 +86,30 @@ const ContactsPageOrderForm = () => {
             return fieldObj;
         }, {});
         data.file = orderFormState.contactsForm.contactFormFileUpload;
-        console.log(data)
+        dispatch(sendContactUsOrder(data));
     };
     const getFileNames = () => {
         const names = Object.entries(contactsRefs.file.current.files).map((item, i) => {
             if (item[1]) return {id: i, fileName: item[1].name};
         });
         return names;
-    }
+    };
+
     useEffect(() => {
         if (contactsRefs.file.current.files && contactsRefs.file.current.files.length > 0) {
             const promises = Object.entries(contactsRefs.file.current.files).map((fileItem, i) => {
                 const filePromise = fileToBase64(fileItem[1]);
                 return filePromise;
             });
-            Promise.all(promises).then((data) => {
-                dispatch(contactsAddFiles({files: data}));
-            });
+            if (orderFormState.contactsForm.contactFormFileUpload.length !== contactsRefs.file.current.files.length) {
+                Promise.all(promises).then((data) => {
+                    dispatch(contactsAddFiles({files: data}));
+                });
+            }
         }
-    }, [contactsRefs.file.current])
+        dispatch(contactsSendBtnActive());
+        
+    }, [orderFormState.contactsForm, orderFormState.contactsForm.filesLoaded]);
 
     return (
         <React.Fragment>
@@ -139,7 +148,7 @@ const ContactsPageOrderForm = () => {
                                     {findField('orderType').options.map((optionItem) => {
                                         return (
                                             <React.Fragment key={optionItem.id}>
-                                                <option value={optionItem.value}>{optionItem.name}</option>
+                                                <option value={optionItem.value}>{optionItem.value}</option>
                                             </React.Fragment>
                                         )
                                     })}
@@ -308,8 +317,10 @@ const ContactsPageOrderForm = () => {
                                 </span>
                             </div>
                             <div className="contact-page-form-btn-wrap">
-                                <span 
-                                    className="contact-page-form-btn-send"
+                                <span
+                                    className={orderFormState.contactsForm.sendBtnActive ? 
+                                        "contact-page-form-btn-send": "contact-page-form-btn-send btnDisabled"
+                                    }
                                     onClick={sendFormHandler}
                                 >Отправить</span>
                             </div>

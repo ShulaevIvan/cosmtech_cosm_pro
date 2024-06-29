@@ -230,12 +230,12 @@ const initialState = {
                     fieldName: 'orderType',
                     fieldValue: '',
                     options: [
-                        { id: 1, name: 'Контрактное производство', value: 'Контрактное производство', selected: true},
-                        { id: 2, name: 'Услуги лаборатории', value: 'Химический анализ', selected: false},
-                        { id: 3, name: 'Упаковка и сопровождение', value: 'Упаковка и сопровождение', selected: false},
-                        { id: 4, name: 'Сертификация продукции', value: 'Сертификация продукции', selected: false},
-                        { id: 5, name: 'Торговое предложение', value: 'Торговое предложение', selected: false},
-                        { id: 6, name: 'Сотрудничество', value: 'Сотрудничество', selected: false},
+                        { id: 1, name: 'contract', value: 'Контрактное производство', selected: true},
+                        { id: 2, name: 'lab', value: 'Услуги лаборатории', selected: false},
+                        { id: 3, name: 'pack', value: 'Упаковка и сопровождение', selected: false},
+                        { id: 4, name: 'cert', value: 'Сертификация продукции', selected: false },
+                        { id: 5, name: 'trade', value: 'Торговое предложение', selected: false },
+                        { id: 6, name: 'cooperation', value: 'Сотрудничество', selected: false },
                     ],
                     fieldValid: true
                 },
@@ -293,10 +293,8 @@ const initialState = {
                     fieldValid: true
                 },
             ],
-            contactFormFileUpload: {
-                fileUploaded: false,
-                fileName: '',
-            },
+            contactFormFileUpload: [],
+            filesLoaded: false,
             checkboxPolicyStatus: false,
             allFieldsValid: true,
         }
@@ -415,9 +413,9 @@ export const sendInnerConsultThunk = createAsyncThunk(
 );
 
 export const sendContactUsOrder = createAsyncThunk(
-    'serndContactUs',
+    'sendContactUs',
     async (sendData) => {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contactreq/`, {
             method: 'POST',
             headers: {
                 'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
@@ -500,7 +498,7 @@ const innerPageSlice = createSlice({
             });
         },
         selectFieldContactsForm(state, action) {
-            const { inputType, optionName, status, inputValue } = action.payload;
+            const { inputType, optionName, orderName, inputValue } = action.payload;
             state.contacts.contactsForm.fields = state.contacts.contactsForm.fields.map((fieldItem) => {
                 if (fieldItem.options && fieldItem.fieldName === inputType && fieldItem.fieldType !== 'select') {
                     
@@ -524,9 +522,10 @@ const innerPageSlice = createSlice({
                     return {
                         ...fieldItem,
                         options: fieldItem.options.map((optionItem) => {
-                            if (optionItem.name === inputValue) {
+                            if (optionItem.value === inputValue) {
                                 return {
                                     ...optionItem,
+                                    orderName: orderName,
                                     selected: true
                                 }
                             }
@@ -560,16 +559,28 @@ const innerPageSlice = createSlice({
         contactsAddFiles(state, action) {
             const { files } = action.payload;
             state.contacts.contactsForm.contactFormFileUpload = files;
+            state.contacts.contactsForm.filesLoaded = false;
+        },
+        contactsSendBtnActive(state) {
+            const checkFieldsErr = state.contacts.contactsForm.fields.filter(
+                (formField) => formField.fieldValue !== '' && formField.fieldValid && (formField.fieldName === 'email' | formField.fieldName === 'phone')
+            );
+            if (checkFieldsErr.length >= 2) {
+                state.contacts.contactsForm.sendBtnActive = true;
+                return;
+            }
+            state.contacts.contactsForm.sendBtnActive = false;
         },
         uploadFile(state, action) {
-            const { file } = action.payload;
-            if (file) {
-                state.contacts.contactsForm.contactFormFileUpload = {
-                    ...state.contacts.contactsForm.contactFormFileUpload,
-                    fileUploaded: true,
-                    fileName: 'test',
-                }
-            }
+            const { status } = action.payload;
+            state.contacts.contactsForm.filesLoaded = status;
+            // if (file) {
+            //     state.contacts.contactsForm.contactFormFileUpload = {
+            //         ...state.contacts.contactsForm.contactFormFileUpload,
+            //         fileUploaded: true,
+            //         fileName: 'test',
+            //     }
+            // }
             
         },
         serviceOrderValidateInput(state, action) {
@@ -728,6 +739,7 @@ export const {
     serviceOrderInputClear,
     validateInnerConsultForm,
     clearInnerConsultInput,
-    innerCounsultSendBtn
+    innerCounsultSendBtn,
+    contactsSendBtnActive
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
