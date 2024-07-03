@@ -29,7 +29,8 @@ const ContactsPageOrderForm = () => {
             msg: useRef(null),
         },
         file: useRef(null),
-        comment: useRef(null)
+        comment: useRef(null),
+        checkbox: useRef(null),
     };
 
     const contactInputHandler = (inputType) => {
@@ -61,6 +62,12 @@ const ContactsPageOrderForm = () => {
         }
     };
 
+    const clearRefs = () => {
+        Object.entries(contactsRefs).forEach((item, i) => {
+            if (item[1].current && item[0] !== 'orderType') item[1].current.value = '';
+        });
+    };
+
     const checkboxPolicyHandler = (status) => {
         dispatch(contactsCheckboxPolicy({status: status}));
     };
@@ -73,7 +80,6 @@ const ContactsPageOrderForm = () => {
         const data = orderFormState.contactsForm.fields.reduce((fieldObj, item) => {
             if (item.fieldName === 'orderType') {
                 const selectedOrder = item.options.find((orderItem) => orderItem.selected);
-                console.log(item.options)
                 fieldObj['orderType'] = selectedOrder ? selectedOrder.name : '';
                 return fieldObj;
             }
@@ -86,7 +92,11 @@ const ContactsPageOrderForm = () => {
             return fieldObj;
         }, {});
         data.file = orderFormState.contactsForm.contactFormFileUpload;
+        contactsRefs.file.current.value = '';
         dispatch(sendContactUsOrder(data));
+        contactsRefs.checkbox.current.click();
+        clearRefs();
+
     };
     const getFileNames = () => {
         const names = Object.entries(contactsRefs.file.current.files).map((item, i) => {
@@ -282,8 +292,8 @@ const ContactsPageOrderForm = () => {
                                         </React.Fragment>
                                     )
                                 }) : null}
-                                <div>{orderFormState.contactsForm.contactFormFileUpload.length ? 
-                                    `Количество файлов:${orderFormState.contactsForm.contactFormFileUpload.length}`: null}
+                                <div>{orderFormState.contactsForm.contactFormFileUpload.length > 0 ? 
+                                    `Количество файлов:${orderFormState.contactsForm.contactFormFileUpload.length}`: ''}
                                 </div>
                             </div>
                         </div>
@@ -308,7 +318,8 @@ const ContactsPageOrderForm = () => {
                         <div className="contact-page-form-btns-row">
                             <div className="contact-page-form-checkbox-wrap">
                                 <input type="checkbox" id="checkbox-custom-hero-form-policy" className="checkbox-custom-hero-form-policy" />
-                                <label 
+                                <label
+                                    ref={contactsRefs.checkbox} 
                                     htmlFor="checkbox-custom-hero-form-policy"
                                     onClick={() => checkboxPolicyHandler(orderFormState.contactsForm.checkboxPolicyStatus ? false : true)}
                                 ></label>

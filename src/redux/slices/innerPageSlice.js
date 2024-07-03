@@ -230,7 +230,7 @@ const initialState = {
                     fieldName: 'orderType',
                     fieldValue: '',
                     options: [
-                        { id: 1, name: 'contract', value: 'Контрактное производство', selected: true},
+                        { id: 1, name: 'contract', value: 'Контрактное производство', selected: false},
                         { id: 2, name: 'lab', value: 'Услуги лаборатории', selected: false},
                         { id: 3, name: 'pack', value: 'Упаковка и сопровождение', selected: false},
                         { id: 4, name: 'cert', value: 'Сертификация продукции', selected: false },
@@ -294,6 +294,9 @@ const initialState = {
                 },
             ],
             contactFormFileUpload: [],
+            contactFormHappyState: false,
+            contactFormHappyStateDescription: '',
+            sendBtnActive: false,
             filesLoaded: false,
             checkboxPolicyStatus: false,
             allFieldsValid: true,
@@ -565,7 +568,7 @@ const innerPageSlice = createSlice({
             const checkFieldsErr = state.contacts.contactsForm.fields.filter(
                 (formField) => formField.fieldValue !== '' && formField.fieldValid && (formField.fieldName === 'email' | formField.fieldName === 'phone')
             );
-            if (checkFieldsErr.length >= 2) {
+            if (checkFieldsErr.length >= 2 && state.contacts.contactsForm.checkboxPolicyStatus) {
                 state.contacts.contactsForm.sendBtnActive = true;
                 return;
             }
@@ -574,14 +577,6 @@ const innerPageSlice = createSlice({
         uploadFile(state, action) {
             const { status } = action.payload;
             state.contacts.contactsForm.filesLoaded = status;
-            // if (file) {
-            //     state.contacts.contactsForm.contactFormFileUpload = {
-            //         ...state.contacts.contactsForm.contactFormFileUpload,
-            //         fileUploaded: true,
-            //         fileName: 'test',
-            //     }
-            // }
-            
         },
         serviceOrderValidateInput(state, action) {
             const { fieldType, fieldValue } = action.payload;
@@ -721,6 +716,19 @@ const innerPageSlice = createSlice({
             state.about.innerForm.innerConsultFormHappyStateDescription = description;
             state.about.innerForm.fields = initialState.about.innerForm.fields;
         })
+        .addCase(sendContactUsOrder.pending, (state) => {
+            state.loadingStatus = 'loading';
+            state.error = null;
+            state.contacts.contactsForm.fields = initialState.contacts.contactsForm.fields;
+            state.contacts.contactsForm.contactFormFileUpload = [];
+          })
+        .addCase(sendContactUsOrder.fulfilled, (state, action) => {
+            const { message, description } = action.payload;
+            state.loadingStatus = 'ready';
+            state.error = null;
+            state.contacts.contactsForm.contactFormHappyState = true;
+            state.contacts.contactsForm.contactFormHappyStateDescription = description;
+        });
     }
 });
 
