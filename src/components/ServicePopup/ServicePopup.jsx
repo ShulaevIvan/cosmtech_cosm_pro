@@ -5,7 +5,7 @@ import ServiceMainPagePopupHappy from "../ServiceMainPagePopup/ServiceMainPagePo
 import { 
     serviceOrderValidateInput, 
     serviceOrderSendBtnActive,
-    serviceOrderInputClear, 
+    serviceOrderInputClear,
     sendServiceOrderThunk
 } from "../../redux/slices/innerPageSlice";
 
@@ -22,6 +22,7 @@ const ServicePopup = (props) => {
     ];
 
     const formInputHandler = (fieldName, targetRef) => {
+        console.log(targetRef.current.value)
         dispatch(serviceOrderValidateInput({fieldType: fieldName, fieldValue: targetRef.current.value}));
     };
 
@@ -40,6 +41,7 @@ const ServicePopup = (props) => {
             itemObj[item.name] = item.ref.current.value;
             return itemObj;
         }, {});
+        console.log(data)
         dispatch(sendServiceOrderThunk(data));
     };
 
@@ -56,7 +58,6 @@ const ServicePopup = (props) => {
     useEffect(() => {
         dispatch(serviceOrderSendBtnActive());
     }, [formRefs]);
-
     
 
     return (

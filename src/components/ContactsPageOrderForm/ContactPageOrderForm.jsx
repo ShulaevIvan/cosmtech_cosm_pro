@@ -10,7 +10,8 @@ import {
     uploadFile,
     contactsAddFiles,
     contactsSendBtnActive,
-    sendContactUsOrder
+    sendContactUsOrder,
+    contactUsHappyState
 } from "../../redux/slices/innerPageSlice";
 import fileToBase64 from "../../functions/fileToBase64";
 
@@ -98,6 +99,11 @@ const ContactsPageOrderForm = () => {
         clearRefs();
 
     };
+
+    const closeContactHappyState = (statusValue) => {
+        dispatch(contactUsHappyState({status: statusValue}))
+    };
+
     const getFileNames = () => {
         const names = Object.entries(contactsRefs.file.current.files).map((item, i) => {
             if (item[1]) return {id: i, fileName: item[1].name};
@@ -124,6 +130,19 @@ const ContactsPageOrderForm = () => {
     return (
         <React.Fragment>
             <div className="contacts-form-wrap">
+            <div className="contact-page-happy-state-wrap">
+                {orderFormState.contactsForm.contactFormHappyState ?
+                    <React.Fragment>
+                         <div className="service-popup-close-wrap">
+                            <span 
+                                className="service-popup-close-btn"
+                                onClick={() => closeContactHappyState(false)}
+                            ></span>
+                        </div>
+                        <p>{orderFormState.contactsForm.contactFormHappyStateDescription}</p>
+                    </React.Fragment>       
+                : null} 
+            </div>
                 <div className="contact-page-form-wrap">
                     <form>
                         <div className="contact-page-form-row">

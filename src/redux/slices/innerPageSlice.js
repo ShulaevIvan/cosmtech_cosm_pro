@@ -230,7 +230,7 @@ const initialState = {
                     fieldName: 'orderType',
                     fieldValue: '',
                     options: [
-                        { id: 1, name: 'contract', value: 'Контрактное производство', selected: false},
+                        { id: 1, name: 'contract', value: 'Контрактное производство', selected: true},
                         { id: 2, name: 'lab', value: 'Услуги лаборатории', selected: false},
                         { id: 3, name: 'pack', value: 'Упаковка и сопровождение', selected: false},
                         { id: 4, name: 'cert', value: 'Сертификация продукции', selected: false },
@@ -580,6 +580,8 @@ const innerPageSlice = createSlice({
         },
         serviceOrderValidateInput(state, action) {
             const { fieldType, fieldValue } = action.payload;
+            console.log(fieldType)
+            console.log(fieldValue)
             state.servicesPage.serviceForm.fields = state.servicesPage.serviceForm.fields.map((formField) => {
                 if (formField.fieldName === fieldType && fieldType === 'name') {
                     const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
@@ -687,6 +689,10 @@ const innerPageSlice = createSlice({
                 return;
             }
             state.about.innerForm.sendBtnActive = false;
+        },
+        contactUsHappyState(state, action) {
+            const { status } = action.payload;
+            state.contacts.contactsForm.contactFormHappyState = status;
         }
     },
     
@@ -724,6 +730,7 @@ const innerPageSlice = createSlice({
           })
         .addCase(sendContactUsOrder.fulfilled, (state, action) => {
             const { message, description } = action.payload;
+            console.log(description)
             state.loadingStatus = 'ready';
             state.error = null;
             state.contacts.contactsForm.contactFormHappyState = true;
@@ -748,6 +755,7 @@ export const {
     validateInnerConsultForm,
     clearInnerConsultInput,
     innerCounsultSendBtn,
-    contactsSendBtnActive
+    contactsSendBtnActive,
+    contactUsHappyState,
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

@@ -3,7 +3,7 @@ import React from "react";
 import telegramLogo from '../../img/telegram_footer.svg'
 import whatsappLogo from '../../img/whatsapp_footer.svg'
 import vkLogo from '../../img/vk_footer.svg'
-import findUsPhoto from '../../img/contacts_enter_to_us.jpg';
+import findUsPhoto from '../../img/contacts_enter_to_us4.jpg';
 import cosmtechReq from '../../doc/cosmtech_req.doc';
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import ContactsPageOrderForm from "../ContactsPageOrderForm/ContactPageOrderForm";
@@ -80,33 +80,31 @@ const ContactsPage = () => {
                     <div className="container">
                         <div className="contact-page-map-title">
                             <h2>Как добраться</h2>
-                            <div className="contact-page-map-description-wrap">
+                        </div>
+                        <div className="contact-page-map-description-wrap">
+                            <div className="contact-page-map-description-row">
+                                <div className="contact-page-map-description-photo">
+                                    <img src={findUsPhoto} alt="как нас найти" />
+                                </div>
                                 <div className="contact-page-map-description-content">
-                                    <p> 
+                                     <p> 
                                         Вход со стороны ул. Салова, оранжевая крыша с козырьком, 
                                         внизу вывеска с верблюдами, правая стеклянная дверь, 
                                         далее через вертушку с охраной и справа лифт, 
                                         7 этаж, компания "Косметические технологии".
                                     </p>
+                                    <div className="contact-page-map-description-btn-wrap">
+                                        <Link
+                                            target={'_blank'} 
+                                            to={"https://yandex.ru/maps/?rtext=~59.895998,30.374016"} 
+                                            className="contact-page-map-description-btn"
+                                        >проложить маршрут</Link>
+                                    </div>
                                 </div>
-                                <div className="contact-page-map-description-btn-wrap">
-                                    <Link
-                                        target={'_blank'} 
-                                        to={"https://yandex.ru/maps/?rtext=~59.895998,30.374016"} 
-                                        className="contact-page-map-description-btn"
-                                    >проложить маршрут</Link>
-                                </div>
-                               
                             </div>
                             <div className="contact-page-find-us-row">
-                                <div className="contact-page-find-us-image-wrap">
-                                    <img src={findUsPhoto} alt="как нас найти" />
-                                </div>
-                                <div className="contact-page-find-us-description">
-                                    <YandexMap />
-                                </div>
+                                <YandexMap />
                             </div>
-                           
                         </div>
                     </div>
                 </section>
