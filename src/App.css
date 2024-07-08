@@ -34,6 +34,10 @@ input, textarea {
 input[type='file'] {
   border: none;
 }
+textarea {
+  padding: 5px;
+  line-height: 1.5;
+}
 .input-err {
   border: 1px solid #CD5C5C;
   outline: 1px solid #CD5C5C;
@@ -1342,6 +1346,14 @@ section {
   flex-wrap: wrap;
   width: 100%;
   position: relative;
+}
+.prefooter-form-happystate-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+  align-items: center;
 }
 .prefooter-order-form-background {
   min-width: 380px;

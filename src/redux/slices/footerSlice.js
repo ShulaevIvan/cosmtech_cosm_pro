@@ -60,6 +60,8 @@ const initialState = {
     },
     footerFormCallbackValid: true,
     footerFormCallbackValue: '',
+    footerFormHappyStateStatus: false,
+    footerFormHappyStateDescription: '',
 };
 
 export const fetchFooterCallback = createAsyncThunk(
@@ -75,6 +77,24 @@ export const fetchFooterCallback = createAsyncThunk(
             
             body: JSON.stringify({phone: sendData.phone, type: 'callback', time: '30min'})
         });
+        const data = await response.json();
+
+        return data;
+    }
+);
+
+export const fetchFooterConsultReq = createAsyncThunk(
+    'api/consultreq/',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/consultreq/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sendData)
+        });
+
         const data = await response.json();
 
         return data;
@@ -143,7 +163,11 @@ const footerSlice = createSlice({
             }
             state.footerFormCallbackValue = phone;
             state.footerFormCallbackValid = true;
-        }
+        },
+        footerFormHappyState(state, action) {
+            const { status } = action.payload;
+            state.footerFormHappyStateStatus = status;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -158,6 +182,19 @@ const footerSlice = createSlice({
             state.footerFormCallbackValue = '';
             state.footerFormCallbackValid = true;
           })
+          .addCase(fetchFooterConsultReq.pending, (state) => {
+            state.loadingStatus = 'loading';
+            state.error = null;
+            state.preFooterForm = initialState.preFooterForm;
+          })
+          .addCase(fetchFooterConsultReq.fulfilled, (state, action) => {
+            const { message, description } = action.payload;
+            console.log(description)
+            state.loadingStatus = 'ready';
+            state.error = null;
+            state.footerFormHappyStateDescription = description;
+            state.footerFormHappyStateStatus = true;
+          })
     },
 });
 
@@ -167,6 +204,7 @@ export const {
     validatePrefooterForm,
     prefooterClearInput,
     prefooterFormCheckbox,
-    validateFooterCallback
+    validateFooterCallback,
+    footerFormHappyState
 } = footerSlice.actions;
 export default footerSlice.reducer;

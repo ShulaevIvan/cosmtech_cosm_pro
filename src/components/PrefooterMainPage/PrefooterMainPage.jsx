@@ -4,7 +4,8 @@ import {
     validatePrefooterForm, 
     prefooterClearInput,
     prefooterFormCheckbox,
-    fetchFooterCallback
+    fetchFooterConsultReq,
+    footerFormHappyState
 } from "../../redux/slices/footerSlice";
 import { Link } from "react-router-dom";
 
@@ -50,12 +51,13 @@ const PrefooterMainPage = () => {
             formObj[item.nameRef] = item.inputRef.current.value;
             return formObj;
         }, {});
-        dispatch(fetchFooterCallback(data));
-        if (footerState.preFooterForm.policyCheckboxStatus) {
-            policyRef.current.click();
-        }
+        dispatch(fetchFooterConsultReq(data));
+        policyRef.current.click();
     };
 
+    const happyStateHandler = (status) => {
+        dispatch(footerFormHappyState({status: status}))
+    };
 
 
     return (
@@ -64,8 +66,21 @@ const PrefooterMainPage = () => {
                 <div className="prefooter-order-form-wrap">
                     <div className="prefooter-order-form-background">
                         <div className="prefooter-form-wrap">
-                   
                             <form className="prefooter-form">
+                                {footerState.footerFormHappyStateStatus ?
+                                    <React.Fragment>
+                                        <div className="prefooter-form-happystate-wrap">
+                                            <div className="service-popup-close-wrap">
+                                                <span 
+                                                    className="service-popup-close-btn"
+                                                    onClick={(() => happyStateHandler(false))}
+                                                ></span>
+                                            </div>
+                                            <p>{footerState.footerFormHappyStateDescription}</p>
+                                        </div>
+                                    </React.Fragment>
+                                : null}
+                                
                                 <div className="prefooter-from-title">
                                     <h3>Быстрый способ уточнить детали</h3>
                                 </div>

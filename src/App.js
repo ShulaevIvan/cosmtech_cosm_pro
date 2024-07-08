@@ -11,6 +11,7 @@ import ServicesPage from './components/ServicesPage/ServicesPage';
 import AboutPage from './components/AboutPage/AboutPage';
 import ContactsPage from './components/ContactsPage/ContactsPage';
 import PolicyPage from './components/PolicyPage/PolicyPage';
+import JobPage from './components/JobPage/JobPage';
 import { useLocation } from 'react-router-dom';
 
 function App() {  
@@ -24,6 +25,7 @@ function App() {
               <Route path='/about' element = {<AboutPage />} />
               <Route path='/contacts' element = {<ContactsPage />} />
               <Route path='/about/policy' element={<PolicyPage />}/>
+              <Route path='/about/job' element={<JobPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

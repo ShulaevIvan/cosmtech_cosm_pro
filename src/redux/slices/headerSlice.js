@@ -46,6 +46,13 @@ const initialState = {
             path: '/about/policy',
             title: 'test',
             description: 'Контрактное производство',
+        },
+        {
+            id: 6,
+            name: 'Работа в компании Косметические Технологии',
+            path: '/about/job',
+            title: 'test',
+            description: 'Контрактное производство',
         }
     ],
     stickyHeader: {

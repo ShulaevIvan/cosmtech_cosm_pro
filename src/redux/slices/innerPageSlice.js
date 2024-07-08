@@ -90,7 +90,7 @@ const initialState = {
             page: '/about/policy', 
             backgroundImg: backgroundAbout, 
             title: 'Политика',
-            description: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
+            description: 'Политика в отношении обработки персональных данных ООО "Косметические Технологии" ',
             breadcrumbs: [
                 {
                     id: 1,
@@ -110,6 +110,35 @@ const initialState = {
                     id: 3,
                     name: 'Политика',
                     url: '/policy',
+                    main: false,
+                    active: true,
+                },
+            ]
+        },
+        { 
+            page: '/about/job', 
+            backgroundImg: backgroundServices, 
+            title: 'Вакансии',
+            description: 'Работа в ООО "Косметические Технологии" ',
+            breadcrumbs: [
+                {
+                    id: 1,
+                    name: 'Контрактное производство',
+                    url: '/',
+                    main: true,
+                    active: false,
+                },
+                {
+                    id: 2,
+                    name: 'О Нас',
+                    url: '/about',
+                    main: false,
+                    active: false,
+                },
+                {
+                    id: 3,
+                    name: 'Вакансии',
+                    url: '/job',
                     main: false,
                     active: true,
                 },
@@ -363,6 +392,24 @@ const initialState = {
                 },
             ]
         }
+    },
+    jobPage: {
+        vacancyHeader: [
+            { id: 1,name: 'Специальность'},
+            { id: 2,name: 'Требования'},
+            { id: 3,name: 'Контакты'},
+        ],
+        vacancyList: [
+            {
+                id: 1,
+                name: 'Инженер-строитель',
+                contacts: [
+                    {id: 1, value: 'test@mail.ru', description: 'Направлять резюме'}, 
+                    {id: 2, value: '8 xxx xxx xx xx', description: 'Телефон'}
+                ],
+                description: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.'
+            }
+        ]
     },
     mousePosition: {
         left: 0,

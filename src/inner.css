@@ -824,7 +824,6 @@
 .main-service-img-wrap img {
     max-width: 100%;
     width: 575px;
-    height: 400px;
     max-height: 400px;
     border-radius: 10px;
     box-shadow: 0px 4px 32px 0px rgba(50,38,5,.06);
@@ -1097,6 +1096,110 @@
     align-items: center;
     position: relative;
 }
+.vacancy-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.vacancy-item-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 97%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    margin-bottom: 20px;
+}
+.vacancy-header-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.vacancy-item-name,
+.vacancy-item-requirements,
+.vacancy-item-contacts {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+.vacancy-item-contacts {
+    justify-content: flex-start;
+}
+.vacancy-item-contacts ul {
+    margin: 0;
+    padding: 0;
+}
+.vacancy-item-contacts ul li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+.vacancy-header-item-name,
+.vacancy-header-item-requirements,
+.vacancy-header-item-contacts {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.vacancy-header-item-name h3,
+.vacancy-header-item-requirements h3,
+.vacancy-header-item-contacts h3 {
+    font-size: 20px;
+    margin: 0;
+}
+.vacancy-item-name,
+.vacancy-header-item-name {
+    width: 25%;
+    margin-right: 10px;
+}
+.vacancy-item-requirements,
+.vacancy-header-item-requirements {
+    width: 40%;
+}
+.vacancy-header-item-contacts {
+    width: 20%;
+    margin-right: 10px;
+}
+.vacancy-item-contacts {
+    width: 25%;
+    margin-right: 10px;
+    border-left: 1px solid;
+    height: 88%;
+}
+.vacancy-item-requirements {
+    border-left: 1px solid;
+    height: 88%;
+}
+
+@media (max-width: 800px) {
+    .vacancy-header-row,
+    .vacancy-item-row {
+        width: 100%;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 800px) {
+    .vacancy-item-name,
+    .vacancy-item-requirements,
+    .vacancy-item-contacts {
+        width: 100%;
+        border-bottom: 1px solid;
+        border-left: none;
+        height: auto;
+    }
+}
+
 @media (max-width: 800px) {
     .inner-page-main-title-wrap {
         left: 0;
