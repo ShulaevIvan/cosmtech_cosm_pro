@@ -1,33 +1,43 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { changeHeaderBackground } from "../../redux/slices/innerPageSlice";
 import InnerPageBreadcrumbs from "../InnerPageBreadcrumbs/InnerPageBreadcrubs";
 
 
 const InnerPageHeader = () => {
-    const location = useLocation();
+    const location = useLocation(); 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const activeBackground = useSelector((state) => state.innerPage.activeBackground);
     const headerContent = useSelector((state) => state.innerPage.headerBackgrounds);
-    const breadcrumbs = headerContent.filter((item) => item.page === location.pathname)[0].breadcrumbs;
+    const pageTitle = headerContent.find((header) => header.page === location.pathname.replace(/\/$/, '')).title;
+    const pageDescription = headerContent.find((header) => header.page === location.pathname.replace(/\/$/, '')).description;
+    const seoDescription = headerContent.find((header) => header.page === location.pathname.replace(/\/$/, '')).seoDescription;
+    const breadcrumbs = headerContent.find((item) => item.page === location.pathname.replace(/\/$/, '') && location.pathname !== '/').breadcrumbs;
 
     useEffect(() => {
-        dispatch(changeHeaderBackground({currentPage: location.pathname}));
+        if (/\/$/.test(location.pathname)) {
+            navigate(location.pathname.replace(/\/$/, ''),  { replace: true })
+        }
+        dispatch(changeHeaderBackground({currentPage: location.pathname.replace(/\/$/, '')}));
     }, [location.pathname]);
-
 
     return (
         <React.Fragment>
+            {/* <Helmet>
+                <title>testse</title>
+                <meta name="description" content={seoDescription} data-rh="true" />
+            </Helmet> */}
             <div className="inner-page-header-title-wrap">
                 <InnerPageBreadcrumbs breadcrumbs={breadcrumbs} />
                 <div className="inner-page-main-title-wrap">
                 
-                    <h1>{headerContent.find((header) => header.page === location.pathname).title}</h1>
+                    <h1>{pageTitle}</h1>
                     <div className="inner-page-main-title-description">
-                        <p>{headerContent.find((header) => header.page === location.pathname).description}</p>
+                        <p>{pageDescription}</p>
                     </div>
                 </div>
                 <div className="inner-page-background-wrap">

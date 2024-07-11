@@ -6,12 +6,12 @@ import callbackIcon from '../../img/callback.svg';
 import sendmailIcon from '../../img/send_mail.svg';
 import mainLogoIcon from '../../img/logo_cosm_back.jpeg';
 import mainLogoMinIcon from '../../img/logo_cosm.png';
-
 import CallbackRequestPopup from "../CallbackRequestPopup/CallbackRequestPopup";
 import MobileMenu from "../MobileMenu/MobileMenu";
-
-import { callbackPopupShow, activeStickyHeader } from "../../redux/slices/headerSlice";
-
+import { 
+    callbackPopupShow,
+    setPathUrl
+} from "../../redux/slices/headerSlice";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -27,7 +27,6 @@ const Header = () => {
         const targetTitle = headerState.pageTitles.find((headerTitleObj) => headerTitleObj.path === location.pathname);
         document.title = targetTitle ? targetTitle.name : '';
     }, [location.pathname]);
-    
 
     return (
         <React.Fragment>

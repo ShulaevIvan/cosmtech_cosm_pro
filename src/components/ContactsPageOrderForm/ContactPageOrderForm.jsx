@@ -92,6 +92,7 @@ const ContactsPageOrderForm = () => {
             fieldObj[item.fieldName] = item.fieldValue;
             return fieldObj;
         }, {});
+        
         data.file = orderFormState.contactsForm.contactFormFileUpload;
         contactsRefs.file.current.value = '';
         dispatch(sendContactUsOrder(data));
@@ -133,7 +134,7 @@ const ContactsPageOrderForm = () => {
             <div className="contact-page-happy-state-wrap">
                 {orderFormState.contactsForm.contactFormHappyState ?
                     <React.Fragment>
-                         <div className="service-popup-close-wrap">
+                        <div className="service-popup-close-wrap">
                             <span 
                                 className="service-popup-close-btn"
                                 onClick={() => closeContactHappyState(false)}

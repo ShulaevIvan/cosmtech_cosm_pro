@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 
 const initialState = { 
     callbackHeader: {
@@ -55,6 +55,7 @@ const initialState = {
             description: 'Контрактное производство',
         }
     ],
+    currentPathUrl: '',
     stickyHeader: {
         scrollPercent: 0,
         stickyActive: false,
@@ -64,6 +65,7 @@ const initialState = {
 export const fetchCallbackThunk = createAsyncThunk(
     'api/callbackreq/',
     async (sendData) => {
+        console.log(sendData)
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/callbackreq/`, {
             method:'POST',
             headers: {
@@ -135,6 +137,10 @@ const headerSlice = createSlice({
             state.callbackHeader.callbackSendBtnStatus = false;
             return;
         },
+        setPathUrl(state, action) {
+            const { url } = action.payload;
+            state.currentPathUrl = url;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -159,5 +165,6 @@ export const {
     callbackValidatePhone,
     callbackSendBtn,
     clearCallbackInput,
+    setPathUrl
 } = headerSlice.actions;
 export default headerSlice.reducer;

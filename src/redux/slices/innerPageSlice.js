@@ -25,6 +25,7 @@ const initialState = {
             backgroundImg: backgroundServices, 
             title: 'Услуги',
             description: 'Сотрудничество с нами позволит вам успешно войти на рынок косметической продукции и получить прибыль от продаж.',
+            seoDescription: 'Услуги компании ООО Косметические Технологии',
             breadcrumbs: [
                 {
                     id: 1,
@@ -47,6 +48,7 @@ const initialState = {
             backgroundImg: backgroundAbout, 
             title: 'О компании',
             description: 'У нас есть опыт работы с различными клиентами и мы готовы помочь вам добиться успеха в вашем бизнесе.',
+            seoDescription: 'О Компании Косметические Технологии, богатый опыт работы',
             breadcrumbs: [
                 {
                     id: 1,
@@ -69,6 +71,7 @@ const initialState = {
             backgroundImg: backgroundContacts, 
             title: 'Контакты',
             description: 'Свяжитесь с нами по телефону, электронной почте или через социальные сети. Мы готовы ответить на все ваши вопросы',
+            seoDescription: 'Телефоны, email и мессенджеры для надежной связи с нашими клиентами',
             breadcrumbs: [
                 {
                     id: 1,
@@ -91,6 +94,7 @@ const initialState = {
             backgroundImg: backgroundAbout, 
             title: 'Политика',
             description: 'Политика в отношении обработки персональных данных ООО "Косметические Технологии" ',
+            seoDescription: 'Политика в отношении обработки персональных данных ООО "Косметические Технологии"',
             breadcrumbs: [
                 {
                     id: 1,
@@ -120,6 +124,7 @@ const initialState = {
             backgroundImg: backgroundServices, 
             title: 'Вакансии',
             description: 'Работа в ООО "Косметические Технологии" ',
+            seoDescription: 'Вакансии в компании ООО "Косметические Технологии"',
             breadcrumbs: [
                 {
                     id: 1,

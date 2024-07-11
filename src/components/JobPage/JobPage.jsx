@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
-
+import { Helmet } from "react-helmet-async";
 const JobPage = () => {
     const jobState = useSelector((state) => state.innerPage.jobPage);
     return (

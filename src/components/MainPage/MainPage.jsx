@@ -6,7 +6,7 @@ import ServicesMainPage from "../ServicesMainPage/ServicesMainPage";
 import ProductionMainPage from "../ProductionMainPage/ProductionMainPage";
 import ClientsMainPage from "../ClientsMainPage/ClientsMainPage";
 
-const MainPage = () => {
+const MainPage = (props) => {
     return (
         <React.Fragment>
             <HeroMainPage />
