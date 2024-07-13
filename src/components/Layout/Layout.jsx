@@ -21,7 +21,8 @@ const Layout = () => {
         if (localStorage.getItem('currentPath')) {
             navigate(localStorage.getItem('currentPath'));
         }
-    }, [location.pathname])
+    }, [location.pathname]);
+    
     return (
         <React.Fragment>
             <Header />

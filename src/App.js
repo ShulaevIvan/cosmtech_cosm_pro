@@ -18,15 +18,15 @@ function App() {
       <BrowserRouter>
           <Routes>
             <Route path='/' element = {<Layout />}>
+              <Route path="*" replace={false} element={<MainPage />} /> 
               <Route path='/' element = {<MainPage />} />
               <Route path='/services' element = {<ServicesPage />} />
               <Route path='/about/policy' element={<PolicyPage />}/>
               <Route path='/about/job' element={<JobPage />} />
               <Route path='/about' element = {<AboutPage />} />
               <Route path='/contacts' element = {<ContactsPage />} />
-
-              <Route path="*" replace={true} element={<MainPage />} /> 
           </Route>
+         
         </Routes>
       </BrowserRouter>
     </div>

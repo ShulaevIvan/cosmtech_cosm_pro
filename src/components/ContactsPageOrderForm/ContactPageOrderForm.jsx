@@ -234,9 +234,10 @@ const ContactsPageOrderForm = () => {
                                         className={findField('email').fieldValid ? '' : 'input-err'} 
                                         onChange={() => contactInputHandler('email')}
                                         onKeyDown={(e) => clearInputHandler(e, 'email')}
-                                        ref={contactsRefs.email}  
+                                        ref={contactsRefs.email} 
                                         id="contact-page-form-email" 
                                         type="text"
+                                        value={findField('email').fieldValue}
                                         placeholder={'demo@......ru'}
                                         autoComplete={'off'}
                                     />

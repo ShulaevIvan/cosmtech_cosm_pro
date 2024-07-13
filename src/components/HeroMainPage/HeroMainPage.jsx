@@ -19,7 +19,7 @@ const HeroMainPage = () => {
                {orderForm.happyState ? <MainPageOrderFormHappy /> : null}
                 <div className="hero-img-wrap">
                     <div className="hero-img-main-title-wrap">
-                        <h1>Контрактное Производство косметики в Санкт-Петербурге</h1>
+                        <h1>Контрактное производство косметики в Санкт-Петербурге</h1>
                         <div className="hero-img-main-title-description">
                             <p>
                                 Косметические технологии — это российская компания-производитель косметической продукции с собственным производством 

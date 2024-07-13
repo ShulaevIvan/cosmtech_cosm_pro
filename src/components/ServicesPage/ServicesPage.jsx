@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import ServicePopup from "../ServicePopup/ServicePopup";
-
 import { useSelector, useDispatch } from "react-redux";
 import { servicePageOrderPopup } from "../../redux/slices/innerPageSlice";
 import getPopupCords from "../../functions/getPopupCords";
@@ -27,7 +26,6 @@ const ServicesPage = () => {
                         {servicesState.servicesItems.map((serviceItem) => {
                             return (
                                 <React.Fragment key={serviceItem.id}>
-                                    
                                     <div className={serviceItem.position === 'left' ? 
                                         'main-service-item-row slide-left' : "main-service-item-row reverseService slide-right"}>
                                         <div className={`main-service-img-box img-service-align-${serviceItem.position}`}>
@@ -56,8 +54,6 @@ const ServicesPage = () => {
                         })}
                     </div>
                 </div>
-                
-                
             </section>
             </div>
         </React.Fragment>

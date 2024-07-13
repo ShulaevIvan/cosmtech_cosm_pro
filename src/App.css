@@ -273,7 +273,7 @@ section {
   font-size: 18px;
   min-height: 25px;
   margin-right: 20px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 .main-nav-list li a {
   position: relative;
