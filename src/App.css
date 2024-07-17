@@ -818,7 +818,7 @@ section {
   font-size: 20px;
 }
 .service-background-title h4 {
-  text-transform: capitalize;
+  text-transform: none;
 }
 .service-background-order-btn-wrap {
   position: absolute;

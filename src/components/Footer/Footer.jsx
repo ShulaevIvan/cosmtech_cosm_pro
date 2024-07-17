@@ -103,7 +103,7 @@ const Footer = () => {
                         </div>
                         <div className="main-footer-contact-list-wrap">
                             <ul>
-                                <li>Адрес: <Link to={"https://yandex.ru/maps/?rtext=~59.895998,30.374016"} target={'_blank'}>Санкт-Петербург ул Салова 27 АБ</Link></li>
+                                <li>Адрес: <Link to={"https://yandex.ru/maps/?rtext=~59.895998,30.374016"} target={'_blank'}> г. Санкт-Петербург, ул. Салова, д. 27 АБ</Link></li>
                                 <li>Телефон: <Link to={"tel:+78123630614"}>+7 (812) 363-06-14</Link></li>
                                 <li>Email: <Link to={"mailto:pro@cosmtech.ru&body=text?subject=Вопрос"} target={'_blank'}>pro@cosmtech.ru</Link></li>
                             </ul>
@@ -116,7 +116,7 @@ const Footer = () => {
                             </div>
                             <ul className="main-footer-submenu">
                                 <li><Link onClick={goToTopHandler} to={"/"}>Производство</Link></li>
-                                <li><Link onClick={goToTopHandler} to={'/services'}>Собственная торовая марка</Link></li>
+                                <li><Link onClick={goToTopHandler} to={'/services'}>Собственная торговая марка</Link></li>
                                 <li><Link onClick={goToTopHandler} to={'/services'}>Упаковка и сопровождение</Link></li>
                             </ul>
                         </div>

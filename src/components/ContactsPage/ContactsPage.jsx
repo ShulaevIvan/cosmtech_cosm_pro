@@ -31,6 +31,7 @@ const ContactsPage = () => {
                                         <li><span className="span-title-bold">Адрес производства: </span>
                                             <Link to={"https://yandex.ru/maps/?rtext=~59.895998,30.374016"} target={'_blank'}>Санкт-Петербург, ул Салова 27 АБ</Link>
                                         </li>
+                                        <li><span className="span-title-bold">Режим работы офиса: </span>пн-пт с 10:00 до 18:00</li>
                                     </ul>
                                     <ul>
                                         <li className="contact-list-social">
