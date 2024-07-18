@@ -6,6 +6,7 @@ import validateCity from "../../functions/validateCity";
 
 import backgroundServices from '../../img/services_bg.jpg';
 import backgroundAbout from '../../img/about.jpg';
+import backgroundPolicy from '../../img/about.jpg';
 import backgroundContacts from '../../img/contacts.jpg';
 import innerHeaderImg from '../../img/1920x400.png';
 import serviceLabImg from '../../img/service_lab.jpg';
@@ -91,7 +92,7 @@ const initialState = {
         },
         { 
             page: '/about/policy', 
-            backgroundImg: backgroundAbout, 
+            backgroundImg: '/static/media/about.b6207ae7a6046a88abdf.jpg', 
             title: 'Политика',
             description: 'Политика в отношении обработки персональных данных ООО "Косметические Технологии" ',
             seoDescription: 'Политика в отношении обработки персональных данных ООО "Косметические Технологии"',
@@ -121,7 +122,7 @@ const initialState = {
         },
         { 
             page: '/about/job', 
-            backgroundImg: backgroundServices, 
+            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
             title: 'Вакансии',
             description: 'Работа в ООО "Косметические Технологии" ',
             seoDescription: 'Вакансии в компании ООО "Косметические Технологии"',
@@ -497,7 +498,10 @@ const innerPageSlice = createSlice({
     reducers: {
         changeHeaderBackground(state, action) {
             const { currentPage } = action.payload;
-            state.activeBackground = state.headerBackgrounds.find((background) => background.page === currentPage).backgroundImg;
+            if (currentPage) {
+                state.activeBackground = state.headerBackgrounds.find((background) => background.page === currentPage).backgroundImg;
+            }
+            
         },
         servicePageOrderPopup(state, action) {
             const { status, left, top, service } = action.payload;
@@ -632,8 +636,6 @@ const innerPageSlice = createSlice({
         },
         serviceOrderValidateInput(state, action) {
             const { fieldType, fieldValue } = action.payload;
-            console.log(fieldType)
-            console.log(fieldValue)
             state.servicesPage.serviceForm.fields = state.servicesPage.serviceForm.fields.map((formField) => {
                 if (formField.fieldName === fieldType && fieldType === 'name') {
                     const notValidName = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]|[0-9]|\s/g.test(fieldValue);
@@ -782,7 +784,6 @@ const innerPageSlice = createSlice({
           })
         .addCase(sendContactUsOrder.fulfilled, (state, action) => {
             const { message, description } = action.payload;
-            console.log(description)
             state.loadingStatus = 'ready';
             state.error = null;
             state.contacts.contactsForm.contactFormHappyState = true;

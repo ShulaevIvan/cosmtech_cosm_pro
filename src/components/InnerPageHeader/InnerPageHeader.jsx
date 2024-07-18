@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import { changeHeaderBackground } from "../../redux/slices/innerPageSlice";
 import InnerPageBreadcrumbs from "../InnerPageBreadcrumbs/InnerPageBreadcrubs";
 
@@ -15,10 +14,12 @@ const InnerPageHeader = () => {
     const headerContent = useSelector((state) => state.innerPage.headerBackgrounds);
     const pageTitle = headerContent.find((header) => header.page === location.pathname.replace(/\/$/, '')).title;
     const pageDescription = headerContent.find((header) => header.page === location.pathname.replace(/\/$/, '')).description;
-    const seoDescription = headerContent.find((header) => header.page === location.pathname.replace(/\/$/, '')).seoDescription;
     const breadcrumbs = headerContent.find((item) => item.page === location.pathname.replace(/\/$/, '') && location.pathname !== '/').breadcrumbs;
 
     useEffect(() => {
+        console.log(location.pathname)
+        console.log(location.pathname.replace(/\/$/, ''))
+        console.log(breadcrumbs)
         if (/\/$/.test(location.pathname)) {
             navigate(location.pathname.replace(/\/$/, ''),  { replace: true })
         }
@@ -27,10 +28,6 @@ const InnerPageHeader = () => {
 
     return (
         <React.Fragment>
-            {/* <Helmet>
-                <title>testse</title>
-                <meta name="description" content={seoDescription} data-rh="true" />
-            </Helmet> */}
             <div className="inner-page-header-title-wrap">
                 <InnerPageBreadcrumbs breadcrumbs={breadcrumbs} />
                 <div className="inner-page-main-title-wrap">

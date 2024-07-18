@@ -67,7 +67,6 @@ const initialState = {
 export const fetchFooterCallback = createAsyncThunk(
     'api/callbackreq/',
     async (sendData) => {
-        console.log(sendData)
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/callbackreq/`, {
             method:'POST',
             headers: {
@@ -189,7 +188,6 @@ const footerSlice = createSlice({
           })
           .addCase(fetchFooterConsultReq.fulfilled, (state, action) => {
             const { message, description } = action.payload;
-            console.log(description)
             state.loadingStatus = 'ready';
             state.error = null;
             state.footerFormHappyStateDescription = description;

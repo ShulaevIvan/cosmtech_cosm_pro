@@ -17,42 +17,42 @@ const initialState = {
             name: 'Контрактное производство в Санкт-Петербурге',
             path: '/',
             title: 'test',
-            description: 'Контрактное производство',
+            description: 'Компания ООО Косметические Технологии предлагает услуги по контрактному производству косметической продукции в Санкт-Петербурге.',
         },
         {
             id: 2,
             name: 'Услуги косметическое производство',
             path: '/services',
             title: 'test',
-            description: 'Контрактное производство',
+            description: 'Услуги компании ООО Косметические Технологии',
         },
         {
             id: 3,
             name: 'О компании ООО Косметические Технологии',
             path: '/about',
             title: 'test',
-            description: 'Контрактное производство',
+            description: 'О Компании Косметические Технологии, богатый опыт работы',
         },
         {
             id: 4,
             name: 'Контакты ООО Косметические Технологии',
             path: '/contacts',
             title: 'test',
-            description: 'Контрактное производство',
+            description: 'Телефоны, email и мессенджеры для надежной связи с нашими клиентами',
         },
         {
             id: 5,
             name: 'Политика конфиденциальности Косметические Технологии',
             path: '/about/policy',
             title: 'test',
-            description: 'Контрактное производство',
+            description: 'Политика в отношении обработки персональных данных ООО &quot;Косметические Технологии&quot;',
         },
         {
             id: 6,
             name: 'Работа в компании Косметические Технологии',
             path: '/about/job',
             title: 'test',
-            description: 'Контрактное производство',
+            description: 'Вакансии в компании ООО &quot;Косметические Технологии&quot;',
         }
     ],
     currentPathUrl: '',
@@ -65,7 +65,6 @@ const initialState = {
 export const fetchCallbackThunk = createAsyncThunk(
     'api/callbackreq/',
     async (sendData) => {
-        console.log(sendData)
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/callbackreq/`, {
             method:'POST',
             headers: {
@@ -149,7 +148,6 @@ const headerSlice = createSlice({
             state.error = null;
           })
           .addCase(fetchCallbackThunk.fulfilled, (state, action) => {
-            console.log(action.payload)
             state.loadingStatus = 'ready';
             state.error = null;
             state.callbackHeader.callbackHappyState = true;

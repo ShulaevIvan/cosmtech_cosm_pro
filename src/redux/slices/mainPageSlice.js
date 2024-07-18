@@ -791,7 +791,6 @@ const mainPageSlice = createSlice({
           })
           .addCase(sendOrderThunkServiceMainPage.fulfilled, (state, action) => {
             const { message, description } = action.payload;
-            console.log(description)
             state.loadingStatus = 'ready';
             state.error = null;
             state.services.servicePopupForm.servicePopupHappyState = true;

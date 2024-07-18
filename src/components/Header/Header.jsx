@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useRef } from "react";
 import callbackIcon from '../../img/callback.svg';
 import sendmailIcon from '../../img/send_mail.svg';
 import mainLogoIcon from '../../img/logo_cosm_back.jpeg';
@@ -17,6 +18,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
+    const descriptionRef = useRef(window.document.querySelector('meta[name="description"]'));
     const headerState = useSelector((state) => state.header);
     const callbackPopup = useSelector((state) => state.header.callbackHeader.callbackPopupActive);
 
@@ -27,16 +29,21 @@ const Header = () => {
     useEffect(() => {
         const targetTitle = headerState.pageTitles.find((headerTitleObj) => headerTitleObj.path === location.pathname);
         document.title = targetTitle ? targetTitle.name : '';
+        descriptionRef.current.content = targetTitle.description;
     }, [location.pathname]);
 
     useEffect(() => {
         const currentUrl = getUrlFromStorage();
-        if (!currentUrl && location.pathname !== '/') {
+        if (!currentUrl && location.pathname &&  location.pathname !== '/') {
             setUrlToStorage(location.pathname);
+            navigate(currentUrl);
             return;
         }
-        navigate(currentUrl);
     }, []);
+
+    useEffect(() => {
+        window.ym(97856473, 'hit', location.pathname);
+    }, [location.pathname]);
 
     return (
         <React.Fragment>

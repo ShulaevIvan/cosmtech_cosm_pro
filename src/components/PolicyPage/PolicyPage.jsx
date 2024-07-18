@@ -3,7 +3,6 @@ import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 
 const PolicyPage = () => {
     return (
-        
         <React.Fragment>
             <InnerPageHeader />
             <div className="inner-page-main-wrapper">

@@ -9,7 +9,6 @@ import footerLogo from '../../img/logo_cosm.jpeg';
 import telegramLogo from '../../img/telegram_footer.svg';
 import whatsappLogo from '../../img/whatsapp_footer.svg';
 import vkLogo from '../../img/vk_footer.svg';
-
 import GoToTop from "../GoToTopBtn/GoToTopBtn";
 
 const Footer = () => {
@@ -136,7 +135,7 @@ const Footer = () => {
                 </div>
                 <div className="main-footer-copy-wrap">
                     <span className="footer-copy-text">© 2024 ООО Космотех все права защищены</span>
-                    <span className="footer-policy-text"><Link target={'_blank'} to={'/about/policy'}>Политика конфидициальности</Link></span>
+                    <span className="footer-policy-text"><Link onClick={goToTopHandler} to={'/about/policy'}>Политика конфидициальности</Link></span>
                 </div>
                 </div>
             <GoToTop goToTopHandler={goToTopHandler} />

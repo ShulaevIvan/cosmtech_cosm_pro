@@ -12,6 +12,7 @@ const HeroMainPage = () => {
     const orderFormHandler = (e, status) => {
         dispatch(openOrderFrom({status: status}));
     };
+    
     return (
         <React.Fragment>
             <section className="hero-section">

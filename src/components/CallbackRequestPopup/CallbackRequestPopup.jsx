@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import OrderFormHappyMsg from "../OrderFormHappyMsg/OrderFormHappyMsg";
+import sendMetrik from "../../functions/sendMetrik";
 import { 
     callbackPolicy, 
     callbackValidatePhone, 
@@ -37,6 +38,7 @@ const CallbackRequestPopup = (props) => {
     const sendCallbackReq = () => {
         if (callbackState.callbackInputValid && callbackState.checkboxPolicyActive) {
             dispatch(fetchCallbackThunk({phone: callbackState.callbackInputValue}));
+            sendMetrik('reachGoal','headerConsultRequest');
         }
     };
 
