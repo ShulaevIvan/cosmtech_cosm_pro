@@ -77,7 +77,7 @@ const MobileMenu = (props) => {
                             <Link to={'mailto:pro@cosmtech.ru&amp;body=text?subject=Вопрос'}>pro@cosmtech.ru</Link>
                         </div>
                         <div className="mobile-menu-logo-wrap">
-                            <img src={props.logo} alt="cosm_tech_mobile_logo" />
+                            <Link to={'/'}><img src={props.logo} alt="cosm_tech_mobile_logo" /></Link>
                         </div>
                     </div>
                 </div>

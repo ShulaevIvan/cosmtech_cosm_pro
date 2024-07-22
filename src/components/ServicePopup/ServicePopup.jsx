@@ -62,7 +62,7 @@ const ServicePopup = (props) => {
 
     return (
         <React.Fragment>
-            <div className="service-popup-wrap" style={{left: window.screen.width < 800 ? `${0}%` : `${33}%`, top: `${props.cords.top}%`, position: 'fixed'}}>
+            <div className="service-popup-wrap" style={{left: window.screen.width < 800 ? `${0}%` : `${33}%`, top: `${10}%`, position: 'fixed'}}>
                 <div className="service-popup-close-wrap">
                     <span 
                         className="service-popup-close-btn"

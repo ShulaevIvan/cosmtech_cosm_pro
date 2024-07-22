@@ -233,7 +233,8 @@
     margin-right: 10px;
 }
 .contact-list-content a {
-    color: black;
+    color: #00458B;
+    font-weight: bold;
     text-decoration: none;
 }
 .contact-list-content a:hover {
@@ -896,7 +897,7 @@
     border: 1px solid;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     animation-duration: 0.3s;
     animation-name: grow;
     border-radius: 10px;
@@ -1321,6 +1322,7 @@
     .about-company-video-wrap,
     .about-company-textcontent-row {
         margin-bottom: 20px;
+        align-items: baseline;
     }
 }
 @media  (min-width: 300px) and (max-width: 800px) {
@@ -1516,11 +1518,23 @@
         padding: 0 10px;
     }
 }
-@media  (min-width: 200px) and (max-width: 900px) {
+@media  (min-width: 200px) and (max-width: 700px) {
     .inner-page-main-title-wrap{
-        top: 25%;
+        /* top: 25%; */
+        height: 85%;
+        display: flex;
+        left: 0;
+        align-items: center;
+        flex-wrap: wrap;
     }
 }
+@media  (min-width: 701px) and (max-width: 1024px) {
+    .inner-page-main-title-wrap{
+        /* top: 25%; */
+        left: 2%;
+    }
+}
+
 @media  (min-width: 200px) and (max-width: 1100px) {
     .main-service-img-wrap img{
         margin-bottom: 40px;
@@ -1596,3 +1610,14 @@
 .img-service-align-right {
     align-items: flex-end;
 }
+
+@media (min-width: 200px) and (max-width: 991px){
+    .service-popup-wrap {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      max-width: 97%;
+      height: auto;
+      padding: 20px 0;
+    }
+  }

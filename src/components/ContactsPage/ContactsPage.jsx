@@ -69,7 +69,7 @@ const ContactsPage = () => {
                                             <li><span className="req-list-name">Корреспондентский счет:</span> 40702810355000000126</li>
                                         </ul>
                                     </div>
-                                    <Link to={cosmtechReq} download={true} target={"_blank"}>Скачать полные реквизиты</Link>
+                                    <Link to={'/static/media/cosmtech_req.doc'} download={true} target={"_blank"} className="download-req">Скачать полные реквизиты</Link>
                                 </div>
                             </div>
                             <ContactsPageOrderForm />

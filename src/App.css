@@ -169,6 +169,7 @@ section {
 @media (min-width: 200px) and (max-width: 1024px){
   .hero-section {
     margin-bottom: 40px;
+    min-height: 525px;
   }
 }
 .main-color-title {
@@ -1595,7 +1596,8 @@ section {
 .hero-order-form-options-title label {
   cursor: pointer;
 }
-.hero-order-main-fields-title-wrap {
+.hero-order-main-fields-title-wrap,
+.contact-form-order-main-label-wrap label {
   margin-bottom: 5px;
   color: #00458B;
   font-family: gothampro bold;
@@ -1926,7 +1928,7 @@ section {
 }
 @media (max-width: 800px)  {
   .hero-img-main-title-wrap {
-      top: 0;
+      top: 18%;
       left: 0;
       padding: 10px;
   }
@@ -2054,6 +2056,7 @@ section {
   .prefooter-form-wrap form textarea,
   .main-footer-input-wrap input {
       max-width: 100%;
+      width: 95%;
       min-width: 300px;
       left:auto;
       top: auto;
@@ -2132,7 +2135,7 @@ section {
   .contact-form-order-main-item-end {
       flex-direction: column;
       justify-content: center;
-      align-items: center;
+      /* align-items: center; */
       margin: 0;
       margin-bottom: 10px;
       width: 100%;
@@ -2656,7 +2659,13 @@ section {
     height: 42px;
   }
 }
-@media (min-width: 200px) and (max-width: 991px){
+@media (min-width: 200px) and (max-width: 800px){
+  .services-view-all-btn-text {
+    font-size: 22px;
+    margin-bottom: 40px;
+  }
+}
+@media (min-width: 801px) and (max-width: 991px){
   .services-view-all-btn-text {
     font-size: 32px;
     margin-bottom: 40px;
@@ -2699,12 +2708,9 @@ section {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-width: 100%;
-    width: 85%!important;
+    max-width: 95%;
     height: auto;
     padding: 0px;
-    justify-content: center;
-    align-items: center;
   }
 }
 @media (min-width: 680px) and (max-width: 1023px)  {
@@ -2771,3 +2777,10 @@ section {
     width: 55%!important;
   }
 }
+@media (min-width: 200px) and (max-width: 800px)  {
+  .main-order-form-happy-state-wrap {
+    left: 0%;
+    width: 88%;
+  }
+}
+

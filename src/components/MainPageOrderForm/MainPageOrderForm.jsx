@@ -160,7 +160,7 @@ const MainPageOrderForm = (props) => {
                                     onClick={() => policyCheckboxHandler(orderFormState.policyChecked ? false : true)} 
                                     htmlFor="checkbox-custom-hero-form-policy"
                                 ></label>
-                                <span>согласен с <Link target={'_blank'} to={'/about/policy'}>политикой конфидициальности</Link></span>
+                                <span>согласен с <Link to={'/about/policy'}>политикой конфидициальности</Link></span>
                             </div>
                         </div>
                         <div className="hero-order-main-fields-send-btn-wrap">
