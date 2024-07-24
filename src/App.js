@@ -3,6 +3,7 @@ import './inner.css';
 import './components/Header/Header.css';
 import './components/CallbackRequestPopup/CallbackRequestPopup.css'
 import './components/ProductionMainPageHover/ProductionMainPageHover.css';
+import './components/AskedQuestions/AskedQuestions.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import MainPage from './components/MainPage/MainPage';
@@ -18,7 +19,7 @@ function App() {
       <BrowserRouter>
           <Routes>
             <Route path='/' element = {<Layout />}>
-              <Route path="*" replace={true} element={<MainPage />} /> 
+              <Route path="*" replace={false} element={<MainPage />} /> 
               <Route path='/' element = {<MainPage />} />
               <Route path='/services' element = {<ServicesPage />} />
               <Route path='/about/policy' element={<PolicyPage />}/>

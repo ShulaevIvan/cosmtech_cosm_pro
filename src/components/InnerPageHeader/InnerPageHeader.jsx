@@ -17,9 +17,6 @@ const InnerPageHeader = () => {
     const breadcrumbs = headerContent.find((item) => item.page === location.pathname.replace(/\/$/, '') && location.pathname !== '/').breadcrumbs;
 
     useEffect(() => {
-        console.log(location.pathname)
-        console.log(location.pathname.replace(/\/$/, ''))
-        console.log(breadcrumbs)
         if (/\/$/.test(location.pathname)) {
             navigate(location.pathname.replace(/\/$/, ''),  { replace: true })
         }

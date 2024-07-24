@@ -381,6 +381,46 @@ const initialState = {
     videoMainPage: {
         videoMainPageBlob: '',
         loadEnd: false,
+    },
+    faq: {
+        faqItems: [
+            {
+                id: 1,
+                title: 'Title',
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                active: false
+            },
+            {
+                id: 2,
+                title: 'Title',
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                active: false
+            },
+            {
+                id: 3,
+                title: 'Title',
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                active: false
+            },
+            {
+                id: 4,
+                title: 'Title',
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                active: false
+            },
+            {
+                id: 5,
+                title: 'Title',
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                active: false
+            },
+            {
+                id: 6,
+                title: 'Title',
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                active: false
+            }
+        ]
     }
 };
 
@@ -760,6 +800,18 @@ const mainPageSlice = createSlice({
             const { status } = action.payload;
             state.orderForm.happyState = status;
             state.orderForm = initialState.orderForm;
+        },
+        activeFaq(state, action) {
+            const { id, status } = action.payload;
+            state.faq.faqItems = state.faq.faqItems.map((faqItem) => {
+                if (faqItem.id === id) {
+                    return {
+                        ...faqItem,
+                        active: status,
+                    }
+                }
+                return faqItem;
+            });
         }
     },
     extraReducers: (builder) => {
@@ -820,6 +872,7 @@ export const {
     validateServiceFormMainPage,
     serviceFormMainPageClearInput,
     selectServiceOptionMainPage,
-    serviceFormSendBtnActive
+    serviceFormSendBtnActive,
+    activeFaq
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

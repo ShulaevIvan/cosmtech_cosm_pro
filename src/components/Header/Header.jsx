@@ -27,16 +27,22 @@ const Header = () => {
     };
 
     useEffect(() => {
-        const targetTitle = headerState.pageTitles.find((headerTitleObj) => headerTitleObj.path === location.pathname);
+        const targetTitle = headerState.pageTitles.find(
+            (headerTitleObj) => location.pathname !== '/' ? headerTitleObj.path === location.pathname.replace(/\/$/, '') : 
+                headerTitleObj.path === location.pathname
+        );
         document.title = targetTitle ? targetTitle.name : '';
         descriptionRef.current.content = targetTitle.description;
     }, [location.pathname]);
 
     useEffect(() => {
         const currentUrl = getUrlFromStorage();
-        if (!currentUrl && location.pathname &&  location.pathname !== '/') {
-            setUrlToStorage(location.pathname);
-            navigate(currentUrl);
+        if (!currentUrl && location.pathname) {
+            setUrlToStorage(location.pathname.replace(/\/$/, ''));
+            if (location.pathname !== '/') {
+                navigate(currentUrl.replace(/\/$/, ''));
+            }
+            
             return;
         }
     }, []);
