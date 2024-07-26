@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import questImg from '../../img/500x400.png'
+import questImg from '../../img/faq.jpg';
 import { activeFaq } from "../../redux/slices/mainPageSlice";
 
 const AskedQuestions = () => {

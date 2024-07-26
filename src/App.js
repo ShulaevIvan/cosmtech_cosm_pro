@@ -4,6 +4,7 @@ import './components/Header/Header.css';
 import './components/CallbackRequestPopup/CallbackRequestPopup.css'
 import './components/ProductionMainPageHover/ProductionMainPageHover.css';
 import './components/AskedQuestions/AskedQuestions.css';
+import './components/CraftedSeries/CraftedSeries.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import MainPage from './components/MainPage/MainPage';
