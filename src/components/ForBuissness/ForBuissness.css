@@ -12,6 +12,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 100%;
     margin-bottom: 40px;
 }
@@ -25,18 +26,39 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
+    max-width: 1200px;
 }
 .use-for-buissness-item {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     max-width: 22%;
-    min-height: 400px;
-    margin-right: 20px;
     cursor: pointer;
     position: relative;
+}
+.use-for-buissness-item:nth-child(odd) {
+    margin: 0 15px;
+}
+.user-for-buissness-item-name {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    color: #00458B;
+    font-size: 20px;
+    text-align: center;
+    top: 0;
+}
+.use-for-buissness-img {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
 }
 .use-for-buissness-img img {
     width: 400px;
@@ -48,6 +70,55 @@
     width: 100%;
     height: 100%;
     background-color: #3FD2C7;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
     color: #1E1E1E;
-    opacity: 0.7;
+    opacity: 0;
+    animation: opacityAni 0.8s forwards;
+}
+.use-for-buissness-item-hover p {
+    display: flex;
+    position: relative;
+    top: 50%;
+    text-align: center;
+    transform: translateY(-60%);
+    padding: 0 10px;
+}
+
+@media (min-width: 200px) and (max-width: 800px)  {
+    .use-for-buissness-row {
+        width: 100%;
+    }
+}
+@media (min-width: 200px) and (max-width: 800px)  {
+    .use-for-buissness-img img {
+        max-width: 100%;
+    }
+}
+@media (min-width: 200px) and (max-width: 800px)  {
+    .use-for-buissness-item  {
+        max-width: 100%;
+        width: 100%;
+        min-height: 0;
+        margin: 0 0 20px 0;
+        padding: 0 20px;
+    }
+}
+@media (min-width: 200px) and (max-width: 800px)  {
+    .use-for-buissness-item-hover  {
+        max-width: 91%;
+    }
+}
+@media (min-width: 200px) and (max-width: 800px)  {
+    .user-for-buissness-item-name  {
+        width: 90%;
+        font-size: 28px;
+        text-align: center;
+    }
+}
+
+@keyframes opacityAni {
+    0% {opacity: 0;}
+    100% {opacity: 0.7;}
 }

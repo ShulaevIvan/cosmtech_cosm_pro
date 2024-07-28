@@ -17,40 +17,48 @@ const ForBuissness = () => {
     return (
         <React.Fragment>
             <section>
-                <div className="container">
                     <div className="use-for-buissness-wrap">
-                        <div className="use-for-buissness-title-wrap">
-                            <h3>Наши услуги подходят для</h3>
-                        </div>
-                        <div 
-                            className="use-for-buissness-row"
-                            onMouseLeave={() => buissnessItemHandler(false)}
-                        >
-                            {forBuissnessState.buissnessTypes.map((buissnessItem) => {
-                                return (
-                                    <React.Fragment key={buissnessItem.id}>
-                                        <div 
-                                            className="use-for-buissness-item"
-                                            onMouseOver={() => buissnessItemHandler(buissnessItem)}
-                                        >
-                                            {buissnessItem.activeHover ? 
-                                                <React.Fragment>
-                                                    <div className="use-for-buissness-item-hover">
-                                                        hover
-                                                    </div>
-                                                </React.Fragment>
-                                            : null}
+                        <div className="container">
+                            <div className="use-for-buissness-title-wrap">
+                                <h3>Наши услуги подходят для</h3>
+                            </div>
+                            <div 
+                                className="use-for-buissness-row"
+                                onMouseLeave={() => buissnessItemHandler(false)}
+                            >
+                                {forBuissnessState.buissnessTypes.map((buissnessItem) => {
+                                    return (
+                                        <React.Fragment key={buissnessItem.id}>
+                                            <div 
+                                                className="use-for-buissness-item"
+                                                onMouseOver={() => buissnessItemHandler(buissnessItem)}
+                                            >   
+                                                {!buissnessItem.activeHover ? 
+                                                    <React.Fragment>
+                                                        <div className="user-for-buissness-item-name">
+                                                            <h4>{buissnessItem.name}</h4>
+                                                        </div>
+                                                    </React.Fragment>
+                                                : null}
+                                           
+                                                {buissnessItem.activeHover ? 
+                                                    <React.Fragment>
+                                                        <div className="use-for-buissness-item-hover">
+                                                            <p>{buissnessItem.description}</p>
+                                                        </div>
+                                                    </React.Fragment>
+                                                : null}
                                             
-                                            <div className="use-for-buissness-img">
-                                                <img src={buissnessItem.image} alt={buissnessItem.name} />
+                                                <div className="use-for-buissness-img">
+                                                    <img src={buissnessItem.image} alt={buissnessItem.name} />
+                                                </div>
                                             </div>
-                                        </div>
-                                    </React.Fragment>
-                                )
-                            })}
+                                        </React.Fragment>
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
             </section>
         </React.Fragment>
     );

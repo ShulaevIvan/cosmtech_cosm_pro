@@ -97,7 +97,7 @@
 }
 .animated{
     animation-name: rocket;
-    animation-duration: 3s;
+    animation-duration: 1s;
 }
 
 @media (min-width: 200px) and (max-width: 800px)  {
@@ -152,6 +152,6 @@
     }
 }
 @keyframes rocket {
-    0% {transform: translateY(-150%);}
-    100% {transform: translateY(0);}
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }
