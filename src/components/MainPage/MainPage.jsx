@@ -7,6 +7,7 @@ import ProductionMainPage from "../ProductionMainPage/ProductionMainPage";
 import ClientsMainPage from "../ClientsMainPage/ClientsMainPage";
 import AskedQuestions from "../AskedQuestions/AskedQuestions";
 import CraftedSeries from "../CraftedSeries/CraftedSeries";
+import ForBuissness from "../ForBuissness/ForBuissness";
 
 const MainPage = (props) => {
     return (
@@ -16,8 +17,9 @@ const MainPage = (props) => {
             <IndependenceMainPage />
             <ServicesMainPage />
             <ProductionMainPage />
-            <CraftedSeries />
+            <ForBuissness />
             <AskedQuestions />
+            <CraftedSeries />
             <ClientsMainPage />   
         </React.Fragment>
     )

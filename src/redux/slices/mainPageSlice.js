@@ -1,11 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import imgVolos from '../../img/product_volos.jpg';
+import imgSlide1 from '../../img/slide_1.png';
+import imgSlide2 from '../../img/slide_2.png';
+import imgSlide3 from '../../img/slide_3.png';
+import imgSlide4 from '../../img/slide_4.png';
+import imgSlide5 from '../../img/slide_5.png';
 import independenceIconOne from '../../img/independence_1.svg';
 import independenceIconTwo from '../../img/independence_2.svg';
 import independenceIconThree from '../../img/independence_3.svg';
 import independenceIconFour from '../../img/independence_4.svg';
 import independenceIconFive from '../../img/independence_5.svg';
 import independenceIconSix from '../../img/independence_6.svg';
+import buissnessImg from '../../img/400x600.png';
 
 import validatePhone from '../../functions/validatePhone';
 import validateMail from '../../functions/validateMail';
@@ -386,39 +392,118 @@ const initialState = {
         faqItems: [
             {
                 id: 1,
-                title: 'Title',
+                title: 'Какая минимальная партия заказа ?',
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
                 active: false
             },
             {
                 id: 2,
-                title: 'Title',
+                title: 'Как происходит отправка товара?',
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
                 active: false
             },
             {
                 id: 3,
-                title: 'Title',
+                title: 'Сколько стоит разработка 1 продукта?',
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
                 active: false
             },
             {
                 id: 4,
-                title: 'Title',
+                title: 'У вас есть универсальный прайс-лист?',
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
                 active: false
             },
             {
                 id: 5,
-                title: 'Title',
+                title: 'Как проходит заключение договора?',
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
                 active: false
             },
             {
                 id: 6,
-                title: 'Title',
+                title: 'Каковы сроки изготовления продукта?',
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
                 active: false
+            },
+            {
+                id: 7,
+                title: 'Кто разрабатывает рецептуру?',
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                active: false
+            }
+           
+        ]
+    },
+    ourProjects: {
+        nextSlideId: 1,
+        currentSlideIndex: 0,
+        slides: [
+            {
+                id: 1,
+                slideImage: imgSlide1,
+                projectName: 'pro1',
+                slideActive: false,
+            },
+            {
+                id: 2,
+                slideImage: imgSlide2,
+                projectName: 'pro2',
+                slideActive: false,
+            },
+            {
+                id: 3,
+                slideImage: imgSlide3,
+                projectName: 'pro3',
+                slideActive: true,
+            },
+            {
+                id: 4,
+                slideImage: imgSlide4,
+                projectName: 'pro4',
+                slideActive: false,
+            },
+            {
+                id: 5,
+                slideImage: imgSlide5,
+                projectName: 'pro5',
+                slideActive: false,
+            },
+        ],
+    },
+    useForBuissness: {
+        buissnessTypes: [
+            {
+                id: 1,
+                name: 'Для отелей',
+                image: buissnessImg,
+                activeHover: false,
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+
+            },
+            {
+                id: 2,
+                name: 'Салонов красоты и СПА',
+                image: buissnessImg,
+                activeHover: false,
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                
+            },
+            {
+                id: 3,
+                name: 'Реализация через маркетплейсы',
+                image: buissnessImg,
+                activeHover: false,
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                
+            },
+            {
+                id: 4,
+                name: 'Оптовый бизнес',
+                image: buissnessImg,
+                activeHover: false,
+                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                
             }
         ]
     }
@@ -812,6 +897,73 @@ const mainPageSlice = createSlice({
                 }
                 return faqItem;
             });
+        },
+        projectSlideMove(state, action) {
+            const { position } = action.payload;
+            if (position === -1) {
+                const currentSlide = state.ourProjects.slides.find((item) => item.slideActive);
+                const currentSlideIndex = state.ourProjects.slides.indexOf(currentSlide);
+                const nextSlideIndex = currentSlideIndex - 1;
+                state.ourProjects.nextSlideId = state.ourProjects.slides[nextSlideIndex].id;
+                state.ourProjects.slides = state.ourProjects.slides.map((slideItem, i) => {
+                    if (slideItem.slideActive) {
+                        return {
+                            ...slideItem,
+                            slideActive: false,
+                        }
+                    }
+                    else if (i === nextSlideIndex) {
+                        return {
+                            ...slideItem,
+                            slideActive: true
+                        }
+                    }
+                    return slideItem;
+                });
+                const slide = state.ourProjects.slides[currentSlideIndex];
+                state.ourProjects.slides.splice(currentSlideIndex, 1);
+                state.ourProjects.slides.splice(nextSlideIndex, 0, slide);
+                return;
+            }
+
+            const findIndex = state.ourProjects.slides.findIndex((item) => item.slideActive);
+            const nextIndex = findIndex + 1;
+            state.ourProjects.slides = state.ourProjects.slides.map((slideItem, i) => {
+                if (slideItem.slideActive) {
+                    return {
+                        ...slideItem,
+                        slideActive: false,
+                    }
+                }
+                else if (i === nextIndex) {
+                    return {
+                        ...slideItem,
+                        slideActive: true
+                    }
+                }
+                return slideItem;
+            });
+
+            const nextSlide = state.ourProjects.slides.splice(0, 1)[0];
+            
+            state.ourProjects.slides = [...state.ourProjects.slides, nextSlide]
+            return;
+        },
+        buissnesHoverShow(state, action) {
+            const { buissnessItemId, status, hide } = action.payload;
+
+            state.useForBuissness.buissnessTypes = state.useForBuissness.buissnessTypes.map((buissnessItem) => {
+                if (buissnessItemId === buissnessItem.id && !hide) {
+                    return {
+                        ...buissnessItem,
+                       activeHover: status,
+                    };
+                }
+                return {
+                    ...buissnessItem,
+                    activeHover: false,
+                };
+            });
         }
     },
     extraReducers: (builder) => {
@@ -873,6 +1025,8 @@ export const {
     serviceFormMainPageClearInput,
     selectServiceOptionMainPage,
     serviceFormSendBtnActive,
-    activeFaq
+    activeFaq,
+    projectSlideMove,
+    buissnesHoverShow
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;
