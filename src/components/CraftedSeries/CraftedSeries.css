@@ -27,21 +27,24 @@
     flex-direction: column;
     flex-wrap: wrap;
     position: relative;
-    width: 45%;
-    margin: 0 5% 0 5%;
+    max-width: 800px;
+    margin: 0 2% 0 2%;
     -moz-transition: margin 1s;
     -o-transition: margin 1s;
     -webkit-transition: margin 1s;
     transition: margin 1s;
 }
 .crafted-series-slide-item img {
-    max-width: 400px;
-    max-height: 400px;
+    width: 600px;
+    height: 400px;
+    max-width: 600px;
+    max-height: 600px;
+    filter: brightness(0.8);
 }
 .crafted-series-slide-control {
     position: absolute;
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     justify-content: center;
     align-items: center;
     bottom: 60%;
@@ -51,7 +54,7 @@
     cursor: pointer;
     width: 40px;
     height: 40px;
-    left: -20px;
+    left: 10%;
     top: 50%;
     z-index: 5;
     background-image: url('../../img/slide_arrow_left.svg');
@@ -61,7 +64,7 @@
     cursor: pointer;
     width: 40px;
     height: 40px;
-    right: -20px;
+    right: 10%;
     top: 50%;
     z-index: 5;
     background-image: url('../../img/slide_arrow_right.svg');
@@ -82,7 +85,6 @@
     background-color: #3FD2C7;
     color: white;
     text-align: center;
-    max-width: 400px;
 }
 .crafted-series-slide-title h5 {
     padding: 10px;

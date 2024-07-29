@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import imgVolos from '../../img/product_volos.jpg';
 import imgSlide1 from '../../img/slide_1.png';
-import imgSlide2 from '../../img/slide_2.png';
-import imgSlide3 from '../../img/slide_3.png';
-import imgSlide4 from '../../img/slide_4.png';
-import imgSlide5 from '../../img/slide_5.png';
+import imgSlide6 from '../../img/slide_6.jpg';
+import imgSlide7 from '../../img/slide_7.jpg';
+import imgSlide8 from '../../img/slide_8.jpg';
+import imgSlide9 from '../../img/slide_9.jpg';
+import imgSlide10 from '../../img/slide_10.jpg';
 import independenceIconOne from '../../img/independence_1.svg';
 import independenceIconTwo from '../../img/independence_2.svg';
 import independenceIconThree from '../../img/independence_3.svg';
@@ -12,7 +13,10 @@ import independenceIconFour from '../../img/independence_4.svg';
 import independenceIconFive from '../../img/independence_5.svg';
 import independenceIconSix from '../../img/independence_6.svg';
 import buissnessImg from '../../img/400x600.png';
-
+import buissnessHotel from '../../img/buissness_hotels.jpg';
+import buissnessOpt from '../../img/buissness_opt.jpg';
+import buissnessMarketplace from '../../img/buissness_marketpalce.jpg';
+import buissnessSpa from '../../img/buissness_spa.jpg';
 import validatePhone from '../../functions/validatePhone';
 import validateMail from '../../functions/validateMail';
 
@@ -393,43 +397,43 @@ const initialState = {
             {
                 id: 1,
                 title: 'Какая минимальная партия заказа ?',
-                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                description: 'Минимальная варка по любой позиции от 50 кг. ',
                 active: false
             },
             {
                 id: 2,
                 title: 'Как происходит отправка товара?',
-                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                description: 'Доставка заказов производится самовывозом с производства или транспортными компаниями на ваш выбор по тарифам перевозчика за счет покупателя. Точная стоимость доставки рассчитывается перевозчиком при заборе груза на основании его веса, объёма и дальности перевозки. Все подробности, включая способ доставки (до двери, до терминала или до пунктов выдачи), уточняйте у менеджеров.',
                 active: false
             },
             {
                 id: 3,
                 title: 'Сколько стоит разработка 1 продукта?',
-                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                description: 'Есть цена за единицу продукции, при условии, что заказчик выкупает рецептуру и владеет интеллектуальной собственностью в виде рецептуры от 15 000 руб.',
                 active: false
             },
             {
                 id: 4,
                 title: 'У вас есть универсальный прайс-лист?',
-                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                description: 'В контрактном производстве не существует универсальных прайс-листов, так как стоимость конечного продукта - динамическая величина, и она постоянно меняется в зависимости от упаковки, состава, этикетки, объема партии и прочих вводных данных.',
                 active: false
             },
             {
                 id: 5,
                 title: 'Как проходит заключение договора?',
-                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                description: 'Производитель делает расчет индивидуального заказа и заключается договор контрактного производства. Заказчик производит 100% предоплату и заказ уходит в производство.',
                 active: false
             },
             {
                 id: 6,
                 title: 'Каковы сроки изготовления продукта?',
-                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                description: 'В порядке живой очереди. Зависит от объемов заказа, сложности рецептуры, а также от сезона. В любом случае, оговаривается с каждым клиентом индивидуально. До 1 месяца может варьироваться срок изготовления.',
                 active: false
             },
             {
                 id: 7,
                 title: 'Кто разрабатывает рецептуру?',
-                description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
+                description: 'Если необходимо разработать уникальную рецептуру, которая будет ориентирована на требуемый ценовой сегмент, планируется использование активных компонентов или же расширение существующей линии продуктов, то наши технологи решат даже самую сложную задачу.',
                 active: false
             }
            
@@ -441,31 +445,31 @@ const initialState = {
         slides: [
             {
                 id: 1,
-                slideImage: imgSlide1,
+                slideImage: imgSlide10,
                 projectName: 'pro1',
                 slideActive: false,
             },
             {
                 id: 2,
-                slideImage: imgSlide2,
+                slideImage: imgSlide6,
                 projectName: 'pro2',
                 slideActive: false,
             },
             {
                 id: 3,
-                slideImage: imgSlide3,
+                slideImage: imgSlide8,
                 projectName: 'pro3',
                 slideActive: true,
             },
             {
                 id: 4,
-                slideImage: imgSlide4,
+                slideImage: imgSlide7,
                 projectName: 'pro4',
                 slideActive: false,
             },
             {
                 id: 5,
-                slideImage: imgSlide5,
+                slideImage: imgSlide9,
                 projectName: 'pro5',
                 slideActive: false,
             },
@@ -475,24 +479,24 @@ const initialState = {
         buissnessTypes: [
             {
                 id: 1,
-                name: 'Для отелей',
-                image: buissnessImg,
+                name: 'Отели',
+                image: buissnessHotel,
                 activeHover: false,
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
 
             },
             {
                 id: 2,
-                name: 'Салонов красоты и СПА',
-                image: buissnessImg,
+                name: 'Салоны красоты и СПА',
+                image: buissnessSpa,
                 activeHover: false,
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
                 
             },
             {
                 id: 3,
-                name: 'Реализация через маркетплейсы',
-                image: buissnessImg,
+                name: 'Маркетплейсы',
+                image: buissnessMarketplace,
                 activeHover: false,
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
                 
@@ -500,7 +504,7 @@ const initialState = {
             {
                 id: 4,
                 name: 'Оптовый бизнес',
-                image: buissnessImg,
+                image: buissnessOpt,
                 activeHover: false,
                 description: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. ',
                 
