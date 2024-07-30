@@ -50,7 +50,7 @@ const ForBuissness = () => {
                                                 : null}
                                             
                                                 <div className="use-for-buissness-img">
-                                                    <img src={buissnessItem.image} alt={buissnessItem.name} />
+                                                    <img src={buissnessItem.image} alt={buissnessItem.imageAlt} />
                                                 </div>
                                             </div>
                                         </React.Fragment>

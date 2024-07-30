@@ -21,7 +21,7 @@ const AskedQuestions = () => {
                         </div>
                         <div className="questions-row">
                             <div className="questions-image-column">
-                                <img src={questImg} alt="askedQuestions" />
+                                <img src={questImg} alt="Часто задаваемые вопросы компания космотех" />
                             </div>
                             <div className="questions-column">
                                 <div className="questions-items-wrap">

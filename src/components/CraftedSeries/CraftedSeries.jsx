@@ -24,7 +24,7 @@ const CraftedSeries = () => {
             <section className="crafted-series-section">
                 <div className="container">
                     <div className="crafted-series-title-wrap">
-                        <h3 className="main-color-title">Собственные разработки косметики</h3>
+                        <h3 className="main-color-title">Примеры разработанных продуктов</h3>
                     </div>
                     <div className="crafted-series-row">
                         {projectsState.slides.map((slide) => {
