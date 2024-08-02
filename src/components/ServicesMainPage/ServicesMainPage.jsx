@@ -69,9 +69,9 @@ const ServicesMainPage = () => {
                                             
                                         >
                                             <div className="service-background-wrap">
-                                                <div className="service-background-title">
+                                                {/* <div className="service-background-title">
                                                     <h4 className="off-color-title">{serviceItem.name}</h4>
-                                                </div>
+                                                </div> */}
                                                 <img src={serviceItem.serviceImg} alt="holder1"/>
                                                 {serviceItem.serviceOrderActive ? 
                                                     <div className="service-background-order-btn-wrap">
@@ -80,6 +80,9 @@ const ServicesMainPage = () => {
                                                             className="service-background-order-btn">Рассчитать стоимость</span>
                                                     </div>
                                                 : null}
+                                                <div className="service-name-wrap">
+                                                    <h3 className="off-color-title">{serviceItem.name}</h3>
+                                                </div>
                                             </div>
                                         </div>
                                     </React.Fragment>

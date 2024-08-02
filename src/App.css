@@ -785,13 +785,10 @@ section {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  min-width: 250px;
-  min-height: 250px;
-  max-width: 250px;
-  max-height: 250px;
-  border: 1px solid;
-  margin-right: 20px;
+  width: 300px;
+  max-width: 25%;
   margin-bottom: 20px;
+  margin-right: 20px;
   cursor: pointer;
 }
 .service-main-item-animate {
@@ -804,9 +801,11 @@ section {
   flex-wrap: wrap;
   position: relative;
   cursor: pointer;
+  width: 100%;
 }
 .service-background-wrap img {
-  max-width: 250px;
+  width: 100%;
+  max-width: 500px;
 }
 .service-background-title {
   position: absolute;
@@ -824,8 +823,8 @@ section {
 .service-background-order-btn-wrap {
   position: absolute;
   z-index: 2;
-  bottom: 5%;
-  left: 10%;
+  bottom: 50%;
+  left: 16%;
   font-size: 22px;
   opacity: 0;
   /* transition: all ease-in-out 1s; */
@@ -887,6 +886,24 @@ section {
   width: 100%;
   justify-content: center;
   align-items: center;
+  text-align: center;
+}
+.service-name-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: #3FD2C7;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  max-height: 40px;
+}
+.service-name-wrap h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  color: white;
   text-align: center;
 }
 .our-facts-mainpage-wrap {

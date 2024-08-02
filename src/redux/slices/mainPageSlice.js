@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import imgVolos from '../../img/product_volos.jpg';
-import imgSlide1 from '../../img/slide_1.png';
 import imgSlide6 from '../../img/slide_6.jpg';
 import imgSlide7 from '../../img/slide_7.jpg';
 import imgSlide8 from '../../img/slide_8.jpg';
@@ -12,14 +11,14 @@ import independenceIconThree from '../../img/independence_3.svg';
 import independenceIconFour from '../../img/independence_4.svg';
 import independenceIconFive from '../../img/independence_5.svg';
 import independenceIconSix from '../../img/independence_6.svg';
-import buissnessImg from '../../img/400x600.png';
 import buissnessHotel from '../../img/buissness_hotels.jpg';
 import buissnessOpt from '../../img/buissness_opt.jpg';
 import buissnessMarketplace from '../../img/buissness_marketpalce.jpg';
 import buissnessSpa from '../../img/buissness_spa.jpg';
 import validatePhone from '../../functions/validatePhone';
 import validateMail from '../../functions/validateMail';
-
+import test from '../../img/500x500.png';
+import contractImgClear from '../../img/contract_celar_face_cosm.jpg';
 
 const initialState = { 
     calculatorForm: {
@@ -200,80 +199,92 @@ const initialState = {
             {
                 id: 1,
                 name: 'Очищающие средства для лица ',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство очищающих средств для лица в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
             },
             {
                 id: 2,
                 name: 'Уходовая косметика для лица',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство уходовой косметики для лица в спб',
+                serviceImg: contractImgClear,
                 serviceOrderActive: false,
             },
             {
                 id: 3,
                 name: 'Средства для ухода за волосами',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство шампуней в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
             },
             {
                 id: 4,
                 name: 'Уходовая косметика для тела',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство косметики для тела в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
             },
             {
                 id: 5,
                 name: 'Средства для ухода за кожей рук',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство крема для рук в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 6,
                 name: 'Средства для ухода за кожей ног',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство крема для ног в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 7,
                 name: 'Солнцезащитные средства',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство солнцезащитной косметики в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 8,
                 name: 'Очищающая косметика для тела',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство очищающая косметики для тела в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 9,
                 name: 'Детская косметика',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство детская косметики в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 10,
                 name: 'Аппаратная косметика',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство аппаратной косметики в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 11,
                 name: 'Профессиональная косметика',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство профессиональной косметики в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 12,
                 name: 'Пилинги',
-                serviceImg: imgVolos,
+                altName: 'Контрактное производство пиллингов в спб',
+                serviceImg: test,
                 serviceOrderActive: false,
                 amimate: true
             }
