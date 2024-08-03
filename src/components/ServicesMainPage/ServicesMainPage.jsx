@@ -69,10 +69,7 @@ const ServicesMainPage = () => {
                                             
                                         >
                                             <div className="service-background-wrap">
-                                                {/* <div className="service-background-title">
-                                                    <h4 className="off-color-title">{serviceItem.name}</h4>
-                                                </div> */}
-                                                <img src={serviceItem.serviceImg} alt="holder1"/>
+                                                <img src={serviceItem.serviceImg} alt={serviceItem.altName}/>
                                                 {serviceItem.serviceOrderActive ? 
                                                     <div className="service-background-order-btn-wrap">
                                                         <span

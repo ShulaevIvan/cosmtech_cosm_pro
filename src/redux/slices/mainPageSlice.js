@@ -19,6 +19,15 @@ import validatePhone from '../../functions/validatePhone';
 import validateMail from '../../functions/validateMail';
 import test from '../../img/500x500.png';
 import contractImgClear from '../../img/contract_celar_face_cosm.jpg';
+import contractImgClear2 from '../../img/contract_celar_face_cosm2.jpg';
+import contractShampoo from '../../img/contract_shampoo_cosm.jpg';
+import contractHandsImg from '../../img/contract_hands_clear_cosm.jpg';
+import contractBodyImg from '../../img/contract_celar_body_cosm.jpg';
+import contractBodyImg2 from '../../img/contract_celar_body_cosm2.jpg';
+import contractSpfImg from '../../img/contract_spf_cosm.jpg';
+import contractPilling from '../../img/contract_celar_pillings_cosm.jpg';
+import contractFootCream from '../../img/contract_footcream_cosm.jpg';
+import contractProfessional from '../../img/contract_professional_cosm.jpg';
 
 const initialState = { 
     calculatorForm: {
@@ -200,35 +209,35 @@ const initialState = {
                 id: 1,
                 name: 'Очищающие средства для лица ',
                 altName: 'Контрактное производство очищающих средств для лица в спб',
-                serviceImg: test,
+                serviceImg: contractImgClear,
                 serviceOrderActive: false,
             },
             {
                 id: 2,
-                name: 'Уходовая косметика для лица',
-                altName: 'Контрактное производство уходовой косметики для лица в спб',
-                serviceImg: contractImgClear,
+                name: 'Профессиональная косметика',
+                altName: 'Контрактное производство профессиональной косметики в спб',
+                serviceImg: contractProfessional,
                 serviceOrderActive: false,
             },
             {
                 id: 3,
                 name: 'Средства для ухода за волосами',
                 altName: 'Контрактное производство шампуней в спб',
-                serviceImg: test,
+                serviceImg: contractShampoo,
                 serviceOrderActive: false,
             },
             {
                 id: 4,
                 name: 'Уходовая косметика для тела',
                 altName: 'Контрактное производство косметики для тела в спб',
-                serviceImg: test,
+                serviceImg: contractBodyImg,
                 serviceOrderActive: false,
             },
             {
                 id: 5,
                 name: 'Средства для ухода за кожей рук',
                 altName: 'Контрактное производство крема для рук в спб',
-                serviceImg: test,
+                serviceImg: contractHandsImg,
                 serviceOrderActive: false,
                 amimate: true
             },
@@ -236,7 +245,7 @@ const initialState = {
                 id: 6,
                 name: 'Средства для ухода за кожей ног',
                 altName: 'Контрактное производство крема для ног в спб',
-                serviceImg: test,
+                serviceImg: contractFootCream,
                 serviceOrderActive: false,
                 amimate: true
             },
@@ -244,15 +253,15 @@ const initialState = {
                 id: 7,
                 name: 'Солнцезащитные средства',
                 altName: 'Контрактное производство солнцезащитной косметики в спб',
-                serviceImg: test,
+                serviceImg: contractSpfImg,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
                 id: 8,
                 name: 'Очищающая косметика для тела',
-                altName: 'Контрактное производство очищающая косметики для тела в спб',
-                serviceImg: test,
+                altName: 'Контрактное производство очищающей косметики для тела в спб',
+                serviceImg: contractBodyImg2,
                 serviceOrderActive: false,
                 amimate: true
             },
@@ -273,10 +282,10 @@ const initialState = {
                 amimate: true
             },
             {
-                id: 11,
-                name: 'Профессиональная косметика',
-                altName: 'Контрактное производство профессиональной косметики в спб',
-                serviceImg: test,
+                id: 2,
+                name: 'Уходовая косметика для лица',
+                altName: 'Контрактное производство уходовой косметики для лица в спб',
+                serviceImg: contractImgClear2,
                 serviceOrderActive: false,
                 amimate: true
             },
@@ -284,7 +293,7 @@ const initialState = {
                 id: 12,
                 name: 'Пилинги',
                 altName: 'Контрактное производство пиллингов в спб',
-                serviceImg: test,
+                serviceImg: contractPilling,
                 serviceOrderActive: false,
                 amimate: true
             }
