@@ -2725,6 +2725,7 @@ section {
   .independence-main-item,
   .services-main-item {
     margin:20px!important;
+    max-width: 300px;
   }
 }
 @media (min-width: 200px) and (max-width: 1024px){
@@ -2811,6 +2812,16 @@ section {
   .main-order-form-happy-state-wrap {
     left: 0%;
     width: 88%;
+  }
+}
+@media (min-width: 200px) and (max-width: 800px)  {
+  .service-name-wrap h3 {
+    font-size: 16px;
+  }
+}
+@media (min-width: 900px) and (max-width: 1025px)  {
+  .user-for-buissness-item-name h4 {
+    font-size: 16px;
   }
 }
 

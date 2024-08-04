@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { 
     serviceShowBtn, 
     showAllServices, 
@@ -17,6 +17,7 @@ const ServicesMainPage = () => {
     const dispatch = useDispatch();
     const servicesState = useSelector((state) => state.mainPage.services);
     const mouseCords = useSelector((state) => state.mainPage.mouseCords);
+    const bodyRef = useRef(null);
 
     const serviceBtnHandler = (service, status) => {
         dispatch(serviceShowBtn({status: status, targetId: service.id}));
@@ -61,12 +62,11 @@ const ServicesMainPage = () => {
                             : null}
                             {Array.from(servicesState.servicesItems).map((serviceItem) => {
                                 return (
-                                    <React.Fragment key={Math.random()}>
+                                    <React.Fragment key={serviceItem.id}>
                                         <div 
                                             className={serviceItem.amimate ? "services-main-item service-main-item-animate" : "services-main-item"}
                                             onMouseOver={() => serviceBtnHandler(serviceItem, 'show')}
                                             onMouseLeave={() => serviceBtnHandler(serviceItem, 'reset')}
-                                            
                                         >
                                             <div className="service-background-wrap">
                                                 <img src={serviceItem.serviceImg} alt={serviceItem.altName}/>

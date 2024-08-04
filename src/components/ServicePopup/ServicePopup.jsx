@@ -41,7 +41,6 @@ const ServicePopup = (props) => {
             itemObj[item.name] = item.ref.current.value;
             return itemObj;
         }, {});
-        console.log(data)
         dispatch(sendServiceOrderThunk(data));
     };
 
@@ -58,7 +57,6 @@ const ServicePopup = (props) => {
     useEffect(() => {
         dispatch(serviceOrderSendBtnActive());
     }, [formRefs]);
-    
 
     return (
         <React.Fragment>

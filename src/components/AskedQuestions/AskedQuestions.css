@@ -36,6 +36,7 @@
     align-items: center;
     justify-content: center;
     margin-right: 10px;
+    border-radius: 5px;
 }
 .questions-column {
     display: flex;

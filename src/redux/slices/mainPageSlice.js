@@ -28,6 +28,8 @@ import contractSpfImg from '../../img/contract_spf_cosm.jpg';
 import contractPilling from '../../img/contract_celar_pillings_cosm.jpg';
 import contractFootCream from '../../img/contract_footcream_cosm.jpg';
 import contractProfessional from '../../img/contract_professional_cosm.jpg';
+import contractApparat from '../../img/contract_apparat_cosm.jpg';
+import contractChildrenCosm from '../../img/contract_children_cosm.jpg';
 
 const initialState = { 
     calculatorForm: {
@@ -269,7 +271,7 @@ const initialState = {
                 id: 9,
                 name: 'Детская косметика',
                 altName: 'Контрактное производство детская косметики в спб',
-                serviceImg: test,
+                serviceImg: contractChildrenCosm,
                 serviceOrderActive: false,
                 amimate: true
             },
@@ -277,12 +279,12 @@ const initialState = {
                 id: 10,
                 name: 'Аппаратная косметика',
                 altName: 'Контрактное производство аппаратной косметики в спб',
-                serviceImg: test,
+                serviceImg: contractApparat,
                 serviceOrderActive: false,
                 amimate: true
             },
             {
-                id: 2,
+                id: 11,
                 name: 'Уходовая косметика для лица',
                 altName: 'Контрактное производство уходовой косметики для лица в спб',
                 serviceImg: contractImgClear2,
