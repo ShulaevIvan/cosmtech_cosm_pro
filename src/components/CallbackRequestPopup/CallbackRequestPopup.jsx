@@ -14,10 +14,12 @@ import {
 
 
 const CallbackRequestPopup = (props) => {
+    const dispatch = useDispatch();
     const callbackState = props.callbackState;
     const phoneRef = useRef(null);
     const policyRef = useRef(null);
-    const dispatch = useDispatch();
+    const popupWrapperRef = useRef(null);
+    const closePopupBtnRef = useRef(null);
     
     const callbackCheckboxHandler = (status) => {
         dispatch(callbackPolicy({status: status}));
@@ -42,6 +44,13 @@ const CallbackRequestPopup = (props) => {
         }
     };
 
+    const closePopupOutsideHandler = (e) => {
+        if (popupWrapperRef.current && !popupWrapperRef.current.contains(e.target)) {
+            closePopupBtnRef.current.click();
+            return;
+        }
+    };
+
     useEffect(() => {
         if (!phoneRef.current.value) return;
         dispatch(callbackSendBtn());
@@ -52,11 +61,19 @@ const CallbackRequestPopup = (props) => {
         callbackState.callbackInputValue
     ]);
 
+    useEffect(() => {
+        document.addEventListener('mousedown', closePopupOutsideHandler);
+        return () => {
+            document.removeEventListener('mousedown', closePopupOutsideHandler);
+        };
+    }, [popupWrapperRef]);
+
     return (
         <React.Fragment>
-            <div className="callback-request-popup">
+            <div className="callback-request-popup" ref={popupWrapperRef}>
                 <div className="callback-request-popup-close">
                     <span 
+                        ref={closePopupBtnRef}
                         className="close-popup-btn"
                         onClick={() => props.callbackPopupHander(false)}
                     ></span>

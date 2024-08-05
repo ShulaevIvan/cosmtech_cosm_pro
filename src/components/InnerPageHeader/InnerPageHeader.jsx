@@ -15,7 +15,6 @@ const InnerPageHeader = () => {
     const pageTitle = headerContent.find((header) => header.page === location.pathname.replace(/\/$/, '')).title;
     const pageDescription = headerContent.find((header) => header.page === location.pathname.replace(/\/$/, '')).description;
     const breadcrumbs = headerContent.find((item) => item.page === location.pathname.replace(/\/$/, '') && location.pathname !== '/').breadcrumbs;
-
     useEffect(() => {
         if (/\/$/.test(location.pathname)) {
             navigate(location.pathname.replace(/\/$/, ''),  { replace: true })
@@ -35,7 +34,7 @@ const InnerPageHeader = () => {
                     </div>
                 </div>
                 <div className="inner-page-background-wrap">
-                    <img src={activeBackground} alt="background" />
+                    <img src={activeBackground} alt={`${pageTitle} Космотех`} />
                 </div>
             </div>
         </React.Fragment>

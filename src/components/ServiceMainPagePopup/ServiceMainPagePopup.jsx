@@ -14,6 +14,8 @@ import ServiceMainPagePopupHappy from "./ServiceMainPagePopupHappy";
 const ServicesMainPagePopup = (props) => {
     const dispatch = useDispatch();
     const serviceState = props.serviceState;
+    const wrapperRef = useRef(null);
+    const closeBtnRef = useRef(null);
     const formRefs = [
         { name: 'name', ref: useRef(null)},
         { name: 'phone', ref: useRef(null)},
@@ -44,6 +46,19 @@ const ServicesMainPagePopup = (props) => {
         dispatch(sendOrderThunkServiceMainPage(data));
     };
 
+    const clickOutsidePopupHandler = (e) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+            closeBtnRef.current.click();
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', clickOutsidePopupHandler);
+        return () => {
+            document.removeEventListener('mousedown', clickOutsidePopupHandler);
+        };
+    }, [wrapperRef]);
+
     useEffect(() => {
         dispatch(serviceFormSendBtnActive());
     }, [serviceState.servicePopupForm.formFields])
@@ -61,10 +76,16 @@ const ServicesMainPagePopup = (props) => {
 
     return (
         <React.Fragment>
-        <div className="service-popup-wrap" style={{'left': window.screen.width < 800 ? 5 : props.cords.left, 'top': props.cords.top}}>
+        <div 
+            className="service-popup-wrap"
+            onClick={clickOutsidePopupHandler}
+            ref={wrapperRef}
+            style={{'left': window.screen.width < 800 ? 5 : props.cords.left, 'top': props.cords.top}}
+        >
             <div className="service-popup-close-wrap">
                 <span 
                     className="service-popup-close-btn"
+                    ref={closeBtnRef}
                     onClick={(e) => props.popupHandler(e, false)}
                 ></span>
             </div>

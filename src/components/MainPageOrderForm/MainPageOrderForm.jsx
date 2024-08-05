@@ -18,6 +18,8 @@ const MainPageOrderForm = (props) => {
     const orderFormState = useSelector((state) => state.mainPage.orderForm);
     const baseFields = useSelector((state) => state.mainPage.orderForm.baseFields);
     const policyCheckboxRef = useRef(null);
+    const popupWrapRef = useRef(null);
+    const closePopupBtnRef = useRef(null);
     const formRefs = [
         {name: 'name', ref: useRef(null)},
         {name: 'phone', ref: useRef(null)},
@@ -72,17 +74,31 @@ const MainPageOrderForm = (props) => {
         });
     };
 
+    const clickOutsideHandler = (e) => {
+        if (popupWrapRef.current && !popupWrapRef.current.contains(e.target)) {
+            closePopupBtnRef.current.click();
+        }
+    };
+
     useEffect(() => {
         if (baseFields.filter((item) => !item.err).length === 4 && orderFormState.policyChecked) {
             dispatch(checkOrderFrom({formRefs: formRefs}));
         }
     }, [baseFields, orderFormState.policyChecked]);
+
+    useEffect(() => {
+        document.addEventListener('mousedown', clickOutsideHandler);
+        return () => {
+            document.removeEventListener('mousedown', clickOutsideHandler);
+        };
+    }, [popupWrapRef]);
     
     return (
         <React.Fragment>
-            <div className='hero-order-form-popup-wrap'>
+            <div className='hero-order-form-popup-wrap' ref={popupWrapRef}>
                 <div className="hero-order-form-popup-close-wrap">
-                    <span 
+                    <span
+                        ref={closePopupBtnRef}
                         className="close-popup-btn"
                         onClick={() => props.orderFormHandler(false)}
                     ></span>

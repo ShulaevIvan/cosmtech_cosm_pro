@@ -894,7 +894,7 @@
     color: #1E1E1E;
     position: absolute;
     z-index: 10;
-    border: 1px solid;
+    border: 1px solid #00458B;
     justify-content: center;
     align-items: center;
     padding: 10px;
@@ -969,6 +969,8 @@
 .service-popup-form-wrap form select {
     min-height: 37px;
     max-width: 259px;
+    border-color: #00458B;
+    outline-color: #00458B;
 }
 .service-popup-form-wrap form textarea {
     min-height: 100px;

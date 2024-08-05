@@ -85,7 +85,7 @@ const ContactsPage = () => {
                         <div className="contact-page-map-description-wrap">
                             <div className="contact-page-map-description-row">
                                 <div className="contact-page-map-description-photo">
-                                    <img src={findUsPhoto} alt="как нас найти" />
+                                    <img src={findUsPhoto} alt="ООО Косметические технологии в Санкт-Петербурге как нас найти" />
                                 </div>
                                 <div className="contact-page-map-description-content">
                                      <p> 

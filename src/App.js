@@ -15,7 +15,8 @@ import ContactsPage from './components/ContactsPage/ContactsPage';
 import PolicyPage from './components/PolicyPage/PolicyPage';
 import JobPage from './components/JobPage/JobPage';
 
-function App() {  
+function App() {
+  
   return (
     <div className="App">
       <BrowserRouter>

@@ -33,7 +33,7 @@ const initialState = {
                 fieldType: 'email',
                 type: 'email',
                 fieldValue: '',
-                placeholder: 'test@yandex.ru',
+                placeholder: 'demo@....ru',
                 fieldValid: true,
             },
             {

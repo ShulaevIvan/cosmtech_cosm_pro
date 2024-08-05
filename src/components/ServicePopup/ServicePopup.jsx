@@ -13,6 +13,8 @@ import {
 const ServicePopup = (props) => {
     const dispatch = useDispatch();
     const servicesFormState = useSelector((state) => state.innerPage.servicesPage.serviceForm);
+    const popupWrapRef = useRef(null);
+    const closeBtnRef = useRef(null);
     const formRefs = [
         { id: 1, name: 'name', ref: useRef(null), },
         { id: 2, name: 'phone', ref: useRef(null), },
@@ -44,6 +46,12 @@ const ServicePopup = (props) => {
         dispatch(sendServiceOrderThunk(data));
     };
 
+    const clickOutsideHandler = (e) => {
+        if (popupWrapRef.current && !popupWrapRef.current.contains(e.target)) {
+            closeBtnRef.current.click();
+        }
+    };
+
     useEffect(() => {
         const optionsObj = servicesFormState.fields.find((item) => item.fieldName === 'serviceType');
         const findSelected = optionsObj.options.find((item) => item.name === servicesFormState.selectedService);
@@ -58,11 +66,22 @@ const ServicePopup = (props) => {
         dispatch(serviceOrderSendBtnActive());
     }, [formRefs]);
 
+    useEffect(() => {
+        document.addEventListener('mousedown', clickOutsideHandler);
+        return () => {
+            document.removeEventListener('mousedown', clickOutsideHandler);
+        };
+    }, [popupWrapRef]);
+
     return (
         <React.Fragment>
-            <div className="service-popup-wrap" style={{left: window.screen.width < 800 ? `${0}%` : `${33}%`, top: `${10}%`, position: 'fixed'}}>
+            <div
+                ref={popupWrapRef}
+                className="service-popup-wrap" 
+                style={{left: window.screen.width < 800 ? `${0}%` : `${33}%`, top: `${10}%`, position: 'fixed'}}>
                 <div className="service-popup-close-wrap">
-                    <span 
+                    <span
+                        ref={closeBtnRef} 
                         className="service-popup-close-btn"
                         onClick={(e) => props.formHandler(e, false)}
                     ></span>

@@ -1,9 +1,27 @@
 import React from "react";
+import { useEffect, useRef } from "react";
 
 const ProductionMainPageHover = (props) => {
+    const closePopupBtnRef = useRef(null);
+    const hoverWrapRef = useRef(null);
+
+    const clickOutsideHandler = (e) => {
+        if (hoverWrapRef.current && !hoverWrapRef.current.contains(e.target)) {
+            closePopupBtnRef.current.click();
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', clickOutsideHandler);
+        return () => {
+            document.removeEventListener('mousedown', clickOutsideHandler);
+        };
+    }, [hoverWrapRef]);
+
     return (
         <React.Fragment>
-            <div 
+            <div
+                ref={hoverWrapRef}
                 className="production-mainpage-hover-wrap"
                 style={
                     {
@@ -14,7 +32,8 @@ const ProductionMainPageHover = (props) => {
                     }}
             >
                 <div className="callback-request-popup-close">
-                    <span 
+                    <span
+                        ref={closePopupBtnRef}
                         className="production-close-hover-btn"
                         onClick={(e) => props.closeHandler(e, false, props.productionId)}
                     ></span>

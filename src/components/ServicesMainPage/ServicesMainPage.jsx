@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { 
     serviceShowBtn, 
     showAllServices, 
@@ -17,7 +17,6 @@ const ServicesMainPage = () => {
     const dispatch = useDispatch();
     const servicesState = useSelector((state) => state.mainPage.services);
     const mouseCords = useSelector((state) => state.mainPage.mouseCords);
-    const bodyRef = useRef(null);
 
     const serviceBtnHandler = (service, status) => {
         dispatch(serviceShowBtn({status: status, targetId: service.id}));
@@ -40,7 +39,6 @@ const ServicesMainPage = () => {
         dispatch(showAllServices({status: false}));
     }, []);
     
-    
     return (
         <React.Fragment>
             <section>
@@ -58,7 +56,11 @@ const ServicesMainPage = () => {
 
                         <div className="services-main-row">
                             {servicesState.servicePopupShow ? 
-                                <ServicesMainPagePopup popupHandler={serviceOrderPopupHandler} serviceState={servicesState} cords={mouseCords} /> 
+                                <ServicesMainPagePopup 
+                                    popupHandler={serviceOrderPopupHandler} 
+                                    serviceState={servicesState} 
+                                    cords={mouseCords}
+                                /> 
                             : null}
                             {Array.from(servicesState.servicesItems).map((serviceItem) => {
                                 return (
