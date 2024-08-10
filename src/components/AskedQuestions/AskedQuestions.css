@@ -112,7 +112,7 @@
     width: 100%;
     visibility: visible;
     transition: opacity 1s;
-    animation: dropdown-animation 0.7s forwards;
+    animation: dropdown-animation 1s forwards;
 }
 @media (min-width: 200px) and (max-width: 800px)  {
     .questions-image-column,
@@ -143,6 +143,12 @@
         margin-right: 20px;
     }
 }
+@media (min-width: 200px) and (max-width: 800px)  {
+    .question-item-row,
+    .dropdown-animation {
+        max-height: 100%;
+    }
+}
 
 @keyframes dropdown-animation {
     0% {
@@ -154,5 +160,8 @@
        -o-animation-delay: 1.5s;
         animation-delay: 1.5s;
     }
-    100% {opacity: 1; max-height: 200px;}
+    100% {
+        opacity: 1; 
+        max-height: 400px;
+    }
 }

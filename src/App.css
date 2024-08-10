@@ -1655,8 +1655,8 @@ section {
   min-height: 30px;
   width: 100%;
   max-width: 270px;
-  border-color: #00458B;
-  outline-color: #00458B;
+  /* border-color: #00458B;
+  outline-color: #00458B; */
 }
 .hero-order-form select {
   min-width: 280px;

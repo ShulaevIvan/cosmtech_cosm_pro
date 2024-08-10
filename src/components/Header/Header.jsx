@@ -19,6 +19,9 @@ const Header = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const descriptionRef = useRef(window.document.querySelector('meta[name="description"]'));
+    const openGraphTitleRef = useRef(window.document.querySelector('meta[property="og:title"]'));
+    const openGraphDescriptionRef = useRef(window.document.querySelector('meta[property="og:description"]'));
+    const openGraphUrlRef = useRef(window.document.querySelector('meta[property="og:url"]'));
     const headerState = useSelector((state) => state.header);
     const callbackPopup = useSelector((state) => state.header.callbackHeader.callbackPopupActive);
 
@@ -32,7 +35,10 @@ const Header = () => {
                 headerTitleObj.path === location.pathname
         );
         document.title = targetTitle ? targetTitle.name : '';
+        openGraphTitleRef.current.content = targetTitle.name;
         descriptionRef.current.content = targetTitle.description;
+        openGraphDescriptionRef.current.content = targetTitle.description;
+        openGraphUrlRef.current.content = `https://cosmtech.ru${targetTitle.path}`;
     }, [location.pathname]);
 
     useEffect(() => {
@@ -47,9 +53,9 @@ const Header = () => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     window.ym(97856473, 'hit', location.pathname);
-    // }, [location.pathname]);
+    useEffect(() => {
+        window.ym(97856473, 'hit', location.pathname);
+    }, [location.pathname]);
 
     return (
         <React.Fragment>
