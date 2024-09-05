@@ -30,6 +30,7 @@ import contractFootCream from '../../img/contract_footcream_cosm.jpg';
 import contractProfessional from '../../img/contract_professional_cosm.jpg';
 import contractApparat from '../../img/contract_apparat_cosm.jpg';
 import contractChildrenCosm from '../../img/contract_children_cosm.jpg';
+import userPhoto from '../../img/user-review-img-holder.png'
 
 const initialState = { 
     calculatorForm: {
@@ -405,6 +406,58 @@ const initialState = {
            allFieldsValid: false,
            sendBtnActive: false,
         },
+    },
+    reviews: {
+        reviewsItems: [
+            {
+                id: 1,
+                userName: 'Testname ',
+                userSecondName: 'TestFamil',
+                userAvatar: userPhoto,
+                userChangeRating: 5,
+                userOriginalLink: '',
+                reviewDescription: 'ddddddddddddddddddddddddddddd Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+            },
+            {
+                id: 2,
+                userName: 'Testname ',
+                userSecondName: 'TestFamil',
+                userAvatar: userPhoto,
+                userChangeRating: 5,
+                userOriginalLink: '',
+                reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+            },
+            {
+                id: 3,
+                userName: 'Testname ',
+                userSecondName: 'TestFamil',
+                userAvatar: userPhoto,
+                userChangeRating: 5,
+                userOriginalLink: '',
+                reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+            },
+            {
+                id: 4,
+                userName: 'Testname ',
+                userSecondName: 'TestFamil',
+                userAvatar: userPhoto,
+                userChangeRating: 5,
+                userOriginalLink: '',
+                reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+            },
+            {
+                id: 5,
+                userName: 'Testname ',
+                userSecondName: 'TestFamil',
+                userAvatar: userPhoto,
+                userChangeRating: 5,
+                userOriginalLink: '',
+                reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+            }
+        ],
+        yandexRating: 5,
+        yandexMapUrl: 'https://yandex.ru/maps/org/kosmeticheskiye_tekhnologii/238223588879/reviews/?ll=30.374016%2C59.895998&z=17',
+
     },
     mouseCords: {
         left: 0,
@@ -994,6 +1047,10 @@ const mainPageSlice = createSlice({
                     activeHover: false,
                 };
             });
+        },
+        reviewsMoveSlide(state, action) {
+            const { position } = action.payload;
+            state.reviews.reviewsItems = [...state.reviews.reviewsItems.slice(-1), ...state.reviews.reviewsItems.slice(0,-1)];
         }
     },
     extraReducers: (builder) => {
@@ -1057,6 +1114,7 @@ export const {
     serviceFormSendBtnActive,
     activeFaq,
     projectSlideMove,
-    buissnesHoverShow
+    buissnesHoverShow,
+    reviewsMoveSlide
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

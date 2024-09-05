@@ -6,6 +6,7 @@ import './components/ProductionMainPageHover/ProductionMainPageHover.css';
 import './components/AskedQuestions/AskedQuestions.css';
 import './components/CraftedSeries/CraftedSeries.css';
 import './components/ForBuissness/ForBuissness.css';
+import './components/ReviewsMainPage/ReviewsMainPage.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import MainPage from './components/MainPage/MainPage';

@@ -8,6 +8,7 @@ import ClientsMainPage from "../ClientsMainPage/ClientsMainPage";
 import AskedQuestions from "../AskedQuestions/AskedQuestions";
 import CraftedSeries from "../CraftedSeries/CraftedSeries";
 import ForBuissness from "../ForBuissness/ForBuissness";
+import ReviewsMainPage from "../ReviewsMainPage/ReviewsMainPage";
 
 const MainPage = (props) => {
     return (
@@ -18,6 +19,7 @@ const MainPage = (props) => {
             <ServicesMainPage />
             <ProductionMainPage />
             <ForBuissness />
+            <ReviewsMainPage />
             <AskedQuestions />
             <CraftedSeries />
             <ClientsMainPage />   

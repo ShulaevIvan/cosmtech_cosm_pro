@@ -779,6 +779,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
+    max-width: 1200px;
     align-items: center;
     justify-content: center;
 }
