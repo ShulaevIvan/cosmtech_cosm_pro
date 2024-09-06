@@ -185,6 +185,13 @@
 }
 .review-show-more {
     padding: 0 10px;
+    color: #00458B;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.review-show-more:hover {
+    color: #3FD2C7;
+    text-decoration: none;
 }
 .yandex-reviews-control-row {
     display: flex;
@@ -211,6 +218,15 @@
     max-width: 50px;
     width: 50%;
     cursor: pointer;
+}
+
+@media (min-width: 200px) and (max-width: 800px)  {
+    .yandex-reviews-item {
+      min-width: 350px;
+      min-height: 50px;
+      width: 100%;
+      margin: 0 20px;
+    }
 }
 
 @keyframes moveToRight {

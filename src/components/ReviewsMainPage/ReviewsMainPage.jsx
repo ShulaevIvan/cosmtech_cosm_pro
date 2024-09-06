@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { reviewsMoveSlide } from "../../redux/slices/mainPageSlice";
+import { reviewsMoveSlide, cutReviewDescription, reviewShowMore } from "../../redux/slices/mainPageSlice";
 
 import starEmpty from '../../img/star-empty.svg';
 import starFull from '../../img/star-full.svg';
@@ -16,22 +16,43 @@ const ReviewsMainPage = () => {
     const reviewsState = useSelector((state) => state.mainPage.reviews);
 
     const moveSlideHandler = (position) => {
-        dispatch(reviewsMoveSlide({position: position}))
+        dispatch(reviewsMoveSlide({position: position}));
     };
 
-    const showMoreHandler = () => {
-        console.log(showMoreHandler);
+    const showMoreHandler = (reviewItem) => {
+        dispatch(reviewShowMore({review: reviewItem, status: reviewItem.showFullDescr ? false : true}));
     };
 
-    const cutReviewString = (reviewStr) => {
-        if (reviewStr.length > 366) {
-            return reviewStr.substr(0, 366);
+    const showMoreBtn = (reviewItem, show) => {
+        
+        if (show && !reviewItem.showFullDescr) {
+            return (
+                <React.Fragment>
+                    {reviewItem.cutFullDescription}
+                    <span 
+                        className="review-show-more"
+                        onClick={() => showMoreHandler(reviewItem)}
+                    >развернуть</span>
+                </React.Fragment>
+            )
         }
-        return reviewStr;
-    };
+        return (
+            <React.Fragment>
+                {reviewItem.reviewDescription}
+                <span 
+                    className="review-show-more"
+                    onClick={() => showMoreHandler(reviewItem)}
+                >свернуть</span>
+            </React.Fragment>
+        )
+    }
 
     useEffect(() => {
-        console.log(reviewsState.currentSlidePosition);
+        reviewsState.reviewsItems.map((reviewItem) => {
+            if (reviewItem.reviewDescription.length > 366) {
+                dispatch(cutReviewDescription({review: reviewItem, maxLength: 366}));
+            } 
+        });
     }, []);
 
     return (
@@ -86,22 +107,18 @@ const ReviewsMainPage = () => {
                                                 <span className="review-star"><img src={starFull} alt="star" /></span>
                                             </div>
                                             <div className="yandex-reviews-user-original-link">
-                                                <Link>ссылка на отзыв</Link>
+                                                {reviewItem.userOriginalLink ? <Link>ссылка на отзыв</Link> : null}
+                                                
                                             </div>
                                         </div>
                                         <div className="yandex-reviews-review-description">
                                             <p>
                                                 {reviewItem.reviewDescription.length > 366 ? 
-                                                    <React.Fragment>
-                                                        {cutReviewString(reviewItem.reviewDescription)}
-                                                        <span className="review-show-more">
-                                                            <Link>развернуть...</Link>
-                                                        </span>
-                                                    </React.Fragment> 
+                                                    showMoreBtn(reviewItem, true) 
                                                 : reviewItem.reviewDescription}
-
-
                                             </p>
+                                            
+                                            
                                         </div>
                                     </div>
                                 </React.Fragment>

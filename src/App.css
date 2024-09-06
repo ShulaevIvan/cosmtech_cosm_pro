@@ -493,7 +493,8 @@ section {
 .service-background-order-btn:hover,
 .services-view-all-services-btn:hover,
 .prefooter-order-form-btn:hover,
-.main-footer-btn-send:hover {
+.main-footer-btn-send:hover,
+.send-review-btn:hover {
   background-color: #00458B;
   transition: background .4s ease;
 }

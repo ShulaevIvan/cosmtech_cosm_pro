@@ -416,6 +416,8 @@ const initialState = {
                 userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
+                showFullDescr: true,
+                cutFullDescription: '',
                 reviewDescription: 'ddddddddddddddddddddddddddddd Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
             },
             {
@@ -425,6 +427,8 @@ const initialState = {
                 userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
+                showFullDescr: true,
+                cutFullDescription: '',
                 reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
             },
             {
@@ -434,6 +438,8 @@ const initialState = {
                 userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
+                showFullDescr: true,
+                cutFullDescription: '',
                 reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
             },
             {
@@ -443,6 +449,8 @@ const initialState = {
                 userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
+                showFullDescr: true,
+                cutFullDescription: '',
                 reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
             },
             {
@@ -452,6 +460,8 @@ const initialState = {
                 userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
+                showFullDescr: true,
+                cutFullDescription: '',
                 reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
             }
         ],
@@ -1051,7 +1061,39 @@ const mainPageSlice = createSlice({
         reviewsMoveSlide(state, action) {
             const { position } = action.payload;
             state.reviews.reviewsItems = [...state.reviews.reviewsItems.slice(-1), ...state.reviews.reviewsItems.slice(0,-1)];
+        },
+        cutReviewDescription(state, action) {
+            const { review, maxLength } = action.payload;
+            state.reviews.reviewsItems = state.reviews.reviewsItems.map((reviewItem) => {
+                if (reviewItem.id === review.id && maxLength) {
+                    return {
+                        ...reviewItem,
+                        showFullDescr: false,
+                        cutFullDescription: reviewItem.reviewDescription.substr(0, maxLength)
+                    }
+                }
+                return {
+                    ...reviewItem,
+                    showFullDescr: true,
+                    cutFullDescription: ''
+                }
+            });
+        },
+        reviewShowMore(state, action) {
+            const { review, status } = action.payload;
+            state.reviews.reviewsItems = state.reviews.reviewsItems.map((reviewItem) => {
+                if (reviewItem.id === review.id) {
+                    return {
+                        ...reviewItem,
+                        showFullDescr: status,
+                    }
+                }
+                return {
+                    ...reviewItem
+                }
+            });
         }
+
     },
     extraReducers: (builder) => {
         builder
@@ -1115,6 +1157,8 @@ export const {
     activeFaq,
     projectSlideMove,
     buissnesHoverShow,
-    reviewsMoveSlide
+    reviewsMoveSlide,
+    cutReviewDescription,
+    reviewShowMore
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;
