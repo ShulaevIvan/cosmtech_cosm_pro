@@ -2,14 +2,16 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { reviewsMoveSlide, cutReviewDescription, reviewShowMore } from "../../redux/slices/mainPageSlice";
+import ReviewsMainPagePopup from "./ReviewsMainPagePopup";
+import { 
+    reviewsMoveSlide, 
+    cutReviewDescription, 
+    reviewShowMore,
+    showReviewPopup
+} from "../../redux/slices/mainPageSlice";
 
-import starEmpty from '../../img/star-empty.svg';
 import starFull from '../../img/star-full.svg';
-import starHalf from '../../img/star-half.svg';
-import arrowLeft from '../../img/review-arrow-left.svg';
 import arrowRight from '../../img/review-arrow-right.svg';
-import userPhoto from '../../img/user-review-img-holder.png'
 
 const ReviewsMainPage = () => {
     const dispatch = useDispatch();
@@ -45,7 +47,11 @@ const ReviewsMainPage = () => {
                 >свернуть</span>
             </React.Fragment>
         )
-    }
+    };
+
+    const reviewPopupHandler = () => {
+        dispatch(showReviewPopup({status: reviewsState.reviewPopupActive ? false : true}));
+    };
 
     useEffect(() => {
         reviewsState.reviewsItems.map((reviewItem) => {
@@ -94,7 +100,9 @@ const ReviewsMainPage = () => {
                                 <React.Fragment key={reviewItem.id}>
                                     <div className="yandex-reviews-item">
                                         <div className="yandex-reviews-userinfo">
-                                            <div className="yandex-reviews-userinfo-img-wrap"><img src={userPhoto} alt="userInfo" /></div>
+                                            <div className="yandex-reviews-userinfo-img-wrap">
+                                                <img src={reviewItem.userAvatar} alt={`${reviewItem.userName} ${reviewItem.userSecondName} отзыв клиента`} />
+                                            </div>
                                             <div className="yandex-reviews-userinfo-title">
                                                 <span className="yandex-reviews-userinfo-name">{reviewItem.userName}</span>
                                                 <span className="yandex-reviews-userinfo-second">{reviewItem.userSecondName}</span>
@@ -138,11 +146,20 @@ const ReviewsMainPage = () => {
                             <h3>Оставьте отзыв о нашей работе</h3>
                         </div>
                         <div className="send-review-block-btn-wrap">
-                            <span className="send-review-btn">Отправить</span>
+                            <span 
+                                className="send-review-btn"
+                                onClick={reviewPopupHandler}
+                            >Написать</span>
                         </div>
                     </div>
                 </div>
             </div>
+            {reviewsState.reviewPopupActive ? 
+                <ReviewsMainPagePopup 
+                    popupHandler={reviewPopupHandler}
+                    reviewsPlaces={reviewsState.reviewsPlaces}
+                /> 
+            : null}
             </section>
         </React.Fragment>
     )

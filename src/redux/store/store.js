@@ -4,6 +4,7 @@ import innerPageSlice from '../slices/innerPageSlice';
 import mainPageSlice from '../slices/mainPageSlice';
 import footerSlice from '../slices/footerSlice';
 import menuSlice from '../slices/menuSlice';
+import quizSlice from '../slices/quizSlice';
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         mainPage: mainPageSlice,
         footer: footerSlice,
         menu: menuSlice,
+        quiz: quizSlice,
     },
     middleware: (getDefaultMiddleware)  => getDefaultMiddleware({serializableCheck: false}),
 });

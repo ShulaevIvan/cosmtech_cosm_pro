@@ -30,11 +30,18 @@ import contractFootCream from '../../img/contract_footcream_cosm.jpg';
 import contractProfessional from '../../img/contract_professional_cosm.jpg';
 import contractApparat from '../../img/contract_apparat_cosm.jpg';
 import contractChildrenCosm from '../../img/contract_children_cosm.jpg';
+import annGurAvatar from '../../img/anna_gurjanova_avatar.jpeg';
+import nadehjdaSecachAvatar from '../../img/nadehjda_secacheva.jpg';
 import userPhoto from '../../img/user-review-img-holder.png'
+import yandexPlace from '../../img/yandex.jpg';
+import gisPlace from '../../img/2gis.jpg';
+import zoonPlace from '../../img/zoon.jpg';
+import yellPlace from '../../img/yell.jpg';
 
 const initialState = { 
     calculatorForm: {
         popupOpen: false,
+        quizOpen: false
     },
     orderForm: {
         popupOpen: false,
@@ -411,25 +418,25 @@ const initialState = {
         reviewsItems: [
             {
                 id: 1,
-                userName: 'Testname ',
-                userSecondName: 'TestFamil',
-                userAvatar: userPhoto,
+                userName: 'Надежда  ',
+                userSecondName: 'Секачева',
+                userAvatar: nadehjdaSecachAvatar,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
                 cutFullDescription: '',
-                reviewDescription: 'ddddddddddddddddddddddddddddd Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+                reviewDescription: 'Работали над созданием линейки мужской косметики, и это сотрудничество стало настоящим успехом. Важно было, чтобы продукция подходила для чувствительной кожи и была эффективной. Получили качественные гели для душа и кремы для бритья, которые соответствуют нашим ожиданиям и запросам покупателей.'
             },
             {
                 id: 2,
-                userName: 'Testname ',
-                userSecondName: 'TestFamil',
-                userAvatar: userPhoto,
+                userName: 'Анна  ',
+                userSecondName: 'Гурьянова',
+                userAvatar: annGurAvatar,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
                 cutFullDescription: '',
-                reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+                reviewDescription: 'Заказывали крем для рук, и остались очень довольны результатом. Производитель выполнил все этапы, от разработки рецептуры до тестирования, точно в срок. Вежливое общение с сотрудниками и адекватные цены - дополнительные плюсы. Продукт уже в продаже, и клиенты довольны.'
             },
             {
                 id: 3,
@@ -465,8 +472,39 @@ const initialState = {
                 reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
             }
         ],
+        reviewPopupActive: false,
         yandexRating: 5,
         yandexMapUrl: 'https://yandex.ru/maps/org/kosmeticheskiye_tekhnologii/238223588879/reviews/?ll=30.374016%2C59.895998&z=17',
+        reviewsPlaces: [
+            {
+                id: 1,
+                paceName: 'yandex',
+                placeImg: yandexPlace,
+                placeDescription: 'оставить отызв о компании космотех на яндекс',
+                placeUrl: 'https://yandex.ru/maps/org/kosmeticheskiye_tekhnologii/238223588879/reviews/?ll=30.374016%2C59.895998&z=17',
+            },
+            {
+                id: 2,
+                paceName: '2gis',
+                placeImg: gisPlace,
+                placeDescription: 'оставить отызв о компании космотех на 2gis',
+                placeUrl: 'https://2gis.ru/spb/search/%D0%9A%D0%BE%D1%81%D0%BC%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20%D1%81%D0%B0%D0%BB%D0%BE%D0%B2%D0%B0/firm/70000001090431923/30.373679%2C59.896468/tab/reviews',
+            },
+            {
+                id: 3,
+                paceName: 'zoon',
+                placeImg: zoonPlace,
+                placeDescription: 'оставить отызв о компании космотех на zoon',
+                placeUrl: 'https://zoon.ru/spb/business/proizvodstvennaya_kompaniya_kosmeticheskie_tehnologii/',
+            },
+            {
+                id: 4,
+                paceName: 'yell',
+                placeImg: yellPlace,
+                placeDescription: 'оставить отызв о компании космотех на yell',
+                placeUrl: 'https://www.yell.ru/spb/com/kosmeticheskie-texnologii_14480385/',
+            }
+        ]
 
     },
     mouseCords: {
@@ -595,7 +633,7 @@ const initialState = {
                 imageAlt: 'Косметика оптом от производителя',
                 image: buissnessOpt,
                 activeHover: false,
-                description: 'Мы специализируются на производстве больших объемов косметики, что позволяет нам предложить конкурентоспособные цены и быстрые сроки выполнения заказа.',
+                description: 'Мы специализируемся на производстве больших объемов косметики, что позволяет нам предложить конкурентоспособные цены и быстрые сроки выполнения заказа.',
                 
             }
         ]
@@ -1079,6 +1117,10 @@ const mainPageSlice = createSlice({
                 }
             });
         },
+        showReviewPopup(state, action) {
+            const { status } = action.payload;
+            state.reviews.reviewPopupActive = status;
+        },
         reviewShowMore(state, action) {
             const { review, status } = action.payload;
             state.reviews.reviewsItems = state.reviews.reviewsItems.map((reviewItem) => {
@@ -1092,6 +1134,10 @@ const mainPageSlice = createSlice({
                     ...reviewItem
                 }
             });
+        },
+        quizPopupShow(state, action) {
+            const { status } = action.payload;
+            state.calculatorForm.quizOpen = status;
         }
 
     },
@@ -1159,6 +1205,8 @@ export const {
     buissnesHoverShow,
     reviewsMoveSlide,
     cutReviewDescription,
-    reviewShowMore
+    reviewShowMore,
+    showReviewPopup,
+    quizPopupShow
 } = mainPageSlice.actions;
 export default mainPageSlice.reducer;

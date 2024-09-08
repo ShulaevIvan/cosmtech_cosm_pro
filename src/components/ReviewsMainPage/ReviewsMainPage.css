@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    position: relative;
     width: 100%;
     max-width: 1200px;
     justify-content: center;
@@ -91,6 +92,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    color: #00458B;
 }
 .send-review-btn {
     display: flex;
@@ -219,6 +221,47 @@
     width: 50%;
     cursor: pointer;
 }
+.reviews-mainpage-popup-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+    min-height: 400px;
+    width: 400px;
+    background-color: white;
+    color: #1E1E1E;
+    position: absolute;
+    z-index: 5;
+    border: 1px solid #00458B;
+    padding: 10px;
+    animation-duration: 0.3s;
+    animation-name: grow;
+    border-radius: 10px;
+}
+.reviews-mainpage-popup-wrap .service-popup-close-wrap {
+    min-height: 20px;
+}
+.review-place-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.review-place-item-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px
+}
+.review-place-item-wrap img {
+    max-width: 200px;
+    cursor: pointer;
+}
 
 @media (min-width: 200px) and (max-width: 800px)  {
     .yandex-reviews-item {
@@ -228,6 +271,16 @@
       margin: 0 20px;
     }
 }
+
+@media (min-width: 200px) and (max-width: 800px)  {
+    .reviews-mainpage-popup-wrap {
+      width: 100%;
+      max-width: 360px;
+      margin: 0 20px;
+    }
+}
+
+
 
 @keyframes moveToRight {
     0% {

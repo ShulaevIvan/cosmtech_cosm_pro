@@ -104,9 +104,6 @@ const footerSlice = createSlice({
     name: 'footer',
     initialState,
     reducers: {
-        goToTop(state, action) {
-
-        },
         validatePrefooterForm(state, action) {
             const { fieldId, fieldType, fieldValue } = action.payload;
             if (fieldType === 'phone' && fieldValue.length > 18) return;
@@ -198,7 +195,6 @@ const footerSlice = createSlice({
 
 
 export const {
-    goToTop,
     validatePrefooterForm,
     prefooterClearInput,
     prefooterFormCheckbox,
