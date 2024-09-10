@@ -7,7 +7,6 @@ import QuizMainPage from "../QuizMainPage/QuizMainPage";
 
 const HeroMainPage = () => {
     const dispatch = useDispatch();
-    const calculatorPopup = useSelector((state) => state.mainPage.calculatorForm);
     const quizPopupStatus = useSelector((state) => state.mainPage.calculatorForm.quizOpen);
     const orderForm = useSelector((state) => state.mainPage.orderForm);
 
@@ -38,7 +37,7 @@ const HeroMainPage = () => {
                             <div className="hero-img-action-button-wrap">
                                 <span 
                                     className="hero-img-action-button-main"
-                                    onClick={quizHandler}
+                                    // onClick={quizHandler}
                                 >Калькулятор</span>
                             </div>
                             <div className="hero-img-action-button-wrap">

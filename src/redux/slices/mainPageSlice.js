@@ -440,37 +440,15 @@ const initialState = {
             },
             {
                 id: 3,
-                userName: 'Testname ',
-                userSecondName: 'TestFamil',
+                userName: 'Ирина ',
+                userSecondName: 'Я',
                 userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
                 cutFullDescription: '',
-                reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+                reviewDescription: 'Очень рада знакомству,с удовольствием начала сотрудничество. Все четко, без воды!'
             },
-            {
-                id: 4,
-                userName: 'Testname ',
-                userSecondName: 'TestFamil',
-                userAvatar: userPhoto,
-                userChangeRating: 5,
-                userOriginalLink: '',
-                showFullDescr: true,
-                cutFullDescription: '',
-                reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
-            },
-            {
-                id: 5,
-                userName: 'Testname ',
-                userSecondName: 'TestFamil',
-                userAvatar: userPhoto,
-                userChangeRating: 5,
-                userOriginalLink: '',
-                showFullDescr: true,
-                cutFullDescription: '',
-                reviewDescription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
-            }
         ],
         reviewPopupActive: false,
         yandexRating: 5,
@@ -513,6 +491,18 @@ const initialState = {
     },
     videoMainPage: {
         videoMainPageBlob: '',
+        textVideoTitle: 'Где качество сочетается с точностью',
+        textVideo: [
+            {
+                id: 1, 
+                text: 'Компания "Космотех" осуществляет услуги по производству, фасовке и доставке косметической продукции по территории России. У нас есть современное оборудование, которое позволяет создавать уже на протяжении более 10 лет косметику, за которую не стыдно, и лаборатория с командой из профессиональных химиков, которая дает уверенность в точности и надежности проводимых исследований.'
+            },
+            {
+                id: 2, 
+                text: 'В работе мы используем исключительно качественные и экологичные компоненты, а сама продукция проходит сертификацию. Благодаря наличию на нашей площадке варочной зоны с различными видами котлов, мы можем предложить нашим клиентам партии от 50 кг. Мы разработаем, произведем и упакуем по вашему запросу косметику в необходимых объемах и точно в срок.'
+            },
+
+        ],
         loadEnd: false,
     },
     faq: {
