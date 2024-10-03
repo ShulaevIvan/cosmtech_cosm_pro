@@ -41,9 +41,6 @@
     max-height: 600px;
     filter: brightness(0.8);
 }
-.crafted-series-slide-img img {
-    max-width: 528px;
-}
 .crafted-series-slide-control {
     position: absolute;
     width: 100%;
@@ -82,7 +79,7 @@
     flex-wrap: wrap;
     width: 100%;
     position: relative;
-    bottom: 2%;
+    bottom: 10%;
     min-height: 30px;
     max-height: 40px;
     background-color: #3FD2C7;

@@ -25,7 +25,7 @@ const VideoMainPage = () => {
                             })}
                             <div className="video-mainpage-prezent-wrap">
                                 <div className="video-mainpage-prezent-btn">
-                                <span className="video-mainpage-prezent-btn">презентация</span>
+                                    <span className="video-mainpage-prezent-btn">презентация</span>
                                 </div>
                             </div>
                         </div>

@@ -561,7 +561,7 @@ section {
 .video-mainpage-textblock-wrap h2 {
   color: #00458B;
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 58px;
 }
 .video-mainpage-textblock-wrap p {
@@ -579,8 +579,10 @@ section {
 .video-mainpage-wrap source {
   background-image: url('../src/img/video_holder.png');
   background-repeat: no-repeat;
+  object-fit: cover;
   background-position: center;
   width: 1000px;
+  min-height: 100%;
   max-width: 100%;
 }
 .video-mainpage-prezent-wrap {
@@ -588,14 +590,14 @@ section {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .video-mainpage-prezent-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 130px;
-  height: 33px;
+  height: 40px;
   padding: 0 40px;
   font-size: 18px;
   color: #fff;

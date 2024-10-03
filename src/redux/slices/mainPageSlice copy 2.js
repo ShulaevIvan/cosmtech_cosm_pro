@@ -1,10 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import imgVolos from '../../img/product_volos.jpg';
+import imgSlide6 from '../../img/slide_6.jpg';
+import imgSlide7 from '../../img/slide_7.jpg';
+import imgSlide8 from '../../img/slide_8.jpg';
+import imgSlide9 from '../../img/slide_9.jpg';
+import imgSlide10 from '../../img/slide_10.jpg';
+import independenceIconOne from '../../img/independence_1.svg';
+import independenceIconTwo from '../../img/independence_2.svg';
+import independenceIconThree from '../../img/independence_3.svg';
+import independenceIconFour from '../../img/independence_4.svg';
+import independenceIconFive from '../../img/independence_5.svg';
+import independenceIconSix from '../../img/independence_6.svg';
 import buissnessHotel from '../../img/buissness_hotels.jpg';
 import buissnessOpt from '../../img/buissness_opt.jpg';
 import buissnessMarketplace from '../../img/buissness_marketpalce.jpg';
 import buissnessSpa from '../../img/buissness_spa.jpg';
 import validatePhone from '../../functions/validatePhone';
 import validateMail from '../../functions/validateMail';
+import test from '../../img/500x500.png';
 import contractImgClear from '../../img/contract_celar_face_cosm.jpg';
 import contractImgClear2 from '../../img/contract_celar_face_cosm2.jpg';
 import contractShampoo from '../../img/contract_shampoo_cosm.jpg';
@@ -17,21 +30,13 @@ import contractFootCream from '../../img/contract_footcream_cosm.jpg';
 import contractProfessional from '../../img/contract_professional_cosm.jpg';
 import contractApparat from '../../img/contract_apparat_cosm.jpg';
 import contractChildrenCosm from '../../img/contract_children_cosm.jpg';
-
-const importAllImages = (ctxWebpuck) => {
-    const images = {};
-    ctxWebpuck.keys().forEach((item, index) => { images[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
-    return images;
-};
-const productionSlides = importAllImages(require.context('../../img/mainpageSlides', false, /\.(png|jpe?g|svg)$/));
-const independenceIcons = importAllImages(require.context('../../img/independensImg', false, /\.(png|jpe?g|svg)$/));
-const reviewImages = importAllImages(require.context('../../img/reviewsUsers', false, /\.(png|jpe?g|svg)$/));
-const reviewPlaces = importAllImages(require.context('../../img/reviewPlaces', false, /\.(png|jpe?g|svg)$/));
-
-const { slide6, slide8, slide11, slide12, slide13, slide14, slide15 } = productionSlides;
-const { independenceOne, independenceTwo, independenceThree, independenceFour, independenceFive, independenceSix } = independenceIcons;
-const { reviewDefault, review1, review2, review3, review4, review5, review6, review7 } = reviewImages;
-const { gisPlace, zoonPlace, yellPlace, yandexPlace } = reviewPlaces;
+import annGurAvatar from '../../img/anna_gurjanova_avatar.jpeg';
+import nadehjdaSecachAvatar from '../../img/nadehjda_secacheva.jpg';
+import userPhoto from '../../img/user-review-img-holder.png'
+import yandexPlace from '../../img/yandex.jpg';
+import gisPlace from '../../img/2gis.jpg';
+import zoonPlace from '../../img/zoon.jpg';
+import yellPlace from '../../img/yell.jpg';
 
 const initialState = { 
     calculatorForm: {
@@ -364,37 +369,37 @@ const initialState = {
             {
                 id: 1,
                 title: 'Полный цикл',
-                image: independenceOne,
+                image: independenceIconOne,
                 description: 'Полный производственный цикл – от формулы к готовому продукту',
             },
             {
                 id: 2,
                 title: 'Быстрый старт под СТМ',
-                image: independenceThree,
+                image: independenceIconThree,
                 description: 'Высокие производственные мощности для выпуска продукции под собственной торговой маркой.',
             },
             {
                 id: 3,
                 title: 'Уникальные рецептуры',
-                image: independenceTwo,
+                image: independenceIconTwo,
                 description: 'Лаборатория с опытными технологами и уникальными рецептурами собственных разработок.',
             },
             {
                 id: 4,
                 title: 'Качественное сырье',
-                image: independenceFive,
+                image: independenceIconFive,
                 description: 'Использование в производстве сырья и оборудования ведущих мировых компаний.',
             },
             {
                 id: 5,
                 title: 'Упаковка и хранение',
-                image: independenceFour,
+                image: independenceIconFour,
                 description: 'Упаковка готовой продукции и хранение комплектующих.',
             },
             {
                 id: 6,
                 title: 'Оперативность',
-                image: independenceSix,
+                image: independenceIconSix,
                 description: 'Высокое качество по доступной цене. Оперативность выполнения заказов.',
             },
         ],
@@ -415,7 +420,7 @@ const initialState = {
                 id: 1,
                 userName: 'Надежда  ',
                 userSecondName: 'Секачева',
-                userAvatar: review2,
+                userAvatar: nadehjdaSecachAvatar,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
@@ -426,7 +431,7 @@ const initialState = {
                 id: 2,
                 userName: 'Анна  ',
                 userSecondName: 'Гурьянова',
-                userAvatar: review1,
+                userAvatar: annGurAvatar,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
@@ -437,7 +442,7 @@ const initialState = {
                 id: 3,
                 userName: 'Ирина ',
                 userSecondName: 'Я',
-                userAvatar: reviewDefault,
+                userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
@@ -448,7 +453,7 @@ const initialState = {
                 id: 4,
                 userName: 'Виталий ',
                 userSecondName: 'Конюхов',
-                userAvatar: review7,
+                userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
@@ -459,7 +464,7 @@ const initialState = {
                 id: 5,
                 userName: 'Альбина ',
                 userSecondName: 'Булашина',
-                userAvatar: review6,
+                userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
@@ -470,7 +475,7 @@ const initialState = {
                 id: 6,
                 userName: 'Кристина ',
                 userSecondName: 'Борисова',
-                userAvatar: review5,
+                userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
@@ -481,7 +486,7 @@ const initialState = {
                 id: 7,
                 userName: 'Евгения ',
                 userSecondName: 'Гладкова',
-                userAvatar: review4,
+                userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
@@ -492,12 +497,34 @@ const initialState = {
                 id: 8,
                 userName: 'Станислав ',
                 userSecondName: 'Одиноких',
-                userAvatar: review3,
+                userAvatar: userPhoto,
                 userChangeRating: 5,
                 userOriginalLink: '',
                 showFullDescr: true,
                 cutFullDescription: '',
                 reviewDescription: 'С партнером нужно было срочно найти новое производство, и этот завод оказался настоящей находкой. Хотели повторить состав шампуня, и тут подошли с пониманием и профессионализмом. Очень благодарны за такое отношение и качественную работу.'
+            },
+            {
+                id: 9,
+                userName: 'Вероника ',
+                userSecondName: 'Лисицина',
+                userAvatar: userPhoto,
+                userChangeRating: 5,
+                userOriginalLink: '',
+                showFullDescr: true,
+                cutFullDescription: '',
+                reviewDescription: 'Нашли здесь возможность выпустить косметику под своим брендом с минимальной партией и без дополнительных затрат. Все сделано в точности как и договаривались, и это радует. Особенно понравилось, что команда всегда была на связи и помогала на всех этапах производства.'
+            },
+            {
+                id: 10,
+                userName: 'Светлана ',
+                userSecondName: 'Горбылева',
+                userAvatar: userPhoto,
+                userChangeRating: 5,
+                userOriginalLink: '',
+                showFullDescr: true,
+                cutFullDescription: '',
+                reviewDescription: 'Для линии по уходу за телом нам нужно было создать серию скрабов и массажных масел. Заказали питательный скраб с лифтинг-эффектом и масла шиммером. Продукция получилась с хорошей консистенцией, ароматами и необходимыми свойствами.'
             },
         ],
         reviewPopupActive: false,
@@ -608,45 +635,32 @@ const initialState = {
         slides: [
             {
                 id: 1,
-                slideImage: slide6,
-                projectName: 'Молодежная косметика PIXEL',
+                slideImage: imgSlide10,
+                projectName: 'Космецевтика Stella-Marina',
                 slideActive: false,
             },
             {
                 id: 2,
-                slideImage: slide8,
-                projectName: 'Профессиональная косметика SM Prof',
+                slideImage: imgSlide6,
+                projectName: 'Молодежная косметика PIXEL',
                 slideActive: false,
             },
             {
                 id: 3,
-                slideImage: slide13,
-                projectName: 'Профессиональная косметика verifique',
-                slideActive: false,
-            },
-            {
-                id: 4,
-                slideImage: slide11,
-                projectName: 'Серия косметики Grimoire',
+                slideImage: imgSlide8,
+                projectName: 'Профессиональная косметика SM Prof',
                 slideActive: true,
             },
             {
+                id: 4,
+                slideImage: imgSlide7,
+                projectName: 'Уходовая косметика Stella-Marina',
+                slideActive: false,
+            },
+            {
                 id: 5,
-                slideImage: slide14,
-                projectName: 'Уходовая косметика ART&FACT',
-                slideActive: false,
-            },
-            {
-                id: 6,
-                slideImage: slide12,
-                projectName: 'Уходовая косметика Карельский Лес',
-                slideActive: false,
-            },
-
-            {
-                id: 7,
-                slideImage: slide15,
-                projectName: 'Косметика для животных Lissilandia',
+                slideImage: imgSlide9,
+                projectName: 'Профессиональные пилинги Stella-Marina',
                 slideActive: false,
             },
         ],
