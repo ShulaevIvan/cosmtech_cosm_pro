@@ -1,10 +1,35 @@
 import React from "react";
-// import demoImg from '../../img/180x300.png';
-import demoImg from '../../img/230x300.png';
-import quizCheckbox from '../../img/quiz_checkbox.svg';
-import quizCheckboxActive from '../../img/quiz_checkbox-active.svg';
+import { useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { nextStep } from "../../redux/slices/quizSlice";
+import QuizStep1 from './QuizStep1';
 
 const QuizMainPage = (props) => {
+    const dispatch = useDispatch();
+    const stepTitle = useRef(null);
+    const quizState = useSelector((state) => state.quiz);
+
+    const nextStepHandler = (param) => {
+        dispatch(nextStep({stepParam: param}));
+    };
+
+    const findStep = (stepNum) => {
+        const stepData = quizState.qizSteps.find((quizItem) => quizItem.stepNum === stepNum);
+        return stepData;
+    };
+
+    const productSelectHandler = (product) => {
+        console.log(product)
+    };
+
+    useEffect(() => {
+        const stepData = findStep(quizState.currentStep);
+        if (stepData) {
+            stepTitle.current.textContent = stepData.stepTitle;
+        }
+
+    }, [quizState.currentStep]);
+
     return (
         <React.Fragment>
             <div className="quiz-mainpage-popup-wrap">
@@ -18,7 +43,7 @@ const QuizMainPage = (props) => {
                         <div className="quiz-content-wrap">
                         <div className="quiz-mainpage-title-row">
                             <div className="quiz-mainpage-title-wrap">
-                                <h2>Test stage question asd asd asd asd asd ?</h2>
+                                <h2 ref={stepTitle}></h2>
                             </div>
                             <div className="quiz-mainpage-close-btn-wrap">
                                 <span 
@@ -28,83 +53,33 @@ const QuizMainPage = (props) => {
                             </div>
                         </div>
                         <div className="quiz-mainpage-content-wrap">
-                            <div className="quiz-products-row">
-                                <div className="quiz-products-item">
-                                    <div className="quiz-product-img-wrap">
-                                        <img src={demoImg} alt="" />
-                                    </div>
-                                    <div className="quiz-product-selected-icon-wrap">
-                                        <img src={quizCheckbox} alt="" />
-                                    </div>
-                                    <div className="quiz-product-decription-wrap">
-                                        <h4>product description</h4>
-                                    </div>
-                                </div>
-                                <div className="quiz-products-item">
-                                    <div className="quiz-product-img-wrap">
-                                        <img src={demoImg} alt="" />
-                                    </div>
-                                    <div className="quiz-product-selected-icon-wrap">
-                                        <img src={quizCheckbox} alt="" />
-                                    </div>
-                                    <div className="quiz-product-decription-wrap">
-                                        <h4>product description</h4>
-                                    </div>
-                                </div>
-                                <div className="quiz-products-item">
-                                    <div className="quiz-product-img-wrap">
-                                        <img src={demoImg} alt="" />
-                                    </div>
-                                    <div className="quiz-product-selected-icon-wrap">
-                                        <img src={quizCheckbox} alt="" />
-                                    </div>
-                                    <div className="quiz-product-decription-wrap">
-                                        <h4>product description</h4>
-                                    </div>
-                                </div>
-                                <div className="quiz-products-item">
-                                    <div className="quiz-product-img-wrap">
-                                        <img src={demoImg} alt="" />
-                                    </div>
-                                    <div className="quiz-product-selected-icon-wrap">
-                                        <img src={quizCheckbox} alt="" />
-                                    </div>
-                                    <div className="quiz-product-decription-wrap">
-                                        <h4>product description</h4>
-                                    </div>
-                                </div>
-                                <div className="quiz-products-item">
-                                    <div className="quiz-product-img-wrap">
-                                        <img src={demoImg} alt="" />
-                                    </div>
-                                    <div className="quiz-product-selected-icon-wrap">
-                                        <img src={quizCheckboxActive} alt="" />
-                                    </div>
-                                    <div className="quiz-product-decription-wrap">
-                                        <h4>product description</h4>
-                                    </div>
-                                </div>
-                                <div className="quiz-products-item">
-                                    <div className="quiz-product-img-wrap">
-                                        <img src={demoImg} alt="" />
-                                    </div>
-                                    <div className="quiz-product-selected-icon-wrap quiz-product-selected-icon-wrap-active">
-                                        <img src={quizCheckbox} alt="" />
-                                    </div>
-                                    <div className="quiz-product-decription-wrap">
-                                        <h4>product description</h4>
-                                    </div>
-                                </div>
-                            </div>
+                            {quizState.currentStep === 1 ? 
+                                <QuizStep1 
+                                    stepData={findStep(1)} 
+                                    productSelectHandler={productSelectHandler}
+                                /> 
+                            : null}
+                            
                         </div>
                         <div className="next-step-wrap">
+                            <div className="prev-step-btn-wrap">
+                                {quizState.showPrevStepBtn ? 
+                                    <span 
+                                        className="prev-step-btn"
+                                        onClick={() => nextStepHandler(-1)}
+                                    >{quizState.prevBtnText}</span> 
+                                : null}
+                            </div>
                             <div className="next-step-btn-wrap">
-                                <span className="next-step-btn">Next step</span>
+                                <span 
+                                    className="next-step-btn"
+                                    onClick={() => nextStepHandler(1)}
+                                >{quizState.nextBtnText}</span>
                             </div>
                             <div className="step-counter-wrap">
                                 <div className="step-counter-value">
-                                    <span><span>Step:</span> 0 / </span>
-                                    <span>3</span>
+                                    <span><span>Step:</span> {quizState.currentStep} / </span>
+                                    <span>{quizState.maxSteps}</span>
                                 </div>
                             </div>
                         </div>

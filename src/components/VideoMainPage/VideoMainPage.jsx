@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import promo_video from '../../video/compress_promo_video.mp4';
 
@@ -25,7 +26,11 @@ const VideoMainPage = () => {
                             })}
                             <div className="video-mainpage-prezent-wrap">
                                 <div className="video-mainpage-prezent-btn">
-                                    <span className="video-mainpage-prezent-btn">презентация</span>
+                                    <Link 
+                                        to={'/static/media/cosmtech-prezentation.pdf'} 
+                                        target={"_blank"} 
+                                        className="video-mainpage-prezent-btn"
+                                    >Презентация</Link>
                                 </div>
                             </div>
                         </div>

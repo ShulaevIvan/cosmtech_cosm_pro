@@ -495,9 +495,13 @@ section {
 .services-view-all-services-btn:hover,
 .prefooter-order-form-btn:hover,
 .main-footer-btn-send:hover,
-.send-review-btn:hover,
+.send-review-btn:hover {
+  background-color: #00458B;
+  transition: background .4s ease;
+}
 .video-mainpage-prezent-btn:hover {
   background-color: #00458B;
+  color: white;
   transition: background .4s ease;
 }
 /* video */

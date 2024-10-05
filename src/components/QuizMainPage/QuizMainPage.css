@@ -9,7 +9,7 @@
     min-height: 400px;
     position: absolute;
     left: 20%;
-    top: 2%;
+    top: 1%;
     background-color: white;
     border: 1px solid #00458B;
     border-radius: 10px;
@@ -20,6 +20,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    max-width: 1000px;
+    min-width: 1000px;
     justify-content: space-between;
 }
 .quiz-controlpanel-wrap {
@@ -61,8 +63,11 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
+    min-height: 750px;
+    max-height: 750px;
     max-width: 75%;
-    padding: 10px;
+    min-width: 75%;
+    padding: 10px 10px 10px 0;
     overflow: hidden;
     position: relative;
     right: 0;
@@ -75,7 +80,7 @@
     padding: 10px;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .quiz-mainpage-title-wrap {
     display: flex;
@@ -85,6 +90,7 @@
     max-width: 80%;
 }
 .quiz-mainpage-title-wrap h2 {
+    text-align: center;
     margin: 0;
 }
 .quiz-mainpage-close-btn-wrap {
@@ -101,6 +107,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
+    min-width: 750px;
     justify-content: space-around;
 }
 .quiz-products-row {
@@ -122,7 +129,7 @@
     min-height: 300px;
     min-width: 180px;
     width: 30%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     cursor: pointer;
     position: relative;
     border: 1px solid transparent;
@@ -159,22 +166,33 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: auto;
 }
-.next-step-btn-wrap {
-    padding-left: 30%;
+.next-step-btn-wrap,
+.prev-step-btn-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 33%;
+    justify-content: center;
 }
 .step-counter-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 20%;
     padding: 0 10px;
 }
-.next-step-btn {
+.next-step-btn,
+.prev-step-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
+    position: relative;
+    width: 130px;
+    max-width: 200px;
     height: 30px;
     padding: 0 40px;
-    font-size: 18px;
+    font-size: 14px;
     color: #fff;
     text-decoration: none;
     -webkit-user-select: none;
@@ -184,4 +202,31 @@
     outline: none;
     cursor: pointer;
     border-radius: 5px;
+}
+.prev-step-btn {
+    width: 200px;
+    background: none;
+    color: #1E1E1E;
+}
+.next-step-btn::before {
+    content:'\2192';
+    position: absolute;
+    font-size: 20px;
+    top: -5%;
+    right: 5%;
+}
+.prev-step-btn::before {
+    content: '\2190';
+    position: absolute;
+    font-size: 20px;
+    top: -5%;
+    left: 5%;
+}
+.step-counter-value {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

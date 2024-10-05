@@ -23,6 +23,7 @@ const importAllImages = (ctxWebpuck) => {
     ctxWebpuck.keys().forEach((item, index) => { images[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
     return images;
 };
+
 const productionSlides = importAllImages(require.context('../../img/mainpageSlides', false, /\.(png|jpe?g|svg)$/));
 const independenceIcons = importAllImages(require.context('../../img/independensImg', false, /\.(png|jpe?g|svg)$/));
 const reviewImages = importAllImages(require.context('../../img/reviewsUsers', false, /\.(png|jpe?g|svg)$/));

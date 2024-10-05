@@ -37,7 +37,7 @@ const HeroMainPage = () => {
                             <div className="hero-img-action-button-wrap">
                                 <span 
                                     className="hero-img-action-button-main"
-                                    // onClick={quizHandler}
+                                    onClick={quizHandler}
                                 >Калькулятор</span>
                             </div>
                             <div className="hero-img-action-button-wrap">
