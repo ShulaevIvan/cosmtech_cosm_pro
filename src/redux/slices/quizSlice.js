@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice, createAction, createAsyncThunk, current } from "@reduxjs/toolkit";
 import demoImg from '../../img/quizImages/200x275.png';
 import quizCheckbox from '../../img/quizImages/quiz_checkbox.svg';
 import quizCheckboxActive from '../../img/quizImages/quiz_checkbox-active.svg';
@@ -9,6 +9,26 @@ const initialState = {
     showPrevStepBtn: false,
     nextBtnText: 'Следующий шаг',
     prevBtnText: 'К предыдущему шагу',
+    quizMenu: [
+        {
+            id: 1,
+            name: 'Расчитайте стоимость',
+            active: true,
+            icon: '',
+        },
+        {
+            id: 2,
+            name: 'Задайте нам вопрос',
+            active: false,
+            icon: '',
+        },
+        {
+            id: 3,
+            name: 'Готовые решения',
+            active: false,
+            icon: '',
+        }
+    ],
     qizSteps: [
         {
             id: 1,
@@ -16,6 +36,7 @@ const initialState = {
             stepTitle: 'Выберите продукт для изготовления',
             stepNum: 1,
             active: true,
+            stepValid: false,
             products: [
                 { 
                     id: 1,
@@ -76,9 +97,10 @@ const initialState = {
         {
             id: 2,
             name: 'Количество',
-            stepTitle: 'Выберите продукт для изготовления',
+            stepTitle: 'Укажите количество',
             stepNum: 2,
             active: false,
+            stepValid: false,
         },
         {
             id: 3,
@@ -86,6 +108,7 @@ const initialState = {
             stepTitle: 'Выберите продукт для изготовления',
             stepNum: 3,
             active: false,
+            stepValid: false,
         },
         {
             id: 4,
@@ -93,6 +116,7 @@ const initialState = {
             stepTitle: 'Выберите продукт для изготовления',
             stepNum: 4,
             active: false,
+            stepValid: false,
         },
         {
             id: 5,
@@ -100,6 +124,7 @@ const initialState = {
             stepTitle: 'Выберите продукт для изготовления',
             stepNum: 5,
             active: false,
+            stepValid: false,
         }
         
     ]
@@ -139,11 +164,54 @@ const qizSlice = createSlice({
         },
         selectProduct(state, action) {
             const { selectItem } = action.payload;
+            const productStep = state.qizSteps.find((quizItem) => quizItem.stepNum === state.currentStep);
+            if (!productStep.products) return;
+            state.qizSteps = state.qizSteps.map((stepItem) => {
+                if (stepItem.id === productStep.id){
+                    return {
+                        ...stepItem,
+                        products: stepItem.products.map((productItem) => {
+                            if (productItem.id === selectItem.id) {
+                                return {
+                                    ...productItem,
+                                    selected: productItem.selected ? false : true
+                                }
+                            }
+                            return {
+                                ...productItem,
+                                selected: false
+                            }
+                        })
+                    }
+                }
+                return stepItem;
+            });
+            if (state.currentStep === 1) {
+                state.qizSteps = [...state.qizSteps.map((stepItem) => {
+                    if (stepItem.stepNum === state.currentStep && stepItem.products.find((item) => item.selected)) {
+                        return {
+                            ...stepItem,
+                            stepValid: true
+                        }
+                    }
+                    return {
+                        ...stepItem,
+                        stepValid: false
+                    }
+                })];
+            }
+        },
+        resetQuiz(state) {
+            state = initialState;
         }
-    }
+    },
+    extraReducers: (builder) => builder.addCase(resetQuizState, () => initialState)
 });
 
 export const {
-    nextStep
+    nextStep,
+    selectProduct,
+    resetQuiz
 } = qizSlice.actions;
+export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;

@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { nextStep } from "../../redux/slices/quizSlice";
+import { nextStep, selectProduct } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
+import QuizStep2 from './QuizStep2';
 
 const QuizMainPage = (props) => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const QuizMainPage = (props) => {
     };
 
     const productSelectHandler = (product) => {
-        console.log(product)
+        dispatch(selectProduct({selectItem: product}));
     };
 
     useEffect(() => {
@@ -27,7 +28,6 @@ const QuizMainPage = (props) => {
         if (stepData) {
             stepTitle.current.textContent = stepData.stepTitle;
         }
-
     }, [quizState.currentStep]);
 
     return (
@@ -35,10 +35,17 @@ const QuizMainPage = (props) => {
             <div className="quiz-mainpage-popup-wrap">
                 <div className="quiz-mainpage-body-row">
                     <div className="quiz-controlpanel-wrap">
-                        <div className="quiz-controlpanel-item quiz-controlpanel-item-active">1</div>
-                        <div className="quiz-controlpanel-item">2</div>
-                        <div className="quiz-controlpanel-item">3</div>
-                        <div className="quiz-controlpanel-item">4</div>
+                        {quizState.quizMenu.map((quizMenuItem) => {
+                            return (
+                                <React.Fragment key={quizMenuItem.id}>
+                                    <div className={
+                                        quizMenuItem.active ? 
+                                            "quiz-controlpanel-item quiz-controlpanel-item-active": "quiz-controlpanel-item"
+                                        }
+                                    >{quizMenuItem.name}</div>
+                                </React.Fragment>
+                            )
+                        })}
                     </div>
                         <div className="quiz-content-wrap">
                         <div className="quiz-mainpage-title-row">
@@ -59,6 +66,11 @@ const QuizMainPage = (props) => {
                                     productSelectHandler={productSelectHandler}
                                 /> 
                             : null}
+                            {quizState.currentStep === 2 ? 
+                                <QuizStep2 
+                                    stepData={findStep(2)} 
+                                /> 
+                            : null}
                             
                         </div>
                         <div className="next-step-wrap">
@@ -72,13 +84,16 @@ const QuizMainPage = (props) => {
                             </div>
                             <div className="next-step-btn-wrap">
                                 <span 
-                                    className="next-step-btn"
+                                    className={
+                                        quizState.qizSteps.find((item) => item.stepValid && item.stepNum === quizState.currentStep) ? 
+                                            "next-step-btn" : "next-step-btn btnDisabled" 
+                                        }
                                     onClick={() => nextStepHandler(1)}
                                 >{quizState.nextBtnText}</span>
                             </div>
                             <div className="step-counter-wrap">
                                 <div className="step-counter-value">
-                                    <span><span>Step:</span> {quizState.currentStep} / </span>
+                                    <span><span>Шаг:</span> {quizState.currentStep} / </span>
                                     <span>{quizState.maxSteps}</span>
                                 </div>
                             </div>

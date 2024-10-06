@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MainPageOrderForm from "../MainPageOrderForm/MainPageOrderForm";
 import MainPageOrderFormHappy from "../MainPageOrderForm/MainPageOrderFormHappy";
 import { openOrderFrom, quizPopupShow } from "../../redux/slices/mainPageSlice";
+import { resetQuizState } from "../../redux/slices/quizSlice";
 import QuizMainPage from "../QuizMainPage/QuizMainPage";
 
 const HeroMainPage = () => {
@@ -16,6 +17,7 @@ const HeroMainPage = () => {
     
     const quizHandler = () => {
         dispatch(quizPopupShow({status: quizPopupStatus ? false : true}));
+        dispatch(resetQuizState());
     };
     
     return (

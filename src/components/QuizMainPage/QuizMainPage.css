@@ -12,6 +12,7 @@
     top: 1%;
     background-color: white;
     border: 1px solid #00458B;
+    padding: 4px 0 0 4px;
     border-radius: 10px;
     animation-duration: 0.3s;
     animation-name: grow;
@@ -44,6 +45,8 @@
     border-right: 1px solid #E0E0E0;
     border-bottom: 1px solid #E0E0E0;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 .quiz-controlpanel-item-active {
     color: white;
@@ -136,6 +139,7 @@
 }
 .quiz-products-item:hover {
     border: 1px solid #3FD2C7;
+    transition: border-color 0.5s ease; 
 }
 .quiz-product-selected-icon-wrap {
     position: absolute;
@@ -154,6 +158,7 @@
     max-width: 300px;
     min-width: 180px;
     text-align: center;
+    font-size: 18px;
 }
 .quiz-products-item h4 {
     margin: 0;
@@ -166,7 +171,6 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 10px;
     margin-top: auto;
 }
 .next-step-btn-wrap,
@@ -229,4 +233,57 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+.quantity-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.quantity-title-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.quantity-title-wrap h3 {
+    margin: 0;
+}
+.quantity-quiz-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.quantity-quiz-range-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    max-width: 500px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 0 65px 0 45px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.quantity-value-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.quantity-quiz-range {
+    width: 100%;
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+    accent-color: #00458B;
+    cursor: ew-resize;
 }
