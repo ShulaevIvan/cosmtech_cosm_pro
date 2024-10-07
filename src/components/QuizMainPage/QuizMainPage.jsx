@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { nextStep, selectProduct } from "../../redux/slices/quizSlice";
+import { nextStep, selectProduct, disableQuantity, changeQuantity, changeMaxQuantity } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
 
@@ -12,6 +12,21 @@ const QuizMainPage = (props) => {
 
     const nextStepHandler = (param) => {
         dispatch(nextStep({stepParam: param}));
+    };
+
+    const quantityBlockHandler = (param, customValue) => {
+        if (customValue) {
+            return;
+        }
+        dispatch(disableQuantity({status: param}));
+    };
+
+    const changeQuantityHandler = (numValue) => {
+        dispatch(changeQuantity({qntValue: numValue}));
+    };
+
+    const changeMaxQuantityHandler = (numValue) => {
+        dispatch(changeMaxQuantity({qntValue: numValue}));
     };
 
     const findStep = (stepNum) => {
@@ -32,6 +47,7 @@ const QuizMainPage = (props) => {
 
     return (
         <React.Fragment>
+            <div className="quiz-mainpage-popup-background">
             <div className="quiz-mainpage-popup-wrap">
                 <div className="quiz-mainpage-body-row">
                     <div className="quiz-controlpanel-wrap">
@@ -68,7 +84,10 @@ const QuizMainPage = (props) => {
                             : null}
                             {quizState.currentStep === 2 ? 
                                 <QuizStep2 
-                                    stepData={findStep(2)} 
+                                    stepData={findStep(2)}
+                                    qntHandler={quantityBlockHandler}
+                                    changeQntHandler={changeQuantityHandler}
+                                    changeMaxQntHandler={changeMaxQuantityHandler}
                                 /> 
                             : null}
                             
@@ -101,6 +120,7 @@ const QuizMainPage = (props) => {
 
                     </div>
                 </div>
+            </div>
             </div>
         </React.Fragment>
     )

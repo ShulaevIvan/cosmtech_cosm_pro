@@ -97,8 +97,24 @@ const initialState = {
         {
             id: 2,
             name: 'Количество',
-            stepTitle: 'Укажите количество',
+            stepTitle: 'Количество продукции и сроки',
             stepNum: 2,
+            quantity: {
+                value: 25000,
+                defaultValue: 25000,
+                minQnt: 1500,
+                maxQnt: 500000,
+                customValue: 0,
+                inputActive: false
+            },
+            deadLineItems: [
+                { id: 1, name: 'deadlineName 1', selected: false },
+                { id: 2, name: 'deadlineName 2', selected: false },
+                { id: 3, name: 'deadlineName 3', selected: false },
+                { id: 4, name: 'deadlineName 4', selected: false },
+                { id: 5, name: 'deadlineName 5', selected: false },
+                { id: 6, name: 'deadlineName 6', selected: false },
+            ],
             active: false,
             stepValid: false,
         },
@@ -203,6 +219,41 @@ const qizSlice = createSlice({
         },
         resetQuiz(state) {
             state = initialState;
+        },
+        disableQuantity(state, action) {
+            const { status } = action.payload;
+            state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep) {
+                    quizStep.quantity = {
+                        ...quizStep.quantity,
+                        inputActive: status,
+                    }
+                }
+            });
+        },
+        changeQuantity(state, action) {
+            const { qntValue } = action.payload;
+            state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep) {
+                    quizStep.quantity = {
+                        ...quizStep.quantity,
+                        customValue: 0,
+                        value: qntValue,
+                    }
+                }
+            });
+        },
+        changeMaxQuantity(state, action) {
+            const { qntValue } = action.payload;
+            state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep) {
+                    quizStep.quantity = {
+                        ...quizStep.quantity,
+                        value: qntValue,
+                        maxQnt: Number(qntValue),
+                    }
+                }
+            });
         }
     },
     extraReducers: (builder) => builder.addCase(resetQuizState, () => initialState)
@@ -211,7 +262,10 @@ const qizSlice = createSlice({
 export const {
     nextStep,
     selectProduct,
-    resetQuiz
+    resetQuiz,
+    disableQuantity,
+    changeQuantity,
+    changeMaxQuantity
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;
