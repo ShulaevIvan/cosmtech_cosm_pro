@@ -5,6 +5,7 @@ const QuizStep2 = (props) => {
     const qntValueRef = useRef(null);
     const rangeQntRef = useRef(null);
     const checkboxRef = useRef(null);
+    const deadlineInputRef = useRef(null);
 
     const applyQntHandler = async (value) => {
         return new Promise((resolve, reject) => {
@@ -20,6 +21,10 @@ const QuizStep2 = (props) => {
     useEffect(() => {
         qntValueRef.current.value = rangeQntRef.current.value;
     }, [stepData.quantity.value]);
+
+    useEffect(() => {
+        props.validateStep();
+    }, [stepData.deadLineItems]);
 
     return (
         <React.Fragment>
@@ -69,19 +74,23 @@ const QuizStep2 = (props) => {
 
                 <div className="quiz-deadline-wrap">
                     <h3>Сроки изготовления</h3>
-                    <div className="quiz-dedline-description-wrap">
+                    <div className="quiz-dedaline-description-wrap">
                         <p>От срочности может зависить цена</p>
                     </div>
-                    <div className="quiz-dedline-radio-wrap">
+                    <div className="quiz-deadline-radio-wrap">
                         <fieldset>
                             {stepData.deadLineItems.map((deadlineItem) => {
                                 return (
                                     <React.Fragment key={deadlineItem.id}>
                                         <div className="quiz-deadline-radio-item">
-                                            <input 
+                                            <input
+                                                onClick={() => props.deadlineHandler(
+                                                    deadlineItem, 
+                                                    deadlineItem.id === Array.from(stepData.deadLineItems.length) ? deadlineInputRef.current.value : null
+                                                )}
                                                 type="radio" 
                                                 id={`${deadlineItem.name}-${deadlineItem.id}`} 
-                                                name="deadline" value={deadlineItem.name} 
+                                                name="deadline" value={deadlineItem.name}
                                             />
                                             <label htmlFor={`${deadlineItem.name}-${deadlineItem.id}`}>{deadlineItem.name}</label>
                                         </div>
@@ -89,6 +98,22 @@ const QuizStep2 = (props) => {
                                 )
                             })}
                         </fieldset>
+                        {stepData.deadLineItems.find((item) => item.id === stepData.deadLineItems.length).selected ? 
+                            <React.Fragment>
+                                <div className="quiz-deadline-custom-wrap">
+                                    <div className="quiz-deadline-custom-input-wrap">
+                                        <textarea 
+                                            ref={deadlineInputRef}>
+                                        </textarea>
+                                        <span className="quiz-deadline-custom-btn-wrap">
+                                            <button
+                                                onClick={() => props.deadlineSaveHandler(deadlineInputRef.current.value)}
+                                            >Сохранить</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        : null}
                     </div>
                 </div>
             </div>

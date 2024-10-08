@@ -9,6 +9,11 @@ const initialState = {
     showPrevStepBtn: false,
     nextBtnText: 'Следующий шаг',
     prevBtnText: 'К предыдущему шагу',
+    quizResult: {
+        productName: '',
+        productQuantity: '',
+        orderDeadline: '',
+    },
     quizMenu: [
         {
             id: 1,
@@ -113,8 +118,12 @@ const initialState = {
                 { id: 3, name: 'deadlineName 3', selected: false },
                 { id: 4, name: 'deadlineName 4', selected: false },
                 { id: 5, name: 'deadlineName 5', selected: false },
-                { id: 6, name: 'deadlineName 6', selected: false },
+                { id: 6, name: 'свой вариант', selected: false, customValue: '' },
             ],
+            deadLineCustomField: {
+                fieldValue: '',
+                active: false,
+            },
             active: false,
             stepValid: false,
         },
@@ -150,9 +159,6 @@ const qizSlice = createSlice({
     name: 'quizSlice',
     initialState,
     reducers: {
-        testRed(state, action) {
-
-        },
         nextStep(state, action) {
             const { stepParam } = action.payload;
             let nextStep;
@@ -254,6 +260,76 @@ const qizSlice = createSlice({
                     }
                 }
             });
+        },
+        selectDeadline(state, action) {
+            const { itemId, customValue } = action.payload;
+            state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.deadLineItems) {
+                    quizStep.deadLineItems = quizStep.deadLineItems.map((deadlineItem) => {
+                        if (itemId === Array.from(quizStep.deadLineItems.length) && customValue) {
+                            return {
+                                ...deadlineItem,
+                                selected: true,
+                                customValue: '',
+                            }
+                        }
+                        else if (deadlineItem.id === itemId && itemId !== Array.from(quizStep.deadLineItems.length)) {
+                            return {
+                                ...deadlineItem,
+                                selected: true,
+                                customValue: '',
+                            }
+                        }
+                        return {
+                            ...deadlineItem,
+                            selected: false,
+                        }
+                    });
+                }
+                return quizStep;
+            });
+        },
+        saveDeadlineCustomValue(state, action) {
+            const { customValue } = action.payload;
+            state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep) {
+                    quizStep.deadLineItems = quizStep.deadLineItems.map((deadlineItem) => {
+                        if (deadlineItem.id === Array.from(quizStep.deadLineItems).length) {
+                            return {
+                                ...deadlineItem,
+                                selected: true,
+                                customValue: customValue
+                            }
+                        }
+                        return deadlineItem;
+                    });
+                }
+                return quizStep;
+            });
+        },
+        validateStep(state) {
+            if (state.currentStep === 2) {
+                const stepIndex = state.currentStep - 1;
+                const checkDeadlines = state.qizSteps[stepIndex].deadLineItems.find((item) => item.selected);
+                const checkCustomValue = state.qizSteps[stepIndex].deadLineItems.find((item) => item.customValue);
+                const deadlineLastId = state.qizSteps[stepIndex].deadLineItems.length;
+                const checkQuantity = state.qizSteps[stepIndex].quantity.value;
+                state.qizSteps = state.qizSteps.map((quizStep) => {
+                    if ((checkDeadlines && checkDeadlines.id !== deadlineLastId && checkQuantity) || (checkDeadlines && checkCustomValue && checkQuantity)) {
+                        return {
+                            ...quizStep,
+                            stepValid: true
+                        }
+                    }
+                    else if (quizStep.id === 2) {
+                        return {
+                            ...quizStep,
+                            stepValid: false
+                        }
+                    }
+                    return quizStep;
+                })
+            }
         }
     },
     extraReducers: (builder) => builder.addCase(resetQuizState, () => initialState)
@@ -261,11 +337,14 @@ const qizSlice = createSlice({
 
 export const {
     nextStep,
+    validateStep,
     selectProduct,
     resetQuiz,
     disableQuantity,
     changeQuantity,
-    changeMaxQuantity
+    changeMaxQuantity,
+    selectDeadline,
+    saveDeadlineCustomValue
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;

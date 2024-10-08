@@ -1,7 +1,16 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { nextStep, selectProduct, disableQuantity, changeQuantity, changeMaxQuantity } from "../../redux/slices/quizSlice";
+import { 
+    nextStep,
+    validateStep,
+    selectProduct, 
+    disableQuantity, 
+    changeQuantity, 
+    changeMaxQuantity,
+    selectDeadline,
+    saveDeadlineCustomValue
+} from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
 
@@ -29,6 +38,14 @@ const QuizMainPage = (props) => {
         dispatch(changeMaxQuantity({qntValue: numValue}));
     };
 
+    const deadlineHandler = (deadLineItem) => {
+        dispatch(selectDeadline({itemId: deadLineItem.id}));
+    };
+
+    const customDeadlineSaveHandler = (saveValue) => {
+        dispatch(saveDeadlineCustomValue({customValue: saveValue}));
+    };
+
     const findStep = (stepNum) => {
         const stepData = quizState.qizSteps.find((quizItem) => quizItem.stepNum === stepNum);
         return stepData;
@@ -38,12 +55,17 @@ const QuizMainPage = (props) => {
         dispatch(selectProduct({selectItem: product}));
     };
 
+    const validateCurrentStep = () => {
+        dispatch(validateStep());
+    };
+
     useEffect(() => {
         const stepData = findStep(quizState.currentStep);
         if (stepData) {
             stepTitle.current.textContent = stepData.stepTitle;
         }
     }, [quizState.currentStep]);
+    
 
     return (
         <React.Fragment>
@@ -88,6 +110,9 @@ const QuizMainPage = (props) => {
                                     qntHandler={quantityBlockHandler}
                                     changeQntHandler={changeQuantityHandler}
                                     changeMaxQntHandler={changeMaxQuantityHandler}
+                                    deadlineHandler={deadlineHandler}
+                                    deadlineSaveHandler={customDeadlineSaveHandler}
+                                    validateStep={validateCurrentStep}
                                 /> 
                             : null}
                             

@@ -351,13 +351,13 @@
 .quiz-deadline-wrap h3 {
     margin: 0;
 }
-.quiz-dedline-radio-wrap fieldset {
+.quiz-deadline-radio-wrap fieldset {
     border: none;
 }
 .quiz-deadline-radio-item {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .quiz-deadline-radio-item input {
     width: 16px;
@@ -366,4 +366,49 @@
 .quiz-deadline-radio-item input,
 .quiz-deadline-radio-item label {
     cursor: pointer;
+}
+.quiz-deadline-custom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.quiz-deadline-custom-input-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.quiz-deadline-custom-input-wrap textarea {
+    min-width: 300px;
+}
+.quiz-deadline-custom-input-wrap textarea,
+.quiz-deadline-custom-input-wrap button {
+    min-height: 40px;
+    max-height: 40px;
+}
+.quiz-deadline-custom-btn-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+.quiz-deadline-custom-input-wrap button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 200px;
+    height: 20px;
+    padding: 0 20px;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
 }
