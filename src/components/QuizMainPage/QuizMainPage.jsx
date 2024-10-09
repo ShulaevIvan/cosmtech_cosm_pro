@@ -13,6 +13,7 @@ import {
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
+import QuizStep3 from "./QuizStep3";
 
 const QuizMainPage = (props) => {
     const dispatch = useDispatch();
@@ -31,11 +32,15 @@ const QuizMainPage = (props) => {
     };
 
     const changeQuantityHandler = (numValue) => {
+        if (isNaN(numValue) || numValue === '') return;
         dispatch(changeQuantity({qntValue: numValue}));
     };
 
-    const changeMaxQuantityHandler = (numValue) => {
-        dispatch(changeMaxQuantity({qntValue: numValue}));
+    const changeMaxQuantityHandler = async (numValue) => {
+        if (isNaN(numValue) || numValue === '') return;
+        return new Promise((resolve, reject) => {
+            resolve(dispatch(changeMaxQuantity({qntValue: numValue})));
+        })
     };
 
     const deadlineHandler = (deadLineItem) => {
@@ -46,17 +51,17 @@ const QuizMainPage = (props) => {
         dispatch(saveDeadlineCustomValue({customValue: saveValue}));
     };
 
-    const findStep = (stepNum) => {
-        const stepData = quizState.qizSteps.find((quizItem) => quizItem.stepNum === stepNum);
-        return stepData;
-    };
-
     const productSelectHandler = (product) => {
         dispatch(selectProduct({selectItem: product}));
     };
 
     const validateCurrentStep = () => {
         dispatch(validateStep());
+    };
+
+    const findStep = (stepNum) => {
+        const stepData = quizState.qizSteps.find((quizItem) => quizItem.stepNum === stepNum);
+        return stepData;
     };
 
     useEffect(() => {
@@ -115,7 +120,11 @@ const QuizMainPage = (props) => {
                                     validateStep={validateCurrentStep}
                                 /> 
                             : null}
-                            
+                            {quizState.currentStep === 3 ? 
+                                <QuizStep3 
+                                    stepData={findStep(3)}
+                                /> 
+                            : null}
                         </div>
                         <div className="next-step-wrap">
                             <div className="prev-step-btn-wrap">

@@ -8,14 +8,19 @@ const QuizStep2 = (props) => {
     const deadlineInputRef = useRef(null);
 
     const applyQntHandler = async (value) => {
-        return new Promise((resolve, reject) => {
-            resolve(props.changeMaxQntHandler(qntValueRef.current.value));
-        })
-        .then((data) => {
-            rangeQntRef.current.value = qntValueRef.current.value;
+        await props.changeMaxQntHandler(qntValueRef.current.value)
+        .then(() => {
+            rangeQntRef.current.value = value;
             qntValueRef.current.value = value;
             checkboxRef.current.click();
         });
+    };
+
+    const validateQntInput = () => {
+        if (isNaN(Number(qntValueRef.current.value)) || !/^[0-9]+$/.test(Number(qntValueRef.current.value)) || !qntValueRef.current.value.trim()) {
+            qntValueRef.current.value = '';
+            return;
+        }
     };
 
     useEffect(() => {
@@ -43,6 +48,7 @@ const QuizStep2 = (props) => {
                         <label htmlFor="quiz-qnt">Количество от</label>
                         <input
                             ref={qntValueRef}
+                            onInput={validateQntInput}
                             disabled={stepData.quantity.inputActive ? false : true} 
                             id="quiz-qnt" 
                             type="text"
@@ -50,7 +56,10 @@ const QuizStep2 = (props) => {
                         <span>шт</span>
                         {stepData.quantity.inputActive ? 
                             <div className="qnt-apply-wrap">
-                                <button onClick={() => applyQntHandler(qntValueRef.current.value)}>применить</button>
+                                <button 
+                                    onClick={() => applyQntHandler(qntValueRef.current.value)}
+                                    className="qnt-apply-button"
+                                >применить</button>
                             </div>
                         : null}
                         
@@ -66,7 +75,7 @@ const QuizStep2 = (props) => {
                                 min={stepData.quantity.minQnt}
                                 max={stepData.quantity.maxQnt}
                                 defaultValue={stepData.quantity.defaultValue}
-                                step="1" 
+                                step="500" 
                             />
                         </div>
                     </div>

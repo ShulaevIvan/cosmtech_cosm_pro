@@ -11,12 +11,12 @@ const CraftedSeries = () => {
         dispatch(projectSlideMove({ position: pos}));
     };
 
-    useEffect(() => {
-        const slides = setInterval(() => {
-            dispatch(projectSlideMove({ position: 1}));
-        }, 6000);
-        return () => clearInterval(slides);
-    }, [projectsState.slides]);
+    // useEffect(() => {
+    //     const slides = setInterval(() => {
+    //         dispatch(projectSlideMove({ position: 1}));
+    //     }, 6000);
+    //     return () => clearInterval(slides);
+    // }, [projectsState.slides]);
 
 
     return (

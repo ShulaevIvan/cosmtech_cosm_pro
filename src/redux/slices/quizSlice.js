@@ -23,13 +23,13 @@ const initialState = {
         },
         {
             id: 2,
-            name: 'Задайте нам вопрос',
+            name: 'Задайте вопрос технологу',
             active: false,
             icon: '',
         },
         {
             id: 3,
-            name: 'Готовые решения',
+            name: 'Скачать ТЗ',
             active: false,
             icon: '',
         }
@@ -97,7 +97,7 @@ const initialState = {
                     checkboxIconInactive: quizCheckbox,
                     image: demoImg
                 }
-            ]
+            ],
         },
         {
             id: 2,
@@ -113,11 +113,11 @@ const initialState = {
                 inputActive: false
             },
             deadLineItems: [
-                { id: 1, name: 'deadlineName 1', selected: false },
-                { id: 2, name: 'deadlineName 2', selected: false },
-                { id: 3, name: 'deadlineName 3', selected: false },
-                { id: 4, name: 'deadlineName 4', selected: false },
-                { id: 5, name: 'deadlineName 5', selected: false },
+                { id: 1, name: 'как можно скорее', selected: false },
+                { id: 2, name: 'от 4 до 8 недель', selected: false },
+                { id: 3, name: 'до 12 недель', selected: false },
+                { id: 4, name: 'до 3 мес', selected: false },
+                { id: 5, name: 'до 6 месяцев', selected: false },
                 { id: 6, name: 'свой вариант', selected: false, customValue: '' },
             ],
             deadLineCustomField: {
@@ -129,16 +129,189 @@ const initialState = {
         },
         {
             id: 3,
-            name: 'Дополнительно',
-            stepTitle: 'Выберите продукт для изготовления',
+            name: 'Упаковка и ссылка на похожую',
+            stepTitle: 'Формат планируемой упаковки',
+            package: [
+                { 
+                    id: 1, 
+                    name: 'Флаконы косметические', 
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ],
+                    page: 1,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 2, 
+                    name: 'Тубы и тубофлаконы',
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ], 
+                    page: 1,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 3, 
+                    name: 'Банки косметические',
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ],
+                    page: 1,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 4, 
+                    name: 'Флаконы Roll-on ',
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ],
+                    page: 1,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 5,
+                    name: 'Косметические линейки', 
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ],
+                    page: 1,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 6, 
+                    name: 'Вакуумные флаконы', 
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ],
+                    page: 1,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 7, 
+                    name: 'Флаконы-пенообразователи', 
+                    selected: false,
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ],
+                    page: 2,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 8, 
+                    name: 'Косметическая ПЭТ упаковка', 
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ],
+                    page: 2,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 9, 
+                    name: 'Алюминиевая упаковка', 
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ], 
+                    page: 2,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 10, 
+                    name: 'Атомайзеры', 
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ], 
+                    page: 2,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 11, 
+                    name: 'Стеклянная косметическая упаковка', 
+                    selected: false,
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ],
+                    page: 2,
+                    showCustomField: false,  
+                    selected: false
+                },
+                { 
+                    id: 12, 
+                    name: 'Фиолки',
+                    sizes: [
+                        {id: 1, name: 'ml', value: 20, selected: true,},
+                        {id: 2, name: 'ml', value: 30, selected: false,},
+                        {id: 3, name: 'ml', value: 40, selected: false,},
+                        {id: 4, name: 'ml', value: 50, selected: false,},
+                        {id: 5, name: 'ml', value: 60, selected: false,},
+                    ],
+                    page: 2,
+                    showCustomField: false,
+                    selected: false
+                },
+            ],
+            packagePages: [{id: 1, active: true }, {id: 2, active: false}],
             stepNum: 3,
             active: false,
             stepValid: false,
         },
         {
             id: 4,
-            name: 'Доставка',
-            stepTitle: 'Выберите продукт для изготовления',
+            name: 'Дополнительно',
+            stepTitle: 'Дополнительные условия',
             stepNum: 4,
             active: false,
             stepValid: false,
@@ -146,7 +319,7 @@ const initialState = {
         {
             id: 5,
             name: 'Результат',
-            stepTitle: 'Выберите продукт для изготовления',
+            stepTitle: 'Укажите куда выслать рассчет',
             stepNum: 5,
             active: false,
             stepValid: false,
@@ -329,6 +502,9 @@ const qizSlice = createSlice({
                     }
                     return quizStep;
                 })
+            }
+            else if (state.currentStep === 3) {
+                console.log('test')
             }
         }
     },

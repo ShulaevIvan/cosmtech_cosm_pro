@@ -42,6 +42,7 @@
     filter: brightness(0.8);
 }
 .crafted-series-slide-img img {
+    display: flex;
     max-width: 528px;
 }
 .crafted-series-slide-control {
@@ -110,11 +111,11 @@
 @media (min-width: 200px) and (max-width: 800px)  {
     .crafted-series-row {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
         overflow-y: hidden;
+        margin: 0;
+        padding: 0;
     }
 }
 @media (min-width: 200px) and (max-width: 800px)  {
@@ -125,8 +126,11 @@
 @media (min-width: 200px) and (max-width: 800px)  {
     .slide-active {
         display:  flex;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 560px;
         justify-content: center;
-        align-items: center;
+        /* align-items: center; */
     }
 }
 @media (min-width: 200px) and (max-width: 800px)  {
