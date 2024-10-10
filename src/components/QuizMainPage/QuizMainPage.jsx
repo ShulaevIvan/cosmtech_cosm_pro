@@ -9,7 +9,9 @@ import {
     changeQuantity, 
     changeMaxQuantity,
     selectDeadline,
-    saveDeadlineCustomValue
+    saveDeadlineCustomValue,
+    showCustomPackageField,
+    selectPackage
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -62,6 +64,18 @@ const QuizMainPage = (props) => {
     const findStep = (stepNum) => {
         const stepData = quizState.qizSteps.find((quizItem) => quizItem.stepNum === stepNum);
         return stepData;
+    };
+
+    const showCustomPackageHandler = (status) => {
+        dispatch(showCustomPackageField({status: status}));
+    };
+
+    const selectPackageHandler = (packageId) => {
+        dispatch(selectPackage({packageId: packageId}));
+    };
+
+    const selectPackageSizeHandler = (sizeId) => {
+        console.log(sizeId)
     };
 
     useEffect(() => {
@@ -123,6 +137,9 @@ const QuizMainPage = (props) => {
                             {quizState.currentStep === 3 ? 
                                 <QuizStep3 
                                     stepData={findStep(3)}
+                                    showCustomPackageHandler={showCustomPackageHandler}
+                                    selectPackageHandler={selectPackageHandler}
+                                    selectPackageSizeHandler={selectPackageSizeHandler}
                                 /> 
                             : null}
                         </div>

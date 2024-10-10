@@ -131,6 +131,7 @@ const initialState = {
             id: 3,
             name: 'Упаковка и ссылка на похожую',
             stepTitle: 'Формат планируемой упаковки',
+            customPackageActive: false,
             package: [
                 { 
                     id: 1, 
@@ -143,7 +144,6 @@ const initialState = {
                         {id: 5, name: 'ml', value: 60, selected: false,},
                     ],
                     page: 1,
-                    showCustomField: false,  
                     selected: false
                 },
                 { 
@@ -157,7 +157,6 @@ const initialState = {
                         {id: 5, name: 'ml', value: 60, selected: false,},
                     ], 
                     page: 1,
-                    showCustomField: false,  
                     selected: false
                 },
                 { 
@@ -171,12 +170,11 @@ const initialState = {
                         {id: 5, name: 'ml', value: 60, selected: false,},
                     ],
                     page: 1,
-                    showCustomField: false,  
                     selected: false
                 },
                 { 
                     id: 4, 
-                    name: 'Флаконы Roll-on ',
+                    name: 'Флаконы Roll-on (мини-ролл) ',
                     sizes: [
                         {id: 1, name: 'ml', value: 20, selected: true,},
                         {id: 2, name: 'ml', value: 30, selected: false,},
@@ -185,12 +183,11 @@ const initialState = {
                         {id: 5, name: 'ml', value: 60, selected: false,},
                     ],
                     page: 1,
-                    showCustomField: false,  
                     selected: false
                 },
                 { 
                     id: 5,
-                    name: 'Косметические линейки', 
+                    name: 'Вакуумные флаконы (диспенсеры)', 
                     sizes: [
                         {id: 1, name: 'ml', value: 20, selected: true,},
                         {id: 2, name: 'ml', value: 30, selected: false,},
@@ -199,25 +196,10 @@ const initialState = {
                         {id: 5, name: 'ml', value: 60, selected: false,},
                     ],
                     page: 1,
-                    showCustomField: false,  
                     selected: false
                 },
                 { 
                     id: 6, 
-                    name: 'Вакуумные флаконы', 
-                    sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
-                    ],
-                    page: 1,
-                    showCustomField: false,  
-                    selected: false
-                },
-                { 
-                    id: 7, 
                     name: 'Флаконы-пенообразователи', 
                     selected: false,
                     sizes: [
@@ -227,79 +209,7 @@ const initialState = {
                         {id: 4, name: 'ml', value: 50, selected: false,},
                         {id: 5, name: 'ml', value: 60, selected: false,},
                     ],
-                    page: 2,
-                    showCustomField: false,  
-                    selected: false
-                },
-                { 
-                    id: 8, 
-                    name: 'Косметическая ПЭТ упаковка', 
-                    sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
-                    ],
-                    page: 2,
-                    showCustomField: false,  
-                    selected: false
-                },
-                { 
-                    id: 9, 
-                    name: 'Алюминиевая упаковка', 
-                    sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
-                    ], 
-                    page: 2,
-                    showCustomField: false,  
-                    selected: false
-                },
-                { 
-                    id: 10, 
-                    name: 'Атомайзеры', 
-                    sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
-                    ], 
-                    page: 2,
-                    showCustomField: false,  
-                    selected: false
-                },
-                { 
-                    id: 11, 
-                    name: 'Стеклянная косметическая упаковка', 
-                    selected: false,
-                    sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
-                    ],
-                    page: 2,
-                    showCustomField: false,  
-                    selected: false
-                },
-                { 
-                    id: 12, 
-                    name: 'Фиолки',
-                    sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
-                    ],
-                    page: 2,
-                    showCustomField: false,
+                    page: 1,
                     selected: false
                 },
             ],
@@ -480,6 +390,40 @@ const qizSlice = createSlice({
                 return quizStep;
             });
         },
+        showCustomPackageField(state, action) {
+            const { status } = action.payload;
+
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep) {
+                    return {
+                        ...quizStep,
+                        customPackageActive: status,
+                    }
+                }
+                return quizStep;
+            });
+        },
+        selectPackage(state, action) {
+            const { packageId } = action.payload;
+            state.qizSteps.find((stepItem) => stepItem.stepNum === state.currentStep)
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.id === 3) {
+                    quizStep.package = quizStep.package.map((packageItem) => {
+                        if (packageItem.id === packageId) {
+                            return {
+                                ...packageItem,
+                                selected: packageItem.selected ? false : true
+                            }
+                        }
+                        return {
+                            ...packageItem,
+                            selected: false
+                        }
+                    });
+                }
+                return quizStep;
+            })
+        },
         validateStep(state) {
             if (state.currentStep === 2) {
                 const stepIndex = state.currentStep - 1;
@@ -520,7 +464,9 @@ export const {
     changeQuantity,
     changeMaxQuantity,
     selectDeadline,
-    saveDeadlineCustomValue
+    showCustomPackageField,
+    saveDeadlineCustomValue,
+    selectPackage
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;
