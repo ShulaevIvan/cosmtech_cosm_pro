@@ -11,7 +11,9 @@ import {
     selectDeadline,
     saveDeadlineCustomValue,
     showCustomPackageField,
-    selectPackage
+    selectPackage,
+    selectPackageSize,
+    saveCustomPackageField
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -70,12 +72,17 @@ const QuizMainPage = (props) => {
         dispatch(showCustomPackageField({status: status}));
     };
 
+    const saveCustomPackageHandler = (text, file) => {
+        if (!text) return;
+        dispatch(saveCustomPackageField({textData: text, fileData: file}))
+    };
+    
     const selectPackageHandler = (packageId) => {
         dispatch(selectPackage({packageId: packageId}));
     };
 
-    const selectPackageSizeHandler = (sizeId) => {
-        console.log(sizeId)
+    const selectPackageSizeHandler = (sizeValue, sizeObj) => {
+        dispatch(selectPackageSize({packageId: sizeObj.id, sizeValue: sizeValue}));
     };
 
     useEffect(() => {
@@ -138,8 +145,10 @@ const QuizMainPage = (props) => {
                                 <QuizStep3 
                                     stepData={findStep(3)}
                                     showCustomPackageHandler={showCustomPackageHandler}
+                                    saveCustomPackageHandler={saveCustomPackageHandler}
                                     selectPackageHandler={selectPackageHandler}
                                     selectPackageSizeHandler={selectPackageSizeHandler}
+                                    validateStep={validateCurrentStep}
                                 /> 
                             : null}
                         </div>

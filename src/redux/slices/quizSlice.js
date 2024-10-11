@@ -2,6 +2,7 @@ import { createSlice, createAction, createAsyncThunk, current } from "@reduxjs/t
 import demoImg from '../../img/quizImages/200x275.png';
 import quizCheckbox from '../../img/quizImages/quiz_checkbox.svg';
 import quizCheckboxActive from '../../img/quizImages/quiz_checkbox-active.svg';
+import packageImgHold from '../../img/quizImages/250x250.png';
 
 const initialState = {
     maxSteps: 5,
@@ -131,18 +132,25 @@ const initialState = {
             id: 3,
             name: 'Упаковка и ссылка на похожую',
             stepTitle: 'Формат планируемой упаковки',
-            customPackageActive: false,
+            stepNum: 3,
+            customPackage: {
+                active: false,
+                fieldValue: '',
+                fieldFile: '',
+                fieldValid: true,
+            },
             package: [
                 { 
                     id: 1, 
                     name: 'Флаконы косметические', 
                     sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
+                        {id: 1, name: 'ml', value: 20, selected: true, packageId: 1,},
+                        {id: 2, name: 'ml', value: 30, selected: false, packageId: 1,},
+                        {id: 3, name: 'ml', value: 40, selected: false, packageId: 1,},
+                        {id: 4, name: 'ml', value: 50, selected: false, packageId: 1,},
+                        {id: 5, name: 'ml', value: 60, selected: false, packageId: 1,},
                     ],
+                    image: packageImgHold,
                     page: 1,
                     selected: false
                 },
@@ -150,12 +158,13 @@ const initialState = {
                     id: 2, 
                     name: 'Тубы и тубофлаконы',
                     sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
-                    ], 
+                        {id: 1, name: 'ml', value: 30, selected: true, packageId: 2,},
+                        {id: 2, name: 'ml', value: 40, selected: false, packageId: 2,},
+                        {id: 3, name: 'ml', value: 50, selected: false, packageId: 2,},
+                        {id: 4, name: 'ml', value: 60, selected: false, packageId: 2,},
+                        {id: 5, name: 'ml', value: 70, selected: false, packageId: 2,},
+                    ],
+                    image: packageImgHold,
                     page: 1,
                     selected: false
                 },
@@ -163,12 +172,13 @@ const initialState = {
                     id: 3, 
                     name: 'Банки косметические',
                     sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
+                        {id: 1, name: 'ml', value: 40, selected: true, packageId: 3,},
+                        {id: 2, name: 'ml', value: 50, selected: false, packageId: 3,},
+                        {id: 3, name: 'ml', value: 60, selected: false, packageId: 3,},
+                        {id: 4, name: 'ml', value: 70, selected: false, packageId: 3,},
+                        {id: 5, name: 'ml', value: 80, selected: false, packageId: 3,},
                     ],
+                    image: packageImgHold,
                     page: 1,
                     selected: false
                 },
@@ -176,12 +186,13 @@ const initialState = {
                     id: 4, 
                     name: 'Флаконы Roll-on (мини-ролл) ',
                     sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
+                        {id: 1, name: 'ml', value: 50, selected: true, packageId: 4,},
+                        {id: 2, name: 'ml', value: 60, selected: false, packageId: 4,},
+                        {id: 3, name: 'ml', value: 70, selected: false, packageId: 4,},
+                        {id: 4, name: 'ml', value: 80, selected: false, packageId: 4,},
+                        {id: 5, name: 'ml', value: 90, selected: false, packageId: 4,},
                     ],
+                    image: packageImgHold,
                     page: 1,
                     selected: false
                 },
@@ -189,12 +200,13 @@ const initialState = {
                     id: 5,
                     name: 'Вакуумные флаконы (диспенсеры)', 
                     sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
+                        {id: 1, name: 'ml', value: 60, selected: true, packageId: 5,},
+                        {id: 2, name: 'ml', value: 70, selected: false, packageId: 5,},
+                        {id: 3, name: 'ml', value: 80, selected: false, packageId: 5,},
+                        {id: 4, name: 'ml', value: 90, selected: false, packageId: 5,},
+                        {id: 5, name: 'ml', value: 100, selected: false, packageId: 5,},
                     ],
+                    image: packageImgHold,
                     page: 1,
                     selected: false
                 },
@@ -203,18 +215,18 @@ const initialState = {
                     name: 'Флаконы-пенообразователи', 
                     selected: false,
                     sizes: [
-                        {id: 1, name: 'ml', value: 20, selected: true,},
-                        {id: 2, name: 'ml', value: 30, selected: false,},
-                        {id: 3, name: 'ml', value: 40, selected: false,},
-                        {id: 4, name: 'ml', value: 50, selected: false,},
-                        {id: 5, name: 'ml', value: 60, selected: false,},
+                        {id: 1, name: 'ml', value: 70, selected: true, packageId: 6,},
+                        {id: 2, name: 'ml', value: 80, selected: false, packageId: 6,},
+                        {id: 3, name: 'ml', value: 90, selected: false, packageId: 6,},
+                        {id: 4, name: 'ml', value: 100, selected: false, packageId: 6,},
+                        {id: 5, name: 'ml', value: 110, selected: false, packageId: 6,},
                     ],
+                    image: packageImgHold,
                     page: 1,
                     selected: false
                 },
             ],
-            packagePages: [{id: 1, active: true }, {id: 2, active: false}],
-            stepNum: 3,
+            packagePages: [{id: 1, active: true }],
             active: false,
             stepValid: false,
         },
@@ -397,7 +409,29 @@ const qizSlice = createSlice({
                 if (quizStep.stepNum === state.currentStep) {
                     return {
                         ...quizStep,
-                        customPackageActive: status,
+                        customPackage: {
+                            ...quizStep.customPackage,
+                            active: status
+                        },
+                        package: initialState.qizSteps[2].package,
+                    }
+                }
+                return quizStep;
+            });
+        },
+        saveCustomPackageField(state, action) {
+            const { textData, fileData } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.customPackage) {
+                    return {
+                        ...quizStep,
+                        customPackage: {
+                            ...quizStep.customPackage,
+                            fieldValue: textData ? textData : '',
+                            fieldFile: fileData ? fileData : '',
+                            fieldValid: /^\s*$/.test(textData) ? false : true
+                        },
+                        package: initialState.qizSteps[2].package,
                     }
                 }
                 return quizStep;
@@ -407,7 +441,7 @@ const qizSlice = createSlice({
             const { packageId } = action.payload;
             state.qizSteps.find((stepItem) => stepItem.stepNum === state.currentStep)
             state.qizSteps = state.qizSteps.map((quizStep) => {
-                if (quizStep.stepNum === state.currentStep && quizStep.id === 3) {
+                if (quizStep.stepNum === state.currentStep) {
                     quizStep.package = quizStep.package.map((packageItem) => {
                         if (packageItem.id === packageId) {
                             return {
@@ -422,7 +456,38 @@ const qizSlice = createSlice({
                     });
                 }
                 return quizStep;
-            })
+            });
+        },
+        selectPackageSize(state, action) {
+            const { packageId, sizeValue } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep) {
+                    quizStep.package = quizStep.package.map((packageItem) => {
+                        if (packageItem.id === packageId) {
+                            console.log(packageId)
+                            return {
+                                ...packageItem,
+                                sizes: packageItem.sizes = packageItem.sizes.map((sizeItem) => {
+                                    if ((sizeItem.value +' '+ sizeItem.name) === sizeValue && sizeItem.packageId === packageId ) {
+                                        console.log(sizeValue)
+                                        return {
+                                            ...sizeItem,
+                                            selected: true,
+                                        }
+                                    }
+                                    return {
+                                        ...sizeItem,
+                                        selected: false,
+                                    }
+                                })
+                            }
+                        }
+                        return packageItem;
+                    });
+                    return quizStep;
+                }
+                return quizStep;
+            });
         },
         validateStep(state) {
             if (state.currentStep === 2) {
@@ -438,7 +503,7 @@ const qizSlice = createSlice({
                             stepValid: true
                         }
                     }
-                    else if (quizStep.id === 2) {
+                    else if (quizStep.stepNum === state.currentStep) {
                         return {
                             ...quizStep,
                             stepValid: false
@@ -447,8 +512,13 @@ const qizSlice = createSlice({
                     return quizStep;
                 })
             }
-            else if (state.currentStep === 3) {
-                console.log('test')
+            if (state.currentStep === 3) {
+                state.qizSteps = state.qizSteps.map((quizStep) => {
+                    return {
+                        ...quizStep,
+                        stepValid: false
+                    }
+                })
             }
         }
     },
@@ -466,7 +536,9 @@ export const {
     selectDeadline,
     showCustomPackageField,
     saveDeadlineCustomValue,
-    selectPackage
+    selectPackage,
+    selectPackageSize,
+    saveCustomPackageField
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;
