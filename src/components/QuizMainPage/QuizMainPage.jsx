@@ -18,6 +18,7 @@ import {
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
 import QuizStep3 from "./QuizStep3";
+import QuizStep4 from "./QuizStep4";
 
 const QuizMainPage = (props) => {
     const dispatch = useDispatch();
@@ -151,6 +152,13 @@ const QuizMainPage = (props) => {
                                     validateStep={validateCurrentStep}
                                 /> 
                             : null}
+                            {
+                                quizState.currentStep === 4 ? 
+                                    <QuizStep4
+                                        stepData={findStep(4)}
+                                    />
+                                : null
+                            }
                         </div>
                         <div className="next-step-wrap">
                             <div className="prev-step-btn-wrap">

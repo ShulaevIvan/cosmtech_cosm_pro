@@ -30,7 +30,7 @@ const initialState = {
         },
         {
             id: 3,
-            name: 'Скачать ТЗ',
+            name: 'Отправить ТЗ',
             active: false,
             icon: '',
         }
@@ -213,7 +213,6 @@ const initialState = {
                 { 
                     id: 6, 
                     name: 'Флаконы-пенообразователи', 
-                    selected: false,
                     sizes: [
                         {id: 1, name: 'ml', value: 70, selected: true, packageId: 6,},
                         {id: 2, name: 'ml', value: 80, selected: false, packageId: 6,},
@@ -235,6 +234,28 @@ const initialState = {
             name: 'Дополнительно',
             stepTitle: 'Дополнительные условия',
             stepNum: 4,
+            services: [
+                { id: 1, name: 'Разработка уникальной рецептуры', selected: false},
+                { id: 2, name: 'Помощь с сертификацией', selected: false},
+                { id: 3, name: 'Помощь с разработкой дизайна', selected: false},
+                { id: 4, name: 'Опишите свой случай', selected: false},
+                { id: 5, name: 'Не требуются', selected: false},
+            ],
+            budget: [
+                { id: 1, name: 'от 1 единиц до 100 единиц', selected: false },
+                { id: 2, name: 'от 1 единиц до 100 единиц', selected: false },
+                { id: 3, name: 'от 1 единиц до 100 единиц', selected: false },
+                { id: 4, name: 'от 1 единиц до 100 единиц', selected: false },
+                { id: 5, name: 'не ограничен', selected: false },
+                { id: 6, name: 'пока не определен', selected: false, customValue: '' },
+                { id: 7, name: 'свой вариант', selected: false, customValue: '' },
+            ],
+            budgetCustomField: {
+                active: false,
+            },
+            commentField: {
+                active: false
+            },
             active: false,
             stepValid: false,
         },
@@ -410,7 +431,14 @@ const qizSlice = createSlice({
                     return {
                         ...quizStep,
                         customPackage: {
-                            ...quizStep.customPackage,
+                            ...quizStep,
+                            customPackage: status ? {
+                                ...quizStep.customPackage,
+                            } : {
+                                ...quizStep.customPackage,
+                                fieldValue: '',
+                                fieldFile: ''
+                            },
                             active: status
                         },
                         package: initialState.qizSteps[2].package,
@@ -421,6 +449,7 @@ const qizSlice = createSlice({
         },
         saveCustomPackageField(state, action) {
             const { textData, fileData } = action.payload;
+            console.log(textData)
             state.qizSteps = state.qizSteps.map((quizStep) => {
                 if (quizStep.stepNum === state.currentStep && quizStep.customPackage) {
                     return {
@@ -464,12 +493,10 @@ const qizSlice = createSlice({
                 if (quizStep.stepNum === state.currentStep) {
                     quizStep.package = quizStep.package.map((packageItem) => {
                         if (packageItem.id === packageId) {
-                            console.log(packageId)
                             return {
                                 ...packageItem,
                                 sizes: packageItem.sizes = packageItem.sizes.map((sizeItem) => {
                                     if ((sizeItem.value +' '+ sizeItem.name) === sizeValue && sizeItem.packageId === packageId ) {
-                                        console.log(sizeValue)
                                         return {
                                             ...sizeItem,
                                             selected: true,
@@ -490,8 +517,8 @@ const qizSlice = createSlice({
             });
         },
         validateStep(state) {
+            const stepIndex = state.currentStep - 1;
             if (state.currentStep === 2) {
-                const stepIndex = state.currentStep - 1;
                 const checkDeadlines = state.qizSteps[stepIndex].deadLineItems.find((item) => item.selected);
                 const checkCustomValue = state.qizSteps[stepIndex].deadLineItems.find((item) => item.customValue);
                 const deadlineLastId = state.qizSteps[stepIndex].deadLineItems.length;
@@ -513,7 +540,17 @@ const qizSlice = createSlice({
                 })
             }
             if (state.currentStep === 3) {
+                const checkCustomPackageValue = state.qizSteps[stepIndex].customPackage.fieldValue;
+                const checkCustomPackageValid = state.qizSteps[stepIndex].customPackage.fieldValid;
+                const checkCustomPackageFile = state.qizSteps[stepIndex].customPackage.fieldFile;
+                const checkSelectedPackage = state.qizSteps[stepIndex].package.find((item) => item.selected)
                 state.qizSteps = state.qizSteps.map((quizStep) => {
+                    if (checkCustomPackageValue || checkSelectedPackage) {
+                        return {
+                            ...quizStep,
+                            stepValid: true
+                        }
+                    }
                     return {
                         ...quizStep,
                         stepValid: false

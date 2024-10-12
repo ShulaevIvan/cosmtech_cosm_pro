@@ -9,7 +9,7 @@ const QuizStep3 = (props) => {
 
     useEffect(() => {
         props.validateStep();
-    }, [stepData.package]);
+    }, [stepData.package, stepData.customPackage, stepData.customPackage.fieldValid]);
 
     return (
         <React.Fragment>
@@ -80,12 +80,15 @@ const QuizStep3 = (props) => {
                     </div>
                     {stepData.customPackage.active ?
                         <React.Fragment>
+                            <div className="quiz-package-custom-package-description-wrap">
+                                <span>Пример (ссылка) на готовый продукт, описание или загрузите фото упаковки/продукта</span>
+                            </div>
                             <div className="quiz-package-custom-package-input">
                                 <div className="quiz-package-custom-input-wrap">
                                     <textarea
                                         className={stepData.customPackage.fieldValid ? '' : 'input-err'}
                                         ref={customPackageRef}
-                                        placeholder="сcыллка продукт, упаковку или описание..."
+                                        placeholder="описание..."
                                     ></textarea>
                                     <label className="input-file">
                                         <input type="file" />

@@ -330,7 +330,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .qnt-apply-wrap {
     display: flex;
@@ -642,4 +642,13 @@
     max-width: 30px;
     position: absolute;
     pointer-events: none;
+}
+.quiz-package-custom-package-description-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 100%;
 }

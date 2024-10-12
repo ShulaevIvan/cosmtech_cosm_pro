@@ -99,7 +99,8 @@ const QuizStep2 = (props) => {
                                                 )}
                                                 type="radio" 
                                                 id={`${deadlineItem.name}-${deadlineItem.id}`} 
-                                                name="deadline" value={deadlineItem.name}
+                                                name="deadline" 
+                                                value={deadlineItem.name}
                                             />
                                             <label htmlFor={`${deadlineItem.name}-${deadlineItem.id}`}>{deadlineItem.name}</label>
                                         </div>
