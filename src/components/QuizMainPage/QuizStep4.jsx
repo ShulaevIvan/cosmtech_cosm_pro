@@ -52,7 +52,8 @@ const QuizStep4 = (props) => {
                     </fieldset>
                     <div className="quiz-advanced-settings-buget-custom-range-wrap">
                         <div className="quiz-advanced-settings-buget-custom-range-value">0</div>
-                            <input 
+                            <input
+                                className="quiz-advanced-settings-buget-custom-range"
                                 type="range"
                                 min="25000" 
                                 step="5000"
