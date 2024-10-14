@@ -13,12 +13,18 @@ import {
     showCustomPackageField,
     selectPackage,
     selectPackageSize,
-    saveCustomPackageField
+    saveCustomPackageField,
+    advancedServiceChange,
+    advancedBudgetChange,
+    customBudgetChange,
+    showTechTask,
+    saveAdvancedServiceCustomValue
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
 import QuizStep3 from "./QuizStep3";
 import QuizStep4 from "./QuizStep4";
+import QuizStep5 from "./QuizStep5";
 
 const QuizMainPage = (props) => {
     const dispatch = useDispatch();
@@ -84,6 +90,30 @@ const QuizMainPage = (props) => {
 
     const selectPackageSizeHandler = (sizeValue, sizeObj) => {
         dispatch(selectPackageSize({packageId: sizeObj.id, sizeValue: sizeValue}));
+    };
+
+    const advancedServiceHandler = (value, serviceId) => {
+        dispatch(advancedServiceChange({status: value, serviceId: serviceId}));
+    };
+
+    const budgetServiceHandler = (value, budgetId) => {
+        dispatch(advancedBudgetChange({status: value, budgetId: budgetId}));
+    };
+
+    const customServiceBudgetHandler = (value) => {
+        dispatch(customBudgetChange({value: value}));
+    };
+
+    const advancedServiceSaveCommentHandler = (value) => {
+        dispatch(saveAdvancedServiceCustomValue({commentValue: value}));
+    };
+
+    const deliveryServiceHandler = () => {
+        console.log('test')
+    };
+
+    const techTaskHandler = (value) => {
+        dispatch(showTechTask({status: value}));
     };
 
     useEffect(() => {
@@ -156,6 +186,20 @@ const QuizMainPage = (props) => {
                                 quizState.currentStep === 4 ? 
                                     <QuizStep4
                                         stepData={findStep(4)}
+                                        serviceChangeHandler = {advancedServiceHandler}
+                                        budgetChangeHandler = {budgetServiceHandler}
+                                        customBudgetHandler = {customServiceBudgetHandler}
+                                        saveCommentHandler = {advancedServiceSaveCommentHandler}
+                                        techTaskHandler={techTaskHandler}
+                                        validateStep={validateCurrentStep}
+                                    />
+                                : null
+                            }
+                            {
+                                quizState.currentStep === 5 ? 
+                                    <QuizStep5
+                                        stepData={findStep(5)}
+                                        deliveryChangeHandler = {deliveryServiceHandler}
                                     />
                                 : null
                             }

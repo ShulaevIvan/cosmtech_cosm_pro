@@ -238,23 +238,33 @@ const initialState = {
                 { id: 1, name: 'Разработка уникальной рецептуры', selected: false},
                 { id: 2, name: 'Помощь с сертификацией', selected: false},
                 { id: 3, name: 'Помощь с разработкой дизайна', selected: false},
-                { id: 4, name: 'Опишите свой случай', selected: false},
+                { id: 4, name: 'Под ключ', selected: false},
                 { id: 5, name: 'Не требуются', selected: false},
+                { id: 6, name: 'Опишите свой случай', selected: false},
             ],
             budget: [
                 { id: 1, name: 'от 1 единиц до 100 единиц', selected: false },
-                { id: 2, name: 'от 1 единиц до 100 единиц', selected: false },
-                { id: 3, name: 'от 1 единиц до 100 единиц', selected: false },
-                { id: 4, name: 'от 1 единиц до 100 единиц', selected: false },
-                { id: 5, name: 'не ограничен', selected: false },
-                { id: 6, name: 'пока не определен', selected: false, customValue: '' },
-                { id: 7, name: 'свой вариант', selected: false, customValue: '' },
+                { id: 2, name: 'от 2 единиц до 100 единиц', selected: false },
+                { id: 3, name: 'от 3 единиц до 100 единиц', selected: false },
+                { id: 4, name: 'от 4 единиц до 100 единиц', selected: false },
+                { id: 5, name: 'пока не определен', selected: false},
+                { id: 6, name: 'свой вариант', selected: false},
             ],
             budgetCustomField: {
                 active: false,
+                min: 25000,
+                max: 10000000,
+                step: 5000,
+                value: 0,
+                currency: 'руб'
+            },
+            techTaskCustom: {
+                active: false,
+                file: '',
             },
             commentField: {
-                active: false
+                active: false,
+                value: '',
             },
             active: false,
             stepValid: false,
@@ -262,8 +272,13 @@ const initialState = {
         {
             id: 5,
             name: 'Результат',
-            stepTitle: 'Укажите куда выслать рассчет',
+            stepTitle: 'Дотставка и рассчет',
             stepNum: 5,
+            delivery: [
+                { id: 1, name: 'Вывоз продукции своими силами или ТК (вопрос решен)', selected: false },
+                { id: 2, name: 'Доставка в пределах Санкт-Петербурга И ЛО', selected: false },
+                { id: 3, name: 'Доставка транспортной компанией (нужна помощь)', selected: false },
+            ],
             active: false,
             stepValid: false,
         }
@@ -516,6 +531,105 @@ const qizSlice = createSlice({
                 return quizStep;
             });
         },
+        advancedServiceChange(state, action) {
+            const { status, serviceId } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.services) {
+                    return {
+                        ...quizStep,
+                        customValue: {
+                            ...quizStep.customValue,
+                            value: '',
+                        },
+                        services: quizStep.services.map((serviceItem) => {
+                            if (serviceItem.id === serviceId) {
+                                return {
+                                    ...serviceItem,
+                                    selected: status
+                                }
+                            }
+                            return {
+                                ...serviceItem,
+                                selected: false
+                            }
+                        })
+                    }
+                }
+                return quizStep;
+            });
+        },
+        advancedBudgetChange(state, action) {
+            const { status, budgetId } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.budget) {
+                    return {
+                        ...quizStep,
+                        budgetCustomField: {
+                            ...quizStep.budgetCustomField,
+                            value: quizStep.budgetCustomField.min
+                        },
+                        budget: quizStep.budget.map((budgetItem) => {
+                            if (budgetItem.id === budgetId) {
+                                return {
+                                    ...budgetItem,
+                                    selected: status
+                                }
+                            }
+                            return {
+                                ...budgetItem,
+                                selected: false
+                            }
+                        })
+                    }
+                }
+                return quizStep;
+            });
+        },
+        customBudgetChange(state, action) {
+            const { value } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.budgetCustomField) {
+                    return {
+                        ...quizStep,
+                        budgetCustomField: {
+                            ...quizStep.budgetCustomField,
+                            value: value
+                        }
+                    }
+                }
+                return quizStep;
+            });
+        },
+        saveAdvancedServiceCustomValue(state, action) {
+            const { commentValue } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.commentField) {
+                    return {
+                        ...quizStep,
+                        commentField: {
+                            ...quizStep.commentField,
+                            value: commentValue
+                        }
+                    }
+                }
+                return quizStep;
+            });
+        },
+        showTechTask(state, action) {
+            const { status } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.techTaskCustom) {
+                    return {
+                        ...quizStep,
+                        techTaskCustom: {
+                            ...quizStep.techTaskCustom,
+                            active: status
+                        }
+                    }
+                }
+                return quizStep;
+            });
+        },
         validateStep(state) {
             const stepIndex = state.currentStep - 1;
             if (state.currentStep === 2) {
@@ -557,6 +671,25 @@ const qizSlice = createSlice({
                     }
                 })
             }
+            if(state.currentStep === 4) {
+                const checkCustomServiceValue = state.qizSteps[stepIndex].commentField.value;
+                const checkSelectedService = state.qizSteps[stepIndex].services.find((item) => item.selected);
+                const checkSelectedBudget = state.qizSteps[stepIndex].budget.find((item) => item.selected);
+                const checkCustomBudgetValue = state.qizSteps[stepIndex].budgetCustomField.value;
+                state.qizSteps = state.qizSteps.map((quizStep) => {
+                    if ((checkCustomServiceValue || checkSelectedService) && (checkSelectedBudget || checkCustomBudgetValue)) {
+                        return {
+                            ...quizStep,
+                            stepValid: true
+                        }
+                    }
+                    return {
+                        ...quizStep,
+                        stepValid: false
+                    }
+                })
+
+            }
         }
     },
     extraReducers: (builder) => builder.addCase(resetQuizState, () => initialState)
@@ -575,7 +708,12 @@ export const {
     saveDeadlineCustomValue,
     selectPackage,
     selectPackageSize,
-    saveCustomPackageField
+    saveCustomPackageField,
+    advancedServiceChange,
+    advancedBudgetChange,
+    customBudgetChange,
+    showTechTask,
+    saveAdvancedServiceCustomValue
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;

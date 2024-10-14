@@ -270,6 +270,7 @@
 }
 #quiz-qnt {
     margin: 0 10px;
+    letter-spacing: 5px;
 }
 .quantity-title-wrap,
 .quantity-value-wrap {
@@ -413,7 +414,10 @@
     margin-left: 10px;
 }
 .quiz-deadline-custom-input-wrap button,
-.quiz-package-custom-package-btn {
+.quiz-package-custom-package-btn,
+.quiz-advanced-settings-comment-btn-wrap button,
+.quiz-advanced-settings-tz-btn-save,
+.quiz-advanced-settings-delivery-custom-field-btn button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -606,7 +610,8 @@
     flex-wrap: wrap;
     max-width: 800px;
 }
-.quiz-package-custom-package-input-file-btn {
+.quiz-package-custom-package-input-file-btn,
+.quiz-advanced-settings-tz-input-file-btn {
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -652,15 +657,27 @@
     font-size: 14px;
     width: 100%;
 }
+.quiz-advanced-settings-services-wrap,
+.quiz-advanced-settings-budget-wrap,
+.quiz-advanced-settings-delivery-wrap  {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
 .quiz-advanced-settings-services-wrap fieldset,
-.quiz-advanced-settings-budget-wrap fieldset {
+.quiz-advanced-settings-budget-wrap fieldset,
+.quiz-advanced-settings-delivery-wrap fieldset {
     border: none;
     padding: 0;
 }
 .quiz-advanced-settings-service-item-wrap input[type="radio"],
 .quiz-advanced-settings-service-item-wrap label,
 .quiz-advanced-settings-budget-item-wrap input[type="radio"],
-.quiz-advanced-settings-budget-item-wrap label {
+.quiz-advanced-settings-budget-item-wrap label,
+.quiz-advanced-settings-delivery-wrap label,
+.quiz-advanced-settings-delivery-wrap input[type="radio"] {
     cursor: pointer;
 }
 .quiz-advanced-settings-buget-custom-range-wrap {
@@ -668,13 +685,15 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 500px;
+    max-width: 700px;
+    margin-bottom: 10px;
 }
 .quiz-advanced-settings-buget-custom-range-value {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    letter-spacing: 5px;
     justify-content: center;
 }
 .quiz-advanced-settings-buget-custom-range {
@@ -684,4 +703,105 @@
     border: 0;
     accent-color: #00458B;
     cursor: ew-resize
+}
+.quiz-advanced-settings-tz-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.quiz-advanced-settings-budget-title,
+.quiz-advanced-settings-services-title {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.quiz-advanced-settings-budget-title h3,
+.quiz-advanced-settings-services-title h3,
+.quiz-advanced-settings-comment-wrap h3 {
+    margin: 0;
+}
+.quiz-advanced-settings-service-item-wrap,
+.quiz-advanced-settings-budget-item-wrap,
+.quiz-advanced-settings-delivery-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.quiz-advanced-settings-tz-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 10px;
+}
+.quiz-advanced-settings-comment-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.quiz-advanced-settings-tz-btn-wrap input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: flex;
+    width: 0;
+    height: 0;
+}
+.quiz-advanced-settings-comment-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 800px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.quiz-advanced-settings-comment-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 440px;
+}
+.quiz-advanced-settings-comment-row textarea {
+    min-width: 300px;
+    min-height: 75px;
+}
+.quiz-advanced-settings-comment-btn-wrap button,
+.quiz-advanced-settings-tz-btn-save,
+.quiz-advanced-settings-delivery-custom-field-btn button {
+    min-height: 40px;
+}
+.quiz-advanced-settings-tz-btn-wrap label{
+    margin-right: 20px;
+}
+.quiz-advanced-settings-delivery-custom-field-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: flex-end;
+}
+.quiz-advanced-settings-delivery-custom-field-row h3 {
+    margin: 0;
+    margin-bottom: 5px;
+}
+.quiz-advanced-settings-delivery-custom-field-row input {
+    min-height: 40px;
+    max-height: 40px;
+}
+.quiz-advanced-settings-delivery-custom-field-btn {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20px;
 }
