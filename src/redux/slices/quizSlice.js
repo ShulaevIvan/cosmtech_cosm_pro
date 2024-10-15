@@ -275,10 +275,14 @@ const initialState = {
             stepTitle: 'Дотставка и рассчет',
             stepNum: 5,
             delivery: [
-                { id: 1, name: 'Вывоз продукции своими силами или ТК (вопрос решен)', selected: false },
+                { id: 1, name: 'Вывоз продукции своими силами или ТК (вопрос решен)', selected: true },
                 { id: 2, name: 'Доставка в пределах Санкт-Петербурга И ЛО', selected: false },
                 { id: 3, name: 'Доставка транспортной компанией (нужна помощь)', selected: false },
             ],
+            deliveryCityForm: {
+                active: false,
+                value: '',
+            },
             active: false,
             stepValid: false,
         }
@@ -630,6 +634,52 @@ const qizSlice = createSlice({
                 return quizStep;
             });
         },
+        changeDelivery(state, action) {
+            const { deliveryId, status } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.delivery) {
+                    return {
+                        ...quizStep,
+                        deliveryCityForm: deliveryId === quizStep.delivery.length ? {
+                            ...quizStep.deliveryCityForm,
+                            active: true
+                        }
+                        : {
+                            ...quizStep.deliveryCityForm,
+                            active: false
+                        },
+                        delivery: quizStep.delivery.map((deliveryItem) => {
+                            if (deliveryItem.id === deliveryId) {
+                                return {
+                                    ...deliveryItem,
+                                    selected: true
+                                }
+                            }
+                            return {
+                                ...deliveryItem,
+                                selected: false
+                            }
+                        }),
+                    }
+                }
+                return quizStep;
+            });
+        },
+        saveDeliveryCity(state, action) {
+            const { cityValue } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.deliveryCityForm) {
+                    return {
+                        ...quizStep,
+                        deliveryCityForm: {
+                            ...quizStep.deliveryCityForm,
+                            value: cityValue
+                        }
+                    }
+                }
+                return quizStep;
+            });
+        },
         validateStep(state) {
             const stepIndex = state.currentStep - 1;
             if (state.currentStep === 2) {
@@ -713,7 +763,9 @@ export const {
     advancedBudgetChange,
     customBudgetChange,
     showTechTask,
-    saveAdvancedServiceCustomValue
+    saveAdvancedServiceCustomValue,
+    changeDelivery,
+    saveDeliveryCity
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;

@@ -18,7 +18,9 @@ import {
     advancedBudgetChange,
     customBudgetChange,
     showTechTask,
-    saveAdvancedServiceCustomValue
+    saveAdvancedServiceCustomValue,
+    changeDelivery,
+    saveDeliveryCity
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -108,8 +110,13 @@ const QuizMainPage = (props) => {
         dispatch(saveAdvancedServiceCustomValue({commentValue: value}));
     };
 
-    const deliveryServiceHandler = () => {
-        console.log('test')
+    const deliveryServiceHandler = (value, deliveryId) => {
+        dispatch(changeDelivery({status: value, deliveryId: deliveryId}));
+    };
+
+    const saveDeliveryCityHandler = (value) => {
+        console.log(value)
+        dispatch(saveDeliveryCity({cityValue: value}));
     };
 
     const techTaskHandler = (value) => {
@@ -200,6 +207,7 @@ const QuizMainPage = (props) => {
                                     <QuizStep5
                                         stepData={findStep(5)}
                                         deliveryChangeHandler = {deliveryServiceHandler}
+                                        deliveryCityHandler= {saveDeliveryCityHandler}
                                     />
                                 : null
                             }
@@ -213,7 +221,8 @@ const QuizMainPage = (props) => {
                                     >{quizState.prevBtnText}</span> 
                                 : null}
                             </div>
-                            <div className="next-step-btn-wrap">
+                            
+                            <div className={quizState.maxSteps === quizState.currentStep ? "next-step-btn-wrap-hidden" : "next-step-btn-wrap"}>
                                 <span 
                                     className={
                                         quizState.qizSteps.find((item) => item.stepValid && item.stepNum === quizState.currentStep) ? 

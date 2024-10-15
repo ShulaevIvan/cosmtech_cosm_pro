@@ -180,6 +180,13 @@
     text-align: center;
     font-size: 16px;
 }
+.quiz-product-img-wrap img {
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
 .quiz-products-item h4 {
     margin: 0;
     padding: 0;
@@ -199,6 +206,9 @@
     flex-wrap: wrap;
     width: 33%;
     justify-content: center;
+}
+.next-step-btn-wrap-hidden {
+    display: none;
 }
 .step-counter-wrap {
     display: flex;
@@ -417,7 +427,8 @@
 .quiz-package-custom-package-btn,
 .quiz-advanced-settings-comment-btn-wrap button,
 .quiz-advanced-settings-tz-btn-save,
-.quiz-advanced-settings-delivery-custom-field-btn button {
+.quiz-advanced-settings-delivery-custom-field-btn button,
+.result-form-get-contacts-send-btn button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -666,6 +677,7 @@
     width: 100%;
     margin-bottom: 10px;
 }
+.quiz-advanced-settings-delivery-wrap,
 .quiz-advanced-settings-services-wrap fieldset,
 .quiz-advanced-settings-budget-wrap fieldset,
 .quiz-advanced-settings-delivery-wrap fieldset {
@@ -779,8 +791,9 @@
 }
 .quiz-advanced-settings-comment-btn-wrap button,
 .quiz-advanced-settings-tz-btn-save,
-.quiz-advanced-settings-delivery-custom-field-btn button {
-    min-height: 40px;
+.quiz-advanced-settings-delivery-custom-field-btn button,
+.result-form-get-contacts-send-btn button {
+    min-height: 30px;
 }
 .quiz-advanced-settings-tz-btn-wrap label{
     margin-right: 20px;
@@ -791,17 +804,101 @@
     flex-wrap: wrap;
     width: 100%;
     align-items: flex-end;
+    margin-bottom: 10px;
 }
 .quiz-advanced-settings-delivery-custom-field-row h3 {
     margin: 0;
     margin-bottom: 5px;
 }
 .quiz-advanced-settings-delivery-custom-field-row input {
-    min-height: 40px;
-    max-height: 40px;
+    min-height: 30px;
+    max-height: 30px;
 }
 .quiz-advanced-settings-delivery-custom-field-btn {
     display: flex;
     flex-wrap: wrap;
     margin-left: 20px;
+}
+.quiz-result-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.quiz-result-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.quiz-result-title h3 {
+    margin: 0;
+}
+.quiz-result-table-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.quiz-result-value-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.quiz-result-value-title {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+}
+.quiz-result-value {
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+}
+.result-get-contacts-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.result-form-get-contacts-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+.result-form-get-contacts-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.result-form-get-contacts-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.result-form-contacts-item-input {
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+    margin-right: 10px;
+}
+.result-form-contacts-item-input input {
+    min-height: 30px;
+}
+.result-form-get-contacts-send-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
