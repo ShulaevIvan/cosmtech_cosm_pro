@@ -3,8 +3,10 @@ import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { 
     nextStep,
+    resetStep,
     validateStep,
-    selectProduct, 
+    selectProduct,
+    selectProductPage,
     disableQuantity, 
     changeQuantity, 
     changeMaxQuantity,
@@ -20,7 +22,8 @@ import {
     showTechTask,
     saveAdvancedServiceCustomValue,
     changeDelivery,
-    saveDeliveryCity
+    saveDeliveryCity,
+    saveResultStep
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -33,8 +36,16 @@ const QuizMainPage = (props) => {
     const stepTitle = useRef(null);
     const quizState = useSelector((state) => state.quiz);
 
-    const nextStepHandler = (param) => {
-        dispatch(nextStep({stepParam: param}));
+    const nextStepHandler = async (param) => {
+        return new Promise((resolve, reject) => {
+            dispatch(nextStep({stepParam: param}));
+            if (Math.sign(param) === -1) {
+                resolve(dispatch(resetStep({stepNumber: quizState.currentStep})));
+                return;
+            }
+            dispatch(saveResultStep({stepNumber: quizState.currentStep}));
+            resolve(nextStep({stepParam: param}));
+        })
     };
 
     const quantityBlockHandler = (param, customValue) => {
@@ -66,6 +77,10 @@ const QuizMainPage = (props) => {
 
     const productSelectHandler = (product) => {
         dispatch(selectProduct({selectItem: product}));
+    };
+
+    const productPageSelectHandler = (productId) => {
+        dispatch(selectProductPage({nextPageId: productId}));
     };
 
     const validateCurrentStep = () => {
@@ -115,7 +130,6 @@ const QuizMainPage = (props) => {
     };
 
     const saveDeliveryCityHandler = (value) => {
-        console.log(value)
         dispatch(saveDeliveryCity({cityValue: value}));
     };
 
@@ -128,6 +142,10 @@ const QuizMainPage = (props) => {
         if (stepData) {
             stepTitle.current.textContent = stepData.stepTitle;
         }
+    }, [quizState.currentStep]);
+
+    useEffect(() => {
+        console.log(quizState.quizResult);
     }, [quizState.currentStep]);
     
 
@@ -166,6 +184,7 @@ const QuizMainPage = (props) => {
                                 <QuizStep1 
                                     stepData={findStep(1)} 
                                     productSelectHandler={productSelectHandler}
+                                    productPageHandler = {productPageSelectHandler}
                                 /> 
                             : null}
                             {quizState.currentStep === 2 ? 

@@ -36,6 +36,7 @@
     flex-wrap: wrap;
     max-width: 1000px;
     min-width: 1000px;
+    min-height: 820px;
     justify-content: space-between;
 }
 .quiz-controlpanel-wrap {
@@ -554,8 +555,8 @@
     background-color: gray;
     border-radius: 10px;
     border:none;
-    min-height: 8px;
-    max-height: 8px;
+    min-height: 12px;
+    max-height: 12px;
     width: 70px;
 }
 .quiz-package-page-item-slide-btn-active {

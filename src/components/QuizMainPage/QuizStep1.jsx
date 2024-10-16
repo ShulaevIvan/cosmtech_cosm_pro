@@ -1,12 +1,13 @@
 import React from "react";
 
 const QuizMainPage = (props) => {
-    const products = props.stepData.products;
+    const stepData = props.stepData;
+    const products = stepData.products;
 
     return (
         <React.Fragment>
             <div className="quiz-products-row">
-                {products.map((productItem) => {
+                {products.filter((item) => item.page === props.stepData.productPages.find((item) => item.selected).page).map((productItem) => {
                     return (
                         <React.Fragment key={productItem.id}>
                             <div 
@@ -26,6 +27,22 @@ const QuizMainPage = (props) => {
                         </React.Fragment>
                     )
                 })}              
+            </div>
+            <div className="quiz-package-pages-wrap">
+                <div className="quiz-package-pages-items">
+                    {stepData.productPages.map((pageItem) => {
+                        return (
+                            <React.Fragment key={pageItem.id}>
+                                <div className="quiz-package-page-item">
+                                    <button
+                                        onClick={() => props.productPageHandler(pageItem.id)} 
+                                        className={pageItem.selected ? "quiz-package-page-item-slide-btn-active" : "quiz-package-page-item-slide-btn"}
+                                    ></button>
+                                </div>
+                            </React.Fragment>
+                        )
+                    })}
+                </div>
             </div>
         </React.Fragment>
     )

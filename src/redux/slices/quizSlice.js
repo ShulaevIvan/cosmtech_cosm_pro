@@ -11,9 +11,10 @@ const initialState = {
     nextBtnText: 'Следующий шаг',
     prevBtnText: 'К предыдущему шагу',
     quizResult: {
-        productName: '',
-        productQuantity: '',
-        orderDeadline: '',
+        product: {
+            id: '',
+            name: ''
+        }
     },
     quizMenu: [
         {
@@ -43,60 +44,128 @@ const initialState = {
             stepNum: 1,
             active: true,
             stepValid: false,
+            productActivePage: 1,
+            productPages: [{ id: 1, page: 1, selected: true}, { id: 2, page: 2, selected: false}],
             products: [
                 { 
                     id: 1,
-                    name: 'product description',
+                    name: 'Уход для лица',
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg
+                    image: demoImg,
+                    page: 1,
                 },
                 { 
                     id: 2,
-                    name: 'product description',
+                    name: 'Уход для тела',
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg
+                    image: demoImg,
+                    page: 1,
                 },
                 { 
                     id: 3,
-                    name: 'product description',
+                    name: 'Уход за волосами',
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg
+                    image: demoImg,
+                    page: 1,
                 },
                 { 
                     id: 4,
-                    name: 'product description',
+                    name: 'Профессиональная косметика',
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg
+                    image: demoImg,
+                    page: 1,
                 },
                 { 
                     id: 5,
-                    name: 'product description',
+                    name: 'Для животных',
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg
+                    image: demoImg,
+                    page: 1,
                 },
                 { 
                     id: 6,
-                    name: 'product description',
+                    name: 'Детская косметика',
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg
+                    image: demoImg,
+                    page: 1,
+                },
+                { 
+                    id: 7,
+                    name: 'Уход за кожей рук',
+                    description: '',
+                    selected: false,
+                    checkboxIconActive: quizCheckboxActive,
+                    checkboxIconInactive: quizCheckbox,
+                    image: demoImg,
+                    page: 2,
+                },
+                { 
+                    id: 8,
+                    name: 'Уход за кожей ног',
+                    description: '',
+                    selected: false,
+                    checkboxIconActive: quizCheckboxActive,
+                    checkboxIconInactive: quizCheckbox,
+                    image: demoImg,
+                    page: 2,
+                },
+                { 
+                    id: 9,
+                    name: 'Солнцезащитные средства',
+                    description: '',
+                    selected: false,
+                    checkboxIconActive: quizCheckboxActive,
+                    checkboxIconInactive: quizCheckbox,
+                    image: demoImg,
+                    page: 2,
+                },
+                { 
+                    id: 10,
+                    name: 'Аппаратная косметика',
+                    description: '',
+                    selected: false,
+                    checkboxIconActive: quizCheckboxActive,
+                    checkboxIconInactive: quizCheckbox,
+                    image: demoImg,
+                    page: 2,
+                },
+                { 
+                    id: 11,
+                    name: 'Пилинги',
+                    description: '',
+                    selected: false,
+                    checkboxIconActive: quizCheckboxActive,
+                    checkboxIconInactive: quizCheckbox,
+                    image: demoImg,
+                    page: 2,
+                },
+                { 
+                    id: 12,
+                    name: 'Для ванны и душа',
+                    description: '',
+                    selected: false,
+                    checkboxIconActive: quizCheckboxActive,
+                    checkboxIconInactive: quizCheckbox,
+                    image: demoImg,
+                    page: 2,
                 }
             ],
         },
@@ -357,6 +426,30 @@ const qizSlice = createSlice({
                     }
                 })];
             }
+        },
+        selectProductPage(state, action) {
+            const { nextPageId } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.productPages) {
+                    return {
+                        ...quizStep,
+                        productPages: quizStep.productPages.map((productPageItem) => {
+                            if (productPageItem.id === nextPageId) {
+                                return {
+                                    ...productPageItem,
+                                    selected: true
+                                }
+                            }
+                            return {
+                                ...productPageItem,
+                                selected: false
+                            }
+                        }),
+                        productActivePage: quizStep.productPages.find((productPageItem) => productPageItem.selected).page,
+                    }
+                }
+                return quizStep;
+            })
         },
         resetQuiz(state) {
             state = initialState;
@@ -740,6 +833,35 @@ const qizSlice = createSlice({
                 })
 
             }
+        },
+        resetStep(state, action) {
+            const { stepNumber } = action.payload;
+            const prevStep = stepNumber - 1;
+            const stepIndex = state.currentStep - 1;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === prevStep) {
+                    return {
+                        ...initialState.qizSteps[stepIndex]
+                    }
+                }
+                return quizStep;
+            });
+        },
+        saveResultStep(state, action) {
+            const { stepNumber } = action.payload;
+            const stepIndex = stepNumber - 1;
+            if (stepNumber === 1) {
+                const selectedProduct = state.qizSteps[stepIndex].products.find((item) => item.selected);
+                state.quizResult = {
+                    ...state.quizResult,
+                    product: {
+                        ...state.quizResult.product,
+                        id: selectedProduct.id,
+                        name: selectedProduct.name
+                    }
+                }
+            }
+
         }
     },
     extraReducers: (builder) => builder.addCase(resetQuizState, () => initialState)
@@ -748,7 +870,9 @@ const qizSlice = createSlice({
 export const {
     nextStep,
     validateStep,
+    resetStep,
     selectProduct,
+    selectProductPage,
     resetQuiz,
     disableQuantity,
     changeQuantity,
@@ -765,7 +889,8 @@ export const {
     showTechTask,
     saveAdvancedServiceCustomValue,
     changeDelivery,
-    saveDeliveryCity
+    saveDeliveryCity,
+    saveResultStep
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;
