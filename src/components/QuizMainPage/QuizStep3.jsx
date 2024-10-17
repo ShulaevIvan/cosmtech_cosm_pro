@@ -1,10 +1,12 @@
 import React from "react";
 import { useEffect, useRef } from "react";
+import sortArrWithParam from "../../functions/sortArrWithParam";
 import testImg from '../../img/quiz_checkbox.svg';
 import testImg2 from '../../img/quiz_checkbox-active.svg';
 
 const QuizStep3 = (props) => {
     const stepData = props.stepData;
+    const packageRef = useRef(null);
     const customPackageRef = useRef(null);
 
     useEffect(() => {
@@ -33,13 +35,15 @@ const QuizStep3 = (props) => {
                                     </div>
                                     <div className="quiz-package-item-size-wrap">
                                         <select
+                                            ref={packageRef}
                                             onChange={(e) => props.selectPackageSizeHandler(e.target.value, packageItem)}
                                         >
-                                            {packageItem.sizes.map((sizeItem) => {
+                                            {sortArrWithParam(packageItem.sizes, 'selected', 'bool').map((sizeItem) => {
+                                                const sizeName = `${sizeItem.from} ${sizeItem.value} ${sizeItem.to} ${sizeItem.max} ${sizeItem.name}`;
                                                 return (
                                                     <React.Fragment key={sizeItem.id}>
                                                         <option>
-                                                            {`${sizeItem.value} ${sizeItem.name}`}
+                                                            {`${sizeName}`}
                                                         </option>
                                                     </React.Fragment>
                                                 )
@@ -88,6 +92,8 @@ const QuizStep3 = (props) => {
                                     <textarea
                                         className={stepData.customPackage.fieldValid ? '' : 'input-err'}
                                         ref={customPackageRef}
+                                        onChange={() => props.validateCustomPackageHandler(customPackageRef.current.value)}
+                                        onKeyDown={(e) => props.clearCustomPackageText(e, customPackageRef.current)}
                                         placeholder="описание..."
                                     ></textarea>
                                     <label className="input-file">

@@ -25,7 +25,7 @@ const HeroMainPage = () => {
             <section className="hero-section">
                {orderForm.popupOpen ?  <MainPageOrderForm orderFormHandler={orderFormHandler} /> : null}
                {orderForm.happyState ? <MainPageOrderFormHappy /> : null}
-               {quizPopupStatus ? <QuizMainPage closeHandler={quizHandler} /> : null}
+               {quizPopupStatus ? <QuizMainPage closeHandler={quizHandler} closed={quizPopupStatus ? false : true} /> : null}
                 <div className="hero-img-wrap">
                     <div className="hero-img-main-title-wrap">
                         <h1>Контрактное производство косметики в Санкт-Петербурге</h1>

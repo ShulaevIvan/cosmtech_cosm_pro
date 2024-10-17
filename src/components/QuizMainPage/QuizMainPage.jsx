@@ -16,6 +16,7 @@ import {
     selectPackage,
     selectPackageSize,
     saveCustomPackageField,
+    clearCustomPackageField,
     advancedServiceChange,
     advancedBudgetChange,
     customBudgetChange,
@@ -35,6 +36,7 @@ const QuizMainPage = (props) => {
     const dispatch = useDispatch();
     const stepTitle = useRef(null);
     const quizState = useSelector((state) => state.quiz);
+    const popupWrapRef = useRef(null);
 
     const nextStepHandler = async (param) => {
         return new Promise((resolve, reject) => {
@@ -100,13 +102,32 @@ const QuizMainPage = (props) => {
         if (!text) return;
         dispatch(saveCustomPackageField({textData: text, fileData: file}))
     };
+
+    const validateCustomPackageHandler = (text) => {
+        dispatch(saveCustomPackageField({textData: text, fileData: ''}))
+    };
+
+    const clearCustomTextField = (e, inputElemRef) => {
+        if (e.key === 'Backspace') {
+            inputElemRef.value = '';
+            dispatch(clearCustomPackageField());
+        }
+    };
     
     const selectPackageHandler = (packageId) => {
         dispatch(selectPackage({packageId: packageId}));
     };
 
     const selectPackageSizeHandler = (sizeValue, sizeObj) => {
+        if (!sizeValue) return;
         dispatch(selectPackageSize({packageId: sizeObj.id, sizeValue: sizeValue}));
+    };
+
+    const setDefaultSize = (packageItem) => {
+        const targetPackage = packageItem.sizes.find((item) => item.packageId === packageItem.id && item.selected);
+        if (targetPackage) {
+            return `${targetPackage.from} ${targetPackage.value} ${targetPackage.to} ${targetPackage.max} ${targetPackage.name}`;
+        } 
     };
 
     const advancedServiceHandler = (value, serviceId) => {
@@ -145,14 +166,18 @@ const QuizMainPage = (props) => {
     }, [quizState.currentStep]);
 
     useEffect(() => {
-        console.log(quizState.quizResult);
+        if (quizState.currentStep === 4) {
+            console.log(quizState.quizResult);
+        } 
+        
     }, [quizState.currentStep]);
-    
 
     return (
         <React.Fragment>
-            <div className="quiz-mainpage-popup-background">
-            <div className="quiz-mainpage-popup-wrap">
+            <div className="quiz-mainpage-popup-background" ref={popupWrapRef}>
+            <div
+                className="quiz-mainpage-popup-wrap"
+            >
                 <div className="quiz-mainpage-body-row">
                     <div className="quiz-controlpanel-wrap">
                         {quizState.quizMenu.map((quizMenuItem) => {
@@ -203,9 +228,12 @@ const QuizMainPage = (props) => {
                                     stepData={findStep(3)}
                                     showCustomPackageHandler={showCustomPackageHandler}
                                     saveCustomPackageHandler={saveCustomPackageHandler}
+                                    validateCustomPackageHandler={validateCustomPackageHandler}
+                                    clearCustomPackageText={clearCustomTextField}
                                     selectPackageHandler={selectPackageHandler}
                                     selectPackageSizeHandler={selectPackageSizeHandler}
                                     validateStep={validateCurrentStep}
+                                    setDefaultSize={setDefaultSize}
                                 /> 
                             : null}
                             {
