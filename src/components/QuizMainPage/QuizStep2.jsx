@@ -23,13 +23,20 @@ const QuizStep2 = (props) => {
         }
     };
 
+    const validateCustomDeadlineHandler = () => {
+        const customDeadLineValue = stepData.deadLineItems.find((item) => item.customValue);
+        console.log(customDeadLineValue)
+    };
+
     useEffect(() => {
         qntValueRef.current.value = rangeQntRef.current.value;
     }, [stepData.quantity.value]);
 
     useEffect(() => {
         props.validateStep();
-    }, [stepData.deadLineItems]);
+    }, [stepData.deadLineItems, stepData.deadLineCustomField]);
+
+    console.log(stepData)
 
     return (
         <React.Fragment>
@@ -111,9 +118,18 @@ const QuizStep2 = (props) => {
                         {stepData.deadLineItems.find((item) => item.id === stepData.deadLineItems.length).selected ? 
                             <React.Fragment>
                                 <div className="quiz-deadline-custom-wrap">
+                                    <div className="quiz-deadline-custom-title-wrap">
+                                        <label htmlFor="quiz-deadline-custom-input">Желаемые сроки</label>
+                                    </div>
                                     <div className="quiz-deadline-custom-input-wrap">
                                         <textarea 
-                                            ref={deadlineInputRef}>
+                                            ref={deadlineInputRef}
+                                            className={!stepData.deadLineCustomField.fieldValid ? 'input-err' : ''}
+                                            onKeyDown={(e) => props.deadlineClearInput(e, deadlineInputRef.current)}
+                                            onChange={() => props.deadlineSaveHandler(deadlineInputRef.current.value)}
+                                            id="quiz-deadline-custom-input"
+                                            placeholder="Описание..."
+                                        >
                                         </textarea>
                                         <span className="quiz-deadline-custom-btn-wrap">
                                             <button

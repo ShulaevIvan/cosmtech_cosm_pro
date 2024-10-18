@@ -77,6 +77,14 @@ const QuizMainPage = (props) => {
         dispatch(saveDeadlineCustomValue({customValue: saveValue}));
     };
 
+    const customDeadlineClearInput = (e, inputRef) => {
+        if (e.key === 'Backspace') {
+            dispatch(saveDeadlineCustomValue({customValue: ''}));
+            inputRef.value = '';
+            return;
+        }
+    };
+
     const productSelectHandler = (product) => {
         dispatch(selectProduct({selectItem: product}));
     };
@@ -220,6 +228,7 @@ const QuizMainPage = (props) => {
                                     changeMaxQntHandler={changeMaxQuantityHandler}
                                     deadlineHandler={deadlineHandler}
                                     deadlineSaveHandler={customDeadlineSaveHandler}
+                                    deadlineClearInput={customDeadlineClearInput}
                                     validateStep={validateCurrentStep}
                                 /> 
                             : null}

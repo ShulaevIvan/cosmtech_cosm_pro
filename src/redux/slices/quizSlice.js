@@ -198,6 +198,7 @@ const initialState = {
             ],
             deadLineCustomField: {
                 fieldValue: '',
+                fieldValid: false,
                 active: false,
             },
             active: false,
@@ -371,6 +372,7 @@ const qizSlice = createSlice({
     reducers: {
         nextStep(state, action) {
             const { stepParam } = action.payload;
+
             let nextStep;
             if (Math.sign(stepParam) === -1) {
                 nextStep = state.qizSteps.find((quizItem) => quizItem.stepNum === state.currentStep - 1);
@@ -396,6 +398,7 @@ const qizSlice = createSlice({
         },
         selectProduct(state, action) {
             const { selectItem } = action.payload;
+
             const productStep = state.qizSteps.find((quizItem) => quizItem.stepNum === state.currentStep);
             if (!productStep.products) return;
             state.qizSteps = state.qizSteps.map((stepItem) => {
@@ -435,6 +438,7 @@ const qizSlice = createSlice({
         },
         selectProductPage(state, action) {
             const { nextPageId } = action.payload;
+
             state.qizSteps = state.qizSteps.map((quizStep) => {
                 if (quizStep.stepNum === state.currentStep && quizStep.productPages) {
                     return {
@@ -462,6 +466,7 @@ const qizSlice = createSlice({
         },
         disableQuantity(state, action) {
             const { status } = action.payload;
+
             state.qizSteps.map((quizStep) => {
                 if (quizStep.stepNum === state.currentStep) {
                     quizStep.quantity = {
@@ -473,6 +478,7 @@ const qizSlice = createSlice({
         },
         changeQuantity(state, action) {
             const { qntValue } = action.payload;
+
             state.qizSteps.map((quizStep) => {
                 if (quizStep.stepNum === state.currentStep) {
                     quizStep.quantity = {
@@ -485,6 +491,7 @@ const qizSlice = createSlice({
         },
         changeMaxQuantity(state, action) {
             const { qntValue } = action.payload;
+            
             state.qizSteps.map((quizStep) => {
                 if (quizStep.stepNum === state.currentStep) {
                     quizStep.quantity = {
@@ -497,6 +504,7 @@ const qizSlice = createSlice({
         },
         selectDeadline(state, action) {
             const { itemId, customValue } = action.payload;
+
             state.qizSteps.map((quizStep) => {
                 if (quizStep.stepNum === state.currentStep && quizStep.deadLineItems) {
                     quizStep.deadLineItems = quizStep.deadLineItems.map((deadlineItem) => {
@@ -525,14 +533,15 @@ const qizSlice = createSlice({
         },
         saveDeadlineCustomValue(state, action) {
             const { customValue } = action.payload;
+
             state.qizSteps.map((quizStep) => {
-                if (quizStep.stepNum === state.currentStep) {
+                if (quizStep.stepNum === state.currentStep && quizStep.deadLineItems) {
                     quizStep.deadLineItems = quizStep.deadLineItems.map((deadlineItem) => {
                         if (deadlineItem.id === Array.from(quizStep.deadLineItems).length) {
                             return {
                                 ...deadlineItem,
                                 selected: true,
-                                customValue: customValue
+                                customValue:  /^\s*$/.test(customValue) ? '' : customValue
                             }
                         }
                         return deadlineItem;
@@ -588,7 +597,6 @@ const qizSlice = createSlice({
         clearCustomPackageField(state) {
             state.qizSteps = state.qizSteps.map((quizStep) => {
                 if (quizStep.stepNum === state.currentStep && quizStep.customPackage) {
-                    console.log('test2')
                     return {
                         ...quizStep,
                         customPackage: {
