@@ -9082,6 +9082,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Рубцовск",
       "population": 126834,
+      "range": 3236,
       "subject": "Алтайский край"
     },
     {
@@ -9092,6 +9093,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Рудня",
       "population": 8908,
+      "range": 573,
       "subject": "Смоленская область"
     },
     {
@@ -9102,6 +9104,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Руза",
       "population": 16014,
+      "range": 597,
       "subject": "Московская область"
     },
     {
@@ -9112,6 +9115,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Рузаевка",
       "population": 42989,
+      "range": 1106,
       "subject": "Мордовия"
     },
     {
@@ -9122,6 +9126,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Рыбинск",
       "population": 177295,
+      "range": 573,
       "subject": "Ярославская область"
     },
     {
@@ -9132,6 +9137,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Рыбное",
       "population": 21069,
+      "range": 809,
       "subject": "Рязанская область"
     },
     {
@@ -9142,6 +9148,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Рыльск",
       "population": 15069,
+      "range": 984,
       "subject": "Курская область"
     },
     {
@@ -9152,6 +9159,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Ряжск",
       "population": 20634,
+      "range": 922,
       "subject": "Рязанская область"
     },
     {
@@ -9162,6 +9170,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Рязань",
       "population": 528599,
+      "range": 827,
       "subject": "Рязанская область"
     },
     {
@@ -9172,6 +9181,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Саки",
       "population": 24285,
+      "range": 1667,
       "subject": "Крым"
     },
     {
@@ -9182,6 +9192,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Салават",
       "population": 148575,
+      "range": 1720,
       "subject": "Башкортостан"
     },
     {
@@ -9192,6 +9203,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Салаир",
       "population": 7088,
+      "range": 3312,
       "subject": "Кемеровская область"
     },
     {
@@ -9202,6 +9214,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Салехард",
       "population": 47910,
+      "range": 1922,
       "subject": "Ямало-Ненецкий АО"
     },
     {
@@ -9212,6 +9225,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Сальск",
       "population": 57937,
+      "range": 1682,
       "subject": "Ростовская область"
     },
     {
@@ -9222,6 +9236,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Самара",
       "population": 1173299,
+      "range": 1425,
       "subject": "Самарская область"
     },
     {
@@ -9232,6 +9247,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Санкт-Петербург",
       "population": 5601911,
+      "range": 0,
       "subject": "Санкт-Петербург"
     },
     {
@@ -9242,6 +9258,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Саранск",
       "population": 314871,
+      "range": 1108,
       "subject": "Мордовия"
     },
     {
@@ -9252,6 +9269,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Сарапул",
       "population": 91115,
+      "range": 1425,
       "subject": "Удмуртия"
     },
     {
@@ -9262,6 +9280,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Саратов",
       "population": 901361,
+      "range": 1361,
       "subject": "Саратовская область"
     },
     {
@@ -9272,6 +9291,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Саров",
       "population": 93357,
+      "range": 965,
       "subject": "Нижегородская область"
     },
     {
@@ -9282,6 +9302,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Сасово",
       "population": 21628,
+      "range": 944,
       "subject": "Рязанская область"
     },
     {
@@ -9292,6 +9313,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Сатка",
       "population": 42597,
+      "range": 1786,
       "subject": "Челябинская область"
     },
     {
@@ -9302,6 +9324,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Сафоново",
       "population": 38403,
+      "range": 579,
       "subject": "Смоленская область"
     },
     {
@@ -9312,6 +9335,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Саяногорск",
       "population": 44872,
+      "range": 3687,
       "subject": "Хакасия"
     },
     {
@@ -9322,6 +9346,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Саянск",
       "population": 35561,
+      "range": 4182,
       "subject": "Иркутская область"
     },
     {
@@ -9332,6 +9357,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Светлогорск",
       "population": 16207,
+      "range": 835,
       "subject": "Калининградская область"
     },
     {
@@ -9342,6 +9368,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Светлоград",
       "population": 35703,
+      "range": 1839,
       "subject": "Ставропольский край"
     },
     {
@@ -9352,6 +9379,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Светлый",
       "population": 21114,
+      "range": 858,
       "subject": "Калининградская область"
     },
     {
@@ -9362,6 +9390,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Светогорск",
       "population": 13784,
+      "range": 141,
       "subject": "Ленинградская область"
     },
     {
@@ -9372,6 +9401,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Свирск",
       "population": 15485,
+      "range": 4315,
       "subject": "Иркутская область"
     },
     {
@@ -9382,6 +9412,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Свободный",
       "population": 48517,
+      "range": 5637,
       "subject": "Амурская область"
     },
     {
@@ -9392,6 +9423,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Себеж",
       "population": 6246,
+      "range": 437,
       "subject": "Псковская область"
     },
     {
@@ -9402,6 +9434,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Севастополь",
       "population": 547820,
+      "range": 1733,
       "subject": "Севастополь"
     },
     {
@@ -9412,6 +9445,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Северо-Курильск",
       "population": 2374,
+      "range": 6789,
       "subject": "Сахалинская область"
     },
     {
@@ -9422,6 +9456,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Северобайкальск",
       "population": 24233,
+      "range": 4429,
       "subject": "Бурятия"
     },
     {
@@ -9432,6 +9467,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Северодвинск",
       "population": 157213,
+      "range": 700,
       "subject": "Архангельская область"
     },
     {
@@ -9442,6 +9478,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Североморск",
       "population": 43327,
+      "range": 1014,
       "subject": "Мурманская область"
     },
     {
@@ -9452,6 +9489,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Североуральск",
       "population": 24428,
+      "range": 1632,
       "subject": "Свердловская область"
     },
     {
@@ -9462,6 +9500,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Северск",
       "population": 106648,
+      "range": 3124,
       "subject": "Томская область"
     },
     {
@@ -9472,6 +9511,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Севск",
       "population": 6732,
+      "range": 918,
       "subject": "Брянская область"
     },
     {
@@ -9482,6 +9522,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сегежа",
       "population": 23543,
+      "range": 459,
       "subject": "Карелия"
     },
     {
@@ -9492,6 +9533,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Сельцо",
       "population": 15906,
+      "range": 780,
       "subject": "Брянская область"
     },
     {
@@ -9502,6 +9544,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Семикаракорск",
       "population": 21719,
+      "range": 1554,
       "subject": "Ростовская область"
     },
     {
@@ -9512,6 +9555,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Семилуки",
       "population": 27938,
+      "range": 1077,
       "subject": "Воронежская область"
     },
     {
@@ -9522,6 +9566,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Семёнов",
       "population": 25075,
+      "range": 901,
       "subject": "Нижегородская область"
     },
     {
@@ -9532,6 +9577,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Сенгилей",
       "population": 6407,
+      "range": 1304,
       "subject": "Ульяновская область"
     },
     {
@@ -9542,6 +9588,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Серафимович",
       "population": 8633,
+      "range": 1408,
       "subject": "Волгоградская область"
     },
     {
@@ -9552,6 +9599,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Сергач",
       "population": 20256,
+      "range": 1028,
       "subject": "Нижегородская область"
     },
     {
@@ -9562,6 +9610,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Сергиев Посад",
       "population": 101756,
+      "range": 620,
       "subject": "Московская область"
     },
     {
@@ -9572,6 +9621,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Сердобск",
       "population": 30220,
+      "range": 1202,
       "subject": "Пензенская область"
     },
     {
@@ -9582,6 +9632,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Серов",
       "population": 94211,
+      "range": 1681,
       "subject": "Свердловская область"
     },
     {
@@ -9592,6 +9643,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Серпухов",
       "population": 133793,
+      "range": 713,
       "subject": "Московская область"
     },
     {
@@ -9602,6 +9654,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сертолово",
       "population": 68241,
+      "range": 11,
       "subject": "Ленинградская область"
     },
     {
@@ -9612,6 +9665,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сестрорецк",
       "population": 45192,
+      "range": 21,
       "subject": "Санкт-Петербург"
     },
     {
@@ -9622,6 +9676,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Сибай",
       "population": 56514,
+      "range": 1911,
       "subject": "Башкортостан"
     },
     {
@@ -9632,6 +9687,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Сим",
       "population": 12858,
+      "range": 1718,
       "subject": "Челябинская область"
     },
     {
@@ -9642,6 +9698,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Симферополь",
       "population": 340540,
+      "range": 1702,
       "subject": "Крым"
     },
     {
@@ -9652,6 +9709,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Сковородино",
       "population": 7057,
+      "range": 5233,
       "subject": "Амурская область"
     },
     {
@@ -9662,6 +9720,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Скопин",
       "population": 25238,
+      "range": 892,
       "subject": "Рязанская область"
     },
     {
@@ -9672,6 +9731,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Славгород",
       "population": 27900,
+      "range": 2999,
       "subject": "Алтайский край"
     },
     {
@@ -9682,6 +9742,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Славск",
       "population": 4153,
+      "range": 762,
       "subject": "Калининградская область"
     },
     {
@@ -9692,6 +9753,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Славянск-на-Кубани",
       "population": 62985,
+      "range": 1727,
       "subject": "Краснодарский край"
     },
     {
@@ -9702,6 +9764,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сланцы",
       "population": 34628,
+      "range": 166,
       "subject": "Ленинградская область"
     },
     {
@@ -9712,6 +9775,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Слободской",
       "population": 29148,
+      "range": 1132,
       "subject": "Кировская область"
     },
     {
@@ -9722,6 +9786,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Слюдянка",
       "population": 18058,
+      "range": 4436,
       "subject": "Иркутская область"
     },
     {
@@ -9732,6 +9797,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Смоленск",
       "population": 316570,
+      "range": 598,
       "subject": "Смоленская область"
     },
     {
@@ -9742,6 +9808,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Снежинск",
       "population": 50619,
+      "range": 1829,
       "subject": "Челябинская область"
     },
     {
@@ -9752,6 +9819,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Снежногорск",
       "population": 9942,
+      "range": 1026,
       "subject": "Мурманская область"
     },
     {
@@ -9762,6 +9830,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Собинка",
       "population": 17444,
+      "range": 729,
       "subject": "Владимирская область"
     },
     {
@@ -9772,6 +9841,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Советск",
       "population": 38910,
+      "range": 750,
       "subject": "Калининградская область"
     },
     {
@@ -9782,6 +9852,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Советск",
       "population": 14626,
+      "range": 1106,
       "subject": "Кировская область"
     },
     {
@@ -9792,6 +9863,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Советск",
       "population": 7889,
+      "range": 813,
       "subject": "Тульская область"
     },
     {
@@ -9802,6 +9874,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Советская Гавань",
       "population": 24231,
+      "range": 6369,
       "subject": "Хабаровский край"
     },
     {
@@ -9812,6 +9885,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Советский",
       "population": 31138,
+      "range": 1799,
       "subject": "Ханты-Мансийский АО"
     },
     {
@@ -9822,6 +9896,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сокол",
       "population": 34742,
+      "range": 553,
       "subject": "Вологодская область"
     },
     {
@@ -9832,6 +9907,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Солигалич",
       "population": 5534,
+      "range": 683,
       "subject": "Костромская область"
     },
     {
@@ -9842,6 +9918,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Соликамск",
       "population": 89473,
+      "range": 1471,
       "subject": "Пермский край"
     },
     {
@@ -9852,6 +9929,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Солнечногорск",
       "population": 48413,
+      "range": 583,
       "subject": "Московская область"
     },
     {
@@ -9862,6 +9940,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Соль-Илецк",
       "population": 26149,
+      "range": 1825,
       "subject": "Оренбургская область"
     },
     {
@@ -9872,6 +9951,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сольвычегодск",
       "population": 1952,
+      "range": 914,
       "subject": "Архангельская область"
     },
     {
@@ -9882,6 +9962,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сольцы",
       "population": 8449,
+      "range": 218,
       "subject": "Новгородская область"
     },
     {
@@ -9892,6 +9973,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Сорочинск",
       "population": 28478,
+      "range": 1637,
       "subject": "Оренбургская область"
     },
     {
@@ -9902,6 +9984,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Сорск",
       "population": 10124,
+      "range": 3567,
       "subject": "Хакасия"
     },
     {
@@ -9912,6 +9995,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сортавала",
       "population": 14867,
+      "range": 183,
       "subject": "Карелия"
     },
     {
@@ -9922,6 +10006,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Сосенский",
       "population": 11413,
+      "range": 751,
       "subject": "Калужская область"
     },
     {
@@ -9932,6 +10017,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Сосновка",
       "population": 8428,
+      "range": 1297,
       "subject": "Кировская область"
     },
     {
@@ -9942,6 +10028,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Сосновоборск",
       "population": 40442,
+      "range": 3596,
       "subject": "Красноярский край"
     },
     {
@@ -9952,6 +10039,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сосновый Бор",
       "population": 65367,
+      "range": 73,
       "subject": "Ленинградская область"
     },
     {
@@ -9962,6 +10050,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сосногорск",
       "population": 22189,
+      "range": 1292,
       "subject": "Коми"
     },
     {
@@ -9972,6 +10061,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Сочи",
       "population": 466078,
+      "range": 1940,
       "subject": "Краснодарский край"
     },
     {
@@ -9982,6 +10072,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Спас-Деменск",
       "population": 4569,
+      "range": 668,
       "subject": "Калужская область"
     },
     {
@@ -9992,6 +10083,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Спас-Клепики",
       "population": 4743,
+      "range": 804,
       "subject": "Рязанская область"
     },
     {
@@ -10002,6 +10094,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Спасск-Дальний",
       "population": 35732,
+      "range": 6445,
       "subject": "Приморский край"
     },
     {
@@ -10012,6 +10105,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Спасск-Рязанский",
       "population": 5796,
+      "range": 873,
       "subject": "Рязанская область"
     },
     {
@@ -10022,6 +10116,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Спасск",
       "population": 6936,
+      "range": 1035,
       "subject": "Пензенская область"
     },
     {
@@ -10032,6 +10127,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Среднеколымск",
       "population": 3131,
+      "range": 5125,
       "subject": "Якутия"
     },
     {
@@ -10042,6 +10138,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Среднеуральск",
       "population": 23344,
+      "range": 1771,
       "subject": "Свердловская область"
     },
     {
@@ -10052,6 +10149,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Сретенск",
       "population": 6093,
+      "range": 5085,
       "subject": "Забайкальский край"
     },
     {
@@ -10062,6 +10160,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Ставрополь",
       "population": 547443,
+      "range": 1842,
       "subject": "Ставропольский край"
     },
     {
@@ -10072,6 +10171,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Старая Купавна",
       "population": 22898,
+      "range": 663,
       "subject": "Московская область"
     },
     {
@@ -10082,6 +10182,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Старая Русса",
       "population": 27487,
+      "range": 239,
       "subject": "Новгородская область"
     },
     {
@@ -10092,6 +10193,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Старица",
       "population": 6938,
+      "range": 479,
       "subject": "Тверская область"
     },
     {
@@ -10102,6 +10204,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Стародуб",
       "population": 17687,
+      "range": 847,
       "subject": "Брянская область"
     },
     {
@@ -10112,6 +10215,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Старый Крым",
       "population": 10470,
+      "range": 1703,
       "subject": "Крым"
     },
     {
@@ -10122,6 +10226,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Старый Оскол",
       "population": 221676,
+      "range": 1083,
       "subject": "Белгородская область"
     },
     {
@@ -10132,6 +10237,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Стерлитамак",
       "population": 277410,
+      "range": 1703,
       "subject": "Башкортостан"
     },
     {
@@ -10142,6 +10248,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Стрежевой",
       "population": 39169,
+      "range": 2549,
       "subject": "Томская область"
     },
     {
@@ -10152,6 +10259,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Строитель",
       "population": 23780,
+      "range": 1104,
       "subject": "Белгородская область"
     },
     {
@@ -10162,6 +10270,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Струнино",
       "population": 11774,
+      "range": 635,
       "subject": "Владимирская область"
     },
     {
@@ -10172,6 +10281,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Ступино",
       "population": 64412,
+      "range": 740,
       "subject": "Московская область"
     },
     {
@@ -10182,6 +10292,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Суворов",
       "population": 17598,
+      "range": 759,
       "subject": "Тульская область"
     },
     {
@@ -10192,6 +10303,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Судак",
       "population": 17834,
+      "range": 1722,
       "subject": "Крым"
     },
     {
@@ -10202,6 +10314,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Суджа",
       "population": 5127,
+      "range": 1036,
       "subject": "Курская область"
     },
     {
@@ -10212,6 +10325,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Судогда",
       "population": 10408,
+      "range": 771,
       "subject": "Владимирская область"
     },
     {
@@ -10222,6 +10336,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Суздаль",
       "population": 9286,
+      "range": 718,
       "subject": "Владимирская область"
     },
     {
@@ -10232,6 +10347,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Сунжа",
       "population": 62078,
+      "range": 2112,
       "subject": "Ингушетия"
     },
     {
@@ -10242,6 +10358,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Суоярви",
       "population": 7190,
+      "range": 250,
       "subject": "Карелия"
     },
     {
@@ -10252,6 +10369,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Сураж",
       "population": 11176,
+      "range": 796,
       "subject": "Брянская область"
     },
     {
@@ -10262,6 +10380,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Сургут",
       "population": 396443,
+      "range": 2315,
       "subject": "Ханты-Мансийский АО"
     },
     {
@@ -10272,6 +10391,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Суровикино",
       "population": 18227,
+      "range": 1508,
       "subject": "Волгоградская область"
     },
     {
@@ -10282,6 +10402,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Сурск",
       "population": 6034,
+      "range": 1218,
       "subject": "Пензенская область"
     },
     {
@@ -10292,6 +10413,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Сусуман",
       "population": 4439,
+      "range": 5394,
       "subject": "Магаданская область"
     },
     {
@@ -10302,6 +10424,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Сухиничи",
       "population": 14806,
+      "range": 730,
       "subject": "Калужская область"
     },
     {
@@ -10312,6 +10435,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Сухой Лог",
       "population": 32748,
+      "range": 1862,
       "subject": "Свердловская область"
     },
     {
@@ -10322,6 +10446,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Сызрань",
       "population": 165725,
+      "range": 1346,
       "subject": "Самарская область"
     },
     {
@@ -10332,6 +10457,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сыктывкар",
       "population": 220580,
+      "range": 1122,
       "subject": "Коми"
     },
     {
@@ -10342,6 +10468,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Сысерть",
       "population": 20634,
+      "range": 1813,
       "subject": "Свердловская область"
     },
     {
@@ -10352,6 +10479,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Сычёвка",
       "population": 7544,
+      "range": 527,
       "subject": "Смоленская область"
     },
     {
@@ -10362,6 +10490,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Сясьстрой",
       "population": 12566,
+      "range": 123,
       "subject": "Ленинградская область"
     },
     {
@@ -10372,6 +10501,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Тавда",
       "population": 32749,
+      "range": 1993,
       "subject": "Свердловская область"
     },
     {
@@ -10382,6 +10512,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Таганрог",
       "population": 245120,
+      "range": 1537,
       "subject": "Ростовская область"
     },
     {
@@ -10392,6 +10523,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Тайга",
       "population": 22375,
+      "range": 3194,
       "subject": "Кемеровская область"
     },
     {
@@ -10402,6 +10534,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Тайшет",
       "population": 34491,
+      "range": 3846,
       "subject": "Иркутская область"
     },
     {
@@ -10412,6 +10545,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Талдом",
       "population": 17317,
+      "range": 561,
       "subject": "Московская область"
     },
     {
@@ -10422,6 +10556,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Талица",
       "population": 14808,
+      "range": 1952,
       "subject": "Свердловская область"
     },
     {
@@ -10432,6 +10567,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Тамбов",
       "population": 261803,
+      "range": 1065,
       "subject": "Тамбовская область"
     },
     {
@@ -10442,6 +10578,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Тара",
       "population": 26878,
+      "range": 2591,
       "subject": "Омская область"
     },
     {
@@ -10452,6 +10589,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Тарко-Сале",
       "population": 19900,
+      "range": 2441,
       "subject": "Ямало-Ненецкий АО"
     },
     {
@@ -10462,6 +10600,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Таруса",
       "population": 9918,
+      "range": 723,
       "subject": "Калужская область"
     },
     {
@@ -10472,6 +10611,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Татарск",
       "population": 23711,
+      "range": 2719,
       "subject": "Новосибирская область"
     },
     {
@@ -10482,6 +10622,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Таштагол",
       "population": 21980,
+      "range": 3518,
       "subject": "Кемеровская область"
     },
     {
@@ -10492,6 +10633,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Тверь",
       "population": 416219,
+      "range": 483,
       "subject": "Тверская область"
     },
     {
@@ -10502,6 +10644,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Теберда",
       "population": 9020,
+      "range": 2004,
       "subject": "Карачаево-Черкесия"
     },
     {
@@ -10512,6 +10655,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Тейково",
       "population": 31305,
+      "range": 693,
       "subject": "Ивановская область"
     },
     {
@@ -10522,6 +10666,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Темников",
       "population": 6451,
+      "range": 981,
       "subject": "Мордовия"
     },
     {
@@ -10532,6 +10677,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Темрюк",
       "population": 41608,
+      "range": 1711,
       "subject": "Краснодарский край"
     },
     {
@@ -10542,6 +10688,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Терек",
       "population": 19948,
+      "range": 2067,
       "subject": "Кабардино-Балкария"
     },
     {
@@ -10552,6 +10699,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Тетюши",
       "population": 10535,
+      "range": 1242,
       "subject": "Татарстан"
     },
     {
@@ -10562,6 +10710,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Тимашёвск",
       "population": 51858,
+      "range": 1706,
       "subject": "Краснодарский край"
     },
     {
@@ -10572,6 +10721,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Тихвин",
       "population": 55415,
+      "range": 185,
       "subject": "Ленинградская область"
     },
     {
@@ -10582,6 +10732,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Тихорецк",
       "population": 55686,
+      "range": 1709,
       "subject": "Краснодарский край"
     },
     {
@@ -10592,6 +10743,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Тобольск",
       "population": 100352,
+      "range": 2149,
       "subject": "Тюменская область"
     },
     {
@@ -10602,6 +10754,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Тогучин",
       "population": 20766,
+      "range": 3177,
       "subject": "Новосибирская область"
     },
     {
@@ -10612,6 +10765,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Тольятти",
       "population": 684709,
+      "range": 1368,
       "subject": "Самарская область"
     },
     {
@@ -10622,6 +10776,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Томари",
       "population": 4313,
+      "range": 6553,
       "subject": "Сахалинская область"
     },
     {
@@ -10632,6 +10787,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Томмот",
       "population": 6440,
+      "range": 4937,
       "subject": "Якутия"
     },
     {
@@ -10642,6 +10798,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Томск",
       "population": 556478,
+      "range": 3134,
       "subject": "Томская область"
     },
     {
@@ -10652,6 +10809,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Топки",
       "population": 27158,
+      "range": 3239,
       "subject": "Кемеровская область"
     },
     {
@@ -10662,6 +10820,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Торжок",
       "population": 41116,
+      "range": 431,
       "subject": "Тверская область"
     },
     {
@@ -10672,6 +10831,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Торопец",
       "population": 11441,
+      "range": 406,
       "subject": "Тверская область"
     },
     {
@@ -10682,6 +10842,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Тосно",
       "population": 34066,
+      "range": 66,
       "subject": "Ленинградская область"
     },
     {
@@ -10692,6 +10853,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Тотьма",
       "population": 8669,
+      "range": 691,
       "subject": "Вологодская область"
     },
     {
@@ -10702,6 +10864,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Троицк",
       "population": 65043,
+      "range": 657,
       "subject": "Москва"
     },
     {
@@ -10712,6 +10875,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Троицк",
       "population": 70301,
+      "range": 1984,
       "subject": "Челябинская область"
     },
     {
@@ -10722,6 +10886,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Трубчевск",
       "population": 13287,
+      "range": 861,
       "subject": "Брянская область"
     },
     {
@@ -10732,6 +10897,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Трёхгорный",
       "population": 32463,
+      "range": 1769,
       "subject": "Челябинская область"
     },
     {
@@ -10742,6 +10908,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Туапсе",
       "population": 61571,
+      "range": 1872,
       "subject": "Краснодарский край"
     },
     {
@@ -10752,6 +10919,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Туймазы",
       "population": 68349,
+      "range": 1522,
       "subject": "Башкортостан"
     },
     {
@@ -10762,6 +10930,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Тула",
       "population": 473622,
+      "range": 788,
       "subject": "Тульская область"
     },
     {
@@ -10772,6 +10941,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Тулун",
       "population": 38440,
+      "range": 4069,
       "subject": "Иркутская область"
     },
     {
@@ -10782,6 +10952,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Туран",
       "population": 5044,
+      "range": 3889,
       "subject": "Тыва"
     },
     {
@@ -10792,6 +10963,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Туринск",
       "population": 16561,
+      "range": 1905,
       "subject": "Свердловская область"
     },
     {
@@ -10802,6 +10974,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Тутаев",
       "population": 39643,
+      "range": 582,
       "subject": "Ярославская область"
     },
     {
@@ -10812,6 +10985,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Тында",
       "population": 28625,
+      "range": 5174,
       "subject": "Амурская область"
     },
     {
@@ -10822,6 +10996,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Тырныауз",
       "population": 22056,
+      "range": 2040,
       "subject": "Кабардино-Балкария"
     },
     {
@@ -10832,6 +11007,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Тюкалинск",
       "population": 9894,
+      "range": 2475,
       "subject": "Омская область"
     },
     {
@@ -10842,6 +11018,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Тюмень",
       "population": 847488,
+      "range": 2045,
       "subject": "Тюменская область"
     },
     {
@@ -10852,6 +11029,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Уварово",
       "population": 23584,
+      "range": 1164,
       "subject": "Тамбовская область"
     },
     {
@@ -10862,6 +11040,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Углегорск",
       "population": 8041,
+      "range": 6430,
       "subject": "Сахалинская область"
     },
     {
@@ -10872,6 +11051,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Углич",
       "population": 32719,
+      "range": 541,
       "subject": "Ярославская область"
     },
     {
@@ -10882,6 +11062,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Удачный",
       "population": 12930,
+      "range": 3872,
       "subject": "Якутия"
     },
     {
@@ -10892,6 +11073,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Удомля",
       "population": 25950,
+      "range": 362,
       "subject": "Тверская область"
     },
     {
@@ -10902,6 +11084,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Ужур",
       "population": 14134,
+      "range": 3462,
       "subject": "Красноярский край"
     },
     {
@@ -10912,6 +11095,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Узловая",
       "population": 49427,
+      "range": 827,
       "subject": "Тульская область"
     },
     {
@@ -10922,6 +11106,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Улан-Удэ",
       "population": 437565,
+      "range": 4621,
       "subject": "Бурятия"
     },
     {
@@ -10932,6 +11117,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Ульяновск",
       "population": 617352,
+      "range": 1260,
       "subject": "Ульяновская область"
     },
     {
@@ -10942,6 +11128,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Унеча",
       "population": 24274,
+      "range": 817,
       "subject": "Брянская область"
     },
     {
@@ -10952,6 +11139,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Урай",
       "population": 41315,
+      "range": 1895,
       "subject": "Ханты-Мансийский АО"
     },
     {
@@ -10962,6 +11150,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Урень",
       "population": 12450,
+      "range": 937,
       "subject": "Нижегородская область"
     },
     {
@@ -10972,6 +11161,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Уржум",
       "population": 8448,
+      "range": 1185,
       "subject": "Кировская область"
     },
     {
@@ -10982,6 +11172,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Урус-Мартан",
       "population": 63449,
+      "range": 2147,
       "subject": "Чечня"
     },
     {
@@ -10992,6 +11183,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Урюпинск",
       "population": 36669,
+      "range": 1265,
       "subject": "Волгоградская область"
     },
     {
@@ -11002,6 +11194,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Усинск",
       "population": 32182,
+      "range": 1511,
       "subject": "Коми"
     },
     {
@@ -11012,6 +11205,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Усмань",
       "population": 19662,
+      "range": 1066,
       "subject": "Липецкая область"
     },
     {
@@ -11022,6 +11216,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Усолье-Сибирское",
       "population": 74762,
+      "range": 4355,
       "subject": "Иркутская область"
     },
     {
@@ -11032,6 +11227,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Усолье",
       "population": 6619,
+      "range": 1473,
       "subject": "Пермский край"
     },
     {
@@ -11042,6 +11238,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Уссурийск",
       "population": 180393,
+      "range": 6478,
       "subject": "Приморский край"
     },
     {
@@ -11052,6 +11249,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Усть-Джегута",
       "population": 31137,
+      "range": 1943,
       "subject": "Карачаево-Черкесия"
     },
     {
@@ -11062,6 +11260,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Усть-Илимск",
       "population": 79570,
+      "range": 3954,
       "subject": "Иркутская область"
     },
     {
@@ -11072,6 +11271,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Усть-Катав",
       "population": 21439,
+      "range": 1748,
       "subject": "Челябинская область"
     },
     {
@@ -11082,6 +11282,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Усть-Кут",
       "population": 36918,
+      "range": 4176,
       "subject": "Иркутская область"
     },
     {
@@ -11092,6 +11293,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Усть-Лабинск",
       "population": 40158,
+      "range": 1766,
       "subject": "Краснодарский край"
     },
     {
@@ -11102,6 +11304,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Устюжна",
       "population": 7843,
+      "range": 371,
       "subject": "Вологодская область"
     },
     {
@@ -11112,6 +11315,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Уфа",
       "population": 1144809,
+      "range": 1637,
       "subject": "Башкортостан"
     },
     {
@@ -11122,6 +11326,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Ухта",
       "population": 79899,
+      "range": 1281,
       "subject": "Коми"
     },
     {
@@ -11132,6 +11337,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Учалы",
       "population": 36175,
+      "range": 1850,
       "subject": "Башкортостан"
     },
     {
@@ -11142,6 +11348,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Уяр",
       "population": 12036,
+      "range": 3666,
       "subject": "Красноярский край"
     },
     {
@@ -11152,6 +11359,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Фатеж",
       "population": 4691,
+      "range": 952,
       "subject": "Курская область"
     },
     {
@@ -11162,6 +11370,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Феодосия",
       "population": 66293,
+      "range": 1708,
       "subject": "Крым"
     },
     {
@@ -11172,6 +11381,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Фокино",
       "population": 12538,
+      "range": 777,
       "subject": "Брянская область"
     },
     {
@@ -11182,6 +11392,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Фокино",
       "population": 19711,
+      "range": 6574,
       "subject": "Приморский край"
     },
     {
@@ -11192,6 +11403,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Фролово",
       "population": 35661,
+      "range": 1424,
       "subject": "Волгоградская область"
     },
     {
@@ -11202,6 +11414,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Фрязино",
       "population": 60580,
+      "range": 645,
       "subject": "Московская область"
     },
     {
@@ -11212,6 +11425,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Фурманов",
       "population": 29715,
+      "range": 698,
       "subject": "Ивановская область"
     },
     {
@@ -11222,6 +11436,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Хабаровск",
       "population": 617441,
+      "range": 6195,
       "subject": "Хабаровский край"
     },
     {
@@ -11232,6 +11447,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Хадыженск",
       "population": 22094,
+      "range": 1847,
       "subject": "Краснодарский край"
     },
     {
@@ -11242,6 +11458,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Ханты-Мансийск",
       "population": 107473,
+      "range": 2094,
       "subject": "Ханты-Мансийский АО"
     },
     {
@@ -11252,6 +11469,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Харабали",
       "population": 18514,
+      "range": 1787,
       "subject": "Астраханская область"
     },
     {
@@ -11262,6 +11480,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Харовск",
       "population": 8389,
+      "range": 550,
       "subject": "Вологодская область"
     },
     {
@@ -11272,6 +11491,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Хасавюрт",
       "population": 155144,
+      "range": 2170,
       "subject": "Дагестан"
     },
     {
@@ -11282,6 +11502,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Хвалынск",
       "population": 12042,
+      "range": 1379,
       "subject": "Саратовская область"
     },
     {
@@ -11292,6 +11513,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Хилок",
       "population": 9948,
+      "range": 4801,
       "subject": "Забайкальский край"
     },
     {
@@ -11302,6 +11524,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Химки",
       "population": 257128,
+      "range": 627,
       "subject": "Московская область"
     },
     {
@@ -11312,6 +11535,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Холм",
       "population": 3214,
+      "range": 329,
       "subject": "Новгородская область"
     },
     {
@@ -11322,6 +11546,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Холмск",
       "population": 25677,
+      "range": 6619,
       "subject": "Сахалинская область"
     },
     {
@@ -11332,6 +11557,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Хотьково",
       "population": 20466,
+      "range": 618,
       "subject": "Московская область"
     },
     {
@@ -11342,6 +11568,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Цивильск",
       "population": 12762,
+      "range": 1112,
       "subject": "Чувашия"
     },
     {
@@ -11352,6 +11579,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Цимлянск",
       "population": 14731,
+      "range": 1579,
       "subject": "Ростовская область"
     },
     {
@@ -11362,6 +11590,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Циолковский",
       "population": 7194,
+      "range": 5604,
       "subject": "Амурская область"
     },
     {
@@ -11372,6 +11601,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Чадан",
       "population": 9732,
+      "range": 3820,
       "subject": "Тыва"
     },
     {
@@ -11382,6 +11612,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Чайковский",
       "population": 75837,
+      "range": 1429,
       "subject": "Пермский край"
     },
     {
@@ -11392,6 +11623,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Чапаевск",
       "population": 70228,
+      "range": 1421,
       "subject": "Самарская область"
     },
     {
@@ -11402,6 +11634,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Чаплыгин",
       "population": 11579,
+      "range": 961,
       "subject": "Липецкая область"
     },
     {
@@ -11412,6 +11645,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Чебаркуль",
       "population": 44693,
+      "range": 1867,
       "subject": "Челябинская область"
     },
     {
@@ -11422,6 +11656,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Чебоксары",
       "population": 497807,
+      "range": 1084,
       "subject": "Чувашия"
     },
     {
@@ -11432,6 +11667,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Чегем",
       "population": 20736,
+      "range": 2041,
       "subject": "Кабардино-Балкария"
     },
     {
@@ -11442,6 +11678,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Чекалин",
       "population": 935,
+      "range": 755,
       "subject": "Тульская область"
     },
     {
@@ -11452,6 +11689,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Челябинск",
       "population": 1189525,
+      "range": 1914,
       "subject": "Челябинская область"
     },
     {
@@ -11462,6 +11700,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Чердынь",
       "population": 4590,
+      "range": 1439,
       "subject": "Пермский край"
     },
     {
@@ -11472,6 +11711,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Черемхово",
       "population": 53958,
+      "range": 4297,
       "subject": "Иркутская область"
     },
     {
@@ -11482,6 +11722,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Черепаново",
       "population": 19900,
+      "range": 3181,
       "subject": "Новосибирская область"
     },
     {
@@ -11492,6 +11733,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Череповец",
       "population": 305185,
+      "range": 439,
       "subject": "Вологодская область"
     },
     {
@@ -11502,6 +11744,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Черкесск",
       "population": 113226,
+      "range": 1930,
       "subject": "Карачаево-Черкесия"
     },
     {
@@ -11512,6 +11755,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Черноголовка",
       "population": 19530,
+      "range": 655,
       "subject": "Московская область"
     },
     {
@@ -11522,6 +11766,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Черногорск",
       "population": 75745,
+      "range": 3634,
       "subject": "Хакасия"
     },
     {
@@ -11532,6 +11777,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Чернушка",
       "population": 32991,
+      "range": 1549,
       "subject": "Пермский край"
     },
     {
@@ -11542,6 +11788,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Черняховск",
       "population": 36128,
+      "range": 793,
       "subject": "Калининградская область"
     },
     {
@@ -11552,6 +11799,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Чехов",
       "population": 89025,
+      "range": 694,
       "subject": "Московская область"
     },
     {
@@ -11562,6 +11810,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Чистополь",
       "population": 58815,
+      "range": 1311,
       "subject": "Татарстан"
     },
     {
@@ -11572,6 +11821,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Чита",
       "population": 334427,
+      "range": 4900,
       "subject": "Забайкальский край"
     },
     {
@@ -11582,6 +11832,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Чкаловск",
       "population": 11535,
+      "range": 837,
       "subject": "Нижегородская область"
     },
     {
@@ -11592,6 +11843,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Чудово",
       "population": 14302,
+      "range": 130,
       "subject": "Новгородская область"
     },
     {
@@ -11602,6 +11854,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Чулым",
       "population": 11034,
+      "range": 2999,
       "subject": "Новосибирская область"
     },
     {
@@ -11612,6 +11865,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Чусовой",
       "population": 45471,
+      "range": 1570,
       "subject": "Пермский край"
     },
     {
@@ -11622,6 +11876,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Чухлома",
       "population": 4252,
+      "range": 715,
       "subject": "Костромская область"
     },
     {
@@ -11632,6 +11887,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Чёрмоз",
       "population": 3044,
+      "range": 1462,
       "subject": "Пермский край"
     },
     {
@@ -11642,6 +11898,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Шагонар",
       "population": 11772,
+      "range": 3875,
       "subject": "Тыва"
     },
     {
@@ -11652,6 +11909,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Шадринск",
       "population": 68609,
+      "range": 1990,
       "subject": "Курганская область"
     },
     {
@@ -11662,6 +11920,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Шали",
       "population": 55054,
+      "range": 2156,
       "subject": "Чечня"
     },
     {
@@ -11672,6 +11931,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Шарыпово",
       "population": 33961,
+      "range": 3414,
       "subject": "Красноярский край"
     },
     {
@@ -11682,6 +11942,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Шарья",
       "population": 20439,
+      "range": 885,
       "subject": "Костромская область"
     },
     {
@@ -11692,6 +11953,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Шатура",
       "population": 38230,
+      "range": 740,
       "subject": "Московская область"
     },
     {
@@ -11702,6 +11964,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Шахты",
       "population": 226452,
+      "range": 1518,
       "subject": "Ростовская область"
     },
     {
@@ -11712,6 +11975,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Шахунья",
       "population": 17626,
+      "range": 973,
       "subject": "Нижегородская область"
     },
     {
@@ -11722,6 +11986,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Шацк",
       "population": 5927,
+      "range": 962,
       "subject": "Рязанская область"
     },
     {
@@ -11732,6 +11997,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Шебекино",
       "population": 39680,
+      "range": 1152,
       "subject": "Белгородская область"
     },
     {
@@ -11742,6 +12008,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Шелехов",
       "population": 41998,
+      "range": 4415,
       "subject": "Иркутская область"
     },
     {
@@ -11752,6 +12019,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Шенкурск",
       "population": 4600,
+      "range": 713,
       "subject": "Архангельская область"
     },
     {
@@ -11762,6 +12030,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Шилка",
       "population": 12046,
+      "range": 5037,
       "subject": "Забайкальский край"
     },
     {
@@ -11772,6 +12041,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Шимановск",
       "population": 16488,
+      "range": 5564,
       "subject": "Амурская область"
     },
     {
@@ -11782,6 +12052,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Шиханы",
       "population": 5155,
+      "range": 1366,
       "subject": "Саратовская область"
     },
     {
@@ -11792,6 +12063,7 @@ const cityBase = [
       "district": "Северо-Западный",
       "name": "Шлиссельбург",
       "population": 14131,
+      "range": 41,
       "subject": "Ленинградская область"
     },
     {
@@ -11802,6 +12074,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Шумерля",
       "population": 26873,
+      "range": 1079,
       "subject": "Чувашия"
     },
     {
@@ -11812,6 +12085,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Шумиха",
       "population": 16264,
+      "range": 2015,
       "subject": "Курганская область"
     },
     {
@@ -11822,6 +12096,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Шуя",
       "population": 55225,
+      "range": 736,
       "subject": "Ивановская область"
     },
     {
@@ -11832,6 +12107,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Щербинка",
       "population": 56531,
+      "range": 665,
       "subject": "Москва"
     },
     {
@@ -11842,6 +12118,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Щигры",
       "population": 14927,
+      "range": 1000,
       "subject": "Курская область"
     },
     {
@@ -11852,6 +12129,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Щучье",
       "population": 8252,
+      "range": 1986,
       "subject": "Курганская область"
     },
     {
@@ -11862,6 +12140,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Щёкино",
       "population": 55109,
+      "range": 803,
       "subject": "Тульская область"
     },
     {
@@ -11872,6 +12151,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Щёлкино",
       "population": 10131,
+      "range": 1670,
       "subject": "Крым"
     },
     {
@@ -11882,6 +12162,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Щёлково",
       "population": 134211,
+      "range": 646,
       "subject": "Московская область"
     },
     {
@@ -11892,6 +12173,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Электрогорск",
       "population": 29982,
+      "range": 683,
       "subject": "Московская область"
     },
     {
@@ -11902,6 +12184,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Электросталь",
       "population": 146403,
+      "range": 676,
       "subject": "Московская область"
     },
     {
@@ -11912,6 +12195,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Электроугли",
       "population": 17944,
+      "range": 672,
       "subject": "Московская область"
     },
     {
@@ -11922,6 +12206,7 @@ const cityBase = [
       "district": "Южный",
       "name": "Элиста",
       "population": 102583,
+      "range": 1784,
       "subject": "Калмыкия"
     },
     {
@@ -11932,6 +12217,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Энгельс",
       "population": 225428,
+      "range": 1368,
       "subject": "Саратовская область"
     },
     {
@@ -11942,6 +12228,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Эртиль",
       "population": 10024,
+      "range": 1123,
       "subject": "Воронежская область"
     },
     {
@@ -11952,6 +12239,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Югорск",
       "population": 38238,
+      "range": 1788,
       "subject": "Ханты-Мансийский АО"
     },
     {
@@ -11962,6 +12250,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Южа",
       "population": 12957,
+      "range": 785,
       "subject": "Ивановская область"
     },
     {
@@ -11972,6 +12261,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Южно-Сахалинск",
       "population": 181587,
+      "range": 6655,
       "subject": "Сахалинская область"
     },
     {
@@ -11982,6 +12272,7 @@ const cityBase = [
       "district": "Северо-Кавказский",
       "name": "Южно-Сухокумск",
       "population": 10503,
+      "range": 1996,
       "subject": "Дагестан"
     },
     {
@@ -11992,6 +12283,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Южноуральск",
       "population": 37478,
+      "range": 1947,
       "subject": "Челябинская область"
     },
     {
@@ -12002,6 +12294,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Юрга",
       "population": 79693,
+      "range": 3177,
       "subject": "Кемеровская область"
     },
     {
@@ -12012,6 +12305,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Юрьев-Польский",
       "population": 17276,
+      "range": 676,
       "subject": "Владимирская область"
     },
     {
@@ -12022,6 +12316,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Юрьевец",
       "population": 7899,
+      "range": 799,
       "subject": "Ивановская область"
     },
     {
@@ -12032,6 +12327,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Юрюзань",
       "population": 10284,
+      "range": 1766,
       "subject": "Челябинская область"
     },
     {
@@ -12042,6 +12338,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Юхнов",
       "population": 6610,
+      "range": 622,
       "subject": "Калужская область"
     },
     {
@@ -12052,6 +12349,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Ядрин",
       "population": 7918,
+      "range": 1041,
       "subject": "Чувашия"
     },
     {
@@ -12062,6 +12360,7 @@ const cityBase = [
       "district": "Дальневосточный",
       "name": "Якутск",
       "population": 355443,
+      "range": 4834,
       "subject": "Якутия"
     },
     {
@@ -12071,6 +12370,7 @@ const cityBase = [
       },
       "district": "Южный",
       "name": "Ялта",
+      "range": 1752,
       "population": 74652,
       "subject": "Крым"
     },
@@ -12082,6 +12382,7 @@ const cityBase = [
       "district": "Уральский",
       "name": "Ялуторовск",
       "population": 38853,
+      "range": 2111,
       "subject": "Тюменская область"
     },
     {
@@ -12092,6 +12393,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Янаул",
       "population": 25908,
+      "range": 1497,
       "subject": "Башкортостан"
     },
     {
@@ -12102,6 +12404,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Яранск",
       "population": 14284,
+      "range": 1059,
       "subject": "Кировская область"
     },
     {
@@ -12112,6 +12415,7 @@ const cityBase = [
       "district": "Сибирский",
       "name": "Яровое",
       "population": 16424,
+      "range": 3000,
       "subject": "Алтайский край"
     },
     {
@@ -12122,6 +12426,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Ярославль",
       "population": 577279,
+      "range": 614,
       "subject": "Ярославская область"
     },
     {
@@ -12132,6 +12437,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Ярцево",
       "population": 41452,
+      "range": 575,
       "subject": "Смоленская область"
     },
     {
@@ -12142,6 +12448,7 @@ const cityBase = [
       "district": "Центральный",
       "name": "Ясногорск",
       "population": 15269,
+      "range": 746,
       "subject": "Тульская область"
     },
     {
@@ -12152,6 +12459,7 @@ const cityBase = [
       "district": "Приволжский",
       "name": "Ясный",
       "population": 15471,
+      "range": 2092,
       "subject": "Оренбургская область"
     },
     {
@@ -12162,13 +12470,14 @@ const cityBase = [
       "district": "Центральный",
       "name": "Яхрома",
       "population": 14011,
+      "range": 594,
       "subject": "Московская область"
     }
 ];
 
 const findCity = (value) => {
     const cityName = value.replace(/[^a-zA-Z | ^а-яА-Я]/g, "").toLowerCase();
-    const targetCity = cityBase.find((cityObj) => cityObj.name.replace(/[^a-zA-Z | ^а-яА-Я]/g, "").toLowerCase() === cityName);
+    const targetCity = cityBase.find((cityObj) => cityObj.name.replace(/[^a-zA-Z | ^а-яА-Я]/g, "").toLowerCase() === cityName)
 };
 
 export default findCity;
