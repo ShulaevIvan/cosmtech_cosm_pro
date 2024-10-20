@@ -42,10 +42,12 @@ const QuizStep4 = (props) => {
                             <div className="quiz-advanced-settings-comment-wrap">
                                 <h3>Комментарий</h3>
                                 <div className="quiz-advanced-settings-comment-row">
-                                    <textarea ref={commentRef}></textarea>
-                                    <span className="quiz-advanced-settings-comment-btn-wrap">
-                                        <button onClick={() => props.saveCommentHandler(commentRef.current.value)}>Сохранить</button>
-                                    </span>
+                                    <textarea 
+                                        ref={commentRef}
+                                        className={commentRef.current && !commentRef.current.value ? 'input-err' : ''}
+                                        onKeyDown={(e) => props.clearServiceInputHandler(e, commentRef.current)}
+                                        onChange={() => props.saveCommentHandler(commentRef.current.value)}
+                                    ></textarea>
                                 </div>  
                             </div>
                         </React.Fragment>

@@ -23,11 +23,6 @@ const QuizStep2 = (props) => {
         }
     };
 
-    const validateCustomDeadlineHandler = () => {
-        const customDeadLineValue = stepData.deadLineItems.find((item) => item.customValue);
-        console.log(customDeadLineValue)
-    };
-
     useEffect(() => {
         qntValueRef.current.value = rangeQntRef.current.value;
     }, [stepData.quantity.value]);
@@ -124,18 +119,13 @@ const QuizStep2 = (props) => {
                                     <div className="quiz-deadline-custom-input-wrap">
                                         <textarea 
                                             ref={deadlineInputRef}
-                                            className={!stepData.deadLineCustomField.fieldValid ? 'input-err' : ''}
+                                            className={deadlineInputRef.current && !deadlineInputRef.current.value ? 'input-err' : ''}
                                             onKeyDown={(e) => props.deadlineClearInput(e, deadlineInputRef.current)}
                                             onChange={() => props.deadlineSaveHandler(deadlineInputRef.current.value)}
                                             id="quiz-deadline-custom-input"
                                             placeholder="Описание..."
                                         >
                                         </textarea>
-                                        <span className="quiz-deadline-custom-btn-wrap">
-                                            <button
-                                                onClick={() => props.deadlineSaveHandler(deadlineInputRef.current.value)}
-                                            >Сохранить</button>
-                                        </span>
                                     </div>
                                 </div>
                             </React.Fragment>

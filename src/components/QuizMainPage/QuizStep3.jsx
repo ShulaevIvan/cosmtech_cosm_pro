@@ -90,8 +90,8 @@ const QuizStep3 = (props) => {
                             <div className="quiz-package-custom-package-input">
                                 <div className="quiz-package-custom-input-wrap">
                                     <textarea
-                                        className={stepData.customPackage.fieldValid ? '' : 'input-err'}
                                         ref={customPackageRef}
+                                        className={stepData.customPackage.fieldValid ? '' : 'input-err'}
                                         onChange={() => props.validateCustomPackageHandler(customPackageRef.current.value)}
                                         onKeyDown={(e) => props.clearCustomPackageText(e, customPackageRef.current)}
                                         placeholder="описание..."

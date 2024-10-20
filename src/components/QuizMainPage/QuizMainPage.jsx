@@ -142,16 +142,23 @@ const QuizMainPage = (props) => {
         dispatch(advancedServiceChange({status: value, serviceId: serviceId}));
     };
 
+    const clearAdvancedServiceHandler = (e, serviceRef) => {
+        if (e.key === 'Backspace') {
+            serviceRef.value = '';
+            dispatch(saveAdvancedServiceCustomValue({commentValue: ''}));
+        }
+    };
+
+    const advancedServiceSaveCommentHandler = (value) => {
+        dispatch(saveAdvancedServiceCustomValue({commentValue: value}));
+    };
+
     const budgetServiceHandler = (value, budgetId) => {
         dispatch(advancedBudgetChange({status: value, budgetId: budgetId}));
     };
 
     const customServiceBudgetHandler = (value) => {
         dispatch(customBudgetChange({value: value}));
-    };
-
-    const advancedServiceSaveCommentHandler = (value) => {
-        dispatch(saveAdvancedServiceCustomValue({commentValue: value}));
     };
 
     const deliveryServiceHandler = (value, deliveryId) => {
@@ -250,6 +257,7 @@ const QuizMainPage = (props) => {
                                     <QuizStep4
                                         stepData={findStep(4)}
                                         serviceChangeHandler = {advancedServiceHandler}
+                                        clearServiceInputHandler = {clearAdvancedServiceHandler}
                                         budgetChangeHandler = {budgetServiceHandler}
                                         customBudgetHandler = {customServiceBudgetHandler}
                                         saveCommentHandler = {advancedServiceSaveCommentHandler}
@@ -262,6 +270,7 @@ const QuizMainPage = (props) => {
                                 quizState.currentStep === 5 ? 
                                     <QuizStep5
                                         stepData={findStep(5)}
+                                        test={quizState}
                                         deliveryChangeHandler = {deliveryServiceHandler}
                                         deliveryCityHandler= {saveDeliveryCityHandler}
                                     />

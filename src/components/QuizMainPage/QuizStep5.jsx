@@ -1,5 +1,6 @@
 import React from "react";
 import { useRef, useEffect } from "react";
+import findCity from "../../functions/findCityRange";
 
 const QuizStep5 = (props) => {
     const stepData = props.stepData;
@@ -7,9 +8,12 @@ const QuizStep5 = (props) => {
     const inputNameRef = useRef(null);
     const inputPhoneRef = useRef(null);
     const inputMailRef = useRef(null);
-    
+
+    const testFunc = (cityValue) => {
+        findCity(cityValue);
+    };
+
     useEffect(() => {
-        console.log(stepData)
     }, [stepData.deliveryCityForm])
 
     return (
@@ -47,6 +51,7 @@ const QuizStep5 = (props) => {
                                         ref={deliveryCityRef} 
                                         type="text"
                                         id="quiz-order-delivery-city-input" 
+                                        onChange={() => testFunc(deliveryCityRef.current.value)}
                                     />
                                 </div>
                             </div>

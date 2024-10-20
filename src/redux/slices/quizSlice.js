@@ -20,6 +20,11 @@ const initialState = {
         package: {
             name: "",
             format: "",
+        },
+        conditions: {
+            service: '',
+            budget: '',
+            customTechFile: ''
         }
     },
     quizMenu: [
@@ -314,8 +319,8 @@ const initialState = {
                 { id: 1, name: 'Разработка уникальной рецептуры', selected: false},
                 { id: 2, name: 'Помощь с сертификацией', selected: false},
                 { id: 3, name: 'Помощь с разработкой дизайна', selected: false},
-                { id: 4, name: 'Под ключ', selected: false},
-                { id: 5, name: 'Не требуются', selected: false},
+                { id: 4, name: 'Требуется разработка "под ключ"', selected: false},
+                { id: 5, name: 'Доп усулги не требуются', selected: false},
                 { id: 6, name: 'Опишите свой случай', selected: false},
             ],
             budget: [
@@ -382,10 +387,13 @@ const qizSlice = createSlice({
             }
 
             if ((nextStep && nextStep.stepNum > state.maxSteps) || !nextStep) return;
-            state.qizSteps.map((quizItem) => {
+            state.qizSteps = state.qizSteps.map((quizItem) => {
                 if (quizItem.id === nextStep.id && quizItem.stepNum === nextStep.stepNum) {
                     state.currentStep = nextStep.stepNum;
-                    return {...quizItem, active: true }
+                    return {
+                        ...initialState.qizSteps.find((item) => item.id === quizItem.id), 
+                        active: true 
+                    }
                 }
                 return {...quizItem, active: false };
             });
@@ -851,11 +859,12 @@ const qizSlice = createSlice({
             }
             if(state.currentStep === 4) {
                 const checkCustomServiceValue = state.qizSteps[stepIndex].commentField.value;
-                const checkSelectedService = state.qizSteps[stepIndex].services.find((item) => item.selected);
+                const customServiceId = Array.from(state.qizSteps[stepIndex].services).length;
+                const checkSelectedService = state.qizSteps[stepIndex].services.find((item) => item.selected && item.id !== customServiceId);
                 const checkSelectedBudget = state.qizSteps[stepIndex].budget.find((item) => item.selected);
                 const checkCustomBudgetValue = state.qizSteps[stepIndex].budgetCustomField.value;
                 state.qizSteps = state.qizSteps.map((quizStep) => {
-                    if ((checkCustomServiceValue || checkSelectedService) && (checkSelectedBudget || checkCustomBudgetValue)) {
+                    if ((checkCustomServiceValue !== '' || checkSelectedService) && (checkSelectedBudget || checkCustomBudgetValue)) {
                         return {
                             ...quizStep,
                             stepValid: true
@@ -940,6 +949,23 @@ const qizSlice = createSlice({
                         size: `${packageSize.from} ${packageSize.value} ${packageSize.to} ${packageSize.max}`,
                     }
                 } 
+            }
+            else if (stepNumber === 4) {
+                const lastServiceId = Array.from(state.qizSteps[stepIndex].services).length;
+                const lastBudgetId = Array.from(state.qizSteps[stepIndex].budget).length;
+                const selectedServices = state.qizSteps[stepIndex].services.find((serviceItem) => serviceItem.selected && serviceItem.id !== lastServiceId);
+                const customServiceValue = state.qizSteps[stepIndex].commentField.value;
+                const selectedBudget = state.qizSteps[stepIndex].budget.find((budgetItem) => budgetItem.selected && budgetItem.id !== lastBudgetId);
+                const customBudgetValue = state.qizSteps[stepIndex].budgetCustomField.value;
+                
+                state.quizResult = {
+                    ...state.quizResult,
+                    conditions: {
+                        ...state.quizResult.conditions,
+                        service: selectedServices ? selectedServices.name : customServiceValue,
+                        budget: selectedBudget ? selectedBudget.name : customBudgetValue
+                    }
+                };
             }
 
         }
