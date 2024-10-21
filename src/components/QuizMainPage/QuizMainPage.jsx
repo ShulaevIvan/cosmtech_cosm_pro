@@ -173,6 +173,26 @@ const QuizMainPage = (props) => {
         dispatch(showTechTask({status: value}));
     };
 
+    const getResultSizeValue = () => {
+        const resultPackageString = quizState.quizResult.package.size;
+        const maxQuantity = quizState.quizResult.quantity.value;
+        if (resultPackageString.name === 'custom') {
+            return {
+                minValue: 0,
+                maxValue: 0
+            }
+        }
+        const findNumbers = resultPackageString.match(/(\d+)/gm);
+
+
+        const result = {
+            minValue: (Number(findNumbers[0]) * Number(maxQuantity)) / 1000,
+            maxValue: (Number(findNumbers[1]) * Number(maxQuantity)) / 1000
+        };
+        return result;
+
+    };
+
     useEffect(() => {
         const stepData = findStep(quizState.currentStep);
         if (stepData) {
@@ -270,6 +290,8 @@ const QuizMainPage = (props) => {
                                 quizState.currentStep === 5 ? 
                                     <QuizStep5
                                         stepData={findStep(5)}
+                                        quizResult={quizState.quizResult}
+                                        getSizeValue={getResultSizeValue}
                                         test={quizState}
                                         deliveryChangeHandler = {deliveryServiceHandler}
                                         deliveryCityHandler= {saveDeliveryCityHandler}

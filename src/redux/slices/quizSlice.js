@@ -324,10 +324,10 @@ const initialState = {
                 { id: 6, name: 'Опишите свой случай', selected: false},
             ],
             budget: [
-                { id: 1, name: 'от 1 единиц до 100 единиц', selected: false },
-                { id: 2, name: 'от 2 единиц до 100 единиц', selected: false },
-                { id: 3, name: 'от 3 единиц до 100 единиц', selected: false },
-                { id: 4, name: 'от 4 единиц до 100 единиц', selected: false },
+                { id: 1, name: 'от 50 000 руб до 100 000 руб', selected: false },
+                { id: 2, name: 'от 100 000 руб до 300 000 руб', selected: false },
+                { id: 3, name: 'от 300 000 руб до 500 000 руб', selected: false },
+                { id: 4, name: 'от 500 000 руб до 1 000 000 руб', selected: false },
                 { id: 5, name: 'пока не определен', selected: false},
                 { id: 6, name: 'свой вариант', selected: false},
             ],
@@ -356,7 +356,7 @@ const initialState = {
             stepTitle: 'Дотставка и рассчет',
             stepNum: 5,
             delivery: [
-                { id: 1, name: 'Вывоз продукции своими силами или ТК (вопрос решен)', selected: true },
+                { id: 1, name: 'Вывоз продукции своими силами или ТК (вопрос решен)', selected: false },
                 { id: 2, name: 'Доставка в пределах Санкт-Петербурга И ЛО', selected: false },
                 { id: 3, name: 'Доставка транспортной компанией (нужна помощь)', selected: false },
             ],

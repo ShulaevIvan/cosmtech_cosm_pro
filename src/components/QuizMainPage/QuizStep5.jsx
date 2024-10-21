@@ -4,10 +4,12 @@ import findCity from "../../functions/findCityRange";
 
 const QuizStep5 = (props) => {
     const stepData = props.stepData;
+    const quizResult = props.quizResult;
     const deliveryCityRef = useRef(null);
     const inputNameRef = useRef(null);
     const inputPhoneRef = useRef(null);
     const inputMailRef = useRef(null);
+    const sizeResult = props.getSizeValue();
 
     const testFunc = (cityValue) => {
         findCity(cityValue);
@@ -23,29 +25,32 @@ const QuizStep5 = (props) => {
                 <div className="quiz-advanced-settings-budget-title">
                     <h3>Доставка продукции</h3>
                 </div>
-                <fieldset>
-                    {stepData.delivery.map((deliveryItem) => {
-                        return (
-                            <React.Fragment key={deliveryItem.id}>
-                                <div className="quiz-advanced-settings-delivery-item">
-                                    <input
-                                        onChange={() => props.deliveryChangeHandler(true, deliveryItem.id)}
-                                        type="radio"
-                                        id={`${deliveryItem.name}-${deliveryItem.id}`}
-                                        value={deliveryItem.name}
-                                        name="advanced-delivery"  
-                                    />
-                                    <label htmlFor={`${deliveryItem.name}-${deliveryItem.id}`}>{deliveryItem.name}</label>
-                                </div>
-                            </React.Fragment>
-                        )
-                    })}
-                </fieldset>
+                <div className="result-quiz-table-wrap">
+                    <fieldset>
+                        {stepData.delivery.map((deliveryItem) => {
+                            return (
+                                <React.Fragment key={deliveryItem.id}>
+                                    <div className="quiz-advanced-settings-delivery-item">
+                                        <input
+                                            onChange={() => props.deliveryChangeHandler(true, deliveryItem.id)}
+                                            type="radio"
+                                            id={`${deliveryItem.name}-${deliveryItem.id}`}
+                                            value={deliveryItem.name}
+                                            name="advanced-delivery"  
+                                        />
+                                        <label htmlFor={`${deliveryItem.name}-${deliveryItem.id}`}>{deliveryItem.name}</label>
+                                    </div>
+                                </React.Fragment>
+                            )
+                        })}
+                    </fieldset>
+                </div>
+                
                 {stepData.deliveryCityForm.active ? 
                     <div className="quiz-advanced-settings-delivery-custom-field-wrap">
                         <div className="quiz-advanced-settings-delivery-custom-field-row">
                             <div className="quiz-advanced-settings-delivery-custom-field-input">
-                                <label htmlFor="quiz-order-delivery-city-input">Город Доставки</label>
+                                <label htmlFor="quiz-order-delivery-city-input">Город доставки</label>
                                 <div>
                                     <input
                                         ref={deliveryCityRef} 
@@ -70,10 +75,10 @@ const QuizStep5 = (props) => {
                     <div className="quiz-result-table-wrap">
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                                Название
+                                Продукт
                             </div>
                             <div className="quiz-result-value">
-                                Тестовый продукт 200 мл
+                                {quizResult.product.name}
                             </div>
                         </div>
                         <div className="quiz-result-value-row">
@@ -81,45 +86,73 @@ const QuizStep5 = (props) => {
                                 Количество
                             </div>
                             <div className="quiz-result-value">
-                                10 000 шт
+                                {`${quizResult.quantity.value} шт`}
                             </div>
                         </div>
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                                Цена за единицу
+                                Приблизительная цена за единицу
                             </div>
                             <div className="quiz-result-value">
-                                68 руб
+                                ~ 68 руб
                             </div>
                         </div>
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                               Вес партии
+                               Приблизительный вес партии
                             </div>
                             <div className="quiz-result-value">
-                                1000 кг
+                                {`~ от ${sizeResult.minValue} кг до ${sizeResult.maxValue} кг`}
                             </div>
                         </div>
+                        {stepData.delivery.find((deliveryItem) => deliveryItem.selected && deliveryItem.id === stepData.delivery.length) ?
+                            <React.Fragment>
+                                <div className="quiz-result-value-row">
+                                    <div className="quiz-result-value-title">
+                                        Регион доставки
+                                    </div>
+                                    <div className="quiz-result-value">
+                                        Санкт-Петербург
+                                    </div>
+                                </div>
+                                <div className="quiz-result-value-row">
+                                    <div className="quiz-result-value-title">
+                                        Город
+                                    </div>
+                                    <div className="quiz-result-value">
+                                        Санкт-Петербург
+                                    </div>
+                                </div>
+                                <div className="quiz-result-value-row">
+                                    <div className="quiz-result-value-title">
+                                        Приблизительное Расстояние
+                                    </div>
+                                    <div className="quiz-result-value">
+                                        ~ 0 км на авто
+                                    </div>
+                                </div>
+                                <div className="quiz-result-value-row">
+                                    <div className="quiz-result-value-title">
+                                        Приблизительная стоимость доставки
+                                    </div>
+                                    <div className="quiz-result-value">
+                                        ~ 25 000 руб
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        : null}
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                               Стоимость доставки
+                                Приблизительная стоимость проекта
                             </div>
                             <div className="quiz-result-value">
-                                25 000 руб
-                            </div>
-                        </div>
-                        <div className="quiz-result-value-row">
-                            <div className="quiz-result-value-title">
-                                Общая стоимость
-                            </div>
-                            <div className="quiz-result-value">
-                                0
+                                0 руб
                             </div>
                         </div>
                     </div>
                     <div className="result-get-contacts-wrap">
                         <div className="result-form-get-contacts-title">
-                            <h3>Получить точный рассчет и КП по проекту</h3>
+                            <h3>Запросить точный расчет или КП</h3>
                         </div>
                         <div className="result-form-get-contacts-wrap">
                             <form>
@@ -157,9 +190,11 @@ const QuizStep5 = (props) => {
                                 </div>
                             </form>
                             <div className="result-form-get-contacts-send-wrap">
-                                <div className="result-form-get-contacts-send-btn">
-                                    <button>Отправить запрос</button>
-                                </div>
+                                <button 
+                                    className={stepData.delivery.find((deliveryItem) => deliveryItem.selected) ? 
+                                        "result-form-get-contacts-send-btn" : "result-form-get-contacts-send-btn btnDisabled"
+                                    }
+                                >Отправить запрос</button>
                             </div>
                         </div>
                     </div>
