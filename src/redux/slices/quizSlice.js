@@ -61,6 +61,17 @@ const initialState = {
                 { 
                     id: 1,
                     name: 'Уход для лица',
+                    categories: [
+                        { id: 1, name: 'Сыворотки', selected: false, priceValue: 1 },
+                        { id: 2, name: 'Гели', selected: false,  priceValue: 1 },
+                        { id: 3, name: 'Крема', selected: false,  priceValue: 1 },
+                        { id: 4, name: 'Маски', selected: false,  priceValue: 1 },
+                        { id: 5, name: 'Пенки', selected: false,  priceValue: 1 },
+                        { id: 6, name: 'Тоники', selected: false, priceValue: 1 },
+                        { id: 7, name: 'Пилинги', selected: false, priceValue: 1 },
+                        { id: 8, name: 'Фито-муссы', selected: false, priceValue: 1 },
+                        { id: 9, name: 'Декоративная косметика', selected: false,  priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -71,6 +82,17 @@ const initialState = {
                 { 
                     id: 2,
                     name: 'Уход для тела',
+                    categories: [
+                        { id: 1, name: 'Гели для душа', selected: false, priceValue: 1 },
+                        { id: 2, name: 'Молочко', selected: false,  priceValue: 1 },
+                        { id: 3, name: 'Масла', selected: false,  priceValue: 1 },
+                        { id: 4, name: 'Скрабы', selected: false,  priceValue: 1 },
+                        { id: 5, name: 'Крем баттер', selected: false,  priceValue: 1 },
+                        { id: 6, name: 'Гели для интимной гигиены', selected: false, priceValue: 1 },
+                        { id: 7, name: 'Обертывания', selected: false, priceValue: 1 },
+                        { id: 8, name: 'Дезодоранты', selected: false, priceValue: 1 },
+                        { id: 9, name: 'Другое', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -81,6 +103,13 @@ const initialState = {
                 { 
                     id: 3,
                     name: 'Уход за волосами',
+                    categories: [
+                        { id: 1, name: 'Шампуни', selected: false, priceValue: 1 },
+                        { id: 2, name: 'Бальзамы', selected: false,  priceValue: 1 },
+                        { id: 3, name: 'Маски для волос', selected: false,  priceValue: 1 },
+                        { id: 4, name: 'Масла для волос', selected: false,  priceValue: 1 },
+                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -91,6 +120,18 @@ const initialState = {
                 { 
                     id: 4,
                     name: 'Профессиональная косметика',
+                    categories: [
+                        { id: 1, name: 'Кремы', selected: false, priceValue: 1 },
+                        { id: 2, name: 'Маски ', selected: false,  priceValue: 1 },
+                        { id: 3, name: 'Бальзамы', selected: false,  priceValue: 1 },
+                        { id: 4, name: 'Шампуни', selected: false,  priceValue: 1 },
+                        { id: 5, name: 'Обертывания', selected: false,  priceValue: 1 },
+                        { id: 6, name: 'Скрабы', selected: false,  priceValue: 1 },
+                        { id: 7, name: 'Сыворотки', selected: false,  priceValue: 1 },
+                        { id: 7, name: 'Гели', selected: false,  priceValue: 1 },
+                        { id: 7, name: 'Пиллинги', selected: false,  priceValue: 1 },
+                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -101,6 +142,9 @@ const initialState = {
                 { 
                     id: 5,
                     name: 'Для животных',
+                    categories: [
+                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -111,6 +155,9 @@ const initialState = {
                 { 
                     id: 6,
                     name: 'Детская косметика',
+                    categories: [
+                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -122,6 +169,9 @@ const initialState = {
                     id: 7,
                     name: 'Уход за кожей рук',
                     description: '',
+                    categories: [
+                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                    ],
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
@@ -131,6 +181,9 @@ const initialState = {
                 { 
                     id: 8,
                     name: 'Уход за кожей ног',
+                    categories: [
+                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -141,6 +194,12 @@ const initialState = {
                 { 
                     id: 9,
                     name: 'Солнцезащитные средства',
+                    categories: [
+                        { id: 1, name: 'Солнцезащитный крем', selected: false, priceValue: 1 },
+                        { id: 2, name: 'Гидролат', selected: false, priceValue: 1 },
+                        { id: 3, name: 'Масла для загара', selected: false, priceValue: 1 },
+                        { id: 4, name: 'Крем после загара', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -151,6 +210,9 @@ const initialState = {
                 { 
                     id: 10,
                     name: 'Аппаратная косметика',
+                    categories: [
+                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -161,6 +223,9 @@ const initialState = {
                 { 
                     id: 11,
                     name: 'Пилинги',
+                    categories: [
+                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -171,6 +236,11 @@ const initialState = {
                 { 
                     id: 12,
                     name: 'Для ванны и душа',
+                    categories: [
+                        { id: 1, name: 'Гели для душа', selected: false, priceValue: 1 },
+                        { id: 2, name: 'Соль для ванн', selected: false, priceValue: 1 },
+                        { id: 3, name: 'Жидкое мыло', selected: false, priceValue: 1 },
+                    ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
@@ -218,7 +288,7 @@ const initialState = {
                 active: false,
                 fieldValue: '',
                 fieldFile: '',
-                fieldValid: true,
+                fieldValid: false,
             },
             package: [
                 { 
@@ -356,9 +426,9 @@ const initialState = {
             stepTitle: 'Дотставка и рассчет',
             stepNum: 5,
             delivery: [
-                { id: 1, name: 'Вывоз продукции своими силами или ТК (вопрос решен)', selected: false },
+                { id: 1, name: 'Вывоз продукции своими силами или ТК (вопрос решен)', selected: true },
                 { id: 2, name: 'Доставка в пределах Санкт-Петербурга И ЛО', selected: false },
-                { id: 3, name: 'Доставка транспортной компанией (нужна помощь)', selected: false },
+                { id: 3, name: 'Доставка транспортной компанией по России (нужна помощь)', selected: false },
             ],
             deliveryCityForm: {
                 active: false,
@@ -565,16 +635,15 @@ const qizSlice = createSlice({
                 if (quizStep.stepNum === state.currentStep) {
                     return {
                         ...quizStep,
-                        customPackage: {
-                            ...quizStep,
-                            customPackage: status ? {
-                                ...quizStep.customPackage,
-                            } : {
-                                ...quizStep.customPackage,
-                                fieldValue: '',
-                                fieldFile: ''
-                            },
-                            active: status
+                        customPackage: status ? {
+                            ...quizStep.customPackage,
+                            active: status,
+                        } :
+                        {
+                            ...quizStep.customPackage,
+                            active: status,
+                            fieldValue: '',
+                            fieldFile: ''
                         },
                         package: initialState.qizSteps[2].package,
                     }
@@ -584,8 +653,9 @@ const qizSlice = createSlice({
         },
         saveCustomPackageField(state, action) {
             const { textData, fileData } = action.payload;
+            const checkFile = state.qizSteps.find((item) => item.customPackage);
+            if (/^\s*$/.test(textData) && !fileData.file) return;
 
-            if (/^\s*$/.test(textData)) return;
             state.qizSteps = state.qizSteps.map((quizStep) => {
                 if (quizStep.stepNum === state.currentStep && quizStep.customPackage) {
                     return {
@@ -593,8 +663,8 @@ const qizSlice = createSlice({
                         customPackage: {
                             ...quizStep.customPackage,
                             fieldValue: textData ? textData : '',
-                            fieldFile: fileData ? fileData : '',
-                            fieldValid: /^\s*$/.test(textData) ? false : true
+                            fieldFile: fileData && fileData.file ? fileData : '',
+                            fieldValid: true
                         },
                         package: initialState.qizSteps[2].package,
                     }
@@ -637,6 +707,15 @@ const qizSlice = createSlice({
                             selected: false
                         }
                     });
+                    return {
+                        ...quizStep,
+                        customPackage: {
+                            ...quizStep.customPackage,
+                            active: false,
+                            fieldValue: '',
+                            fieldFile: '',
+                        }
+                    }
                 }
                 return quizStep;
             });
@@ -644,7 +723,7 @@ const qizSlice = createSlice({
         selectPackageSize(state, action) {
             const { packageId, sizeValue } = action.payload;
             state.qizSteps = state.qizSteps.map((quizStep) => {
-                if (quizStep.stepNum === state.currentStep) {
+                if (quizStep.stepNum === state.currentStep && quizStep.package) {
                     quizStep.package = quizStep.package.map((packageItem) => {
                         if (packageItem.id === packageId) {
                             return {
@@ -666,7 +745,15 @@ const qizSlice = createSlice({
                         }
                         return packageItem;
                     });
-                    return quizStep;
+                    return {
+                        ...quizStep,
+                        customPackage: {
+                            ...quizStep.customPackage,
+                            fieldFile: '',
+                            fieldValue: '',
+                            fieldValid: false
+                        }
+                    }
                 }
                 return quizStep;
             });
@@ -770,6 +857,22 @@ const qizSlice = createSlice({
                 return quizStep;
             });
         },
+        saveTechTaskCustom(state, action) {
+            const { file } = action.payload;
+
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.techTaskCustom) {
+                    return {
+                        ...quizStep,
+                        techTaskCustom: {
+                            ...quizStep.techTaskCustom,
+                            file: file
+                        }
+                    }
+                }
+                return quizStep;
+            });
+        },
         changeDelivery(state, action) {
             const { deliveryId, status } = action.payload;
             state.qizSteps = state.qizSteps.map((quizStep) => {
@@ -785,7 +888,7 @@ const qizSlice = createSlice({
                             active: false
                         },
                         delivery: quizStep.delivery.map((deliveryItem) => {
-                            if (deliveryItem.id === deliveryId) {
+                            if (deliveryItem.id === deliveryId && !deliveryItem.selected) {
                                 return {
                                     ...deliveryItem,
                                     selected: true
@@ -845,7 +948,7 @@ const qizSlice = createSlice({
                 const checkCustomPackageFile = state.qizSteps[stepIndex].customPackage.fieldFile;
                 const checkSelectedPackage = state.qizSteps[stepIndex].package.find((item) => item.selected);
                 state.qizSteps = state.qizSteps.map((quizStep) => {
-                    if (checkCustomPackageValue || checkSelectedPackage) {
+                    if (checkCustomPackageValue || checkSelectedPackage || checkCustomPackageFile) {
                         return {
                             ...quizStep,
                             stepValid: true
@@ -880,6 +983,7 @@ const qizSlice = createSlice({
         },
         resetStep(state, action) {
             const { stepNumber } = action.payload;
+
             const prevStep = stepNumber - 1;
             const stepIndex = state.currentStep - 1;
             state.qizSteps = state.qizSteps.map((quizStep) => {
@@ -924,13 +1028,14 @@ const qizSlice = createSlice({
             }
             else if (stepNumber === 3) {
                 const customPackage = state.qizSteps[stepIndex].customPackage;
-                if (customPackage.active && customPackage.fieldValid && customPackage.fieldValue) {
+                if (customPackage.active && customPackage.fieldValid && (customPackage.fieldValue || customPackage.fieldFile)) {
                     state.quizResult = {
                         ...state.quizResult,
                         package: {
                             ...state.quizResult.package,
                             id: 0,
                             name: 'custom',
+                            file: customPackage.fieldFile,
                             size: `${customPackage.fieldValue}`,
                         }
                     }
@@ -939,7 +1044,7 @@ const qizSlice = createSlice({
 
                 const selectedPackage = state.qizSteps[stepIndex].package.find((item) => item.selected);
                 const packageSize = selectedPackage.sizes.find((item) => item.selected);
-
+                
                 state.quizResult = {
                     ...state.quizResult,
                     package: {
@@ -957,13 +1062,15 @@ const qizSlice = createSlice({
                 const customServiceValue = state.qizSteps[stepIndex].commentField.value;
                 const selectedBudget = state.qizSteps[stepIndex].budget.find((budgetItem) => budgetItem.selected && budgetItem.id !== lastBudgetId);
                 const customBudgetValue = state.qizSteps[stepIndex].budgetCustomField.value;
+                const customTechFile = state.qizSteps[stepIndex].techTaskCustom.file;
                 
                 state.quizResult = {
                     ...state.quizResult,
                     conditions: {
                         ...state.quizResult.conditions,
                         service: selectedServices ? selectedServices.name : customServiceValue,
-                        budget: selectedBudget ? selectedBudget.name : customBudgetValue
+                        budget: selectedBudget ? selectedBudget.name : customBudgetValue,
+                        customTechFile: customTechFile,
                     }
                 };
             }
@@ -994,6 +1101,7 @@ export const {
     advancedBudgetChange,
     customBudgetChange,
     showTechTask,
+    saveTechTaskCustom,
     saveAdvancedServiceCustomValue,
     changeDelivery,
     saveDeliveryCity,

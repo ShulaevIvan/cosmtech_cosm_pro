@@ -5,6 +5,7 @@ const QuizStep4 = (props) => {
     const stepData = props.stepData;
     const budgetRef = useRef(null);
     const commentRef = useRef(null);
+    const techTaskRef = useRef(null);
 
     useEffect(() => {
         props.validateStep();
@@ -102,20 +103,32 @@ const QuizStep4 = (props) => {
                 <div className="quiz-advanced-settings-comment-wrap">
                     <div className="quiz-advanced-settings-tz-wrap">
                         <input
-                            type="checkbox" id="quiz-advanced-settings-tz-value" className="checkbox-custom-hero-form" />
+                            type="checkbox" 
+                            id="quiz-advanced-settings-tz-value" 
+                            className="checkbox-custom-hero-form"
+                            checked={stepData.techTaskCustom.active}
+                            onChange={() => props.techTaskHandler(stepData.techTaskCustom.active ? false : true)}
+                        />
                         <label
-                            onClick={() => props.techTaskHandler(stepData.techTaskCustom.active ? false : true)}
                             htmlFor="quiz-advanced-settings-tz-value"
                         ></label>
-                        <span>имеется ТЗ</span>
+                        <span>Есть ТЗ (Техническое задание)</span>
                         {stepData.techTaskCustom.active ? 
                             <React.Fragment>
                                 <div className="quiz-advanced-settings-tz-btn-wrap">
                                     <label className="input-file">
-                                        <input type="file" />
+                                        <input
+                                            onChange={(e) => props.uploadTechTaskHandler(e, techTaskRef.current)}
+                                            type="file"
+                                        />
                                         <span className="quiz-advanced-settings-tz-input-file-btn">Файл...</span>
                                     </label>
+                                    <span
+                                        ref={techTaskRef}
+                                        className="quiz-advanced-settings-tz-filename"
+                                    ></span>
                                 </div>
+                                
                             </React.Fragment>
                         : null}
                     </div>

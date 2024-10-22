@@ -21,16 +21,19 @@ import {
     advancedBudgetChange,
     customBudgetChange,
     showTechTask,
+    saveTechTaskCustom,
     saveAdvancedServiceCustomValue,
     changeDelivery,
     saveDeliveryCity,
     saveResultStep
 } from "../../redux/slices/quizSlice";
+import gileToBase64 from '../../functions/fileToBase64';
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
 import QuizStep3 from "./QuizStep3";
 import QuizStep4 from "./QuizStep4";
 import QuizStep5 from "./QuizStep5";
+import fileToBase64 from "../../functions/fileToBase64";
 
 const QuizMainPage = (props) => {
     const dispatch = useDispatch();
@@ -173,24 +176,46 @@ const QuizMainPage = (props) => {
         dispatch(showTechTask({status: value}));
     };
 
+    const uploadTechTaskHandler = async (e, filenameRef) => {
+        if (e.target && e.target.fiels && e.target.fiels[0].length === 0) return;
+        const file = e.target.files[0];
+        await fileToBase64(file)
+        .then((data) => {
+            if (data && data.name) {
+                const nameLength = data.name.length;
+                const printFilename = nameLength > 10 ? `${data.name.match(/^.{10}/)}... ${data.name.match(/.\w+$/)[0]}` : data.name;
+                filenameRef.textContent = printFilename;
+                dispatch(saveTechTaskCustom({file: data}));
+            }  
+        });
+    };
+
     const getResultSizeValue = () => {
         const resultPackageString = quizState.quizResult.package.size;
         const maxQuantity = quizState.quizResult.quantity.value;
-        if (resultPackageString.name === 'custom') {
-            return {
-                minValue: 0,
-                maxValue: 0
-            }
-        }
         const findNumbers = resultPackageString.match(/(\d+)/gm);
-
-
         const result = {
-            minValue: (Number(findNumbers[0]) * Number(maxQuantity)) / 1000,
-            maxValue: (Number(findNumbers[1]) * Number(maxQuantity)) / 1000
+            minValue: quizState.quizResult.package.name === 'custom' ? 0 : (Number(findNumbers[0]) * Number(maxQuantity)) / 1000,
+            maxValue: quizState.quizResult.package.name === 'custom' ? 0 : (Number(findNumbers[1]) * Number(maxQuantity)) / 1000
         };
         return result;
+    };
 
+    const loadCustomPackageFileFormHandler = async (e, text, filenameRef) => {
+        if (!e.target || e.target.fiels && e.target.files[0].length === 0) return;
+        const file = e.target.files[0];
+        await fileToBase64(file)
+        .then((data) => {
+            if (data && data.file) {
+                const nameLength = data.name.length;
+                const printFilename = nameLength > 10 ? `${data.name.match(/^.{10}/)}... ${data.name.match(/.\w+$/)[0]}` : data.name;
+                filenameRef.textContent = printFilename;
+                dispatch(saveCustomPackageField({textData: text, fileData: data}))
+                return;
+            }
+            dispatch(saveCustomPackageField({textData: '', fileData: ''}));
+            filenameRef.textContent = '';
+        });
     };
 
     useEffect(() => {
@@ -268,6 +293,7 @@ const QuizMainPage = (props) => {
                                     clearCustomPackageText={clearCustomTextField}
                                     selectPackageHandler={selectPackageHandler}
                                     selectPackageSizeHandler={selectPackageSizeHandler}
+                                    loadFileHandler={loadCustomPackageFileFormHandler}
                                     validateStep={validateCurrentStep}
                                     setDefaultSize={setDefaultSize}
                                 /> 
@@ -282,6 +308,7 @@ const QuizMainPage = (props) => {
                                         customBudgetHandler = {customServiceBudgetHandler}
                                         saveCommentHandler = {advancedServiceSaveCommentHandler}
                                         techTaskHandler={techTaskHandler}
+                                        uploadTechTaskHandler={uploadTechTaskHandler}
                                         validateStep={validateCurrentStep}
                                     />
                                 : null

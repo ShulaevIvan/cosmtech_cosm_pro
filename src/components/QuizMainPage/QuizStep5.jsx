@@ -10,6 +10,7 @@ const QuizStep5 = (props) => {
     const inputPhoneRef = useRef(null);
     const inputMailRef = useRef(null);
     const sizeResult = props.getSizeValue();
+    console.log(quizResult)
 
     const testFunc = (cityValue) => {
         findCity(cityValue);
@@ -36,7 +37,8 @@ const QuizStep5 = (props) => {
                                             type="radio"
                                             id={`${deliveryItem.name}-${deliveryItem.id}`}
                                             value={deliveryItem.name}
-                                            name="advanced-delivery"  
+                                            name="advanced-delivery"
+                                            checked={deliveryItem.selected ? true : false}
                                         />
                                         <label htmlFor={`${deliveryItem.name}-${deliveryItem.id}`}>{deliveryItem.name}</label>
                                     </div>
@@ -75,7 +77,7 @@ const QuizStep5 = (props) => {
                     <div className="quiz-result-table-wrap">
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                                Продукт
+                                Тип изготавливаемого продукта
                             </div>
                             <div className="quiz-result-value">
                                 {quizResult.product.name}

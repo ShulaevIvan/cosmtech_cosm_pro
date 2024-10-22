@@ -7,11 +7,14 @@ import testImg2 from '../../img/quiz_checkbox-active.svg';
 const QuizStep3 = (props) => {
     const stepData = props.stepData;
     const packageRef = useRef(null);
+    const fileRef = useRef(null);
     const customPackageRef = useRef(null);
 
     useEffect(() => {
         props.validateStep();
     }, [stepData.package, stepData.customPackage, stepData.customPackage.fieldValid]);
+
+
 
     return (
         <React.Fragment>
@@ -55,29 +58,18 @@ const QuizStep3 = (props) => {
                         )
                     })}
                 </div>
-                <div className="quiz-package-pages-wrap">
-                    <div className="quiz-package-pages-items">
-                        {stepData.packagePages.map((pageItem) => {
-                            return (
-                                <React.Fragment key={pageItem.id}>
-                                    <div className="quiz-package-page-item">
-                                        <button 
-                                            className={pageItem.active ? "quiz-package-page-item-slide-btn-active" : "quiz-package-page-item-slide-btn"}
-                                        ></button>
-                                    </div>
-                                </React.Fragment>
-                            )
-                        })}
-                        
-                    </div>
-                </div>
 
                 <div className="quiz-package-custom-package-wrap">
                     <div className="quantity-custom-wrap">
                         <input
-                            type="checkbox" id="quiz-package-custom-package-value" className="checkbox-custom-hero-form" />
+                            checked={stepData.customPackage.active}
+                            type="checkbox" 
+                            id="quiz-package-custom-package-value" 
+                            className="checkbox-custom-hero-form" 
+                            onChange={() => props.showCustomPackageHandler(stepData.customPackage.active ? false : true)}
+                        />
                         <label
-                            onClick={() => props.showCustomPackageHandler(stepData.customPackage.active ? false : true)}
+                          
                             htmlFor="quiz-package-custom-package-value"
                         ></label>
                         <span>Указать свой вариант</span>
@@ -97,15 +89,16 @@ const QuizStep3 = (props) => {
                                         placeholder="описание..."
                                     ></textarea>
                                     <label className="input-file">
-                                        <input type="file" />
-                                        <span className="quiz-package-custom-package-input-file-btn">Файл...</span>
+                                        <input
+                                            type="file"  
+                                            onChange={(e) => props.loadFileHandler(e, customPackageRef.current.value, fileRef.current)}
+                                        />
+                                        <span className="quiz-package-custom-package-input-file-btn">Файл/Фото...</span>
+                                       
                                     </label>
-                                    <span className="quiz-package-custom-package-btn-wrap">
-                                        <button
-                                            onClick={() => props.saveCustomPackageHandler(customPackageRef.current.value)}
-                                            className="quiz-package-custom-package-btn"
-                                        >Сохранить</button>
-                                    </span>
+                                    <span ref={fileRef} className="quiz-package-custom-package-upload-filename"></span>
+                                    
+                                    
                                 </div>
                             </div>
                         </React.Fragment>

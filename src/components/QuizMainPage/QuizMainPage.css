@@ -35,7 +35,6 @@
     flex-wrap: wrap;
     max-width: 1000px;
     min-width: 1000px;
-    min-height: 820px;
     justify-content: space-between;
 }
 .quiz-controlpanel-wrap {
@@ -89,7 +88,7 @@
 }
 .quiz-content-wrap label {
     font-size: 18px;
-    font-family: gothampro;
+    font-family: gothampro bold;
 }
 .quiz-content-wrap fieldset label {
     font-weight: normal;
@@ -128,10 +127,9 @@
 .quiz-mainpage-close-btn-wrap {
     display: flex;
     flex-direction: column;
+    right: 5%;
     flex-wrap: wrap;
-    position: relative;
-    width: 10%;
-    max-width: 100px;
+    position: absolute;
     min-height: 30px;
 }
 .quiz-mainpage-content-wrap {
@@ -615,7 +613,7 @@
     flex-wrap: wrap;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 .quiz-package-custom-input-wrap textarea {
     width: 300px;
@@ -652,6 +650,7 @@
 .quiz-package-custom-input-wrap .input-file {
     position: relative;
     display: inline-flex;
+    margin-right: 15px;
 }
 .quiz-package-custom-package-input {
     display: flex;
@@ -705,6 +704,16 @@
     margin-bottom: 10px;
     font-size: 14px;
     width: 100%;
+}
+.quiz-package-custom-package-upload-filename {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.input-file-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 .quiz-advanced-settings-services-wrap,
 .quiz-advanced-settings-budget-wrap,
@@ -799,8 +808,15 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
     width: 100%;
     margin-top: 10px;
+}
+.quiz-advanced-settings-tz-filename {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 200px;
 }
 .quiz-advanced-settings-comment-title {
     display: flex;
@@ -930,7 +946,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .result-get-contacts-wrap {
     display: flex;
@@ -951,6 +967,7 @@
     text-align: center;
     margin-bottom: 20px;
     color: #00458B;
+    margin: 10px 0;
 }
 .result-form-get-contacts-wrap {
     display: flex;
@@ -995,7 +1012,6 @@
 .test1 {
     opacity: 0;
 }
-  
 @keyframes quiz-fadeOut {
     0% {opacity:1;}
     100% {
