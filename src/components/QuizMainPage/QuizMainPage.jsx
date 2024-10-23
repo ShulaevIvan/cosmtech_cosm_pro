@@ -6,6 +6,7 @@ import {
     resetStep,
     validateStep,
     selectProduct,
+    selectInnerProduct,
     selectProductPage,
     disableQuantity, 
     changeQuantity, 
@@ -27,7 +28,6 @@ import {
     saveDeliveryCity,
     saveResultStep
 } from "../../redux/slices/quizSlice";
-import gileToBase64 from '../../functions/fileToBase64';
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
 import QuizStep3 from "./QuizStep3";
@@ -90,6 +90,10 @@ const QuizMainPage = (props) => {
 
     const productSelectHandler = (product) => {
         dispatch(selectProduct({selectItem: product}));
+    };
+
+    const productItemSelectHandler = (e, mainProductId, productName) => {
+        dispatch(selectInnerProduct({mainProductId: mainProductId, productName: productName}));
     };
 
     const productPageSelectHandler = (productId) => {
@@ -269,6 +273,7 @@ const QuizMainPage = (props) => {
                                 <QuizStep1 
                                     stepData={findStep(1)} 
                                     productSelectHandler={productSelectHandler}
+                                    productItemSelectHadnler={productItemSelectHandler}
                                     productPageHandler = {productPageSelectHandler}
                                 /> 
                             : null}

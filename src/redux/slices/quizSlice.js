@@ -3,6 +3,18 @@ import demoImg from '../../img/quizImages/200x275.png';
 import quizCheckbox from '../../img/quizImages/quiz_checkbox.svg';
 import quizCheckboxActive from '../../img/quizImages/quiz_checkbox-active.svg';
 import packageImgHold from '../../img/quizImages/250x250.png';
+import cosmeticZooImg from '../../img/quizImages/cosmetic_zoo_quiz.jpeg'
+import cosmeticBody from '../../img/quizImages/cosmetic_body.jpeg'
+import cosmeticProf from '../../img/quizImages/cosmetic_professional.jpeg';
+import babyCosm from '../../img/quizImages/baby_cosm.jpeg';
+import cosmeticHair from '../../img/quizImages/cosmetic_hair_quiz.jpeg';
+import cosmtechFace from '../../img/quizImages/cosmetic_face_quiz.jpeg';
+import cosmtechHands from '../../img/quizImages/cosmetic_hands.jpg';
+import cosmtechFeet from '../../img/quizImages/cosmetic_feet.jpg';
+import cosmtechSpf from '../../img/quizImages/cosmetic_spf.jpg';
+import cosmtechWash from '../../img/quizImages/wash.jpeg';
+import pillings from '../../img/quizImages/pillings.jpg';
+import apparat from '../../img/quizImages/cosmtech_cosmetic.jpg';
 
 const initialState = {
     maxSteps: 5,
@@ -62,107 +74,112 @@ const initialState = {
                     id: 1,
                     name: 'Уход для лица',
                     categories: [
-                        { id: 1, name: 'Сыворотки', selected: false, priceValue: 1 },
-                        { id: 2, name: 'Гели', selected: false,  priceValue: 1 },
-                        { id: 3, name: 'Крема', selected: false,  priceValue: 1 },
-                        { id: 4, name: 'Маски', selected: false,  priceValue: 1 },
-                        { id: 5, name: 'Пенки', selected: false,  priceValue: 1 },
-                        { id: 6, name: 'Тоники', selected: false, priceValue: 1 },
-                        { id: 7, name: 'Пилинги', selected: false, priceValue: 1 },
-                        { id: 8, name: 'Фито-муссы', selected: false, priceValue: 1 },
-                        { id: 9, name: 'Декоративная косметика', selected: false,  priceValue: 1 },
+                        { id: 1, name: 'Сыворотки', productId: 1, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Гели', productId: 1, selected: false,  priceValue: 1 },
+                        { id: 3, name: 'Кремы', productId: 1, selected: false,  priceValue: 1 },
+                        { id: 4, name: 'Маски', productId: 1, selected: false,  priceValue: 1 },
+                        { id: 5, name: 'Пенки', productId: 1, selected: false,  priceValue: 1 },
+                        { id: 6, name: 'Тоники', productId: 1, selected: false, priceValue: 1 },
+                        { id: 7, name: 'Пилинги', productId: 1, selected: false, priceValue: 1 },
+                        { id: 8, name: 'Фито-муссы', productId: 1, selected: false, priceValue: 1 },
+                        { id: 9, name: 'Декоративная косметика', productId: 1, selected: false,  priceValue: 1 },
+                        { id: 10, name: 'Другое', productId: 1, selected: false,  priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: cosmtechFace,
                     page: 1,
                 },
                 { 
                     id: 2,
                     name: 'Уход для тела',
                     categories: [
-                        { id: 1, name: 'Гели для душа', selected: false, priceValue: 1 },
-                        { id: 2, name: 'Молочко', selected: false,  priceValue: 1 },
-                        { id: 3, name: 'Масла', selected: false,  priceValue: 1 },
-                        { id: 4, name: 'Скрабы', selected: false,  priceValue: 1 },
-                        { id: 5, name: 'Крем баттер', selected: false,  priceValue: 1 },
-                        { id: 6, name: 'Гели для интимной гигиены', selected: false, priceValue: 1 },
-                        { id: 7, name: 'Обертывания', selected: false, priceValue: 1 },
-                        { id: 8, name: 'Дезодоранты', selected: false, priceValue: 1 },
-                        { id: 9, name: 'Другое', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Гели для душа', productId: 2, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Молочко', productId: 2, selected: false,  priceValue: 1 },
+                        { id: 3, name: 'Масла', productId: 2, selected: false,  priceValue: 1 },
+                        { id: 4, name: 'Скрабы', productId: 2, selected: false,  priceValue: 1 },
+                        { id: 5, name: 'Крем баттер', productId: 2, selected: false,  priceValue: 1 },
+                        { id: 6, name: 'Гели для интимной гигиены', productId: 2, selected: false, priceValue: 1 },
+                        { id: 7, name: 'Обертывания', productId: 2, selected: false, priceValue: 1 },
+                        { id: 8, name: 'Дезодоранты', productId: 2, selected: false, priceValue: 1 },
+                        { id: 9, name: 'Другое', productId: 2, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: cosmeticBody,
                     page: 1,
                 },
                 { 
                     id: 3,
                     name: 'Уход за волосами',
                     categories: [
-                        { id: 1, name: 'Шампуни', selected: false, priceValue: 1 },
-                        { id: 2, name: 'Бальзамы', selected: false,  priceValue: 1 },
-                        { id: 3, name: 'Маски для волос', selected: false,  priceValue: 1 },
-                        { id: 4, name: 'Масла для волос', selected: false,  priceValue: 1 },
-                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Шампуни', productId: 3, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Бальзамы', productId: 3, selected: false,  priceValue: 1 },
+                        { id: 3, name: 'Маски для волос', productId: 3, selected: false,  priceValue: 1 },
+                        { id: 4, name: 'Масла для волос', productId: 3, selected: false,  priceValue: 1 },
+                        { id: 5, name: 'Другое', productId: 3, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: cosmeticHair,
                     page: 1,
                 },
                 { 
                     id: 4,
                     name: 'Профессиональная косметика',
                     categories: [
-                        { id: 1, name: 'Кремы', selected: false, priceValue: 1 },
-                        { id: 2, name: 'Маски ', selected: false,  priceValue: 1 },
-                        { id: 3, name: 'Бальзамы', selected: false,  priceValue: 1 },
-                        { id: 4, name: 'Шампуни', selected: false,  priceValue: 1 },
-                        { id: 5, name: 'Обертывания', selected: false,  priceValue: 1 },
-                        { id: 6, name: 'Скрабы', selected: false,  priceValue: 1 },
-                        { id: 7, name: 'Сыворотки', selected: false,  priceValue: 1 },
-                        { id: 7, name: 'Гели', selected: false,  priceValue: 1 },
-                        { id: 7, name: 'Пиллинги', selected: false,  priceValue: 1 },
-                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Маски ', productId: 4, selected: true,  priceValue: 1 },
+                        { id: 2, name: 'Кремы', productId: 4, selected: false, priceValue: 1 },
+                        { id: 3, name: 'Бальзамы', productId: 4, selected: false,  priceValue: 1 },
+                        { id: 4, name: 'Шампуни', productId: 4, selected: false,  priceValue: 1 },
+                        { id: 5, name: 'Обертывания', productId: 4, selected: false,  priceValue: 1 },
+                        { id: 6, name: 'Скрабы', productId: 4, selected: false,  priceValue: 1 },
+                        { id: 7, name: 'Сыворотки', productId: 4, selected: false,  priceValue: 1 },
+                        { id: 8, name: 'Гели', productId: 4, selected: false,  priceValue: 1 },
+                        { id: 9, name: 'Пиллинги', productId: 4, selected: false,  priceValue: 1 },
+                        { id: 10, name: 'Другое', productId: 4, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: cosmeticProf,
                     page: 1,
                 },
                 { 
                     id: 5,
                     name: 'Для животных',
                     categories: [
-                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Шампуни', productId: 5, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Другое', productId: 5, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: cosmeticZooImg,
                     page: 1,
                 },
                 { 
                     id: 6,
                     name: 'Детская косметика',
                     categories: [
-                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Бальзамы', productId: 6, selected: true,  priceValue: 1 },
+                        { id: 2, name: 'Шампуни', productId: 6, selected: false, priceValue: 1 },
+                        { id: 3, name: 'Гели', productId: 6, selected: false,  priceValue: 1 },
+                        { id: 4, name: 'Другое', productId: 6, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: babyCosm,
                     page: 1,
                 },
                 { 
@@ -170,82 +187,93 @@ const initialState = {
                     name: 'Уход за кожей рук',
                     description: '',
                     categories: [
-                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Дезодорант', productId: 7, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Крем', productId: 7, selected: false, priceValue: 1 },
+                        { id: 3, name: 'Бальзам', productId: 7, selected: false, priceValue: 1 },
+                        { id: 4, name: 'Другое', productId: 7, selected: false, priceValue: 1 },
                     ],
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: cosmtechHands,
                     page: 2,
                 },
                 { 
                     id: 8,
                     name: 'Уход за кожей ног',
                     categories: [
-                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Крем', productId: 8, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Бальзам', productId: 8, selected: false, priceValue: 1 },
+                        { id: 3, name: 'Дезодорант', productId: 8, selected: false, priceValue: 1 },
+                        { id: 4, name: 'Другое', productId: 8, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: cosmtechFeet,
                     page: 2,
                 },
                 { 
                     id: 9,
                     name: 'Солнцезащитные средства',
                     categories: [
-                        { id: 1, name: 'Солнцезащитный крем', selected: false, priceValue: 1 },
-                        { id: 2, name: 'Гидролат', selected: false, priceValue: 1 },
-                        { id: 3, name: 'Масла для загара', selected: false, priceValue: 1 },
-                        { id: 4, name: 'Крем после загара', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Солнцезащитный крем', productId: 9, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Гидролат', selected: false, productId: 9, priceValue: 1 },
+                        { id: 3, name: 'Масла для загара', productId: 9, selected: false, priceValue: 1 },
+                        { id: 4, name: 'Крем после загара', productId: 9, selected: false, priceValue: 1 },
+                        { id: 5, name: 'Другое', productId: 9, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: cosmtechSpf,
                     page: 2,
                 },
                 { 
                     id: 10,
                     name: 'Аппаратная косметика',
                     categories: [
-                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Гели', productId: 10, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Сыворотки', productId: 10, selected: false, priceValue: 1 },
+                        { id: 3, name: 'Эмульсии', productId: 10, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: apparat,
                     page: 2,
                 },
                 { 
                     id: 11,
                     name: 'Пилинги',
                     categories: [
-                        { id: 5, name: 'Другое', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Гель-пилинг', productId: 11, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Крем-пилинг', productId: 11, selected: false, priceValue: 1 },
+                        { id: 3, name: 'Другое', productId: 11, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: pillings,
                     page: 2,
                 },
                 { 
                     id: 12,
                     name: 'Для ванны и душа',
                     categories: [
-                        { id: 1, name: 'Гели для душа', selected: false, priceValue: 1 },
-                        { id: 2, name: 'Соль для ванн', selected: false, priceValue: 1 },
-                        { id: 3, name: 'Жидкое мыло', selected: false, priceValue: 1 },
+                        { id: 1, name: 'Жидкое мыло', productId: 12, selected: true, priceValue: 1 },
+                        { id: 2, name: 'Гели для душа', productId: 12, selected: false, priceValue: 1 },
+                        { id: 3, name: 'Соль для ванн', productId: 12, selected: false, priceValue: 1 },
                     ],
                     description: '',
                     selected: false,
                     checkboxIconActive: quizCheckboxActive,
                     checkboxIconInactive: quizCheckbox,
-                    image: demoImg,
+                    image: cosmtechWash,
                     page: 2,
                 }
             ],
@@ -513,6 +541,37 @@ const qizSlice = createSlice({
                     }
                 })];
             }
+        },
+        selectInnerProduct(state, action) {
+            const { mainProductId, productName } = action.payload;
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.products) {
+                    return {
+                        ...quizStep,
+                        products: quizStep.products.map((productItem) => {
+                           if (productItem.id === mainProductId) {
+                            return {
+                                ...productItem,
+                                categories: productItem.categories.map((catItem) => {
+                                    if (catItem.productId === mainProductId && catItem.name === productName) {
+                                        return {
+                                            ...catItem,
+                                            selected: true
+                                        }
+                                    }
+                                    return {
+                                        ...catItem,
+                                        selected: false
+                                    }
+                                })
+                            }
+                           }
+                           return productItem;
+                        })
+                    }
+                }
+                return quizStep;
+            });
         },
         selectProductPage(state, action) {
             const { nextPageId } = action.payload;
@@ -1000,12 +1059,14 @@ const qizSlice = createSlice({
             const stepIndex = stepNumber - 1;
             if (stepNumber === 1) {
                 const selectedProduct = state.qizSteps[stepIndex].products.find((item) => item.selected);
+                const selectedCategory = selectedProduct.categories.find((item) => item.selected);
                 state.quizResult = {
                     ...state.quizResult,
                     product: {
                         ...state.quizResult.product,
                         id: selectedProduct.id,
-                        name: selectedProduct.name
+                        name: selectedProduct.name,
+                        category: selectedCategory.name
                     }
                 }
             }
@@ -1085,6 +1146,7 @@ export const {
     validateStep,
     resetStep,
     selectProduct,
+    selectInnerProduct,
     selectProductPage,
     resetQuiz,
     disableQuantity,

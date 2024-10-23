@@ -74,19 +74,19 @@ const ReviewsMainPage = () => {
                             <div className="yandex-rating-num">4.6</div>
                             <div className="yandex-rating-stars-row">
                                <span className="review-star">
-                                    <img src={starFull} />
+                                    <img src={starFull} alt="review yandex star"/>
                                </span>
                                <span className="review-star">
-                                    <img src={starFull} />
+                                    <img src={starFull} alt="review yandex star" />
                                </span>
                                <span className="review-star">
-                                    <img src={starFull} />
+                                    <img src={starFull} alt="review yandex star" />
                                </span>
                                <span className="review-star">
-                                    <img src={starFull} />
+                                    <img src={starFull} alt="review yandex star" />
                                </span>
                                <span className="review-star">
-                                    <img src={starFull} />
+                                    <img src={starFull} alt="review yandex star" />
                                </span>
                             </div>
                         </div>
@@ -138,7 +138,7 @@ const ReviewsMainPage = () => {
                             <span 
                                 className="yandex-reviews-arrow-right"
                                 onClick={() => moveSlideHandler('right')}
-                            ><img src={arrowRight} /></span>
+                            ><img src={arrowRight} alt="следующий отзыв ООО космотех"/></span>
                         </div>
                     </div>
                     <div className="send-review-block-wrap">

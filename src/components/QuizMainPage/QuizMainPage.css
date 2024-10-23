@@ -154,33 +154,41 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    background-color: whitesmoke;
     max-width: 33%;
-    min-height: 300px;
+    min-height: 320px;
     min-width: 180px;
+    max-height: 333px;
     width: 30%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     cursor: pointer;
     position: relative;
     border: 1px solid transparent;
+    opacity: 1;
+    transform: translateX(-150%);
+    animation: quiz-product-types-in 1s forwards;
 }
-.quiz-products-item:hover {
+.quiz-products-item-not-select {
+    filter: brightness(0.5);
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+}
+/* .quiz-product-img-wrap:hover {
     border: 1px solid #3FD2C7;
-    transition: border-color 0.5s ease; 
-}
-.quiz-product-selected-icon-wrap {
-    position: absolute;
-    top: 80%;
-}
+    transition: border-color 0.5s ease-in-out;
+} */
+.quiz-product-selected-icon-wrap,
 .quiz-product-selected-icon-wrap-active {
     position: absolute;
-    top: 80%;
+    /* top: 44%; */
+    right: 43%;
+    bottom: 0;
 }
 .quiz-product-decription-wrap,
 .quiz-product-img-wrap {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    position: absolute;
     width: 100%;
     max-width: 300px;
     min-width: 180px;
@@ -196,7 +204,28 @@
 }
 .quiz-products-item h4 {
     margin: 0;
-    padding: 0;
+    padding: 2px 0;
+    /* background-color: rgb(63, 210, 199, 0.4); */
+    background-color: #3FD2C7;
+    color: white;
+}
+.quiz-products-category-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 150px;
+    min-width: 100px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 17%;
+    pointer-events:visible;
+}
+.quiz-products-category-wrap select {
+    min-width: 150px;
+    max-width: 150px;
+    text-align: center;
 }
 .next-step-wrap {
     display: flex;
@@ -1018,4 +1047,8 @@
         opacity:0;
     }
 }
-  
+
+@keyframes quiz-product-types-in {
+    0% {transform: translateX(-150%);}
+    100% {transform: translateY(0);}
+  }

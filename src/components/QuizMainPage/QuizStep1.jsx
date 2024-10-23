@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRef } from "react";
 
 const QuizMainPage = (props) => {
     const stepData = props.stepData;
     const products = stepData.products;
+    const productOptionRef = useRef(null);
 
     return (
         <React.Fragment>
@@ -11,11 +13,13 @@ const QuizMainPage = (props) => {
                     return (
                         <React.Fragment key={productItem.id}>
                             <div 
-                                className="quiz-products-item"
-                                onClick={() => props.productSelectHandler(productItem)}
+                                className={"quiz-products-item"}
                             >
-                                <div className="quiz-product-img-wrap">
-                                    <img src={productItem.image} alt={productItem.name} />
+                                <div
+                                    className={productItem.selected ? "quiz-product-img-wrap" : "quiz-product-img-wrap quiz-products-item-not-select"}
+                                    onClick={() => props.productSelectHandler(productItem)}
+                                >
+                                    <img src={productItem.image} alt={`калькулятор космотех расчет ${productItem.name}`} />
                                 </div>
                                 <div className="quiz-product-selected-icon-wrap">
                                     <img src={productItem.selected ? productItem.checkboxIconActive : productItem.checkboxIconInactive} alt="выбор продукта quiz" />
@@ -23,6 +27,26 @@ const QuizMainPage = (props) => {
                                 <div className="quiz-product-decription-wrap">
                                     <h4>{productItem.name}</h4>
                                 </div>
+                                {productItem.selected ? 
+                                    <React.Fragment>
+                                        <div className="quiz-products-category-wrap">
+                                            <select
+                                                ref={productOptionRef} 
+                                                onChange={(e) => props.productItemSelectHadnler(e, productItem.id, e.target.value)}
+                                            >
+                                                {productItem.categories.map((catItem) => {
+                                                    return (
+                                                        <React.Fragment key={catItem.id}>
+                                                            <option>{catItem.name}</option>
+                                                        </React.Fragment>
+                                                    )
+                                                })}  
+                                            </select>
+                                        </div>
+                                    </React.Fragment>
+                                
+                                : null}
+                                
                             </div>
                         </React.Fragment>
                     )
