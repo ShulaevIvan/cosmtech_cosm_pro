@@ -23,7 +23,7 @@ const QuizStep3 = (props) => {
                     {stepData.package.filter((item) => item.page === 1).map((packageItem) => {
                         return (
                             <React.Fragment key={packageItem.id}>
-                                <div className="quiz-package-item">
+                                <div className={packageItem.selected ? "quiz-package-item" : "quiz-package-item quiz-products-item-not-select"}>
                                     <div className="quiz-package-item-img-wrap">
                                         <img
                                             onClick={() => props.selectPackageHandler(packageItem.id)}
@@ -33,26 +33,30 @@ const QuizStep3 = (props) => {
                                             {packageItem.selected ? <img src={testImg2} alt="#"/> : <img src={testImg} alt="#"/>}
                                         </div>
                                     </div>
-                                    <div className="quiz-package-item-title-wrap">
-                                        <h4>{packageItem.name}</h4>
-                                    </div>
-                                    <div className="quiz-package-item-size-wrap">
-                                        <select
-                                            ref={packageRef}
-                                            onChange={(e) => props.selectPackageSizeHandler(e.target.value, packageItem)}
-                                        >
-                                            {sortArrWithParam(packageItem.sizes, 'selected', 'bool').map((sizeItem) => {
-                                                const sizeName = `${sizeItem.from} ${sizeItem.value} ${sizeItem.to} ${sizeItem.max} ${sizeItem.name}`;
-                                                return (
-                                                    <React.Fragment key={sizeItem.id}>
-                                                        <option>
-                                                            {`${sizeName}`}
-                                                        </option>
-                                                    </React.Fragment>
-                                                )
-                                            })}
-                                        </select>
-                                    </div>
+                                    {packageItem.selected ?
+                                        <React.Fragment>
+                                            <div className="quiz-package-item-size-wrap">
+                                                <select
+                                                    ref={packageRef}
+                                                    onChange={(e) => props.selectPackageSizeHandler(e.target.value, packageItem)}
+                                                >
+                                                    {sortArrWithParam(packageItem.sizes, 'selected', 'bool').map((sizeItem) => {
+                                                        const sizeName = `${sizeItem.from} ${sizeItem.value} ${sizeItem.to} ${sizeItem.max} ${sizeItem.name}`;
+                                                        return (
+                                                            <React.Fragment key={sizeItem.id}>
+                                                                <option value={sizeName}>
+                                                                    {`${sizeName}`}
+                                                                </option>
+                                                            </React.Fragment>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </React.Fragment>
+                                    : null}
+                                      <div className="quiz-package-item-title-wrap">
+                                            <h4>{packageItem.name}</h4>
+                                        </div>
                                 </div>
                             </React.Fragment>
                         )

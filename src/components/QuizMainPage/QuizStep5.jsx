@@ -74,18 +74,25 @@ const QuizStep5 = (props) => {
                     <div className="quiz-result-title">
                         <h3>Приблизительный рассчет проекта</h3>
                     </div>
+                    <div className="result-description">
+                        <p className="quiz-description-text">
+                            Объем партии должен составлять не менее 50 кг. 
+                            <br /> 
+                            Наша команда всегда на связи и готова ответить на возникающие вопросы.
+                        </p>
+                    </div>
                     <div className="quiz-result-table-wrap">
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                                Тип изготавливаемого продукта
+                                <h4>Тип продукта</h4>
                             </div>
                             <div className="quiz-result-value">
-                                {quizResult.product.name}
+                                {`${quizResult.product.category} ${quizResult.product.name.toLowerCase()}`}
                             </div>
                         </div>
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                                Количество
+                                <h4>Количество</h4>
                             </div>
                             <div className="quiz-result-value">
                                 {`${quizResult.quantity.value} шт`}
@@ -93,7 +100,7 @@ const QuizStep5 = (props) => {
                         </div>
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                                Приблизительная цена за единицу
+                                <h4>Приблизительная цена за 1шт</h4>
                             </div>
                             <div className="quiz-result-value">
                                 ~ 68 руб
@@ -101,7 +108,7 @@ const QuizStep5 = (props) => {
                         </div>
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                               Приблизительный вес партии
+                               <h4>Приблизительный вес партии</h4>
                             </div>
                             <div className="quiz-result-value">
                                 {`~ от ${sizeResult.minValue} кг до ${sizeResult.maxValue} кг`}
@@ -111,7 +118,7 @@ const QuizStep5 = (props) => {
                             <React.Fragment>
                                 <div className="quiz-result-value-row">
                                     <div className="quiz-result-value-title">
-                                        Регион доставки
+                                        <h4>Регион доставки</h4>
                                     </div>
                                     <div className="quiz-result-value">
                                         Санкт-Петербург
@@ -119,7 +126,7 @@ const QuizStep5 = (props) => {
                                 </div>
                                 <div className="quiz-result-value-row">
                                     <div className="quiz-result-value-title">
-                                        Город
+                                        <h4>Город</h4>
                                     </div>
                                     <div className="quiz-result-value">
                                         Санкт-Петербург
@@ -127,7 +134,7 @@ const QuizStep5 = (props) => {
                                 </div>
                                 <div className="quiz-result-value-row">
                                     <div className="quiz-result-value-title">
-                                        Приблизительное Расстояние
+                                        <h4>Приблизительное Расстояние</h4>
                                     </div>
                                     <div className="quiz-result-value">
                                         ~ 0 км на авто
@@ -135,7 +142,7 @@ const QuizStep5 = (props) => {
                                 </div>
                                 <div className="quiz-result-value-row">
                                     <div className="quiz-result-value-title">
-                                        Приблизительная стоимость доставки
+                                        <h4>Приблизительная стоимость доставки</h4>
                                     </div>
                                     <div className="quiz-result-value">
                                         ~ 25 000 руб
@@ -145,59 +152,63 @@ const QuizStep5 = (props) => {
                         : null}
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
-                                Приблизительная стоимость проекта
+                                <h4>Приблизительная стоимость проекта</h4>
                             </div>
                             <div className="quiz-result-value">
                                 0 руб
                             </div>
                         </div>
                     </div>
-                    <div className="result-get-contacts-wrap">
-                        <div className="result-form-get-contacts-title">
-                            <h3>Запросить точный расчет или КП</h3>
-                        </div>
-                        <div className="result-form-get-contacts-wrap">
-                            <form>
-                                <div className="result-form-get-contacts-row">
-                                    <div className="result-form-contacts-item">
-                                        <label htmlFor="quiz-order-from-input-name">Имя</label>
-                                        <div className="result-form-contacts-item-input">
-                                            <input
-                                                ref={inputNameRef}
-                                                type="text"
-                                                id="quiz-order-from-input-name"
-                                            /> 
-                                        </div>
-                                    </div>
-                                    <div className="result-form-contacts-item">
-                                        <label htmlFor="quiz-order-from-input-phone">Телефон</label>
-                                        <div className="result-form-contacts-item-input">
-                                            <input
-                                                ref={inputPhoneRef} 
-                                                type="text"
-                                                id="quiz-order-from-input-phone"
-                                            /> 
-                                        </div>
-                                    </div>
-                                    <div className="result-form-contacts-item">
-                                        <label htmlFor="quiz-order-from-input-email">Email</label>
-                                        <div className="result-form-contacts-item-input">
-                                            <input
-                                                ref={inputMailRef}  
-                                                type="email"
-                                                id="quiz-order-from-input-email"
-                                            /> 
-                                        </div>
+                </div>
+                <div className="result-get-contacts-wrap">
+                    <div className="result-form-get-contacts-title">
+                        <h3>Запросить точный расчет или КП</h3>
+                    </div>
+                   
+                    <div className="result-form-get-contacts-wrap">
+                        <form>
+                            <div className="result-form-get-contacts-row">
+                                <div className="result-form-contacts-item">
+                                    <label htmlFor="quiz-order-from-input-name">Имя</label>
+                                    <div className="result-form-contacts-item-input">
+                                        <input
+                                            ref={inputNameRef}
+                                            type="text"
+                                            id="quiz-order-from-input-name"
+                                        /> 
                                     </div>
                                 </div>
-                            </form>
-                            <div className="result-form-get-contacts-send-wrap">
-                                <button 
-                                    className={stepData.delivery.find((deliveryItem) => deliveryItem.selected) ? 
-                                        "result-form-get-contacts-send-btn" : "result-form-get-contacts-send-btn btnDisabled"
-                                    }
-                                >Отправить запрос</button>
+                                <div className="result-form-contacts-item">
+                                    <label htmlFor="quiz-order-from-input-phone">Телефон</label>
+                                    <div className="result-form-contacts-item-input">
+                                        <input
+                                            ref={inputPhoneRef} 
+                                            type="text"
+                                            id="quiz-order-from-input-phone"
+                                        /> 
+                                    </div>
+                                </div>
+                                <div className="result-form-contacts-item">
+                                    <label htmlFor="quiz-order-from-input-email">Email</label>
+                                    <div className="result-form-contacts-item-input">
+                                        <input
+                                            ref={inputMailRef}  
+                                            type="email"
+                                            id="quiz-order-from-input-email"
+                                        /> 
+                                    </div>
+                                </div>
                             </div>
+                        </form>
+                        <div className="result-form-get-contacts-description">
+                            Данные по проекту прикреплены
+                        </div>
+                        <div className="result-form-get-contacts-send-wrap">
+                            <button 
+                                className={stepData.delivery.find((deliveryItem) => deliveryItem.selected) ? 
+                                    "result-form-get-contacts-send-btn" : "result-form-get-contacts-send-btn btnDisabled"
+                                }
+                            >Отправить запрос</button>
                         </div>
                     </div>
                 </div>

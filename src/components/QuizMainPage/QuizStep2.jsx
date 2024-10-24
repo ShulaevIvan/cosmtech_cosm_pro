@@ -81,12 +81,18 @@ const QuizStep2 = (props) => {
                             />
                         </div>
                     </div>
+                    <div className="quantity-description-wrap">
+                        <p className="quiz-description-text">
+                            Чем больше партия, тем более привлекательные условия мы можем предложить нашим клиентам.
+                        </p>
+                    </div>
                 </div>
+
 
                 <div className="quiz-deadline-wrap">
                     <h3>Сроки изготовления</h3>
                     <div className="quiz-dedaline-description-wrap">
-                        <p>От срочности может зависить цена</p>
+                        <p className="quiz-description-text">От срочности может зависить цена партии</p>
                     </div>
                     <div className="quiz-deadline-radio-wrap">
                         <fieldset>
