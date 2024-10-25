@@ -230,12 +230,6 @@
 }
 .quiz-products-category-wrap select,
 .quiz-package-item-size-wrap select {
-    min-width: 150px;
-    max-width: 150px;
-}
-  
-.quiz-products-category-wrap select,
-.quiz-package-item-size-wrap select {
     background-color: #00458B;
     color: white;
     padding: 4px;
@@ -246,14 +240,16 @@
     -webkit-appearance: button;
     appearance: button;
     outline: none;
+    min-width: 150px;
+    max-width: 150px;
 }
   
 .quiz-products-category-wrap:hover::before,
 quiz-package-item-size-wrap:hover::before {
     color: rgba(255, 255, 255, 0.6);
     background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
 }
-
 .next-step-wrap {
     display: flex;
     flex-direction: row;
@@ -415,6 +411,7 @@ quiz-package-item-size-wrap:hover::before {
 .quantity-description-wrap .quiz-description-text {
     padding: 0 40px;
     text-align: center;
+    max-width: 50%;
 }
 .qnt-apply-wrap {
     display: flex;

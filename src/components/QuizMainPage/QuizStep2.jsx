@@ -91,9 +91,6 @@ const QuizStep2 = (props) => {
 
                 <div className="quiz-deadline-wrap">
                     <h3>Сроки изготовления</h3>
-                    <div className="quiz-dedaline-description-wrap">
-                        <p className="quiz-description-text">От срочности может зависить цена партии</p>
-                    </div>
                     <div className="quiz-deadline-radio-wrap">
                         <fieldset>
                             {stepData.deadLineItems.map((deadlineItem) => {
