@@ -121,7 +121,7 @@ const QuizStep4 = (props) => {
                                             onChange={(e) => props.uploadTechTaskHandler(e, techTaskRef.current)}
                                             type="file"
                                         />
-                                        <span className="quiz-advanced-settings-tz-input-file-btn">Файл...</span>
+                                        <span className="quiz-advanced-settings-tz-input-file-btn">прикрепить файл...</span>
                                     </label>
                                     <span
                                         ref={techTaskRef}

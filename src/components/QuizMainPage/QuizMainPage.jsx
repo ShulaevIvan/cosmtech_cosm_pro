@@ -25,8 +25,11 @@ import {
     saveTechTaskCustom,
     saveAdvancedServiceCustomValue,
     changeDelivery,
+    clearDeliveryCityInput,
     saveDeliveryCity,
-    saveResultStep
+    saveResultStep,
+    getDeliveryCity,
+    saveCalculateResult
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -38,6 +41,7 @@ import fileToBase64 from "../../functions/fileToBase64";
 const QuizMainPage = (props) => {
     const dispatch = useDispatch();
     const stepTitle = useRef(null);
+    const quizWrapRef = useRef(null);
     const quizState = useSelector((state) => state.quiz);
     const popupWrapRef = useRef(null);
 
@@ -172,8 +176,19 @@ const QuizMainPage = (props) => {
         dispatch(changeDelivery({status: value, deliveryId: deliveryId}));
     };
 
-    const saveDeliveryCityHandler = (value) => {
-        dispatch(saveDeliveryCity({cityValue: value}));
+    const saveDeliveryCityHandler = async (value) => {
+        if (!value) return;
+        dispatch(getDeliveryCity(value));
+    };
+
+    const clearDeliveryCityHandler = (e, inputRef) => {
+        if (e.key === 'Backspace') {
+            dispatch(clearDeliveryCityInput());
+            inputRef.value = '';
+            return;
+        }
+        dispatch(saveDeliveryCity({cityValue: inputRef.value}))
+        
     };
 
     const techTaskHandler = (value) => {
@@ -222,6 +237,19 @@ const QuizMainPage = (props) => {
         });
     };
 
+    const calculateResult = () => {
+        const conditionsPrice = Number(quizState.quizResult.conditions.price);
+        const deadlineModifer = Number(quizState.quizResult.deadLine.ratio);
+        const deadLineMaxDays = Number(quizState.quizResult.deadLine.maxDays);
+        const packagePricePerItem = Number(quizState.quizResult.package.price);
+        const productPricePerItem = Number(quizState.quizResult.product.price);
+        const totalQuantity = Number(quizState.quizResult.quantity.value);
+        const productItemSum = (packagePricePerItem + productPricePerItem);
+        const allProductSum = ((productItemSum * totalQuantity) + conditionsPrice) * deadlineModifer;
+
+        dispatch(saveCalculateResult());
+    };
+
     useEffect(() => {
         const stepData = findStep(quizState.currentStep);
         if (stepData) {
@@ -230,9 +258,11 @@ const QuizMainPage = (props) => {
     }, [quizState.currentStep]);
 
     useEffect(() => {
-        if (quizState.currentStep === 4) {
-            console.log(quizState.quizResult);
-        } 
+        quizWrapRef.current.className = "quiz-content-wrap quiz-content-wrap-aimate"
+        const animationTimeout = setTimeout(() => {
+            quizWrapRef.current.className = "quiz-content-wrap";
+            clearTimeout(animationTimeout)
+        }, 1000);
         
     }, [quizState.currentStep]);
 
@@ -256,7 +286,10 @@ const QuizMainPage = (props) => {
                             )
                         })}
                     </div>
-                        <div className="quiz-content-wrap">
+                        <div
+                            ref={quizWrapRef} 
+                            className="quiz-content-wrap"
+                        >
                         <div className="quiz-mainpage-title-row">
                             <div className="quiz-mainpage-title-wrap">
                                 <h2 ref={stepTitle}></h2>
@@ -307,11 +340,11 @@ const QuizMainPage = (props) => {
                                 quizState.currentStep === 4 ? 
                                     <QuizStep4
                                         stepData={findStep(4)}
-                                        serviceChangeHandler = {advancedServiceHandler}
-                                        clearServiceInputHandler = {clearAdvancedServiceHandler}
-                                        budgetChangeHandler = {budgetServiceHandler}
-                                        customBudgetHandler = {customServiceBudgetHandler}
-                                        saveCommentHandler = {advancedServiceSaveCommentHandler}
+                                        serviceChangeHandler={advancedServiceHandler}
+                                        clearServiceInputHandler ={clearAdvancedServiceHandler}
+                                        budgetChangeHandler={budgetServiceHandler}
+                                        customBudgetHandler={customServiceBudgetHandler}
+                                        saveCommentHandler={advancedServiceSaveCommentHandler}
                                         techTaskHandler={techTaskHandler}
                                         uploadTechTaskHandler={uploadTechTaskHandler}
                                         validateStep={validateCurrentStep}
@@ -323,10 +356,12 @@ const QuizMainPage = (props) => {
                                     <QuizStep5
                                         stepData={findStep(5)}
                                         quizResult={quizState.quizResult}
-                                        getSizeValue={getResultSizeValue}
                                         test={quizState}
-                                        deliveryChangeHandler = {deliveryServiceHandler}
-                                        deliveryCityHandler= {saveDeliveryCityHandler}
+                                        getSizeValue ={getResultSizeValue}
+                                        deliveryChangeHandler={deliveryServiceHandler}
+                                        deliveryCityHandler={saveDeliveryCityHandler}
+                                        deliveryCityClearHandler={clearDeliveryCityHandler}
+                                        calculate={calculateResult}
                                     />
                                 : null
                             }

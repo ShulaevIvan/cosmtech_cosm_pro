@@ -43,7 +43,18 @@ const initialState = {
             service: '',
             budget: '',
             customTechFile: ''
-        }
+        },
+        calculateResult: {
+            totalQuantity: 0,
+            totalProductName: '',
+            totalProductPricePerItem: 0,
+            totalDeliveryPrice: 0,
+            totalDeliveryRange: 0,
+            totalSum: 0,
+            totalProductWeight: 0,
+            dateStart: '',
+            dateEnd: '',
+        },
     },
     quizMenu: [
         {
@@ -138,17 +149,17 @@ const initialState = {
                 },
                 { 
                     id: 4,
-                    name: 'Профессиональная косметика',
+                    name: 'Проф. косметика',
                     categories: [
-                        { id: 1, name: 'Маски ', productId: 4, selected: true,  priceValue: 1 },
-                        { id: 2, name: 'Кремы', productId: 4, selected: false, priceValue: 1 },
-                        { id: 3, name: 'Бальзамы', productId: 4, selected: false,  priceValue: 1 },
-                        { id: 4, name: 'Шампуни', productId: 4, selected: false,  priceValue: 1 },
-                        { id: 5, name: 'Обертывания', productId: 4, selected: false,  priceValue: 1 },
-                        { id: 6, name: 'Скрабы', productId: 4, selected: false,  priceValue: 1 },
-                        { id: 7, name: 'Сыворотки', productId: 4, selected: false,  priceValue: 1 },
-                        { id: 8, name: 'Гели', productId: 4, selected: false,  priceValue: 1 },
-                        { id: 9, name: 'Пиллинги', productId: 4, selected: false,  priceValue: 1 },
+                        { id: 1, name: 'Маски ', productId: 4, selected: true,  priceValue: 34 },
+                        { id: 2, name: 'Кремы', productId: 4, selected: false, priceValue: 33 },
+                        { id: 3, name: 'Бальзамы', productId: 4, selected: false,  priceValue: 36 },
+                        { id: 4, name: 'Шампуни', productId: 4, selected: false,  priceValue: 24 },
+                        { id: 5, name: 'Обертывания', productId: 4, selected: false,  priceValue: 35 },
+                        { id: 6, name: 'Скрабы', productId: 4, selected: false,  priceValue: 28 },
+                        { id: 7, name: 'Сыворотки', productId: 4, selected: false,  priceValue: 31 },
+                        { id: 8, name: 'Гели', productId: 4, selected: false,  priceValue: 24 },
+                        { id: 9, name: 'Пиллинги', productId: 4, selected: false,  priceValue: 38 },
                         { id: 10, name: 'Другое', productId: 4, selected: false, priceValue: 1 },
                     ],
                     description: '',
@@ -298,12 +309,12 @@ const initialState = {
                 inputActive: false
             },
             deadLineItems: [
-                { id: 1, name: 'как можно скорее', selected: false, ratio: 1.2, },
-                { id: 2, name: 'от 4 до 8 недель', selected: false, ratio: 1.05, },
-                { id: 3, name: 'до 10 недель', selected: false, ratio: 1 },
-                { id: 4, name: 'до 3 мес', selected: false, ratio: 0.9 },
-                { id: 5, name: 'до 6 месяцев', selected: false, ratio: 0.8 },
-                { id: 6, name: 'свой вариант', selected: false, ratio: 1, customValue: '' },
+                { id: 1, name: 'как можно скорее', selected: false, minDays: 1, maxDays: 7, ratio: 1.1, },
+                { id: 2, name: 'от 4 до 8 недель', selected: false, minDays: 32, maxDays: 56, ratio: 1.05, },
+                { id: 3, name: 'до 10 недель', selected: false, minDays: 1, maxDays: 70, ratio: 1 },
+                { id: 4, name: 'до 3 мес', selected: false, minDays: 1, maxDays: 99, ratio: 0.9 },
+                { id: 5, name: 'до 6 месяцев', selected: false, minDays: 1, maxDays: 180, ratio: 0.8 },
+                { id: 6, name: 'свой вариант', selected: false, minDays: 1, maxDays: 1, ratio: 1, customValue: '' },
             ],
             deadLineCustomField: {
                 fieldValue: '',
@@ -330,13 +341,13 @@ const initialState = {
                     name: 'Флаконы косметические', 
                     sizes: [
                         {id: 1, from: 'от', to: 'до', name: 'ml', value: 10, max: 50, selected: true, packageId: 1, price: 10},
-                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 50, max: 100, selected: false, packageId: 13 },
-                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 100, max: 150, selected: false, packageId: 15 },
-                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 150, max: 200, selected: false, packageId: 17 },
-                        {id: 5, from: 'от', to: 'до', name: 'ml', value: 200, max: 250, selected: false, packageId: 19 },
-                        {id: 6, from: 'от', to: 'до', name: 'ml', value: 250, max: 350, selected: false, packageId: 21 },
-                        {id: 7, from: 'от', to: 'до', name: 'ml', value: 350, max: 450, selected: false, packageId: 23 },
-                        {id: 8, from: 'от', to: 'до', name: 'ml', value: 450, max: 1000, selected: false, packageId: 25 },
+                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 50, max: 100, selected: false, packageId: 1, price: 13 },
+                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 100, max: 150, selected: false, packageId: 1, price: 15 },
+                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 150, max: 200, selected: false, packageId: 1, price: 17 },
+                        {id: 5, from: 'от', to: 'до', name: 'ml', value: 200, max: 250, selected: false, packageId: 1, price: 19 },
+                        {id: 6, from: 'от', to: 'до', name: 'ml', value: 250, max: 350, selected: false, packageId: 1, price: 21 },
+                        {id: 7, from: 'от', to: 'до', name: 'ml', value: 350, max: 450, selected: false, packageId: 1, price: 23 },
+                        {id: 8, from: 'от', to: 'до', name: 'ml', value: 450, max: 1000, selected: false, packageId: 1, price: 25 },
                     ],
                     image: packageBottle,
                     page: 1,
@@ -346,10 +357,10 @@ const initialState = {
                     id: 2, 
                     name: 'Тубы и тубофлаконы',
                     sizes: [
-                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 5, max: 10, selected: false, packageId: 16,},
-                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 30, max: 80, selected: false, packageId: 18,},
-                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 100, max: 150, selected: true, packageId: 20,},
-                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 150, max: 300, selected: false, packageId: 22,},
+                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 5, max: 10, selected: false, packageId: 2, price: 16},
+                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 30, max: 80, selected: false, packageId: 2, price: 18},
+                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 100, max: 150, selected: true, packageId: 2, price: 20},
+                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 150, max: 300, selected: false, packageId: 2, price: 22},
                     ],
                     image: packageTubes,
                     page: 1,
@@ -359,13 +370,13 @@ const initialState = {
                     id: 3, 
                     name: 'Банки косметические',
                     sizes: [
-                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 2, max: 20, selected: false, packageId: 14,},
-                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 20, max: 40, selected: false, packageId: 18,},
-                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 40, max: 100, selected: true, packageId: 21,},
-                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 100, max: 200, selected: false, packageId: 24,},
-                        {id: 5, from: 'от', to: 'до', name: 'ml', value: 200, max: 400, selected: false, packageId: 27,},
-                        {id: 6, from: 'от', to: 'до', name: 'ml', value: 400, max: 800, selected: false, packageId: 29,},
-                        {id: 7, from: 'от', to: 'до', name: 'ml', value: 800, max: 1200, selected: false, packageId: 31,},
+                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 2, max: 20, selected: false, packageId: 3, price: 14},
+                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 20, max: 40, selected: false, packageId: 3, price: 18},
+                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 40, max: 100, selected: true, packageId: 3, price: 21},
+                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 100, max: 200, selected: false, packageId: 3, price: 24},
+                        {id: 5, from: 'от', to: 'до', name: 'ml', value: 200, max: 400, selected: false, packageId: 3, price: 27},
+                        {id: 6, from: 'от', to: 'до', name: 'ml', value: 400, max: 800, selected: false, packageId: 3, price: 29},
+                        {id: 7, from: 'от', to: 'до', name: 'ml', value: 800, max: 1200, selected: false, packageId: 3, price: 31},
                     ],
                     image: packagePot,
                     page: 1,
@@ -375,10 +386,10 @@ const initialState = {
                     id: 4, 
                     name: 'Флаконы Roll-on',
                     sizes: [
-                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 10, max: 20, selected: false, packageId: 14,},
-                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 20, max: 50, selected: false, packageId: 21,},
-                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 50, max: 100, selected: true, packageId: 26,},
-                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 100, max: 200, selected: false, packageId: 31,},
+                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 10, max: 20, selected: false, packageId: 4, price: 14},
+                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 20, max: 50, selected: false, packageId: 4, price: 21},
+                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 50, max: 100, selected: true, packageId: 4, price: 26},
+                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 100, max: 200, selected: false, packageId: 4, price: 31},
                     ],
                     image: packageRollon,
                     page: 1,
@@ -388,10 +399,10 @@ const initialState = {
                     id: 5,
                     name: 'Вакуумные флаконы', 
                     sizes: [
-                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 5, max: 15, selected: false, packageId: 65,},
-                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 15, max: 30, selected: false, packageId: 74,},
-                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 30, max: 80, selected: true, packageId: 88,},
-                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 80, max: 120, selected: false, packageId: 97,},
+                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 5, max: 15, selected: false, packageId: 5, price: 65},
+                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 15, max: 30, selected: false, packageId: 5, price: 75},
+                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 30, max: 80, selected: true, packageId: 5, price: 88},
+                        {id: 4, from: 'от', to: 'до', name: 'ml', value: 80, max: 120, selected: false, packageId: 5, price: 97},
                     ],
                     image: packageDespencer,
                     page: 1,
@@ -401,9 +412,9 @@ const initialState = {
                     id: 6, 
                     name: 'Флаконы-пенообразователи', 
                     sizes: [
-                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 50, max: 100, selected: false, packageId: 53,},
-                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 100, max: 200, selected: true, packageId: 59,},
-                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 200, max: 300, selected: false, packageId: 61,},
+                        {id: 1, from: 'от', to: 'до', name: 'ml', value: 50, max: 100, selected: false, packageId: 6, price: 53},
+                        {id: 2, from: 'от', to: 'до', name: 'ml', value: 100, max: 200, selected: true, packageId: 6, price: 59},
+                        {id: 3, from: 'от', to: 'до', name: 'ml', value: 200, max: 300, selected: false, packageId: 6, price: 61},
                     ],
                     image: packagePena,
                     page: 1,
@@ -457,23 +468,43 @@ const initialState = {
         {
             id: 5,
             name: 'Результат',
-            stepTitle: 'Дотставка и рассчет',
+            stepTitle: 'Доставка и рассчет',
             stepNum: 5,
             delivery: [
-                { id: 1, name: 'Вывоз продукции своими силами или ТК (вопрос решен)', selected: true },
-                { id: 2, name: 'Доставка в пределах Санкт-Петербурга И ЛО', selected: false },
-                { id: 3, name: 'Доставка транспортной компанией по России (нужна помощь)', selected: false },
+                { id: 1, name: 'Вывоз продукции своими силами или ТК (вопрос решен)', selected: true, price: 0 },
+                { id: 2, name: 'Доставка в пределах Санкт-Петербурга И ЛО', selected: false, price: 15 },
+                { id: 3, name: 'Доставка транспортной компанией по России (нужна помощь)', selected: false, price: 24 },
             ],
             deliveryCityForm: {
                 active: false,
                 value: '',
+                inputValid: true,
+                cityData: '',
+                deliveryPricePoint: 33,
             },
             active: false,
             stepValid: false,
         }
         
     ]
-}
+};
+
+export const getDeliveryCity = createAsyncThunk(
+    'api/city/',
+    async (cityValue) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/city/?city=${cityValue}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            }
+        });
+
+        const data = await response.json();
+        console.log(data)
+        return data;
+    }
+);
 
 const qizSlice = createSlice({
     name: 'quizSlice',
@@ -939,18 +970,24 @@ const qizSlice = createSlice({
             });
         },
         changeDelivery(state, action) {
-            const { deliveryId, status } = action.payload;
+            const { deliveryId } = action.payload;
             state.qizSteps = state.qizSteps.map((quizStep) => {
                 if (quizStep.stepNum === state.currentStep && quizStep.delivery) {
                     return {
                         ...quizStep,
                         deliveryCityForm: deliveryId === quizStep.delivery.length ? {
-                            ...quizStep.deliveryCityForm,
-                            active: true
+                            
+                            active: true,
+                            value: '',
+                            inputValid: true,
+                            cityData: '', 
                         }
                         : {
                             ...quizStep.deliveryCityForm,
-                            active: false
+                            active: false,
+                            value: '',
+                            inputValid: true,
+                            cityData: '',
                         },
                         delivery: quizStep.delivery.map((deliveryItem) => {
                             if (deliveryItem.id === deliveryId && !deliveryItem.selected) {
@@ -977,12 +1014,60 @@ const qizSlice = createSlice({
                         ...quizStep,
                         deliveryCityForm: {
                             ...quizStep.deliveryCityForm,
-                            value: cityValue
+                            value: !/^\s*$/.test(cityValue) ? cityValue : '',
+                            inputValid: true,
                         }
                     }
                 }
                 return quizStep;
             });
+        },
+        clearDeliveryCityInput(state) {
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.deliveryCityForm) {
+                    return {
+                        ...quizStep,
+                        deliveryCityForm: {
+                            ...quizStep.deliveryCityForm,
+                            value: '',
+                            inputValid: false,
+                            cityData: {}
+                        }
+                    }
+                }
+                return quizStep;
+            });
+        },
+        saveCalculateResult(state, action) {
+
+            const date = new Date();
+            const conditionsPrice = Number(state.quizResult.conditions.price);
+            const deadlineModifer = Number(state.quizResult.deadLine.ratio);
+            const packagePricePerItem = Number(state.quizResult.package.price);
+            const productPricePerItem = Number(state.quizResult.product.price);
+            const deadLineMaxDays = Number(state.quizResult.deadLine.maxDays);
+            const totalQuantity = Number(state.quizResult.quantity.value);
+            const productItemSum = (packagePricePerItem + productPricePerItem);
+            const allProductSum = ((productItemSum * totalQuantity) + conditionsPrice) * deadlineModifer;
+            const nextDate = new Date().setDate(date.getDate() + deadLineMaxDays);
+            const currentPrintDate = ('' + (new Date(date)).toLocaleDateString('ru'));
+            const endPrintDate = ('' + (new Date(nextDate)).toLocaleDateString('ru'));
+
+            state.quizResult = {
+                ...state.quizResult,
+                calculateResult: {
+                    ...state.quizResult.calculateResult,
+                    totalQuantity: totalQuantity,
+                    totalProductName: '',
+                    totalProductPricePerItem: productItemSum,
+                    totalDeliveryPrice: 0,
+                    totalDeliveryRange: 0,
+                    totalSum: allProductSum,
+                    totalProductWeight: 0,
+                    dateStart: currentPrintDate,
+                    dateEnd: endPrintDate,
+                }
+            }
         },
         validateStep(state) {
             const stepIndex = state.currentStep - 1;
@@ -1066,12 +1151,14 @@ const qizSlice = createSlice({
             if (stepNumber === 1) {
                 const selectedProduct = state.qizSteps[stepIndex].products.find((item) => item.selected);
                 const selectedCategory = selectedProduct.categories.find((item) => item.selected);
+
                 state.quizResult = {
                     ...state.quizResult,
                     product: {
                         ...state.quizResult.product,
                         id: selectedProduct.id,
                         name: selectedProduct.name,
+                        price: selectedCategory.priceValue,
                         category: selectedCategory.name
                     }
                 }
@@ -1089,6 +1176,9 @@ const qizSlice = createSlice({
                     deadLine: {
                         ...state.quizResult.deadLine,
                         id: deadlineItem.id,
+                        minDays: !deadlineItem.customValue ? deadlineItem.minDays : 0,
+                        maxDays: !deadlineItem.customValue ? deadlineItem.maxDays : 0,
+                        ratio: deadlineItem.ratio,
                         name: deadlineItem.id === state.qizSteps[stepIndex].deadLineItems.length ? deadlineItem.customValue : deadlineItem.name,
                     },
                 }
@@ -1118,6 +1208,7 @@ const qizSlice = createSlice({
                         ...state.quizResult.package,
                         id: selectedPackage.id,
                         name: selectedPackage.name,
+                        price: packageSize.price,
                         size: `${packageSize.from} ${packageSize.value} ${packageSize.to} ${packageSize.max}`,
                     }
                 } 
@@ -1136,6 +1227,7 @@ const qizSlice = createSlice({
                     conditions: {
                         ...state.quizResult.conditions,
                         service: selectedServices ? selectedServices.name : customServiceValue,
+                        price: selectedServices ? selectedServices.price : 0,
                         budget: selectedBudget ? selectedBudget.name : customBudgetValue,
                         customTechFile: customTechFile,
                     }
@@ -1144,7 +1236,46 @@ const qizSlice = createSlice({
 
         }
     },
-    extraReducers: (builder) => builder.addCase(resetQuizState, () => initialState)
+    extraReducers: (builder) => {
+        builder
+        .addCase(resetQuizState, () => initialState)
+        .addCase(getDeliveryCity.fulfilled, (state, action) => {
+            const { cities } = action.payload;
+            if (cities && cities.length > 0) {
+                state.qizSteps = state.qizSteps.map((quizStep) => {
+                    if (quizStep.stepNum === state.currentStep && quizStep.deliveryCityForm) {
+                        return {
+                            ...quizStep,
+                            deliveryCityForm: {
+                                ...quizStep.deliveryCityForm,
+                                value: cities[0].name,
+                                totalPrice: cities[0].range * state.qizSteps.find((item) => item.delivery).delivery.find((item) => item.selected).price,
+                                inputValid: true,
+                                cityData: cities[0]
+                            }
+                        }
+                    }
+                    return quizStep;
+                });
+                return;
+            }
+            state.qizSteps = state.qizSteps.map((quizStep) => {
+                if (quizStep.stepNum === state.currentStep && quizStep.deliveryCityForm) {
+                    return {
+                        ...quizStep,
+                        deliveryCityForm: {
+                            ...quizStep.deliveryCityForm,
+                            value: '',
+                            inputValid: false,
+                            cityData: {},
+                        }
+                    }
+                }
+                return quizStep;
+            });
+        });
+
+    }
 });
 
 export const {
@@ -1173,7 +1304,9 @@ export const {
     saveAdvancedServiceCustomValue,
     changeDelivery,
     saveDeliveryCity,
-    saveResultStep
+    clearDeliveryCityInput,
+    saveResultStep,
+    saveCalculateResult
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;
