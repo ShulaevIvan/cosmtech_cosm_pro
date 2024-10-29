@@ -90,8 +90,8 @@
 }
 .quiz-content-wrap-aimate {
     opacity: 0;
-    transition: fade-in 0.5s ease;
-    animation: quiz_forward_opacity 0.8s forwards;
+    transition: fade-in 1s ease-in;
+    animation: quiz_forward_opacity 1s forwards;
 }
 .quiz-content-wrap label {
     font-size: 18px;
@@ -431,8 +431,9 @@ quiz-package-item-size-wrap:hover::before {
 }
 .quantity-description-wrap .quiz-description-text {
     padding: 0 40px;
+    margin: 0;
     text-align: center;
-    max-width: 50%;
+    max-width: 80%;
 }
 .qnt-apply-wrap {
     display: flex;
@@ -470,7 +471,6 @@ quiz-package-item-size-wrap:hover::before {
     padding: 10px;
 }
 .quiz-description-text {
-    margin: 5px 0;
     font-size: 14px;
     justify-content: center;
     padding: 0 10px;

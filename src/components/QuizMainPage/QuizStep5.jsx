@@ -10,7 +10,6 @@ const QuizStep5 = (props) => {
     const inputPhoneRef = useRef(null);
     const inputMailRef = useRef(null);
     const sizeResult = props.getSizeValue();
-    console.log(quizResult)
 
     useEffect(() => {
         props.calculate();
@@ -103,12 +102,16 @@ const QuizStep5 = (props) => {
                         </p>
                     </div>
                     <div className="quiz-result-table-wrap">
+                        
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
                                 <h4>Ожидаемое время производства</h4>
                             </div>
                             <div className="quiz-result-value">
-                                {`с ${quizResult.calculateResult.dateStart} по ${quizResult.calculateResult.dateEnd}`}
+                                {quizResult.calculateResult.dateStart !== quizResult.calculateResult.dateEnd ? 
+                                    `с ${quizResult.calculateResult.dateStart} по ${quizResult.calculateResult.dateEnd}` 
+                                    : `комментарий учтен (расчет через запрос)` 
+                                }
                             </div>
                         </div>
                         <div className="quiz-result-value-row">
@@ -124,7 +127,9 @@ const QuizStep5 = (props) => {
                                 <h4>Тип упаковки</h4>
                             </div>
                             <div className="quiz-result-value">
-                                {`${quizResult.package.name} ${quizResult.package.size} ml`}
+                                {sizeResult && sizeResult.minValue ? 
+                                    `${quizResult.package.name} ${quizResult.package.size} ml` 
+                                        : `(свой вариант) расчет через запрос`}
                             </div>
                         </div>
                         <div className="quiz-result-value-row">
@@ -140,15 +145,20 @@ const QuizStep5 = (props) => {
                                 <h4>Приблизительная цена за 1шт: </h4>
                             </div>
                             <div className="quiz-result-value">
-                                {`~ ${quizResult.calculateResult.totalProductPricePerItem} руб за 1 шт с упаковкой`}
+                                {console.log(quizResult)}
+                                {sizeResult && sizeResult.minValue ? 
+                                    `~ ${quizResult.calculateResult.totalProductPricePerItem} руб за 1 шт с упаковкой`
+                                    : `~ ${quizResult.calculateResult.totalProductPricePerItem} руб за 1 шт без упаковки`}
                             </div>
                         </div>
                         <div className="quiz-result-value-row">
                             <div className="quiz-result-value-title">
                                <h4>Приблизительный вес партии</h4>
                             </div>
+                            
                             <div className="quiz-result-value">
-                                {`~ от ${sizeResult.minValue} кг до ${sizeResult.maxValue} кг`}
+                                {sizeResult && sizeResult.minValue ? `~ от ${sizeResult.minValue} кг до ${sizeResult.maxValue} кг` 
+                                    : '(свой вариант) расчет через запрос'}
                             </div>
                         </div>
                         {!stepData.delivery.find((deliveryItem) => deliveryItem.selected && deliveryItem.id === stepData.delivery.length) ? 
@@ -208,7 +218,9 @@ const QuizStep5 = (props) => {
                                 <h4>Приблизительная цена за {quizResult.quantity.value} шт: </h4>
                             </div>
                             <div className="quiz-result-value">
-                                {`~ ${quizResult.calculateResult.totalSum} руб`}
+                                {sizeResult && sizeResult.minValue ? 
+                                    `~ ${quizResult.calculateResult.totalSum} руб` 
+                                    : `без учета упаковки ~ ${quizResult.calculateResult.totalSum} руб`}
                             </div>
                         </div>
                     </div>
@@ -226,6 +238,10 @@ const QuizStep5 = (props) => {
                                     <div className="result-form-contacts-item-input">
                                         <input
                                             ref={inputNameRef}
+                                            className={quizResult.resultOrderForm.name.valid ? '' : 'input-err'}
+                                            onChange={() => props.validateQuizOrder(inputNameRef.current, 'name')}
+                                            onKeyDown={(e) => props.clearQuizInput(e, inputNameRef.current, 'name')}
+                                            value={quizResult.resultOrderForm.name.value}
                                             type="text"
                                             id="quiz-order-from-input-name"
                                         /> 
@@ -235,7 +251,11 @@ const QuizStep5 = (props) => {
                                     <label htmlFor="quiz-order-from-input-phone">Телефон для связи</label>
                                     <div className="result-form-contacts-item-input">
                                         <input
-                                            ref={inputPhoneRef} 
+                                            ref={inputPhoneRef}
+                                            className={quizResult.resultOrderForm.phone.valid ? '' : 'input-err'}
+                                            onChange={() => props.validateQuizOrder(inputPhoneRef.current, 'phone')}
+                                            onKeyDown={(e) => props.clearQuizInput(e, inputNameRef.current, 'phone')}
+                                            value={quizResult.resultOrderForm.phone.value}
                                             type="text"
                                             id="quiz-order-from-input-phone"
                                         /> 
@@ -245,7 +265,11 @@ const QuizStep5 = (props) => {
                                     <label htmlFor="quiz-order-from-input-email">Email для ответа</label>
                                     <div className="result-form-contacts-item-input">
                                         <input
-                                            ref={inputMailRef}  
+                                            ref={inputMailRef}
+                                            className={quizResult.resultOrderForm.email.valid ? '' : 'input-err'}
+                                            onChange={() => props.validateQuizOrder(inputMailRef.current, 'email')}
+                                            onKeyDown={(e) => props.clearQuizInput(e, inputNameRef.current, 'email')}
+                                            value={quizResult.resultOrderForm.email.value}
                                             type="email"
                                             id="quiz-order-from-input-email"
                                         /> 
@@ -258,9 +282,10 @@ const QuizStep5 = (props) => {
                         </div>
                         <div className="result-form-get-contacts-send-wrap">
                             <button 
-                                className={stepData.delivery.find((deliveryItem) => deliveryItem.selected) ? 
+                                className={props.checkFormInputs() ? 
                                     "result-form-get-contacts-send-btn" : "result-form-get-contacts-send-btn btnDisabled"
                                 }
+                                onClick={props.sendQuizOrderHandler}
                             >Отправить запрос</button>
                         </div>
                     </div>

@@ -29,7 +29,9 @@ import {
     saveDeliveryCity,
     saveResultStep,
     getDeliveryCity,
-    saveCalculateResult
+    saveCalculateResult,
+    saveQuizOrderInput,
+    saveQuizUserdata
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -238,17 +240,40 @@ const QuizMainPage = (props) => {
     };
 
     const calculateResult = () => {
-        const conditionsPrice = Number(quizState.quizResult.conditions.price);
-        const deadlineModifer = Number(quizState.quizResult.deadLine.ratio);
-        const deadLineMaxDays = Number(quizState.quizResult.deadLine.maxDays);
-        const packagePricePerItem = Number(quizState.quizResult.package.price);
-        const productPricePerItem = Number(quizState.quizResult.product.price);
-        const totalQuantity = Number(quizState.quizResult.quantity.value);
-        const productItemSum = (packagePricePerItem + productPricePerItem);
-        const allProductSum = ((productItemSum * totalQuantity) + conditionsPrice) * deadlineModifer;
-
         dispatch(saveCalculateResult());
     };
+
+    const validateQuizOrder = (inputRef, typeValue) => {
+        const value = inputRef.value;
+        dispatch(saveQuizOrderInput({inputValue: inputRef.value, inputType: typeValue}))
+    };
+
+    const sendQuizOrderHandler = (inputRef, inputType) => {
+        const value = inputRef.value;
+        dispatch(saveQuizOrderInput({inputValue: value, inputType: inputType, clearInput: false}));
+    };
+
+    const clearQuizOrderInputHandler = (e, inputRef, inputType) => {
+        if (e.key === 'Backspace') {
+            inputRef.value = '';
+            dispatch(saveQuizOrderInput({inputValue: '', inputType: inputType, clearInput: true}));
+        }
+    };
+
+    const checkInputsResultQuizForm = () => {
+        const nameValid = quizState.quizResult.resultOrderForm.name.valid;
+        const nameInputValue = quizState.quizResult.resultOrderForm.name.value;
+        const phoneValid = quizState.quizResult.resultOrderForm.phone.valid;
+        const phoneInputValue = quizState.quizResult.resultOrderForm.phone.value;
+        const emailValid = quizState.quizResult.resultOrderForm.email.valid;
+        const emailInputValue = quizState.quizResult.resultOrderForm.email.value;
+        if ((nameValid && nameInputValue) && (phoneValid && phoneInputValue) && (emailValid && emailInputValue)) {
+            dispatch(saveQuizUserdata({status: true}));
+            return true;
+        }
+        // dispatch(saveQuizUserdata({status: false}));
+        return false;
+    }
 
     useEffect(() => {
         const stepData = findStep(quizState.currentStep);
@@ -362,6 +387,10 @@ const QuizMainPage = (props) => {
                                         deliveryCityHandler={saveDeliveryCityHandler}
                                         deliveryCityClearHandler={clearDeliveryCityHandler}
                                         calculate={calculateResult}
+                                        validateQuizOrder={validateQuizOrder}
+                                        clearQuizInput={clearQuizOrderInputHandler}
+                                        checkFormInputs ={checkInputsResultQuizForm}
+                                        sendQuizOrderHandler={sendQuizOrderHandler}
                                     />
                                 : null
                             }

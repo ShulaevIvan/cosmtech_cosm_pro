@@ -1,4 +1,7 @@
 import { createSlice, createAction, createAsyncThunk, current } from "@reduxjs/toolkit";
+import validateName from '../../functions/validateName';
+import validateMail from '../../functions/validateMail';
+import validatePhone from '../../functions/validatePhone';
 import demoImg from '../../img/quizImages/200x275.png';
 import quizCheckbox from '../../img/quizImages/quiz_checkbox.svg';
 import quizCheckboxActive from '../../img/quizImages/quiz_checkbox-active.svg';
@@ -55,6 +58,12 @@ const initialState = {
             dateStart: '',
             dateEnd: '',
         },
+        resultOrderForm: {
+            name: { value: '', valid: true },
+            phone: { value: '', valid: true },
+            email: { value: '', valid: true },
+            sendData: {}
+        }
     },
     quizMenu: [
         {
@@ -501,7 +510,6 @@ export const getDeliveryCity = createAsyncThunk(
         });
 
         const data = await response.json();
-        console.log(data)
         return data;
     }
 );
@@ -1039,11 +1047,10 @@ const qizSlice = createSlice({
             });
         },
         saveCalculateResult(state, action) {
-
             const date = new Date();
             const conditionsPrice = Number(state.quizResult.conditions.price);
-            const deadlineModifer = Number(state.quizResult.deadLine.ratio);
-            const packagePricePerItem = Number(state.quizResult.package.price);
+            const deadlineModifer = isNaN(state.quizResult.deadLine.ratio) ? 1 : Number(state.quizResult.deadLine.ratio);
+            const packagePricePerItem = isNaN(state.quizResult.package.price) ? 0 : Number(state.quizResult.package.price);
             const productPricePerItem = Number(state.quizResult.product.price);
             const deadLineMaxDays = Number(state.quizResult.deadLine.maxDays);
             const totalQuantity = Number(state.quizResult.quantity.value);
@@ -1234,6 +1241,53 @@ const qizSlice = createSlice({
                 };
             }
 
+        },
+        saveQuizOrderInput(state, action) {
+            const { inputValue, inputType, clearInput } = action.payload;
+            let validateInput;
+            if (inputType === 'name' && !clearInput) validateInput =  validateName(inputValue) ? true : false;
+            else if (inputType === 'email' && !clearInput) validateInput = validateMail(inputValue) ? false : true;
+            else if (inputType === 'phone' && !clearInput) validateInput = validatePhone(inputValue).length === 18 ? true : false;
+            if (inputValue && inputType && !clearInput) {
+                state.quizResult.resultOrderForm = {
+                    ...state.quizResult.resultOrderForm,
+                    [inputType]: {
+                        value: inputType === 'phone' ? validatePhone(inputValue) : inputValue,
+                        valid: validateInput
+                    },
+                }
+            }
+            else if (clearInput) {
+                state.quizResult.resultOrderForm = {
+                    ...state.quizResult.resultOrderForm,
+                    [inputType]: {
+                        value: '',
+                        valid: false
+                    },
+                }
+            }
+        },
+        saveQuizUserdata(state, action) {
+            const { status } = action.payload;
+       
+            const totalQuantity = state.calculateResult.totalQuantity;
+            const totalProductWeight = state.calculateResult.totalProductWeight;
+            const totalDeliveryRange = state.calculateResult.totalDeliveryRange;
+            const totalDeliveryPrice = state.calculateResult.totalDeliveryPrice;
+            const productionDate = `${state.calculateResult.dateStart} - ${state.calculateResult.dateEnd}`;
+            const totalSum = state.calculateResult.totalSum;
+            const clientBudget = state.quizResult.conditions.budget;
+            const additionalService = state.quizResult.conditions.service;
+            const additionalServicePrice = state.quizResult.conditions.price;
+            const deadLineName = state.quizResult.deadLine.name;
+            const productCategory = state.quizResult.product.category;
+            const productName = state.quizResult.product.name;
+
+            const customTech = state.quizResult.conditions.customTechFile;
+            const customPackageSize = state.quizResult.package.size;
+            const customPackageFile = state.quizResult.package.file;
+            
+
         }
     },
     extraReducers: (builder) => {
@@ -1306,7 +1360,9 @@ export const {
     saveDeliveryCity,
     clearDeliveryCityInput,
     saveResultStep,
-    saveCalculateResult
+    saveCalculateResult,
+    saveQuizOrderInput,
+    saveQuizUserdata,
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;
