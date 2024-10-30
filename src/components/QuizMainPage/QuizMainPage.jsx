@@ -31,7 +31,9 @@ import {
     getDeliveryCity,
     saveCalculateResult,
     saveQuizOrderInput,
-    saveQuizUserdata
+    saveQuizUserdata,
+    saveQuizOrderSize,
+    sendQuizOrder
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -223,7 +225,7 @@ const QuizMainPage = (props) => {
     };
 
     const loadCustomPackageFileFormHandler = async (e, text, filenameRef) => {
-        if (!e.target || e.target.fiels && e.target.files[0].length === 0) return;
+        if ((!e.target || e.target.fiels) && e.target.files[0].length === 0) return;
         const file = e.target.files[0];
         await fileToBase64(file)
         .then((data) => {
@@ -241,16 +243,21 @@ const QuizMainPage = (props) => {
 
     const calculateResult = () => {
         dispatch(saveCalculateResult());
+        dispatch(saveQuizUserdata());
     };
 
     const validateQuizOrder = (inputRef, typeValue) => {
-        const value = inputRef.value;
         dispatch(saveQuizOrderInput({inputValue: inputRef.value, inputType: typeValue}))
     };
 
-    const sendQuizOrderHandler = (inputRef, inputType) => {
-        const value = inputRef.value;
-        dispatch(saveQuizOrderInput({inputValue: value, inputType: inputType, clearInput: false}));
+    const sendQuizOrderHandler = async () => {
+        return new Promise((resolve, reject) => {
+            const getSize = getResultSizeValue();
+            resolve(dispatch(saveQuizOrderSize({minWeight: getSize.minValue, maxWeight: getSize.maxValue})));
+        })
+        .then(() => {
+            dispatch(sendQuizOrder(quizState.quizResult.resultOrderForm));
+        });
     };
 
     const clearQuizOrderInputHandler = (e, inputRef, inputType) => {
@@ -267,13 +274,9 @@ const QuizMainPage = (props) => {
         const phoneInputValue = quizState.quizResult.resultOrderForm.phone.value;
         const emailValid = quizState.quizResult.resultOrderForm.email.valid;
         const emailInputValue = quizState.quizResult.resultOrderForm.email.value;
-        if ((nameValid && nameInputValue) && (phoneValid && phoneInputValue) && (emailValid && emailInputValue)) {
-            dispatch(saveQuizUserdata({status: true}));
-            return true;
-        }
-        // dispatch(saveQuizUserdata({status: false}));
+        if ((nameValid && nameInputValue) && (phoneValid && phoneInputValue) && (emailValid && emailInputValue)) return true;
         return false;
-    }
+    };
 
     useEffect(() => {
         const stepData = findStep(quizState.currentStep);

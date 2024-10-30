@@ -1214,3 +1214,12 @@ quiz-package-item-size-wrap:hover::before {
         visibility: visible;
     }
 }
+/* .test_title {
+        margin: 0;
+        background-color: #00458B;
+        color: white;
+        padding: 5px;
+        margin: 0 0 0 6px;
+        transform: skew(-14deg);
+        transform: -14deg;
+} */

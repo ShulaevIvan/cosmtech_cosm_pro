@@ -49,6 +49,7 @@ const initialState = {
         },
         calculateResult: {
             totalQuantity: 0,
+            totalWeight: 0,
             totalProductName: '',
             totalProductPricePerItem: 0,
             totalDeliveryPrice: 0,
@@ -507,6 +508,24 @@ export const getDeliveryCity = createAsyncThunk(
                 'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
                 'Content-Type': 'application/json',
             }
+        });
+
+        const data = await response.json();
+        return data;
+    }
+);
+
+export const sendQuizOrder = createAsyncThunk(
+    'api/quiz/',
+    async (sendData) => {
+        console.log(sendData)
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/quiz/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sendData)
         });
 
         const data = await response.json();
@@ -1074,7 +1093,7 @@ const qizSlice = createSlice({
                     dateStart: currentPrintDate,
                     dateEnd: endPrintDate,
                 }
-            }
+            };
         },
         validateStep(state) {
             const stepIndex = state.currentStep - 1;
@@ -1242,6 +1261,10 @@ const qizSlice = createSlice({
             }
 
         },
+        saveQuizOrderSize(state, action) {
+            const { minWeight, maxWeight } = action.payload;
+            state.quizResult.calculateResult.totalWeight = `от ${minWeight} - до ${maxWeight} кг`;
+        },
         saveQuizOrderInput(state, action) {
             const { inputValue, inputType, clearInput } = action.payload;
             let validateInput;
@@ -1267,27 +1290,56 @@ const qizSlice = createSlice({
                 }
             }
         },
-        saveQuizUserdata(state, action) {
-            const { status } = action.payload;
-       
-            const totalQuantity = state.calculateResult.totalQuantity;
-            const totalProductWeight = state.calculateResult.totalProductWeight;
-            const totalDeliveryRange = state.calculateResult.totalDeliveryRange;
-            const totalDeliveryPrice = state.calculateResult.totalDeliveryPrice;
-            const productionDate = `${state.calculateResult.dateStart} - ${state.calculateResult.dateEnd}`;
-            const totalSum = state.calculateResult.totalSum;
+        saveQuizUserdata(state) {
+            const totalQuantity = state.quizResult.calculateResult.totalQuantity;
+            const totalProductWeight = state.quizResult.calculateResult.totalWeight;
+            const totalDeliveryRange = state.quizResult.calculateResult.totalDeliveryRange;
+            const totalDeliveryPrice = state.quizResult.calculateResult.totalDeliveryPrice;
+            const productionDate = `${state.quizResult.calculateResult.dateStart} - ${state.quizResult.calculateResult.dateEnd}`;
+            const totalSum = state.quizResult.calculateResult.totalSum;
             const clientBudget = state.quizResult.conditions.budget;
             const additionalService = state.quizResult.conditions.service;
             const additionalServicePrice = state.quizResult.conditions.price;
             const deadLineName = state.quizResult.deadLine.name;
             const productCategory = state.quizResult.product.category;
+            const productPricePerItem = state.quizResult.calculateResult.totalProductPricePerItem
             const productName = state.quizResult.product.name;
+            const deliverySelected = state.qizSteps.find((stepItem) => stepItem.stepNum === 5);
+            const customTech = state.quizResult.conditions.customTechFile ? state.quizResult.conditions.customTechFile : 'empty';
+            const packageSize = `${state.quizResult.package.name} (${state.quizResult.package.size})`;
+            const customPackageFile = state.quizResult.package.file ? state.quizResult.package.file : 'empty';
 
-            const customTech = state.quizResult.conditions.customTechFile;
-            const customPackageSize = state.quizResult.package.size;
-            const customPackageFile = state.quizResult.package.file;
-            
-
+            state.quizResult.resultOrderForm = {
+                ...state.quizResult.resultOrderForm,
+                sendData: {
+                    ...state.quizResult.resultOrderForm.sendData,
+                    orderProduct: productName,
+                    orderProductPricePerItem: productPricePerItem,
+                    orderProductCategory: productCategory,
+                    orderPackage: packageSize,
+                    clientBudget: `${clientBudget}`,
+                    orderDeadline: deadLineName,
+                    orderService: additionalService,
+                    orderServicePrice: additionalServicePrice,
+                    orderProductionDate: productionDate,
+                    orderQnt: totalQuantity,
+                    orderWeight: totalProductWeight,
+                    orderDeliveryRange: totalDeliveryRange,
+                    orderDeliveryPrice: totalDeliveryPrice,
+                    orderCalcSum: totalSum,
+                    deliveryPricePerPoint:  deliverySelected.delivery.find((item) => item.selected).price,
+                    deliveryPriceSum: deliverySelected.deliveryCityForm.totalPrice,
+                    customDelivery: deliverySelected && deliverySelected.deliveryCityForm.cityData ? {
+                        from: 'Санкт-Петербург',
+                        to: deliverySelected.deliveryCityForm.cityData.name,
+                        range: deliverySelected.deliveryCityForm.cityData.range,
+                        population: deliverySelected.deliveryCityForm.cityData.population,
+                        subject: deliverySelected.deliveryCityForm.cityData.subject,
+                    } : 'empty',
+                    customTz: customTech,
+                    customPackage: customPackageFile,
+                },
+            }
         }
     },
     extraReducers: (builder) => {
@@ -1327,7 +1379,20 @@ const qizSlice = createSlice({
                 }
                 return quizStep;
             });
-        });
+        })
+        // .addCase(sendQuizOrder.pending, (state) => {
+        //     state.quizResult.resultOrderForm = {
+        //         ...state.quizResult.resultOrderForm,
+        //         name: { value: '', valid: true },
+        //         phone: { value: '', valid: true },
+        //         email: { value: '', valid: true },
+        //     }
+        // })
+        .addCase(sendQuizOrder.fulfilled, (state, action) => {
+            const { status } = action.payload;
+            console.log(status)
+            console.log('end')
+        })
 
     }
 });
@@ -1363,6 +1428,7 @@ export const {
     saveCalculateResult,
     saveQuizOrderInput,
     saveQuizUserdata,
+    saveQuizOrderSize
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;

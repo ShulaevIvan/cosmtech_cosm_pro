@@ -13,7 +13,11 @@ const QuizStep5 = (props) => {
 
     useEffect(() => {
         props.calculate();
-    }, [stepData.deliveryCityForm]);
+    }, [stepData.deliveryCityForm,]);
+
+    useEffect(() => {
+        props.calculate();
+    }, [])
 
     useEffect(() => {
         if (stepData.deliveryCityForm.cityData) {
@@ -145,7 +149,6 @@ const QuizStep5 = (props) => {
                                 <h4>Приблизительная цена за 1шт: </h4>
                             </div>
                             <div className="quiz-result-value">
-                                {console.log(quizResult)}
                                 {sizeResult && sizeResult.minValue ? 
                                     `~ ${quizResult.calculateResult.totalProductPricePerItem} руб за 1 шт с упаковкой`
                                     : `~ ${quizResult.calculateResult.totalProductPricePerItem} руб за 1 шт без упаковки`}
@@ -197,6 +200,7 @@ const QuizStep5 = (props) => {
                                                 <h4>Приблизительное Расстояние</h4>
                                             </div>
                                             <div className="quiz-result-value">
+                                                {console.log(stepData.deliveryCityForm)}
                                                 {`~ ${stepData.deliveryCityForm.cityData.range} км`}
                                             </div>
                                         </div>
@@ -278,7 +282,8 @@ const QuizStep5 = (props) => {
                             </div>
                         </form>
                         <div className="result-form-get-contacts-description">
-                            Данные по проекту прикреплены
+                            <span>Данные по проекту прикреплены</span>
+                            <span className="result-form-get-contacts-description-icon">icon</span>
                         </div>
                         <div className="result-form-get-contacts-send-wrap">
                             <button 
