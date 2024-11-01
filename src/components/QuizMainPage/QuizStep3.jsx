@@ -15,7 +15,6 @@ const QuizStep3 = (props) => {
     }, [stepData.package, stepData.customPackage, stepData.customPackage.fieldValid]);
 
 
-
     return (
         <React.Fragment>
             <div className="quiz-package-wrap">

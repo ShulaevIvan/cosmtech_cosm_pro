@@ -776,7 +776,6 @@ const qizSlice = createSlice({
         },
         saveCustomPackageField(state, action) {
             const { textData, fileData } = action.payload;
-            const checkCustomPackageFile = state.qizSteps[state.currentStep - 1].customPackage.fieldFile;
             const checkFile = state.qizSteps.find((item) => item.customPackage);
             if (/^\s*$/.test(textData) && !fileData.file) return;
 
@@ -787,8 +786,7 @@ const qizSlice = createSlice({
                         customPackage: {
                             ...quizStep.customPackage,
                             fieldValue: textData ? textData : '',
-                            fieldFile: fileData && !checkCustomPackageFile && fileData.file ? 
-                                fileData : checkCustomPackageFile ? checkCustomPackageFile : '',
+                            fieldFile: fileData && fileData.file ? fileData : '',
                             fieldValid: true
                         },
                         package: initialState.qizSteps[2].package,
@@ -1336,14 +1334,10 @@ const qizSlice = createSlice({
                     deliveryPrice: deliveryObj.deliveryCityForm.totalPrice,
                     customDelivery: deliveryObj && deliveryObj.delivery.find((item) => item.selected).id === deliveryObj.delivery.length  ? {
                             from: 'Санкт-Петербург',
-                            to: deliveryObj.deliveryCityForm.cityData.name ? 
-                                deliveryObj.deliveryCityForm.cityData.name : '',
-                            range: deliveryObj.deliveryCityForm.cityData.range ? 
-                                deliveryObj.deliveryCityForm.cityData.range : 0,
-                            population: deliveryObj.deliveryCityForm.cityData.population ? 
-                                deliveryObj.deliveryCityForm.cityData.population : 0,
-                            subject: deliveryObj.deliveryCityForm.cityData.subject ? 
-                                deliveryObj.deliveryCityForm.cityData.subject : '',
+                            to: deliveryObj.deliveryCityForm.cityData.name,
+                            range: deliveryObj.deliveryCityForm.cityData.range,
+                            population: deliveryObj.deliveryCityForm.cityData.population,
+                            subject: deliveryObj.deliveryCityForm.cityData.subject,
                         } : 'empty',
                     customTz: customTech,
                     customPackage: customPackageFile,

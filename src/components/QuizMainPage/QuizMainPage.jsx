@@ -191,6 +191,7 @@ const QuizMainPage = (props) => {
             inputRef.value = '';
             return;
         }
+        console.log(e.target.value)
         dispatch(saveDeliveryCity({cityValue: inputRef.value}))
         
     };
@@ -236,12 +237,15 @@ const QuizMainPage = (props) => {
                 dispatch(saveCustomPackageField({textData: text, fileData: data}))
                 return;
             }
+
             dispatch(saveCustomPackageField({textData: '', fileData: ''}));
             filenameRef.textContent = '';
         });
     };
 
     const calculateResult = () => {
+        const getSize = getResultSizeValue();
+        dispatch(saveQuizOrderSize({minWeight: getSize.minValue, maxWeight: getSize.maxValue}));
         dispatch(saveCalculateResult());
         dispatch(saveQuizUserdata());
     };
@@ -309,7 +313,9 @@ const QuizMainPage = (props) => {
                                         quizMenuItem.active ? 
                                             "quiz-controlpanel-item quiz-controlpanel-item-active": "quiz-controlpanel-item"
                                         }
-                                    >{quizMenuItem.name}</div>
+                                    >
+                                        <span className="quiz-controlpanel-item-name">{quizMenuItem.name}</span>
+                                    </div>
                                 </React.Fragment>
                             )
                         })}

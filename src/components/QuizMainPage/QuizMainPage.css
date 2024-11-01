@@ -26,7 +26,6 @@
     top: 0%;
     background-color: white;
     border: 1px solid #00458B;
-    padding: 10px;
     border-radius: 10px;
     animation-duration: 0.5s;
     animation-name: grow;
@@ -61,6 +60,11 @@
     justify-content: center;
     align-items: center;
 }
+.quiz-controlpanel-item-name {
+    max-width: 200px;
+    text-align: center;
+    padding: 0 20px;
+}
 .quiz-controlpanel-item-active {
     color: white;
     background-color: #3FD2C7;
@@ -82,7 +86,7 @@
     min-height: 720px;
     max-width: 75%;
     min-width: 75%;
-    padding: 10px 10px 10px 0;
+    padding: 20px 10px;
     overflow: hidden;
     position: relative;
 
@@ -157,8 +161,9 @@
     height: 100%;
     max-width: 700px;
     max-height: 650px;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    overflow-y: hidden;
     /* margin-bottom: 20px; */
 }
 .quiz-products-item {
@@ -173,14 +178,16 @@
     max-height: 333px; */
     height: 50%;
     width: 30%;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 17px;
     cursor: pointer;
     position: relative;
     border: 1px solid transparent;
     opacity: 1;
     transform: translateX(-150%);
     animation: quiz-product-types-in 1s forwards;
+}
+.quiz-products-item:nth-child(n+4) {
+    margin-bottom: 0;
 }
 .quiz-products-item img {
     max-width: 100%;
@@ -350,19 +357,19 @@ quiz-package-item-size-wrap:hover::before {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 100%;
-    background-color: #fff;
+    width: 94.5%;
+    background-color: #F5F5F5;
     border-radius: 10px;
-    padding: 20px 0;
+    padding: 20px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
     margin: 5% 0;
 }
 #quiz-qnt {
+    color:#00458B;
     margin: 0 10px;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
 }
-.quantity-title-wrap,
-.quantity-value-wrap {
+.quantity-title-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -370,6 +377,14 @@ quiz-package-item-size-wrap:hover::before {
     align-items: center;
     width: 100%;
     margin-bottom: 10px;
+}
+.quantity-value-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 .quantity-title-wrap h3 {
     margin: 0;
@@ -397,7 +412,6 @@ quiz-package-item-size-wrap:hover::before {
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 10px;
 }
 .quantity-quiz-range {
     width: 100%;
@@ -434,6 +448,9 @@ quiz-package-item-size-wrap:hover::before {
     margin: 0;
     text-align: center;
     max-width: 80%;
+}
+.quiz-description-text p {
+    margin: 5px 0;
 }
 .qnt-apply-wrap {
     display: flex;
@@ -473,7 +490,6 @@ quiz-package-item-size-wrap:hover::before {
 .quiz-description-text {
     font-size: 14px;
     justify-content: center;
-    padding: 0 10px;
     font-style: italic;
 }
 .quiz-description-text::before {
@@ -844,7 +860,7 @@ quiz-package-item-size-wrap:hover::before {
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    /* margin-bottom: 10px; */
+    margin-bottom: 10px;
 }
 .quiz-advanced-settings-delivery-wrap,
 .quiz-advanced-settings-services-wrap fieldset,
@@ -1000,7 +1016,6 @@ quiz-package-item-size-wrap:hover::before {
     max-width: 100%;
     margin-left: 10px;
     align-items: flex-end;
-    margin-bottom: 5px;
 }
 .quiz-advanced-settings-delivery-custom-field-row h3 {
     margin: 0;
@@ -1018,10 +1033,11 @@ quiz-package-item-size-wrap:hover::before {
 .quiz-result-wrap {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    max-height: 250px;
+    padding: 10px;
+    width: 97.5%;
+    max-height: 230px;
     overflow-y: scroll;
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 .quiz-result-title {
     display: flex;
@@ -1066,7 +1082,7 @@ quiz-package-item-size-wrap:hover::before {
 .quiz-result-value-title {
     display: flex;
     flex-wrap: wrap;
-    width: 45%;
+    width: 50%;
 }
 .quiz-result-value-title h4 {
     margin: 0 5px;
@@ -1075,7 +1091,7 @@ quiz-package-item-size-wrap:hover::before {
 .quiz-result-value {
     display: flex;
     flex-wrap: wrap;
-    width: 50%;
+    width: 47%;
     justify-content: flex-end;
 }
 .result-description {
@@ -1083,7 +1099,9 @@ quiz-package-item-size-wrap:hover::before {
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 10px;
+}
+.result-description p {
+    margin: 5px 0;
 }
 .quiz-advanced-settings-delivery-custom-field-wrap {
     display: flex;

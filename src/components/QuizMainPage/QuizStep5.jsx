@@ -13,18 +13,20 @@ const QuizStep5 = (props) => {
 
     useEffect(() => {
         props.calculate();
-    }, [stepData.deliveryCityForm,]);
+    }, [stepData.deliveryCityForm, stepData.delivery]);
 
     useEffect(() => {
         props.calculate();
     }, [])
 
     useEffect(() => {
-        if (stepData.deliveryCityForm.cityData) {
+        if (stepData.deliveryCityForm.cityData && stepData.deliveryCityForm.cityData.value) {
+            deliverySaveBtnRef.current.value = '';
             deliverySaveBtnRef.current.className = 'btnDisabled';
+
             return;
         }
-    }, [stepData.deliveryCityForm.cityData]);
+    }, [stepData.deliveryCityForm.cityData, stepData.deliveryCityForm]);
     
     useEffect(() => {
         if (!deliveryCityRef.current || !deliveryCityRef.current.value) return;
@@ -85,7 +87,9 @@ const QuizStep5 = (props) => {
                             <div className="quiz-advanced-settings-delivery-custom-field-btn">
                                 <button
                                     ref={deliverySaveBtnRef}
-                                    className={stepData.deliveryCityForm.value ? '' : 'btnDisabled'}
+                                    className={stepData.deliveryCityForm.value && !stepData.deliveryCityForm.cityData.name  ? 
+                                        '' : stepData.deliveryCityForm.cityData ? 'btnDisabled' : ''
+                                    }
                                     onClick={() => props.deliveryCityHandler(deliveryCityRef.current.value)}
                                 >Применить</button>
                             </div>
@@ -187,7 +191,9 @@ const QuizStep5 = (props) => {
                                                 <h4>Доставка</h4>
                                             </div>
                                             <div className="quiz-result-value">
-                                                {`Санкт-Петербург  => ${stepData.deliveryCityForm.value}`}
+                                                {`Санкт-Петербург  => 
+                                                    ${stepData.deliveryCityForm.cityData.name ? stepData.deliveryCityForm.cityData.name : ''}`
+                                                }
                                             </div>
                                         </div>
                                     </React.Fragment>
@@ -197,16 +203,15 @@ const QuizStep5 = (props) => {
                                     <React.Fragment>
                                         <div className="quiz-result-value-row">
                                             <div className="quiz-result-value-title">
-                                                <h4>Приблизительное Расстояние</h4>
+                                                <h4>Приблизительное Расстояние (по дороге)</h4>
                                             </div>
                                             <div className="quiz-result-value">
-                                                {console.log(stepData.deliveryCityForm)}
                                                 {`~ ${stepData.deliveryCityForm.cityData.range} км`}
                                             </div>
                                         </div>
                                         <div className="quiz-result-value-row">
                                             <div className="quiz-result-value-title">
-                                                <h4>Приблизительная стоимость доставки</h4>
+                                                <h4>Приблизительная стоимость доставки (авто)</h4>
                                             </div>
                                             <div className="quiz-result-value">
                                                 {`~ ${stepData.deliveryCityForm.totalPrice} руб`}
@@ -231,7 +236,7 @@ const QuizStep5 = (props) => {
                 </div>
                 <div className="result-get-contacts-wrap">
                     <div className="result-form-get-contacts-title">
-                        <h3>Запросить точный расчет или КП</h3>
+                        <h3>Получить точный расчет (КП)</h3>
                     </div>
                    
                     <div className="result-form-get-contacts-wrap">
