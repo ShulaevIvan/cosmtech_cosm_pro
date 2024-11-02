@@ -1349,8 +1349,24 @@ const qizSlice = createSlice({
                     customPackage: customPackageFile,
                 },
             }
-        }
+        },
+        selectQuizMenu(state, action) {
+            const { menuId } = action.payload;
+            state.quizMenu = state.quizMenu.map((quizMenuItem) => {
+                if (quizMenuItem.id === menuId) {
+                    return {
+                        ...quizMenuItem,
+                        active: true
+                    }
+                }
+                return {
+                    ...quizMenuItem,
+                    active: false
+                }
+            });
+        },
     },
+   
     extraReducers: (builder) => {
         builder
         .addCase(resetQuizState, () => initialState)
@@ -1437,7 +1453,8 @@ export const {
     saveCalculateResult,
     saveQuizOrderInput,
     saveQuizUserdata,
-    saveQuizOrderSize
+    saveQuizOrderSize,
+    selectQuizMenu
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;

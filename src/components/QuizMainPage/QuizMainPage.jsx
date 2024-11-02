@@ -33,13 +33,16 @@ import {
     saveQuizOrderInput,
     saveQuizUserdata,
     saveQuizOrderSize,
-    sendQuizOrder
+    sendQuizOrder,
+    selectQuizMenu
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
 import QuizStep3 from "./QuizStep3";
 import QuizStep4 from "./QuizStep4";
 import QuizStep5 from "./QuizStep5";
+import QuizQuestion from "./QuizQuestion";
+import QuizSendTz from "./QuizSendTz"
 import fileToBase64 from "../../functions/fileToBase64";
 
 const QuizMainPage = (props) => {
@@ -48,6 +51,10 @@ const QuizMainPage = (props) => {
     const quizWrapRef = useRef(null);
     const quizState = useSelector((state) => state.quiz);
     const popupWrapRef = useRef(null);
+
+    const selectQuizMenuHandler = (quizMenuItem) => {
+        dispatch(selectQuizMenu({menuId: quizMenuItem.id}));
+    };
 
     const nextStepHandler = async (param) => {
         return new Promise((resolve, reject) => {
@@ -309,9 +316,11 @@ const QuizMainPage = (props) => {
                         {quizState.quizMenu.map((quizMenuItem) => {
                             return (
                                 <React.Fragment key={quizMenuItem.id}>
-                                    <div className={
-                                        quizMenuItem.active ? 
-                                            "quiz-controlpanel-item quiz-controlpanel-item-active": "quiz-controlpanel-item"
+                                    <div
+                                        onClick={() => selectQuizMenuHandler(quizMenuItem)} 
+                                        className={
+                                            quizMenuItem.active ? 
+                                                "quiz-controlpanel-item quiz-controlpanel-item-active": "quiz-controlpanel-item"
                                         }
                                     >
                                         <span className="quiz-controlpanel-item-name">{quizMenuItem.name}</span>
@@ -336,7 +345,7 @@ const QuizMainPage = (props) => {
                             </div>
                         </div>
                         <div className="quiz-mainpage-content-wrap">
-                            {quizState.currentStep === 1 ? 
+                            {quizState.currentStep === 1 && quizState.quizMenu.find((item) => item.id === 1 && item.active) ? 
                                 <QuizStep1 
                                     stepData={findStep(1)} 
                                     productSelectHandler={productSelectHandler}
@@ -344,7 +353,7 @@ const QuizMainPage = (props) => {
                                     productPageHandler = {productPageSelectHandler}
                                 /> 
                             : null}
-                            {quizState.currentStep === 2 ? 
+                            {quizState.currentStep === 2 && quizState.quizMenu.find((item) => item.id === 1 && item.active) ? 
                                 <QuizStep2 
                                     stepData={findStep(2)}
                                     qntHandler={quantityBlockHandler}
@@ -356,7 +365,7 @@ const QuizMainPage = (props) => {
                                     validateStep={validateCurrentStep}
                                 /> 
                             : null}
-                            {quizState.currentStep === 3 ? 
+                            {quizState.currentStep === 3 && quizState.quizMenu.find((item) => item.id === 1 && item.active)? 
                                 <QuizStep3 
                                     stepData={findStep(3)}
                                     showCustomPackageHandler={showCustomPackageHandler}
@@ -371,7 +380,7 @@ const QuizMainPage = (props) => {
                                 /> 
                             : null}
                             {
-                                quizState.currentStep === 4 ? 
+                                quizState.currentStep === 4 && quizState.quizMenu.find((item) => item.id === 1 && item.active) ? 
                                     <QuizStep4
                                         stepData={findStep(4)}
                                         serviceChangeHandler={advancedServiceHandler}
@@ -386,7 +395,7 @@ const QuizMainPage = (props) => {
                                 : null
                             }
                             {
-                                quizState.currentStep === 5 ? 
+                                quizState.currentStep === 5 && quizState.quizMenu.find((item) => item.id === 1 && item.active) ? 
                                     <QuizStep5
                                         stepData={findStep(5)}
                                         quizResult={quizState.quizResult}
@@ -401,6 +410,16 @@ const QuizMainPage = (props) => {
                                         checkFormInputs ={checkInputsResultQuizForm}
                                         sendQuizOrderHandler={sendQuizOrderHandler}
                                     />
+                                : null
+                            }
+                            {
+                                quizState.quizMenu.find((item) => item.id === 2 && item.active) ? 
+                                    <QuizQuestion /> 
+                                : null
+                            }
+                            {
+                                quizState.quizMenu.find((item) => item.id === 3 && item.active) ?
+                                    <QuizSendTz /> 
                                 : null
                             }
                         </div>

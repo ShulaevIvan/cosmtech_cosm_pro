@@ -71,12 +71,12 @@
 }
 .quiz-controlpanel-item-active::after {
     content: '';
-    right: -20px; top: 25px;
+    right: -20px;
     width: 0; height: 0;
     border-style: solid;
     border-width: 10px;
-    border-color: transparent transparent transparent #3FD2C7;
     position: absolute;
+    border-color: transparent transparent transparent #3FD2C7;
 }
 .quiz-content-wrap {
     display: flex;
