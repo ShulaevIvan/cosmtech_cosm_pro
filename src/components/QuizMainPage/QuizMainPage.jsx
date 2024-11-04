@@ -34,7 +34,9 @@ import {
     saveQuizUserdata,
     saveQuizOrderSize,
     sendQuizOrder,
-    selectQuizMenu
+    selectQuizMenu,
+    quizQuestionSaveInputValue,
+    quizQuestionSelectCommunication
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -50,10 +52,17 @@ const QuizMainPage = (props) => {
     const stepTitle = useRef(null);
     const quizWrapRef = useRef(null);
     const quizState = useSelector((state) => state.quiz);
+    const quizQuestionState = useSelector((state) => state.quiz.quizQuestion);
     const popupWrapRef = useRef(null);
 
     const selectQuizMenuHandler = (quizMenuItem) => {
         dispatch(selectQuizMenu({menuId: quizMenuItem.id}));
+    };
+
+    const findActiveMenu = () => {
+        const activeMenu = quizState.quizMenu.find((item) => item.active);
+
+        return activeMenu;
     };
 
     const nextStepHandler = async (param) => {
@@ -289,12 +298,23 @@ const QuizMainPage = (props) => {
         return false;
     };
 
+    const quizQuestionInputHandler = (inputName, inputRef) => {
+        dispatch(quizQuestionSaveInputValue({inputName: inputName, inputValue: inputRef.value}));
+    };
+
+    const selectCommunicationTypeHandler = (selectValue) => {
+        dispatch(quizQuestionSelectCommunication({selectName: selectValue}));
+    };
+
     useEffect(() => {
         const stepData = findStep(quizState.currentStep);
-        if (stepData) {
+        const activeMenu = findActiveMenu();
+        if (stepData && activeMenu.id === 1) {
             stepTitle.current.textContent = stepData.stepTitle;
+            return;
         }
-    }, [quizState.currentStep]);
+        stepTitle.current.textContent = activeMenu.name;
+    }, [quizState.currentStep, quizState.quizMenu]);
 
     useEffect(() => {
         quizWrapRef.current.className = "quiz-content-wrap quiz-content-wrap-aimate"
@@ -345,7 +365,7 @@ const QuizMainPage = (props) => {
                             </div>
                         </div>
                         <div className="quiz-mainpage-content-wrap">
-                            {quizState.currentStep === 1 && quizState.quizMenu.find((item) => item.id === 1 && item.active) ? 
+                            {quizState.currentStep === 1 && findActiveMenu().id === 1 && findActiveMenu().active ? 
                                 <QuizStep1 
                                     stepData={findStep(1)} 
                                     productSelectHandler={productSelectHandler}
@@ -353,7 +373,7 @@ const QuizMainPage = (props) => {
                                     productPageHandler = {productPageSelectHandler}
                                 /> 
                             : null}
-                            {quizState.currentStep === 2 && quizState.quizMenu.find((item) => item.id === 1 && item.active) ? 
+                            {quizState.currentStep === 2 && findActiveMenu().id === 1 && findActiveMenu().active ? 
                                 <QuizStep2 
                                     stepData={findStep(2)}
                                     qntHandler={quantityBlockHandler}
@@ -365,7 +385,7 @@ const QuizMainPage = (props) => {
                                     validateStep={validateCurrentStep}
                                 /> 
                             : null}
-                            {quizState.currentStep === 3 && quizState.quizMenu.find((item) => item.id === 1 && item.active)? 
+                            {quizState.currentStep === 3 && findActiveMenu().id === 1 && findActiveMenu().active ? 
                                 <QuizStep3 
                                     stepData={findStep(3)}
                                     showCustomPackageHandler={showCustomPackageHandler}
@@ -380,7 +400,7 @@ const QuizMainPage = (props) => {
                                 /> 
                             : null}
                             {
-                                quizState.currentStep === 4 && quizState.quizMenu.find((item) => item.id === 1 && item.active) ? 
+                                quizState.currentStep === 4 && findActiveMenu().id === 1 && findActiveMenu().active ? 
                                     <QuizStep4
                                         stepData={findStep(4)}
                                         serviceChangeHandler={advancedServiceHandler}
@@ -395,7 +415,7 @@ const QuizMainPage = (props) => {
                                 : null
                             }
                             {
-                                quizState.currentStep === 5 && quizState.quizMenu.find((item) => item.id === 1 && item.active) ? 
+                                quizState.currentStep === 5 && findActiveMenu().id === 1 && findActiveMenu().active ? 
                                     <QuizStep5
                                         stepData={findStep(5)}
                                         quizResult={quizState.quizResult}
@@ -413,42 +433,49 @@ const QuizMainPage = (props) => {
                                 : null
                             }
                             {
-                                quizState.quizMenu.find((item) => item.id === 2 && item.active) ? 
-                                    <QuizQuestion /> 
+                                findActiveMenu().id === 2 && findActiveMenu().active ? 
+                                    <QuizQuestion
+                                        quizState={quizQuestionState}
+                                        quizFormInputHandler={quizQuestionInputHandler}
+                                        quizFormSelectHandler={selectCommunicationTypeHandler}
+                                    /> 
                                 : null
                             }
                             {
-                                quizState.quizMenu.find((item) => item.id === 3 && item.active) ?
+                                findActiveMenu().id === 3 && findActiveMenu().active ?
                                     <QuizSendTz /> 
                                 : null
                             }
                         </div>
-                        <div className="next-step-wrap">
-                            <div className="prev-step-btn-wrap">
-                                {quizState.showPrevStepBtn ? 
-                                    <span 
-                                        className="prev-step-btn"
-                                        onClick={() => nextStepHandler(-1)}
-                                    >{quizState.prevBtnText}</span> 
-                                : null}
-                            </div>
+                        {findActiveMenu().id === 1 && findActiveMenu().active ? 
+                            <div className="next-step-wrap">
+                                <div className="prev-step-btn-wrap">
+                                    {quizState.showPrevStepBtn ? 
+                                        <span 
+                                            className="prev-step-btn"
+                                            onClick={() => nextStepHandler(-1)}
+                                        >{quizState.prevBtnText}</span> 
+                                    : null}
+                                </div>
                             
-                            <div className={quizState.maxSteps === quizState.currentStep ? "next-step-btn-wrap-hidden" : "next-step-btn-wrap"}>
-                                <span 
-                                    className={
-                                        quizState.qizSteps.find((item) => item.stepValid && item.stepNum === quizState.currentStep) ? 
-                                            "next-step-btn" : "next-step-btn btnDisabled" 
-                                        }
-                                    onClick={() => nextStepHandler(1)}
-                                >{quizState.nextBtnText}</span>
-                            </div>
-                            <div className="step-counter-wrap">
-                                <div className="step-counter-value">
-                                    <span><span>Шаг:</span> {quizState.currentStep} / </span>
-                                    <span>{quizState.maxSteps}</span>
+                                <div className={quizState.maxSteps === quizState.currentStep ? "next-step-btn-wrap-hidden" : "next-step-btn-wrap"}>
+                                    <span 
+                                        className={
+                                            quizState.qizSteps.find((item) => item.stepValid && item.stepNum === quizState.currentStep) ? 
+                                                "next-step-btn" : "next-step-btn btnDisabled" 
+                                            }
+                                        onClick={() => nextStepHandler(1)}
+                                    >{quizState.nextBtnText}</span>
+                                </div>
+                                <div className="step-counter-wrap">
+                                    <div className="step-counter-value">
+                                        <span><span>Шаг:</span> {quizState.currentStep} / </span>
+                                        <span>{quizState.maxSteps}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        : null}
+                        
 
                     </div>
                 </div>

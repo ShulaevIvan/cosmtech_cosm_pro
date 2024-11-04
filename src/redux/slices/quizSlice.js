@@ -24,6 +24,7 @@ import packageTubes from '../../img/quizImages/tubes.png';
 import packageRollon from '../../img/quizImages/rolon.png';
 import packageDespencer from '../../img/quizImages/despencer.png';
 import packagePena from '../../img/quizImages/penatrans.png';
+import quizQuestFormBanner from '../../img/quizImages/form_question_banner.jpg';
 
 const initialState = {
     maxSteps: 5,
@@ -31,6 +32,68 @@ const initialState = {
     showPrevStepBtn: false,
     nextBtnText: 'Следующий шаг',
     prevBtnText: 'К предыдущему шагу',
+    quizQuestion: {
+        formBanner: {img: quizQuestFormBanner, alt: 'задать вопрос технологу Космотех'},
+        quizFormInputs: [
+            {
+                id: 1,
+                inputType: 'text',
+                inputTag: 'input',
+                inputName: 'name',
+                inputValue: '',
+                inputTitle: 'Имя',
+                placeholder: 'Ваше имя',
+                valid: true,
+            },
+            {
+                id: 2,
+                inputType: 'text',
+                inputTag: 'input',
+                inputName: 'phone',
+                inputValue: '',
+                inputTitle: 'Телефон',
+                placeholder: '8xxxxxxxxxx',
+                valid: true,
+            },
+            {
+                id: 3,
+                inputType: 'email',
+                inputTag: 'input',
+                inputName: 'email',
+                inputValue: '',
+                inputTitle: 'Email',
+                placeholder: 'demo@xxxx.ru..',
+                valid: true,
+            },
+            {
+                id: 4,
+                inputType: '',
+                inputTag: 'textarea',
+                inputName: 'comment',
+                inputValue: '',
+                inputTitle: 'Описание',
+                placeholder: 'Ваш вопрос',
+                valid: true,
+            }
+        ],
+        сommunicationMethods: [
+            {
+                id: 1,
+                value: 'email',
+                selected: true
+            },
+            {
+                id: 2,
+                value: 'Телефон',
+                selected: false
+            },
+            {
+                id: 3,
+                value: 'Мессаджеры',
+                selected: false
+            },
+        ]
+    },
     quizResult: {
         product: {
             id: '',
@@ -1365,6 +1428,34 @@ const qizSlice = createSlice({
                 }
             });
         },
+        quizQuestionSaveInputValue(state, action) {
+            const { inputName, inputValue } = action.payload;
+            state.quizQuestion.quizFormInputs = state.quizQuestion.quizFormInputs.map((formItem) => {
+                if (formItem.inputName === inputName) {
+                    return {
+                        ...formItem,
+                        value: inputValue,
+                    }
+                }
+                return formItem;
+            })
+        },
+        quizQuestionSelectCommunication(state, action) {
+            const { selectName } = action.payload;
+            state.quizQuestion.сommunicationMethods = state.quizQuestion.сommunicationMethods.map((comItem) => {
+                if (comItem.value === selectName) {
+                    return {
+                        ...comItem,
+                        selected: true
+                    }
+                }
+                return {
+                    ...comItem,
+                    selected: false
+                }
+            });
+
+        }
     },
    
     extraReducers: (builder) => {
@@ -1454,7 +1545,9 @@ export const {
     saveQuizOrderInput,
     saveQuizUserdata,
     saveQuizOrderSize,
-    selectQuizMenu
+    selectQuizMenu,
+    quizQuestionSaveInputValue,
+    quizQuestionSelectCommunication
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;
