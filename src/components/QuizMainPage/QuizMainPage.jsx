@@ -34,9 +34,10 @@ import {
     saveQuizUserdata,
     saveQuizOrderSize,
     sendQuizOrder,
+    sendQuizQuestionOrder,
     selectQuizMenu,
     quizQuestionSaveInputValue,
-    quizQuestionSelectCommunication
+    quizQuestionSelectCommunication,
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -302,8 +303,42 @@ const QuizMainPage = (props) => {
         dispatch(quizQuestionSaveInputValue({inputName: inputName, inputValue: inputRef.value}));
     };
 
+    const quizQuestionClearInput = (e, inputName, inputRef) => {
+        if (e.key === 'Backspace') {
+            inputRef.value = '';
+            dispatch(quizQuestionSaveInputValue({inputName: inputName, inputValue: inputRef.value}));
+            return;
+        }
+    };
+
     const selectCommunicationTypeHandler = (selectValue) => {
         dispatch(quizQuestionSelectCommunication({selectName: selectValue}));
+    };
+
+    const quizQuestionSendFormHandler = async () => {
+        return new Promise((resolve, reject) => {
+            const questionState = quizState.quizQuestion;
+            const questionName = questionState.quizFormInputs.find((item) => item.inputName === 'name');
+            const questionPhone = questionState.quizFormInputs.find((item) => item.inputName === 'phone');
+            const questionEmail = questionState.quizFormInputs.find((item) => item.inputName === 'email');
+            const questionComment = questionState.quizFormInputs.find((item) => item.inputName === 'comment');
+            const questionMethod = questionState.сommunicationMethods.find((item) => item.selected);
+            const sendData = {
+                name: questionName ? questionName.inputValue : '',
+                phone: questionPhone ? questionPhone.inputValue : '',
+                email: questionEmail ? questionEmail.inputValue : '',
+                comment: questionComment ? questionComment.inputValue : '',
+                communicationType : questionMethod.value,
+            };
+            resolve(sendData);
+        })
+        .then((data) => {
+            dispatch(sendQuizQuestionOrder(data));
+        });      
+    };
+
+    const resetQuizPartHandler = () => {
+        console.log('test')
     };
 
     useEffect(() => {
@@ -437,7 +472,9 @@ const QuizMainPage = (props) => {
                                     <QuizQuestion
                                         quizState={quizQuestionState}
                                         quizFormInputHandler={quizQuestionInputHandler}
+                                        quizFormClearInputHandler={quizQuestionClearInput}
                                         quizFormSelectHandler={selectCommunicationTypeHandler}
+                                        quizFormSendHandler={quizQuestionSendFormHandler}
                                     /> 
                                 : null
                             }

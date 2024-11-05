@@ -79,7 +79,7 @@ const initialState = {
         сommunicationMethods: [
             {
                 id: 1,
-                value: 'email',
+                value: 'Email',
                 selected: true
             },
             {
@@ -581,7 +581,6 @@ export const getDeliveryCity = createAsyncThunk(
 export const sendQuizOrder = createAsyncThunk(
     'api/quiz/',
     async (sendData) => {
-        console.log(sendData)
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/quiz/`, {
             method: 'POST',
             headers: {
@@ -595,6 +594,23 @@ export const sendQuizOrder = createAsyncThunk(
         return data;
     }
 );
+
+export const sendQuizQuestionOrder = createAsyncThunk(
+    'api/quiz/question',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/quiz/question/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sendData)
+        });
+        const data = await response.json();
+        console.log(data);
+        return data;
+    }
+)
 
 const qizSlice = createSlice({
     name: 'quizSlice',
@@ -1415,6 +1431,7 @@ const qizSlice = createSlice({
         },
         selectQuizMenu(state, action) {
             const { menuId } = action.payload;
+            state.quizQuestion = initialState.quizQuestion;
             state.quizMenu = state.quizMenu.map((quizMenuItem) => {
                 if (quizMenuItem.id === menuId) {
                     return {
@@ -1427,18 +1444,37 @@ const qizSlice = createSlice({
                     active: false
                 }
             });
+
         },
         quizQuestionSaveInputValue(state, action) {
             const { inputName, inputValue } = action.payload;
+            if (inputName === 'phone' && inputValue.length > 18) return;
+            let inputValid = false;
+            let validValue = ''
+            if (inputName === 'name' && isNaN(inputValue)) {
+                inputValid = validateName(inputValue);
+                validValue = inputValue;
+            }
+            else if (inputName === 'phone' && !isNaN(inputValue) && validatePhone(inputValue).length <= 18) {
+                
+                inputValid = validatePhone(inputValue).length === 18 ? true : false;
+                validValue = validatePhone(inputValue);
+            }
+            else if (inputName === 'email') {
+                inputValid = validateMail(inputValue) ? false : true;
+                validValue = inputValue;
+            }
+            
             state.quizQuestion.quizFormInputs = state.quizQuestion.quizFormInputs.map((formItem) => {
                 if (formItem.inputName === inputName) {
                     return {
                         ...formItem,
-                        value: inputValue,
+                        inputValue: inputName === 'comment' ? inputValue : validValue,
+                        valid: inputValid,
                     }
                 }
                 return formItem;
-            })
+            });
         },
         quizQuestionSelectCommunication(state, action) {
             const { selectName } = action.payload;
@@ -1454,7 +1490,6 @@ const qizSlice = createSlice({
                     selected: false
                 }
             });
-
         }
     },
    

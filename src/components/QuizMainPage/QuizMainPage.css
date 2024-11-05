@@ -936,7 +936,8 @@ quiz-package-item-size-wrap:hover::before {
 .quiz-deadline-custom-title-wrap label,
 .quiz-advanced-settings-delivery-custom-field-input label,
 .result-form-contacts-item label,
-.quiz-content-wrap label {
+.quiz-quistion-form-input-wrap label,
+.quiz-question-form-comment-wrap label {
     margin: 0;
     font-family: gothampro bold;
     color: #00458B;
@@ -1242,7 +1243,8 @@ quiz-package-item-size-wrap:hover::before {
     width: 30%;
     max-width: 33%;
 }
-.quiz-quistion-form-input-wrap label {
+.quiz-quistion-form-input-wrap label,
+.quiz-question-form-comment-wrap label {
     cursor: pointer;
 }
 .quiz-quistion-form-input-wrap input {
