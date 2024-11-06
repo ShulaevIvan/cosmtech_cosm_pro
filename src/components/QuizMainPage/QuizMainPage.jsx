@@ -38,6 +38,7 @@ import {
     selectQuizMenu,
     quizQuestionSaveInputValue,
     quizQuestionSelectCommunication,
+    quizTzSaveInput
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -54,6 +55,7 @@ const QuizMainPage = (props) => {
     const quizWrapRef = useRef(null);
     const quizState = useSelector((state) => state.quiz);
     const quizQuestionState = useSelector((state) => state.quiz.quizQuestion);
+    const quizTzState = useSelector((state) => state.quiz.quizTz);
     const popupWrapRef = useRef(null);
 
     const selectQuizMenuHandler = (quizMenuItem) => {
@@ -337,8 +339,16 @@ const QuizMainPage = (props) => {
         });      
     };
 
-    const resetQuizPartHandler = () => {
-        console.log('test')
+    const quizTzInputHandler = (inputName, inputRef) => {
+        dispatch(quizTzSaveInput({inputName: inputName, inputValue: inputRef.value}));
+    };
+
+    const quizTzClearInput = (e, inputName, inputRef) => {
+        if (e.key === 'Backspace') {
+            inputRef.value = '';
+            dispatch(quizTzSaveInput({inputName: inputName, inputValue: inputRef.value}));
+            return;
+        }
     };
 
     useEffect(() => {
@@ -480,7 +490,11 @@ const QuizMainPage = (props) => {
                             }
                             {
                                 findActiveMenu().id === 3 && findActiveMenu().active ?
-                                    <QuizSendTz /> 
+                                    <QuizSendTz 
+                                        quizState={quizTzState}
+                                        quizFromInputHandler={quizTzInputHandler}
+                                        quizFormClearInputHandler={quizTzClearInput}
+                                    /> 
                                 : null
                             }
                         </div>

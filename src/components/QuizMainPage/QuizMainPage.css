@@ -1244,7 +1244,8 @@ quiz-package-item-size-wrap:hover::before {
     max-width: 33%;
 }
 .quiz-quistion-form-input-wrap label,
-.quiz-question-form-comment-wrap label {
+.quiz-question-form-comment-wrap label,
+.tz-form-wrap label {
     cursor: pointer;
 }
 .quiz-quistion-form-input-wrap input {
@@ -1310,12 +1311,14 @@ quiz-package-item-size-wrap:hover::before {
     width: 100%;
     justify-content: flex-end;
 }
-.quiz-question-send-btn-wrap button {
+.quiz-question-send-btn-wrap button,
+.tz-form-send-btn-wrap button,
+.tz-download-template-btn-wrap button {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    max-width: 200px;
+    max-width: 217px;
     min-width: 150px;
     height: 30px;
     padding: 0 20px;
@@ -1339,6 +1342,160 @@ quiz-package-item-size-wrap:hover::before {
     margin-bottom: 20px;
 }
 .quiz-question-img-banner img {
+    max-width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+.tz-form-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 700px;
+    justify-content: space-between;
+    background-color: #F5F5F5;
+    border: 1px solid transparent;
+    border-radius: 10px;
+}
+.tz-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 50%;
+    align-items: center;
+}
+.tz-form-wrap label {
+    text-align: left;
+    margin: 0;
+    font-family: gothampro bold;
+    color: #00458B;
+}
+.tz-form-wrap form {
+    max-width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 300px;
+    padding: 10px;
+    display: flex;
+}
+.tz-download-template-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 50%;
+    align-items: center;
+}
+.tz-download-template-btn-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+.tz-form-input-file-wrap .input-file-btn {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    font-size: 16px;
+    vertical-align: middle;
+    color: rgb(255 255 255);
+    text-align: center;
+    border-radius: 4px;
+    background-color: #3FD2C7;
+    height: 30px;
+    padding: 4px 6px;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    transition: background-color 0.2s;
+}
+.tz-form-input-file-wrap .input-file input[type=file] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: flex;
+    width: 0;
+    height: 0;
+}
+.tz-form-input-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.tz-form-input-wrap input {
+    height: 25px;
+}
+.tz-form-send-btn-wrap,
+.tz-form-input-file-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.tz-form-send-btn-wrap button {
+    width: 100%;
+}
+.tz-download-template-text-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 85%;
+    margin-bottom: 20px;
+    padding: 10px;
+    margin-top: 20px;
+}
+.tz-download-template-text-wrap p {
+    margin: 0;
+}
+.tz-form-wrap-file-input input[type='file'] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: flex;
+    width: 0;
+    height: 0;
+}
+.tz-form-wrap-file-input label {
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+}
+.tz-form-wrap-file-input {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    font-size: 16px;
+    vertical-align: middle;
+    color: rgb(255 255 255);
+    text-align: center;
+    border-radius: 4px;
+    background-color: #3FD2C7;
+    line-height: 16px;
+    height: 30px;
+    padding: 6px 8px;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    transition: background-color 0.2s;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.tz-form-img-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.tz-form-img-wrap img {
+    max-width: 100%;
     max-width: 100%;
     border-radius: 10px 10px 0 0;
 }

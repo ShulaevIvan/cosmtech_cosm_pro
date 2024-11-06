@@ -25,6 +25,7 @@ import packageRollon from '../../img/quizImages/rolon.png';
 import packageDespencer from '../../img/quizImages/despencer.png';
 import packagePena from '../../img/quizImages/penatrans.png';
 import quizQuestFormBanner from '../../img/quizImages/form_question_banner.jpg';
+import quizTzFormBanner from '../../img/quizImages/form_tz_banner.jpg';
 
 const initialState = {
     maxSteps: 5,
@@ -32,6 +33,52 @@ const initialState = {
     showPrevStepBtn: false,
     nextBtnText: 'Следующий шаг',
     prevBtnText: 'К предыдущему шагу',
+    quizTz: {
+        formBanner: {img: quizTzFormBanner, alt: 'отправить техзадание в Космотех'},
+        quizFormInputs: [
+            {
+                id: 1,
+                inputType: 'text',
+                inputTag: 'input',
+                inputName: 'name',
+                inputValue: '',
+                inputTitle: 'Имя',
+                placeholder: 'Ваше имя',
+                valid: true,
+            },
+            {
+                id: 2,
+                inputType: 'text',
+                inputTag: 'input',
+                inputName: 'phone',
+                inputValue: '',
+                inputTitle: 'Телефон',
+                placeholder: '8xxxxxxxxxx',
+                valid: true,
+            },
+            {
+                id: 3,
+                inputType: 'email',
+                inputTag: 'input',
+                inputName: 'email',
+                inputValue: '',
+                inputTitle: 'Email',
+                placeholder: 'demo@xxxx.ru..',
+                valid: true,
+            },
+            {
+                id: 4,
+                inputType: 'file',
+                inputTag: 'input',
+                inputName: 'file',
+                inputValue: '',
+                inputTitle: 'file',
+                placeholder: '',
+                file: '',
+                valid: true,
+            },
+        ],
+    },
     quizQuestion: {
         formBanner: {img: quizQuestFormBanner, alt: 'задать вопрос технологу Космотех'},
         quizFormInputs: [
@@ -1412,7 +1459,6 @@ const qizSlice = createSlice({
                     deliveryPrice: totalDeliveryPrice ? totalDeliveryPrice : 0,
                     calcSum: totalSum,
                     pricePerpoint:  deliveryObj.delivery.find((item) => item.selected).price,
-                    deliveryPrice: deliveryObj.deliveryCityForm.totalPrice,
                     customDelivery: deliveryObj && deliveryObj.delivery.find((item) => item.selected).id === deliveryObj.delivery.length  ? {
                             from: 'Санкт-Петербург',
                             to: deliveryObj.deliveryCityForm.cityData.name ? 
@@ -1455,8 +1501,7 @@ const qizSlice = createSlice({
                 inputValid = validateName(inputValue);
                 validValue = inputValue;
             }
-            else if (inputName === 'phone' && !isNaN(inputValue) && validatePhone(inputValue).length <= 18) {
-                
+            else if (inputName === 'phone' && !isNaN(inputValue) && validatePhone(inputValue).length <= 18) {      
                 inputValid = validatePhone(inputValue).length === 18 ? true : false;
                 validValue = validatePhone(inputValue);
             }
@@ -1489,6 +1534,36 @@ const qizSlice = createSlice({
                     ...comItem,
                     selected: false
                 }
+            });
+        },
+        quizTzSaveInput(state, action) {
+            const { inputName, inputValue } = action.payload;
+            console.log(inputName)
+            if (inputName === 'phone' && inputValue.length > 18) return;
+            let inputValid = false;
+            let validValue = ''
+            if (inputName === 'name' && isNaN(inputValue)) {
+                inputValid = validateName(inputValue);
+                validValue = inputValue;
+            }
+            else if (inputName === 'phone' && !isNaN(inputValue) && validatePhone(inputValue).length <= 18) {
+                inputValid = validatePhone(inputValue).length === 18 ? true : false;
+                validValue = validatePhone(inputValue);
+                console.log(validValue)
+            }
+            else if (inputName === 'email') {
+                inputValid = validateMail(inputValue) ? false : true;
+                validValue = inputValue;
+            }
+            state.quizTz.quizFormInputs = state.quizTz.quizFormInputs.map((formItem) => {
+                if (formItem.inputName === inputName) {
+                    return {
+                        ...formItem,
+                        inputValue: validValue,
+                        valid: inputValid,
+                    }
+                }
+                return formItem;
             });
         }
     },
@@ -1582,7 +1657,8 @@ export const {
     saveQuizOrderSize,
     selectQuizMenu,
     quizQuestionSaveInputValue,
-    quizQuestionSelectCommunication
+    quizQuestionSelectCommunication,
+    quizTzSaveInput
 } = qizSlice.actions;
 export const resetQuizState = createAction('RESET_QUIZ');
 export default qizSlice.reducer;
