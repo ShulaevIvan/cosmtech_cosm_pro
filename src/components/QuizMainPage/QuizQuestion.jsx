@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useRef } from "react";
-
+import QuizHappyState from "./QuizHappyState";
 const QuizQuestion = (props) => {
     const quizState = props.quizState;
     const formRefs = [
@@ -9,7 +9,7 @@ const QuizQuestion = (props) => {
         { id: 3, name: 'email', ref: useRef(null)},
         { id: 4, name: 'comment', ref: useRef(null)}
     ];
-
+    console.log(props.happyState)
     const findFromRef = (targetInputName) => {
         return formRefs.find((item) => item.name === targetInputName).ref;
     };
@@ -19,8 +19,19 @@ const QuizQuestion = (props) => {
             (item.inputName === 'name' || item.inputName === 'phone' || item.inputName === 'email') 
                 && item.valid && item.inputValue !== '').length;
     };
-
+    
+    if (props.happyState && props.happyState.active) {
+        return (
+            <QuizHappyState 
+                order={props.happyState.data.order} 
+                description={props.happyState.data.description} 
+                title={props.happyState.data.title} 
+            />
+        )
+    }
+  
     return (
+ 
         <React.Fragment>
             
             <div className="quiz-question-form-wrap">

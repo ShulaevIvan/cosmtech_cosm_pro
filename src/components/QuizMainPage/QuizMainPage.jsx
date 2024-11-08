@@ -38,7 +38,8 @@ import {
     selectQuizMenu,
     quizQuestionSaveInputValue,
     quizQuestionSelectCommunication,
-    quizTzSaveInput
+    quizTzSaveInput,
+    sendQuizTzOrder
 } from "../../redux/slices/quizSlice";
 import QuizStep1 from './QuizStep1';
 import QuizStep2 from './QuizStep2';
@@ -48,6 +49,7 @@ import QuizStep5 from "./QuizStep5";
 import QuizQuestion from "./QuizQuestion";
 import QuizSendTz from "./QuizSendTz"
 import fileToBase64 from "../../functions/fileToBase64";
+import { Link } from "react-router-dom";
 
 const QuizMainPage = (props) => {
     const dispatch = useDispatch();
@@ -57,6 +59,7 @@ const QuizMainPage = (props) => {
     const quizQuestionState = useSelector((state) => state.quiz.quizQuestion);
     const quizTzState = useSelector((state) => state.quiz.quizTz);
     const popupWrapRef = useRef(null);
+    const happyState = quizState.quizHappyState;
 
     const selectQuizMenuHandler = (quizMenuItem) => {
         dispatch(selectQuizMenu({menuId: quizMenuItem.id}));
@@ -210,7 +213,6 @@ const QuizMainPage = (props) => {
             inputRef.value = '';
             return;
         }
-        console.log(e.target.value)
         dispatch(saveDeliveryCity({cityValue: inputRef.value}))
         
     };
@@ -339,7 +341,17 @@ const QuizMainPage = (props) => {
         });      
     };
 
-    const quizTzInputHandler = (inputName, inputRef) => {
+    const quizTzInputHandler = async (fileObj='', inputName, inputRef) => {
+        if (inputName === 'file' && !fileObj) return;
+        if (inputName === 'file' && fileObj && fileObj.length > 0) {
+            await fileToBase64(fileObj[0])
+            .then((data) => {
+                if (data && data.file) {
+                    dispatch(quizTzSaveInput({inputName: inputName, inputValue: data}));
+                }
+            });
+            return;
+        }
         dispatch(quizTzSaveInput({inputName: inputName, inputValue: inputRef.value}));
     };
 
@@ -349,6 +361,30 @@ const QuizMainPage = (props) => {
             dispatch(quizTzSaveInput({inputName: inputName, inputValue: inputRef.value}));
             return;
         }
+    };
+
+    const quizSendTzOrder = async (e) => {
+        e.preventDefault();
+        return new Promise((resolve, reject) => {
+            const formInputs = quizTzState.quizFormInputs;
+            const sendData = {
+                name: formInputs.find((item) => item.inputName === 'name').inputValue,
+                phone: formInputs.find((item) => item.inputName === 'phone').inputValue,
+                email: formInputs.find((item) => item.inputName === 'email').inputValue,
+                file: formInputs.find((item) => item.inputName === 'file').inputValue,
+            };
+            resolve(sendData);
+        })
+        .then((sendData) => {
+            console.log(sendData)
+            dispatch(sendQuizTzOrder(sendData));
+        });
+    };
+
+    const findHappyStateStatus = (quizType) => {
+        const targetStatus = quizState.quizHappyState.find((item) => item.active && item.quizType === quizType);
+
+        return targetStatus;
     };
 
     useEffect(() => {
@@ -369,6 +405,10 @@ const QuizMainPage = (props) => {
         }, 1000);
         
     }, [quizState.currentStep]);
+
+    useEffect(() => {
+        console.log(quizState.quizHappyState)
+    }, [quizState.quizHappyState])
 
     return (
         <React.Fragment>
@@ -393,6 +433,20 @@ const QuizMainPage = (props) => {
                                 </React.Fragment>
                             )
                         })}
+                         <div className="quiz-controlpanel-contacts-wrap">
+                            {quizState.quizMenuContacts.map((contactItem) => {
+                                return (
+                                    <React.Fragment key={contactItem.id}>
+                                        <div className={`quiz-controlpanel-contact-${contactItem.name}`}>
+                                            <img src={contactItem.icon} alt={contactItem.name} />
+                                            <Link to={contactItem.link} target={contactItem.name === 'email' ? '__blank' : ''}>
+                                                {contactItem.value}
+                                            </Link>
+                                        </div>
+                                    </React.Fragment>
+                                )
+                            })}
+                         </div>
                     </div>
                         <div
                             ref={quizWrapRef} 
@@ -474,6 +528,7 @@ const QuizMainPage = (props) => {
                                         clearQuizInput={clearQuizOrderInputHandler}
                                         checkFormInputs ={checkInputsResultQuizForm}
                                         sendQuizOrderHandler={sendQuizOrderHandler}
+                                        happyState={findHappyStateStatus('calculator')}
                                     />
                                 : null
                             }
@@ -485,6 +540,7 @@ const QuizMainPage = (props) => {
                                         quizFormClearInputHandler={quizQuestionClearInput}
                                         quizFormSelectHandler={selectCommunicationTypeHandler}
                                         quizFormSendHandler={quizQuestionSendFormHandler}
+                                        happyState={findHappyStateStatus('question')}
                                     /> 
                                 : null
                             }
@@ -494,6 +550,8 @@ const QuizMainPage = (props) => {
                                         quizState={quizTzState}
                                         quizFromInputHandler={quizTzInputHandler}
                                         quizFormClearInputHandler={quizTzClearInput}
+                                        quizSendTzHandler={quizSendTzOrder}
+                                        happyState={findHappyStateStatus('tz')}
                                     /> 
                                 : null
                             }

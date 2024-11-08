@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import QuizHappyState from "./QuizHappyState";
 
 const QuizSendTz = (props) => {
     const tzState = props.quizState;
@@ -13,6 +15,34 @@ const QuizSendTz = (props) => {
     const findFromRef = (targetInputName) => {
         return formRefs.find((item) => item.name === targetInputName).ref;
     };
+
+    const checkInputsValid = () => {
+        const checkFile = tzState.quizFormInputs.filter((item) => item.inputName === 'file' && item.valid && item.inputValue !== '')
+        if (checkFile && checkFile.length > 0) {
+            const validFields = tzState.quizFormInputs.filter((item) => 
+                (item.inputName === 'phone' || item.inputName === 'email') && item.valid && item.inputValue !== '');
+            return 2 + validFields.length;
+        }
+        return 0;
+    };
+
+    const displayUploadFilename = () => {
+        const checkFilename = tzState.quizFormInputs.find((item) => item.inputName === 'file' && item.valid);
+        if (checkFilename) {
+            return checkFilename.inputValue.name;
+        }
+        return 'файл не прикреплен'
+    };
+    
+    if (props.happyState && props.happyState.active) {
+        return (
+            <QuizHappyState 
+                order={props.happyState.data.order} 
+                description={props.happyState.data.description} 
+                title={props.happyState.data.title} 
+            />
+        )
+    }
 
     return (
         <React.Fragment>
@@ -33,7 +63,7 @@ const QuizSendTz = (props) => {
                                         <input
                                             ref={findFromRef(tzInput.inputName)}
                                             className={tzInput.valid ? '' : 'input-err'}
-                                            onChange={() => props.quizFromInputHandler(tzInput.inputName, findFromRef(tzInput.inputName).current)}
+                                            onChange={(e) => props.quizFromInputHandler(e, tzInput.inputName, findFromRef(tzInput.inputName).current)}
                                             onKeyDown={(e) => props.quizFormClearInputHandler(e, tzInput.inputName, findFromRef(tzInput.inputName).current)}
                                             id={`tz-${tzInput.inputName}-${tzInput.id}`} 
                                             type={tzInput.inputType}
@@ -49,15 +79,21 @@ const QuizSendTz = (props) => {
                                 <span className="input-file-text" type="text"></span>
                                 <input
                                     ref={findFromRef('file')}
-                                    onChange={() => props.quizFromInputHandler('file', findFromRef('file').current)}
+                                    onChange={(e) => props.quizFromInputHandler(e.target.files, 'file', findFromRef('file'))}
                                     type="file" 
                                     name="file"
                                 />
                                 <span className="input-file-btn">Прикрепить файл</span>
                             </label>
                         </div>
+                        <div className="tz-form-wrap-file-input-description">{displayUploadFilename()}</div>
                         <div className="tz-form-send-btn-wrap">
-                            <button className="tz-form-send-btn">Отправить</button>
+                            <button
+                                onClick={props.quizSendTzHandler} 
+                                className={checkInputsValid() < 3 ? 
+                                    "tz-form-send-btn btnDisabled" : "tz-form-send-btn"
+                                }
+                            >Отправить</button>
                         </div>
                     </form>
                 </div>
@@ -66,7 +102,10 @@ const QuizSendTz = (props) => {
                         <p>Шаблон технического задания для разработки продукта, который поможет детализировать функциональные характеристики. </p>
                     </div>
                     <div className="tz-download-template-btn-wrap">
-                        <button>Скачать Шаблон ТЗ</button>
+                        <Link
+                            to={`${tzState.tzTemplateUrl}`}
+                            target={'_blank'}
+                        >Скачать шаблон ТЗ</Link>
                     </div>
                 </div>
             </div>

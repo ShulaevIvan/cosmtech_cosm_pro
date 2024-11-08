@@ -2,10 +2,8 @@ import { createSlice, createAction, createAsyncThunk, current } from "@reduxjs/t
 import validateName from '../../functions/validateName';
 import validateMail from '../../functions/validateMail';
 import validatePhone from '../../functions/validatePhone';
-import demoImg from '../../img/quizImages/200x275.png';
 import quizCheckbox from '../../img/quizImages/quiz_checkbox.svg';
 import quizCheckboxActive from '../../img/quizImages/quiz_checkbox-active.svg';
-import packageImgHold from '../../img/quizImages/250x250.png';
 import cosmeticZooImg from '../../img/quizImages/cosmetic_zoo_quiz.jpeg'
 import cosmeticBody from '../../img/quizImages/cosmetic_body.jpeg'
 import cosmeticProf from '../../img/quizImages/cosmetic_professional.jpeg';
@@ -26,6 +24,8 @@ import packageDespencer from '../../img/quizImages/despencer.png';
 import packagePena from '../../img/quizImages/penatrans.png';
 import quizQuestFormBanner from '../../img/quizImages/form_question_banner.jpg';
 import quizTzFormBanner from '../../img/quizImages/form_tz_banner.jpg';
+import quizIconPhone from '../../img/quizImages/phone.svg';
+import quizIconEmail from '../../img/quizImages/email.svg';
 
 const initialState = {
     maxSteps: 5,
@@ -33,8 +33,35 @@ const initialState = {
     showPrevStepBtn: false,
     nextBtnText: 'Следующий шаг',
     prevBtnText: 'К предыдущему шагу',
+    quizHappyState: [
+        {
+            id: 1,
+            quizType: 'calculator',
+            orderNumber: '',
+            title: '',
+            data: '',
+            active: false,
+        },
+        {
+            id: 2,
+            quizType: 'question',
+            orderNumber: '',
+            title: '',
+            data: '',
+            active: false,
+        },
+        {
+            id: 3,
+            quizType: 'tz',
+            orderNumber: '',
+            title: '',
+            data: '',
+            active: false,
+        }
+    ],
     quizTz: {
         formBanner: {img: quizTzFormBanner, alt: 'отправить техзадание в Космотех'},
+        tzTemplateUrl: `${process.env.REACT_APP_BACKEND_URL}/company_files/tz/`,
         quizFormInputs: [
             {
                 id: 1,
@@ -53,7 +80,7 @@ const initialState = {
                 inputName: 'phone',
                 inputValue: '',
                 inputTitle: 'Телефон',
-                placeholder: '8xxxxxxxxxx',
+                placeholder: '8 xxx xxx xx xx',
                 valid: true,
             },
             {
@@ -63,7 +90,7 @@ const initialState = {
                 inputName: 'email',
                 inputValue: '',
                 inputTitle: 'Email',
-                placeholder: 'demo@xxxx.ru..',
+                placeholder: 'mail@xxxx.ru..',
                 valid: true,
             },
             {
@@ -75,7 +102,7 @@ const initialState = {
                 inputTitle: 'file',
                 placeholder: '',
                 file: '',
-                valid: true,
+                valid: false,
             },
         ],
     },
@@ -99,7 +126,7 @@ const initialState = {
                 inputName: 'phone',
                 inputValue: '',
                 inputTitle: 'Телефон',
-                placeholder: '8xxxxxxxxxx',
+                placeholder: '8 xxx xxx xx xx',
                 valid: true,
             },
             {
@@ -109,7 +136,7 @@ const initialState = {
                 inputName: 'email',
                 inputValue: '',
                 inputTitle: 'Email',
-                placeholder: 'demo@xxxx.ru..',
+                placeholder: 'mail@xxxx.ru',
                 valid: true,
             },
             {
@@ -119,7 +146,7 @@ const initialState = {
                 inputName: 'comment',
                 inputValue: '',
                 inputTitle: 'Описание',
-                placeholder: 'Ваш вопрос',
+                placeholder: 'Ваш вопрос...',
                 valid: true,
             }
         ],
@@ -194,6 +221,22 @@ const initialState = {
             name: 'Отправить ТЗ',
             active: false,
             icon: '',
+        }
+    ],
+    quizMenuContacts: [
+        {
+            id: 1,
+            name: 'phone',
+            icon: quizIconPhone,
+            link: 'tel:+78123630614',
+            value: '+7 (812) 363-06-14'
+        },
+        {
+            id: 2,
+            name: 'email',
+            icon: quizIconEmail,
+            link: 'mailto:pro@cosmtech.ru',
+            value: 'pro@comstech.ru',
         }
     ],
     qizSteps: [
@@ -654,10 +697,27 @@ export const sendQuizQuestionOrder = createAsyncThunk(
             body: JSON.stringify(sendData)
         });
         const data = await response.json();
-        console.log(data);
+
         return data;
     }
-)
+);
+
+export const sendQuizTzOrder = createAsyncThunk(
+    'api/quiz/tz',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/quiz/tz/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sendData)
+        });
+        const data = await response.json();
+
+        return data;
+    }
+);
 
 const qizSlice = createSlice({
     name: 'quizSlice',
@@ -1538,7 +1598,6 @@ const qizSlice = createSlice({
         },
         quizTzSaveInput(state, action) {
             const { inputName, inputValue } = action.payload;
-            console.log(inputName)
             if (inputName === 'phone' && inputValue.length > 18) return;
             let inputValid = false;
             let validValue = ''
@@ -1549,10 +1608,13 @@ const qizSlice = createSlice({
             else if (inputName === 'phone' && !isNaN(inputValue) && validatePhone(inputValue).length <= 18) {
                 inputValid = validatePhone(inputValue).length === 18 ? true : false;
                 validValue = validatePhone(inputValue);
-                console.log(validValue)
             }
             else if (inputName === 'email') {
                 inputValid = validateMail(inputValue) ? false : true;
+                validValue = inputValue;
+            }
+            else if (inputName === 'file') {
+                inputValid = inputValue && inputValue.file && inputValue.type ? true : false;
                 validValue = inputValue;
             }
             state.quizTz.quizFormInputs = state.quizTz.quizFormInputs.map((formItem) => {
@@ -1564,6 +1626,18 @@ const qizSlice = createSlice({
                     }
                 }
                 return formItem;
+            });
+        },
+        quizShowHappyState(state, action) {
+            const { quizType, status } = action.payload;
+            state.quizHappyState = state.quizHappyState.map((quizItem) => {
+                if (quizItem.quizType === quizType) {
+                    return {
+                        ...quizItem,
+                        active: status,
+                    }
+                }
+                return quizItem;
             });
         }
     },
@@ -1606,6 +1680,36 @@ const qizSlice = createSlice({
                 return quizStep;
             });
         })
+        .addCase(sendQuizQuestionOrder.fulfilled, (state, action) => {
+            const { status, created, message } = action.payload;
+            if (status === 'ok' && created) {
+                state.quizHappyState = state.quizHappyState.map((quizItem) => {
+                    if (quizItem.quizType === 'question') {
+                        return {
+                            ...quizItem,
+                            data: message,
+                            active: true,
+                        }
+                    }
+                    return quizItem;
+                });
+            }
+        })
+        .addCase(sendQuizTzOrder.fulfilled, (state, action) => {
+            const { status, created, message } = action.payload;
+            if (status === 'ok' && created) {
+                state.quizHappyState = state.quizHappyState.map((quizItem) => {
+                    if (quizItem.quizType === 'tz') {
+                        return {
+                            ...quizItem,
+                            data: message,
+                            active: true,
+                        }
+                    }
+                    return quizItem;
+                });
+            }
+        })
         // .addCase(sendQuizOrder.pending, (state) => {
         //     state.quizResult.resultOrderForm = {
         //         ...state.quizResult.resultOrderForm,
@@ -1615,9 +1719,20 @@ const qizSlice = createSlice({
         //     }
         // })
         .addCase(sendQuizOrder.fulfilled, (state, action) => {
-            const { status } = action.payload;
-            console.log(status)
-            console.log('end')
+            const { status, created, message } = action.payload;
+            
+            if (status === 'ok' && created) {
+                state.quizHappyState = state.quizHappyState.map((quizItem) => {
+                    if (quizItem.quizType === 'calculator') {
+                        return {
+                            ...quizItem,
+                            data: message,
+                            active: true,
+                        }
+                    }
+                    return quizItem;
+                });
+            }
         })
 
     }

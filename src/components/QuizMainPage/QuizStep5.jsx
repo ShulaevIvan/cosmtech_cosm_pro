@@ -1,5 +1,6 @@
 import React from "react";
 import { useRef, useEffect } from "react";
+import QuizHappyState from "./QuizHappyState";
 
 const QuizStep5 = (props) => {
     const stepData = props.stepData;
@@ -35,6 +36,16 @@ const QuizStep5 = (props) => {
         }
         deliveryCityRef.current.value = stepData.deliveryCityForm.value;
     }, [stepData.deliveryCityForm]);
+    console.log(props.happyState)
+    if (props.happyState && props.happyState.active) {
+        return (
+            <QuizHappyState 
+                order={props.happyState.data.order} 
+                description={props.happyState.data.description} 
+                title={props.happyState.data.title} 
+            />
+        )
+    }
 
     return (
         <React.Fragment>
