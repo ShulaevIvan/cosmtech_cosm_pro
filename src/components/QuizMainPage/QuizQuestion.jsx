@@ -9,7 +9,7 @@ const QuizQuestion = (props) => {
         { id: 3, name: 'email', ref: useRef(null)},
         { id: 4, name: 'comment', ref: useRef(null)}
     ];
-    console.log(props.happyState)
+    
     const findFromRef = (targetInputName) => {
         return formRefs.find((item) => item.name === targetInputName).ref;
     };

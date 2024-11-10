@@ -299,7 +299,7 @@ const QuizStep5 = (props) => {
                         </form>
                         <div className="result-form-get-contacts-description">
                             <span>Данные по проекту прикреплены</span>
-                            <span className="result-form-get-contacts-description-icon">icon</span>
+                            <span className="result-form-get-contacts-description-icon"></span>
                         </div>
                         <div className="result-form-get-contacts-send-wrap">
                             <button 
