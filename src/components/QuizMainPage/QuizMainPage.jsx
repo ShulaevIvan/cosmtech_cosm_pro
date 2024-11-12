@@ -529,6 +529,7 @@ const QuizMainPage = (props) => {
                                         checkFormInputs ={checkInputsResultQuizForm}
                                         sendQuizOrderHandler={sendQuizOrderHandler}
                                         happyState={findHappyStateStatus('calculator')}
+                                        closeHandler={props.closeHandler}
                                     />
                                 : null
                             }
@@ -541,6 +542,7 @@ const QuizMainPage = (props) => {
                                         quizFormSelectHandler={selectCommunicationTypeHandler}
                                         quizFormSendHandler={quizQuestionSendFormHandler}
                                         happyState={findHappyStateStatus('question')}
+                                        closeHandler={props.closeHandler}
                                     /> 
                                 : null
                             }
@@ -552,6 +554,7 @@ const QuizMainPage = (props) => {
                                         quizFormClearInputHandler={quizTzClearInput}
                                         quizSendTzHandler={quizSendTzOrder}
                                         happyState={findHappyStateStatus('tz')}
+                                        closeHandler={props.closeHandler}
                                     /> 
                                 : null
                             }

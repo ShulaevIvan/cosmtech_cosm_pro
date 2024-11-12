@@ -627,7 +627,6 @@
     max-width: 33%;
     margin-right: 10px;
     margin-bottom: 10px;
-    border: 1px solid transparent;
     cursor: pointer;
     transform: translateX(-150%);
     animation: quiz-product-types-in 0.7s forwards;
@@ -946,6 +945,9 @@
     margin: 0;
     font-family: gothampro bold;
     color: #00458B;
+}
+.quiz-question-form-options-wrap h3 {
+    font-weight: normal;
 }
 .quiz-advanced-settings-service-item-wrap,
 .quiz-advanced-settings-budget-item-wrap,
@@ -1547,6 +1549,46 @@
     max-height: 28px;
     padding-right: 5%;
 }
+.quiz-happy-state-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: #F5F5F5;
+}
+.quiz-happy-state-order {
+    font-weight: bold;
+}
+.quiz-happy-state-wrap p {
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+.quiz-happy-state-to-mainpage a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 217px;
+    min-width: 150px;
+    height: 30px;
+    padding: 0 20px;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    user-select: none;
+}
 @keyframes quiz-fadeOut {
     0% {opacity:1;}
     100% {
@@ -1908,12 +1950,10 @@
 }
 @media (max-width: 600px) {
     .quiz-package-custom-input-wrap textarea{
-        width: 50%;
+        width: 60%;
         margin-bottom: 10px;
-        max-height: 50px;
-        min-height: 50px;
-        max-width: 150px;
-        padding: 0 20px;
+        max-height: 150px;
+        min-height: 150px;
     }
 }
 @media (max-width: 600px) {
@@ -2097,11 +2137,16 @@
     }
 }
 @media (max-width: 480px) {
-    .tz-form-send-btn-wrap, .tz-form-input-file-wrap{
+    .tz-form-send-btn-wrap, .tz-form-input-file-wrap {
         justify-content: center;
     }
 }
-
+@media (max-width: 480px) {
+    .quiz-happy-state-wrap {
+        width: 100%;
+        padding: 20px 0;
+    }
+}
 
 
 

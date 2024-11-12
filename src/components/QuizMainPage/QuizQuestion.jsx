@@ -25,7 +25,8 @@ const QuizQuestion = (props) => {
             <QuizHappyState 
                 order={props.happyState.data.order} 
                 description={props.happyState.data.description} 
-                title={props.happyState.data.title} 
+                title={props.happyState.data.title}
+                closeHandler={props.closeHandler}
             />
         )
     }

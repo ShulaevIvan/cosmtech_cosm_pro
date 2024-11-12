@@ -18,7 +18,7 @@ const QuizStep5 = (props) => {
 
     useEffect(() => {
         props.calculate();
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (stepData.deliveryCityForm.cityData && stepData.deliveryCityForm.cityData.value) {
@@ -36,13 +36,14 @@ const QuizStep5 = (props) => {
         }
         deliveryCityRef.current.value = stepData.deliveryCityForm.value;
     }, [stepData.deliveryCityForm]);
-    console.log(props.happyState)
+
     if (props.happyState && props.happyState.active) {
         return (
             <QuizHappyState 
                 order={props.happyState.data.order} 
                 description={props.happyState.data.description} 
-                title={props.happyState.data.title} 
+                title={props.happyState.data.title}
+                closeHandler={props.closeHandler}
             />
         )
     }
@@ -138,7 +139,7 @@ const QuizStep5 = (props) => {
                                 <h4>Тип продукта</h4>
                             </div>
                             <div className="quiz-result-value">
-                                {`${quizResult.product.category} ${quizResult.product.name.toLowerCase()}`}
+                                {`(${quizResult.product.category}) ${quizResult.product.name.toLowerCase()}`}
                             </div>
                         </div>
                         <div className="quiz-result-value-row">

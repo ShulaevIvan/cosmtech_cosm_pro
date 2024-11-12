@@ -1639,7 +1639,7 @@ const qizSlice = createSlice({
                 }
                 return quizItem;
             });
-        }
+        },
     },
    
     extraReducers: (builder) => {
