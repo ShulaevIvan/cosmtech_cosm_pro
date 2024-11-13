@@ -464,8 +464,8 @@ const initialState = {
             stepTitle: 'Количество продукции и сроки',
             stepNum: 2,
             quantity: {
-                value: 25000,
-                defaultValue: 25000,
+                value: 3000,
+                defaultValue: 3000,
                 minQnt: 1500,
                 maxQnt: 500000,
                 customValue: 0,
@@ -1266,7 +1266,6 @@ const qizSlice = createSlice({
             const nextDate = new Date().setDate(date.getDate() + deadLineMaxDays);
             const currentPrintDate = ('' + (new Date(date)).toLocaleDateString('ru'));
             const endPrintDate = ('' + (new Date(nextDate)).toLocaleDateString('ru'));
-
             state.quizResult = {
                 ...state.quizResult,
                 calculateResult: {

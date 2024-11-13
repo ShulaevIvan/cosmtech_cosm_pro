@@ -376,7 +376,6 @@ const QuizMainPage = (props) => {
             resolve(sendData);
         })
         .then((sendData) => {
-            console.log(sendData)
             dispatch(sendQuizTzOrder(sendData));
         });
     };

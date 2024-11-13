@@ -10,9 +10,7 @@ import mainLogoMinIcon from '../../img/logo_cosm.png';
 import CallbackRequestPopup from "../CallbackRequestPopup/CallbackRequestPopup";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { setUrlToStorage, getUrlFromStorage } from "../../functions/urlToStorage";
-import { 
-    callbackPopupShow,
-} from "../../redux/slices/headerSlice";
+import { callbackPopupShow } from "../../redux/slices/headerSlice";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -22,6 +20,7 @@ const Header = () => {
     const openGraphTitleRef = useRef(window.document.querySelector('meta[property="og:title"]'));
     const openGraphDescriptionRef = useRef(window.document.querySelector('meta[property="og:description"]'));
     const openGraphUrlRef = useRef(window.document.querySelector('meta[property="og:url"]'));
+    const canonicalUrlRef = useRef(window.document.querySelector('link[rel="canonical"]'));
     const headerState = useSelector((state) => state.header);
     const callbackPopup = useSelector((state) => state.header.callbackHeader.callbackPopupActive);
 
@@ -37,6 +36,7 @@ const Header = () => {
         document.title = targetTitle ? targetTitle.name : '';
         openGraphTitleRef.current.content = targetTitle.name;
         descriptionRef.current.content = targetTitle.description;
+        canonicalUrlRef.current.href = targetTitle.canonical;
         openGraphDescriptionRef.current.content = targetTitle.description;
         openGraphUrlRef.current.content = `https://cosmtech.ru${targetTitle.path}`;
     }, [location.pathname]);
@@ -52,6 +52,10 @@ const Header = () => {
             return;
         }
     }, []);
+
+    useEffect(() => {
+
+    }, [])
 
     // useEffect(() => {
     //     window.ym(97856473, 'hit', location.pathname);
