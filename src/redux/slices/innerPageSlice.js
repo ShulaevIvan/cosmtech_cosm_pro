@@ -405,23 +405,29 @@ const initialState = {
             { id: 2,name: 'Требования'},
             { id: 3,name: 'Контакты'},
         ],
-        vacancyList: [
-            {
-                id: 1,
-                name: 'Инженер-строитель',
-                contacts: [
-                    {id: 1, value: 'test@mail.ru', description: 'Направлять резюме'}, 
-                    {id: 2, value: '8 xxx xxx xx xx', description: 'Телефон'}
-                ],
-                description: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.'
-            }
-        ]
+        vacancyList: []
     },
     mousePosition: {
         left: 0,
         top: 0,
     }
 };
+
+export const getAvalibleVacancy = createAsyncThunk(
+    'api/vacancy/',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/vacancy/`, {
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            }
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+);
 
 export const sendServiceOrderThunk = createAsyncThunk(
     'sendServiceOrder',
@@ -747,6 +753,19 @@ const innerPageSlice = createSlice({
         contactUsHappyState(state, action) {
             const { status } = action.payload;
             state.contacts.contactsForm.contactFormHappyState = status;
+        },
+        showMoreVacanyDescription(state, action) {
+            const { vacancyId } = action.payload;
+            state.jobPage.vacancyList = state.jobPage.vacancyList.map((vacancyItem) => {
+                if (vacancyItem.id === vacancyId) {
+                    return {
+                        ...vacancyItem,
+                        btnText: vacancyItem.active ? 'Свернуть' : 'Читать далее',
+                        active: vacancyItem.active ? false : true,
+                    }
+                }
+                return vacancyItem;
+            });
         }
     },
     
@@ -788,6 +807,15 @@ const innerPageSlice = createSlice({
             state.error = null;
             state.contacts.contactsForm.contactFormHappyState = true;
             state.contacts.contactsForm.contactFormHappyStateDescription = description;
+        })
+        .addCase(getAvalibleVacancy.fulfilled, (state, action) => {
+            const { vacancy } = action.payload;
+            state.jobPage.vacancyList = vacancy.map((item) => {
+                return {
+                    ...item,
+                    active: false,
+                }
+            });
         });
     }
 });
@@ -810,5 +838,6 @@ export const {
     innerCounsultSendBtn,
     contactsSendBtnActive,
     contactUsHappyState,
+    showMoreVacanyDescription
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

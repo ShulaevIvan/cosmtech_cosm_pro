@@ -1,0 +1,228 @@
+.job-main-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1300px;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.job-item-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 45%;
+    max-width: 600px;
+    background-color: #f5f5f5;
+    margin-bottom: 40px;
+    min-height: 370px;
+    max-height: 370px;
+    padding: 20px;
+    position: relative;
+    border-radius: 10px;
+    z-index: 2;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.job-item-title-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.job-item-title-group h4 {
+    margin: 0;
+}
+.job-item-title-group h3,
+.job-item-title-group h4,
+.job-item-title-group h5,
+.job-item-description h5,
+.job-сonditions-wrap h5 {
+    margin: 0;
+}
+.job-item-description h5 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.job-item-title-group h3 {
+    font-size: 22px;
+}
+.job-item-description,
+.job-item-description-full {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: hidden;
+    max-height: 200px;
+    width: 100%;
+}
+.description-full-active {
+    max-height: 100%;
+}
+.job-item-description p {
+    margin: 0;
+}
+.job-сonditions-wrap,
+.job-duties-wrap,
+.job-requirements-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+.job-сonditions-wrap ul,
+.job-duties-wrap ul,
+.job-requirements-wrap ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+.job-сonditions-wrap ul li,
+.job-duties-wrap ul li,
+.job-requirements-wrap ul li {
+    display: flex;
+    margin-bottom: 5px;
+    align-items: baseline;
+}
+.job-list-style li::before {
+    content: '';
+    padding: 0 5px;
+    width: 0;
+	height: 0;
+	border-top: 6px solid transparent;
+	border-left: 12px solid #3FD2C7;
+	border-bottom: 6px solid transparent;
+}
+.job-item-controls-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    background-color: #f5f5f5;
+    position:relative;
+    padding-bottom:0px;
+}
+.job-item-showmore-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 50%;
+    justify-content: center;
+    text-align: center;
+}
+.job-item-send-request-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 50%;
+    justify-content: center; 
+}
+.job-item-send-request-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    max-width: 150px;
+    height: 30px;
+    padding: 0 30px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.job-item-send-request-btn:hover {
+    background-color: #00458B;
+    transition: background .4s ease;
+}
+.job-item-showmore-btn-wrap a {
+    cursor: pointer;
+}
+.job-additional-contacts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.job-additional-contacts strong {
+    padding-right: 10px;
+}
+.job-item-time-added {
+    font-size: 14px;
+    font-family: gothampro bold;
+}
+.job-form-popup-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    position: absolute;
+    z-index: 5;
+    padding: 20px;
+}
+.job-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+}
+.job-form-inputs-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.job-form-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+.job-form-input-title,
+.job-form-input {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 300px;
+    width: 100%;
+}
+.job-form-input-file-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 60%;
+    margin-bottom: 20px;
+}
+.job-form-send-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}

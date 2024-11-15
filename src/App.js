@@ -8,6 +8,7 @@ import './components/CraftedSeries/CraftedSeries.css';
 import './components/ForBuissness/ForBuissness.css';
 import './components/ReviewsMainPage/ReviewsMainPage.css';
 import './components/QuizMainPage/QuizMainPage.css';
+import './components/JobPage/JobPage.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
