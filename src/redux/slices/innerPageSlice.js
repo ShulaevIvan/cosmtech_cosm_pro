@@ -400,12 +400,42 @@ const initialState = {
         }
     },
     jobPage: {
-        vacancyHeader: [
-            { id: 1,name: 'Специальность'},
-            { id: 2,name: 'Требования'},
-            { id: 3,name: 'Контакты'},
-        ],
-        vacancyList: []
+        vacancyList: [],
+        jobPopup: {
+            active: false,
+            vacancyActive: false,
+            vacancyTitle: '',
+            policyActive: false,
+            sendBtnActive: false,
+            inputs: [
+                {
+                    id: 1,
+                    name: 'name',
+                    type: 'text',
+                    title: 'Имя',
+                    placeholder: 'Ваше имя',
+                    value: '',
+                    valid: false
+                },
+                {
+                    id: 2,
+                    name: 'phone',
+                    title: 'Телефон',
+                    type: 'text',
+                    placeholder: '8xxxxxxxxxx',
+                    value: '',
+                    valid: false
+                },
+                {
+                    id: 3,
+                    name: 'file',
+                    type: 'file',
+                    value: '',
+                    file: {},
+                    valid: false
+                },
+            ]
+        }
     },
     mousePosition: {
         left: 0,
@@ -766,6 +796,14 @@ const innerPageSlice = createSlice({
                 }
                 return vacancyItem;
             });
+        },
+        showJobPopup(state, action) {
+            const { vacancy, status } = action.payload;
+            state.jobPage.jobPopup = {
+                ...state.jobPage.jobPopup,
+                active: status,
+                vacancyActive: status ? vacancy : {},
+            }
         }
     },
     
@@ -838,6 +876,7 @@ export const {
     innerCounsultSendBtn,
     contactsSendBtnActive,
     contactUsHappyState,
-    showMoreVacanyDescription
+    showMoreVacanyDescription,
+    showJobPopup
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

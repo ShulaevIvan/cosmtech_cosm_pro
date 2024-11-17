@@ -7,7 +7,8 @@ import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import JobForm from "./JobForm";
 import { 
     getAvalibleVacancy,
-    showMoreVacanyDescription
+    showMoreVacanyDescription,
+    showJobPopup
 } from "../../redux/slices/innerPageSlice";
 
 
@@ -20,6 +21,14 @@ const JobPage = () => {
     const showMoreDescriptionHandler = (vacancyItem) => {
         dispatch(showMoreVacanyDescription({vacancyId: vacancyItem.id}));
     };
+    
+    const jobPopupHandler = (vacancyObj, status) => {
+        if (!vacancyObj || !status) {
+            dispatch(showJobPopup({vacancy: {}, status: false}));
+            return;
+        }
+        dispatch(showJobPopup({vacancy: vacancyObj, status: status}));
+    };
 
     useEffect(() => {
         dispatch(getAvalibleVacancy());
@@ -31,7 +40,12 @@ const JobPage = () => {
             <div className="inner-page-main-wrapper">
                 <section>
                     <div className="container">
-                        <JobForm />
+                        {jobState.jobPopup.active ? 
+                            <JobForm 
+                                jobState={jobState}
+                                popupHandler={jobPopupHandler}
+                            />
+                        : null}
                         <div className="job-main-row">
                             {jobState.vacancyList ? jobState.vacancyList.map((vacancyItem) => {
                                 return (
@@ -97,7 +111,10 @@ const JobPage = () => {
                                                     </Link>
                                                 </div>
                                                 <div className="job-item-send-request-btn-wrap">
-                                                    <span className="job-item-send-request-btn">Откликнуться</span>
+                                                    <span 
+                                                        className="job-item-send-request-btn"
+                                                        onClick={() => jobPopupHandler(vacancyItem, true)}
+                                                    >Откликнуться</span>
                                                 </div>
                                             </div>
                                         </div>
