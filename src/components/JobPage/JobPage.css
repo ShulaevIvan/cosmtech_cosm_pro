@@ -40,6 +40,11 @@
     width: 100%;
     margin-bottom: 40px;
 }
+.job-item-title-group .departament-title {
+    color: #1E1E1E;
+    padding-right: 5px;
+    font-weight: normal;
+}
 .job-item-title-group h4 {
     margin: 0;
 }

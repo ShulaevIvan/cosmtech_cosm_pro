@@ -407,6 +407,11 @@ const initialState = {
             vacancyTitle: '',
             policyActive: false,
             sendBtnActive: false,
+            sendData: {
+                name: '',
+                phone: '',
+                file: '',
+            },
             inputs: [
                 {
                     id: 1,
@@ -415,7 +420,7 @@ const initialState = {
                     title: 'Имя',
                     placeholder: 'Ваше имя',
                     value: '',
-                    valid: false
+                    valid: true
                 },
                 {
                     id: 2,
@@ -424,7 +429,7 @@ const initialState = {
                     type: 'text',
                     placeholder: '8xxxxxxxxxx',
                     value: '',
-                    valid: false
+                    valid: true
                 },
                 {
                     id: 3,
@@ -432,7 +437,7 @@ const initialState = {
                     type: 'file',
                     value: '',
                     file: {},
-                    valid: false
+                    valid: true
                 },
             ]
         }
@@ -801,9 +806,51 @@ const innerPageSlice = createSlice({
             const { vacancy, status } = action.payload;
             state.jobPage.jobPopup = {
                 ...state.jobPage.jobPopup,
+                inputs: initialState.jobPage.jobPopup.inputs,
                 active: status,
                 vacancyActive: status ? vacancy : {},
             }
+        },
+        validateJobForm(state, action) {
+            const { inputType, inputValue } = action.payload;
+            let inputValidValue = '';
+            let inputValid;
+            if (inputType === 'phone') {
+                inputValidValue = validatePhone(inputValue);
+                if (inputValue.length === 18) return;
+                inputValid = inputValidValue.length === 18 ? true : false;
+            }
+            else if (inputType === 'name') {
+                inputValidValue = inputValue;
+                inputValid = validateName(inputValue);
+            }
+            else if (inputType === 'file') {
+                inputValidValue = inputValue ? inputValue : {};
+                inputValid = inputValue ? true : false
+            }
+            state.jobPage.jobPopup.inputs = state.jobPage.jobPopup.inputs.map((inputItem) => {
+                if (inputItem.name === inputType) {
+                    return {
+                        ...inputItem,
+                        value: inputValidValue,
+                        valid: inputValid
+                    }
+                }
+                return inputItem;
+            })
+        },
+        jobSendBtnActive(state, action) {
+            const { status } = action.payload;
+            if (status) {
+                state.jobPage.jobPopup.sendData = {
+                    name: state.jobPage.jobPopup.inputs.find((item) => item.name === 'name'),
+                    phone: state.jobPage.jobPopup.inputs.find((item) => item.name === 'phone'),
+                    file: state.jobPage.jobPopup.inputs.find((item) => item.name === 'file')
+                }
+                state.jobPage.jobPopup.sendBtnActive = status;
+                return;
+            }
+            state.jobPage.jobPopup.sendBtnActive = status;
         }
     },
     
@@ -877,6 +924,8 @@ export const {
     contactsSendBtnActive,
     contactUsHappyState,
     showMoreVacanyDescription,
-    showJobPopup
+    showJobPopup,
+    validateJobForm,
+    jobSendBtnActive
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

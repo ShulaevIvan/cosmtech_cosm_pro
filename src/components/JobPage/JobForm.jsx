@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 
 const JobForm = (props) => {
     const jobState = props.jobState;
-    console.log(jobState)
+    const uploadFileName = jobState.jobPopup.inputs.find((item) => item.name === 'file' && item.value);
+
     return (
         <React.Fragment>
             <div className="job-form-popup-background">
@@ -29,8 +31,13 @@ const JobForm = (props) => {
                                             <label htmlFor={`job-form-tinput-id-${inputItem.name}`}>{inputItem.title}</label>
                                         </div>
                                         <div className="job-form-input">
-                                            <input 
-                                                id={`job-form-tinput-id-${inputItem.name}`} 
+                                            <input
+                                                ref={props.findInputRef(inputItem.name)}
+                                                className={inputItem.valid ? '' : 'input-err'}
+                                                id={`job-form-tinput-id-${inputItem.name}`}
+                                                onChange={() => props.popupInputHandler(inputItem.name)}
+                                                onKeyDown={(e) => props.clearInputHandler(e, inputItem.name)}
+                                                value={inputItem.value}
                                                 type={inputItem.type}
                                                 placeholder={inputItem.placeholder}
                                             />
@@ -43,11 +50,16 @@ const JobForm = (props) => {
                             <div className="job-form-file-input-wrap">
                                 <label className="input-file">
                                     <span className="input-file-text" type="text"></span>
-                                    <input type="file" name="file" />
+                                    <input
+                                        ref={props.findInputRef('file')}
+                                        type="file" 
+                                        name="file"
+                                        onChange={() => props.popupInputHandler('file')}
+                                    />
                                     <span className="input-file-btn">Прикрепить резюме</span>
                                 </label>
                             </div>
-                            <div className="job-form-file-input-name">testFile.pdf</div>
+                            <div className="job-form-file-input-name">{uploadFileName && uploadFileName.value ? uploadFileName.value.name : ''}</div>
                         </div> 
                     </div>
                     <div className="job-form-policy-wrap">
@@ -65,7 +77,9 @@ const JobForm = (props) => {
                     
 
                     <div className="job-form-send-btn-wrap">
-                        <span className="job-form-send-btn">Отправить</span>
+                        <span 
+                            className={jobState.jobPopup.sendBtnActive ? 'job-form-send-btn' : 'job-form-send-btn btnDisabled'}
+                        >Отправить</span>
                     </div>
                 </div>
             </div>
