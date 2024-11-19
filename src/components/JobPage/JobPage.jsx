@@ -4,13 +4,18 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
+import JobFormHappyState from "./JobFormHappyState";
 import JobForm from "./JobForm";
+import fileToBase64 from '../../functions/fileToBase64'
 import { 
     getAvalibleVacancy,
     showMoreVacanyDescription,
     showJobPopup,
     validateJobForm,
-    jobSendBtnActive
+    jobPolicyActive,
+    jobSendBtnActive,
+    sendVacancyRequest,
+    jobHappyStatePopupShow
 } from "../../redux/slices/innerPageSlice";
 
 
@@ -19,9 +24,10 @@ const JobPage = () => {
     const jobState = useSelector((state) => state.innerPage.jobPage);
     const dispatch = useDispatch();
     const jobInputsRefs = [
-        {type: 'name', ref: useRef(null)},
-        {type: 'phone', ref: useRef(null)},
-        {type: 'file', ref: useRef(null)}
+        { type: 'name', ref: useRef(null) },
+        { type: 'phone', ref: useRef(null) },
+        { type: 'file', ref: useRef(null) },
+        { type: 'checkbox', ref: useRef(null), }
     ];
 
     const showMoreDescriptionHandler = (vacancyItem) => {
@@ -40,14 +46,21 @@ const JobPage = () => {
         return jobInputsRefs.find((item) => item.type === inputType).ref;
     };
 
-    const jobInputHandler = (inputType) => {
-        const targetRef = findJobInputRef(inputType);
-        if (inputType === 'file' && targetRef.current.files && targetRef.current.files.length > 0) {
-            const file = targetRef.current.files[0];
-            dispatch(validateJobForm({inputType: 'file', inputValue: file}));
-            return;
-        }
-        dispatch(validateJobForm({inputType: inputType, inputValue: targetRef.current.value}));
+    const jobInputHandler = async (inputType) => {
+        return new Promise((resolve, reject) => {
+            const targetRef = findJobInputRef(inputType);
+            if (inputType === 'file' && targetRef.current.files && targetRef.current.files.length > 0) {
+                const file = fileToBase64(targetRef.current.files[0]);
+                return resolve(file);
+            }
+            return dispatch(validateJobForm({inputType: inputType, inputValue: targetRef.current.value}));
+        })
+        .then((data) => {
+            if (data && data.name) {
+               return dispatch(validateJobForm({inputType: 'file', inputValue: data}));
+            }
+        });
+      
     };
 
     const clearInputHandler = (e, inputType) => {
@@ -58,16 +71,28 @@ const JobPage = () => {
         }
     };
 
+    const policyHandler = (status) => {
+        dispatch(jobPolicyActive({status: status}));
+    };
+
+    const sendJobRequestHandler = () => {
+        const sendData = jobState.jobPopup.sendData;
+        dispatch(sendVacancyRequest(sendData));
+    };
+
+    const happyStatePopupHandler = (status) => {
+        dispatch(jobHappyStatePopupShow({status: status}));
+    };
+
     useEffect(() => {
         const findValidInputs = jobState.jobPopup.inputs.filter((item) => 
             (item.value && item.name === 'name' && item.valid) || (item.value && item.name === 'phone' && item.valid));
-        if (findValidInputs && findValidInputs.length === 2) {
+        if (findValidInputs && findValidInputs.length === 2 && jobState.jobPopup.sendData.name) {
             dispatch(jobSendBtnActive({status: true}));
-            console.log(jobState.jobPopup.sendData)
             return;
         }
         dispatch(jobSendBtnActive({status: false}));
-    }, [jobState.jobPopup.inputs])
+    }, [jobState.jobPopup.sendData])
 
     useEffect(() => {
         dispatch(getAvalibleVacancy());
@@ -79,6 +104,13 @@ const JobPage = () => {
             <div className="inner-page-main-wrapper">
                 <section>
                     <div className="container">
+                        {jobState.jobPopup.haapyStatePopup.active ? 
+                            <JobFormHappyState
+                                popupHanlder={happyStatePopupHandler}
+                                userData={jobState.jobPopup.haapyStatePopup.data}
+
+                            /> 
+                        : null}
                         {jobState.jobPopup.active ? 
                             <JobForm 
                                 jobState={jobState}
@@ -86,6 +118,8 @@ const JobPage = () => {
                                 popupHandler={jobPopupHandler}
                                 popupInputHandler={jobInputHandler}
                                 clearInputHandler={clearInputHandler}
+                                policyHandler={policyHandler}
+                                sendJobHandler={sendJobRequestHandler}
                             />
                         : null}
                         <div className="job-main-row">
@@ -95,7 +129,15 @@ const JobPage = () => {
                                         <div className={vacancyItem.active ? "job-item-wrap description-full-active" : "job-item-wrap"}>
                                             <div className="job-item-title-group">
                                                 <h4><span className="departament-title">Отдел:</span>{vacancyItem.departament}</h4>
-                                                <h3>{vacancyItem.name}</h3>
+                                                <div className="job-item-main-title-row">
+                                                    <div className="job-item-main-title">
+                                                        <h3>{vacancyItem.name}</h3>
+                                                    </div>
+                                                    <div className="job-item-salary-title">
+                                                        <h3>{vacancyItem.salary}</h3>
+                                                    </div>
+                                                </div>
+                                                
                                                 <span className="job-item-time-added">{vacancyItem.date}</span>
                                             </div>
                                             <div className={vacancyItem.active ? "job-item-description description-full-active" : "job-item-description"}>

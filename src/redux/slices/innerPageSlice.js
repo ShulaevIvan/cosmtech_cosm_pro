@@ -407,10 +407,16 @@ const initialState = {
             vacancyTitle: '',
             policyActive: false,
             sendBtnActive: false,
+            checkboxStatus: false,
+            haapyStatePopup: {
+                active: false,
+                data: '',
+            },
             sendData: {
                 name: '',
                 phone: '',
                 file: '',
+                vacancy: ''
             },
             inputs: [
                 {
@@ -452,6 +458,7 @@ export const getAvalibleVacancy = createAsyncThunk(
     'api/vacancy/',
     async (sendData) => {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/vacancy/`, {
+            method: 'GET',
             headers: {
                 'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
                 'Content-Type': 'application/json',
@@ -463,6 +470,24 @@ export const getAvalibleVacancy = createAsyncThunk(
         return data;
     }
 );
+
+export const sendVacancyRequest = createAsyncThunk(
+    'api/vacancy/(post)',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/vacancy/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sendData)
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+)
 
 export const sendServiceOrderThunk = createAsyncThunk(
     'sendServiceOrder',
@@ -804,10 +829,19 @@ const innerPageSlice = createSlice({
         },
         showJobPopup(state, action) {
             const { vacancy, status } = action.payload;
+            if (!status) {
+                state.jobPage.jobPopup = initialState.jobPage.jobPopup;
+                return;
+            }
             state.jobPage.jobPopup = {
                 ...state.jobPage.jobPopup,
+                haapyStatePopup: {
+                    ...state.jobPage.jobPopup.haapyStatePopup,
+                    active: false
+                },
                 inputs: initialState.jobPage.jobPopup.inputs,
                 active: status,
+                vacancyTitle: vacancy.name,
                 vacancyActive: status ? vacancy : {},
             }
         },
@@ -820,14 +854,16 @@ const innerPageSlice = createSlice({
                 if (inputValue.length === 18) return;
                 inputValid = inputValidValue.length === 18 ? true : false;
             }
-            else if (inputType === 'name') {
+            if (inputType === 'name') {
                 inputValidValue = inputValue;
                 inputValid = validateName(inputValue);
             }
-            else if (inputType === 'file') {
-                inputValidValue = inputValue ? inputValue : {};
-                inputValid = inputValue ? true : false
+            if (inputType === 'file') {
+                console.log(inputValue)
+                inputValidValue = inputValue && inputValue.name ? inputValue : {};
+                inputValid = inputValue && inputValue.name ? true : false
             }
+            
             state.jobPage.jobPopup.inputs = state.jobPage.jobPopup.inputs.map((inputItem) => {
                 if (inputItem.name === inputType) {
                     return {
@@ -837,20 +873,31 @@ const innerPageSlice = createSlice({
                     }
                 }
                 return inputItem;
-            })
+            });
+
+            const file = state.jobPage.jobPopup.inputs.find((item) => item.name === 'file');
+
+            state.jobPage.jobPopup.sendData = {
+                name: state.jobPage.jobPopup.inputs.find((item) => item.name === 'name').value,
+                phone: state.jobPage.jobPopup.inputs.find((item) => item.name === 'phone').value,
+                file: file ? file.value : '',
+                vacancy: state.jobPage.jobPopup.vacancyTitle,
+            }
+        },
+        jobPolicyActive(state, action) {
+            const { status } = action.payload;
+            state.jobPage.jobPopup.checkboxStatus = status;
         },
         jobSendBtnActive(state, action) {
             const { status } = action.payload;
-            if (status) {
-                state.jobPage.jobPopup.sendData = {
-                    name: state.jobPage.jobPopup.inputs.find((item) => item.name === 'name'),
-                    phone: state.jobPage.jobPopup.inputs.find((item) => item.name === 'phone'),
-                    file: state.jobPage.jobPopup.inputs.find((item) => item.name === 'file')
-                }
-                state.jobPage.jobPopup.sendBtnActive = status;
-                return;
-            }
             state.jobPage.jobPopup.sendBtnActive = status;
+        },
+        jobHappyStatePopupShow(state, action) {
+            const { status } = action.payload;
+            state.jobPage.jobPopup.haapyStatePopup = {
+                ...state.jobPage.jobPopup.haapyStatePopup,
+                active: status,
+            };
         }
     },
     
@@ -901,7 +948,23 @@ const innerPageSlice = createSlice({
                     active: false,
                 }
             });
-        });
+        })
+        .addCase(sendVacancyRequest.fulfilled, (state, action) => {
+            const { status, data } = action.payload;
+            if (status === 'ok' && data) {
+                state.jobPage.jobPopup = {
+                    ...state.jobPage.jobPopup,
+                    active: false,
+                    haapyStatePopup: {
+                        ...state.jobPage.jobPopup.haapyStatePopup,
+                        active: true,
+                        data: data
+                    }
+                }
+                return;
+            }
+            state.jobPage.jobPopup.haapyStatePopup = initialState.jobPage.jobPopup.haapyStatePopup;
+        })
     }
 });
 
@@ -926,6 +989,8 @@ export const {
     showMoreVacanyDescription,
     showJobPopup,
     validateJobForm,
-    jobSendBtnActive
+    jobPolicyActive,
+    jobSendBtnActive,
+    jobHappyStatePopupShow
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

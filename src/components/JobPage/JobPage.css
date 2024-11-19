@@ -38,7 +38,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 .job-item-title-group .departament-title {
     color: #1E1E1E;
@@ -61,6 +61,28 @@
 }
 .job-item-title-group h3 {
     font-size: 22px;
+}
+.job-item-main-title-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.job-item-main-title {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 70%;
+    max-width: 70%;
+}
+.job-item-salary-title {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    max-width: 30%;
+    align-items: end;
+
 }
 .job-item-description,
 .job-item-description-full {
@@ -163,7 +185,8 @@
 }
 .job-item-send-request-btn:hover,
 .job-form-send-btn:hover,
-.job-form-file-input-wrap:hover {
+.job-form-file-input-wrap:hover,
+.job-happy-state-close-btn:hover {
     background-color: #00458B;
     transition: background .4s ease;
 }
@@ -324,7 +347,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-width: 30%;
+    max-width: 50%;
     margin-left: 10px;
     overflow: hidden;
 }
@@ -398,4 +421,59 @@
     border-color: #000;
     background-image: url('../../../src/img/form_checkbox_checked.svg');
     background-size: contain;
+}
+.job-form-happy-state-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    max-width: 400px;
+    min-height: 250px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.job-form-happy-state-title-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+}
+.job-form-happy-state-description {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.job-form-happy-state-description p {
+    margin: 0;
+    text-align: center;
+}
+.job-happy-state-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    max-width: 150px;
+    height: 30px;
+    padding: 0 30px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
 }

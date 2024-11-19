@@ -6,6 +6,15 @@ const JobForm = (props) => {
     const jobState = props.jobState;
     const uploadFileName = jobState.jobPopup.inputs.find((item) => item.name === 'file' && item.value);
 
+    const checkSendBtn = () => {
+        if (jobState.jobPopup.sendBtnActive && 
+                jobState.jobPopup.checkboxStatus && 
+                    jobState.jobPopup.sendData.name && jobState.jobPopup.sendData.phone) {
+            return true;
+        }
+        return false;
+    }
+
     return (
         <React.Fragment>
             <div className="job-form-popup-background">
@@ -64,9 +73,13 @@ const JobForm = (props) => {
                     </div>
                     <div className="job-form-policy-wrap">
                         <div className="form-mode-checkbox">
-                            <input 
+                            <input
+                                ref={props.findInputRef('checkbox')}
+                                onClick={() => props.policyHandler(jobState.jobPopup.checkboxStatus ? false : true)}
                                 type="checkbox" 
-                                id="job-form-policy-checkbox" className="job-form-policy-checkbox" />
+                                id="job-form-policy-checkbox" 
+                                className="job-form-policy-checkbox"
+                            />
                             <label htmlFor="job-form-policy-checkbox"></label>
                             <span>согласен с <Link 
                                 to={'/about/policy'}
@@ -78,7 +91,10 @@ const JobForm = (props) => {
 
                     <div className="job-form-send-btn-wrap">
                         <span 
-                            className={jobState.jobPopup.sendBtnActive ? 'job-form-send-btn' : 'job-form-send-btn btnDisabled'}
+                            className={checkSendBtn() ? 
+                                'job-form-send-btn' : 'job-form-send-btn btnDisabled'
+                            }
+                            onClick={props.sendJobHandler}
                         >Отправить</span>
                     </div>
                 </div>
