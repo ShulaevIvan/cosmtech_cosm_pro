@@ -477,3 +477,182 @@
     border-radius: 5px;
     margin-top: 20px;
 }
+@media (max-width: 992px) {
+    .job-main-row {
+        max-width: 900px;
+    }
+}
+@media (max-width: 992px) {
+    .job-item-wrap {
+        max-width: 380px;
+    }
+}
+@media (max-width: 992px) {
+    .job-form-popup-wrap  {
+        min-height: 375px;
+    }
+}
+
+@media (max-width: 992px) {
+    .job-item-controls-wrap  {
+        padding: 0;
+        bottom: -15px;
+    }
+}
+@media (max-width: 992px) {
+    .job-form-inputs-row {
+        max-width: 100%;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+@media (min-width: 700px) and (max-width: 850px) {
+    .job-item-wrap {
+        max-width: 40%;
+        min-height: auto;
+    }
+}
+@media (min-width: 700px) and (max-width: 850px) {
+    .job-item-wrap:nth-child(even) {
+        margin-right: 20px;
+    }
+}
+@media (min-width: 700px) and (max-width: 850px) {
+    .job-item-wrap:nth-child(odd) {
+        margin-left: 20px;
+    }
+}
+@media (min-width: 700px) and (max-width: 850px) {
+    .job-item-controls-wrap  {
+        padding: 0;
+        bottom: -10px;
+    }
+}
+@media (min-width: 700px) and (max-width: 850px) {
+    .job-item-send-request-btn  {
+        width: 60px;
+    }
+}
+@media (min-width: 700px) and (max-width: 850px) {
+    .job-item-salary-title,
+    .job-item-main-title  {
+        width: 100%;
+        max-width: 100%;
+        align-items: start;
+        justify-content: center;
+    }
+}
+@media (max-width: 800px) {
+    .job-main-row  {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media (max-width: 800px) {
+    .job-item-wrap  {
+        width:80%;
+        max-width: 80%;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 800px) {
+    .job-item-salary-title,
+    .job-item-main-title  {
+        width: 100%;
+        max-width: 100%;
+        align-items: start;
+        justify-content: center;
+    }
+}
+@media (max-width: 800px) {
+    .job-item-send-request-btn  {
+        width: 60px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 850px) {
+    .job-form-input input {
+        max-width: 150px;
+    }
+}
+@media (max-width: 800px) {
+    .job-form-popup-background {
+        display: flex;
+        position: fixed;
+        left: 28%;
+        transform: translate(-25%, -25%);
+        width: 75%;
+        z-index: 5;
+    }
+}
+@media (max-width: 800px) {
+    .job-form-policy-wrap {
+        font-size: 13px;
+    }
+}
+@media (max-width: 800px) {
+    .job-form-policy-wrap {
+        font-size: 13px;
+    }
+}
+@media (max-width: 800px) {
+    .job-form-popup-wrap {
+        min-height: 400px;
+    }
+}
+@media (max-width: 800px) {
+    .job-form-send-btn-wrap {
+        bottom: 5%;
+    }
+}
+@media (max-width: 800px) {
+    .job-form-input-wrap {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+@media (max-width: 800px) {
+    .job-form-input-wrap input{
+        max-width: 200px
+    }
+}
+
+
+
+/* @media (max-width: 800px) {
+    .job-form-input-wrap input {
+        width: 100%;
+    }
+}
+@media (max-width: 800px) {
+    .job-form-policy-wrap {
+        font-size: 14px;
+    }
+}
+@media (max-width: 800px) {
+    .job-form-popup-wrap {
+        min-height: 400px;
+    }
+} */
+
+
+
+
+/* # Mobile
+only screen and (min-width: 480px)
+
+# Tablet
+only screen and (min-width: 768px) 
+
+# Desktop
+only screen and (min-width: 992px)
+
+# Huge
+only screen and (min-width: 1280px)  */
