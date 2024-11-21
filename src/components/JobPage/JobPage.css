@@ -16,6 +16,9 @@
     justify-content: space-between;
     align-items: baseline;
     z-index: 1;
+    animation: vacancy-fadeOut;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
 }
 .job-item-wrap {
     display: flex;
@@ -95,6 +98,7 @@
 }
 .description-full-active {
     max-height: 100%;
+    transition: max-height 0.20s ease-in;
 }
 .job-item-description p {
     margin: 0;
@@ -219,9 +223,13 @@
     position: absolute;
     z-index: 5;
     padding: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 69, 139, 0.5);
     border-radius: 10px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation-name: vacancy-fadeIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
 }
 .job-form-wrap {
     display: flex;
@@ -477,6 +485,42 @@
     border-radius: 5px;
     margin-top: 20px;
 }
+.job-page-vacancy-empty-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 600px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+@keyframes vacancy-fadeOut {
+    0% {opacity:0;}
+    100% {
+        opacity:1;
+    }
+}
+@keyframes vacancy-fadeIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(0px, 10%, 0px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (max-width: 992px) {
+    .job-page-vacancy-empty-wrap {
+        max-width: 900px;
+        width: 80%;
+    }
+}
 @media (max-width: 992px) {
     .job-main-row {
         max-width: 900px;
@@ -621,6 +665,14 @@
 @media (max-width: 800px) {
     .job-form-input-wrap input{
         max-width: 200px
+    }
+}
+@media (max-width: 800px) {
+    .job-form-happy-state-wrap {
+        width:80%;
+        max-width: 80%;
+        flex-direction: column;
+        flex-wrap: wrap;
     }
 }
 

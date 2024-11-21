@@ -405,10 +405,6 @@ const QuizMainPage = (props) => {
         
     }, [quizState.currentStep]);
 
-    useEffect(() => {
-        console.log(quizState.quizHappyState)
-    }, [quizState.quizHappyState])
-
     return (
         <React.Fragment>
             <div className="quiz-mainpage-popup-background" ref={popupWrapRef}>

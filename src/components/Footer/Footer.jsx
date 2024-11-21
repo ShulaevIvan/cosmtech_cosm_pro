@@ -77,7 +77,7 @@ const Footer = () => {
                                         className={footerState.footerFormCallbackValid ? null : 'input-err'}
                                         ref={footerCallbackRef}
                                         value={footerState.footerFormCallbackValue}
-                                        placeholder={'8 xxx xxx-xx-xx'}
+                                        placeholder={'8 xxx xxx xx xx'}
                                         onChange={footerCallbackInputHandler} type="tel"
                                         onKeyDown={(e) => clearInputFooterCallback(e)}
                                     />

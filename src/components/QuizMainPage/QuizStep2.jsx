@@ -31,8 +31,6 @@ const QuizStep2 = (props) => {
         props.validateStep();
     }, [stepData.deadLineItems, stepData.deadLineCustomField]);
 
-    console.log(stepData)
-
     return (
         <React.Fragment>
             <div className="step-main-wrap">

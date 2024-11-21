@@ -105,7 +105,7 @@ const MainPageOrderForm = (props) => {
                 </div>
                 <div className="hero-order-form-wrap">
                     <form className="hero-order-form">
-                        <div className="hero-order-form-mode-wrap">
+                        {/* <div className="hero-order-form-mode-wrap">
                             <div className="form-mode-checkbox">
                                 <input type="checkbox" id="checkbox-custom-hero-form" className="checkbox-custom-hero-form" />
                                 <label 
@@ -114,7 +114,7 @@ const MainPageOrderForm = (props) => {
                                 ></label>
                                 <span>Уточнить</span>
                             </div>
-                        </div>
+                        </div> */}
                         {orderFormState.additionalFields.fieldsActive ? 
                             <div className="hero-order-additional-fields-wrap">
                                 {orderFormState.additionalFields.fieldsTypes.map((fieldBlock) => {

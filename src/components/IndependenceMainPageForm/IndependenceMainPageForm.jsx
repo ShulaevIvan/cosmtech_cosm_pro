@@ -82,7 +82,7 @@ const IndependenceMainPageForm = (props) => {
                                     className={!independenceFormState.phoneFieldValid ? 'input-err' : null} 
                                     ref={phoneInputRef} 
                                     type="tel" 
-                                    placeholder="8 xxx xx xx"
+                                    placeholder="8 xxx xxx xx xx"
                                     autoComplete={'off'}
                                     value={independenceFormState.phoneFieldValue}
                                     onChange={() => formInputHandler('phone', phoneInputRef.current.value)}

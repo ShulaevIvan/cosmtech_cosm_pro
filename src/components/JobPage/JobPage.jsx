@@ -122,6 +122,18 @@ const JobPage = () => {
                                 sendJobHandler={sendJobRequestHandler}
                             />
                         : null}
+                        {!jobState.vacancyList || jobState.vacancyList.length === 0 ? 
+                            <React.Fragment>
+                                <div className="job-page-vacancy-empty-wrap">
+                                    <div className="job-page-vacancy-description">
+                                        <p>К сожалению, вакансий сейчас нет, 
+                                            но вы можете отправить нам свое резюме на электронную почту  <a href="mailto:pro@comsteh.ru">pro@cosmtech.ru.</a>
+                                        </p>
+                                        <p>Мы ценим каждый талант и готовы рассмотреть резюме в любом случае.</p>
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        : null}
                         <div className="job-main-row">
                             {jobState.vacancyList.length > 0 ? jobState.vacancyList.map((vacancyItem) => {
                                 return (

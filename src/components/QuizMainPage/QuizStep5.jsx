@@ -263,6 +263,7 @@ const QuizStep5 = (props) => {
                                             onChange={() => props.validateQuizOrder(inputNameRef.current, 'name')}
                                             onKeyDown={(e) => props.clearQuizInput(e, inputNameRef.current, 'name')}
                                             value={quizResult.resultOrderForm.name.value}
+                                            placeholder='Ваше имя'
                                             type="text"
                                             id="quiz-order-from-input-name"
                                         /> 
@@ -277,6 +278,7 @@ const QuizStep5 = (props) => {
                                             onChange={() => props.validateQuizOrder(inputPhoneRef.current, 'phone')}
                                             onKeyDown={(e) => props.clearQuizInput(e, inputNameRef.current, 'phone')}
                                             value={quizResult.resultOrderForm.phone.value}
+                                            placeholder="8xxx xxx xx xx"
                                             type="text"
                                             id="quiz-order-from-input-phone"
                                         /> 
@@ -291,6 +293,7 @@ const QuizStep5 = (props) => {
                                             onChange={() => props.validateQuizOrder(inputMailRef.current, 'email')}
                                             onKeyDown={(e) => props.clearQuizInput(e, inputNameRef.current, 'email')}
                                             value={quizResult.resultOrderForm.email.value}
+                                            placeholder='demo@......ru'
                                             type="email"
                                             id="quiz-order-from-input-email"
                                         /> 
