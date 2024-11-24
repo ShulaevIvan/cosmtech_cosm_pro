@@ -1184,6 +1184,69 @@
     border-left: 1px solid;
     height: 88%;
 }
+.our-team-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.our-team-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+.our-team-item-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 1 1 25%;
+    min-height: 320px;
+    max-width: 250px;
+    border: 1px solid;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+}
+.our-team-img-wrap {
+    width: 100%;
+    position: relative;
+}
+.our-team-img-wrap img {
+    width: 100%;
+    max-width: 250px;
+    max-height: 230px;
+}
+.our-team-item-info-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
+}
+.our-team-item-title-wrap,
+.our-team-item-description-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 0 5px 0;
+}
+.our-team-item-description-wrap {
+    height: 100%;
+    max-height: 100%;
+}
+.our-team-item-title-wrap h3,
+.our-team-item-description-wrap p {
+    margin: 0;
+}
+.our-team-item-title-wrap h4 {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
 
 @media (max-width: 800px) {
     .vacancy-header-row,
