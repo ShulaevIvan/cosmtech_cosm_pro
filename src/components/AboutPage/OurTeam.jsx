@@ -5,115 +5,114 @@ const OurTeam = () => {
     return (
         <React.Fragment>
             <div className="our-team-wrap">
-                <div class="about-title-wrap">
+                <div className="about-title-wrap">
                     <h2>Наша команда</h2>
                 </div>
                 <div className="our-team-row">
-                    <div className="our-team-item-wrap">
-                        <div className="our-team-img-wrap">
-                            <img src={demoTeam}  alt="Test"/>
+                    <div className="our-team-emploee-item-row">
+                        <div className="emploee-img-wrap">
+                            <img src={demoTeam} alt="test" />
                         </div>
-                        <div className="our-team-item-info-wrap">
-                            <div className="our-team-item-title-wrap">
-                                <h4>Title</h4>
+                        <div className="emploee-info-wrap">
+                            <div className="emploee-info-title-info">
+                                <h3>Name Second Name</h3>
+                                <h4 className="emploee-info-jobname">Должность</h4>
+                                <h5 className="emploee-info-workmail"><a href="#">workmail@cosmtech.ru</a></h5>
                             </div>
-                            <div className="our-team-item-description-wrap">
-                                <p>description</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="our-team-item-wrap">
-                        <div className="our-team-img-wrap">
-                            <img src={demoTeam}  alt="Test"/>
-                        </div>
-                        <div className="our-team-item-info-wrap">
-                            <div className="our-team-item-title-wrap">
-                                <h4>Title</h4>
-                            </div>
-                            <div className="our-team-item-description-wrap">
-                                <p>description</p>
-                            </div>
+                            <p className="emploee-info-description">
+                                Также как современная методология разработки создаёт необходимость включения в 
+                                производственный план целого ряда внеочередных мероприятий с 
+                                учётом комплекса дальнейших направлений развития. 
+                            </p>
                         </div>
                     </div>
-                    <div className="our-team-item-wrap">
-                        <div className="our-team-img-wrap">
-                            <img src={demoTeam}  alt="Test"/>
+                    <div className="our-team-emploee-item-row">
+                        <div className="emploee-img-wrap">
+                            <img src={demoTeam} alt="test" />
                         </div>
-                        <div className="our-team-item-info-wrap">
-                            <div className="our-team-item-title-wrap">
-                                <h4>Title</h4>
+                        <div className="emploee-info-wrap">
+                            <div className="emploee-info-title-info">
+                                <h3>Name Second Name</h3>
+                                <h4 className="emploee-info-jobname">Должность</h4>
+                                <h5 className="emploee-info-workmail"><a href="#">workmail@cosmtech.ru</a></h5>
                             </div>
-                            <div className="our-team-item-description-wrap">
-                                <p>description</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="our-team-item-wrap">
-                        <div className="our-team-img-wrap">
-                            <img src={demoTeam}  alt="Test"/>
-                        </div>
-                        <div className="our-team-item-info-wrap">
-                            <div className="our-team-item-title-wrap">
-                                <h4>Title</h4>
-                            </div>
-                            <div className="our-team-item-description-wrap">
-                                <p>description</p>
-                            </div>
+                            <p className="emploee-info-description">
+                                Также как современная методология разработки создаёт необходимость включения в 
+                                производственный план целого ряда внеочередных мероприятий с 
+                                учётом комплекса дальнейших направлений развития. 
+                            </p>
                         </div>
                     </div>
-                    <div className="our-team-item-wrap">
-                        <div className="our-team-img-wrap">
-                            <img src={demoTeam}  alt="Test"/>
+                    <div className="our-team-emploee-item-row">
+                        <div className="emploee-img-wrap">
+                            <img src={demoTeam} alt="test" />
                         </div>
-                        <div className="our-team-item-info-wrap">
-                            <div className="our-team-item-title-wrap">
-                                <h4>Title</h4>
+                        <div className="emploee-info-wrap">
+                            <div className="emploee-info-title-info">
+                                <h3>Name Second Name</h3>
+                                <h4 className="emploee-info-jobname">Должность</h4>
+                                <h5 className="emploee-info-workmail"><a href="#">workmail@cosmtech.ru</a></h5>
                             </div>
-                            <div className="our-team-item-description-wrap">
-                                <p>description</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="our-team-item-wrap">
-                        <div className="our-team-img-wrap">
-                            <img src={demoTeam}  alt="Test"/>
-                        </div>
-                        <div className="our-team-item-info-wrap">
-                            <div className="our-team-item-title-wrap">
-                                <h4>Title</h4>
-                            </div>
-                            <div className="our-team-item-description-wrap">
-                                <p>description</p>
-                            </div>
+                            <p className="emploee-info-description">
+                                Также как современная методология разработки создаёт необходимость включения в 
+                                производственный план целого ряда внеочередных мероприятий с 
+                                учётом комплекса дальнейших направлений развития. 
+                            </p>
                         </div>
                     </div>
-                    <div className="our-team-item-wrap">
-                        <div className="our-team-img-wrap">
-                            <img src={demoTeam}  alt="Test"/>
+                    <div className="our-team-emploee-item-row">
+                        <div className="emploee-img-wrap">
+                            <img src={demoTeam} alt="test" />
                         </div>
-                        <div className="our-team-item-info-wrap">
-                            <div className="our-team-item-title-wrap">
-                                <h4>Title</h4>
+                        <div className="emploee-info-wrap">
+                            <div className="emploee-info-title-info">
+                                <h3>Name Second Name</h3>
+                                <h4 className="emploee-info-jobname">Должность</h4>
+                                <h5 className="emploee-info-workmail"><a href="#">workmail@cosmtech.ru</a></h5>
                             </div>
-                            <div className="our-team-item-description-wrap">
-                                <p>description</p>
-                            </div>
+                            <p className="emploee-info-description">
+                                Также как современная методология разработки создаёт необходимость включения в 
+                                производственный план целого ряда внеочередных мероприятий с 
+                                учётом комплекса дальнейших направлений развития. 
+                            </p>
                         </div>
                     </div>
-                    <div className="our-team-item-wrap">
-                        <div className="our-team-img-wrap">
-                            <img src={demoTeam}  alt="Test"/>
+                    <div className="our-team-emploee-item-row">
+                        <div className="emploee-img-wrap">
+                            <img src={demoTeam} alt="test" />
                         </div>
-                        <div className="our-team-item-info-wrap">
-                            <div className="our-team-item-title-wrap">
-                                <h4>Title</h4>
+                        <div className="emploee-info-wrap">
+                            <div className="emploee-info-title-info">
+                                <h3>Name Second Name</h3>
+                                <h4 className="emploee-info-jobname">Должность</h4>
+                                <h5 className="emploee-info-workmail"><a href="#">workmail@cosmtech.ru</a></h5>
                             </div>
-                            <div className="our-team-item-description-wrap">
-                                <p>description</p>
+                            <p className="emploee-info-description">
+                                Также как современная методология разработки создаёт необходимость включения в 
+                                производственный план целого ряда внеочередных мероприятий с 
+                                учётом комплекса дальнейших направлений развития. 
+                            </p>
+                        </div>
+                    </div>
+                    <div className="our-team-emploee-item-row">
+                        <div className="emploee-img-wrap">
+                            <img src={demoTeam} alt="test" />
+                        </div>
+                        <div className="emploee-info-wrap">
+                            <div className="emploee-info-title-info">
+                                <h3>Name Second Name</h3>
+                                <h4 className="emploee-info-jobname">Должность</h4>
+                                <h5 className="emploee-info-workmail"><a href="#">workmail@cosmtech.ru</a></h5>
                             </div>
+                            <p className="emploee-info-description">
+                                Также как современная методология разработки создаёт необходимость включения в 
+                                производственный план целого ряда внеочередных мероприятий с 
+                                учётом комплекса дальнейших направлений развития. 
+                            </p>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </React.Fragment>
     )
