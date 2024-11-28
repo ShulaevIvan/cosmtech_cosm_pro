@@ -124,7 +124,7 @@ const PrefooterMainPage = () => {
                                         ></label>
                                     </div>
                                     <div className="prefooter-form-checkbox-text">
-                                        <p>Я ознакомлен и согласен с <Link target={'_blank'} to={'about/policy'}>политикой конфидициальности</Link></p>
+                                        <p>Я ознакомлен и согласен с <Link target={'_blank'} to={'/policy'}>политикой конфидициальности</Link></p>
                                     </div>
                             
                                 </div>

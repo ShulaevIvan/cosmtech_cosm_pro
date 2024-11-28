@@ -33,11 +33,11 @@ const AboutPage = () => {
                     </div>
                 </div>
             </section>
-            <section>
+            {/* <section>
                 <div className="container">
                     <OurTeam />
                 </div> 
-            </section>
+            </section> */}
             <section>
                 <div className="container">
                     <div className="about-title-wrap">

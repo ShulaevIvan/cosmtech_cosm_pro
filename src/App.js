@@ -10,7 +10,7 @@ import './components/ReviewsMainPage/ReviewsMainPage.css';
 import './components/QuizMainPage/QuizMainPage.css';
 import './components/JobPage/JobPage.css';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import MainPage from './components/MainPage/MainPage';
 import ServicesPage from './components/ServicesPage/ServicesPage';
@@ -29,8 +29,8 @@ function App() {
               <Route path="*" replace={false} element={<MainPage />} /> 
               <Route path='/' element = {<MainPage />} />
               <Route path='/services' element = {<ServicesPage />} />
-              <Route path='/about/policy' element={<PolicyPage />}/>
-              <Route path='/about/job' element={<JobPage />} />
+              <Route path='/policy' element={<PolicyPage />}/>
+              <Route path='/job' element={<JobPage />} />
               <Route path='/about' element = {<AboutPage />} />
               <Route path='/contacts' element = {<ContactsPage />} />
           </Route>

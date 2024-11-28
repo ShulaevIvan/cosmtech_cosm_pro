@@ -345,7 +345,7 @@ const ContactsPageOrderForm = () => {
                                     onClick={() => checkboxPolicyHandler(orderFormState.contactsForm.checkboxPolicyStatus ? false : true)}
                                 ></label>
                                 <span className="contact-page-form-checkbox-description">
-                                    согласен с <Link target={'_blank'} to={'/about/policy'}>политикой конфидициальности</Link>
+                                    согласен с <Link target={'_blank'} to={'/policy'}>политикой конфидициальности</Link>
                                 </span>
                             </div>
                             <div className="contact-page-form-btn-wrap">

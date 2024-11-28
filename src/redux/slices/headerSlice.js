@@ -47,17 +47,17 @@ const initialState = {
         {
             id: 5,
             name: 'Политика конфиденциальности Косметические Технологии',
-            path: '/about/policy',
+            path: '/policy',
             title: 'test',
-            canonical: 'https://cosmtech.ru/about/policy/',
+            canonical: 'https://cosmtech.ru/policy/',
             description: 'Политика в отношении обработки персональных данных ООО &quot;Косметические Технологии&quot;',
         },
         {
             id: 6,
             name: 'Работа в компании Косметические Технологии',
-            path: '/about/job',
+            path: '/job',
             title: 'test',
-            canonical: 'https://cosmtech.ru/about/job/',
+            canonical: 'https://cosmtech.ru/job/',
             description: 'Вакансии в компании ООО &quot;Косметические Технологии&quot;',
         }
     ],

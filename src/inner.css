@@ -540,7 +540,7 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 40px;
 }
 .about-company-fact-item-wrap {
@@ -650,6 +650,7 @@
 .about-title-wrap h1,
 .about-title-wrap h2 {
     font-size: 34px;
+    margin: 0 0 20px 0;
 }
 .inner-page-consult-form-wrap {
     display: flex;

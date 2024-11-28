@@ -61,7 +61,7 @@ const initialState = {
     ],
     quizTz: {
         formBanner: {img: quizTzFormBanner, alt: 'отправить техзадание в Космотех'},
-        tzTemplateUrl: `${process.env.REACT_APP_BACKEND_URL}/company_files/tz/`,
+        tzTemplateUrl: `${process.env.REACT_APP_BACKEND_URL}/static/media/tz_template.docx`,
         quizFormInputs: [
             {
                 id: 1,

@@ -91,7 +91,7 @@ const initialState = {
             ]
         },
         { 
-            page: '/about/policy', 
+            page: '/policy', 
             backgroundImg: '/static/media/about.b6207ae7a6046a88abdf.jpg', 
             title: 'Политика',
             description: 'Политика в отношении обработки персональных данных ООО "Косметические Технологии" ',
@@ -106,13 +106,6 @@ const initialState = {
                 },
                 {
                     id: 2,
-                    name: 'О Нас',
-                    url: '/about',
-                    main: false,
-                    active: false,
-                },
-                {
-                    id: 3,
                     name: 'Политика',
                     url: '/policy',
                     main: false,
@@ -121,7 +114,7 @@ const initialState = {
             ]
         },
         { 
-            page: '/about/job', 
+            page: '/job', 
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
             title: 'Вакансии',
             description: 'Работа в ООО "Косметические Технологии" ',
@@ -136,13 +129,6 @@ const initialState = {
                 },
                 {
                     id: 2,
-                    name: 'О Нас',
-                    url: '/about',
-                    main: false,
-                    active: false,
-                },
-                {
-                    id: 3,
                     name: 'Вакансии',
                     url: '/job',
                     main: false,
