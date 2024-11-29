@@ -9,6 +9,7 @@ import './components/ForBuissness/ForBuissness.css';
 import './components/ReviewsMainPage/ReviewsMainPage.css';
 import './components/QuizMainPage/QuizMainPage.css';
 import './components/JobPage/JobPage.css';
+import './components/ForClients/ForClients.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';
@@ -18,6 +19,7 @@ import AboutPage from './components/AboutPage/AboutPage';
 import ContactsPage from './components/ContactsPage/ContactsPage';
 import PolicyPage from './components/PolicyPage/PolicyPage';
 import JobPage from './components/JobPage/JobPage';
+import ForClients from './components/ForClients/ForClients';
 
 function App() {
   
@@ -32,6 +34,7 @@ function App() {
               <Route path='/policy' element={<PolicyPage />}/>
               <Route path='/job' element={<JobPage />} />
               <Route path='/about' element = {<AboutPage />} />
+              <Route path='/forclients' element= {<ForClients />} />
               <Route path='/contacts' element = {<ContactsPage />} />
           </Route>
          

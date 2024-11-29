@@ -17,7 +17,7 @@ const initialState = {
             name: 'Контрактное производство косметики в Санкт-Петербурге',
             path: '/',
             title: 'test',
-            canonical: 'https://cosmtech.ru/',
+            canonical: 'https://cosmtech.ru',
             description: 'Разработаем, произведем и упакуем по вашему запросу косметику в необходимых объемах. Стм и Контрактное Производство Косметики в Санкт-Петербурге.',
         },
         {
@@ -25,7 +25,7 @@ const initialState = {
             name: 'Производство косметики на заказ',
             path: '/services',
             title: 'test',
-            canonical: 'https://cosmtech.ru/services/',
+            canonical: 'https://cosmtech.ru/services',
             description: 'Все услуги компании ООО Косметические Технологии. Производство косметики на заказ от от 15 000 рублей. Услуги колсметической лаборатории.',
         },
         {
@@ -33,7 +33,7 @@ const initialState = {
             name: 'О компании ООО Косметические Технологии',
             path: '/about',
             title: 'test',
-            canonical: 'https://cosmtech.ru/about/',
+            canonical: 'https://cosmtech.ru/about',
             description: 'Информация о российском производителе косметики ООО "Косметические Технологии"',
         },
         {
@@ -41,7 +41,7 @@ const initialState = {
             name: 'Контакты ООО Косметические Технологии',
             path: '/contacts',
             title: 'test',
-            canonical: 'https://cosmtech.ru/contacts/',
+            canonical: 'https://cosmtech.ru/contacts',
             description: 'Телефоны, email и мессенджеры для надежной связи с нашими клиентами',
         },
         {
@@ -49,7 +49,7 @@ const initialState = {
             name: 'Политика конфиденциальности Косметические Технологии',
             path: '/policy',
             title: 'test',
-            canonical: 'https://cosmtech.ru/policy/',
+            canonical: 'https://cosmtech.ru/policy',
             description: 'Политика в отношении обработки персональных данных ООО &quot;Косметические Технологии&quot;',
         },
         {
@@ -57,8 +57,16 @@ const initialState = {
             name: 'Работа в компании Косметические Технологии',
             path: '/job',
             title: 'test',
-            canonical: 'https://cosmtech.ru/job/',
+            canonical: 'https://cosmtech.ru/job',
             description: 'Вакансии в компании ООО &quot;Косметические Технологии&quot;',
+        },
+        {
+            id: 7,
+            name: 'Полезная информация для клиентов',
+            path: '/forclients',
+            title: 'test',
+            canonical: 'https://cosmtech.ru/forclients',
+            description: 'Информация для клиентов и дополнительные возможности по эффективному производству контрактной косметики"',
         }
     ],
     currentPathUrl: '',

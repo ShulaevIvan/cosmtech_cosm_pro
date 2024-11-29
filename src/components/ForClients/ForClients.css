@@ -1,0 +1,113 @@
+.for-clients-main-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 500px;
+}
+.for-clients-main-suppliers-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.for-clients-suppliers-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 45%;
+    max-width: 50%;
+    border: 1px solid;
+}
+.for-clients-supplier-main-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.clients-suppliers-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 97%;
+    padding: 10px;
+}
+.clients-supplier-item-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.clients-supplier-item-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.clients-supplier-item-head {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.clients-supplier-item-head-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 33%;
+}
+.clients-supplier-item-head-city,
+.clients-supplier-item-head-phone,
+.clients-supplier-item-head-logo {
+    display: flex;
+    flex-wrap: wrap;
+    width: 33%;
+    font-weight: bold;
+}
+.clients-supplier-item-head-phone,
+.clients-supplier-item-head-logo {
+    justify-content: center;
+}
+.clients-supplier-item-description {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 65%;
+    max-width: 100%;
+}
+.clients-supplier-item-description a {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 50%;
+}
+.clients-supplier-item-logo {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 35%;
+    max-width: 100%;
+    align-items: flex-end;
+}
+.clients-supplier-item-logo img {
+    max-width: 150px;
+}
+.clients-supplier-city {
+    font-weight: bold;
+    margin-left: 10px;
+}
+.clients-supplier-phone {
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 10px;
+}

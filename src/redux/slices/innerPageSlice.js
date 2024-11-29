@@ -6,7 +6,6 @@ import validateCity from "../../functions/validateCity";
 
 import backgroundServices from '../../img/services_bg.jpg';
 import backgroundAbout from '../../img/about.jpg';
-import backgroundPolicy from '../../img/about.jpg';
 import backgroundContacts from '../../img/contacts.jpg';
 import innerHeaderImg from '../../img/1920x400.png';
 import serviceLabImg from '../../img/service_lab.jpg';
@@ -131,6 +130,29 @@ const initialState = {
                     id: 2,
                     name: 'Вакансии',
                     url: '/job',
+                    main: false,
+                    active: true,
+                },
+            ]
+        },
+        { 
+            page: '/forclients', 
+            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            title: 'Для клиентов',
+            description: 'Полезная информация и дополнительные услуги ',
+            seoDescription: 'Полезная информация и дополнительная выгода для клиентов компании "Косметические Технологии"',
+            breadcrumbs: [
+                {
+                    id: 1,
+                    name: 'Контрактное производство',
+                    url: '/',
+                    main: true,
+                    active: false,
+                },
+                {
+                    id: 2,
+                    name: 'Клиентам',
+                    url: '/forclients',
                     main: false,
                     active: true,
                 },
@@ -433,6 +455,8 @@ const initialState = {
                 },
             ]
         }
+    },
+    forClientsPage: {
     },
     mousePosition: {
         left: 0,
