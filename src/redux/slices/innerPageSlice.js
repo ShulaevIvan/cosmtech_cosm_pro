@@ -457,6 +457,18 @@ const initialState = {
         }
     },
     forClientsPage: {
+        howToWorkSteps: [
+            {id: 1, name: 'Разрабатываем концепции', description: ''},
+            {id: 2, name: 'Создаем рецептуру', description: ''},
+            {id: 3, name: 'Подбор упаковки', description: ''},
+            {id: 4, name: 'Продумываем дизайн этикетки', description: ''},
+            {id: 5, name: 'step5', description: ''},
+            {id: 6, name: 'step6', description: ''},
+            {id: 7, name: 'step7', description: ''},
+            {id: 8, name: 'step8', description: ''},
+            {id: 9, name: 'step9', description: ''},
+            {id: 10, name: 'step10', description: ''},
+        ]
     },
     mousePosition: {
         left: 0,

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import supplerDemo from '../../img/supplersImages/suppler_demo.png';
 import proteiLogo from '../../img/supplersImages/protei.svg';
@@ -10,6 +11,8 @@ import vitaplastLogo from '../../img/supplersImages/vitaplast.svg';
 import cosmopackLogo from '../../img/supplersImages/cosmopack.svg';
 
 const ForClients = () => {
+    const forClientsState = useSelector((state) => state.innerPage.forClientsPage);
+
     return (
         <React.Fragment>
             <InnerPageHeader />
@@ -18,14 +21,20 @@ const ForClients = () => {
                 <section>
                     <div className="container">
                         <h2>Проверенные поставщики</h2>
-                        <div className="for-clients-main-suppliers-description">
-                            <p>Рыбатекст используется дизайнерами, 
-                                проектировщиками и фронтендерами, 
-                                когда нужно быстро заполнить макеты или прототипы содержимым. 
-                                Это тестовый контент, который не должен нести никакого смысла, 
-                                лишь показать наличие самого текста или продемонстрировать типографику в деле.
-                            </p>
+                        <div className="for-clients-main-suppliers-description-row">
+                            <div className="for-clients-main-suppliers-description">
+                                <p>
+                                    Поможем наладить прямые связи с проверенными поставщиками, 
+                                    чтобы вы могли сосредоточиться на своем бизнесе, оставаясь уверенными в качестве упаковки и дизайна для ваших продуктов.
+                                </p>
+                            </div>
+                            <div className="for-clients-main-suppliers-consult-wrap">
+                                <div className="for-clients-main-suppliers-consult-btn-wrap">
+                                    <Link className="for-clients-main-suppliers-consult-btn">Консультация</Link>
+                                </div>
+                            </div>
                         </div>
+                        
                         <div className="for-clients-main-suppliers-row">
                             <div className="for-clients-suppliers-item">
                                 <div className="for-clients-supplier-main-title">
@@ -36,7 +45,7 @@ const ForClients = () => {
                                         <div className="clients-supplier-item-head">
                                             <div className="clients-supplier-item-head-city">Город</div>
                                             <div className="clients-supplier-item-head-phone">Телефон</div>
-                                            <div className="clients-supplier-item-head-logo">Сайт</div>
+                                            <div className="clients-supplier-item-head-logo"></div>
                                         </div>
                                         <div className="clients-supplier-item-row">
                                             <div className="clients-supplier-item-description">
@@ -145,13 +154,23 @@ const ForClients = () => {
                 </section>
                 <section>
                     <div className="container">
-                        <h2>Обратная связь</h2>
-                    </div>
-                </section>
-                <section>
-                    <div className="container">
                         <h2>Порядок работы</h2>
+                        <div className="for-clients-howtowork-wrap">
+                        <ol>
+                            {forClientsState.howToWorkSteps.map((stepItem) => {
+                                return (
+                                    <React.Fragment key={stepItem.id}>
+                                        <li>
+                                            <p className="event-date">{stepItem.name}</p>
+                                            <p className="event-description">HTML Tags, an informal CERN document listing 18 HTML tags, was first mentioned in public.</p>
+                                        </li>
+                                    </React.Fragment>
+                                )
+                            })}
+                        </ol>
+                        </div>
                     </div>
+                   
                 </section>
                 <section>
                     <div className="container">
