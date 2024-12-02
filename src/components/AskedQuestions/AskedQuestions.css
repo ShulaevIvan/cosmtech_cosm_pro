@@ -58,10 +58,14 @@
     width: 100%;
     border: 1px solid #00458B;
     color: #1E1E1E;
-    max-width: 600px;
+    max-width: 630px;
     min-height: 50px;
+    max-height: 50px;
     margin-bottom: 20px;
     align-items: center;
+}
+.question-item-row.active {
+    max-height: 600px;
 }
 .question-item-title-wrap {
     display: flex;

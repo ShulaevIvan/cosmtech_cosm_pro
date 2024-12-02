@@ -90,6 +90,7 @@
     width: 100%;
     justify-content: space-between;
     align-items: baseline;
+    margin-bottom: 20px;
 }
 .for-clients-suppliers-item {
     display: flex;
@@ -99,6 +100,7 @@
     padding: 20px;
     border-radius: 10px;
     max-width: 50%;
+    min-height: 100%;
     box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 .for-clients-supplier-main-title {
@@ -134,6 +136,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin-bottom: 20px;
 }
 .clients-supplier-item-head {
     display: flex;
@@ -439,4 +442,78 @@
       border: var(--unit) solid transparent;
       border-right-color: #3FD2C7;
     }
+}
+.forclients-faq-main-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+.for-clients-question-item-row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 47%;
+  max-width: 47%;
+  border: 1px solid #00458B;
+  color: #1E1E1E;
+  min-height: 50px;
+  max-height: 50px;
+  margin-bottom: 20px;
+  padding: 10px;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+}
+.for-clients-question-item-row.active {
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+}
+.for-clients-question-title-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 80%;
+  padding: 5px;
+  text-align: left;
+}
+.for-clients-question-item-row h4 {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+.for-clients-question-btn-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 10%;
+  position: absolute;
+  top: 6%;
+  right: 5%;
+  min-height: 50px;
+}
+.for-clients-question-btn-more::before {
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  content: '\2795';
+  cursor: pointer;
+  font-size: 25px;
+  color: #00458B;
+}
+.rotate-for-clients-question-btn-more::before {
+  transform: rotate(250deg);
+  color:#3FD2C7;
+  right: 5%;
+  top: -5%;
+}
+.for-clients-question-item-description {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 100%;
+  width: 100%;
+  min-height: 250px;
 }
