@@ -16,6 +16,8 @@ import mdmLogo from '../../img/supplersImages/mdm.png';
 import rpkLogo from '../../img/supplersImages/rpkr.png';
 import alaskaLogo from '../../img/supplersImages/alaska.jpg';
 import gospodinLogo from '../../img/supplersImages/pechatnik.png';
+import telegramIcon from '../../img/telegram_footer.svg';
+import whatsappIcon from '../../img/whatsapp_footer.svg';
 
 const ForClients = () => {
     const forClientsState = useSelector((state) => state.innerPage.forClientsPage);
@@ -284,32 +286,50 @@ const ForClients = () => {
                 </section>
                 <section>
                     <div className="container">
-                        <h2>Часто задаваемые вопросы</h2>
+                        <h2>Ответы на часто задаваемые вопросы</h2>
                         <div className="forclients-faq-main-row">
                             {forClientsState.faqQuestions.map((faqItem) => {
                                 return (
                                     <React.Fragment key={faqItem.id}>
-                                        <div className={faqItem.active ? "for-clients-question-item-row active" : "for-clients-question-item-row"}>
-                                            <div className="for-clients-question-title-wrap"><h4>{faqItem.ask}</h4></div>
-                                            <div className="for-clients-question-btn-wrap">
-                                                <span 
-                                                    className={faqItem.active ? "for-clients-question-btn-more rotate-for-clients-question-btn-more" 
-                                                        : "question-item-btn-more"
-                                                    }
-                                                    onClick={() => faqDescriptionHandler(faqItem)}
+                                        <div className={faqItem.active ? "for-clients-faq-accordion-item active" : "for-clients-faq-accordion-item"}>
+                                            <div className="for-clients-faq-accordion-item-title">
+                                                <h4>{faqItem.ask}</h4>
+                                            </div>
+                                            <div 
+                                                className="for-clients-faq-accordion-item-btn-wrap"
+                                                onClick={() => faqDescriptionHandler(faqItem)}
+                                            >
+                                                <span className={faqItem.active ? 
+                                                    "for-clients-faq-accordion-item-btn active" : "for-clients-faq-accordion-item-btn"}
                                                 ></span>
                                             </div>
-                                            {faqItem.active ? 
-                                                <div className={"for-clients-question-item-description"}>
-                                                    asdasdasd
-                                                </div>
-                                            
-                                            : null}
+                                            <div className={faqItem.active ? 
+                                                'for-clients-faq-accordion-item-description active' : 'for-clients-faq-accordion-item-description'}>
+                                                <p>{faqItem.ans}</p>
+                                            </div>
                                         </div>
                                     </React.Fragment>
                                 )
                             })}
                         </div>
+                    </div>
+                </section>
+                <section>
+                    <div className="container">
+                        <h2>Не нашли что искали ?</h2>
+                        <div className="for-clients-not-found-row">
+                            <div className="for-clients-not-found-description">
+                                <p>
+                                    Вы можете задать интересующий вас вопрос 
+                                    в по телефону <Link to={'tel:78123630614'}>+7 (812) 363-06-14</Link>, в месседжарах,
+                                    написать нам на электронную почту <Link to={'mailto:pro@cosmtech.ru'} target={'_blank'}>pro@cosmtech.ru</Link> или отправить техническое задание.
+                                </p>
+                                <div className="for-clients-not-found-tz-wrap">
+                                    <a className="for-clients-not-found-tz-btn">Скачать шаблон тз</a>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </section>
             </div>
