@@ -3,21 +3,6 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import { forClientsFaqShowDescription } from "../../redux/slices/innerPageSlice";
-import supplerDemo from '../../img/supplersImages/suppler_demo.png';
-import proteiLogo from '../../img/supplersImages/protei.svg';
-import calculateLogo from '../../img/supplersImages/calculate.svg';
-import upakovkaLogo from '../../img/supplersImages/upakovka24.svg';
-import plasticKitLogo from '../../img/supplersImages/plasticKit.svg';
-import vitaplastLogo from '../../img/supplersImages/vitaplast.svg';
-import cosmopackLogo from '../../img/supplersImages/cosmopack.svg';
-import okilsatoLogo from '../../img/supplersImages/okilsato.svg';
-import stickylineLogo from '../../img/supplersImages/stickyline.png';
-import mdmLogo from '../../img/supplersImages/mdm.png';
-import rpkLogo from '../../img/supplersImages/rpkr.png';
-import alaskaLogo from '../../img/supplersImages/alaska.jpg';
-import gospodinLogo from '../../img/supplersImages/pechatnik.png';
-import telegramIcon from '../../img/telegram_footer.svg';
-import whatsappIcon from '../../img/whatsapp_footer.svg';
 
 const ForClients = () => {
     const forClientsState = useSelector((state) => state.innerPage.forClientsPage);
@@ -59,7 +44,7 @@ const ForClients = () => {
                                         <div className="clients-supplier-item-head">
                                             <div className="clients-supplier-item-head-city">Город</div>
                                             <div className="clients-supplier-item-head-phone">Телефон</div>
-                                            <div className="clients-supplier-item-head-logo"></div>
+                                            <div className="clients-supplier-item-head-logo">Сайт</div>
                                         </div>
                                         <div className="clients-supplier-item-row">
                                             <div className="clients-supplier-item-description">
@@ -71,7 +56,7 @@ const ForClients = () => {
                                                     to={'https://www.cosmopack.ru/kontakty'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={cosmopackLogo} alt="#" />
+                                                    Cosmopack
                                                 </Link>
                                             </div>
                                         </div>
@@ -87,7 +72,7 @@ const ForClients = () => {
                                                     to={'https://upakovka24.com/contacts/'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={upakovkaLogo} alt="#" />
+                                                    Upakovka24
                                                 </Link>
                                             </div>
                                         </div>
@@ -103,7 +88,7 @@ const ForClients = () => {
                                                     to={'https://www.calculate.ru/contacts'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={calculateLogo} alt="#" />
+                                                    Калкулейт
                                                 </Link>
                                             </div>
                                         </div>
@@ -119,7 +104,7 @@ const ForClients = () => {
                                                     to={'https://plastic-kit.ru/kontakty'} 
                                                     target={'_blank'}
                                                 >
-                                                    <img src={plasticKitLogo} alt="#" />
+                                                    Plastic-Kit
                                                 </Link>
                                             </div>
                                         </div>
@@ -135,7 +120,7 @@ const ForClients = () => {
                                                     to={'https://vitaplastpack.ru/contacts'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={vitaplastLogo} alt="#" />
+                                                    VitaPlastPack
                                                 </Link>
                                             </div>
                                         </div>
@@ -151,7 +136,7 @@ const ForClients = () => {
                                                     to={'https://zavodprotey.ru/contacts'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={proteiLogo} alt="#" />
+                                                    Протей
                                                 </Link>
                                             </div>
                                         </div>
@@ -167,7 +152,7 @@ const ForClients = () => {
                                         <div className="clients-supplier-item-head">
                                             <div className="clients-supplier-item-head-city">Город</div>
                                             <div className="clients-supplier-item-head-phone">Телефон</div>
-                                            <div className="clients-supplier-item-head-logo"></div>
+                                            <div className="clients-supplier-item-head-logo">Сайт</div>
                                         </div>
                                         <div className="clients-supplier-item-row">
                                             <div className="clients-supplier-item-description">
@@ -179,7 +164,7 @@ const ForClients = () => {
                                                     to={'https://okil.ru/en/contact.html'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={okilsatoLogo} alt="#" />
+                                                    OKILSATO
                                                 </Link>
                                             </div>
                                         </div>
@@ -193,7 +178,7 @@ const ForClients = () => {
                                                     to={'https://stickyline.ru/contacts/'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={stickylineLogo} alt="#" />
+                                                    StickyLine
                                                 </Link>
                                             </div>
                                         </div>
@@ -208,7 +193,7 @@ const ForClients = () => {
                                                     to={'https://mdmprint.ru/contacts/'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={mdmLogo} alt="#" />
+                                                    MDMPrint
                                                 </Link>
                                             </div>
                                         </div>
@@ -223,7 +208,7 @@ const ForClients = () => {
                                                     to={'https://rpkgr.ru/kontakty/'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={rpkLogo} alt="#" />
+                                                    RPKGroup
                                                 </Link>
                                             </div>
                                         </div>
@@ -238,7 +223,7 @@ const ForClients = () => {
                                                     to={'https://www.alaskapof.ru/contacts/'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={alaskaLogo} alt="#" />
+                                                    Аляска
                                                 </Link>
                                             </div>
                                         </div>
@@ -253,7 +238,7 @@ const ForClients = () => {
                                                     to={'https://gospechatnik.ru/'}
                                                     target={'_blank'}
                                                 >
-                                                    <img src={gospodinLogo} alt="#" />
+                                                    Господин-Печатник
                                                 </Link>
                                             </div>
                                         </div>
