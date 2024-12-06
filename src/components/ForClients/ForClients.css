@@ -22,8 +22,9 @@
   justify-content: space-between;
   position: relative;
   background: #f5f5f5;
+  font-size: 18px;
   margin-bottom: 40px;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
 }
 .for-clients-main-suppliers-description-row::before {
   content: '';
@@ -76,7 +77,8 @@
   border-radius: 4px;
 }
 .for-clients-main-suppliers-consult-btn:hover,
-.for-clients-not-found-tz-btn:hover {
+.for-clients-not-found-tz-btn:hover,
+.for-clients-get-consult-btn:hover {
   background-color: #00458B;
   transition: background .4s ease;
   color: white;
@@ -91,7 +93,7 @@
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: 20px;
 }
 .for-clients-suppliers-item {
@@ -102,9 +104,9 @@
   padding: 20px;
   border-radius: 10px;
   max-width: 50%;
-  min-height: 100%;
   background-color: whitesmoke;
   border-radius: 10px;
+  margin-bottom: 40px;
 }
 .for-clients-supplier-main-title {
   display: flex;
@@ -451,7 +453,15 @@ color: #1E1E1E;
     border-right-color: #3FD2C7;
   }
 }
-
+.for-clients-howtowork-send-consult-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
 .forclients-faq-main-row {
   display: flex;
   flex-direction: row;
@@ -572,4 +582,154 @@ color: #1E1E1E;
 }
 .for-clients-not-found-tz-wrap a:hover {
   text-decoration: none;
+}
+.for-clients-suppliers-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: #f5f5f5;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid rgba(30, 30, 30, 0.1);
+}
+.for-clients-suppliers-logo-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 97%;
+  padding: 20px;
+  justify-content:space-between;
+}
+.for-clients-suppliers-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16.66%;
+  border: 1px solid rgba(30, 30, 30, 0.1);
+  max-width: 16.66%;
+  height: 100px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+}
+.for-clients-consult-form-background {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 5;
+}
+.for-clients-consult-from-row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 460px;
+  min-height: 250px;
+  padding: 20px;
+  position: relative;
+  margin: 0 auto;
+  background-color: white;
+  top: 25%;
+  border-radius: 10px;
+  border: 1px solid #00458B;
+}
+.for-clients-inputs-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.for-clients-consult-input-item-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+  margin-right: 20px;
+  max-width: 50%;
+}
+.for-clients-consult-input-item-wrap:nth-child(2) {
+  margin: 0;
+}
+.for-clients-consult-input-label-wrap,
+.for-clients-consult-input-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.for-clients-consult-input-label-wrap label {
+  width: 100%;
+  max-width: 240px;
+  align-items: center;
+  color: #00458B;
+  font-family: gothampro bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.for-clients-consult-input-wrap input {
+  max-width: 260px;
+  min-height: 25px;
+}
+.for-clients-consult-main-title-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 15%;
+}
+.for-clients-consult-main-title-form h3 {
+  font-size: 20px;
+}
+.for-clients-get-consult-btn-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 15%;
+}
+.for-clients-get-consult-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 35px;
+  padding: 0 40px;
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  -webkit-user-select: none;
+  user-select: none;
+  background: #3FD2C7;
+  padding: 0 40px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 4px;
+}
+.for-clients-consult-popup-close-btn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  right: 2%;
+  top: 7%;
+  background-image: url("../../img/close_popup.svg");
+}
+.for-clients-consult-popup-close-btn:hover {
+  background-image: url("../../img/close_popup_hover.svg");
 }

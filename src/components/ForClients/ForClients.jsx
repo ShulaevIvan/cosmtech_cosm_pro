@@ -1,8 +1,16 @@
 import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { 
+    forClientsFaqShowDescription, 
+    getAvalibleSuppliers,
+    getAvalibleSuppliersType,
+    showForClientsConsultForm
+} from "../../redux/slices/innerPageSlice";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
-import { forClientsFaqShowDescription } from "../../redux/slices/innerPageSlice";
+import ForClientsConsultForm from "./ForClientsConsultForm";
+
 
 const ForClients = () => {
     const forClientsState = useSelector((state) => state.innerPage.forClientsPage);
@@ -12,14 +20,42 @@ const ForClients = () => {
         dispatch(forClientsFaqShowDescription({faqId: faqItem.id}))
     };
 
+    const consultPopupHandler = (status) => {
+        dispatch(showForClientsConsultForm({status: status}));
+    };
+
+    useEffect(() => {
+        dispatch(getAvalibleSuppliersType());
+        dispatch(getAvalibleSuppliers());
+    }, []);
+
+
     return (
         <React.Fragment>
             <InnerPageHeader />
 
             <div className="for-clients-main-wrap">
                 <section>
+                    {forClientsState.consultForm.active ? 
+                        <ForClientsConsultForm 
+                            popupHandler={consultPopupHandler}
+                        /> 
+                    : null}
                     <div className="container">
                         <h2>Проверенные поставщики</h2>
+                        <div className="for-clients-suppliers-logo-wrap">
+                            <div className="for-clients-suppliers-logo-row">
+                                {forClientsState.suppliersLogo.map((logoItem) => {
+                                    return (
+                                        <React.Fragment key={logoItem.id}>
+                                            <div className="for-clients-suppliers-logo-item">
+                                                <img src={logoItem.img} alt={logoItem.altName} />
+                                            </div>
+                                        </React.Fragment>
+                                    )
+                                })}
+                            </div>
+                        </div>
                         <div className="for-clients-main-suppliers-description-row">
                             <div className="for-clients-main-suppliers-description">
                                 <p>
@@ -29,222 +65,53 @@ const ForClients = () => {
                             </div>
                             <div className="for-clients-main-suppliers-consult-wrap">
                                 <div className="for-clients-main-suppliers-consult-btn-wrap">
-                                    <Link className="for-clients-main-suppliers-consult-btn">Консультация</Link>
+                                    <Link 
+                                        className="for-clients-main-suppliers-consult-btn"
+                                        onClick={() => consultPopupHandler(true)}
+                                    >Консультация</Link>
                                 </div>
                             </div>
                         </div>
                         
                         <div className="for-clients-main-suppliers-row">
-                            <div className="for-clients-suppliers-item">
-                                <div className="for-clients-supplier-main-title">
-                                    <h3>Упаковка</h3>
-                                </div>
-                                <div className="clients-suppliers-wrap">
-                                    <div className="clients-supplier-item-wrap">
-                                        <div className="clients-supplier-item-head">
-                                            <div className="clients-supplier-item-head-city">Город</div>
-                                            <div className="clients-supplier-item-head-phone">Телефон</div>
-                                            <div className="clients-supplier-item-head-logo">Сайт</div>
-                                        </div>
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                 Москва
-                                                <Link to={"tel:+74992838818"}>+7 (499) 283-88-18</Link>
+                            {forClientsState.suppliersType ? forClientsState.suppliersType.map((supplierTypeItem) => {
+                                return (
+                                    <React.Fragment key={supplierTypeItem.id}>
+                                        <div className="for-clients-suppliers-item">
+                                            <div className="for-clients-supplier-main-title">
+                                                <h3>{supplierTypeItem.name}</h3>
                                             </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://www.cosmopack.ru/kontakty'}
-                                                    target={'_blank'}
-                                                >
-                                                    Cosmopack
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="clients-supplier-item-wrap">
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Москва
-                                                <Link to={"tel:88005008942"}>8 (800) 500-89-42</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://upakovka24.com/contacts/'}
-                                                    target={'_blank'}
-                                                >
-                                                    Upakovka24
-                                                </Link>
+                                            <div className="clients-suppliers-wrap">
+                                                <div className="clients-supplier-item-head">
+                                                    <div className="clients-supplier-item-head-city">Город</div>
+                                                    <div className="clients-supplier-item-head-phone">Телефон</div>
+                                                    <div className="clients-supplier-item-head-logo">Сайт</div>
+                                                </div>
+                                                {forClientsState.suppliers.filter((item) => item.type === supplierTypeItem.name).map((supplierItem) => {
+                                                    return (
+                                                        <React.Fragment key={supplierItem.id + Math.random()}>
+                                                            <div className="clients-supplier-item-row">
+                                                                <div className="clients-supplier-item-description">
+                                                                    {supplierItem.city}
+                                                                    <Link to={`tel:${supplierItem.phonelink}`}>{supplierItem.phone}</Link>
+                                                                </div>
+                                                                <div className="clients-supplier-item-logo">
+                                                                    <Link 
+                                                                        to={`${supplierItem.url}`}
+                                                                        target={'_blank'}
+                                                                    >
+                                                                        {supplierItem.name}
+                                                                    </Link>
+                                                                </div>
+                                                            </div>
+                                                        </React.Fragment>
+                                                    )
+                                                })}
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="clients-supplier-item-wrap">
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                 Санкт-Петербург
-                                                <Link to={"tel:+78126330110"}>+7 (812) 633-01-10</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://www.calculate.ru/contacts'}
-                                                    target={'_blank'}
-                                                >
-                                                    Калкулейт
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="clients-supplier-item-wrap">
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Санкт-Петербург
-                                                <Link to={'tel:+78126027818'}>+7 (812) 602-78-18</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://plastic-kit.ru/kontakty'} 
-                                                    target={'_blank'}
-                                                >
-                                                    Plastic-Kit
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="clients-supplier-item-wrap">
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Москва
-                                                <Link href="+74959792288">+7 (495) 979-22-88</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://vitaplastpack.ru/contacts'}
-                                                    target={'_blank'}
-                                                >
-                                                    VitaPlastPack
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="clients-supplier-item-wrap">
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Санкт-Петербург
-                                                <Link to={'88003013774'}>8 (800) 301-37-74</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://zavodprotey.ru/contacts'}
-                                                    target={'_blank'}
-                                                >
-                                                    Протей
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="for-clients-suppliers-item">
-                                <div className="for-clients-supplier-main-title">
-                                    <h3>Дизайн</h3>
-                                </div>
-                                <div className="clients-suppliers-wrap">
-                                    <div className="clients-supplier-item-wrap">
-                                        <div className="clients-supplier-item-head">
-                                            <div className="clients-supplier-item-head-city">Город</div>
-                                            <div className="clients-supplier-item-head-phone">Телефон</div>
-                                            <div className="clients-supplier-item-head-logo">Сайт</div>
-                                        </div>
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Санкт-Петербург
-                                                <Link to={'+78123275737'}>+7 (812) 327-57-37</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://okil.ru/en/contact.html'}
-                                                    target={'_blank'}
-                                                >
-                                                    OKILSATO
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Санкт-Петербург
-                                                <Link to={'+78123356630'}>+7 (812) 335-66-30</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://stickyline.ru/contacts/'}
-                                                    target={'_blank'}
-                                                >
-                                                    StickyLine
-                                                </Link>
-                                            </div>
-                                        </div>
-
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Москва
-                                                <Link to={'+74952561000'}>+7 (495) 256-10-00</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://mdmprint.ru/contacts/'}
-                                                    target={'_blank'}
-                                                >
-                                                    MDMPrint
-                                                </Link>
-                                            </div>
-                                        </div>
-
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Санкт-Петербург
-                                                <Link to={'+78129859448'}>+7 (812) 985-94-48</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://rpkgr.ru/kontakty/'}
-                                                    target={'_blank'}
-                                                >
-                                                    RPKGroup
-                                                </Link>
-                                            </div>
-                                        </div>
-
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Санкт-Петербург
-                                                <Link to={'+78123803359'}>+7 (812) 380-33-59</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://www.alaskapof.ru/contacts/'}
-                                                    target={'_blank'}
-                                                >
-                                                    Аляска
-                                                </Link>
-                                            </div>
-                                        </div>
-
-                                        <div className="clients-supplier-item-row">
-                                            <div className="clients-supplier-item-description">
-                                                Санкт-Петербург
-                                                <Link to={'+78127708090'}>+7 (812) 770-80-90</Link>
-                                            </div>
-                                            <div className="clients-supplier-item-logo">
-                                                <Link 
-                                                    to={'https://gospechatnik.ru/'}
-                                                    target={'_blank'}
-                                                >
-                                                    Господин-Печатник
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    </React.Fragment>
+                                )
+                            }) : null}
                         </div>
                     </div>
                 </section>
@@ -267,6 +134,9 @@ const ForClients = () => {
                         </ol>
                         </div>
                     </div>
+                    <div className="for-clients-howtowork-send-consult-wrap">
+                        <a className="for-clients-not-found-tz-btn">Уточнить детали</a>
+                    </div>
                    
                 </section>
                 <section>
@@ -277,7 +147,10 @@ const ForClients = () => {
                                 return (
                                     <React.Fragment key={faqItem.id}>
                                         <div className={faqItem.active ? "for-clients-faq-accordion-item active" : "for-clients-faq-accordion-item"}>
-                                            <div className="for-clients-faq-accordion-item-title">
+                                            <div 
+                                                className="for-clients-faq-accordion-item-title" 
+                                                onClick={() => faqDescriptionHandler(faqItem)}
+                                            >
                                                 <h4>{faqItem.ask}</h4>
                                             </div>
                                             <div 
@@ -306,7 +179,8 @@ const ForClients = () => {
                             <div className="for-clients-not-found-description">
                                 <p>
                                     Вы можете задать интересующий вас вопрос 
-                                    в по телефону <Link to={'tel:78123630614'}>+7 (812) 363-06-14</Link>, в месседжарах,
+                                    в по телефону <Link to={'tel:78123630614'}>+7 (812) 363-06-14</Link>, 
+                                    в <Link to={'tel:78123630614'} target={'_blank'}>whatsapp</Link> / <Link to={'tel:78123630614'} target={'_blank'}>telegram</Link>,
                                     написать нам на электронную почту <Link to={'mailto:pro@cosmtech.ru'} target={'_blank'}>pro@cosmtech.ru</Link> или отправить техническое задание.
                                 </p>
                                 <div className="for-clients-not-found-tz-wrap">

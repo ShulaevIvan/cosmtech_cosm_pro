@@ -18,6 +18,19 @@ import aboutFactSecond from '../../img/production_cosm.svg';
 import aboutFactThird from '../../img/orders.svg';
 import aboutFactFourth  from '../../img/lab_cosm.svg';
 
+import supplierLogo from '../../img/supplersImages/suppler_demo.png';
+
+const importAllImages = (ctxWebpuck) => {
+    const images = {};
+    ctxWebpuck.keys().forEach((item, index) => { images[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
+    return images;
+};
+const suppliersImages = importAllImages(require.context('../../img/supplersImages', false, /\.(png|jpe?g|svg)$/));
+const { 
+    protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
+    okilsato, pechatnik2, rpkr, mdm, pechatnik, stickyline, alaska
+} = suppliersImages;
+
 const initialState = { 
     headerBackgrounds: [
         { 
@@ -457,121 +470,157 @@ const initialState = {
         }
     },
     forClientsPage: {
+        consultForm: {
+            active: false,
+            sendBtnActive: false,
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    value: '',
+                    placeholder: 'Ваше имя',
+                    valid: false,
+                },
+                {
+                    id: 2,
+                    title: 'Телефон',
+                    value: '',
+                    placeholder: '8xxxxxxxxxx',
+                    valid: false,
+                }
+            ]
+        },
+        suppliers: [],
+        suppliersType:[],
+        suppliersLogo: [
+            { id: 1, img: protei, altName: 'Поставщик упаковки Протей'},
+            { id: 2, img: plasticKit, altName: 'Поставщик упаковки PlasticKit'},
+            { id: 3, img: calculate, altName: 'Поставщик упаковки Калкулэйт'},
+            { id: 4, img: vitaplast, altName: 'Поставщик упаковки vitaplast'},
+            { id: 5, img: cosmopack, altName: 'Поставщик упаковки cosmopack'},
+            { id: 6, img: upakovka24, altName: 'Поставщик упаковки upakovka24'},
+            { id: 7, img: okilsato, altName: 'Услуги дизайна okilsato'},
+            { id: 8, img: stickyline, altName: 'Услуги дизайна Stickyline'},
+            { id: 9, img: rpkr, altName: 'Услуги дизайна RPKGroup'},
+            { id: 10, img: pechatnik, altName: 'Услуги дизайна Господин-Печатник'},
+            { id: 11, img: mdm, altName: 'Услуги дизайна MDMPrint'},
+            { id: 12, img: alaska, altName: 'Услуги дизайна Аляска'}
+        ],
         howToWorkSteps: [
-            {id: 1, name: 'Отправка заявки', description: 'отправляете заявку'},
-            {id: 2, name: 'Первичная консультация', description: 'получаете первичную консультацию по вашему проекту'},
-            {id: 3, name: 'Заполнение ТЗ (Бриф)', description: 'заполнение технического задания на основе ваших пожеланий'},
-            {id: 4, name: 'Расчет приблизительной стоимости', description: 'производим расчет стоимости на основе техзадания'},
-            {id: 5, name: 'Корректировка стоимости', description: 'корректировка стоимости если требуется'},
-            {id: 6, name: 'Подписание договора', description: 'юридическое оформление сделки'},
+            {id: 1, name: 'Отправка заявки', description: 'Отправляете заявку'},
+            {id: 2, name: 'Первичная консультация', description: 'Обсуждение производственных возможностей и мощностей'},
+            {id: 3, name: 'Заполнение ТЗ (Бриф)', description: 'Заполнение технического задания на основе ваших пожеланий'},
+            {id: 4, name: 'Расчет себестоимости', description: 'Производим расчет стоимости на основе техзадания'},
+            {id: 5, name: 'Корректировка стоимости', description: 'Корректировка стоимости если требуется'},
+            {id: 6, name: 'Подписание договора', description: 'Юридическое оформление сделки'},
             {id: 7, name: 'Создание рецептуры', description: 'создание рецептуры продукта'},
-            {id: 8, name: 'Подбор упаковки', description: 'Подбор и заказ упаковки у поставщиков.'},
-            {id: 9, name: 'Заказ дизайна', description: 'Заказ дизайна. У нас нет своих дизайнеров в штате.'},
-            {id: 10, name: 'Производство продукции', description: 'производство продукции на наших мощностях'},
-            {id: 11, name: 'Сертификация продукции', description: 'Сертификация продукции через партнеров'},
-            {id: 12, name: 'Доставка и отгрузка клиенту', description: 'Отгрузка клиенту, доставка по СПБ, транспортной компанией или самовывоз.'},
+            {id: 8, name: 'Получение заявки на производсвто', description: 'Согласование сроков производства'},
+            {id: 9, name: 'Подсчет и закупка необходимого сырья', description: 'Закупка необходимого сырья в срок от 1 до 2 недель'},
+            {id: 10, name: 'Производство продукции', description: 'Производство вашей продукции'},
+            {id: 11, name: 'Сертификация', description: 'Сертификация продукции через партнеров'},
+            {id: 12, name: 'Доставка и отгрузка', description: 'Отгрузка клиенту, доставка по СПБ, транспортной компанией или самовывоз.'},
         ],
         faqQuestions: [
             {
                 id: 1, 
                 ask: 'Вы можете закупить под заказ дополнительное сырье?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', 
                 active: false
             },
             {
                 id: 2, 
                 ask: 'Как доставляется готовая продукция?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Готовая продукция доставляется транспортными компаниями на ваш выбор.', 
                 active: false
             },
             {
                 id: 3, 
                 ask: 'Есть ли услуги по хранению готовой продукции на вашем складе?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Нет', 
                 active: false
             },
             {
                 id: 4, 
                 ask: 'Мне не нужна разработка рецептуры. Могу ли я воспользоваться вашими разработками?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Вы можете воспользоваться предложенными нами рецептурами.', 
                 active: false
             },
             {
                 id: 5, 
                 ask: 'Почему у вас платные пробники ?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Бесплатные пробники изготавливаются и корректируются до трёх раз, далее изготовление и корректировка платная.', 
                 active: false
             },
             {
                 id: 6, 
                 ask: 'Оказываете ли вы помощь со сбытом продукции и маркетинговым сопровождением?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Нет', 
                 active: false
             },
             {
                 id: 7, 
                 ask: 'Оформляете ли Вы Сертификаты?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Не оформляем, консультируем и предоставляем контакты по сертификации продукции. ', 
                 active: false
             },
             {
                 id: 8, 
                 ask: 'Могу ли я получить универсальный прайс-лист?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Прайс-листа на готовые рецептуры нет. Стоимость рецептуры зависит от сложности её разработки. ', 
                 active: false
             },
             {
                 id: 9, 
                 ask: 'Оказывает ли ваша компания услуги фасовки и этикетировки?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Да, оказываем полный производственный цикл.', 
                 active: false
             },
             {
                 id: 10, 
                 ask: 'Какие минимальные сроки производства?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Минимальный срок производства от 2-4-х недель, после поставки всех комплектующих и поступления предоплаты.', 
                 active: false
             },
             {
                 id: 11, 
                 ask: 'Когда я смогу получить первые образцы продукта?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Первые образцы готовы через 2-4 недели после согласования рецептуры.', 
                 active: false
             },
             {
                 id: 12, 
                 ask: 'У меня есть рецептура, можете ли вы ее доработать?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Да, можем доработать вашу рецептуру.', 
                 active: false
             },
             {
                 id: 13, 
                 ask: 'Как я могу отправить вам образцы?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Образцы можете отправить курьером.', 
                 active: false
             },
             {
                 id: 14, 
                 ask: 'У меня нет рецептуры. Можете ли вы произвести мой продукт?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Да, мы можем произвести ваш продукт и предложить свои рецептуры.', 
                 active: false
             },
             {
                 id: 15, 
                 ask: 'Печатаете ли вы этикетки?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Нет, предоставляем контакты типографий с кем уже сотрудничаем.', 
                 active: false
             },
             {
                 id: 16, 
                 ask: 'Что из себя представляют тестовые образцы?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'Тестовый образец представляет собой, изготовленный образец по вашей рецептуре в упаковке (диспенсер, банка, тубус, флакон) 100 мл.', 
                 active: false
             },
             {
                 id: 17, 
                 ask: 'Когда вы приступите к разработке рецептуры?', 
-                ans: 'получаете первичную консультацию по вашему проекту', 
+                ans: 'К разработке рецептуры приступаем сразу после обсуждения всех нюансов.', 
                 active: false
             }
         ]
@@ -581,6 +630,40 @@ const initialState = {
         top: 0,
     }
 };
+
+export const getAvalibleSuppliersType = createAsyncThunk(
+    'getSuppliersType',
+    async () => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/suppliers-type/`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+);
+
+export const getAvalibleSuppliers = createAsyncThunk(
+    'getSuppliers',
+    async () => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/suppliers/`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+);
 
 export const getAvalibleVacancy = createAsyncThunk(
     'api/vacancy/',
@@ -1038,6 +1121,13 @@ const innerPageSlice = createSlice({
                 }
                 return faqItem;
             })
+        },
+        showForClientsConsultForm(state, action) {
+            const { status } = action.payload;
+            state.forClientsPage.consultForm = {
+                ...state.forClientsPage.consultForm,
+                active: status
+            }
         }
     },
     
@@ -1105,6 +1195,14 @@ const innerPageSlice = createSlice({
             }
             state.jobPage.jobPopup.haapyStatePopup = initialState.jobPage.jobPopup.haapyStatePopup;
         })
+        .addCase(getAvalibleSuppliersType.fulfilled, (state, action) => {
+            const { data } = action.payload;
+            state.forClientsPage.suppliersType = [...data]
+        })
+        .addCase(getAvalibleSuppliers.fulfilled, (state, action) => {
+            const { data } = action.payload;
+            state.forClientsPage.suppliers = [...data].sort((a, b) => a.type.localeCompare(b.type));
+        })
     }
 });
 
@@ -1132,6 +1230,7 @@ export const {
     jobPolicyActive,
     jobSendBtnActive,
     jobHappyStatePopupShow,
-    forClientsFaqShowDescription
+    forClientsFaqShowDescription,
+    showForClientsConsultForm
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
