@@ -6,10 +6,16 @@ import {
     forClientsFaqShowDescription, 
     getAvalibleSuppliers,
     getAvalibleSuppliersType,
-    showForClientsConsultForm
+    showForClientsConsultForm,
+    forClientsConsultPolicyCheckbox,
+    forClientsValidateConsultForm,
+    forClientsConsultCheckForm,
+    forClientsConsultClearInput,
+    forClientsDetailsForm
 } from "../../redux/slices/innerPageSlice";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import ForClientsConsultForm from "./ForClientsConsultForm";
+import ForClientsDetailsForm from "./ForClientsDetailsForm";
 
 
 const ForClients = () => {
@@ -24,10 +30,39 @@ const ForClients = () => {
         dispatch(showForClientsConsultForm({status: status}));
     };
 
+    const policyCheckboxHandler = () => {
+        dispatch(forClientsConsultPolicyCheckbox());
+    };
+
+    const consultInputPopupHandler = (inputId, inputType, inputRef, clear=false) => {
+        dispatch(forClientsValidateConsultForm({ 
+            inputType: inputType, 
+            inputValue: inputRef.value, 
+            inputId: inputId,
+            clear: clear
+        }));
+    };
+
+    const consultInputClearPopupHandler = (e, inputType, inputId) => {
+        if (e.key === 'Backspace' && inputType && inputId) {
+            dispatch(forClientsConsultClearInput({inputType: inputType, inputId: inputId}));
+            return;
+        }
+        return;
+    };
+
+    const detailsFormPopupHandler = (status) => {
+        dispatch(forClientsDetailsForm({status: status}));
+    };
+
     useEffect(() => {
         dispatch(getAvalibleSuppliersType());
         dispatch(getAvalibleSuppliers());
     }, []);
+
+    useEffect(() => {
+        dispatch(forClientsConsultCheckForm());
+    }, [forClientsState.consultForm]);
 
 
     return (
@@ -37,8 +72,12 @@ const ForClients = () => {
             <div className="for-clients-main-wrap">
                 <section>
                     {forClientsState.consultForm.active ? 
-                        <ForClientsConsultForm 
+                        <ForClientsConsultForm
+                            formState={forClientsState.consultForm}
                             popupHandler={consultPopupHandler}
+                            policyHandler={policyCheckboxHandler}
+                            inputHandler={consultInputPopupHandler}
+                            clearInputHandler={consultInputClearPopupHandler}
                         /> 
                     : null}
                     <div className="container">
@@ -117,6 +156,12 @@ const ForClients = () => {
                 </section>
 
                 <section>
+                    {forClientsState.detailsForm.active ? 
+                        <ForClientsDetailsForm 
+                            formState={forClientsState.detailsForm}
+                            popupHandler={detailsFormPopupHandler}
+                        /> 
+                    : null}
                     <div className="container">
                         <h2>Порядок работы</h2>
                         <div className="for-clients-howtowork-wrap">
@@ -135,7 +180,10 @@ const ForClients = () => {
                         </div>
                     </div>
                     <div className="for-clients-howtowork-send-consult-wrap">
-                        <a className="for-clients-not-found-tz-btn">Уточнить детали</a>
+                        <a
+                            onClick={() => detailsFormPopupHandler(true)}
+                            className="for-clients-not-found-tz-btn"
+                        >Задать вопрос</a>
                     </div>
                    
                 </section>
@@ -180,8 +228,12 @@ const ForClients = () => {
                                 <p>
                                     Вы можете задать интересующий вас вопрос 
                                     в по телефону <Link to={'tel:78123630614'}>+7 (812) 363-06-14</Link>, 
-                                    в <Link to={'tel:78123630614'} target={'_blank'}>whatsapp</Link> / <Link to={'tel:78123630614'} target={'_blank'}>telegram</Link>,
-                                    написать нам на электронную почту <Link to={'mailto:pro@cosmtech.ru'} target={'_blank'}>pro@cosmtech.ru</Link> или отправить техническое задание.
+                                    в 
+                                    <Link to={'tel:78123630614'} target={'_blank'}>whatsapp</Link> / 
+                                    <Link to={'tel:78123630614'} target={'_blank'}>telegram</Link>,
+                                    написать нам на электронную почту 
+                                    <Link to={'mailto:pro@cosmtech.ru'} target={'_blank'}>pro@cosmtech.ru</Link> или 
+                                    отправить техническое задание на нужную вам продукцию.
                                 </p>
                                 <div className="for-clients-not-found-tz-wrap">
                                     <a className="for-clients-not-found-tz-btn">Скачать шаблон тз</a>

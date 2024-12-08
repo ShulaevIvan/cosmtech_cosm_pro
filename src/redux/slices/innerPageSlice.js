@@ -470,23 +470,34 @@ const initialState = {
         }
     },
     forClientsPage: {
+        detailsForm: {
+            active: false,
+            sendBtnActive: false,
+            policyActive: false,
+            fields: [],
+        },
         consultForm: {
             active: false,
             sendBtnActive: false,
+            policyActive: false,
             fields: [
                 {
                     id: 1,
                     title: 'Имя',
+                    name: 'name',
                     value: '',
+                    type: 'text',
                     placeholder: 'Ваше имя',
-                    valid: false,
+                    valid: true,
                 },
                 {
                     id: 2,
                     title: 'Телефон',
+                    name: 'phone',
                     value: '',
+                    type: 'text',
                     placeholder: '8xxxxxxxxxx',
-                    valid: false,
+                    valid: true,
                 }
             ]
         },
@@ -1120,15 +1131,94 @@ const innerPageSlice = createSlice({
                     }
                 }
                 return faqItem;
-            })
+            });
         },
         showForClientsConsultForm(state, action) {
             const { status } = action.payload;
             state.forClientsPage.consultForm = {
-                ...state.forClientsPage.consultForm,
+                ...initialState.forClientsPage.consultForm,
                 active: status
+            };
+        },
+        forClientsConsultPolicyCheckbox(state) {
+            state.forClientsPage.consultForm = {
+                ...state.forClientsPage.consultForm,
+                policyActive: state.forClientsPage.consultForm.policyActive ? false : true
+            };
+        },
+        forClientsValidateConsultForm(state, action) {
+            const { inputType, inputValue, inputId } = action.payload;
+            let inputValid;
+            let validValue;
+
+            if (inputType === 'name') {
+                inputValid = validateName(inputValue) ? true : false;
+                validValue = inputValue;
             }
-        }
+            if (inputType === 'phone') {
+                const phoneStr = validatePhone(inputValue)
+                if (inputValue.length === 18) return;
+                inputValid = phoneStr.length === 18 ? true : false;
+                validValue = phoneStr;
+            } 
+            
+            state.forClientsPage.consultForm = {
+                ...state.forClientsPage.consultForm,
+                fields: state.forClientsPage.consultForm.fields.map((fieldItem) => {
+                    if (fieldItem.name === inputType && inputId === fieldItem.id) {
+                        return (
+                            {
+                                ...fieldItem,
+                                value: validValue,
+                                valid: inputValid ? true : false
+                            }
+                        )
+                    }
+                    return fieldItem;
+                })
+            };
+        },
+        forClientsConsultCheckForm(state) {
+            const nameField = state.forClientsPage.consultForm.fields.find((item) => item.name === 'name');
+            const phoneField = state.forClientsPage.consultForm.fields.find((item) => item.name === 'phone');
+            const checkEmpty = state.forClientsPage.consultForm.fields.filter((item) => item.value !== '');
+            const policyCheckbox = state.forClientsPage.consultForm.policyActive;
+
+            state.forClientsPage.consultForm.sendBtnActive = nameField.valid && phoneField.valid && policyCheckbox && checkEmpty.length >= 2 ? true : false;
+        },
+        forClientsConsultClearInput(state, action) {
+            const { inputType, inputId } = action.payload;
+
+            state.forClientsPage.consultForm = {
+                ...state.forClientsPage.consultForm,
+                fields: state.forClientsPage.consultForm.fields.map((fieldItem) => {
+                    if (fieldItem.name === inputType && inputId === fieldItem.id) {
+                        return (
+                            {
+                                ...fieldItem,
+                                value: '',
+                                valid:false
+                            }
+                        )
+                    }
+                    return fieldItem;
+                })
+            };
+        },
+        forClientsDetailsForm(state, action) {
+            const { status } = action.payload;
+            if (!status) {
+                state.forClientsPage.detailsForm = {
+                    ...initialState.forClientsPage.detailsForm,
+                    active : false
+                };
+                return;
+            }
+            state.forClientsPage.detailsForm = {
+                ...state.forClientsPage.detailsForm,
+                active : state.forClientsPage.detailsForm.active ? false : true
+            };
+        },
     },
     
     extraReducers: (builder) => {
@@ -1231,6 +1321,12 @@ export const {
     jobSendBtnActive,
     jobHappyStatePopupShow,
     forClientsFaqShowDescription,
-    showForClientsConsultForm
+    showForClientsConsultForm,
+    forClientsConsultPolicyCheckbox,
+    forClientsValidateConsultForm,
+    forClientsConsultSendBtn,
+    forClientsConsultCheckForm,
+    forClientsConsultClearInput,
+    forClientsDetailsForm
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
