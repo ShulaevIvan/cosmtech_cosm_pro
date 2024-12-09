@@ -62,7 +62,8 @@ const ForClientsConsultForm = (props) => {
                         </div>
                     </div>
                     <div className="for-clients-get-consult-btn-wrap">
-                        <Link 
+                        <Link
+                            onClick={props.sendFormHandler} 
                             className={formState.sendBtnActive ?
                                 "for-clients-get-consult-btn" : "for-clients-get-consult-btn btnDisabled"}
                         >Отправить</Link>

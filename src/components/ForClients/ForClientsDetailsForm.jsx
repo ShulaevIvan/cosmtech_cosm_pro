@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 
 const ForClientsDetailsForm = (props) => {
+    const formState = props.formState;
+    const formRefs = [{name: 'name', ref: useRef(null)}, {name: 'email', ref: useRef(null)}, {name: 'comment', ref: useRef(null)}];
+    
+    const findTargetRef = (inputName) => {
+        return formRefs.find((item) => item.name === inputName).ref;
+    };
+
     return (
         <React.Fragment>
             <div className="for-clients-detail-form-background">
@@ -14,24 +22,37 @@ const ForClientsDetailsForm = (props) => {
                         <h3>Задать вопрос</h3>
                     </div>
                     <div className="for-clients-detail-inputs-wrap">
-                        <div className="for-clients-detail-input-wrap">
-                            <div className="for-detail-detail-title-wrap">
-                                <label>title</label>
-                            </div>
-                            <input type="text" />
-                        </div>
-                        <div className="for-clients-detail-input-wrap">
-                            <div className="for-detail-detail-title-wrap">
-                                <label>title</label>
-                            </div>
-                            <input type="text" />
-                        </div>
-                        <div className="for-clients-detail-input-wrap">
-                            <div className="for-detail-detail-title-wrap">
-                                <label>title</label>
-                            </div>
-                            <textarea></textarea>
-                        </div>
+                        {formState.fields.map((fieldItem) => {
+                            return (
+                                <React.Fragment key={fieldItem.id}>
+                                    <div className="for-clients-detail-input-wrap">
+                                        <div className="for-detail-detail-title-wrap">
+                                            <label htmlFor={`for-clients-detail-input-${fieldItem.id}`}>{fieldItem.title}</label>
+                                        </div>
+                                        {fieldItem.type === 'textarea' ? 
+                                            <textarea
+                                                ref={findTargetRef(fieldItem.name)}
+                                                className={fieldItem.valid ? '' : 'input-err'}
+                                                onChange={() => props.inputHandler(fieldItem.id, fieldItem.name, findTargetRef(fieldItem.name).current)}
+                                                id={`for-clients-detail-input-${fieldItem.id}`} 
+                                                placeholder={fieldItem.placeholder}
+                                                value={fieldItem.value}
+                                            ></textarea>
+                                        : 
+                                        <input
+                                            ref={findTargetRef(fieldItem.name)}
+                                            className={fieldItem.valid ? '' : 'input-err'}
+                                            onChange={() => props.inputHandler(fieldItem.id, fieldItem.name, findTargetRef(fieldItem.name).current)}
+                                            id={`for-clients-detail-input-${fieldItem.id}`} 
+                                            type={fieldItem.type}
+                                            value={fieldItem.value}
+                                            placeholder={fieldItem.placeholder}
+                                        />}
+                                        
+                                    </div>
+                                </React.Fragment>
+                            )
+                        })}
                         <div className="form-mode-for-clients-get-detail-checkbox">
                             <input
                                 onClick={props.policyHandler}
@@ -45,8 +66,9 @@ const ForClientsDetailsForm = (props) => {
                         </div>
                     </div>
                     <div className="for-clients-detail-btn-wrap ">
-                        <Link 
-                            className={"for-clients-get-detail-btn"}
+                        <Link
+                            onClick={props.sendFormHandler}
+                            className={formState.sendBtnActive ? "for-clients-get-detail-btn" : 'for-clients-get-detail-btn btnDisabled'}
                         >Отправить</Link>
                     </div>
                     

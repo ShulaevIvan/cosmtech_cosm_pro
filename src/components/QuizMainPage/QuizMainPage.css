@@ -1589,6 +1589,7 @@
     border-radius: 5px;
     user-select: none;
 }
+
 @keyframes quiz-fadeOut {
     0% {opacity:1;}
     100% {
@@ -1608,6 +1609,7 @@
         visibility: visible;
     }
 }
+
 @keyframes flipTop {
     0% {transform: translateX(-100%);}
   100% {transform: translateY(0);}

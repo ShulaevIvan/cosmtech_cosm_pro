@@ -11,7 +11,10 @@ import {
     forClientsValidateConsultForm,
     forClientsConsultCheckForm,
     forClientsConsultClearInput,
-    forClientsDetailsForm
+    forClientsDetailsForm,
+    forClientsDetailsValidateForm,
+    forClientsDetailsPolicy,
+    forClientsDetailsCheckForm
 } from "../../redux/slices/innerPageSlice";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import ForClientsConsultForm from "./ForClientsConsultForm";
@@ -51,8 +54,36 @@ const ForClients = () => {
         return;
     };
 
+    const sendConsultFormHandler = () => {
+        const sendData = {
+            name: forClientsState.consultForm.fields.find((item) => item.name === 'name').value,
+            phone: forClientsState.consultForm.fields.find((item) => item.name === 'phone').value,
+        };
+        console.log(sendData)
+    };
+
     const detailsFormPopupHandler = (status) => {
         dispatch(forClientsDetailsForm({status: status}));
+    };
+
+    const detailsInputHandler = (inputId, inputName, inputRef) => {
+        dispatch(forClientsDetailsValidateForm({
+            inputId: inputId,
+            inputName: inputName,
+            inputValue: inputRef.value
+        }));
+    };
+
+    const detailsCheckboxHandler = () => {
+        dispatch(forClientsDetailsPolicy());
+    };
+
+    const sendDetailsFormHandler = () => {
+        const sendData = {
+            name: forClientsState.detailsForm.fields.find((item) => item.name === 'name').value,
+            email: forClientsState.detailsForm.fields.find((item) => item.name === 'email').value,
+            comment: forClientsState.detailsForm.fields.find((item) => item.name === 'comment').value
+        }
     };
 
     useEffect(() => {
@@ -63,6 +94,10 @@ const ForClients = () => {
     useEffect(() => {
         dispatch(forClientsConsultCheckForm());
     }, [forClientsState.consultForm]);
+
+    useEffect(() => {
+        dispatch(forClientsDetailsCheckForm());
+    }, [forClientsState.detailsForm]);
 
 
     return (
@@ -78,6 +113,7 @@ const ForClients = () => {
                             policyHandler={policyCheckboxHandler}
                             inputHandler={consultInputPopupHandler}
                             clearInputHandler={consultInputClearPopupHandler}
+                            sendFormHandler={sendConsultFormHandler}
                         /> 
                     : null}
                     <div className="container">
@@ -160,6 +196,9 @@ const ForClients = () => {
                         <ForClientsDetailsForm 
                             formState={forClientsState.detailsForm}
                             popupHandler={detailsFormPopupHandler}
+                            inputHandler={detailsInputHandler}
+                            policyHandler={detailsCheckboxHandler}
+                            sendFormHandler={sendDetailsFormHandler}
                         /> 
                     : null}
                     <div className="container">
@@ -229,10 +268,10 @@ const ForClients = () => {
                                     Вы можете задать интересующий вас вопрос 
                                     в по телефону <Link to={'tel:78123630614'}>+7 (812) 363-06-14</Link>, 
                                     в 
-                                    <Link to={'tel:78123630614'} target={'_blank'}>whatsapp</Link> / 
-                                    <Link to={'tel:78123630614'} target={'_blank'}>telegram</Link>,
-                                    написать нам на электронную почту 
-                                    <Link to={'mailto:pro@cosmtech.ru'} target={'_blank'}>pro@cosmtech.ru</Link> или 
+                                    <Link to={'tel:78123630614'} target={'_blank'}> whatsapp</Link> / 
+                                    <Link to={'tel:78123630614'} target={'_blank'}> telegram</Link>,
+                                     написать нам на электронную почту 
+                                    <Link to={'mailto:pro@cosmtech.ru'} target={'_blank'}> pro@cosmtech.ru</Link> или 
                                     отправить техническое задание на нужную вам продукцию.
                                 </p>
                                 <div className="for-clients-not-found-tz-wrap">

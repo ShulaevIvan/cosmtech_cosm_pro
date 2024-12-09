@@ -194,6 +194,21 @@
   min-height: 40px;
   align-items: flex-end;
 }
+.clients-supplier-item-logo a {
+  color:#666;
+  background-image: linear-gradient(to right, #65d9d3, #65d9d3);
+  background-repeat: no-repeat;
+  background-size: 0 100%;
+  border: 1px solid rgba(30, 30, 30, 0.1);
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 5px 15px;
+  transition: 0.3s;
+}
+.clients-supplier-item-logo a:hover {
+  color: white;
+  background-size: 100% 100%;
+ }
 .clients-supplier-item-logo img {
   max-width: 100%;
   max-height: 40px;
@@ -273,6 +288,7 @@ border-top-color: #3FD2C7;
 .for-clients-howtowork-wrap li:last-child::after {
 content: none;
 }
+
 .for-clients-howtowork-wrap li:nth-child(2n+2){
 background-color:#f5f5f5;
 color: #1E1E1E;
@@ -544,6 +560,9 @@ color: #1E1E1E;
   height: auto;
   z-index: 5;
   visibility: visible;
+  animation: accordionAnimate;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 .for-clients-not-found-row {
   display: flex;
@@ -637,6 +656,8 @@ color: #1E1E1E;
   top: 25%;
   border-radius: 10px;
   border: 1px solid #00458B;
+  animation-duration: 0.3s;
+  animation-name: grow;
 }
 .for-clients-inputs-row {
   display: flex;
@@ -682,8 +703,7 @@ color: #1E1E1E;
   max-width: 260px;
   min-height: 25px;
 }
-.for-clients-consult-main-title-form,
-.for-clients-detail-main-title-form {
+.for-clients-consult-main-title-form {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -691,11 +711,11 @@ color: #1E1E1E;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 5%;
+  top: 10%;
 }
 .for-clients-consult-main-title-form h3,
 .for-clients-detail-main-title-form h3 {
-  font-size: 20px;
+  font-size: 22px;
 }
 .for-clients-get-consult-btn-wrap,
 .for-clients-detail-btn-wrap  {
@@ -706,7 +726,7 @@ color: #1E1E1E;
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 15%;
+  bottom: 13%;
 }
 .for-clients-get-consult-btn,
 .for-clients-get-detail-btn {
@@ -801,7 +821,19 @@ color: #1E1E1E;
   background-color: white;
   top: 25%;
   border-radius: 10px;
-  border: 1px solid #00458B
+  border: 1px solid #00458B;
+  animation-duration: 0.3s;
+  animation-name: grow;
+}
+.for-clients-detail-main-title-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5%;
 }
 .for-clients-detail-inputs-wrap {
   display: flex;
@@ -816,7 +848,7 @@ color: #1E1E1E;
   flex-direction: column;
   flex-wrap: wrap;
   min-width: 250px;
-  width: 100%;
+  width: 85%;
   justify-content: center;
   margin-bottom: 10px;
 }
@@ -881,4 +913,15 @@ color: #1E1E1E;
   border-color: #000;
   background-image: url('../../img/form_checkbox_checked.svg');
   background-size: contain;
+}
+
+@keyframes accordionAnimate {
+  0% {
+    max-height: 0px;
+    min-height: 0px;
+  }
+  100% {
+    max-height: 0px;
+    min-height: 100px;
+  }
 }

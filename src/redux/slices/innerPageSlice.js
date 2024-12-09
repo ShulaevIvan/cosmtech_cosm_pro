@@ -474,7 +474,40 @@ const initialState = {
             active: false,
             sendBtnActive: false,
             policyActive: false,
-            fields: [],
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    name: 'name',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'Ваше имя',
+                    valid: true,
+                },
+                {
+                    id: 2,
+                    title: 'Телефон',
+                    name: 'email',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'demo@....ru',
+                    valid: true,
+                },
+                {
+                    id: 3,
+                    title: 'Описание',
+                    name: 'comment',
+                    value: '',
+                    type: 'textarea',
+                    placeholder: 'Ваш вопрос....',
+                    valid: true,
+                }
+            ],
+            sendData: {
+                name: '',
+                email: '',
+                comment: ''
+            }
         },
         consultForm: {
             active: false,
@@ -499,7 +532,11 @@ const initialState = {
                     placeholder: '8xxxxxxxxxx',
                     valid: true,
                 }
-            ]
+            ],
+            sendData: {
+                name: '',
+                phone: ''
+            }
         },
         suppliers: [],
         suppliersType:[],
@@ -532,60 +569,28 @@ const initialState = {
             {id: 12, name: 'Доставка и отгрузка', description: 'Отгрузка клиенту, доставка по СПБ, транспортной компанией или самовывоз.'},
         ],
         faqQuestions: [
-            {
-                id: 1, 
-                ask: 'Вы можете закупить под заказ дополнительное сырье?', 
-                ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', 
-                active: false
-            },
-            {
-                id: 2, 
-                ask: 'Как доставляется готовая продукция?', 
-                ans: 'Готовая продукция доставляется транспортными компаниями на ваш выбор.', 
-                active: false
-            },
-            {
-                id: 3, 
-                ask: 'Есть ли услуги по хранению готовой продукции на вашем складе?', 
-                ans: 'Нет', 
-                active: false
-            },
+            { id: 1, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
+            { id: 2, ask: 'Как доставляется готовая продукция?', ans: 'Готовая продукция доставляется транспортными компаниями на ваш выбор.',  active: false },
+            { id: 3,  ask: 'Есть ли услуги по хранению готовой продукции на вашем складе?', ans: 'Нет', active: false },
             {
                 id: 4, 
                 ask: 'Мне не нужна разработка рецептуры. Могу ли я воспользоваться вашими разработками?', 
-                ans: 'Вы можете воспользоваться предложенными нами рецептурами.', 
-                active: false
+                ans: 'Вы можете воспользоваться предложенными нами рецептурами.', active: false 
             },
-            {
-                id: 5, 
-                ask: 'Почему у вас платные пробники ?', 
-                ans: 'Бесплатные пробники изготавливаются и корректируются до трёх раз, далее изготовление и корректировка платная.', 
-                active: false
+            { id: 5, 
+              ask: 'Почему у вас платные пробники ?', 
+              ans: 'Бесплатные пробники изготавливаются и корректируются до трёх раз, далее изготовление и корректировка платная.', 
+              active: false
             },
-            {
-                id: 6, 
-                ask: 'Оказываете ли вы помощь со сбытом продукции и маркетинговым сопровождением?', 
-                ans: 'Нет', 
-                active: false
-            },
-            {
-                id: 7, 
-                ask: 'Оформляете ли Вы Сертификаты?', 
-                ans: 'Не оформляем, консультируем и предоставляем контакты по сертификации продукции. ', 
-                active: false
-            },
+            { id: 6, ask: 'Оказываете ли вы помощь со сбытом продукции и маркетинговым сопровождением?', ans: 'Нет', active: false },
+            { id: 7, ask: 'Оформляете ли Вы Сертификаты?', ans: 'Не оформляем, консультируем и предоставляем контакты по сертификации продукции. ', active: false },
             {
                 id: 8, 
                 ask: 'Могу ли я получить универсальный прайс-лист?', 
                 ans: 'Прайс-листа на готовые рецептуры нет. Стоимость рецептуры зависит от сложности её разработки. ', 
                 active: false
             },
-            {
-                id: 9, 
-                ask: 'Оказывает ли ваша компания услуги фасовки и этикетировки?', 
-                ans: 'Да, оказываем полный производственный цикл.', 
-                active: false
-            },
+            { id: 9, ask: 'Оказывает ли ваша компания услуги фасовки и этикетировки?', ans: 'Да, оказываем полный производственный цикл.', active: false},
             {
                 id: 10, 
                 ask: 'Какие минимальные сроки производства?', 
@@ -598,30 +603,15 @@ const initialState = {
                 ans: 'Первые образцы готовы через 2-4 недели после согласования рецептуры.', 
                 active: false
             },
-            {
-                id: 12, 
-                ask: 'У меня есть рецептура, можете ли вы ее доработать?', 
-                ans: 'Да, можем доработать вашу рецептуру.', 
-                active: false
-            },
-            {
-                id: 13, 
-                ask: 'Как я могу отправить вам образцы?', 
-                ans: 'Образцы можете отправить курьером.', 
-                active: false
-            },
+            { id: 12, ask: 'У меня есть рецептура, можете ли вы ее доработать?', ans: 'Да, можем доработать вашу рецептуру.', active: false },
+            { id: 13, ask: 'Как я могу отправить вам образцы?', ans: 'Образцы можете отправить курьером.', active: false },
             {
                 id: 14, 
                 ask: 'У меня нет рецептуры. Можете ли вы произвести мой продукт?', 
                 ans: 'Да, мы можем произвести ваш продукт и предложить свои рецептуры.', 
                 active: false
             },
-            {
-                id: 15, 
-                ask: 'Печатаете ли вы этикетки?', 
-                ans: 'Нет, предоставляем контакты типографий с кем уже сотрудничаем.', 
-                active: false
-            },
+            { id: 15, ask: 'Печатаете ли вы этикетки?', ans: 'Нет, предоставляем контакты типографий с кем уже сотрудничаем.', active: false },
             {
                 id: 16, 
                 ask: 'Что из себя представляют тестовые образцы?', 
@@ -1155,7 +1145,7 @@ const innerPageSlice = createSlice({
                 inputValid = validateName(inputValue) ? true : false;
                 validValue = inputValue;
             }
-            if (inputType === 'phone') {
+            else if (inputType === 'phone') {
                 const phoneStr = validatePhone(inputValue)
                 if (inputValue.length === 18) return;
                 inputValid = phoneStr.length === 18 ? true : false;
@@ -1218,6 +1208,49 @@ const innerPageSlice = createSlice({
                 ...state.forClientsPage.detailsForm,
                 active : state.forClientsPage.detailsForm.active ? false : true
             };
+        },
+        forClientsDetailsPolicy(state) {
+            state.forClientsPage.detailsForm = {
+                ...state.forClientsPage.detailsForm,
+                policyActive: state.forClientsPage.detailsForm.policyActive ? false : true
+            };
+        },
+        forClientsDetailsValidateForm(state, action) {
+            const { inputId, inputName, inputValue } = action.payload;
+            let validValue;
+            let inputValid;
+
+            if (inputName === 'name') {
+                inputValid = validateName(inputValue) ? true : false;
+                validValue = inputValue;
+            }
+            else if (inputName === 'email') {
+                inputValid = validateMail(inputValue) ? false : true;
+                validValue = inputValue;
+            }
+            else if (inputName === 'comment') {
+                inputValid = inputValue.trim() !== '' &&  inputValue.length >= 1  ? true : false;
+                validValue = inputValue;
+            }
+
+            state.forClientsPage.detailsForm.fields = state.forClientsPage.detailsForm.fields.map((fieldItem) => {
+                if (fieldItem.id === inputId && fieldItem.name === inputName) {
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        valid: inputValid
+                    }
+                }
+                return fieldItem;
+            });
+        },
+        forClientsDetailsCheckForm(state) {
+            const nameField = state.forClientsPage.detailsForm.fields.find((item) => item.name === 'name');
+            const emailField = state.forClientsPage.detailsForm.fields.find((item) => item.name === 'email');
+            const checkEmpty = state.forClientsPage.detailsForm.fields.filter((item) => item.value !== '');
+            const policyCheckbox = state.forClientsPage.detailsForm.policyActive;
+
+            state.forClientsPage.detailsForm.sendBtnActive = nameField.valid && emailField.valid && policyCheckbox && checkEmpty.length >= 3 ? true : false;
         },
     },
     
@@ -1327,6 +1360,9 @@ export const {
     forClientsConsultSendBtn,
     forClientsConsultCheckForm,
     forClientsConsultClearInput,
-    forClientsDetailsForm
+    forClientsDetailsForm,
+    forClientsDetailsValidateForm,
+    forClientsDetailsPolicy,
+    forClientsDetailsCheckForm
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
