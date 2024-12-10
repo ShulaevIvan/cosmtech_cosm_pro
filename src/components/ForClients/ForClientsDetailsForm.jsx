@@ -19,7 +19,7 @@ const ForClientsDetailsForm = (props) => {
                         onClick={() => props.popupHandler(false)}
                     ></span>
                     <div className="for-clients-detail-main-title-form">
-                        <h3>Задать вопрос</h3>
+                        <h3>Уточнить детали</h3>
                     </div>
                     <div className="for-clients-detail-inputs-wrap">
                         {formState.fields.map((fieldItem) => {

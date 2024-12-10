@@ -18,8 +18,6 @@ import aboutFactSecond from '../../img/production_cosm.svg';
 import aboutFactThird from '../../img/orders.svg';
 import aboutFactFourth  from '../../img/lab_cosm.svg';
 
-import supplierLogo from '../../img/supplersImages/suppler_demo.png';
-
 const importAllImages = (ctxWebpuck) => {
     const images = {};
     ctxWebpuck.keys().forEach((item, index) => { images[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
@@ -486,7 +484,7 @@ const initialState = {
                 },
                 {
                     id: 2,
-                    title: 'Телефон',
+                    title: 'Email',
                     name: 'email',
                     value: '',
                     type: 'text',
@@ -503,10 +501,9 @@ const initialState = {
                     valid: true,
                 }
             ],
-            sendData: {
-                name: '',
-                email: '',
-                comment: ''
+            happyState: {
+                active: false,
+                description: ''
             }
         },
         consultForm: {
@@ -533,9 +530,9 @@ const initialState = {
                     valid: true,
                 }
             ],
-            sendData: {
-                name: '',
-                phone: ''
+            happyState: {
+                active: false,
+                description: ''
             }
         },
         suppliers: [],
@@ -571,7 +568,11 @@ const initialState = {
         faqQuestions: [
             { id: 1, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
             { id: 2, ask: 'Как доставляется готовая продукция?', ans: 'Готовая продукция доставляется транспортными компаниями на ваш выбор.',  active: false },
-            { id: 3,  ask: 'Есть ли услуги по хранению готовой продукции на вашем складе?', ans: 'Нет', active: false },
+            { id: 3, 
+                ask: 'Есть ли услуги по хранению готовой продукции на вашем складе?', 
+                ans: 'Нет, продукцию необходимо вывезти не позднее 7 дней с момента получения уведомления о готовности.', 
+                active: false 
+            },
             {
                 id: 4, 
                 ask: 'Мне не нужна разработка рецептуры. Могу ли я воспользоваться вашими разработками?', 
@@ -590,7 +591,10 @@ const initialState = {
                 ans: 'Прайс-листа на готовые рецептуры нет. Стоимость рецептуры зависит от сложности её разработки. ', 
                 active: false
             },
-            { id: 9, ask: 'Оказывает ли ваша компания услуги фасовки и этикетировки?', ans: 'Да, оказываем полный производственный цикл.', active: false},
+            { 
+                id: 9, 
+                ask: 'Оказывает ли ваша компания услуги фасовки и этикетировки?', 
+                ans: 'Да, полный производственный цикл от разработки продукта до фасовки.', active: false},
             {
                 id: 10, 
                 ask: 'Какие минимальные сроки производства?', 
@@ -631,6 +635,42 @@ const initialState = {
         top: 0,
     }
 };
+
+export const sendForClientsConsultForm = createAsyncThunk(
+    'sendForClientsConsult',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/clients/request/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token: ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sendData)
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+);
+
+export const sendForClientsDetailsForm = createAsyncThunk(
+    'sendForClientsDetails',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/clients/request/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token: ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sendData)
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+);
 
 export const getAvalibleSuppliersType = createAsyncThunk(
     'getSuppliersType',
@@ -1252,6 +1292,22 @@ const innerPageSlice = createSlice({
 
             state.forClientsPage.detailsForm.sendBtnActive = nameField.valid && emailField.valid && policyCheckbox && checkEmpty.length >= 3 ? true : false;
         },
+        forClientsHappyStatePopup(state, action) {
+            const { status, happyStateType } = action.payload;
+
+            if (happyStateType === 'suplconsult') {
+                state.forClientsPage.consultForm.happyState = {
+                    ...initialState.forClientsPage.consultForm.happyState,
+                    active: status,
+                }
+            }
+            else if (happyStateType === 'prodquestion') {
+                state.forClientsPage.detailsForm.happyState = {
+                    ...initialState.forClientsPage.detailsForm.happyState,
+                    active: status,
+                }
+            }
+        }
     },
     
     extraReducers: (builder) => {
@@ -1326,6 +1382,32 @@ const innerPageSlice = createSlice({
             const { data } = action.payload;
             state.forClientsPage.suppliers = [...data].sort((a, b) => a.type.localeCompare(b.type));
         })
+        .addCase(sendForClientsConsultForm.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            state.forClientsPage.consultForm = {
+                ...initialState.forClientsPage.consultForm,
+            };
+            if (status !== 'err') {
+                state.forClientsPage.consultForm.happyState = {
+                    ...state.forClientsPage.consultForm.happyState,
+                    active: true,
+                    description: description
+                }
+            }
+        })
+        .addCase(sendForClientsDetailsForm.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            state.forClientsPage.detailsForm = {
+                ...initialState.forClientsPage.detailsForm,
+            };
+            if (status !== 'err') {
+                state.forClientsPage.detailsForm.happyState = {
+                    ...state.forClientsPage.detailsForm.happyState,
+                    active: true,
+                    description: description
+                }
+            }
+        })
     }
 });
 
@@ -1363,6 +1445,7 @@ export const {
     forClientsDetailsForm,
     forClientsDetailsValidateForm,
     forClientsDetailsPolicy,
-    forClientsDetailsCheckForm
+    forClientsDetailsCheckForm,
+    forClientsHappyStatePopup
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

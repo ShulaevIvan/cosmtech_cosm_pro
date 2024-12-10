@@ -9,7 +9,7 @@ const ForClientsConsultForm = (props) => {
     const findTargetRef = (inputName) => {
         return formRefs.find((item) => item.name === inputName).ref;
     };
-
+    
     return (
         <React.Fragment>
             <div className="for-clients-consult-form-background">

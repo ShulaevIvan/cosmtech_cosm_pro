@@ -14,11 +14,15 @@ import {
     forClientsDetailsForm,
     forClientsDetailsValidateForm,
     forClientsDetailsPolicy,
-    forClientsDetailsCheckForm
+    forClientsDetailsCheckForm,
+    sendForClientsConsultForm,
+    sendForClientsDetailsForm,
+    forClientsHappyStatePopup
 } from "../../redux/slices/innerPageSlice";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import ForClientsConsultForm from "./ForClientsConsultForm";
 import ForClientsDetailsForm from "./ForClientsDetailsForm";
+import ForClientsFormHappyState from "./ForClientsFromHappyState";
 
 
 const ForClients = () => {
@@ -51,15 +55,15 @@ const ForClients = () => {
             dispatch(forClientsConsultClearInput({inputType: inputType, inputId: inputId}));
             return;
         }
-        return;
     };
 
     const sendConsultFormHandler = () => {
         const sendData = {
             name: forClientsState.consultForm.fields.find((item) => item.name === 'name').value,
             phone: forClientsState.consultForm.fields.find((item) => item.name === 'phone').value,
+            requestType: 'suplconsult'
         };
-        console.log(sendData)
+        dispatch(sendForClientsConsultForm(sendData));
     };
 
     const detailsFormPopupHandler = (status) => {
@@ -82,8 +86,14 @@ const ForClients = () => {
         const sendData = {
             name: forClientsState.detailsForm.fields.find((item) => item.name === 'name').value,
             email: forClientsState.detailsForm.fields.find((item) => item.name === 'email').value,
-            comment: forClientsState.detailsForm.fields.find((item) => item.name === 'comment').value
-        }
+            comment: forClientsState.detailsForm.fields.find((item) => item.name === 'comment').value,
+            requestType: 'prodquestion'
+        };
+        dispatch(sendForClientsDetailsForm(sendData));
+    };
+
+    const forClientsHappyStateHandler = (status, happyStateType) => {
+        dispatch(forClientsHappyStatePopup({status: status, happyStateType: happyStateType}));
     };
 
     useEffect(() => {
@@ -114,6 +124,13 @@ const ForClients = () => {
                             inputHandler={consultInputPopupHandler}
                             clearInputHandler={consultInputClearPopupHandler}
                             sendFormHandler={sendConsultFormHandler}
+                        /> 
+                    : null}
+                    {forClientsState.consultForm.happyState.active ? 
+                        <ForClientsFormHappyState
+                            happyStateType={'suplconsult'}
+                            happyState={forClientsState.consultForm.happyState}
+                            closeHandler={forClientsHappyStateHandler}
                         /> 
                     : null}
                     <div className="container">
@@ -201,6 +218,13 @@ const ForClients = () => {
                             sendFormHandler={sendDetailsFormHandler}
                         /> 
                     : null}
+                     {forClientsState.detailsForm.happyState.active ? 
+                        <ForClientsFormHappyState
+                            happyStateType={'prodquestion'}
+                            happyState={forClientsState.detailsForm.happyState}
+                            closeHandler={forClientsHappyStateHandler}
+                        /> 
+                    : null}
                     <div className="container">
                         <h2>Порядок работы</h2>
                         <div className="for-clients-howtowork-wrap">
@@ -222,14 +246,14 @@ const ForClients = () => {
                         <a
                             onClick={() => detailsFormPopupHandler(true)}
                             className="for-clients-not-found-tz-btn"
-                        >Задать вопрос</a>
+                        >Уточнить детали</a>
                     </div>
                    
                 </section>
                 <section>
                     <div className="container">
-                        <h2>Ответы на часто задаваемые вопросы</h2>
                         <div className="forclients-faq-main-row">
+                            <h2>Ответы на часто задаваемые вопросы</h2>
                             {forClientsState.faqQuestions.map((faqItem) => {
                                 return (
                                     <React.Fragment key={faqItem.id}>
@@ -261,22 +285,37 @@ const ForClients = () => {
                 </section>
                 <section>
                     <div className="container">
-                        <h2>Не нашли что искали ?</h2>
                         <div className="for-clients-not-found-row">
+                            <h2>Не нашли что искали ?</h2>
                             <div className="for-clients-not-found-description">
                                 <p>
                                     Вы можете задать интересующий вас вопрос 
                                     в по телефону <Link to={'tel:78123630614'}>+7 (812) 363-06-14</Link>, 
                                     в 
-                                    <Link to={'tel:78123630614'} target={'_blank'}> whatsapp</Link> / 
-                                    <Link to={'tel:78123630614'} target={'_blank'}> telegram</Link>,
+                                    <Link to={'https://wa.me/+79643637272'} target={'_blank'}> whatsapp</Link> / 
+                                    <Link to={'https://t.me/+79643637272'} target={'_blank'}> telegram</Link>,
                                      написать нам на электронную почту 
                                     <Link to={'mailto:pro@cosmtech.ru'} target={'_blank'}> pro@cosmtech.ru</Link> или 
                                     отправить техническое задание на нужную вам продукцию.
                                 </p>
+                                <div className="for-clients-not-found-tz-row">
+                                    <div className="for-clients-not-found-btn-item">
+                                        <div className="for-clients-not-found-tz-wrap">
+                                            <a className="for-clients-not-found-tz-btn">Скачать презентацию</a>
+                                        </div>
+                                    </div>
+                                    <div className="for-clients-not-found-btn-item">
+                                        <div className="for-clients-not-found-tz-wrap">
+                                            <a className="for-clients-not-found-tz-btn">Скачать шаблон тз</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* <div className="for-clients-not-found-tz-wrap">
+                                    <a className="for-clients-not-found-tz-btn">Скачать презентацию</a>
+                                </div>
                                 <div className="for-clients-not-found-tz-wrap">
                                     <a className="for-clients-not-found-tz-btn">Скачать шаблон тз</a>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         

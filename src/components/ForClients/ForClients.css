@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 100%;
+  width: 97%;
   min-height: 500px;
 }
 .for-clients-main-wrap h1,
@@ -93,7 +93,7 @@
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   margin-bottom: 20px;
 }
 .for-clients-suppliers-item {
@@ -484,6 +484,7 @@ color: #1E1E1E;
   flex-wrap: wrap;
   width: 100%;
   justify-content: center;
+  text-align: center;
 }
 .for-clients-faq-accordion-item {
   display: flex;
@@ -571,8 +572,12 @@ color: #1E1E1E;
   align-items: baseline;
   max-width: 1024px;
   width: 100%;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+}
+.for-clients-not-found-row h2 {
+  text-align: center;
+  margin: 0;
 }
 .for-clients-not-found-description {
   display: flex;
@@ -581,6 +586,7 @@ color: #1E1E1E;
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 .for-clients-not-found-tz-wrap {
   display: flex;
@@ -590,6 +596,23 @@ color: #1E1E1E;
   justify-content: center;
   align-items: center;
   margin: 20px 0;
+}
+.for-clients-not-found-tz-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.for-clients-not-found-btn-item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 50%;
+  max-width: 50%;
 }
 .for-clients-not-found-description a,
 .clients-supplier-item-description a {
@@ -886,6 +909,11 @@ color: #1E1E1E;
   width: 100%;
   align-items: center;
 }
+.form-mode-for-clients-get-detail-checkbox span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .for-clients-get-detail-checkbox {
   display: none;
 }
@@ -914,6 +942,231 @@ color: #1E1E1E;
   background-image: url('../../img/form_checkbox_checked.svg');
   background-size: contain;
 }
+.for-clients-happystate--message-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1310px) {
+  .for-clients-suppliers-item {
+    padding: 15px;
+  }
+}
+@media (max-width: 1310px) {
+  .clients-supplier-item-logo a{
+    padding: 0;
+  }
+}
+@media (max-width: 1000px) {
+  .for-clients-main-suppliers-row{
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+}
+@media (max-width: 1000px) {
+  .for-clients-suppliers-item {
+    max-width: 600px;
+    width: 100%;
+  }
+}
+@media (max-width: 1000px) {
+  .for-clients-suppliers-item:last-child {
+    margin: 0;
+  }
+}
+@media (max-width: 1000px) {
+  .for-clients-suppliers-logo-item {
+    width: 20%;
+    max-width: 20%;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-suppliers-logo-row {
+    width: 97%;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px 6px;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-suppliers-logo-item {
+    width: 50%;
+    max-width: 45%;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-main-suppliers-description,
+  .for-clients-main-suppliers-consult-wrap {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-main-suppliers-description-row{
+    padding: 20px 0;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-consult-from-row {
+    width: 80%;
+    top: 70%;
+    min-height: 400px;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-inputs-row,
+  .for-clients-consult-input-item-wrap {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-inputs-row, 
+  .for-clients-consult-input-item-wrap  {
+    margin-right: 0;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-consult-input-label-wrap, 
+  .for-clients-consult-input-wrap {
+    width: 70%;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-consult-input-wrap {
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 800px) {
+  .form-mode-for-clients-get-consult-checkbox {
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media (max-width: 800px) {
+  .form-mode-for-clients-get-consult-checkbox span {
+    width: 60%;
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-suppliers-item {
+    max-width: 370px;
+  }
+}
+
+@media (max-width: 800px) {
+  .clients-supplier-item-head{
+    display: none;
+  }
+}
+@media (max-width: 800px) {
+  .clients-supplier-item-row,
+  .clients-supplier-item-description,
+  .clients-supplier-item-logo {
+    width: 95%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 800px) {
+  .clients-supplier-item-logo {
+    order: 1;
+  }
+}
+@media (max-width: 800px) {
+  .clients-supplier-item-description {
+    order: 2;
+  }
+}
+@media (max-width: 800px) {
+  .clients-supplier-item-description{
+    margin-top: 10px;
+  }
+}
+@media (max-width: 800px) {
+  .clients-supplier-item-description {
+    padding: 10px;
+    border-bottom: 1px solid rgba(30, 30, 30, 0.1)
+  }
+}
+
+@media (max-width: 800px) {
+  .for-clients-supplier-main-title {
+    margin: 0;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-howtowork-wrap,
+  .for-clients-suppliers-logo-wrap,
+  .for-clients-main-suppliers-description-row,
+  .forclients-faq-main-row,
+  .for-clients-not-found-row {
+    width: 97%;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-faq-accordion-item-title {
+    width: 80%;
+  }
+}
+
+@media (max-width: 800px) {
+  .for-clients-faq-accordion-item-btn-wrap {
+    position: relative;
+    width: 10%;
+    top: 0%;
+    right: 0;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-not-found-row{
+    justify-content: center;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-not-found-row,
+  .for-clients-not-found-btn-item {
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 97%;
+    max-width: 97%;
+    justify-content: center;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-not-found-tz-wrap {
+    margin: 0 0 20px 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .for-clients-not-found-description {
+    text-align: center;
+    padding: 0;
+  }
+}
+@media (max-width: 800px) {
+  .for-clients-detail-from-row {
+    max-width: 80%;
+    width: 80%;
+    top:150%;
+  }
+}
+
+
+
 
 @keyframes accordionAnimate {
   0% {
