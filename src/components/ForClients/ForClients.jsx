@@ -27,6 +27,8 @@ import ForClientsFormHappyState from "./ForClientsFromHappyState";
 
 const ForClients = () => {
     const forClientsState = useSelector((state) => state.innerPage.forClientsPage);
+    const staticFilesPath = useSelector((state) => state.header.staticFilesPath);
+    console.log(staticFilesPath)
     const dispatch = useDispatch();
 
     const faqDescriptionHandler = (faqItem) => {
@@ -301,12 +303,22 @@ const ForClients = () => {
                                 <div className="for-clients-not-found-tz-row">
                                     <div className="for-clients-not-found-btn-item">
                                         <div className="for-clients-not-found-tz-wrap">
-                                            <a className="for-clients-not-found-tz-btn">Скачать презентацию</a>
+                                            <Link 
+                                                className="for-clients-not-found-tz-btn"
+                                                to={staticFilesPath.prezentationFile}
+                                                target={'_blank'}
+                                                download={true}
+                                            >Скачать презентацию</Link>
                                         </div>
                                     </div>
                                     <div className="for-clients-not-found-btn-item">
                                         <div className="for-clients-not-found-tz-wrap">
-                                            <a className="for-clients-not-found-tz-btn">Скачать шаблон тз</a>
+                                            <Link 
+                                                className="for-clients-not-found-tz-btn"
+                                                to={staticFilesPath.tzFile}
+                                                target={'_blank'}
+                                                download={true}
+                                            >Скачать шаблон тз</Link>
                                         </div>
                                     </div>
                                 </div>

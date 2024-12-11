@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 
-const initialState = { 
+const initialState = {
+    staticFilesPath: {
+        prezentationFile: `${process.env.REACT_APP_BACKEND_URL}/static/media/cosmtech-prezentation.pdf`,
+        tzFile: `${process.env.REACT_APP_BACKEND_URL}/static/media/tz_template.doc`,
+    },
     callbackHeader: {
         loadStatus: false,
         callbackPopupActive: false,

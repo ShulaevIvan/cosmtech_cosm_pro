@@ -1376,7 +1376,11 @@ const innerPageSlice = createSlice({
         })
         .addCase(getAvalibleSuppliersType.fulfilled, (state, action) => {
             const { data } = action.payload;
-            state.forClientsPage.suppliersType = [...data]
+            if (data && data.length > 0) {
+                state.forClientsPage.suppliersType = [...data];
+                return;
+            }
+            state.forClientsPage.suppliersType = [];
         })
         .addCase(getAvalibleSuppliers.fulfilled, (state, action) => {
             const { data } = action.payload;
