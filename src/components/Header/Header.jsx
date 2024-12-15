@@ -53,10 +53,6 @@ const Header = () => {
         }
     }, []);
 
-    useEffect(() => {
-
-    }, [])
-
     // useEffect(() => {
     //     window.ym(97856473, 'hit', location.pathname);
     // }, [location.pathname]);

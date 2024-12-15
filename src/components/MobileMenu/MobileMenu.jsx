@@ -10,8 +10,6 @@ const MobileMenu = (props) => {
     const dispatch = useDispatch();
     const mobileMenuState = useSelector((state) => state.menu);
     const mobileMenuHandler = (status) => {
-        console.log('test')
-        console.log(status)
         dispatch(mobileMenuActive({status: status}));
     };
 
@@ -31,6 +29,7 @@ const MobileMenu = (props) => {
                                     <li><Link to={'/'}>Контрактное производство</Link></li>
                                     <li><Link to={'/services'}>Услуги</Link></li>
                                     <li><Link to={'/about'}>О Нас</Link></li>
+                                    <li><Link to={'/forclients'}>Клиентам</Link></li>
                                     <li><Link to={'/contacts'}>Контакты</Link></li>
                                     <li id="mobile-contacts-wrap-li">
                                         <div className="mobile-contacts-wrap">

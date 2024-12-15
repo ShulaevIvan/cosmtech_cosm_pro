@@ -12,6 +12,7 @@ import serviceLabImg from '../../img/service_lab.jpg';
 import serviceStm from '../../img/service_stm.jpg';
 import serviceTestLab from '../../img/service_test_lab.jpg';
 import servicePacking from '../../img/service_packing.jpg';
+import servicePacking2 from '../../img/packing_service.jpg';
 
 import aboutFactFirst from '../../img/prize_cosm.svg';
 import aboutFactSecond from '../../img/production_cosm.svg';
@@ -263,6 +264,14 @@ const initialState = {
                 description: 'Консультируем по выбору упаковки для вашей косметической продукции. Поможем вам выбрать оптимальный вид упаковки, который будет соответствовать вашему бренду и обеспечит удобство использования для ваших клиентов',
                 descriptionMini: 'Мы знаем, что сертификация может быть сложным и трудоемким процессом, поэтому мы готовы помочь вам собрать все необходимые документы и подготовить продукцию к сертификации.',
             },
+            // {
+            //     id: 5,
+            //     name: 'Услуга по саше фасовке в различных форматах и дозировках.',
+            //     image: servicePacking2,
+            //     position: 'left',
+            //     description: 'Можем фасовать вашу продукцию в трехшовные и четырехшовные типы пакетов. Расчет производится в зависимости от выбранной пленки и количества тиража.',
+            //     descriptionMini: 'Фасуем саше-пакеты объемом от 5 до 20 мл. Ширина саше-пакетов 60 мм, длина от 60 до 120 мм.',
+            // },
             
         ]
     },

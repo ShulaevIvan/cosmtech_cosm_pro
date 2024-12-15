@@ -210,7 +210,7 @@ const ForClients = () => {
                     </div>
                 </section>
 
-                <section>
+                <section className="for-clients-howtowork">
                     {forClientsState.detailsForm.active ? 
                         <ForClientsDetailsForm 
                             formState={forClientsState.detailsForm}
@@ -322,12 +322,6 @@ const ForClients = () => {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <div className="for-clients-not-found-tz-wrap">
-                                    <a className="for-clients-not-found-tz-btn">Скачать презентацию</a>
-                                </div>
-                                <div className="for-clients-not-found-tz-wrap">
-                                    <a className="for-clients-not-found-tz-btn">Скачать шаблон тз</a>
-                                </div> */}
                             </div>
                         </div>
                         

@@ -1158,15 +1158,19 @@ color: #1E1E1E;
   }
 }
 @media (max-width: 800px) {
-  .for-clients-detail-from-row {
+  .for-clients-howtowork .for-clients-detail-from-row {
     max-width: 80%;
     width: 80%;
-    top:150%;
+    top:130%;
   }
 }
-
-
-
+@media (max-width: 800px) {
+  .for-clients-consult-from-row {
+    max-width: 80%;
+    width: 80%;
+    top:100%;
+  }
+}
 
 @keyframes accordionAnimate {
   0% {
