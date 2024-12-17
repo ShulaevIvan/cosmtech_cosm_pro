@@ -237,6 +237,50 @@ const initialState = {
                 name: 'Разработка косметики под СТМ',
                 image: serviceStm,
                 position: 'left',
+                serviceItemHover: {
+                    active: false,
+                    minPrice: 25000,
+                    descriptionTitle: 'Что входит в услугу',
+                    descriptionList: [
+                        {
+                            id: 1,
+                            name: 'Разработка концепции продукта',
+                            description: '',
+                        },
+                        {
+                            id: 2,
+                            name: 'Расчет себестоимости',
+                            description: '',
+                        },
+                        {
+                            id: 3,
+                            name: 'Создание рецептуры',
+                            description: '',
+                        },
+                        {
+                            id: 4,
+                            name: 'Подсчет и закупка необходимого сырья',
+                            description: '',
+                        },
+                        {
+                            id: 5,
+                            name: 'Производство продукции',
+                            description: '',
+                        },
+                        {
+                            id: 6,
+                            name: 'Сертификация',
+                            description: '',
+                        },
+                        {
+                            id: 7,
+                            name: 'Доставка и отгрузка',
+                            description: '',
+                        }
+                    ],
+                    header: 'test header',
+                    content: 'test 1',
+                },
                 description: 'Мы специализируемся на разработке косметики под собственную торговую марку (СТМ). Если у вас есть желание создать собственную линию косметики, мы поможем вам воплотить вашу идею в жизнь.',
                 descriptionMini: 'Учитываем все ваши предпочтения и требования, чтобы создать продукт, который будет соответствовать вашей концепции и удовлетворять потребности вашей целевой аудитории.',
             },
@@ -245,6 +289,40 @@ const initialState = {
                 name: 'Разработка косметических рецептур',
                 image: serviceLabImg,
                 position: 'right',
+                serviceItemHover: {
+                    active: false,
+                    minPrice: 25000,
+                    descriptionTitle: 'Что входит в услугу',
+                    descriptionList: [
+                        {
+                            id: 1,
+                            name: 'Разработка концепции продукта',
+                            description: 'Проработка, технического задания заказчика, подготовка 3 вариантов состава косметической продукции и согласование их.',
+                        },
+                        {
+                            id: 2,
+                            name: 'Производство/закупка',
+                            description: 'Производство/приобретение необходимых ингредиентов',
+                        },
+                        {
+                            id: 3,
+                            name: 'Создание рецептуры',
+                            description: 'Подготовка документации (рецептуры) с указание процентного содержания каждого ингредиента и контакты поставщиков где их можно приобрести',
+                        },
+                        {
+                            id: 4,
+                            name: 'Инструкция',
+                            description: 'Подготовка технологической инструкции с описанием последовательности производственного процесса',
+                        },
+                        {
+                            id: 5,
+                            name: 'Передача образцов',
+                            description: 'Передача образцов и пакета документов заказчику',
+                        },
+                    ],
+                    header: 'test header',
+                    content: 'test 1',
+                },
                 description: 'Предлагаем вам услуги по разработке косметических рецептур. Наша команда состоит из профессиональных химиков и косметологов, которые имеют богатый опыт в создании инновационных и эффективных косметических продуктов.',
                 descriptionMini: '',
             },
@@ -253,6 +331,55 @@ const initialState = {
                 name: 'Фасовка косметики в различных форматах.',
                 image: servicePacking2,
                 position: 'left',
+                serviceItemHover: {
+                    active: false,
+                    minPrice: 25000,
+                    descriptionTitle: 'Варианты фасовки',
+                    descriptionList: [
+                        {
+                            id: 1,
+                            name: 'Упаковка',
+                            description: '',
+                        },
+                        {
+                            id: 2,
+                            name: 'Ручная сборка',
+                            description: '',
+                        },
+                        {
+                            id: 3,
+                            name: 'Переупаковка',
+                            description: '',
+                        },
+                        {
+                            id: 4,
+                            name: 'Термоусадка - спайка',
+                            description: '',
+                        },
+                        {
+                            id: 5,
+                            name: 'Упаковка сашет (саше, sachet)',
+                            description: '',
+                        },
+                        {
+                            id: 6,
+                            name: 'Стикеровка',
+                            description: '',
+                        },
+                        {
+                            id: 7,
+                            name: 'Этикетирование',
+                            description: '',
+                        },
+                        {
+                            id: 8,
+                            name: 'Датирование',
+                            description: '',
+                        },
+                    ],
+                    header: 'test header',
+                    content: 'test 1',
+                },
                 description: 'Можем фасовать вашу продукцию в трехшовные и четырехшовные типы пакетов. Расчет производится в зависимости от выбранной пленки и количества тиража.',
                 descriptionMini: 'Фасуем саше-пакеты объемом от 5 до 20 мл. Ширина саше-пакетов 60 мм, длина от 60 до 120 мм.',
             },
@@ -261,6 +388,20 @@ const initialState = {
                 name: 'Химический анализ косметической продукции согласно ГОСТ',
                 image: serviceTestLab,
                 position: 'right',
+                serviceItemHover: {
+                    active: false,
+                    minPrice: 25000,
+                    descriptionTitle: 'Описание',
+                    descriptionList: [
+                        {
+                            id: 1,
+                            name: 'Анализ продукции',
+                            description: '',
+                        },
+                    ],
+                    header: 'test header',
+                    content: 'test 1',
+                },
                 description: ' Услуги по химическому анализу косметической продукции в соответствии с ГОСТ. Наша лаборатория оборудована современным оборудованием, позволяющим проводить точные и надежные исследования.',
                 descriptionMini: 'Мы гарантируем высокое качество проводимых анализов и предоставляем подробные отчеты о составе и безопасности продукции.',
             },
@@ -269,8 +410,22 @@ const initialState = {
                 name: 'Консультации по выбору упаковки и сопровождение на этапе сертификации готовой продукции',
                 image: servicePacking,
                 position: 'left',
-                description: 'Консультируем по выбору упаковки для вашей косметической продукции. Поможем вам выбрать оптимальный вид упаковки, который будет соответствовать вашему бренду и обеспечит удобство использования для ваших клиентов',
-                descriptionMini: 'Мы знаем, что сертификация может быть сложным и трудоемким процессом, поэтому мы готовы помочь вам собрать все необходимые документы и подготовить продукцию к сертификации.',
+                serviceItemHover: {
+                    active: false,
+                    minPrice: 25000,
+                    descriptionTitle: 'Описание',
+                    descriptionList: [
+                        {
+                            id: 1,
+                            name: 'Консультационные услуги',
+                            description: '',
+                        },
+                    ],
+                    header: 'test header',
+                    content: 'test 1',
+                },
+                description: 'Поможем вам выбрать оптимальный вид упаковки от производителей и поставщиков косметической тары, который будет соответствовать вашему бренду и обеспечит удобство использования для ваших клиентов',
+                descriptionMini: 'Готовы помочь вам собрать все необходимые документы и подготовить продукцию к сертификации.',
             },   
         ]
     },
@@ -838,6 +993,21 @@ const innerPageSlice = createSlice({
             state.mousePosition.left = left;
             state.mousePosition.top = top;
             state.servicesPage.serviceFormActive = status;
+        },
+        showServiceHover(state, action) {
+            const { serviceId } = action.payload;
+            state.servicesPage.servicesItems = state.servicesPage.servicesItems.map((serviceItem) => {
+                if (serviceItem.id === serviceId) {
+                    return {
+                        ...serviceItem,
+                        serviceItemHover: {
+                            ...serviceItem.serviceItemHover,
+                            active: serviceItem.serviceItemHover.active ? false : true
+                        }
+                    }
+                }
+                return serviceItem;
+            });
         },
         validateContactsInput(state, action) {
             const { inputType, inputValue } = action.payload;
@@ -1458,6 +1628,7 @@ export const {
     forClientsDetailsValidateForm,
     forClientsDetailsPolicy,
     forClientsDetailsCheckForm,
-    forClientsHappyStatePopup
+    forClientsHappyStatePopup,
+    showServiceHover
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
