@@ -48,6 +48,8 @@ const ServicesPage = () => {
                                                     descriptionTitle={serviceItem.serviceItemHover.descriptionTitle}
                                                     descriptionList={serviceItem.serviceItemHover.descriptionList}
                                                     minPrice={serviceItem.serviceItemHover.minPrice}
+                                                    serviceItemId={serviceItem.id}
+                                                    hoverHandler={serviceHoverHandler}
                                                 /> 
                                             : null}
                                             <div className={`main-service-content main-service-content-align-${serviceItem.position}`}>
@@ -69,8 +71,9 @@ const ServicesPage = () => {
                                                         <span className="main-service-order-info-icon">
                                                             <img 
                                                                 src={infoIcon} alt="service-info"
-                                                                onMouseEnter={() => serviceHoverHandler(serviceItem.id)}
-                                                                onMouseLeave={() => serviceHoverHandler(serviceItem.id)}
+                                                                onClick={window.innerWidth > 1024 ? null : () => serviceHoverHandler(serviceItem.id)}
+                                                                onMouseEnter={window.innerWidth < 1024 ? null : () => serviceHoverHandler(serviceItem.id)}
+                                                                onMouseLeave={window.innerWidth < 1024 ? null : () => serviceHoverHandler(serviceItem.id)}
                                                             />
                                                         </span>
                                                     </div>
