@@ -183,7 +183,7 @@
     justify-content: center;
 }
 .inner-page-main-wrapper section {
-    margin-bottom: 40px;
+    margin-bottom: 80px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -541,7 +541,7 @@
     width: 100%;
     justify-content: center;
     align-items: baseline;
-    margin-bottom: 40px;
+    margin-bottom: 80px;
 }
 .about-company-fact-item-wrap {
     display: flex;
@@ -1009,7 +1009,7 @@
     align-items: center;
     margin-top: auto;
     margin-bottom: 20px;
-    font-size: 20px;
+    font-size: 18px;
 }
 .service-item-hover-list {
     display: flex;
@@ -1412,6 +1412,16 @@
     align-items: flex-end;
 }
 
+.slide-left {
+    animation:  slide-in-left 1000ms;
+}
+.slide-right {
+    animation:  slide-in-right 1000ms;
+}
+.span-title-bold {
+    font-weight: 700;
+}
+
 @media (max-width: 1200px) {
     .our-team-emploee-item-row {
         width: 100%;
@@ -1487,9 +1497,9 @@
        width: 100%;
     }
 }
-@media (min-width: 200px) and (max-width: 600px) {
-    .main-service-img-box{
-       max-height: 300px;
+@media (min-width: 200px) and (max-width: 480px) {
+    .main-service-img-box {
+       max-height: 320px;
     }
 }
 @media (min-width: 601px) and (max-width: 1025px) {
@@ -1611,7 +1621,7 @@
     .main-service-description-box,
     .main-service-content {
         padding: 10px;
-        max-width: 100%;
+        max-width: 563px;
         width: 95%;
         justify-content: center;
         align-items: center;
@@ -1908,7 +1918,6 @@
         max-width: 100%;
     }
 }
-
 @media (min-width: 200px) and (max-width: 991px){
     .service-popup-wrap {
       display: flex;
@@ -1919,25 +1928,18 @@
       padding: 20px 0;
     }
 }
-
-@media (max-width: 1300px){
+@media (max-width: 1300px) {
     .service-item-hover-wrap {
       left: 0%!important;
       right: 0%!important;
     }
 }
-
-
-
-
-.slide-left {
-    animation:  slide-in-left 1000ms;
-}
-.slide-right {
-    animation:  slide-in-right 1000ms;
-}
-.span-title-bold {
-    font-weight: 700;
+@media (max-width: 800px){
+    .align-img-left,
+    .align-img-right {
+      justify-content: center;
+      align-items: center;
+    }
 }
 
 @keyframes slide-in-left {
@@ -1948,6 +1950,7 @@
     transform: translateX(0%);
   }
 }
+
 @keyframes slide-in-right {
     from {
       transform: translateX(100%);
