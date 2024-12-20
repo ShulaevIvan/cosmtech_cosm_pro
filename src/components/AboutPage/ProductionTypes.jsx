@@ -8,7 +8,7 @@ const ProductionTypes = () => {
         <React.Fragment>
             <div className="container">
                 <div className="about-company-production-title-wrap">
-                    <h2>Типы выпускаемой продукции</h2>
+                    <h2>Типы производимой продукции</h2>
                 </div>
                 <div className="about-company-production-row">
                     <div className="about-company-production-goods-row">
@@ -17,7 +17,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Гели
+                                Средства по уходу за лицом
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -25,7 +25,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Крема
+                                Средства для укладки волос
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -33,7 +33,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Шампуни
+                                Средства по уходу за волосами
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -41,7 +41,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Сыворотки
+                                Средства по уходу за телом
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -49,7 +49,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Маски
+                                Средства по уходу за руками
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -57,7 +57,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Дезодоранты
+                                Средства по уходу за ногами
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -65,7 +65,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Бальзамы
+                                Косметика для детей
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -73,7 +73,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Обертывания
+                                Солнцезащитная косметика
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -81,7 +81,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Баттеры
+                                Косметика для мужчин
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -89,7 +89,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Пиллинги
+                                Косметика для животных
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -97,7 +97,7 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Эмульсии
+                                Профессиональная косметика
                             </div>
                         </div>
                         <div className="about-company-production-good-item-row">
@@ -105,20 +105,22 @@ const ProductionTypes = () => {
                                 <img src={aboutIcon} alt="#" />
                             </div>
                             <div className="about-company-production-good-item-text">
-                                Гидролат
+                                Косметика для салонов красоты
                             </div>
                         </div>
                     </div>
                     <div className="about-company-production-photo">
-                        <img src={aboutType} alt={'test'} />
+                        <div className="about-company-production-photo-wrap">
+                            <img src={aboutType} alt={'test'} />
+                        </div>
+                        <div className="about-company-production-consult-row">
+                            <Link 
+                                className="about-company-production-consult-btn"
+                                target={'_blank'}
+                            >Узнать больше</Link>
+                        </div>
                     </div>
-                    <div className="about-company-production-consult-row">
-
-                        <Link 
-                            className="about-company-production-consult-btn"
-                            target={'_blank'}
-                        >Узнать больше</Link>
-                    </div>
+                   
                 </div>
             </div>
         </React.Fragment>

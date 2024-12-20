@@ -58,7 +58,7 @@ const AboutPage = () => {
                 </div>
             </section> */}
 
-            <section>
+            {/* <section>
                 <div className="container">
                     <div className="about-company-textcontent-wrap">
                         <div className="container">
@@ -92,7 +92,7 @@ const AboutPage = () => {
                         
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <section>
                 <InnerPageConsultForm />

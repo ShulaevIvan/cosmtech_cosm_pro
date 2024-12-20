@@ -517,7 +517,33 @@ const initialState = {
                     err: false
                 },
             ]
-        }
+        },
+        aboutTabs: [
+            {
+                id: 1,
+                name: 'Сотрудничество',
+                tabHeader: 'head1',
+                active: true
+            },
+            {
+                id: 2,
+                name: 'Написать отзыв',
+                tabHeader: 'head2',
+                active: false
+            },
+            {
+                id: 3,
+                name: 'Реквизиты космотех',
+                tabHeader: 'head3',
+                active: false
+            },
+            {
+                id: 4,
+                name: 'Режим работы и адрес',
+                tabHeader: 'head4',
+                active: false
+            }
+        ]
     },
     jobPage: {
         vacancyList: [],
@@ -1423,6 +1449,25 @@ const innerPageSlice = createSlice({
                     active: status,
                 }
             }
+        },
+        aboutTabs(state, action) {
+            const { tabId } = action.payload;
+            const findActive = state.about.aboutTabs.find((item) => item.id === tabId);
+
+            if (findActive && findActive.id === tabId && findActive.active) return;
+
+            state.about.aboutTabs = state.about.aboutTabs.map((tabItem) => {
+                if (tabItem.id === tabId && !tabItem.active) {
+                    return {
+                        ...tabItem,
+                        active: true
+                    }
+                }
+                return {
+                    ...tabItem,
+                    active: false
+                }
+            });
         }
     },
     
@@ -1567,6 +1612,7 @@ export const {
     forClientsDetailsPolicy,
     forClientsDetailsCheckForm,
     forClientsHappyStatePopup,
-    showServiceHover
+    showServiceHover,
+    aboutTabs
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

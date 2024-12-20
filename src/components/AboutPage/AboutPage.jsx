@@ -1,16 +1,27 @@
 import React from "react";
-import aboutImg2 from '../../img/about_test2.jpg';
+import { useSelector, useDispatch } from "react-redux";
+
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import InnerPageConsultForm from "../InnerPageConsultForm/InnerPageConsultForm";
 import AboutVideoPrezentation from "./AboutVideoPrezentation";
 import ProductionTypes from "./ProductionTypes";
 import AboutProduction from "./AboutProduction";
+import AboutTabs from "./AboutTabs";
 import OurTeam from "./OurTeam";
 
-import { useSelector, useDispatch } from "react-redux";
+import { 
+    aboutTabs 
+} from "../../redux/slices/innerPageSlice";
+
 
 const AboutPage = () => {
     const aboutState = useSelector((state) => state.innerPage.about);
+    const dispatch = useDispatch();
+    
+    const aboutTabHandler = (tabId) => {
+        dispatch(aboutTabs({tabId: tabId}));
+    };
+
     return (
         <React.Fragment>
             <InnerPageHeader />
@@ -43,6 +54,12 @@ const AboutPage = () => {
             </section>
             <section>
                 <AboutProduction />
+            </section>
+            <section>
+                <AboutTabs
+                    tabs={aboutState.aboutTabs}
+                    tabHandler={aboutTabHandler}
+                />
             </section>
             <section>
                 <InnerPageConsultForm />
