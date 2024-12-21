@@ -25,10 +25,12 @@ const importAllImages = (ctxWebpuck) => {
     return images;
 };
 const suppliersImages = importAllImages(require.context('../../img/supplersImages', false, /\.(png|jpe?g|svg)$/));
+const reviewPlaces = importAllImages(require.context('../../img/reviewPlaces', false, /\.(png|jpe?g|svg)$/));
 const { 
     protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
     okilsato, pechatnik2, rpkr, mdm, pechatnik, stickyline, alaska
 } = suppliersImages;
+const { gisPlace, zoonPlace, yellPlace, yandexPlace } = reviewPlaces;
 
 const initialState = { 
     headerBackgrounds: [
@@ -521,26 +523,42 @@ const initialState = {
         aboutTabs: [
             {
                 id: 1,
-                name: 'Сотрудничество',
-                tabHeader: 'head1',
+                name: 'coop',
+                title: 'Сотрудничество',
+                tabHeader: 'Для поставщиков',
+                coopEmails: [
+                    {id: 1, name: 'Предложения по сырью', email: 'test@test.ru'},
+                    {id: 2, name: 'Предложения по упаковке', email: 'test@test.ru'},
+                    {id: 3, name: 'Предложения по логистике', email: 'test@test.ru'},
+                    {id: 4, name: 'Предложения по рекламе', email: 'test@test.ru'}
+                ],
                 active: true
             },
             {
                 id: 2,
-                name: 'Написать отзыв',
-                tabHeader: 'head2',
+                name: 'reviews',
+                title: 'Написать отзыв',
+                tabHeader: 'Оставить отзыв о компании',
+                reviewPlaces: [
+                    {id: 1, name: 'yandex', url: '', img: yandexPlace, imgAlt: 'оставить отзыв о космотех на яндекс картах'},
+                    {id: 2, name: '2gis', url: '', img: gisPlace, imgAlt: 'оставить отзыв о космотех на 2gis'},
+                    {id: 3, name: 'zoon', url: '', img: zoonPlace, imgAlt: 'оставить отзыв о космотех zoon'},
+                    {id: 4, name: 'yell', url: '', img: yellPlace, imgAlt: 'оставить отзыв о космотех yell'},
+                ],
                 active: false
             },
             {
                 id: 3,
-                name: 'Реквизиты космотех',
-                tabHeader: 'head3',
+                name: 'req',
+                title: 'Реквизиты',
+                tabHeader: 'Реквизиты Космотех',
                 active: false
             },
             {
                 id: 4,
-                name: 'Режим работы и адрес',
-                tabHeader: 'head4',
+                name: 'address',
+                title: 'Режим работы и адрес',
+                tabHeader: 'Контактная информация',
                 active: false
             }
         ]

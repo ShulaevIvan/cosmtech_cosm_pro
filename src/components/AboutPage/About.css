@@ -232,17 +232,21 @@
 }
 .about-page-production-tab-wrap {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
     border-radius: 10px;
-    background-color: #f5f5f5;
+    border: 1px solid #f5f5f5;
+    height: 600px;
+    max-height:600px;
 }
 .about-page-production-tab-links-row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    height: 80px;
+    max-height: 100px;
     justify-content: space-between;
     margin-bottom: 20px;
     background-color: #00458B;
@@ -271,16 +275,78 @@
     transition: background 0.3s;
     background-color: #3FD2C7;
 }
-.about-page-production-tab-link-wrap:first-child:hover {
+.about-page-production-tab-link-wrap:first-child:hover,
+.about-page-production-tab-link-wrap.tab-active:first-child {
     border-radius: 10px 0 0 0;
 }
-.about-page-production-tab-link-wrap:last-child:hover {
+.about-page-production-tab-link-wrap:last-child:hover,
+.about-page-production-tab-link-wrap.tab-active:last-child {
     border-radius: 0 10px 0 0;
 }
 .about-page-production-tab-content {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
     width: 100%;
     min-height: 400px;
+}
+.about-page-production-tab-coop-row {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+    justify-content: space-between;
+}
+.about-page-tab-cooperation-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: baseline;
+    justify-content: space-between;
+}
+.about-page-tab-cooperation-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 40%;
+    min-width: 200px;
+    max-width: 50%;
+    border-radius: 10px;
+    border: 1px solid #f5f5f5;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+}
+.about-page-tab-cooperation-item h4 {
+    margin: 0 0 20px 0;
+}
+.about-page-production-reviews-logo-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 200px;
+    max-width: 800px;
+}
+.about-page-production-review-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 25%;
+    width: 25%;
+}
+.about-page-production-review-item img {
+    max-width: 150px;
+    padding: 10px;
+}
+.about-page-production-review-item img:hover {
+    transform: scale(1.05);
+    transition: transform .2s ease-in;
 }
