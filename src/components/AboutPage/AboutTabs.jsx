@@ -1,5 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import YandexMap from "../YandexMap/YandexMap";
+import vkIcon from '../../img/vk_footer.svg';
+import whatsapp from '../../img/whatsapp_footer.svg';
+import telegram from '../../img/telegram_footer.svg';
 
 const AboutTabs = (props) => {
     const activeTab = props.tabs.find((item) => item.active);
@@ -23,7 +27,7 @@ const AboutTabs = (props) => {
                     })}
                 </div>
                 {activeTab ? 
-                    <div className="about-page-production-tab-content">
+                    <div className={'about-page-production-tab-content tab-active'}>
                         {activeTab.name === 'coop' ? 
                             <React.Fragment>
                                 <h3>{activeTab.tabHeader}</h3>
@@ -71,12 +75,59 @@ const AboutTabs = (props) => {
                         {activeTab.name === 'req' ? 
                             <React.Fragment>
                                 <h3>{activeTab.tabHeader}</h3>
+                                <div className="about-page-req-table-wrap">
+                                    {activeTab.reqTableRows.map((rowItem) => {
+                                        return (
+                                            <React.Fragment key={rowItem.id}>
+                                                <div className="about-page-req-table-row">
+                                                    <div className="about-page-req-title">
+                                                        {rowItem.title}
+                                                    </div>
+                                                    <div className="about-page-req-value">
+                                                        {rowItem.value}
+                                                    </div>
+                                                </div>
+                                            </React.Fragment>
+                                        )
+                                    })}
+                                </div>
+                                <div className="about-page-req-download-wrap">
+                                    <Link className='about-page-req-download-btn' to={'#'} target={'_blank'}>Скачать реквизиты</Link>
+                                </div>
                             </React.Fragment>
                         : null}
 
                         {activeTab.name === 'address' ? 
                             <React.Fragment>
                                 <h3>{activeTab.tabHeader}</h3>
+                                <div className="about-page-contacts-row">
+                                    <div className="about-page-worktime-wrap">
+                                        <h4>Рабочее время</h4>
+                                        <ul>
+                                            <li>Офис: пн-пт с 10:00 до 18:00</li>
+                                            <li>Производство: пн-вс с 8:00 до 22:00</li>
+                                        </ul>
+                                        <h4>Телефоны</h4>
+                                        <ul>
+                                            <li><Link to={`tel:+7812363061`}>+7 (812) 363-07-14</Link></li>
+                                            <li><Link to={`tel:+79643637272`}>+7 (964)-363-72-72</Link></li>
+                                        </ul>
+                                        <h4>Мессаджеры</h4>
+                                        <ul className="about-page-contacts-social">
+                                            <li><Link className="about-page-social-img"><img src={telegram} alt="telegram cosmtech" /></Link></li>
+                                            <li><Link className="about-page-social-img"><img src={whatsapp} alt="whatsapp cosmtech" /></Link></li>
+                                        </ul>
+                                        <h4>Соцсети</h4>
+                                        <ul className="about-page-contacts-social">
+                                            <li><Link className="about-page-social-img"><img src={vkIcon} alt="vk cosmtech" /></Link></li>
+                                        </ul>
+                                    </div>
+                                    <div className="about-page-tab-map-wrap">
+                                        <h4>Адрес производства</h4>
+                                        <p>Санкт-Петербург, ул Салова 27 АБ <Link>Проложить маршрут</Link></p>
+                                        <YandexMap />
+                                    </div>
+                                </div>
                             </React.Fragment>
                         : null}
                     </div>

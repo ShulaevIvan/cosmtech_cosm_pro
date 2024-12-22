@@ -58,7 +58,9 @@
 }
 .about-company-prezentation-btn,
 .about-company-production-consult-btn,
-.about-page-production-req-btn {
+.about-page-production-req-btn,
+.about-page-req-download-btn,
+.about-page-tab-map-map-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,7 +88,9 @@
 }
 .about-company-prezentation-btn:hover,
 .about-company-production-consult-btn:hover,
-.about-page-production-req-btn:hover {
+.about-page-production-req-btn:hover,
+.about-page-req-download-btn:hover,
+.about-page-tab-map-map-btn:hover {
     background-color: #00458B;
     transition: background .4s ease;
     color: white;
@@ -237,20 +241,21 @@
     width: 100%;
     border-radius: 10px;
     border: 1px solid #f5f5f5;
-    height: 600px;
-    max-height:600px;
+    min-height:600px;
 }
 .about-page-production-tab-links-row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    height: 80px;
-    max-height: 100px;
+    max-height: 60px;
+    height: 60px;
+    overflow-y: hidden;
     justify-content: space-between;
     margin-bottom: 20px;
     background-color: #00458B;
     color: white;
+    
     border-radius: 10px 10px 0 0;
 }
 .about-page-production-tab-link-wrap {
@@ -289,14 +294,23 @@
     flex-wrap: wrap;
     align-items: center;
     width: 100%;
-    min-height: 400px;
+}
+.about-page-production-tab-coop-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+    justify-content: center;
+    align-items: center;
 }
 .about-page-production-tab-coop-row {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 800px;
+    max-width: 1024px;
+    align-items: center;
     justify-content: space-between;
 }
 .about-page-tab-cooperation-row {
@@ -304,6 +318,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    max-width: 800px;
     align-items: baseline;
     justify-content: space-between;
 }
@@ -349,4 +364,115 @@
 .about-page-production-review-item img:hover {
     transform: scale(1.05);
     transition: transform .2s ease-in;
+}
+.about-page-req-table-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 1px solid #f5f5f5;
+}
+.about-page-req-table-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 97.5%;
+    justify-content: space-between;
+    border-bottom: 1px solid #dbd4d4;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+.about-page-req-table-row:last-child {
+    border: none;
+}
+.about-page-req-title {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    max-width: 35%;
+    height: 100%;
+    font-weight: bold;
+    border-right:1px solid #dbd4d4;
+}
+.about-page-req-value {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 65%;
+    max-width: 70%;
+}
+.about-page-req-download-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+.about-page-contacts-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1100px;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 20px;
+}
+.about-page-worktime-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 60%;
+}
+.about-page-tab-map-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 50%;
+}
+.about-page-contacts-row h4 {
+    margin: 0 0 10px 0;
+    font-size: 22px;
+}
+.about-page-contacts-row ul {
+    margin: 0 0 20px 0;
+}
+.about-page-contacts-row ul li {
+    margin-bottom: 10px;
+}
+.about-page-contacts-row p {
+    margin: 0 0 10px 0;
+}
+.about-page-contacts-social {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.about-page-contacts-social li {
+    width: 40px;
+    list-style: none;
+    margin-right: 5px;
+}
+.about-page-contacts-row li {
+    list-style: none;
+}
+.about-page-tab-map-wrap a {
+    padding: 0 10px;
+}
+.about-page-social-img img {
+    transition: transform 0.2s;
+}
+.about-page-social-img img:hover {
+    transform: scale(1.05);
 }
