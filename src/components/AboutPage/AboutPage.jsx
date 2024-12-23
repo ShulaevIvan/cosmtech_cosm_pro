@@ -6,11 +6,13 @@ import InnerPageConsultForm from "../InnerPageConsultForm/InnerPageConsultForm";
 import AboutVideoPrezentation from "./AboutVideoPrezentation";
 import ProductionTypes from "./ProductionTypes";
 import AboutProduction from "./AboutProduction";
+import AboutConsultForm from './AboutConsultForm';
 import AboutTabs from "./AboutTabs";
 import OurTeam from "./OurTeam";
 
 import { 
-    aboutTabs 
+    aboutTabs,
+    abouProductionPopup
 } from "../../redux/slices/innerPageSlice";
 
 
@@ -20,6 +22,10 @@ const AboutPage = () => {
     
     const aboutTabHandler = (tabId) => {
         dispatch(aboutTabs({tabId: tabId}));
+    };
+
+    const aboutProdTypesPopupHandler = () => {
+        dispatch(abouProductionPopup());
     };
 
     return (
@@ -50,7 +56,11 @@ const AboutPage = () => {
                 <AboutVideoPrezentation />
             </section>
             <section>
-                <ProductionTypes />
+                {aboutState.aboutProduction.popupActive ? <AboutConsultForm /> : null}
+                <ProductionTypes
+                    popupHandler={aboutProdTypesPopupHandler} 
+                    productionTypes={aboutState.aboutProduction.productionTypes}
+                />
             </section>
             <section>
                 <AboutProduction />

@@ -114,17 +114,44 @@ const AboutTabs = (props) => {
                                         </ul>
                                         <h4>Мессаджеры</h4>
                                         <ul className="about-page-contacts-social">
-                                            <li><Link className="about-page-social-img"><img src={telegram} alt="telegram cosmtech" /></Link></li>
-                                            <li><Link className="about-page-social-img"><img src={whatsapp} alt="whatsapp cosmtech" /></Link></li>
+                                            <li>
+                                                <Link 
+                                                    className="about-page-social-img"
+                                                    to={'https://t.me/+79643637272'}
+                                                    target={'_blank'}
+                                                >
+                                                <img src={telegram} alt="telegram cosmtech" /></Link>
+                                            </li>
+                                            <li>
+                                                <Link 
+                                                    className="about-page-social-img"
+                                                    to={'https://wa.me/+79643637272'}
+                                                    target={'_blank'}
+                                                >
+                                                <img src={whatsapp} alt="whatsapp cosmtech" />
+                                                </Link>
+                                            </li>
                                         </ul>
                                         <h4>Соцсети</h4>
                                         <ul className="about-page-contacts-social">
-                                            <li><Link className="about-page-social-img"><img src={vkIcon} alt="vk cosmtech" /></Link></li>
+                                            <li>
+                                                <Link 
+                                                    className="about-page-social-img"
+                                                    to={'https://vk.com/cosmtech'}
+                                                    target={'_blank'}
+                                                >
+                                                <img src={vkIcon} alt="vk cosmtech" />
+                                                </Link>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div className="about-page-tab-map-wrap">
                                         <h4>Адрес производства</h4>
-                                        <p>Санкт-Петербург, ул Салова 27 АБ <Link>Проложить маршрут</Link></p>
+                                        <p>Санкт-Петербург, ул Салова 27 АБ 
+                                        <Link 
+                                            target={'_blank'} 
+                                            to={"https://yandex.ru/maps/?rtext=~59.895998,30.374016"} 
+                                        >Проложить маршрут</Link></p>
                                         <YandexMap />
                                     </div>
                                 </div>

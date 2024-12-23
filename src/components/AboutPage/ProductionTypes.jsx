@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import aboutIcon from '../../img/about_icon.png';
-import aboutType from '../../img/test1234.jpg'
+import aboutProductionImg from '../../img/aboutProduction.jpg'
 
-const ProductionTypes = () => {
+const ProductionTypes = (props) => {
+    console.log(props)
     return (
         <React.Fragment>
             <div className="container">
@@ -12,111 +12,29 @@ const ProductionTypes = () => {
                 </div>
                 <div className="about-company-production-row">
                     <div className="about-company-production-goods-row">
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Средства по уходу за лицом
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Средства для укладки волос
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Средства по уходу за волосами
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Средства по уходу за телом
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Средства по уходу за руками
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Средства по уходу за ногами
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Косметика для детей
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Солнцезащитная косметика
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Косметика для мужчин
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Косметика для животных
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Профессиональная косметика
-                            </div>
-                        </div>
-                        <div className="about-company-production-good-item-row">
-                            <div className="about-company-production-good-item-icon">
-                                <img src={aboutIcon} alt="#" />
-                            </div>
-                            <div className="about-company-production-good-item-text">
-                                Косметика для салонов красоты
-                            </div>
-                        </div>
+                        {props.productionTypes.map((productionItem) => {
+                            return (
+                                <React.Fragment key={productionItem.id}>
+                                    <div className="about-company-production-good-item-row">
+                                        <div className="about-company-production-good-item-icon">
+                                            <img src={productionItem.img} alt={productionItem.imgAlt} />
+                                        </div>
+                                        <div className="about-company-production-good-item-text">
+                                            {productionItem.name}
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            )
+                        })}
                     </div>
                     <div className="about-company-production-photo">
                         <div className="about-company-production-photo-wrap">
-                            <img src={aboutType} alt={'test'} />
+                            <img src={aboutProductionImg} alt={'Косметика на заказ от производителя Космотех'} />
                         </div>
                         <div className="about-company-production-consult-row">
                             <Link 
+                                onClick={props.popupHandler}
                                 className="about-company-production-consult-btn"
-                                target={'_blank'}
                             >Узнать больше</Link>
                         </div>
                     </div>

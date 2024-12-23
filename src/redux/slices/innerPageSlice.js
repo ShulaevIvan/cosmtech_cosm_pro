@@ -26,10 +26,16 @@ const importAllImages = (ctxWebpuck) => {
 };
 const suppliersImages = importAllImages(require.context('../../img/supplersImages', false, /\.(png|jpe?g|svg)$/));
 const reviewPlaces = importAllImages(require.context('../../img/reviewPlaces', false, /\.(png|jpe?g|svg)$/));
+const aboutProductionImages = importAllImages(require.context('../../img/aboutProductionImages', false, /\.(png|jpe?g|svg)$/));
 const { 
     protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
     okilsato, pechatnik2, rpkr, mdm, pechatnik, stickyline, alaska
 } = suppliersImages;
+const { 
+    productionHair, productionBody, productionFace, productionLaying, productionFeet, 
+    productionHands, productionBaby, productionMan, productionSuncare, productionSaloon,
+    productionAnimal, productionCosmetic
+} = aboutProductionImages;
 const { gisPlace, zoonPlace, yellPlace, yandexPlace } = reviewPlaces;
 
 const initialState = { 
@@ -486,6 +492,49 @@ const initialState = {
                 image: aboutFactFourth,
             }
         ],
+        aboutProduction: {
+            popupActive: false,
+            productionForm: {
+                policyActive: true,
+                fields: [
+                    {
+                        id: 1,
+                        title: 'Имя',
+                        fieldType: 'name',
+                        fieldValue: '',
+                        fieldValid: true
+                    },
+                    {
+                        id: 2,
+                        title: 'Телефон',
+                        fieldType: 'phone',
+                        fieldValue: '',
+                        fieldValid: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Комментарий',
+                        fieldType: 'comment',
+                        fieldValue: '',
+                        fieldValid: true
+                    },
+                ]
+            },
+            productionTypes: [
+                { id: 1, name: 'Средства по уходу за лицом', img: productionFace, altImg: 'Средства по уходу за лицом на заказ от Космотех в спб'},
+                { id: 2, name: 'Средства для укладки волос', img: productionLaying, altImg: 'Средства для укладки волос на заказ от производства Космотех в спб'},
+                { id: 3, name: 'Средства по уходу за волосами', img: productionHair, altImg: 'Средства по уходу за волосами на заказ от производства Космотех в спб'},
+                { id: 4, name: 'Средства по уходу за телом', img: productionBody, altImg: 'Средства по уходу за телом на заказ от производства Космотех в спб'},
+                { id: 5, name: 'Средства по уходу за руками', img: productionHands, altImg: 'Средства по уходу за руками на заказ от производства Космотех в спб'},
+                { id: 6, name: 'Средства по уходу за ногами', img: productionFeet, altImg: 'Средства по уходу за ногами на заказ от производства Космотех в спб'},
+                { id: 7, name: 'Косметика для детей', img: productionBaby, altImg: 'Косметика для детей на заказ от производства Космотех в спб'},
+                { id: 8, name: 'Солнцезащитная косметика', img: productionSuncare, altImg: 'Солнцезащитная косметика на заказ от производства Космотех в спб'},
+                { id: 9, name: 'Косметика для мужчин', img: productionMan, altImg: 'Косметика для мужчин на заказ от производства Космотех в спб'},
+                { id: 10, name: 'Косметика для животных', img: productionAnimal, altImg: 'Косметика для животных на заказ от производства Космотех в спб'},
+                { id: 11, name: 'Профессиональная косметика', img: productionCosmetic, altImg: 'Профессиональная косметика на заказ от производства Космотех в спб'},
+                { id: 12, name: 'Косметика для салонов красоты', img: productionSaloon, altImg: 'Косметика для салонов красоты на заказ от производства Космотех в спб'},
+            ]
+        },
         innerForm: {
             sendBtnActive: false,
             innerConsultFormHappyState: false,
@@ -527,10 +576,10 @@ const initialState = {
                 title: 'Сотрудничество',
                 tabHeader: 'Для поставщиков',
                 coopEmails: [
-                    {id: 1, name: 'Предложения по сырью', email: 'test@test.ru'},
-                    {id: 2, name: 'Предложения по упаковке', email: 'test@test.ru'},
-                    {id: 3, name: 'Предложения по логистике', email: 'test@test.ru'},
-                    {id: 4, name: 'Предложения по рекламе', email: 'test@test.ru'}
+                    {id: 1, name: 'Предложения по сырью', email: 'supplier@cosmtech.ru'},
+                    {id: 2, name: 'Предложения по упаковке', email: 'supplier@cosmtech.ru'},
+                    {id: 3, name: 'Предложения по логистике', email: 'supplier@cosmtech.ru'},
+                    {id: 4, name: 'Предложения по рекламе', email: 'media@cosmtech.ru'}
                 ],
                 active: true
             },
@@ -1484,6 +1533,15 @@ const innerPageSlice = createSlice({
                 }
             }
         },
+        abouProductionPopup(state) {
+            if (!state.about.aboutProduction.popupActive) {
+                state.about.aboutProduction.popupActive = true;
+                return;
+            }
+            state.about.aboutProduction.popupActive = false;
+            state.about.aboutProduction.productionForm = initialState.about.aboutProduction.productionForm;
+
+        },
         aboutTabs(state, action) {
             const { tabId } = action.payload;
             const findActive = state.about.aboutTabs.find((item) => item.id === tabId);
@@ -1647,6 +1705,7 @@ export const {
     forClientsDetailsCheckForm,
     forClientsHappyStatePopup,
     showServiceHover,
+    abouProductionPopup,
     aboutTabs
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
