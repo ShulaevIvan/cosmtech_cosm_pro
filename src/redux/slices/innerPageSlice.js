@@ -495,27 +495,33 @@ const initialState = {
         aboutProduction: {
             popupActive: false,
             productionForm: {
-                policyActive: true,
+                policyActive: false,
+                sendBtnActive: false,
                 fields: [
                     {
                         id: 1,
                         title: 'Имя',
+                        type: 'text',
                         fieldType: 'name',
-                        fieldValue: '',
+                        value: '',
+                        placeholder: 'Ваше имя',
                         fieldValid: true
                     },
                     {
                         id: 2,
                         title: 'Телефон',
+                        type: 'text',
                         fieldType: 'phone',
-                        fieldValue: '',
+                        value: '',
+                        placeholder: '8xxxxxxxxxx',
                         fieldValid: true
                     },
                     {
                         id: 4,
                         title: 'Комментарий',
                         fieldType: 'comment',
-                        fieldValue: '',
+                        value: '',
+                        placeholder: 'Уточнение или вопрос...',
                         fieldValid: true
                     },
                 ]
@@ -1336,7 +1342,6 @@ const innerPageSlice = createSlice({
                 inputValid = validateName(inputValue);
             }
             if (inputType === 'file') {
-                console.log(inputValue)
                 inputValidValue = inputValue && inputValue.name ? inputValue : {};
                 inputValid = inputValue && inputValue.name ? true : false
             }
@@ -1542,6 +1547,71 @@ const innerPageSlice = createSlice({
             state.about.aboutProduction.productionForm = initialState.about.aboutProduction.productionForm;
 
         },
+        validateAboutProductionForm(state, action) {
+            const { inputType, inputValue } = action.payload;
+            let validValue;
+            let inputValid;
+            if ((inputType === 'phone' && inputValue.length === 18) || inputValue.trim() === '') return;
+            if (inputType === 'phone') {
+                inputValid = false;
+                validValue = validatePhone(inputValue);
+                if (validValue && validValue.length === 18) {
+                    inputValid = true;
+                }
+                
+            }
+            else if (inputType === 'name') {
+                inputValid = validateName(inputValue);
+                validValue = inputValue;
+            }
+            else if (inputType === 'comment') {
+                inputValid = inputValue.trim().length < 5 ? false : true
+                validValue = inputValue;
+            }
+
+            state.about.aboutProduction.productionForm.fields = state.about.aboutProduction.productionForm.fields.map((fieldItem) => {
+                if (inputType === fieldItem.fieldType) {
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        fieldValid: inputValid
+                    }
+                }
+                return fieldItem;
+            });
+        },
+        aboutProductionPolicy(state) {
+            state.about.aboutProduction.productionForm = {
+                ...state.about.aboutProduction.productionForm,
+                policyActive: state.about.aboutProduction.productionForm.policyActive ? false : true
+            }
+        },
+        aboutProductionClearInput(state, action) {
+            const { inputType } = action.payload;
+
+            state.about.aboutProduction.productionForm.fields = state.about.aboutProduction.productionForm.fields.map((fieldItem) => {
+                if (inputType === fieldItem.fieldType) {
+                    return {
+                        ...fieldItem,
+                        value: '',
+                        fieldValid: false
+                    }
+                }
+                return fieldItem;
+            });
+
+        },
+        checkAboutProductionSendBtn(state) {
+            const checkFields = state.about.aboutProduction.productionForm.fields.filter((item) => item.fieldValid && item.value !== '');
+            const phoneField = checkFields.find((item) => item.fieldType === 'phone');
+            const policyChecked = state.about.aboutProduction.productionForm.policyActive;
+
+            if (checkFields && checkFields.length >= 2 && (phoneField && phoneField.fieldValid && policyChecked)) {
+                state.about.aboutProduction.productionForm.sendBtnActive = true;
+                return;
+            }
+            state.about.aboutProduction.productionForm.sendBtnActive = false;
+        },
         aboutTabs(state, action) {
             const { tabId } = action.payload;
             const findActive = state.about.aboutTabs.find((item) => item.id === tabId);
@@ -1706,6 +1776,10 @@ export const {
     forClientsHappyStatePopup,
     showServiceHover,
     abouProductionPopup,
+    validateAboutProductionForm,
+    aboutProductionPolicy,
+    aboutProductionClearInput,
+    checkAboutProductionSendBtn,
     aboutTabs
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

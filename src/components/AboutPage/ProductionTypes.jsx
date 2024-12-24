@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import aboutProductionImg from '../../img/aboutProduction.jpg'
 
 const ProductionTypes = (props) => {
-    console.log(props)
+    
     return (
         <React.Fragment>
             <div className="container">

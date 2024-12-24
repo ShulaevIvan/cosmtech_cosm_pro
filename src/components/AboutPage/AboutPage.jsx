@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useEffect } from "react";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import InnerPageConsultForm from "../InnerPageConsultForm/InnerPageConsultForm";
 import AboutVideoPrezentation from "./AboutVideoPrezentation";
@@ -12,7 +12,11 @@ import OurTeam from "./OurTeam";
 
 import { 
     aboutTabs,
-    abouProductionPopup
+    abouProductionPopup,
+    validateAboutProductionForm,
+    aboutProductionPolicy,
+    aboutProductionClearInput,
+    checkAboutProductionSendBtn
 } from "../../redux/slices/innerPageSlice";
 
 
@@ -27,6 +31,25 @@ const AboutPage = () => {
     const aboutProdTypesPopupHandler = () => {
         dispatch(abouProductionPopup());
     };
+
+    const aboutProdInputHandler = (inputType, inputRef) => {
+        dispatch(validateAboutProductionForm({inputType: inputType, inputValue: inputRef.value}));
+    };
+
+    const aboutProdPolicyHandler = () => {
+        dispatch(aboutProductionPolicy());
+    };
+
+    const aboutProdClearInputHandler = (e, fieldType) => {
+        if (e.key === 'Backspace' && fieldType) {
+            dispatch(aboutProductionClearInput({inputType: fieldType}));
+        }
+        return;
+    };
+
+    useEffect(() => {
+        dispatch(checkAboutProductionSendBtn());
+    }, [aboutState.aboutProduction.productionForm]);
 
     return (
         <React.Fragment>
@@ -56,7 +79,15 @@ const AboutPage = () => {
                 <AboutVideoPrezentation />
             </section>
             <section>
-                {aboutState.aboutProduction.popupActive ? <AboutConsultForm /> : null}
+                {aboutState.aboutProduction.popupActive ? 
+                    <AboutConsultForm 
+                        popupHandler={aboutProdTypesPopupHandler}
+                        inputHandler={aboutProdInputHandler}
+                        policyHandler={aboutProdPolicyHandler}
+                        clearInputHandler={aboutProdClearInputHandler}
+                        formState={aboutState.aboutProduction.productionForm}
+
+                    /> : null}
                 <ProductionTypes
                     popupHandler={aboutProdTypesPopupHandler} 
                     productionTypes={aboutState.aboutProduction.productionTypes}

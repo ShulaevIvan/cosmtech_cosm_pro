@@ -1,39 +1,87 @@
 import React from "react";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 
-const AboutConsultForm = () => {
+const AboutConsultForm = (props) => {
+    const formState = props.formState;
+    const inputRefs = [
+        {type: 'name', ref: useRef(null)}, 
+        {type: 'phone', ref: useRef(null)}, 
+        {type: 'comment', ref: useRef(null)}
+    ];
+    const findInputRef = (inputType) => {
+        return inputRefs.find((item) => item.type === inputType).ref;
+    };
+
     return (
         <React.Fragment>
             <div className="about-production-consult-popup-background">
                 <div className="about-production-consult-popup-wrap">
-                    <h4>Получить консультацию по производству</h4>
+                    <div className="about-production-consult-popup-close-btn-wrap">
+                        <span 
+                            className="about-production-consult-popup-close-btn"
+                            onClick={props.popupHandler}
+                        ></span>
+                    </div>
+                    <h4>Получить консультацию</h4>
                     <div className="about-production-form-wrap">
                         <div className="about-production-consult-form-row">
-                            <div className="about-production-consult-form-item">
-                                <label>Имя</label>
-                                <div className="about-production-form-input-wrap">
-                                    <input type="text" />
-                                </div>
-                            </div>
-                            <div className="about-production-consult-form-item">
-                                <label>Телефон</label>
-                                <div className="about-production-form-input-wrap">
-                                    <input type="text" />
-                                </div>
-                            </div>
+                            {formState.fields.filter((item) => item.fieldType !== 'comment').map((formField) => {
+                                return (
+                                    <React.Fragment key={formField.id}>
+                                        <div className="about-production-consult-form-item">
+                                            <label htmlFor={`about-input-prod-name-id-${formField.id}`}>{formField.title}</label>
+                                            <div className="about-production-form-input-wrap">
+                                                <input
+                                                    className={formField.fieldValid ? '' : 'input-err'}
+                                                    ref={findInputRef(formField.fieldType)}
+                                                    onChange={() => props.inputHandler(formField.fieldType, findInputRef(formField.fieldType).current)}
+                                                    onKeyDown={(e) => props.clearInputHandler(e, formField.fieldType)}
+                                                    id={`about-input-prod-name-id-${formField.id}`}
+                                                    type={formField.type}
+                                                    placeholder={formField.placeholder}
+                                                    value={formField.value}
+                                                />
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
+                                )
+                            })}
                         </div>
                         <div className="about-production-form-textarea-wrap">
-                            <label>Комментарий</label>
-                            <textarea></textarea>
+                            {formState.fields.filter((item) => item.fieldType === 'comment').map((formField) => {
+                                return (
+                                    <React.Fragment key={formField.id}>
+                                        <label htmlFor={`about-input-prod-name-id-${formField.id}`}>{formField.title}</label>
+                                        <textarea
+                                            className={formField.fieldValid ? '' : 'input-err'}
+                                            ref={findInputRef(formField.fieldType)}
+                                            onChange={() => props.inputHandler(formField.fieldType, findInputRef(formField.fieldType).current)}
+                                            onKeyDown={(e) => props.clearInputHandler(e, formField.fieldType)}
+                                            id={`about-input-prod-name-id-${formField.id}`}
+                                            placeholder={formField.placeholder}
+                                            value={formField.value}
+                                        ></textarea>
+                                    </React.Fragment>
+                                )
+                            })}
                         </div>
                         <div className="about-production-checkbox-wrap">
                             <div className="form-mode-about-production-checkbox">
-                                <input type="checkbox" id="about-production-checkbox" className="about-production-checkbox" />
-                                <label for="fabout-production-checkbox"></label>
+                                <input
+                                    onClick={props.policyHandler} 
+                                    type="checkbox" 
+                                    id="about-production-checkbox" 
+                                    className="about-production-checkbox" 
+                                />
+                                <label htmlFor="about-production-checkbox"></label>
                                 <span>согласен с <a href="/policy">политикой конфидициальности</a></span>
                             </div>
                         </div>
                         <div className="about-production-send-btn-wrap">
-                            <a className="about-production-send-btn">Отправить</a>
+                            <Link className={props.formState.sendBtnActive ? 
+                                "about-production-send-btn" : "about-production-send-btn btnDisabled"}
+                            >Отправить</Link>
                         </div>
                     </div>
                 </div>
