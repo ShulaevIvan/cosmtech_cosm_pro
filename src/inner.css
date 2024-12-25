@@ -539,7 +539,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
     align-items: baseline;
     margin-bottom: 80px;
 }
@@ -557,13 +557,16 @@
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
+.about-conpany-fact-icon-wrap img {
+    margin: 0 auto; 
+}
 .about-conpany-fact-text {
     display: flex;
     flex-direction: row;
     font-size: 38px;
     font-weight: bold;
     margin-bottom: 20px;
-    width: 300px;
+    max-width: 300px;
     justify-content: center;
     align-items: center;
 }

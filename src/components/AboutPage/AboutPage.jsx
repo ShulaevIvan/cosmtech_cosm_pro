@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { sendAboutProductionConsultForm } from "../../redux/slices/innerPageSlice";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import InnerPageConsultForm from "../InnerPageConsultForm/InnerPageConsultForm";
 import AboutVideoPrezentation from "./AboutVideoPrezentation";
@@ -8,7 +9,7 @@ import ProductionTypes from "./ProductionTypes";
 import AboutProduction from "./AboutProduction";
 import AboutConsultForm from './AboutConsultForm';
 import AboutTabs from "./AboutTabs";
-import OurTeam from "./OurTeam";
+// import OurTeam from "./OurTeam";
 
 import { 
     aboutTabs,
@@ -16,7 +17,7 @@ import {
     validateAboutProductionForm,
     aboutProductionPolicy,
     aboutProductionClearInput,
-    checkAboutProductionSendBtn
+    checkAboutProductionSendBtn,
 } from "../../redux/slices/innerPageSlice";
 
 
@@ -45,6 +46,15 @@ const AboutPage = () => {
             dispatch(aboutProductionClearInput({inputType: fieldType}));
         }
         return;
+    };
+
+    const aboutProdSendConsultHandler = () => {
+        const data = {
+            name: aboutState.aboutProduction.productionForm.fields.find((item) => item.fieldType === 'name').value,
+            phone: aboutState.aboutProduction.productionForm.fields.find((item) => item.fieldType === 'phone').value,
+            comment: aboutState.aboutProduction.productionForm.fields.find((item) => item.fieldType === 'comment').value,
+        };
+        dispatch(sendAboutProductionConsultForm(data));
     };
 
     useEffect(() => {
@@ -76,7 +86,9 @@ const AboutPage = () => {
                 </div>
             </section>
             <section>
-                <AboutVideoPrezentation />
+                <AboutVideoPrezentation 
+                    prezentationState={aboutState.videoPrezentation} 
+                />
             </section>
             <section>
                 {aboutState.aboutProduction.popupActive ? 
@@ -85,6 +97,7 @@ const AboutPage = () => {
                         inputHandler={aboutProdInputHandler}
                         policyHandler={aboutProdPolicyHandler}
                         clearInputHandler={aboutProdClearInputHandler}
+                        sendFormHandler={aboutProdSendConsultHandler}
                         formState={aboutState.aboutProduction.productionForm}
 
                     /> : null}

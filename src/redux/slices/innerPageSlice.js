@@ -4,6 +4,7 @@ import validatePhone from '../../functions/validatePhone';
 import validateMail from "../../functions/validateMail";
 import validateCity from "../../functions/validateCity";
 
+import promoVideo from '../../video/compress_promo_video.mp4';
 import backgroundServices from '../../img/services_bg.jpg';
 import backgroundAbout from '../../img/about.jpg';
 import backgroundContacts from '../../img/contacts.jpg';
@@ -18,6 +19,11 @@ import aboutFactFirst from '../../img/prize_cosm.svg';
 import aboutFactSecond from '../../img/production_cosm.svg';
 import aboutFactThird from '../../img/orders.svg';
 import aboutFactFourth  from '../../img/lab_cosm.svg';
+
+import aboutIconStart from '../../img/about_clock.svg';
+import aboutIconReq from '../../img/about_requirements.svg';
+import aboutIconMoney from '../../img/about_money.svg';
+import aboutIconOk from '../../img/about_ok.svg';
 
 const importAllImages = (ctxWebpuck) => {
     const images = {};
@@ -492,11 +498,45 @@ const initialState = {
                 image: aboutFactFourth,
             }
         ],
+        videoPrezentation: {
+            prezentationVideo: {file: promoVideo, type: 'video/mp4'},
+            prezentationFileUrl: '',
+            prezentationIcons: [
+                {
+                    id: 1,
+                    title: 'Легкий старт',
+                    img: aboutIconStart,
+                    imgAlt: 'Легкий старт контрактное производство космотех'
+                },
+                {
+                    id: 2,
+                    title: 'Гибкие условия',
+                    img: aboutIconReq,
+                    imgAlt: 'Гибкие условия сотрудничества космотех'
+                },
+                {
+                    id: 3,
+                    title: 'Высокая маржинальность',
+                    img: aboutIconMoney,
+                    imgAlt: 'Высокая маржинальность контрактное производство космотех'
+                },
+                {
+                    id: 4,
+                    title: 'Стабильное качество',
+                    img: aboutIconOk,
+                    imgAlt: 'Стабильное качество производства космотех'
+                }
+            ]
+        },
         aboutProduction: {
             popupActive: false,
             productionForm: {
                 policyActive: false,
                 sendBtnActive: false,
+                happyState: {
+                    active: false,
+                    description: ''
+                },
                 fields: [
                     {
                         id: 1,
@@ -595,10 +635,33 @@ const initialState = {
                 title: 'Написать отзыв',
                 tabHeader: 'Оставить отзыв о компании',
                 reviewPlaces: [
-                    {id: 1, name: 'yandex', url: '', img: yandexPlace, imgAlt: 'оставить отзыв о космотех на яндекс картах'},
-                    {id: 2, name: '2gis', url: '', img: gisPlace, imgAlt: 'оставить отзыв о космотех на 2gis'},
-                    {id: 3, name: 'zoon', url: '', img: zoonPlace, imgAlt: 'оставить отзыв о космотех zoon'},
-                    {id: 4, name: 'yell', url: '', img: yellPlace, imgAlt: 'оставить отзыв о космотех yell'},
+                    {
+                        id: 1, 
+                        name: 'yandex', 
+                        url: 'https://yandex.ru/maps/org/kosmeticheskiye_tekhnologii/238223588879/reviews/?ll=30.374016%2C59.895998&z=17', 
+                        img: yandexPlace, 
+                        imgAlt: 'оставить отзыв о космотех на яндекс картах'
+                    },
+                    {
+                        id: 2, 
+                        name: '2gis', 
+                        url: 'https://2gis.ru/spb/search/%D0%9A%D0%BE%D1%81%D0%BC%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20%D1%81%D0%B0%D0%BB%D0%BE%D0%B2%D0%B0/firm/70000001090431923/30.373679%2C59.896468/tab/reviews', 
+                        img: gisPlace, 
+                        imgAlt: 'оставить отзыв о космотех на 2gis'
+                    },
+                    {
+                        id: 3, 
+                        name: 'zoon', 
+                        url: 'https://zoon.ru/spb/business/proizvodstvennaya_kompaniya_kosmeticheskie_tehnologii/', 
+                        img: zoonPlace, 
+                        imgAlt: 'оставить отзыв о космотех zoon'
+                    },
+                    {
+                        id: 4, 
+                        name: 'yell', 
+                        url: 'https://www.yell.ru/spb/com/kosmeticheskie-texnologii_14480385/', 
+                        img: yellPlace, 
+                        imgAlt: 'оставить отзыв о космотех yell'},
                 ],
                 active: false
             },
@@ -852,13 +915,31 @@ const initialState = {
     }
 };
 
+export const sendAboutProductionConsultForm = createAsyncThunk(
+    'sendAboutProdConsult',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/consultreq/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sendData)
+        });
+
+        const data = await response.json();
+
+        return data;
+    }
+)
+
 export const sendForClientsConsultForm = createAsyncThunk(
     'sendForClientsConsult',
     async (sendData) => {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/clients/request/`, {
             method: 'POST',
             headers: {
-                'Authorization': `Token: ${process.env.REACT_APP_API_TOKEN}`,
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(sendData)
@@ -1734,6 +1815,18 @@ const innerPageSlice = createSlice({
                     description: description
                 }
             }
+        })
+        .addCase(sendAboutProductionConsultForm.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            if (status && status === 'ok') {
+                state.about.aboutProduction.productionForm.happyState = {
+                    ...state.about.aboutProduction.productionForm.happyState,
+                    active: true,
+                    description: description
+                }
+                return;
+            };
+            state.about.aboutProduction.productionForm.happyState = state.about.aboutProduction.productionForm.happyState;
         })
     }
 });

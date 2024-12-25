@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import promo_video from '../../video/compress_promo_video.mp4';
-import aboutIcon from '../../img/about_icon.png';
 
-const AboutVideoPrezentation = () => {
+const AboutVideoPrezentation = (props) => {
+    const prezentationState = props.prezentationState;
+    
     return (
         <React.Fragment>
             <div className="container">
@@ -13,36 +13,25 @@ const AboutVideoPrezentation = () => {
                             <h2>Преимщества работы с нами</h2>
                         </div>
                         <div className="about-company-icons-row">
-                            <div className="about-company-icon-item">
-                                <div className="about-company-icon">
-                                    <img src={aboutIcon} alt="#" />
-                                </div>
-                                <div className="about-company-icon-text">Легкий старт</div>
-                            </div>
-                            <div className="about-company-icon-item">
-                                <div className="about-company-icon">
-                                    <img src={aboutIcon} alt="#" />
-                                </div>
-                                <div className="about-company-icon-text">Гибкие условия</div>
-                            </div>
-                            <div className="about-company-icon-item">
-                                <div className="about-company-icon">
-                                    <img src={aboutIcon} alt="#" />
-                                </div>
-                                <div className="about-company-icon-text">Высокая маржинальность</div>
-                            </div>
-                            <div className="about-company-icon-item">
-                                <div className="about-company-icon">
-                                    <img src={aboutIcon} alt="#" />
-                                </div>
-                                <div className="about-company-icon-text">Стабильное качество</div>
-                            </div>
+                            {prezentationState.prezentationIcons.map((prezentationItem) => {
+                                return (
+                                    <React.Fragment key={prezentationItem.id}>
+                                        <div className="about-company-icon-item">
+                                            <div className="about-company-icon">
+                                                <img src={prezentationItem.img} alt={prezentationItem.imgAlt} />
+                                            </div>
+                                            <div className="about-company-icon-text">{prezentationItem.title}</div>
+                                        </div>
+                                    </React.Fragment>
+                                )
+                            })}
                         </div>
 
                         <div className="about-company-prezentation-btn-row">
                             <div className="about-company-prezentation-link-wrap">
                                 <Link 
                                     className="about-company-prezentation-btn"
+                                    to={prezentationState.prezentationFileUrl}
                                     target={'_blank'}
                                 >Презентация</Link>
                             </div>
@@ -51,7 +40,7 @@ const AboutVideoPrezentation = () => {
                     <div className="about-company-video-content-wrap">
                         <div className="about-company-video-wrap">
                             <video controls>
-                                <source src={promo_video} type="video/mp4" />
+                                <source src={prezentationState.prezentationVideo.file} type={prezentationState.prezentationVideo.type} />
                             </video>
                         </div>
                     </div>

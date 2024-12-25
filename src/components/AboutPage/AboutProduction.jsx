@@ -8,7 +8,7 @@ const AboutProduction = () => {
             <div className="container">
                 <div className="about-page-production-row">
                     <div className="about-page-short-content-wrap">
-                        <img src={aboutImg2} alt="500" />
+                        <img src={aboutImg2} alt="о компании Косметические технологии в Санкт-Петербурге" />
                     </div>
                     <div className="about-page-large-content-wrap">
                         <h3>Пару слов о компании</h3>
