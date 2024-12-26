@@ -478,29 +478,33 @@ const initialState = {
                 name: '100%',
                 description: 'качество продукции полный цикл контроля качества, сертификаты ИСО 9001:2015 и 14001:2015.',
                 image: aboutFactFirst,
+                imgAlt: 'Полный цикл контроля качества продукции космотех',
             },
             {
                 id: 2,
                 name: '1 МЛН',
                 description: 'Мощности производства до 1 миллиона единиц продукции в сутки.',
                 image: aboutFactSecond,
+                imgAlt: 'Производство космотех создает до 1мил. продукции в сутки',
             },
             {
                 id: 3,
                 name: '100+',
-                description: 'Контактов и налаженные связи с лучшими мировыми поставщиками сырья и упаковки.',
+                description: 'Контактов и налаженные связи с лучшими поставщиками сырья и упаковки.',
                 image: aboutFactThird,
+                imgAlt: 'Налаженные связи с лучшими поставщиками сырья и упаковки',
             },
             {
                 id: 4,
                 name: '3 > лет',
                 description: 'опыта в области разработки и реализации косметической продукции.',
                 image: aboutFactFourth,
+                imgAlt: 'Космотех работает с 2022 года',
             }
         ],
         videoPrezentation: {
             prezentationVideo: {file: promoVideo, type: 'video/mp4'},
-            prezentationFileUrl: '',
+            prezentationFileUrl: '/static/media/cosmtech-prezentation.pdf',
             prezentationIcons: [
                 {
                     id: 1,
@@ -601,7 +605,7 @@ const initialState = {
                     fieldType: 'phone',
                     fieldName: 'phone',
                     fieldValue: '',
-                    placeholder: '8 xxx xxx xx xx',
+                    placeholder: '8xxxxxxxxxx',
                     err: false
                 },
                 {

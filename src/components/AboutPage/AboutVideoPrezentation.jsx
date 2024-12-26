@@ -10,7 +10,7 @@ const AboutVideoPrezentation = (props) => {
                 <div className="about-company-prezentation-row">
                     <div className="about-company-text-content-wrap">
                         <div className="about-company-title-wrap">
-                            <h2>Преимщества работы с нами</h2>
+                            <h2>Удобство работы с нами</h2>
                         </div>
                         <div className="about-company-icons-row">
                             {prezentationState.prezentationIcons.map((prezentationItem) => {

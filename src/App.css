@@ -1104,7 +1104,7 @@ section {
   margin: 0 auto 10px auto;
   background: #F1F1F1;
   color: #000;
-  transition: all ease-in-out .3s;
+  transition: all ease-in-out .2s;
   cursor: pointer;
 }
 .timeline li:after{
@@ -1116,7 +1116,7 @@ section {
   top: 40px;
   left: -50%;
   z-index: -999;
-  transition: all ease-in-out .3s;
+  transition: all ease-in-out .2s;
 }
 
 .timeline li:first-child:after{
@@ -1130,7 +1130,7 @@ section {
   color: #F1F1F1;
 }
 
-.timeline li.active + li:after{
+.timeline li.active + li:after {
   background:  #555555;
 }
 /* our clients */
@@ -1142,6 +1142,10 @@ section {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+}
+.timeline li:hover::before {
+  background-color: #00458B;
+  color: white;
 }
 .our-clients-title-wrap h3 {
   font-size: 46px;

@@ -38,7 +38,7 @@ const initialState = {
             path: '/about',
             title: 'test',
             canonical: 'https://cosmtech.ru/about',
-            description: 'Информация о российском производителе косметики ООО "Косметические Технологии"',
+            description: 'Подробная информация о российском производителе косметики ООО "Косметические Технологии"',
         },
         {
             id: 4,
@@ -46,7 +46,7 @@ const initialState = {
             path: '/contacts',
             title: 'test',
             canonical: 'https://cosmtech.ru/contacts',
-            description: 'Телефоны, email и мессенджеры для надежной связи с нашими клиентами',
+            description: 'Телефон, email, мессенджеры и адрес производства для надежной связи с компанией "Космотех"',
         },
         {
             id: 5,

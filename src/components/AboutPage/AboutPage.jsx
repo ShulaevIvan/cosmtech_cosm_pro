@@ -75,7 +75,7 @@ const AboutPage = () => {
                             return (
                                 <React.Fragment key={companyFact.id}>
                                     <div className="about-company-fact-item-wrap">
-                                        <div className="about-conpany-fact-icon-wrap"><img src={companyFact.image} alt={companyFact.name} /></div>
+                                        <div className="about-conpany-fact-icon-wrap"><img src={companyFact.image} alt={companyFact.imgAlt} /></div>
                                             <div className="about-conpany-fact-text">{companyFact.name}</div>
                                             <div className="about-conpany-fact-descr">{companyFact.description}</div>
                                         </div>

@@ -34,7 +34,7 @@ const AboutTabs = (props) => {
                                 <div className="about-page-production-tab-coop-row">
                                     <div className="about-page-production-tab-coop-item">
                                         <p>
-                                            Уважаемые поставщики! Просьба направлять ваши предложения только на указанный адрес электронной почты. 
+                                            Уважаемые поставщики! Просьба направлять ваши КП только на указанный адрес электронной почты. 
                                             Ваши предложения помогают оптимизировать процессы, повышая качество наших услуг. </p>
                                         <div className="about-page-tab-cooperation-row">
                                             {activeTab.coopEmails.map((coopItem) => {
