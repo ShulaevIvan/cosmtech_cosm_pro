@@ -631,7 +631,7 @@ const initialState = {
                     {id: 3, name: 'Предложения по логистике', email: 'supplier@cosmtech.ru'},
                     {id: 4, name: 'Предложения по рекламе', email: 'media@cosmtech.ru'}
                 ],
-                active: true
+                active: false
             },
             {
                 id: 2,
@@ -667,7 +667,7 @@ const initialState = {
                         img: yellPlace, 
                         imgAlt: 'оставить отзыв о космотех yell'},
                 ],
-                active: false
+                active: true
             },
             {
                 id: 3,

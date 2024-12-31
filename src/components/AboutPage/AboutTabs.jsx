@@ -92,7 +92,11 @@ const AboutTabs = (props) => {
                                     })}
                                 </div>
                                 <div className="about-page-req-download-wrap">
-                                    <Link className='about-page-req-download-btn' to={'#'} target={'_blank'}>Скачать реквизиты</Link>
+                                    <Link 
+                                        className='about-page-req-download-btn' 
+                                        to={'/static/media/cosmtech_req.doc'} 
+                                        download={true} target={"_blank"}
+                                    >Скачать реквизиты</Link>
                                 </div>
                             </React.Fragment>
                         : null}
