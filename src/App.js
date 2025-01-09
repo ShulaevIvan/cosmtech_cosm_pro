@@ -11,6 +11,7 @@ import './components/QuizMainPage/QuizMainPage.css';
 import './components/JobPage/JobPage.css';
 import './components/ForClients/ForClients.css';
 import './components/AboutPage/About.css';
+import './components/ImageGalery/ImageGalery.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';

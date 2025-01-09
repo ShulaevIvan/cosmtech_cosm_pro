@@ -9,6 +9,7 @@ import ProductionTypes from "./ProductionTypes";
 import AboutProduction from "./AboutProduction";
 import AboutConsultForm from './AboutConsultForm';
 import AboutTabs from "./AboutTabs";
+import ImageGalery from "../ImageGalery/ImageGalery";
 // import OurTeam from "./OurTeam";
 
 import { 
@@ -84,6 +85,9 @@ const AboutPage = () => {
                         })}
                     </div>
                 </div>
+            </section>
+            <section>
+                <ImageGalery />
             </section>
             <section>
                 <AboutVideoPrezentation 

@@ -135,7 +135,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="main-footer-copy-wrap">
-                    <span className="footer-copy-text">© 2024 ООО Космотех все права защищены</span>
+                    <span className="footer-copy-text">© {new Date().getFullYear()} ООО Космотех все права защищены</span>
                     <span className="footer-policy-text"><Link onClick={goToTopHandler} to={'/policy'}>Политика конфидициальности</Link></span>
                 </div>
                 </div>
