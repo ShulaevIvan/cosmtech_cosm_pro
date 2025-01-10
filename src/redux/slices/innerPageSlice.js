@@ -583,7 +583,17 @@ const initialState = {
                 { id: 10, name: 'Косметика для животных', img: productionAnimal, altImg: 'Косметика для животных на заказ от производства Космотех в спб'},
                 { id: 11, name: 'Профессиональная косметика', img: productionCosmetic, altImg: 'Профессиональная косметика на заказ от производства Космотех в спб'},
                 { id: 12, name: 'Косметика для салонов красоты', img: productionSaloon, altImg: 'Косметика для салонов красоты на заказ от производства Космотех в спб'},
-            ]
+            ],
+            aboutGalery: {
+                images: [
+                    {id: 1, img: '', imgAlt: 'gallery-img', active: false,},
+                    {id: 2, img: '', imgAlt: 'gallery-img', active: false,},
+                    {id: 3, img: '', imgAlt: 'gallery-img', active: false,},
+                    {id: 4, img: '', imgAlt: 'gallery-img', active: false,},
+                    {id: 5, img: '', imgAlt: 'gallery-img', active: false,},
+                    {id: 6, img: '', imgAlt: 'gallery-img', active: false,}
+                ],
+            }
         },
         innerForm: {
             sendBtnActive: false,
