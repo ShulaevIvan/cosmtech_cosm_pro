@@ -1,7 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { sendAboutProductionConsultForm } from "../../redux/slices/innerPageSlice";
+import { 
+    sendAboutProductionConsultForm,
+    aboutGalleryMoveSlide,
+    aboutGalleryHover
+} from "../../redux/slices/innerPageSlice";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import InnerPageConsultForm from "../InnerPageConsultForm/InnerPageConsultForm";
 import AboutVideoPrezentation from "./AboutVideoPrezentation";
@@ -9,7 +13,7 @@ import ProductionTypes from "./ProductionTypes";
 import AboutProduction from "./AboutProduction";
 import AboutConsultForm from './AboutConsultForm';
 import AboutTabs from "./AboutTabs";
-import ImageGalery from "../ImageGalery/ImageGalery";
+import ImageGallery from "../ImageGalery/ImageGallery";
 // import OurTeam from "./OurTeam";
 
 import { 
@@ -47,6 +51,14 @@ const AboutPage = () => {
             dispatch(aboutProductionClearInput({inputType: fieldType}));
         }
         return;
+    };
+
+    const galleryHandler = (value) => {
+        dispatch(aboutGalleryMoveSlide({direction: value}));
+    };
+
+    const galleryHoverHandler = (targetId) => {
+        dispatch(aboutGalleryHover({imageId: targetId}));
     };
 
     const aboutProdSendConsultHandler = () => {
@@ -87,7 +99,11 @@ const AboutPage = () => {
                 </div>
             </section>
             <section>
-                <ImageGalery />
+                <ImageGallery 
+                    galleryState={aboutState.aboutGallery}
+                    moveSlideHandler={galleryHandler}
+                    hoverSlideHandler={galleryHoverHandler}
+                />
             </section>
             <section>
                 <AboutVideoPrezentation 

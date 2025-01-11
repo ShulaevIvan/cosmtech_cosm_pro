@@ -53,9 +53,9 @@ const Header = () => {
         }
     }, []);
 
-    useEffect(() => {
-        window.ym(97856473, 'hit', location.pathname);
-    }, [location.pathname]);
+    // useEffect(() => {
+    //     window.ym(97856473, 'hit', location.pathname);
+    // }, [location.pathname]);
 
     return (
         <React.Fragment>

@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import validateName from '../../functions/validateName';
 import validatePhone from '../../functions/validatePhone';
-import validateMail from "../../functions/validateMail";
-import validateCity from "../../functions/validateCity";
+import validateMail from '../../functions/validateMail';
+import validateCity from '../../functions/validateCity';
+import galeryMoveSlide from '../../functions/galleryMoveSlide';
 
 import promoVideo from '../../video/compress_promo_video.mp4';
 import backgroundServices from '../../img/services_bg.jpg';
@@ -33,6 +34,8 @@ const importAllImages = (ctxWebpuck) => {
 const suppliersImages = importAllImages(require.context('../../img/supplersImages', false, /\.(png|jpe?g|svg)$/));
 const reviewPlaces = importAllImages(require.context('../../img/reviewPlaces', false, /\.(png|jpe?g|svg)$/));
 const aboutProductionImages = importAllImages(require.context('../../img/aboutProductionImages', false, /\.(png|jpe?g|svg)$/));
+const aboutUsGaleryImages = importAllImages(require.context('../../img/imageGalery/aboutUsImages/', false, /\.(png|jpe?g|svg)$/));
+
 const { 
     protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
     okilsato, pechatnik2, rpkr, mdm, pechatnik, stickyline, alaska
@@ -43,6 +46,7 @@ const {
     productionAnimal, productionCosmetic
 } = aboutProductionImages;
 const { gisPlace, zoonPlace, yellPlace, yandexPlace } = reviewPlaces;
+const { demo1, demo2, demo3, demo4, demo5, demo6 } = aboutUsGaleryImages;
 
 const initialState = { 
     headerBackgrounds: [
@@ -584,16 +588,20 @@ const initialState = {
                 { id: 11, name: 'Профессиональная косметика', img: productionCosmetic, altImg: 'Профессиональная косметика на заказ от производства Космотех в спб'},
                 { id: 12, name: 'Косметика для салонов красоты', img: productionSaloon, altImg: 'Косметика для салонов красоты на заказ от производства Космотех в спб'},
             ],
-            aboutGalery: {
-                images: [
-                    {id: 1, img: '', imgAlt: 'gallery-img', active: false,},
-                    {id: 2, img: '', imgAlt: 'gallery-img', active: false,},
-                    {id: 3, img: '', imgAlt: 'gallery-img', active: false,},
-                    {id: 4, img: '', imgAlt: 'gallery-img', active: false,},
-                    {id: 5, img: '', imgAlt: 'gallery-img', active: false,},
-                    {id: 6, img: '', imgAlt: 'gallery-img', active: false,}
-                ],
-            }
+        },
+        aboutGallery: {
+            imagePopup: {
+                active: false,
+                image: '',
+            },
+            images: [
+                {id: 1, img: demo1, imgAlt: 'gallery-img', active: false,},
+                {id: 2, img: demo2, imgAlt: 'gallery-img', active: false,},
+                {id: 3, img: demo3, imgAlt: 'gallery-img', active: false,},
+                {id: 4, img: demo4, imgAlt: 'gallery-img', active: false,},
+                {id: 5, img: demo5, imgAlt: 'gallery-img', active: false,},
+                {id: 6, img: demo6, imgAlt: 'gallery-img', active: false,}
+            ],
         },
         innerForm: {
             sendBtnActive: false,
@@ -1725,6 +1733,26 @@ const innerPageSlice = createSlice({
                     active: false
                 }
             });
+        },
+        aboutGalleryMoveSlide(state, action) {
+            const { direction } = action.payload;
+            state.about.aboutGallery.images = galeryMoveSlide(state.about.aboutGallery.images, direction);
+        },
+        aboutGalleryHover(state, action) {
+            const { imageId } = action.payload;
+            
+            state.about.aboutGallery.images = state.about.aboutGallery.images.map((galleryItem) => {
+                if (galleryItem.id === imageId) {
+                    return {
+                        ...galleryItem,
+                        active: true
+                    }
+                }
+                return {
+                    ...galleryItem,
+                    active: false
+                }
+            });
         }
     },
     
@@ -1887,6 +1915,8 @@ export const {
     aboutProductionPolicy,
     aboutProductionClearInput,
     checkAboutProductionSendBtn,
-    aboutTabs
+    aboutTabs,
+    aboutGalleryMoveSlide,
+    aboutGalleryHover
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
