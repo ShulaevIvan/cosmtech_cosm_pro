@@ -34,7 +34,7 @@ const importAllImages = (ctxWebpuck) => {
 const suppliersImages = importAllImages(require.context('../../img/supplersImages', false, /\.(png|jpe?g|svg)$/));
 const reviewPlaces = importAllImages(require.context('../../img/reviewPlaces', false, /\.(png|jpe?g|svg)$/));
 const aboutProductionImages = importAllImages(require.context('../../img/aboutProductionImages', false, /\.(png|jpe?g|svg)$/));
-const aboutUsGaleryImages = importAllImages(require.context('../../img/imageGalery/aboutUsImages/', false, /\.(png|jpe?g|svg)$/));
+const aboutUsGaleryImages = importAllImages(require.context('../../img/imageGalery/aboutUsImages/', false, /\.(png|jpe?g|jpg|svg)$/));
 
 const { 
     protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
@@ -46,7 +46,10 @@ const {
     productionAnimal, productionCosmetic
 } = aboutProductionImages;
 const { gisPlace, zoonPlace, yellPlace, yandexPlace } = reviewPlaces;
-const { demo1, demo2, demo3, demo4, demo5, demo6 } = aboutUsGaleryImages;
+const { 
+    demo1, demo2, demo3, demo4, demo5, demo6,
+    demo1Full, demo2Full,demo3Full,demo4Full, demo5Full,demo6Full,
+} = aboutUsGaleryImages;
 
 const initialState = { 
     headerBackgrounds: [
@@ -595,12 +598,12 @@ const initialState = {
                 image: '',
             },
             images: [
-                {id: 1, img: demo1, imgAlt: 'gallery-img', active: false,},
-                {id: 2, img: demo2, imgAlt: 'gallery-img', active: false,},
-                {id: 3, img: demo3, imgAlt: 'gallery-img', active: false,},
-                {id: 4, img: demo4, imgAlt: 'gallery-img', active: false,},
-                {id: 5, img: demo5, imgAlt: 'gallery-img', active: false,},
-                {id: 6, img: demo6, imgAlt: 'gallery-img', active: false,}
+                {id: 1, img: demo1, imgAlt: 'gallery-img', active: false, imgFull: demo1Full, imgDescription: 'descr1'},
+                {id: 2, img: demo2, imgAlt: 'gallery-img', active: false, imgFull: demo2Full, imgDescription: 'descr2'},
+                {id: 3, img: demo3, imgAlt: 'gallery-img', active: false, imgFull: demo3Full, imgDescription: 'descr3'},
+                {id: 4, img: demo4, imgAlt: 'gallery-img', active: false, imgFull: demo4Full, imgDescription: 'descr4'},
+                {id: 5, img: demo5, imgAlt: 'gallery-img', active: false, imgFull: demo5Full, imgDescription: 'descr5'},
+                {id: 6, img: demo6, imgAlt: 'gallery-img', active: false, imgFull: demo6Full, imgDescription: 'descr6'}
             ],
         },
         innerForm: {
@@ -1736,6 +1739,12 @@ const innerPageSlice = createSlice({
         },
         aboutGalleryMoveSlide(state, action) {
             const { direction } = action.payload;
+            state.about.aboutGallery.images = state.about.aboutGallery.images.map((galleryItem) => {
+                return {
+                    ...galleryItem,
+                    active: false
+                }
+            });
             state.about.aboutGallery.images = galeryMoveSlide(state.about.aboutGallery.images, direction);
         },
         aboutGalleryHover(state, action) {
@@ -1753,6 +1762,34 @@ const innerPageSlice = createSlice({
                     active: false
                 }
             });
+        },
+        aboutGalleryPopup(state, action) {
+            const { imageItem, status } = action.payload;
+            if (!imageItem) {
+                state.about.aboutGallery.imagePopup = initialState.about.aboutGallery.imagePopup;
+                return;
+            }
+            state.about.aboutGallery.imagePopup = {
+                ...state.about.aboutGallery.imagePopup,
+                active: status,
+                image: imageItem.imgFull,
+                imageAlt: imageItem.imgAlt,
+                imageDescription: imageItem.imgDescription
+            }
+        },
+        aboutGalleryPopupNextSlide(state, action) {
+            const { direction } = action.payload;
+            const targetImage = state.about.aboutGallery.images.slice(0, direction);
+
+            if (targetImage && targetImage.length > 0) {
+                state.about.aboutGallery.images = galeryMoveSlide(state.about.aboutGallery.images, direction);
+                state.about.aboutGallery.imagePopup = {
+                    ...state.about.aboutGallery.imagePopup,
+                    image: targetImage[0].imgFull,
+                    imageAlt: targetImage[0].imgAlt,
+                    imageDescription: targetImage[0].imgDescription
+                };
+            }
         }
     },
     
@@ -1917,6 +1954,8 @@ export const {
     checkAboutProductionSendBtn,
     aboutTabs,
     aboutGalleryMoveSlide,
-    aboutGalleryHover
+    aboutGalleryHover,
+    aboutGalleryPopup,
+    aboutGalleryPopupNextSlide
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

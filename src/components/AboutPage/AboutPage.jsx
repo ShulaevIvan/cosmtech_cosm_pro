@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { 
     sendAboutProductionConsultForm,
     aboutGalleryMoveSlide,
-    aboutGalleryHover
+    aboutGalleryHover,
+    aboutGalleryPopup,
+    aboutGalleryPopupNextSlide
 } from "../../redux/slices/innerPageSlice";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import InnerPageConsultForm from "../InnerPageConsultForm/InnerPageConsultForm";
@@ -61,6 +63,14 @@ const AboutPage = () => {
         dispatch(aboutGalleryHover({imageId: targetId}));
     };
 
+    const galleryImagePopupHandler = (imageItem, status) => {
+        dispatch(aboutGalleryPopup({imageItem: imageItem, status: status}))
+    };
+
+    const galleryPopupImageNextSlide = (count) => {
+        dispatch(aboutGalleryPopupNextSlide({direction: count}));
+    };
+
     const aboutProdSendConsultHandler = () => {
         const data = {
             name: aboutState.aboutProduction.productionForm.fields.find((item) => item.fieldType === 'name').value,
@@ -103,6 +113,8 @@ const AboutPage = () => {
                     galleryState={aboutState.aboutGallery}
                     moveSlideHandler={galleryHandler}
                     hoverSlideHandler={galleryHoverHandler}
+                    imagePopupHandler={galleryImagePopupHandler}
+                    imagePopupNextSlide={galleryPopupImageNextSlide}
                 />
             </section>
             <section>

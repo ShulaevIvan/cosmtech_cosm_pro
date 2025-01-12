@@ -8,11 +8,17 @@ const ImageGallery = (props) => {
     return (
         <React.Fragment>
             <div className="container">
-                <div className="image-gallery-wrap">
-                    {galleryState.imagepopup.active ? <ImageGalleryPopup /> : null}
+                <div className={galleryState.imagePopup.active  ? "image-gallery-wrap view-mode" : "image-gallery-wrap"}>
+                    {galleryState.imagePopup.active ? 
+                        <ImageGalleryPopup 
+                            popupState={galleryState.imagePopup}
+                            popupCloseHandler={props.imagePopupHandler}
+                            nextSlide={props.imagePopupNextSlide}
+                        /> 
+                    : null}
                     <span 
                         className="image-gallery-prev-btn"
-                        onClick={() => props.moveSlideHandler(1)}
+                        onClick={() => props.moveSlideHandler(-3)}
                     ></span>
                     <div className="image-gallery-row">
                         {galleryState.images.map((slideItem) => {
@@ -24,11 +30,12 @@ const ImageGallery = (props) => {
                                     >
                                         <div className="image-gallery-img-wrap">
                                             <img src={slideItem.img} alt={slideItem.imgAlt} />
-                                            {slideItem.active ? 
+                                            {slideItem.active && !galleryState.imagePopup.active ? 
                                                 <span className="image-gallery-icon-view">
                                                     <img 
                                                         src={view} 
-                                                        alt="#"
+                                                        alt={`просмотр фотографии ${slideItem.imgAlt}`}
+                                                        onClick={() => props.imagePopupHandler(slideItem, true)}
                                                     />
                                                 </span>
                                             : null}
@@ -40,7 +47,7 @@ const ImageGallery = (props) => {
                     </div>
                     <span 
                         className="image-gallery-next-btn"
-                        onClick={() => props.moveSlideHandler(-1)}
+                        onClick={() => props.moveSlideHandler(3)}
                     ></span>
                 </div>
             </div>
