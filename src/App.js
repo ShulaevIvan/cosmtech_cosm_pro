@@ -12,6 +12,7 @@ import './components/JobPage/JobPage.css';
 import './components/ForClients/ForClients.css';
 import './components/AboutPage/About.css';
 import './components/ImageGalery/ImageGallery.css';
+import './components/DecorativeCosmetics/DecorativeCosmetics.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';
@@ -22,6 +23,7 @@ import ContactsPage from './components/ContactsPage/ContactsPage';
 import PolicyPage from './components/PolicyPage/PolicyPage';
 import JobPage from './components/JobPage/JobPage';
 import ForClients from './components/ForClients/ForClients';
+import DecorativeCosmetics from './components/DecorativeCosmetics/DecorativeCosmetics';
 
 function App() {
   
@@ -30,13 +32,14 @@ function App() {
       <BrowserRouter>
           <Routes>
             <Route path='/' element = {<Layout />}>
-              <Route path="*" replace={false} element={<MainPage />} /> 
+              <Route path="*" replace = {false} element={<MainPage />} /> 
               <Route path='/' element = {<MainPage />} />
               <Route path='/services' element = {<ServicesPage />} />
-              <Route path='/policy' element={<PolicyPage />}/>
-              <Route path='/job' element={<JobPage />} />
+              <Route path='/policy' element = {<PolicyPage />}/>
+              <Route path='/job' element = {<JobPage />} />
               <Route path='/about' element = {<AboutPage />} />
-              <Route path='/forclients' element= {<ForClients />} />
+              <Route path='/forclients' element = {<ForClients />} />
+              <Route path='/decorative-cosmetics' element = {<DecorativeCosmetics />} />
               <Route path='/contacts' element = {<ContactsPage />} />
           </Route>
          

@@ -4,10 +4,14 @@ import ImageGalleryPopup from "./ImageGalleryPopup";
 
 const ImageGallery = (props) => {
     const galleryState = props.galleryState;
+    const { innerWidth: deviceWidth } = window;
 
     return (
         <React.Fragment>
             <div className="container">
+                <div className="about-title-wrap">
+                    <h2>{props.title}</h2>
+                </div>
                 <div className={galleryState.imagePopup.active  ? "image-gallery-wrap view-mode" : "image-gallery-wrap"}>
                     {galleryState.imagePopup.active ? 
                         <ImageGalleryPopup 
@@ -18,7 +22,7 @@ const ImageGallery = (props) => {
                     : null}
                     <span 
                         className="image-gallery-prev-btn"
-                        onClick={() => props.moveSlideHandler(-3)}
+                        onClick={() => props.moveSlideHandler(deviceWidth < 600 ? -1 : -3)}
                     ></span>
                     <div className="image-gallery-row">
                         {galleryState.images.map((slideItem) => {
@@ -27,6 +31,7 @@ const ImageGallery = (props) => {
                                     <div 
                                         className="image-gallery-item"
                                         onMouseEnter={() => props.hoverSlideHandler(slideItem.id)}
+                                        onMouseLeave={() => props.hoverSlideHandler(slideItem.id, true)}
                                     >
                                         <div className="image-gallery-img-wrap">
                                             <img src={slideItem.img} alt={slideItem.imgAlt} />
@@ -47,7 +52,7 @@ const ImageGallery = (props) => {
                     </div>
                     <span 
                         className="image-gallery-next-btn"
-                        onClick={() => props.moveSlideHandler(3)}
+                        onClick={() => props.moveSlideHandler(deviceWidth < 600 ? 1 : 3)}
                     ></span>
                 </div>
             </div>

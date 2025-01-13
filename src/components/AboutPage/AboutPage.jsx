@@ -59,8 +59,8 @@ const AboutPage = () => {
         dispatch(aboutGalleryMoveSlide({direction: value}));
     };
 
-    const galleryHoverHandler = (targetId) => {
-        dispatch(aboutGalleryHover({imageId: targetId}));
+    const galleryHoverHandler = (targetId, closeParam) => {
+        dispatch(aboutGalleryHover({imageId: targetId, closeParam: closeParam ? closeParam : false}));
     };
 
     const galleryImagePopupHandler = (imageItem, status) => {
@@ -109,17 +109,18 @@ const AboutPage = () => {
                 </div>
             </section>
             <section>
+                <AboutVideoPrezentation 
+                    prezentationState={aboutState.videoPrezentation} 
+                />
+            </section>
+            <section>
                 <ImageGallery 
                     galleryState={aboutState.aboutGallery}
                     moveSlideHandler={galleryHandler}
                     hoverSlideHandler={galleryHoverHandler}
                     imagePopupHandler={galleryImagePopupHandler}
                     imagePopupNextSlide={galleryPopupImageNextSlide}
-                />
-            </section>
-            <section>
-                <AboutVideoPrezentation 
-                    prezentationState={aboutState.videoPrezentation} 
+                    title={'Фото производства'}
                 />
             </section>
             <section>

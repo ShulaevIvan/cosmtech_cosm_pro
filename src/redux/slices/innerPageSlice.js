@@ -34,22 +34,28 @@ const importAllImages = (ctxWebpuck) => {
 const suppliersImages = importAllImages(require.context('../../img/supplersImages', false, /\.(png|jpe?g|svg)$/));
 const reviewPlaces = importAllImages(require.context('../../img/reviewPlaces', false, /\.(png|jpe?g|svg)$/));
 const aboutProductionImages = importAllImages(require.context('../../img/aboutProductionImages', false, /\.(png|jpe?g|svg)$/));
-const aboutUsGaleryImages = importAllImages(require.context('../../img/imageGalery/aboutUsImages/', false, /\.(png|jpe?g|jpg|svg)$/));
+const aboutUsGaleryImages = importAllImages(require.context('../../img/imageGalery/aboutUsImages/', false, /\.(png|jpe?g|jpeg|svg)$/));
+const decorativeCosmeticsImages = importAllImages(require.context('../../img/decoraticeCosmeticsImages/cosmeticsTypes', false, /\.(png|jpe?g|jpeg|svg)$/));
 
 const { 
     protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
     okilsato, pechatnik2, rpkr, mdm, pechatnik, stickyline, alaska
 } = suppliersImages;
+
 const { 
     productionHair, productionBody, productionFace, productionLaying, productionFeet, 
     productionHands, productionBaby, productionMan, productionSuncare, productionSaloon,
     productionAnimal, productionCosmetic
 } = aboutProductionImages;
 const { gisPlace, zoonPlace, yellPlace, yandexPlace } = reviewPlaces;
+
 const { 
-    demo1, demo2, demo3, demo4, demo5, demo6,
-    demo1Full, demo2Full,demo3Full,demo4Full, demo5Full,demo6Full,
+    demo1, demo2, demo3, demo4, demo5, demo6, demo7,
+    demo1Full, demo2Full,demo3Full,demo4Full, demo5Full,demo6Full,demo7Full
 } = aboutUsGaleryImages;
+
+const { demo } = decorativeCosmeticsImages;
+
 
 const initialState = { 
     headerBackgrounds: [
@@ -191,6 +197,30 @@ const initialState = {
                 },
             ]
         },
+        {
+            page: '/decorative-cosmetics',
+            page: '/decorative-cosmetics', 
+            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            title: 'Декор. косметики',
+            description: 'Услуги по контрактному производству декоративной косметики в Санкт-Петербурге',
+            seoDescription: 'Контрактное производство декоративной косметики',
+            breadcrumbs: [
+                {
+                    id: 1,
+                    name: 'Контрактное производство',
+                    url: '/',
+                    main: true,
+                    active: false,
+                },
+                {
+                    id: 2,
+                    name: 'производство декоративной косметики',
+                    url: '/decorative-cosmetics',
+                    main: false,
+                    active: true,
+                },
+            ]
+        }
     ],
     activeBackground: innerHeaderImg,
     servicesPage: {
@@ -603,7 +633,7 @@ const initialState = {
                 {id: 3, img: demo3, imgAlt: 'gallery-img', active: false, imgFull: demo3Full, imgDescription: 'descr3'},
                 {id: 4, img: demo4, imgAlt: 'gallery-img', active: false, imgFull: demo4Full, imgDescription: 'descr4'},
                 {id: 5, img: demo5, imgAlt: 'gallery-img', active: false, imgFull: demo5Full, imgDescription: 'descr5'},
-                {id: 6, img: demo6, imgAlt: 'gallery-img', active: false, imgFull: demo6Full, imgDescription: 'descr6'}
+                {id: 6, img: demo6, imgAlt: 'gallery-img', active: false, imgFull: demo6Full, imgDescription: 'descr6'},
             ],
         },
         innerForm: {
@@ -932,6 +962,22 @@ const initialState = {
                 ans: 'К разработке рецептуры приступаем сразу после обсуждения всех нюансов.', 
                 active: false
             }
+        ]
+    },
+    decorativeCosmeticsPage: {
+        cosmeticTypes: [
+            {id: 1, name: 'test1', img: demo, imgAlt: 'testAlt'},
+            {id: 2, name: 'test2', img: demo, imgAlt: 'testAlt'},
+            {id: 3, name: 'test3', img: demo, imgAlt: 'testAlt'},
+            {id: 4, name: 'test4', img: demo, imgAlt: 'testAlt'},
+            {id: 5, name: 'test5', img: demo, imgAlt: 'testAlt'},
+            {id: 6, name: 'test6', img: demo, imgAlt: 'testAlt'},
+            {id: 7, name: 'test7', img: demo, imgAlt: 'testAlt'},
+            {id: 8, name: 'test8', img: demo, imgAlt: 'testAlt'},
+            {id: 9, name: 'test9', img: demo, imgAlt: 'testAlt'},
+            {id: 10, name: 'test10', img: demo, imgAlt: 'testAlt'},
+            {id: 11, name: 'test11', img: demo, imgAlt: 'testAlt'},
+            {id: 12, name: 'test12', img: demo, imgAlt: 'testAlt'}
         ]
     },
     mousePosition: {
@@ -1748,7 +1794,17 @@ const innerPageSlice = createSlice({
             state.about.aboutGallery.images = galeryMoveSlide(state.about.aboutGallery.images, direction);
         },
         aboutGalleryHover(state, action) {
-            const { imageId } = action.payload;
+            const { imageId, closeParam } = action.payload;
+
+            if (closeParam) {
+                state.about.aboutGallery.images = state.about.aboutGallery.images.map((galleryItem) => {
+                    return {
+                        ...galleryItem,
+                        active: false
+                    }
+                });
+                return;
+            }
             
             state.about.aboutGallery.images = state.about.aboutGallery.images.map((galleryItem) => {
                 if (galleryItem.id === imageId) {

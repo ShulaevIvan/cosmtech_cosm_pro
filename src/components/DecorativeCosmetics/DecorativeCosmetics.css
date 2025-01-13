@@ -1,0 +1,57 @@
+.decorative-cosmetics-types-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.decorative-cosmetics-types-items-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 57%;
+    margin-bottom: 20px
+}
+.decorative-cosmetics-types-image-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 40.4%;
+}
+.decorative-cosmetics-type-item-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 45%;
+    max-width: 50%;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    margin-bottom: 20px
+}
+.decorative-cosmetics-type-item-text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    max-width: 70%;
+}
+.decorative-cosmetics-type-item-icon {
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+    max-width: 50%;
+}
+.decorative-cosmetics-types-image-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 40.4%;
+}
+.decorative-cosmetics-types-image-wrap img {
+    max-width: 100%;
+    border-radius: 10px
+}

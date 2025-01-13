@@ -71,6 +71,14 @@ const initialState = {
             title: 'test',
             canonical: 'https://cosmtech.ru/forclients',
             description: 'Информация для клиентов и дополнительные возможности по эффективному производству контрактной косметики"',
+        },
+        {
+            id: 8,
+            name: 'Производство декоративной косметики',
+            path: '/decorative-cosmetics',
+            title: 'test',
+            canonical: 'https://cosmtech.ru/decorative-cosmetics',
+            description: 'Контрактное производство декоративной косметики',
         }
     ],
     currentPathUrl: '',
