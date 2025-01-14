@@ -43,7 +43,73 @@ const DecorativeCosmetics = () => {
                 </section>
                 <section>
                     <div className="container">
-                        ываыва
+                        <div className="decorative-cosmetics-how-to-work-row">
+                            <div className="decorative-cosmetics-how-to-work-item-wrap">
+                                <div className="decorative-cosmetics-how-to-work-item-icon">
+                                    <img src="#" />
+                                </div>
+                                <div className="decorative-cosmetics-how-to-work-item-text">
+                                    Отправляете заявку
+                                </div>
+                            </div>
+                            <div className="decorative-cosmetics-how-to-work-item-wrap">
+                                <div className="decorative-cosmetics-how-to-work-item-icon">
+                                    <img src="#" />
+                                </div>
+                                <div className="decorative-cosmetics-how-to-work-item-text">
+                                    Получение консультации и заполнение брифа
+                                </div>
+                            </div>
+                            <div className="decorative-cosmetics-how-to-work-item-wrap">
+                                <div className="decorative-cosmetics-how-to-work-item-icon">
+                                    <img src="#" />
+                                </div>
+                                <div className="decorative-cosmetics-how-to-work-item-text">
+                                    Расчет себестоимости
+                                </div>
+                            </div>
+                            <div className="decorative-cosmetics-how-to-work-item-wrap">
+                                <div className="decorative-cosmetics-how-to-work-item-icon">
+                                    <img src="#" />
+                                </div>
+                                <div className="decorative-cosmetics-how-to-work-item-text">
+                                    Создание рецептуры
+                                </div>
+                            </div>
+                            <div className="decorative-cosmetics-how-to-work-item-wrap">
+                                <div className="decorative-cosmetics-how-to-work-item-icon">
+                                    <img src="#" />
+                                </div>
+                                <div className="decorative-cosmetics-how-to-work-item-text">
+                                    Доставка и отгрузка
+                                </div>
+                            </div>
+                            <div className="decorative-cosmetics-how-to-work-item-wrap">
+                                <div className="decorative-cosmetics-how-to-work-item-icon">
+                                    <img src="#" />
+                                </div>
+                                <div className="decorative-cosmetics-how-to-work-item-text">
+                                    Сертификация
+                                </div>
+                            </div>
+                            <div className="decorative-cosmetics-how-to-work-item-wrap">
+                                <div className="decorative-cosmetics-how-to-work-item-icon">
+                                    <img src="#" />
+                                </div>
+                                <div className="decorative-cosmetics-how-to-work-item-text">
+                                    Разработка продукта
+                                </div>
+                            </div>
+                            <div className="decorative-cosmetics-how-to-work-item-wrap">
+                                <div className="decorative-cosmetics-how-to-work-item-icon">
+                                    <img src="#" />
+                                </div>
+                                <div className="decorative-cosmetics-how-to-work-item-text">
+                                    Закупка необходимого сырья
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
                 </section>
                 <section>

@@ -55,3 +55,53 @@
     max-width: 100%;
     border-radius: 10px
 }
+.decorative-cosmetics-how-to-work-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 300px;
+}
+.decorative-cosmetics-how-to-work-item-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    width: 300px;
+    min-height: 150px;
+    max-width: 25%;
+    margin-bottom: 20px;
+}
+.decorative-cosmetics-how-to-work-item-wrap::before {
+    content: '=>';
+    position: absolute;
+    right: 0;
+}
+.decorative-cosmetics-how-to-work-item-wrap:nth-child(n + 4)::before {
+    content: '<=';
+    position: absolute;
+    right: 0;
+}
+.decorative-cosmetics-how-to-work-item-wrap:nth-child(4n)::before {
+    content: '';
+}
+.decorative-cosmetics-how-to-work-item-icon {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.decorative-cosmetics-how-to-work-item-text {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 200px;;
+    text-align: center;
+}
