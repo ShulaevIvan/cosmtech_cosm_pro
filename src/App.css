@@ -416,7 +416,7 @@ section {
 .hero-img-wrap {
   display: flex;
   flex-direction: column;
-  min-height: 800px;
+  min-height: 900px;
   width: 100%;
   background-image: url("../src/img/hero_main.jpg");
   background-size: cover;
@@ -1208,6 +1208,7 @@ section {
   overflow: hidden;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
 }
 .footer-wrap {
   display: flex;

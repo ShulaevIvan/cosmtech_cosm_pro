@@ -36,6 +36,7 @@ const reviewPlaces = importAllImages(require.context('../../img/reviewPlaces', f
 const aboutProductionImages = importAllImages(require.context('../../img/aboutProductionImages', false, /\.(png|jpe?g|svg)$/));
 const aboutUsGaleryImages = importAllImages(require.context('../../img/imageGalery/aboutUsImages/', false, /\.(png|jpe?g|jpeg|svg)$/));
 const decorativeCosmeticsImages = importAllImages(require.context('../../img/decoraticeCosmeticsImages/cosmeticsTypes', false, /\.(png|jpe?g|jpeg|svg)$/));
+const decorativeCosmeticsIcons = importAllImages(require.context('../../img/decoraticeCosmeticsImages/howToWorkIcons', false, /\.(png|jpe?g|jpeg|svg)$/));
 
 const { 
     protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
@@ -55,6 +56,10 @@ const {
 } = aboutUsGaleryImages;
 
 const { demo } = decorativeCosmeticsImages;
+const { 
+    deliveryIcon, recipeIcon, certificationIcon, breafIcon, 
+    developIcon, orderIcon, sebesIcon, suppliesIcon
+} = decorativeCosmeticsIcons;
 
 
 const initialState = { 
@@ -965,19 +970,34 @@ const initialState = {
         ]
     },
     decorativeCosmeticsPage: {
+        
         cosmeticTypes: [
-            {id: 1, name: 'test1', img: demo, imgAlt: 'testAlt'},
-            {id: 2, name: 'test2', img: demo, imgAlt: 'testAlt'},
-            {id: 3, name: 'test3', img: demo, imgAlt: 'testAlt'},
-            {id: 4, name: 'test4', img: demo, imgAlt: 'testAlt'},
-            {id: 5, name: 'test5', img: demo, imgAlt: 'testAlt'},
-            {id: 6, name: 'test6', img: demo, imgAlt: 'testAlt'},
-            {id: 7, name: 'test7', img: demo, imgAlt: 'testAlt'},
-            {id: 8, name: 'test8', img: demo, imgAlt: 'testAlt'},
-            {id: 9, name: 'test9', img: demo, imgAlt: 'testAlt'},
-            {id: 10, name: 'test10', img: demo, imgAlt: 'testAlt'},
-            {id: 11, name: 'test11', img: demo, imgAlt: 'testAlt'},
-            {id: 12, name: 'test12', img: demo, imgAlt: 'testAlt'}
+            {id: 1, name: 'Гелевые тени', img: demo, imgAlt: 'testAlt'},
+            {id: 2, name: 'Помада гигиеническая ', img: demo, imgAlt: 'testAlt'},
+            {id: 3, name: 'Помада декоративная ', img: demo, imgAlt: 'testAlt'},
+            {id: 4, name: 'Блеск для губ', img: demo, imgAlt: 'testAlt'},
+            {id: 5, name: 'Основа под макияж', img: demo, imgAlt: 'testAlt'},
+            {id: 6, name: 'Тональный крем', img: demo, imgAlt: 'testAlt'},
+            {id: 7, name: 'Хайлайтер', img: demo, imgAlt: 'testAlt'},
+            {id: 8, name: 'Кремовые румяна', img: demo, imgAlt: 'testAlt'},
+            {id: 9, name: 'Тушь для ресниц', img: demo, imgAlt: 'testAlt'},
+            {id: 10, name: 'Корректор', img: demo, imgAlt: 'testAlt'},
+            {id: 11, name: 'Консилер', img: demo, imgAlt: 'testAlt'},
+            {id: 12, name: 'База под макияж', img: demo, imgAlt: 'testAlt'},
+            {id: 13, name: 'Масло для ногтей', img: demo, imgAlt: 'testAlt'},
+            {id: 14, name: 'Гель для бровей', img: demo, imgAlt: 'testAlt'},
+            {id: 15, name: 'Гель для ресниц', img: demo, imgAlt: 'testAlt'},
+            {id: 16, name: 'Жидкая подводка для глаз', img: demo, imgAlt: 'testAlt'}
+        ],
+        howToWorkIcons: [
+            {id: 1, name: 'Отправляете заявку', img: orderIcon, imgAlt: 'testAlt'},
+            {id: 2, name: 'Получение консультации и заполнение брифа', img: breafIcon, imgAlt: 'testAlt'},
+            {id: 3, name: 'Расчет себестоимости', img: sebesIcon, imgAlt: 'testAlt'},
+            {id: 4, name: 'Создание рецептуры', img: recipeIcon, imgAlt: 'testAlt'},
+            {id: 5, name: 'Доставка и отгрузка', img: deliveryIcon, imgAlt: 'testAlt'},
+            {id: 6, name: 'Сертификация', img: certificationIcon, imgAlt: 'testAlt'},
+            {id: 7, name: 'Разработка продукта', img: developIcon, imgAlt: 'testAlt'},
+            {id: 8, name: 'Закупка необходимого сырья', img: suppliesIcon, imgAlt: 'testAlt'}
         ]
     },
     mousePosition: {

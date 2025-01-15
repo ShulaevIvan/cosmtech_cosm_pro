@@ -18,6 +18,17 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 40.4%;
+    max-height: 500px;
+}
+.decorative-cosmetics-types-photo-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.decorative-cosmetics-types-photo-wrap img {
+    max-height: 350px;
 }
 .decorative-cosmetics-type-item-row {
     display: flex;
@@ -45,12 +56,6 @@
     width: 60px;
     max-width: 50%;
 }
-.decorative-cosmetics-types-image-wrap {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 40.4%;
-}
 .decorative-cosmetics-types-image-wrap img {
     max-width: 100%;
     border-radius: 10px
@@ -61,7 +66,7 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     min-height: 300px;
 }
 .decorative-cosmetics-how-to-work-item-wrap {
@@ -69,6 +74,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-start;
     position: relative;
     width: 300px;
     min-height: 150px;
@@ -76,14 +82,20 @@
     margin-bottom: 20px;
 }
 .decorative-cosmetics-how-to-work-item-wrap::before {
-    content: '=>';
+    content: url('../../img/right-arrow-bold.svg');
     position: absolute;
     right: 0;
+    top: 25%;
+    background-repeat: no-repeat;
+    filter: invert(82%) sepia(78%) saturate(435%) hue-rotate(99deg) brightness(89%) contrast(82%);
 }
 .decorative-cosmetics-how-to-work-item-wrap:nth-child(n + 4)::before {
-    content: '<=';
+    content: url('../../img/left-arrow-bold.svg');
     position: absolute;
     right: 0;
+    top: 25%;
+    background-repeat: no-repeat;
+    filter: invert(82%) sepia(78%) saturate(435%) hue-rotate(99deg) brightness(89%) contrast(82%);
 }
 .decorative-cosmetics-how-to-work-item-wrap:nth-child(4n)::before {
     content: '';
@@ -97,6 +109,11 @@
     align-items: center;
     margin-bottom: 20px;
 }
+.decorative-cosmetics-how-to-work-item-icon img {
+    width: 80px;
+    max-width: 80px;
+    filter: invert(13%) sepia(92%) saturate(3410%) hue-rotate(197deg) brightness(90%) contrast(104%);
+}
 .decorative-cosmetics-how-to-work-item-text {
     display: flex;
     flex-direction: column;
@@ -104,4 +121,83 @@
     width: 100%;
     max-width: 200px;;
     text-align: center;
+}
+.decorative-cosmetics-information-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.decorative-cosmetics-information-image-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 45%;
+}
+.decorative-cosmetics-information-image-wrap img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+.decorative-cosmetics-information-text-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    position: relative;
+}
+.decorative-cosmetics-information-text-wrap p:nth-child(1) {
+    margin-top: 0;
+}
+.decorative-cosmetics-btns-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+.decorative-cosmetics-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 45;
+    max-width: 50%;
+    justify-content: center;
+    margin-top: auto;
+}
+.decorative-cosmetics-types-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+.decorative-cosmetics-btn,
+.decorative-cosmetics-types-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    max-width: 280px;
+    height: 40px;
+    padding: 0 40px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+}
+.decorative-cosmetics-btn:hover,
+.decorative-cosmetics-types-btn:hover {
+    background-color: #00458B;
+    transition: background .4s ease;
+    color: white;
 }
