@@ -35,15 +35,15 @@ const ImageGallery = (props) => {
                                     >
                                         <div className="image-gallery-img-wrap">
                                             <img src={slideItem.img} alt={slideItem.imgAlt} />
-                                            {slideItem.active && !galleryState.imagePopup.active ? 
-                                                <span className="image-gallery-icon-view">
-                                                    <img 
-                                                        src={view} 
-                                                        alt={`просмотр фотографии ${slideItem.imgAlt}`}
-                                                        onClick={() => props.imagePopupHandler(slideItem, true)}
-                                                    />
-                                                </span>
-                                            : null}
+                                            <span className={slideItem.active && !galleryState.imagePopup.active  ? 
+                                                "image-gallery-icon-view active" : "image-gallery-icon-view"}
+                                            >
+                                                <img 
+                                                    src={view} 
+                                                    alt={`просмотр фотографии ${slideItem.imgAlt}`}
+                                                    onClick={() => props.imagePopupHandler(slideItem, true)}
+                                                />
+                                            </span>
                                         </div>
                                     </div>
                                 </React.Fragment>

@@ -36,8 +36,11 @@
     filter: brightness(0.5);
     animation: galleryImageMinMoveRight 0.3s;
 }
+.image-gallery-img-wrap img {
+    border-radius: 10px;
+}
 .image-gallery-img-wrap:hover {
-    transition: 0.3s;
+    transition: 1s;
     filter: brightness(100%);
 }
 .image-gallery-img-wrap.active img {
@@ -51,6 +54,10 @@
     top: 50%;
     left: 45%;
     z-index: 5;
+    visibility: hidden;
+}
+.image-gallery-icon-view.active {
+    visibility: visible;
 }
 .image-gallery-icon-view img {
     max-width: 48px;
