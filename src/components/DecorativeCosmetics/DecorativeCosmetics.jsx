@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
+import ExcursionToProduction from "../ExcursionToProduction/ExcursionToProduction";
+import InnerPageConsultForm from "../InnerPageConsultForm/InnerPageConsultForm";
 import demo from '../../img/decoraticeCosmeticsImages/decorative.png';
 
 const DecorativeCosmetics = () => {
@@ -107,9 +109,7 @@ const DecorativeCosmetics = () => {
                     </div>
                 </section>
                 <section>
-                    <div className="about-company-production-title-wrap">
-                        <h2>Экскурсия на производство</h2>
-                    </div>
+                    <ExcursionToProduction />
                 </section>
                 <section>
                     <div className="container">

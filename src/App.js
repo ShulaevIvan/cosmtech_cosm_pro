@@ -13,6 +13,7 @@ import './components/ForClients/ForClients.css';
 import './components/AboutPage/About.css';
 import './components/ImageGalery/ImageGallery.css';
 import './components/DecorativeCosmetics/DecorativeCosmetics.css';
+import './components/ExcursionToProduction/ExcursionToProduction.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';

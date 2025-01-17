@@ -1,16 +1,16 @@
 import React from "react";
 
+
 const ImageGalleryPopup = (props) => {
     const popupState = props.popupState;
+
     return (
         <React.Fragment>
             <div className="image-gallery-popup-background">
-                <div className="image-gallery-popup-close-btn-wrap">
-                    <span 
-                        className="image-gallery-popup-close-btn"
-                        onClick={() => props.popupCloseHandler(false)}
-                    ></span>
-                </div>
+                <span 
+                    className="image-gallery-popup-close-btn"
+                    onClick={() => props.popupCloseHandler(false)}
+                ></span>
                 <div className="image-gallery-popup-wrap">
                     <span 
                         className="image-gallery-popup-arrow-left"
@@ -19,7 +19,7 @@ const ImageGalleryPopup = (props) => {
                     <div className="image-gallery-popup-img-item-wrap">
                         <img src={popupState.image} alt={popupState.imageAlt} />
                         <div className="image-gallery-popup-img-item-description">
-                            <p>{popupState.imageDescription}</p>
+                            {popupState.imageDescription}
                         </div>
                     </div>
                     <span 

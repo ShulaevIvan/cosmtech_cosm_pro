@@ -9,7 +9,7 @@ const ImageGallery = (props) => {
     return (
         <React.Fragment>
             <div className="container">
-                <div className="about-title-wrap">
+                <div className="image-gallery-title-wrap">
                     <h2>{props.title}</h2>
                 </div>
                 <div className={galleryState.imagePopup.active  ? "image-gallery-wrap view-mode" : "image-gallery-wrap"}>
@@ -20,10 +20,13 @@ const ImageGallery = (props) => {
                             nextSlide={props.imagePopupNextSlide}
                         /> 
                     : null}
-                    <span 
-                        className="image-gallery-prev-btn"
-                        onClick={() => props.moveSlideHandler(deviceWidth < 600 ? -1 : -3)}
-                    ></span>
+                    {!galleryState.imagePopup.active ? 
+                        <span 
+                            className="image-gallery-prev-btn"
+                            onClick={() => props.moveSlideHandler(deviceWidth < 600 ? -1 : -3)}
+                        ></span>
+                    : null}
+                    
                     <div className="image-gallery-row">
                         {galleryState.images.map((slideItem) => {
                             return (
@@ -50,10 +53,12 @@ const ImageGallery = (props) => {
                             )
                         })}
                     </div>
-                    <span 
-                        className="image-gallery-next-btn"
-                        onClick={() => props.moveSlideHandler(deviceWidth < 600 ? 1 : 3)}
-                    ></span>
+                    {!galleryState.imagePopup.active ? 
+                        <span 
+                            className="image-gallery-next-btn"
+                            onClick={() => props.moveSlideHandler(deviceWidth < 600 ? 1 : 3)}
+                        ></span>
+                    : null}
                 </div>
             </div>
             

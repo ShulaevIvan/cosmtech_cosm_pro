@@ -114,16 +114,6 @@ const AboutPage = () => {
                 />
             </section>
             <section>
-                <ImageGallery 
-                    galleryState={aboutState.aboutGallery}
-                    moveSlideHandler={galleryHandler}
-                    hoverSlideHandler={galleryHoverHandler}
-                    imagePopupHandler={galleryImagePopupHandler}
-                    imagePopupNextSlide={galleryPopupImageNextSlide}
-                    title={'Фото производства'}
-                />
-            </section>
-            <section>
                 {aboutState.aboutProduction.popupActive ? 
                     <AboutConsultForm 
                         popupHandler={aboutProdTypesPopupHandler}
@@ -141,6 +131,16 @@ const AboutPage = () => {
             </section>
             <section>
                 <AboutProduction />
+            </section>
+            <section>
+                <ImageGallery 
+                    galleryState={aboutState.aboutGallery}
+                    moveSlideHandler={galleryHandler}
+                    hoverSlideHandler={galleryHoverHandler}
+                    imagePopupHandler={galleryImagePopupHandler}
+                    imagePopupNextSlide={galleryPopupImageNextSlide}
+                    title={'Фото c производства'}
+                />
             </section>
             <section>
                 <AboutTabs

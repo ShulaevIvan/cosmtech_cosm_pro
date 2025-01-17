@@ -33,7 +33,7 @@ const importAllImages = (ctxWebpuck) => {
 };
 const suppliersImages = importAllImages(require.context('../../img/supplersImages', false, /\.(png|jpe?g|svg)$/));
 const reviewPlaces = importAllImages(require.context('../../img/reviewPlaces', false, /\.(png|jpe?g|svg)$/));
-const aboutProductionImages = importAllImages(require.context('../../img/aboutProductionImages', false, /\.(png|jpe?g|svg)$/));
+const aboutProductionImages = importAllImages(require.context('../../img/aboutProductionImages', false, /\.(png|jpe?g|jpeg|svg)$/));
 const aboutUsGaleryImages = importAllImages(require.context('../../img/imageGalery/aboutUsImages/', false, /\.(png|jpe?g|jpeg|svg)$/));
 const decorativeCosmeticsImages = importAllImages(require.context('../../img/decoraticeCosmeticsImages/cosmeticsTypes', false, /\.(png|jpe?g|jpeg|svg)$/));
 const decorativeCosmeticsIcons = importAllImages(require.context('../../img/decoraticeCosmeticsImages/howToWorkIcons', false, /\.(png|jpe?g|jpeg|svg)$/));
