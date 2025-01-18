@@ -15,7 +15,7 @@ const ExcursionToProduction = () => {
                         </p>
                     </div>
                     <div className="excursion-production-btn-wrap">
-                        <a href="#" className="excursion-production-btn">записаться на экскурсию</a>
+                        <a href="#" className="excursion-production-btn">Записаться на экскурсию</a>
                     </div>
                 </div>
             </div>

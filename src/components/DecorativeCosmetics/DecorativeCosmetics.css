@@ -4,6 +4,7 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
+    position: relative;
 }
 .decorative-cosmetics-types-items-row {
     display: flex;
@@ -200,4 +201,221 @@
     background-color: #00458B;
     transition: background .4s ease;
     color: white;
+}
+.decorative-cosmetics-consult-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+}
+.decorative-cosmetics-consult-form-wrap h3 {
+    font-size: 28px;
+}
+.decorative-cosmetics-consult-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+}
+.decorative-cosmetics-consult-form-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    max-width: 33%;
+    margin-bottom: 20px;
+}
+.decorative-cosmetics-consult-form-input-wrap input {
+    min-height: 25px;
+}
+.decorative-cosmetics-consult-form-input-wrap label {
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.decorative-cosmetics-consult-form-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.decorative-cosmetics-consult-form-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    max-width: 280px;
+    height: 40px;
+    padding: 0 40px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+}
+.decorative-cosmetics-consult-form-btn:hover,
+.decorative-cosmetic-consult-popup-form-send-btn:hover {
+    background-color: #00458B;
+    transition: background .4s ease;
+    color: white;
+}
+.decorative-cosmetic-consult-popup-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    max-height: 450px;
+    min-height: 450px;
+    padding: 20px;
+    position: fixed;
+    top: 25%;
+    left: 35%;
+    background-color: #fff;
+    z-index: 5;
+    border-radius: 10px;
+    border: 1px solid #00458B;
+    animation-duration: 0.3s;
+    animation-name: grow;
+    border-radius: 10px;
+}
+.decorative-cosmetic-consult-popup-close-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    position: absolute;
+    top: 4%;
+}
+.decorative-cosmetic-consult-popup-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.decorative-cosmetic-consult-popup-body h3 {
+    margin-bottom: 20px;
+}
+.decorative-cosmetic-consult-popup-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 10px;
+}
+.decorative-cosmetic-consult-popup-form-input {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.decorative-cosmetic-consult-popup-form-wrap label {
+    color: #00458B;
+    font-family: gothampro bold;
+    font-size: 18px;
+    padding-left: 17%;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.decorative-cosmetic-consult-popup-form-input input {
+    min-height: 25px;
+    max-width: 250px;
+    min-width: 250px;
+}
+.decorative-cosmetic-consult-popup-close-btn::before {
+    content: url('../../img/close_popup.svg');
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top:10%;
+    right: 2%;
+    cursor: pointer;
+}
+.decorative-cosmetic-consult-popup-close-btn:hover::before {
+    content: url('../../img/close_popup_hover.svg');
+}
+.decor-cosmetic-get-consult-checkbox-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.decor-cosmetic-get-consult-checkbox {
+    display: none;
+}
+.decor-cosmetic-get-consult-checkbox + label {
+    position: relative;
+    padding-left: 30px;
+    height: 1.5em;
+    display: flex;
+    align-items: center;
+    color: #000;
+    cursor: pointer;
+    user-select: none;
+}
+.decor-cosmetic-get-consult-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.4em;
+    height: 1.4em;
+    background-image: url('../../img/form_checkbox.svg');
+    background-size: contain;
+}
+.decor-cosmetic-get-consult-checkbox:checked + label::before {
+    border-color: #000;
+    background-image: url('../../img/form_checkbox_checked.svg');
+    background-size: contain;
+}
+.form-mode-decor-cosmetic-get-consult-checkbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.decorative-cosmetic-consult-popup-form-send-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    max-width: 200px;
+    height: 35px;
+    padding: 0 30px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
 }

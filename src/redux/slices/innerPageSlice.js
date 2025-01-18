@@ -970,7 +970,6 @@ const initialState = {
         ]
     },
     decorativeCosmeticsPage: {
-        
         cosmeticTypes: [
             {id: 1, name: 'Гелевые тени', img: demo, imgAlt: 'testAlt'},
             {id: 2, name: 'Помада гигиеническая ', img: demo, imgAlt: 'testAlt'},
@@ -998,7 +997,52 @@ const initialState = {
             {id: 6, name: 'Сертификация', img: certificationIcon, imgAlt: 'testAlt'},
             {id: 7, name: 'Разработка продукта', img: developIcon, imgAlt: 'testAlt'},
             {id: 8, name: 'Закупка необходимого сырья', img: suppliesIcon, imgAlt: 'testAlt'}
-        ]
+        ],
+        faqQuestions: [
+            { id: 1, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
+            { id: 2, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
+            { id: 3, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
+            { id: 4, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
+            { id: 5, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
+        ],
+        consultPopup: {
+            active: false,
+            sendBtnActive: false,
+            policyActive: false,
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    name: 'name',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'Ваше имя',
+                    valid: true,
+                },
+                {
+                    id: 2,
+                    title: 'Email',
+                    name: 'email',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'demo@....ru',
+                    valid: true,
+                },
+                {
+                    id: 3,
+                    title: 'Телефон',
+                    name: 'phone',
+                    type: 'text',
+                    placeholder: '8xxxxxxxxxx',
+                    value: '',
+                    valid: true
+                },
+            ],
+            happyState: {
+                active: false,
+                description: ''
+            }
+        }
     },
     mousePosition: {
         left: 0,
@@ -1866,6 +1910,12 @@ const innerPageSlice = createSlice({
                     imageDescription: targetImage[0].imgDescription
                 };
             }
+        },
+        decorCosmConsultPopup(state, action) {
+            state.decorativeCosmeticsPage.consultPopup = {
+                ...state.decorativeCosmeticsPage.consultPopup,
+                active: state.decorativeCosmeticsPage.consultPopup.active ? false : true
+            }
         }
     },
     
@@ -2032,6 +2082,7 @@ export const {
     aboutGalleryMoveSlide,
     aboutGalleryHover,
     aboutGalleryPopup,
-    aboutGalleryPopupNextSlide
+    aboutGalleryPopupNextSlide,
+    decorCosmConsultPopup
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
