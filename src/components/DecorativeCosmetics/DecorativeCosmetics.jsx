@@ -3,10 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import ExcursionToProduction from "../ExcursionToProduction/ExcursionToProduction";
+import DecorativeCosmeticsFaq from "./DecorativeCosmeticsFaq";
+import DecorativeCosmeticsQuestForm from "./DecorativeCosmeticsQuestForm";
 import DecorativeCosmeticsConsultPopup from "./DecorativeCosmeticsConsultPopup";
+import DecorativeCosmeticsOrderPopup from "./DecorativeCosmeticsOrderPopup";
 
 import { 
-    decorCosmConsultPopup 
+    decorCosmConsultPopup,
+    decorCosmOrderPopup,
+    decorCosmFaqAction
 } from "../../redux/slices/innerPageSlice";
 
 import demo from '../../img/decoraticeCosmeticsImages/decorative.png';
@@ -17,6 +22,14 @@ const DecorativeCosmetics = () => {
 
     const decorCosmeticPopupHandler = () => {
         dispatch(decorCosmConsultPopup());
+    };
+
+    const decorCosmeticPopupOrderHandler = () => {
+        dispatch(decorCosmOrderPopup());
+    };
+
+    const decorCosmeticFaqHandler = (faqId) => {
+        dispatch(decorCosmFaqAction({faqId: faqId}));
     };
 
     return (
@@ -74,11 +87,17 @@ const DecorativeCosmetics = () => {
                             <h2>Косметика под вашим брендом</h2>
                         </div>
                         <div className="decorative-cosmetics-information-row">
+                            {decorativeCosmState.orderPopup.active ? 
+                                <DecorativeCosmeticsOrderPopup 
+                                    popupState={decorativeCosmState.orderPopup}
+                                    popupHandler={decorCosmeticPopupOrderHandler}
+                                /> 
+                            : null}
                            
                             <div className="decorative-cosmetics-information-text-wrap">
                                 <p>
                                     Лаборатория "Космотех" предлагает услуги по созданию декоративной косметики под вашим брендом.
-                                    Разработаем новые или доработаем существующие рецептуры. 
+                                    Разработаем для вас новые или доработаем имеющиеся рецептуры. 
                                     
                                 </p>
                             
@@ -86,13 +105,17 @@ const DecorativeCosmetics = () => {
                                     Специалисты компании помогут вам выбрать текстуру, цвет и аромат для вашей продукции, а также подберут упаковку у проверенных поставщиков.
                                 </p>
                                 <p>Для снижения ваших рисков вы можете заказать небольшую партию для тестирования рынка, 
-                                минимальный объем заказа на производстве - 50 кг.</p>
+                                минимальный объем заказа на производстве - 50 кг. Вы можете скачать и заполнить ТЗ, после чего отправить его нам удобным для вас способом или через форму.</p>
                                 <p>Мы готовы ответить на любые вопросы по техпроцессу, выборе сырья, срокам, упаковке и доставке, 
                                     а также проконсультировать по вопросам реализации.
                                 </p>
                                 <div className="decorative-cosmetics-btns-row">
                                     <div className="decorative-cosmetics-btn-wrap">
-                                        <Link to={'#'} className="decorative-cosmetics-btn">Запросить рассчет</Link>
+                                        <Link 
+                                            to={'#'} 
+                                            className="decorative-cosmetics-btn"
+                                            onClick={decorCosmeticPopupOrderHandler}
+                                        >Запросить рассчет</Link>
                                     </div>
                                     <div className="decorative-cosmetics-btn-wrap">
                                         <Link to={'#'} className="decorative-cosmetics-btn">Скачать ТЗ</Link>
@@ -134,68 +157,16 @@ const DecorativeCosmetics = () => {
                 </section>
                 <section>
                     <div className="container">
-                        <div className="about-company-production-title-wrap">
-                            <h2>Часто задаваемые вопросы</h2>
-                        </div>
-                        {decorativeCosmState.faqQuestions.map((faqItem) => {
-                            return (
-                                <React.Fragment key={faqItem.id}>
-                                    <div className={faqItem.active ? "for-clients-faq-accordion-item active" : "for-clients-faq-accordion-item"}>
-                                        <div 
-                                            className="for-clients-faq-accordion-item-title" 
-                                        >
-                                            <h4>{faqItem.ask}</h4>
-                                        </div>
-                                        <div 
-                                            className="for-clients-faq-accordion-item-btn-wrap"
-                                            
-                                        >
-                                            <span className={faqItem.active ? 
-                                                "for-clients-faq-accordion-item-btn active" : "for-clients-faq-accordion-item-btn"}
-                                            ></span>
-                                        </div>
-                                        <div className={faqItem.active ? 
-                                            'for-clients-faq-accordion-item-description active' : 'for-clients-faq-accordion-item-description'}>
-                                            <p>{faqItem.ans}</p>
-                                        </div>
-                                    </div>
-                                </React.Fragment>
-                            )
-                        })}
-                        
+                        <DecorativeCosmeticsFaq 
+                            questions={decorativeCosmState.faqQuestions}
+                            faqHandler={decorCosmeticFaqHandler}
+                        />
                     </div>
                 </section>
                 <section>
-                    <div className="container">
-                        <div className="decorative-cosmetics-consult-form-wrap">
-                            <h3>Остались вопросы?</h3>
-                            <p>Вы сможете задать их относительно наших услуг заполнив форму.</p>
-                            <div className="decorative-cosmetics-consult-form">
-                                <div className="decorative-cosmetics-consult-form-input-wrap">
-                                    <div className="decorative-cosmetics-consult-form-input-wrap">
-                                        <label>Имя</label>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <div className="decorative-cosmetics-consult-form-input-wrap">
-                                    
-                                    <div className="decorative-cosmetics-consult-form-input-wrap">
-                                        <label>Телефон</label>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <div className="decorative-cosmetics-consult-form-input-wrap">
-                                    <div className="decorative-cosmetics-consult-form-input-wrap">
-                                        <label>Email</label>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <div className="decorative-cosmetics-consult-form-btn-wrap">
-                                    <span to={'#'} className="decorative-cosmetics-consult-form-btn">Отправить</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <DecorativeCosmeticsQuestForm 
+                        formState={decorativeCosmState.questionForm}
+                    />
                 </section>
             </div>
             

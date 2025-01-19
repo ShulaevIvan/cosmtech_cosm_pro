@@ -18,7 +18,7 @@ const DecorativeCosmeticsConsultPopup = (props) => {
                 <div className="decorative-cosmetic-consult-popup-form-wrap">
                     {popupState.fields.map((fieldItem) => {
                         return (
-                            <React.Fragment>
+                            <React.Fragment key={fieldItem.id}>
                                 <label htmlFor={`decorative-cosmetic-consult-popup-form-input-${fieldItem.id}`}>
                                     {fieldItem.title}
                                 </label>

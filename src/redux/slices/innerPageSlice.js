@@ -357,7 +357,7 @@ const initialState = {
             },
             {
                 id: 3,
-                name: 'Контрактная фасовка косметики в различных форматах.',
+                name: 'Контрактная фасовка косметики в различных форматах',
                 image: servicePacking2,
                 position: 'left',
                 serviceItemHover: {
@@ -1021,6 +1021,44 @@ const initialState = {
                 },
                 {
                     id: 2,
+                    title: 'Телефон',
+                    name: 'phone',
+                    type: 'text',
+                    placeholder: '8xxxxxxxxxx',
+                    value: '',
+                    valid: true
+                },
+                {
+                    id: 3,
+                    title: 'Email',
+                    name: 'email',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'demo@....ru',
+                    valid: true,
+                },
+            ],
+            happyState: {
+                active: false,
+                description: ''
+            }
+        },
+        orderPopup: {
+            active: false,
+            sendBtnActive: false,
+            policyActive: false,
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    name: 'name',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'Ваше имя',
+                    valid: true,
+                },
+                {
+                    id: 2,
                     title: 'Email',
                     name: 'email',
                     value: '',
@@ -1037,11 +1075,59 @@ const initialState = {
                     value: '',
                     valid: true
                 },
+                {
+                    id: 4,
+                    title: 'Прикрепить тз',
+                    name: 'file',
+                    type: 'file',
+                    placeholder: '',
+                    fileData: {},
+                    value: '',
+                    valid: true
+                },
+                {
+                    id: 5,
+                    title: 'Комментарий',
+                    name: 'comment',
+                    type: 'textarea',
+                    placeholder: 'Комментарий....',
+                    value: '',
+                    valid: true
+                },
             ],
-            happyState: {
-                active: false,
-                description: ''
-            }
+        },
+        questionForm: {
+            sendBtnActive: false,
+            policyActive: false,
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    name: 'name',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'Ваше имя',
+                    valid: true,
+                },
+                {
+                    id: 2,
+                    title: 'Email',
+                    name: 'email',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'demo@....ru',
+                    valid: true,
+                },
+                {
+                    id: 3,
+                    title: 'Телефон',
+                    name: 'phone',
+                    type: 'text',
+                    placeholder: '8xxxxxxxxxx',
+                    value: '',
+                    valid: true
+                },
+            ]
         }
     },
     mousePosition: {
@@ -1911,11 +1997,29 @@ const innerPageSlice = createSlice({
                 };
             }
         },
-        decorCosmConsultPopup(state, action) {
+        decorCosmConsultPopup(state) {
             state.decorativeCosmeticsPage.consultPopup = {
                 ...state.decorativeCosmeticsPage.consultPopup,
                 active: state.decorativeCosmeticsPage.consultPopup.active ? false : true
             }
+        },
+        decorCosmOrderPopup(state) {
+            state.decorativeCosmeticsPage.orderPopup = {
+                ...state.decorativeCosmeticsPage.orderPopup,
+                active: state.decorativeCosmeticsPage.orderPopup.active ? false : true
+            }
+        },
+        decorCosmFaqAction(state, action) {
+            const { faqId } = action.payload;
+            state.decorativeCosmeticsPage.faqQuestions = state.decorativeCosmeticsPage.faqQuestions.map((faqItem) => {
+                if (faqItem.id === faqId) {
+                    return {
+                        ...faqItem,
+                        active: faqItem.active ? false : true
+                    }
+                }
+                return faqItem;
+            })
         }
     },
     
@@ -2083,6 +2187,8 @@ export const {
     aboutGalleryHover,
     aboutGalleryPopup,
     aboutGalleryPopupNextSlide,
-    decorCosmConsultPopup
+    decorCosmConsultPopup,
+    decorCosmOrderPopup,
+    decorCosmFaqAction
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

@@ -128,6 +128,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    position: relative;
     justify-content: space-between;
 }
 .decorative-cosmetics-information-image-wrap {
@@ -231,10 +232,10 @@
     flex-wrap: wrap;
     width: 30%;
     max-width: 33%;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 .decorative-cosmetics-consult-form-input-wrap input {
-    min-height: 25px;
+    min-height: 30px;
 }
 .decorative-cosmetics-consult-form-input-wrap label {
     margin-bottom: 5px;
@@ -321,7 +322,7 @@
     flex-wrap: wrap;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .decorative-cosmetic-consult-popup-form-input {
     display: flex;
@@ -340,7 +341,7 @@
     cursor: pointer;
 }
 .decorative-cosmetic-consult-popup-form-input input {
-    min-height: 25px;
+    min-height: 30px;
     max-width: 250px;
     min-width: 250px;
 }
@@ -401,7 +402,8 @@
     justify-content: center;
     margin-bottom: 20px;
 }
-.decorative-cosmetic-consult-popup-form-send-btn {
+.decorative-cosmetic-consult-popup-form-send-btn,
+.decorative-cosmetic-order-form-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -418,4 +420,157 @@
     padding: 0 40px;
     outline: none;
     cursor: pointer;
+}
+.decorative-cosmetic-order-popup-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    max-width: 550px;
+    max-height: 600px;
+    min-height: 600px;
+    padding: 20px;
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    background-color: #fff;
+    z-index: 5;
+    border-radius: 10px;
+    border: 1px solid #00458B;
+    animation-duration: 0.3s;
+    animation-name: grow;
+    border-radius: 10px;
+}
+.decorative-cosmetic-order-popup-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+.decorative-cosmetic-order-popup-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+.decorative-cosmetic-order-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
+}
+.decorative-cosmetic-order-form-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.decorative-cosmetic-order-form-input-title-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.decorative-cosmetic-order-form-input-title-wrap label,
+.decorative-cosmetics-consult-form-input-wrap label {
+    color: #00458B;
+    font-family: gothampro bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.decorative-cosmetic-order-form-input-wrap input {
+    max-width: 250px;
+    min-width: 250px;
+    min-height: 30px;
+}
+.decorative-cosmetic-order-form-input-wrap textarea {
+    min-height: 70px;
+}
+.decorative-cosmetic-order-form-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: auto;
+    justify-content: center;
+    align-items: center;
+}
+.decorative-cosmetic-order-form-file-input {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-family: gothampro bold;
+    font-size: 20px;
+}
+.decorative-cosmetic-order-form-file-input input[type='file'] {
+    min-height: 30px;
+    display: none;
+    margin: 20px 0;
+}
+.decorative-cosmetic-order-form-file-input label {
+    margin: 20px 0 10px 0;
+}
+.decorative-cosmetic-order-form-file-input .input-file-btn {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    font-size: 16px;
+    vertical-align: middle;
+    color: rgb(255 255 255);
+    text-align: center;
+    border-radius: 4px;
+    background-color: #3FD2C7;
+    line-height: 22px;
+    height: 40px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    transition: background-color 0.2s
+}
+.decor-cosmetic-quest-from-checkbox-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.decor-cosmetic-quest-from-checkbox {
+    display: none;
+}
+.decor-cosmetic-quest-from-checkbox + label {
+    position: relative;
+    padding-left: 30px;
+    height: 1.5em;
+    display: flex;
+    align-items: center;
+    color: #000;
+    cursor: pointer;
+    user-select: none;
+}
+.decor-cosmetic-quest-from-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.4em;
+    height: 1.4em;
+    background-image: url('../../img/form_checkbox.svg');
+    background-size: contain;
+}
+.decor-cosmetic-quest-from-checkbox:checked + label::before {
+    border-color: #000;
+    background-image: url('../../img/form_checkbox_checked.svg');
+    background-size: contain;
 }
