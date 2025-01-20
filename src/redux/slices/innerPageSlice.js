@@ -206,7 +206,7 @@ const initialState = {
             page: '/decorative-cosmetics',
             page: '/decorative-cosmetics', 
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
-            title: 'Декор. косметики',
+            title: 'Производство декоративной косметики',
             description: 'Услуги по контрактному производству декоративной косметики в Санкт-Петербурге',
             seoDescription: 'Контрактное производство декоративной косметики',
             breadcrumbs: [
@@ -1111,21 +1111,21 @@ const initialState = {
                 },
                 {
                     id: 2,
-                    title: 'Email',
-                    name: 'email',
-                    value: '',
-                    type: 'text',
-                    placeholder: 'demo@....ru',
-                    valid: true,
-                },
-                {
-                    id: 3,
                     title: 'Телефон',
                     name: 'phone',
                     type: 'text',
                     placeholder: '8xxxxxxxxxx',
                     value: '',
                     valid: true
+                },
+                {
+                    id: 3,
+                    title: 'Email',
+                    name: 'email',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'demo@....ru',
+                    valid: true,
                 },
             ]
         }
@@ -1997,7 +1997,12 @@ const innerPageSlice = createSlice({
                 };
             }
         },
-        decorCosmConsultPopup(state) {
+        decorCosmConsultPopup(state, action) {
+            const { status } = action.payload;
+            if (!status) {
+                state.decorativeCosmeticsPage.consultPopup = initialState.decorativeCosmeticsPage.consultPopup;
+                return;
+            }
             state.decorativeCosmeticsPage.consultPopup = {
                 ...state.decorativeCosmeticsPage.consultPopup,
                 active: state.decorativeCosmeticsPage.consultPopup.active ? false : true
@@ -2019,6 +2024,77 @@ const innerPageSlice = createSlice({
                     }
                 }
                 return faqItem;
+            })
+        },
+        decorCosmConsultPopupInput(state, action) {
+            const { fieldId, fieldType, fieldValue } = action.payload;
+            let validValue;
+            let inputValid = false;
+
+            if (fieldId && (!fieldType && !fieldValue)) {
+                state.decorativeCosmeticsPage.consultPopup.fields = state.decorativeCosmeticsPage.consultPopup.fields.map((fieldItem) => {
+                    if (fieldItem.id === fieldId) {
+                        return {
+                            ...fieldItem,
+                            value: '',
+                            valid: false
+                        }
+                    }
+                    return fieldItem
+                });
+                return
+            }
+
+            if (fieldType === 'name' && fieldValue) {
+                inputValid = validateName(fieldValue)
+                validValue = fieldValue
+            }
+            else if (fieldType === 'phone' && fieldValue && fieldValue.length !== 18) {
+                const phoneStr = validatePhone(fieldValue);
+                inputValid = phoneStr.length === 18 ? true : false
+                validValue = phoneStr;
+            }
+            else if (fieldType === 'email' && fieldValue) {
+                inputValid = !validateMail(fieldValue) ? true : false
+                validValue = fieldValue;
+            }
+
+            state.decorativeCosmeticsPage.consultPopup.fields = state.decorativeCosmeticsPage.consultPopup.fields.map((fieldItem) => {
+                if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        valid: inputValid,
+                    }
+                }
+                return fieldItem
+            });
+        },
+        decorCosmConsultPopupCheckbox(state) {
+            state.decorativeCosmeticsPage.consultPopup.policyActive = state.decorativeCosmeticsPage.consultPopup.policyActive ? false : true
+        },
+        decorCosmConsultPopupValidate(state) {
+            const nameField = state.decorativeCosmeticsPage.consultPopup.fields.find((item) => item.name === 'name' && item.value !== '');
+            const phoneField = state.decorativeCosmeticsPage.consultPopup.fields.find((item) => item.name === 'phone' && item.value !== '');
+            const emailField = state.decorativeCosmeticsPage.consultPopup.fields.find((item) => item.name === 'email' && item.value !== '');
+            const checkbox = state.decorativeCosmeticsPage.consultPopup.policyActive;
+
+            if (nameField && nameField.valid && checkbox && (phoneField && phoneField.valid || emailField && emailField.valid)) {
+                state.decorativeCosmeticsPage.consultPopup.sendBtnActive = true;
+                return;
+            }
+            state.decorativeCosmeticsPage.consultPopup.sendBtnActive = false;
+        },
+        decorCosmOrderPopupInput(state, action) {
+            const { fieldId, fieldType, fieldValue } = action.payload;
+            state.decorativeCosmeticsPage.orderPopup.fields = state.decorativeCosmeticsPage.orderPopup.fields.map((fieldItem) => {
+                if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                    return {
+                        ...fieldItem,
+                        value: fieldValue
+                    }
+                }
+                return fieldItem;
             })
         }
     },
@@ -2189,6 +2265,10 @@ export const {
     aboutGalleryPopupNextSlide,
     decorCosmConsultPopup,
     decorCosmOrderPopup,
-    decorCosmFaqAction
+    decorCosmFaqAction,
+    decorCosmConsultPopupInput,
+    decorCosmConsultPopupCheckbox,
+    decorCosmConsultPopupValidate,
+    decorCosmOrderPopupInput
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

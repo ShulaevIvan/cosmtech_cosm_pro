@@ -37,10 +37,11 @@
 }
 .inner-page-main-title-wrap {
     max-width: 1320px;
-    width: 500px;
+    width: 700px;
     position: absolute;
     left: 17%;
-    top: 15%;
+    top: 17%;
+    line-height: 1.2;
     color: white;
     z-index: 1;
 }

@@ -1,8 +1,22 @@
 import React from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 
 const DecorativeCosmeticsOrderPopup = (props) => {
     const popupState = props.popupState;
+
+    const inputRefs = [
+        {name: 'name', ref: useRef()},
+        {name: 'phone', ref: useRef()},
+        {name: 'email', ref: useRef()},
+        {name: 'file', ref: useRef()},
+        {name: 'comment', ref: useRef()},
+    ];
+
+    const findInputRef = (fieldType) => {
+        return inputRefs.find((item) => item.name === fieldType).ref;
+    };
+    
     return (
         <React.Fragment>
             <div className="decorative-cosmetic-order-popup-wrap">
@@ -27,8 +41,11 @@ const DecorativeCosmeticsOrderPopup = (props) => {
                                                     <label htmlFor={`decorative-cosmetic-order-form-input-${fieldItem.id}`}>{fieldItem.title}</label>
                                                 </div>
                                                 <textarea
+                                                    ref={findInputRef(fieldItem.name)}
+                                                    onChange={(e) => props.inputHandler(e, fieldItem, findInputRef(fieldItem.name).current)}
                                                     id={`decorative-cosmetic-order-form-input-${fieldItem.id}`} 
                                                     placeholder={fieldItem.placeholder}
+                                                    value={fieldItem.value}
                                                 ></textarea>
                                             </div>
                                         
@@ -39,7 +56,14 @@ const DecorativeCosmeticsOrderPopup = (props) => {
                                                 <div className="decorative-cosmetic-order-form-file-input">
                                                     <label className="input-file">
                                                         <span className="input-file-text" type="text"></span>
-                                                        <input type="file" name="file" multiple={false} />
+                                                        <input
+                                                            ref={findInputRef(fieldItem.name)}
+                                                            onChange={(e) => props.inputHandler(e, fieldItem, findInputRef(fieldItem.name).current)}
+                                                            type="file" 
+                                                            name="file"
+                                                            value={fieldItem.value} 
+                                                            multiple={false} 
+                                                        />
                                                         <span className="input-file-btn">Прикрепить ТЗ</span>
                                                     </label>
                                                 </div>
@@ -48,10 +72,13 @@ const DecorativeCosmeticsOrderPopup = (props) => {
                                                         <div className="decorative-cosmetic-order-form-input-title-wrap">
                                                             <label htmlFor={`decorative-cosmetic-order-form-input-${fieldItem.id}`}>{fieldItem.title}</label>
                                                         </div>
-                                                        <input 
+                                                        <input
+                                                            ref={findInputRef(fieldItem.name)}
+                                                            onChange={(e) => props.inputHandler(e, fieldItem, findInputRef(fieldItem.name).current)} 
                                                             id={`decorative-cosmetic-order-form-input-${fieldItem.id}`}
                                                             type={fieldItem.type}
                                                             placeholder={fieldItem.placeholder}
+                                                            value={fieldItem.value}
                                                         />
                                                     </React.Fragment>
                                                 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
@@ -11,17 +12,22 @@ import DecorativeCosmeticsOrderPopup from "./DecorativeCosmeticsOrderPopup";
 import { 
     decorCosmConsultPopup,
     decorCosmOrderPopup,
-    decorCosmFaqAction
+    decorCosmFaqAction,
+    decorCosmConsultPopupInput,
+    decorCosmConsultPopupCheckbox,
+    decorCosmConsultPopupValidate,
+    decorCosmOrderPopupInput
 } from "../../redux/slices/innerPageSlice";
 
-import demo from '../../img/decoraticeCosmeticsImages/decorative.png';
+import cosmeticTypesImg from '../../img/decoraticeCosmeticsImages/decorativeCosmeticType.jpg'
+import decorativeCosmeticBrand from '../../img/decoraticeCosmeticsImages/decorativeStm.jpg'
 
 const DecorativeCosmetics = () => {
     const decorativeCosmState = useSelector((state) => state.innerPage.decorativeCosmeticsPage);
     const dispatch = useDispatch();
 
-    const decorCosmeticPopupHandler = () => {
-        dispatch(decorCosmConsultPopup());
+    const decorCosmeticPopupHandler = (status) => {
+        dispatch(decorCosmConsultPopup({status: status}));
     };
 
     const decorCosmeticPopupOrderHandler = () => {
@@ -31,6 +37,44 @@ const DecorativeCosmetics = () => {
     const decorCosmeticFaqHandler = (faqId) => {
         dispatch(decorCosmFaqAction({faqId: faqId}));
     };
+
+    const popupConsultInputHandler = (inputId, inputType, inputRef) => {
+        dispatch(decorCosmConsultPopupInput({fieldId: inputId, fieldType: inputType, fieldValue: inputRef.value}));
+    };
+
+    const popupConsultClearInputHandler = (e, inputId, inputType) => {
+        if (e.key === 'Backspace') {
+            dispatch(decorCosmConsultPopupInput({fieldId: inputId, fieldType: '', fieldValue: ''}));
+            return;
+        }
+    };
+
+    const popupConsultCheckboxHandler = (status) => {
+        dispatch(decorCosmConsultPopupCheckbox({status: status}));
+    };
+
+    const sendConsultPopupFormHandler = () => {
+        const data = {
+            name: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'name').value,
+            phone: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'phone').value,
+            email: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'email').value
+        };
+
+        console.log(data)
+    };
+
+    const popupOrderInputHandler = (e, fieldItem, fieldRef) => {
+        dispatch(decorCosmOrderPopupInput({
+            fieldId: fieldItem.id, 
+            fieldType: fieldItem.name,
+            fieldValue: fieldRef.value,
+        }));
+    };
+    
+
+    useEffect(() => {
+        dispatch(decorCosmConsultPopupValidate());
+    }, [decorativeCosmState.consultPopup])
 
     return (
         <React.Fragment>
@@ -46,6 +90,10 @@ const DecorativeCosmetics = () => {
                                 <DecorativeCosmeticsConsultPopup
                                     popupState={decorativeCosmState.consultPopup}
                                     popupHandler={decorCosmeticPopupHandler}
+                                    inputHandler={popupConsultInputHandler}
+                                    clearInputHandler={popupConsultClearInputHandler}
+                                    policyHandler={popupConsultCheckboxHandler}
+                                    sendFormHandler={sendConsultPopupFormHandler}
                                 />
                             : null}
                            
@@ -67,13 +115,13 @@ const DecorativeCosmetics = () => {
                             </div>
                             <div className="decorative-cosmetics-types-image-wrap">
                                 <div className="decorative-cosmetics-types-photo-wrap">
-                                    <img src={demo} alt="#" />
+                                    <img src={cosmeticTypesImg} alt="Производимая декоративная косметика ООО Космотех" />
                                 </div>
                                 <div className="decorative-cosmetics-types-btn-wrap">
                                     <Link 
                                         to={'#'} 
                                         className="decorative-cosmetics-types-btn"
-                                        onClick={decorCosmeticPopupHandler}
+                                        onClick={() => decorCosmeticPopupHandler(true)}
                                     >Получить консультацию</Link>
                                 </div>
                             </div>
@@ -91,6 +139,7 @@ const DecorativeCosmetics = () => {
                                 <DecorativeCosmeticsOrderPopup 
                                     popupState={decorativeCosmState.orderPopup}
                                     popupHandler={decorCosmeticPopupOrderHandler}
+                                    inputHandler={popupOrderInputHandler}
                                 /> 
                             : null}
                            
@@ -124,7 +173,7 @@ const DecorativeCosmetics = () => {
                                 
                             </div>
                             <div className="decorative-cosmetics-information-image-wrap">
-                                <img src={demo} alt="#" />
+                                <img src={decorativeCosmeticBrand} alt="Декоративная косметика под СТМ" />
                             </div>
                         </div>
                     </div>
