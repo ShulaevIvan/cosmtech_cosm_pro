@@ -8,6 +8,7 @@ import DecorativeCosmeticsFaq from "./DecorativeCosmeticsFaq";
 import DecorativeCosmeticsQuestForm from "./DecorativeCosmeticsQuestForm";
 import DecorativeCosmeticsConsultPopup from "./DecorativeCosmeticsConsultPopup";
 import DecorativeCosmeticsOrderPopup from "./DecorativeCosmeticsOrderPopup";
+import fileToBase64 from "../../functions/fileToBase64";
 
 import { 
     decorCosmConsultPopup,
@@ -16,7 +17,14 @@ import {
     decorCosmConsultPopupInput,
     decorCosmConsultPopupCheckbox,
     decorCosmConsultPopupValidate,
-    decorCosmOrderPopupInput
+    decorCosmOrderPopupInput,
+    decorCosmOrderClearInput,
+    decorCosmOrderCheckbox,
+    decorCosmOrderPopupValidate,
+    decorCosmQuestionFormInput,
+    decorCosmQuestionFormClearInput,
+    decorCosmQuestionFormCheckbox,
+    decorCosmQuestionFormValidate
 } from "../../redux/slices/innerPageSlice";
 
 import cosmeticTypesImg from '../../img/decoraticeCosmeticsImages/decorativeCosmeticType.jpg'
@@ -26,8 +34,8 @@ const DecorativeCosmetics = () => {
     const decorativeCosmState = useSelector((state) => state.innerPage.decorativeCosmeticsPage);
     const dispatch = useDispatch();
 
-    const decorCosmeticPopupHandler = (status) => {
-        dispatch(decorCosmConsultPopup({status: status}));
+    const decorCosmeticPopupHandler = () => {
+        dispatch(decorCosmConsultPopup());
     };
 
     const decorCosmeticPopupOrderHandler = () => {
@@ -59,22 +67,96 @@ const DecorativeCosmetics = () => {
             phone: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'phone').value,
             email: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'email').value
         };
-
-        console.log(data)
     };
 
-    const popupOrderInputHandler = (e, fieldItem, fieldRef) => {
+    const popupOrderInputHandler = async (fieldItem, fieldRef) => {
+        if (fieldRef.files && fieldRef.files.length > 0) {
+            await fileToBase64(fieldRef.files[0])
+            .then((data) => {
+                dispatch(decorCosmOrderPopupInput({
+                    fieldId: fieldItem.id, 
+                    fieldType: fieldItem.name,
+                    fieldValue: data,
+                }));
+            })
+            return;
+        }
         dispatch(decorCosmOrderPopupInput({
             fieldId: fieldItem.id, 
             fieldType: fieldItem.name,
             fieldValue: fieldRef.value,
         }));
     };
+
+    const popupOrderClearInputHandler = (e, fieldItemId, fieldItemType) => {
+        if (e.key === 'Backspace') {
+            dispatch(decorCosmOrderClearInput({
+                fieldId: fieldItemId, 
+                fieldType: fieldItemType,
+                fieldValue: '',
+            }));
+        }
+    };
+
+    const popupOrderCheckboxHandler = () => {
+        dispatch(decorCosmOrderCheckbox());
+    };
+
+    const sendOrderPopupFormHandler = () => {
+        const data = {
+            name: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'name').value,
+            phone: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'phone').value,
+            email: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'email').value,
+            comment: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'comment').value,
+            file: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'file').fileData,
+        };
+        console.log(data);
+    };
+
+    const questFromInputHandler = (fieldId, fieldType, fieldRef) => {
+        dispatch(decorCosmQuestionFormInput({
+            fieldId: fieldId, 
+            fieldType: fieldType, 
+            fieldValue: fieldRef.value
+        }));
+    };
+
+    const questFromClearInputHandler = (e, fieldId, fieldType) => {
+        if (e.key === 'Backspace') {
+            dispatch(decorCosmQuestionFormClearInput({
+                fieldId: fieldId, 
+                fieldType: fieldType, 
+                fieldValue: ''
+            }));
+            return;
+        }
+    };
+
+    const questFromCheckboxHandler = () => {
+        dispatch(decorCosmQuestionFormCheckbox());
+    };
+
+    const sendQuestFormHandler = () => {
+        const data = {
+            name: decorativeCosmState.questionForm.fields.find((item) => item.name === 'name').value,
+            phone: decorativeCosmState.questionForm.fields.find((item) => item.name === 'phone').value,
+            email: decorativeCosmState.questionForm.fields.find((item) => item.name === 'email').value,
+        };
+        console.log(data);
+    };
     
 
     useEffect(() => {
         dispatch(decorCosmConsultPopupValidate());
-    }, [decorativeCosmState.consultPopup])
+    }, [decorativeCosmState.consultPopup]);
+
+    useEffect(() => {
+        dispatch(decorCosmOrderPopupValidate());
+    }, [decorativeCosmState.orderPopup]);
+
+    useEffect(() => {
+        dispatch(decorCosmQuestionFormValidate());
+    }, [decorativeCosmState.questionForm]);
 
     return (
         <React.Fragment>
@@ -140,6 +222,9 @@ const DecorativeCosmetics = () => {
                                     popupState={decorativeCosmState.orderPopup}
                                     popupHandler={decorCosmeticPopupOrderHandler}
                                     inputHandler={popupOrderInputHandler}
+                                    clearInputHandler={popupOrderClearInputHandler}
+                                    policyHandler={popupOrderCheckboxHandler}
+                                    sendFormHandler={sendOrderPopupFormHandler}
                                 /> 
                             : null}
                            
@@ -215,6 +300,10 @@ const DecorativeCosmetics = () => {
                 <section>
                     <DecorativeCosmeticsQuestForm 
                         formState={decorativeCosmState.questionForm}
+                        inputHandler={questFromInputHandler}
+                        clearInputHandler={questFromClearInputHandler}
+                        policyHandler={questFromCheckboxHandler}
+                        sendFormHandler={sendQuestFormHandler}
                     />
                 </section>
             </div>

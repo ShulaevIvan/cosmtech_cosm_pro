@@ -42,7 +42,9 @@ const DecorativeCosmeticsOrderPopup = (props) => {
                                                 </div>
                                                 <textarea
                                                     ref={findInputRef(fieldItem.name)}
-                                                    onChange={(e) => props.inputHandler(e, fieldItem, findInputRef(fieldItem.name).current)}
+                                                    className={fieldItem.valid ? '' : 'input-err'}
+                                                    onChange={() => props.inputHandler(fieldItem, findInputRef(fieldItem.name).current)}
+                                                    onKeyDown={(e) => props.clearInputHandler(e, fieldItem.id, fieldItem.name)}
                                                     id={`decorative-cosmetic-order-form-input-${fieldItem.id}`} 
                                                     placeholder={fieldItem.placeholder}
                                                     value={fieldItem.value}
@@ -58,13 +60,16 @@ const DecorativeCosmeticsOrderPopup = (props) => {
                                                         <span className="input-file-text" type="text"></span>
                                                         <input
                                                             ref={findInputRef(fieldItem.name)}
-                                                            onChange={(e) => props.inputHandler(e, fieldItem, findInputRef(fieldItem.name).current)}
+                                                            onChange={() => props.inputHandler(fieldItem, findInputRef(fieldItem.name).current)}
                                                             type="file" 
                                                             name="file"
                                                             value={fieldItem.value} 
                                                             multiple={false} 
                                                         />
                                                         <span className="input-file-btn">Прикрепить ТЗ</span>
+                                                        <span className="input-file-display-name">
+                                                            {fieldItem.displayName ? fieldItem.displayName : null}
+                                                        </span>
                                                     </label>
                                                 </div>
                                                 :
@@ -74,7 +79,9 @@ const DecorativeCosmeticsOrderPopup = (props) => {
                                                         </div>
                                                         <input
                                                             ref={findInputRef(fieldItem.name)}
-                                                            onChange={(e) => props.inputHandler(e, fieldItem, findInputRef(fieldItem.name).current)} 
+                                                            className={fieldItem.valid ? '' : 'input-err'}
+                                                            onChange={() => props.inputHandler(fieldItem, findInputRef(fieldItem.name).current)}
+                                                            onKeyDown={(e) => props.clearInputHandler(e, fieldItem.id, fieldItem.name)}
                                                             id={`decorative-cosmetic-order-form-input-${fieldItem.id}`}
                                                             type={fieldItem.type}
                                                             placeholder={fieldItem.placeholder}
@@ -96,6 +103,7 @@ const DecorativeCosmeticsOrderPopup = (props) => {
                         <input
                             type="checkbox" 
                             id="decor-cosmetic-consult-checkbox" className="decor-cosmetic-get-consult-checkbox"
+                            onClick={props.policyHandler}
                         />
                         <label
                             htmlFor="decor-cosmetic-consult-checkbox"
@@ -103,7 +111,12 @@ const DecorativeCosmeticsOrderPopup = (props) => {
                         <span>согласен с <Link to={'/policy'}>политикой конфидициальности</Link></span>
                     </div>
                     <div className="decorative-cosmetic-order-form-btn-wrap">
-                        <a className="decorative-cosmetic-order-form-btn">Отправить</a>
+                        <a 
+                            className={
+                                popupState.sendBtnActive ? 'decorative-cosmetic-order-form-btn' : 'decorative-cosmetic-order-form-btn btnDisabled'
+                            }
+                            onClick={props.sendFormHandler}
+                        >Отправить</a>
                     </div>
                 </div>
             </div>

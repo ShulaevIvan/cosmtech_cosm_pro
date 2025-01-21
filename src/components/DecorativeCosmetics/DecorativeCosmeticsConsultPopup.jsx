@@ -21,7 +21,7 @@ const DecorativeCosmeticsConsultPopup = (props) => {
                 <div className="decorative-cosmetic-consult-popup-close-btn-wrap">
                     <span 
                         className="decorative-cosmetic-consult-popup-close-btn"
-                        onClick={() => props.popupHandler(false)}
+                        onClick={props.popupHandler}
                     ></span>
                 </div>
                 <div className="decorative-cosmetic-consult-popup-body">

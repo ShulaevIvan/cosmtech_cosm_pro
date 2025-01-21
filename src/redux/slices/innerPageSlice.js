@@ -1059,15 +1059,6 @@ const initialState = {
                 },
                 {
                     id: 2,
-                    title: 'Email',
-                    name: 'email',
-                    value: '',
-                    type: 'text',
-                    placeholder: 'demo@....ru',
-                    valid: true,
-                },
-                {
-                    id: 3,
                     title: 'Телефон',
                     name: 'phone',
                     type: 'text',
@@ -1076,12 +1067,21 @@ const initialState = {
                     valid: true
                 },
                 {
+                    id: 3,
+                    title: 'Email',
+                    name: 'email',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'demo@....ru',
+                    valid: true,
+                },
+                {
                     id: 4,
                     title: 'Прикрепить тз',
                     name: 'file',
                     type: 'file',
-                    placeholder: '',
                     fileData: {},
+                    displayName: '',
                     value: '',
                     valid: true
                 },
@@ -1997,21 +1997,22 @@ const innerPageSlice = createSlice({
                 };
             }
         },
-        decorCosmConsultPopup(state, action) {
-            const { status } = action.payload;
-            if (!status) {
-                state.decorativeCosmeticsPage.consultPopup = initialState.decorativeCosmeticsPage.consultPopup;
-                return;
-            }
+        decorCosmConsultPopup(state) {
             state.decorativeCosmeticsPage.consultPopup = {
                 ...state.decorativeCosmeticsPage.consultPopup,
                 active: state.decorativeCosmeticsPage.consultPopup.active ? false : true
+            }
+            if (!state.decorativeCosmeticsPage.consultPopup.active) {
+                state.decorativeCosmeticsPage.consultPopup = initialState.decorativeCosmeticsPage.consultPopup;
             }
         },
         decorCosmOrderPopup(state) {
             state.decorativeCosmeticsPage.orderPopup = {
                 ...state.decorativeCosmeticsPage.orderPopup,
                 active: state.decorativeCosmeticsPage.orderPopup.active ? false : true
+            }
+            if (!state.decorativeCosmeticsPage.orderPopup.active) {
+                state.decorativeCosmeticsPage.orderPopup = initialState.decorativeCosmeticsPage.orderPopup;
             }
         },
         decorCosmFaqAction(state, action) {
@@ -2028,6 +2029,9 @@ const innerPageSlice = createSlice({
         },
         decorCosmConsultPopupInput(state, action) {
             const { fieldId, fieldType, fieldValue } = action.payload;
+
+            if (fieldValue === ' ') return;
+
             let validValue;
             let inputValid = false;
 
@@ -2071,7 +2075,7 @@ const innerPageSlice = createSlice({
             });
         },
         decorCosmConsultPopupCheckbox(state) {
-            state.decorativeCosmeticsPage.consultPopup.policyActive = state.decorativeCosmeticsPage.consultPopup.policyActive ? false : true
+            state.decorativeCosmeticsPage.consultPopup.policyActive = state.decorativeCosmeticsPage.consultPopup.policyActive ? false : true;
         },
         decorCosmConsultPopupValidate(state) {
             const nameField = state.decorativeCosmeticsPage.consultPopup.fields.find((item) => item.name === 'name' && item.value !== '');
@@ -2087,15 +2091,136 @@ const innerPageSlice = createSlice({
         },
         decorCosmOrderPopupInput(state, action) {
             const { fieldId, fieldType, fieldValue } = action.payload;
+            let inputValid;
+            let validValue;
+
+            if (fieldValue && (fieldType === 'name' || fieldType === 'comment')) {
+                inputValid = validateName(fieldValue)
+                validValue = fieldValue
+            }
+            else if (fieldType === 'phone' && fieldValue && fieldValue.length !== 18) {
+                const phoneStr = validatePhone(fieldValue);
+                inputValid = phoneStr.length === 18 ? true : false
+                validValue = phoneStr;
+            }
+            else if (fieldType === 'email' && fieldValue) {
+                inputValid = !validateMail(fieldValue) ? true : false
+                validValue = fieldValue;
+            }
+            else if (fieldType === 'file' && fieldValue) {
+                state.decorativeCosmeticsPage.orderPopup.fields = state.decorativeCosmeticsPage.orderPopup.fields.map((fieldItem) => {
+                    if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                        console.log(fieldValue)
+                        return {
+                            ...fieldItem,
+                            fileData: fieldValue,
+                            displayName: fieldValue.name
+                        }
+                    }
+                    return fieldItem;
+                });
+            }
+
             state.decorativeCosmeticsPage.orderPopup.fields = state.decorativeCosmeticsPage.orderPopup.fields.map((fieldItem) => {
-                if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                if (fieldItem.id === fieldId && fieldItem.name === fieldType && validValue) {
                     return {
                         ...fieldItem,
-                        value: fieldValue
+                        value: validValue,
+                        valid: inputValid
                     }
                 }
                 return fieldItem;
-            })
+            });
+        },
+        decorCosmOrderClearInput(state, action) {
+            const { fieldId, fieldType, fieldValue } = action.payload;
+            if (!fieldValue) {
+                state.decorativeCosmeticsPage.orderPopup.fields = state.decorativeCosmeticsPage.orderPopup.fields.map((fieldItem) => {
+                    if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                        return {
+                            ...fieldItem,
+                            value: '',
+                            valid: false
+                        }
+                    }
+                    return fieldItem;
+                })
+            }
+        },
+        decorCosmOrderCheckbox(state) {
+            state.decorativeCosmeticsPage.orderPopup.policyActive = state.decorativeCosmeticsPage.orderPopup.policyActive ? false : true;
+        },
+        decorCosmOrderPopupValidate(state) {
+            const nameField = state.decorativeCosmeticsPage.orderPopup.fields.find((item) => item.name === 'name' && item.value !== '');
+            const phoneField = state.decorativeCosmeticsPage.orderPopup.fields.find((item) => item.name === 'phone' && item.value !== '');
+            const emailField = state.decorativeCosmeticsPage.orderPopup.fields.find((item) => item.name === 'email' && item.value !== '');
+            const checkbox = state.decorativeCosmeticsPage.orderPopup.policyActive;
+
+            if (nameField && nameField.valid && checkbox && (phoneField && phoneField.valid || emailField && emailField.valid)) {
+                state.decorativeCosmeticsPage.orderPopup.sendBtnActive = true;
+                return;
+            }
+            state.decorativeCosmeticsPage.orderPopup.sendBtnActive = false;
+        },
+        decorCosmQuestionFormInput(state, action) {
+            const { fieldId, fieldType, fieldValue } = action.payload;
+            let inputValid;
+            let validValue;
+
+            if (fieldValue && (fieldType === 'name' || fieldType === 'comment')) {
+                inputValid = validateName(fieldValue)
+                validValue = fieldValue
+            }
+            else if (fieldType === 'phone' && fieldValue && fieldValue.length !== 18) {
+                const phoneStr = validatePhone(fieldValue);
+                inputValid = phoneStr.length === 18 ? true : false
+                validValue = phoneStr;
+            }
+            else if (fieldType === 'email' && fieldValue) {
+                inputValid = !validateMail(fieldValue) ? true : false
+                validValue = fieldValue;
+            }
+
+            state.decorativeCosmeticsPage.questionForm.fields = state.decorativeCosmeticsPage.questionForm.fields.map((fieldItem) => {
+                if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        valid: inputValid
+                    }
+                }
+                return fieldItem;
+            });
+        },
+        decorCosmQuestionFormClearInput(state, action) {
+            const { fieldId, fieldType, fieldValue } = action.payload;
+            if (!fieldValue) {
+                state.decorativeCosmeticsPage.questionForm.fields = state.decorativeCosmeticsPage.questionForm.fields.map((fieldItem) => {
+                    if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                        return {
+                            ...fieldItem,
+                            value: '',
+                            valid: false
+                        }
+                    }
+                    return fieldItem;
+                })
+            }
+        },
+        decorCosmQuestionFormCheckbox(state) {
+            state.decorativeCosmeticsPage.questionForm.policyActive = state.decorativeCosmeticsPage.questionForm.policyActive ? false : true;
+        },
+        decorCosmQuestionFormValidate(state) {
+            const nameField = state.decorativeCosmeticsPage.questionForm.fields.find((item) => item.name === 'name' && item.value !== '');
+            const phoneField = state.decorativeCosmeticsPage.questionForm.fields.find((item) => item.name === 'phone' && item.value !== '');
+            const emailField = state.decorativeCosmeticsPage.questionForm.fields.find((item) => item.name === 'email' && item.value !== '');
+            const checkbox = state.decorativeCosmeticsPage.questionForm.policyActive;
+            console.log(checkbox)
+            if (nameField && nameField.valid && checkbox && (phoneField && phoneField.valid || emailField && emailField.valid)) {
+                state.decorativeCosmeticsPage.questionForm.sendBtnActive = true;
+                return;
+            }
+            state.decorativeCosmeticsPage.questionForm.sendBtnActive = false;
         }
     },
     
@@ -2269,6 +2394,13 @@ export const {
     decorCosmConsultPopupInput,
     decorCosmConsultPopupCheckbox,
     decorCosmConsultPopupValidate,
-    decorCosmOrderPopupInput
+    decorCosmOrderPopupInput,
+    decorCosmOrderClearInput,
+    decorCosmOrderCheckbox,
+    decorCosmOrderPopupValidate,
+    decorCosmQuestionFormInput,
+    decorCosmQuestionFormClearInput,
+    decorCosmQuestionFormCheckbox,
+    decorCosmQuestionFormValidate
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

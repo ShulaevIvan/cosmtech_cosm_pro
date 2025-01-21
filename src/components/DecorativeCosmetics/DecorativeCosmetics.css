@@ -197,7 +197,9 @@
     border-radius: 4px;
 }
 .decorative-cosmetics-btn:hover,
-.decorative-cosmetics-types-btn:hover {
+.decorative-cosmetics-types-btn:hover,
+.decorative-cosmetic-order-form-btn:hover,
+.input-file-btn:hover {
     background-color: #00458B;
     transition: background .4s ease;
     color: white;
@@ -514,7 +516,9 @@
     margin: 20px 0;
 }
 .decorative-cosmetic-order-form-file-input label {
-    margin: 20px 0 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 .decorative-cosmetic-order-form-file-input .input-file-btn {
     position: relative;
@@ -535,6 +539,11 @@
     border: none;
     margin: 0;
     transition: background-color 0.2s
+}
+.input-file-display-name {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 .decor-cosmetic-quest-from-checkbox-wrap {
     display: flex;
