@@ -57,6 +57,9 @@
     width: 60px;
     max-width: 50%;
 }
+.decorative-cosmetics-type-item-icon img {
+    border-radius: 50%;
+}
 .decorative-cosmetics-types-image-wrap img {
     border-radius: 10px
 }

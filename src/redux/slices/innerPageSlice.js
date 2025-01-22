@@ -40,7 +40,7 @@ const decorativeCosmeticsIcons = importAllImages(require.context('../../img/deco
 
 const { 
     protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
-    okilsato, pechatnik2, rpkr, mdm, pechatnik, stickyline, alaska
+    okilsato, rpkr, mdm, pechatnik, stickyline, alaska
 } = suppliersImages;
 
 const { 
@@ -55,7 +55,10 @@ const {
     demo1Full, demo2Full,demo3Full,demo4Full, demo5Full,demo6Full,demo7Full
 } = aboutUsGaleryImages;
 
-const { demo } = decorativeCosmeticsImages;
+const { 
+    mascara, eyeliner, eyelashGel, eyebrowGel, сoncealer, blush, highlighter, 
+    foundationСream, creamBlush, makeupBase, lipGloss, lipstickForLips, hygenicLipstick,
+    eyeShadow } = decorativeCosmeticsImages;
 const { 
     deliveryIcon, recipeIcon, certificationIcon, breafIcon, 
     developIcon, orderIcon, sebesIcon, suppliesIcon
@@ -757,6 +760,51 @@ const initialState = {
             }
         ]
     },
+    productionExcuirsion: {
+        popup: {
+            popupActive: false,
+            sendBtnActive: false,
+            happyState: false,
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    name: 'name',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'Ваше имя',
+                    valid: true,
+                },
+                {
+                    id: 2,
+                    title: 'Телфон',
+                    name: 'phone',
+                    value: '',
+                    type: 'text',
+                    placeholder: '8xxxxxxxxxx',
+                    valid: true,
+                },
+                {
+                    id: 3,
+                    title: 'Желаемая дата визита',
+                    name: 'date',
+                    value: '',
+                    type: 'date',
+                    placeholder: 'dd/mm/yyyy',
+                    valid: true,
+                },
+                {
+                    id: 4,
+                    title: 'Желаемое время визита',
+                    name: 'time',
+                    value: '',
+                    type: 'text',
+                    placeholder: '14:00',
+                    valid: true,
+                }
+            ]
+        }  
+    },
     jobPage: {
         vacancyList: [],
         jobPopup: {
@@ -971,22 +1019,20 @@ const initialState = {
     },
     decorativeCosmeticsPage: {
         cosmeticTypes: [
-            {id: 1, name: 'Гелевые тени', img: demo, imgAlt: 'testAlt'},
-            {id: 2, name: 'Помада гигиеническая ', img: demo, imgAlt: 'testAlt'},
-            {id: 3, name: 'Помада декоративная ', img: demo, imgAlt: 'testAlt'},
-            {id: 4, name: 'Блеск для губ', img: demo, imgAlt: 'testAlt'},
-            {id: 5, name: 'Основа под макияж', img: demo, imgAlt: 'testAlt'},
-            {id: 6, name: 'Тональный крем', img: demo, imgAlt: 'testAlt'},
-            {id: 7, name: 'Хайлайтер', img: demo, imgAlt: 'testAlt'},
-            {id: 8, name: 'Кремовые румяна', img: demo, imgAlt: 'testAlt'},
-            {id: 9, name: 'Тушь для ресниц', img: demo, imgAlt: 'testAlt'},
-            {id: 10, name: 'Корректор', img: demo, imgAlt: 'testAlt'},
-            {id: 11, name: 'Консилер', img: demo, imgAlt: 'testAlt'},
-            {id: 12, name: 'База под макияж', img: demo, imgAlt: 'testAlt'},
-            {id: 13, name: 'Масло для ногтей', img: demo, imgAlt: 'testAlt'},
-            {id: 14, name: 'Гель для бровей', img: demo, imgAlt: 'testAlt'},
-            {id: 15, name: 'Гель для ресниц', img: demo, imgAlt: 'testAlt'},
-            {id: 16, name: 'Жидкая подводка для глаз', img: demo, imgAlt: 'testAlt'}
+            {id: 1, name: 'Гелевые тени', img: eyeShadow, imgAlt: 'Контрактное производство гелевых теней пример'},
+            {id: 2, name: 'Помада гигиеническая', img: hygenicLipstick, imgAlt: 'Контрактное производство помады гигиенической пример'},
+            {id: 3, name: 'Помада декоративная', img: lipstickForLips, imgAlt: 'Контрактное производство помады декоративной пример'},
+            {id: 4, name: 'Блеск для губ', img: lipGloss, imgAlt: 'Контрактное производство блеск для губ пример'},
+            {id: 5, name: 'Основа под макияж', img: makeupBase, imgAlt: 'Контрактное производство основы под макияж пример'},
+            {id: 6, name: 'Тональный крем', img: foundationСream, imgAlt: 'Контрактное производство тонального крема пример'},
+            {id: 7, name: 'Хайлайтер', img: highlighter, imgAlt: 'Контрактное производство гелевых теней пример'},
+            {id: 8, name: 'Кремовые румяна', img: blush, imgAlt: 'Контрактное производство кремовых румян пример'},
+            {id: 9, name: 'Тушь для ресниц', img: mascara, imgAlt: 'Контрактное производство nушь для ресниц пример'},
+            {id: 10, name: 'Консилер', img: сoncealer, imgAlt: 'Контрактное производство консилера пример'},
+            {id: 11, name: 'Масло для ногтей', img: creamBlush, imgAlt: 'Контрактное производство масла для ногтей пример'},
+            {id: 12, name: 'Гель для бровей', img: eyebrowGel, imgAlt: 'Контрактное производство гелей для бровей пример'},
+            {id: 13, name: 'Гель для ресниц', img: eyelashGel, imgAlt: 'Контрактное производство гель для ресниц пример'},
+            {id: 14, name: 'Жидкая подводка для глаз', img: eyeliner, imgAlt: 'Контрактное производство Жидкая подводки для глаз пример'}
         ],
         howToWorkIcons: [
             {id: 1, name: 'Отправляете заявку', img: orderIcon, imgAlt: 'testAlt'},
@@ -1009,6 +1055,7 @@ const initialState = {
             active: false,
             sendBtnActive: false,
             policyActive: false,
+            happyStateActive: false,
             fields: [
                 {
                     id: 1,
@@ -1047,6 +1094,7 @@ const initialState = {
             active: false,
             sendBtnActive: false,
             policyActive: false,
+            happyStateActive: false,
             fields: [
                 {
                     id: 1,
@@ -1099,6 +1147,7 @@ const initialState = {
         questionForm: {
             sendBtnActive: false,
             policyActive: false,
+            happyStateActive: false,
             fields: [
                 {
                     id: 1,
@@ -2221,6 +2270,12 @@ const innerPageSlice = createSlice({
                 return;
             }
             state.decorativeCosmeticsPage.questionForm.sendBtnActive = false;
+        },
+        excursionProductionPopup(state) {
+            state.productionExcuirsion.popup = {
+                ...state.productionExcuirsion.popup,
+                popupActive: state.productionExcuirsion.popup.popupActive ? false : true
+            }
         }
     },
     
@@ -2401,6 +2456,7 @@ export const {
     decorCosmQuestionFormInput,
     decorCosmQuestionFormClearInput,
     decorCosmQuestionFormCheckbox,
-    decorCosmQuestionFormValidate
+    decorCosmQuestionFormValidate,
+    excursionProductionPopup
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

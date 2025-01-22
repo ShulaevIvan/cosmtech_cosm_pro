@@ -78,3 +78,52 @@
     transition: background .4s ease;
     color: white;
 }
+.excursion-production-popup-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+    min-height: 400px;
+    position: absolute;
+    z-index: 5;
+    background-color: white;
+    border: 1px solid #00458B;
+    border-radius: 10px;
+    left: 20%;
+    padding: 20px;
+}
+.excursion-production-close-btn::before {
+    content: url('../../img/close_popup.svg');
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    cursor: pointer;
+}
+.excursion-production-title-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.excursion-production-form-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
+}
+.excursion-production-form-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    max-width: 33%;
+    margin-right: 10px;
+}

@@ -1,12 +1,31 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { excursionProductionPopup } from "../../redux/slices/innerPageSlice";
+
+import ExcursionToProductionPopup from "./ExcursionToProductionPopup";
 
 const ExcursionToProduction = () => {
+
+    const excusionState = useSelector((state) => state.innerPage.productionExcuirsion);
+    const dispatch = useDispatch();
+
+    const popupHandler = () => {
+        dispatch(excursionProductionPopup());
+    };
+
+
     return (
         <React.Fragment>
             <div className="container">
                 <div className="excursion-production-row">
+                    {excusionState.popup.popupActive ? 
+                        <ExcursionToProductionPopup 
+                            popupHandler={popupHandler}
+                        /> : null
+                    }
                     <div className="excursion-production-text-wrap">
-                        <h3>Наши двери открыты для всех</h3>
+                        <h3>Экскурсия на производство</h3>
                         <p>
                             Приезжайте к нам на производство где вы получите возможность не только увидеть как мы работаем, но и задать вопросы нашим специалистам. 
                         </p>
@@ -15,7 +34,10 @@ const ExcursionToProduction = () => {
                         </p>
                     </div>
                     <div className="excursion-production-btn-wrap">
-                        <a href="#" className="excursion-production-btn">Записаться на экскурсию</a>
+                        <Link 
+                            className="excursion-production-btn"
+                            onClick={popupHandler}
+                        >Записаться на экскурсию</Link>
                     </div>
                 </div>
             </div>

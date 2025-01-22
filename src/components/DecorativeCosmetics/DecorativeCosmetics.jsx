@@ -8,6 +8,7 @@ import DecorativeCosmeticsFaq from "./DecorativeCosmeticsFaq";
 import DecorativeCosmeticsQuestForm from "./DecorativeCosmeticsQuestForm";
 import DecorativeCosmeticsConsultPopup from "./DecorativeCosmeticsConsultPopup";
 import DecorativeCosmeticsOrderPopup from "./DecorativeCosmeticsOrderPopup";
+import PopupHappyState from "./PopupHappyState";
 import fileToBase64 from "../../functions/fileToBase64";
 
 import { 
@@ -197,7 +198,7 @@ const DecorativeCosmetics = () => {
                             </div>
                             <div className="decorative-cosmetics-types-image-wrap">
                                 <div className="decorative-cosmetics-types-photo-wrap">
-                                    <img src={cosmeticTypesImg} alt="Производимая декоративная косметика ООО Космотех" />
+                                    <img src={cosmeticTypesImg} alt="Производимая декоративная косметика на производстве ООО Космотех" />
                                 </div>
                                 <div className="decorative-cosmetics-types-btn-wrap">
                                     <Link 
@@ -258,7 +259,7 @@ const DecorativeCosmetics = () => {
                                 
                             </div>
                             <div className="decorative-cosmetics-information-image-wrap">
-                                <img src={decorativeCosmeticBrand} alt="Декоративная косметика под СТМ" />
+                                <img src={decorativeCosmeticBrand} alt="Контрактное производство декоративной косметики" />
                             </div>
                         </div>
                     </div>
