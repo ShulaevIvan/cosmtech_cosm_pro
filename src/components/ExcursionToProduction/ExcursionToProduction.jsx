@@ -14,14 +14,21 @@ const ExcursionToProduction = () => {
         dispatch(excursionProductionPopup());
     };
 
+    const popupInputHandler = (fieldItem, fieldItemValue) => {
+        console.log(fieldItem)
+        console.log(fieldItemValue)
+    };
+
 
     return (
         <React.Fragment>
             <div className="container">
                 <div className="excursion-production-row">
                     {excusionState.popup.popupActive ? 
-                        <ExcursionToProductionPopup 
+                        <ExcursionToProductionPopup
+                            formState={excusionState.popup} 
                             popupHandler={popupHandler}
+                            inputHandler={popupInputHandler}
                         /> : null
                     }
                     <div className="excursion-production-text-wrap">

@@ -777,7 +777,7 @@ const initialState = {
                 },
                 {
                     id: 2,
-                    title: 'Телфон',
+                    title: 'Телефон',
                     name: 'phone',
                     value: '',
                     type: 'text',
@@ -786,16 +786,16 @@ const initialState = {
                 },
                 {
                     id: 3,
-                    title: 'Желаемая дата визита',
+                    title: 'Дата визита',
                     name: 'date',
                     value: '',
                     type: 'date',
-                    placeholder: 'dd/mm/yyyy',
+                    placeholder: 'mm/dd/yyyy',
                     valid: true,
                 },
                 {
                     id: 4,
-                    title: 'Желаемое время визита',
+                    title: 'Время визита',
                     name: 'time',
                     value: '',
                     type: 'text',

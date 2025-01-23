@@ -1,7 +1,20 @@
 import React from "react";
-
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const ExcursionToProductionPopup = (props) => {
+    const formState = props.formState;
+
+    const inputRefs = [
+        {name:'name', ref:useRef(null)},
+        {name:'phone', ref:useRef(null)},
+        {name:'date', ref:useRef(null)},
+        {name:'time', ref:useRef(null)}
+    ];
+    const findInputRef = (inputName) => {
+        return inputRefs.find((item) => item.name === inputName).ref;
+    };
+    
     return (
         <React.Fragment>
             <div className="excursion-production-popup-wrap">
@@ -9,29 +22,44 @@ const ExcursionToProductionPopup = (props) => {
                     onClick={props.popupHandler} 
                     className="excursion-production-close-btn"
                 ></span>
+                <div className="excursion-production-title-wrap">
+                        <h2>Предварительная запись на экскурсию</h2>
+                </div>
                 <div className="excursion-production-popup-body">
-                    <div className="excursion-production-title-wrap">
-                        <h2>Title</h2>
-                    </div>
+                    
                     <div className="excursion-production-form-row">
-                        <div className="excursion-production-form-input-wrap">
-                            <label>Title</label>
-                            <div className="excursion-production-form-input-wrap">
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div className="excursion-production-form-input-wrap">
-                            <label>Title2</label>
-                            <div className="excursion-production-form-input-wrap">
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div className="excursion-production-form-input-wrap">
-                            <label>Title3</label>
-                            <div className="excursion-production-form-input-wrap">
-                                <input type="date" />
-                            </div>
-                        </div>
+                        {formState.fields.map((fieldItem) => {
+                            return (
+                                <React.Fragment key={fieldItem.id}>
+                                    <div className="excursion-production-form-input-wrap">
+                                        <label htmlFor={`excursion-input-${fieldItem.id}`}>{fieldItem.title}</label>
+                                        <div className="excursion-production-form-input-wrap">
+                                            <input
+                                                ref={findInputRef(fieldItem.name)}
+                                                id={`excursion-input-${fieldItem.id}`} 
+                                                type={fieldItem.type}
+                                                placeholder={fieldItem.placeholder}
+                                                onChange={() => props.inputHandler(fieldItem, findInputRef(fieldItem.name).current)} 
+                                            />
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            )
+                        })}
+                    </div>
+                    <div className="form-mode-get-excursion-popup-checkbox">
+                        <input
+                            type="checkbox" 
+                            id="get-excursion-popup-checkbox" 
+                            className="get-excursion-popup-checkbox"
+                        />
+                        <label
+                            htmlFor="get-excursion-popup-checkbox"
+                        ></label>
+                        <span>согласен с <Link to={'/policy'}>политикой конфидициальности</Link></span>
+                    </div>
+                    <div className="excursion-production-send-btn-wrap">
+                        <Link className="excursion-production-send-btn">Отправить</Link>
                     </div>
                 </div>
             </div>

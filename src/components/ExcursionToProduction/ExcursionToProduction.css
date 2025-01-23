@@ -82,16 +82,27 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
     width: 100%;
-    max-width: 800px;
-    min-height: 400px;
+    max-width: 900px;
+    min-height: 300px;
     position: absolute;
     z-index: 5;
     background-color: white;
     border: 1px solid #00458B;
     border-radius: 10px;
-    left: 20%;
+    left: 15%;
     padding: 20px;
+}
+.excursion-production-popup-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    min-height: 220px;
 }
 .excursion-production-close-btn::before {
     content: url('../../img/close_popup.svg');
@@ -110,6 +121,13 @@
     justify-content: center;
     align-items: center;
 }
+.excursion-production-form-input-wrap label {
+    color: #00458B;
+    font-family: gothampro bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
 .excursion-production-form-row {
     display: flex;
     flex-direction: row;
@@ -117,13 +135,94 @@
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    max-width: 800px;
+    max-width: 750px;
+    margin-bottom: 30px;
 }
 .excursion-production-form-input-wrap {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 30%;
-    max-width: 33%;
+    max-width: 25%;
     margin-right: 10px;
+}
+.excursion-production-form-input-wrap input {
+    min-height: 30px;
+    max-width: 150px;
+}
+.excursion-production-send-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.excursion-production-send-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    max-width: 200px;
+    height: 35px;
+    padding: 0 30px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
+}
+.excursion-production-send-btn:hover {
+    background-color: #00458B;
+    transition: background .4s ease;
+    color: white;
+}
+
+.get-excursion-popup-checkbox-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.get-excursion-popup-checkbox {
+    display: none;
+}
+.get-excursion-popup-checkbox + label {
+    position: relative;
+    padding-left: 30px;
+    height: 1.5em;
+    display: flex;
+    align-items: center;
+    color: #000;
+    cursor: pointer;
+    user-select: none;
+}
+.get-excursion-popup-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.4em;
+    height: 1.4em;
+    background-image: url('../../img/form_checkbox.svg');
+    background-size: contain;
+}
+.get-excursion-popup-checkbox:checked + label::before {
+    border-color: #000;
+    background-image: url('../../img/form_checkbox_checked.svg');
+    background-size: contain;
+}
+.form-mode-get-excursion-popup-checkbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
 }
