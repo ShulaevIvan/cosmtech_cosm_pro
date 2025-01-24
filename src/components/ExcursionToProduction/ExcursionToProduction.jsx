@@ -1,9 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { excursionProductionPopup } from "../../redux/slices/innerPageSlice";
-
 import ExcursionToProductionPopup from "./ExcursionToProductionPopup";
+import { 
+    excursionProductionPopup,
+    excursionProductionPopupInput,
+    excursionProductionPopupClearInput
+} from "../../redux/slices/innerPageSlice";
+
 
 const ExcursionToProduction = () => {
 
@@ -14,9 +18,19 @@ const ExcursionToProduction = () => {
         dispatch(excursionProductionPopup());
     };
 
-    const popupInputHandler = (fieldItem, fieldItemValue) => {
-        console.log(fieldItem)
-        console.log(fieldItemValue)
+    const popupInputHandler = (fieldItem, fieldItemRef) => {
+        dispatch(excursionProductionPopupInput({
+            fieldId: fieldItem.id, 
+            fieldType: fieldItem.name, 
+            fieldValue: fieldItemRef.value
+        }));
+    };
+
+    const popupClearInput = (e, fieldId, fieldType) => {
+        if (e.key === 'Backspace') {
+            dispatch(excursionProductionPopupClearInput({fieldId: fieldId, fieldType: fieldType}));
+            return;
+        }
     };
 
 
@@ -29,6 +43,7 @@ const ExcursionToProduction = () => {
                             formState={excusionState.popup} 
                             popupHandler={popupHandler}
                             inputHandler={popupInputHandler}
+                            clearInputHandler={popupClearInput}
                         /> : null
                     }
                     <div className="excursion-production-text-wrap">

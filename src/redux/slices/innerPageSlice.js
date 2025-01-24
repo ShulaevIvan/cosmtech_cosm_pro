@@ -3,6 +3,8 @@ import validateName from '../../functions/validateName';
 import validatePhone from '../../functions/validatePhone';
 import validateMail from '../../functions/validateMail';
 import validateCity from '../../functions/validateCity';
+import validateWorkTime from "../../functions/validateWorkTime";
+import validateDate from "../../functions/validateDate";
 import galeryMoveSlide from '../../functions/galleryMoveSlide';
 
 import promoVideo from '../../video/compress_promo_video.mp4';
@@ -790,7 +792,8 @@ const initialState = {
                     name: 'date',
                     value: '',
                     type: 'date',
-                    placeholder: 'mm/dd/yyyy',
+                    placeholder: 'мясяц/день/год',
+                    minDate: new Date().toJSON().slice(0,10).replace(/-/g,'-'),
                     valid: true,
                 },
                 {
@@ -799,6 +802,8 @@ const initialState = {
                     name: 'time',
                     value: '',
                     type: 'text',
+                    min: '10:00',
+                    max: '18:00',
                     placeholder: '14:00',
                     valid: true,
                 }
@@ -2264,7 +2269,7 @@ const innerPageSlice = createSlice({
             const phoneField = state.decorativeCosmeticsPage.questionForm.fields.find((item) => item.name === 'phone' && item.value !== '');
             const emailField = state.decorativeCosmeticsPage.questionForm.fields.find((item) => item.name === 'email' && item.value !== '');
             const checkbox = state.decorativeCosmeticsPage.questionForm.policyActive;
-            console.log(checkbox)
+
             if (nameField && nameField.valid && checkbox && (phoneField && phoneField.valid || emailField && emailField.valid)) {
                 state.decorativeCosmeticsPage.questionForm.sendBtnActive = true;
                 return;
@@ -2276,6 +2281,56 @@ const innerPageSlice = createSlice({
                 ...state.productionExcuirsion.popup,
                 popupActive: state.productionExcuirsion.popup.popupActive ? false : true
             }
+        },
+        excursionProductionPopupInput(state, action) {
+            const { fieldId, fieldType, fieldValue } = action.payload;
+            let inputValid;
+            let validValue;
+
+            if (fieldValue && fieldType === 'name') {
+                inputValid = validateName(fieldValue);
+                validValue = fieldValue;
+            }
+            else if (fieldType === 'phone' && fieldValue && fieldValue.length !== 18) {
+                const phoneStr = validatePhone(fieldValue);
+                inputValid = phoneStr.length === 18 ? true : false
+                validValue = phoneStr;
+            }
+            else if (fieldType === 'date' && fieldValue) {
+                const workDayStr = validateDate(fieldValue);
+                inputValid = workDayStr ? true : false;
+                validValue = fieldValue
+            }
+            else if (fieldType === 'time' && fieldValue) {
+                const workTimeStr = validateWorkTime(fieldValue);
+                inputValid = workTimeStr ? true : false;
+                validValue = workTimeStr ? workTimeStr : fieldValue;
+            }
+
+            state.productionExcuirsion.popup.fields = state.productionExcuirsion.popup.fields.map((fieldItem) => {
+                if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        valid: inputValid
+                    }
+                }
+                return fieldItem;
+            });
+        },
+        excursionProductionPopupClearInput(state, action) {
+            const { fieldId, fieldType } = action.payload;
+
+            state.productionExcuirsion.popup.fields = state.productionExcuirsion.popup.fields.map((fieldItem) => {
+                if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                    return {
+                        ...fieldItem,
+                        value: '',
+                        valid: false
+                    }
+                }
+                return fieldItem;
+            });
         }
     },
     
@@ -2457,6 +2512,8 @@ export const {
     decorCosmQuestionFormClearInput,
     decorCosmQuestionFormCheckbox,
     decorCosmQuestionFormValidate,
-    excursionProductionPopup
+    excursionProductionPopup,
+    excursionProductionPopupInput,
+    excursionProductionPopupClearInput
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

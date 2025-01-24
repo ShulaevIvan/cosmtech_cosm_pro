@@ -10,8 +10,7 @@
     padding: 20px;
     border-radius: 10px;
     z-index: 1;
-    position: relative;
-    
+    position: relative; 
 }
 .excursion-production-row::before {
     max-width: 100%;
@@ -51,7 +50,6 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-
 }
 .excursion-production-btn {
     display: flex;
@@ -88,11 +86,16 @@
     min-height: 300px;
     position: absolute;
     z-index: 5;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
     background-color: white;
     border: 1px solid #00458B;
     border-radius: 10px;
-    left: 15%;
     padding: 20px;
+    animation-name: grow;
+    animation-duration: 0.3s;
 }
 .excursion-production-popup-body {
     display: flex;
@@ -115,7 +118,7 @@
 }
 .excursion-production-title-wrap {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
@@ -149,6 +152,7 @@
     min-height: 30px;
     max-width: 150px;
 }
+
 .excursion-production-send-btn-wrap {
     display: flex;
     flex-direction: row;
