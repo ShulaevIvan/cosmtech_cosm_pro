@@ -985,6 +985,11 @@ color: #1E1E1E;
     max-width: 20%;
   }
 }
+@media (max-width: 900px) {
+  .for-clients-faq-accordion-item {
+    width: 92%;
+  }
+}
 @media (max-width: 800px) {
   .for-clients-suppliers-logo-row {
     width: 97%;
@@ -1118,7 +1123,7 @@ color: #1E1E1E;
 }
 @media (max-width: 800px) {
   .for-clients-faq-accordion-item-title {
-    width: 80%;
+    width: 84%;
   }
 }
 

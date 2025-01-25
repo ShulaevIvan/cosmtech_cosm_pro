@@ -18,9 +18,12 @@ const DecorativeCosmeticsQuestForm = (props) => {
         <React.Fragment>
             <div className="container">
                 <div className="decorative-cosmetics-consult-form-wrap">
-                    <h3>Остались вопросы?</h3>
-                    <p>Вы сможете задать их относительно наших услуг заполнив форму.</p>
+                   
                     <div className="decorative-cosmetics-consult-form">
+                        <div className="decorative-cosmetics-consult-form-text">
+                            <h3>Остались вопросы?</h3>
+                            <p>Вы можете получить консультацию относительно наших услуг заполнив форму.</p>
+                        </div>
                         {formState.fields.map((fieldItem) => {
                             return (
                                 <React.Fragment key={fieldItem.id}>

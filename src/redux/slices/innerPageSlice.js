@@ -766,6 +766,7 @@ const initialState = {
         popup: {
             popupActive: false,
             sendBtnActive: false,
+            policyActive: false,
             happyState: false,
             fields: [
                 {
@@ -1051,10 +1052,25 @@ const initialState = {
         ],
         faqQuestions: [
             { id: 1, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
-            { id: 2, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
-            { id: 3, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
-            { id: 4, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
-            { id: 5, ask: 'Вы можете закупить под заказ дополнительное сырье?', ans: 'Да, можем закупить доп. сырьё по согласованной рецептуре.', active: false },
+            { id: 2, ask: 'Как доставляется готовая продукция?', ans: 'Готовая продукция доставляется транспортными компаниями на ваш выбор.',  active: false },
+            { id: 3, ask: 'Оказываете ли вы помощь со сбытом продукции и маркетинговым сопровождением?', ans: 'Нет', active: false },
+            {
+                id: 4, 
+                ask: 'Какие минимальные сроки производства?', 
+                ans: 'Минимальный срок производства от 2-4-х недель, после поставки всех комплектующих и поступления предоплаты.', 
+                active: false
+            },
+            {
+                id: 5, 
+                ask: 'Когда я смогу получить первые образцы продукта?', 
+                ans: 'Первые образцы готовы через 2-4 недели после согласования рецептуры.', 
+                active: false
+            },
+            { id: 6, 
+                ask: 'Есть ли услуги по хранению готовой продукции на вашем складе?', 
+                ans: 'Нет, продукцию необходимо вывезти не позднее 7 дней с момента получения уведомления о готовности.', 
+                active: false 
+            },
         ],
         consultPopup: {
             active: false,
@@ -2277,6 +2293,10 @@ const innerPageSlice = createSlice({
             state.decorativeCosmeticsPage.questionForm.sendBtnActive = false;
         },
         excursionProductionPopup(state) {
+            if (state.productionExcuirsion.popup.popupActive) {
+                state.productionExcuirsion.popup = initialState.productionExcuirsion.popup;
+                return;
+            }
             state.productionExcuirsion.popup = {
                 ...state.productionExcuirsion.popup,
                 popupActive: state.productionExcuirsion.popup.popupActive ? false : true
@@ -2331,7 +2351,25 @@ const innerPageSlice = createSlice({
                 }
                 return fieldItem;
             });
+        },
+        excursionProductionPopupCheckbox(state) {
+            state.productionExcuirsion.popup.policyActive = state.productionExcuirsion.popup.policyActive ? false : true;
+        },
+        excursionPorductionPopupValidateForm(state) {
+            const nameField = state.productionExcuirsion.popup.fields.find((item) => item.name === 'name' && item.value !== '');
+            const phoneField = state.productionExcuirsion.popup.fields.find((item) => item.name === 'phone' && item.value !== '');
+            const dateField = state.productionExcuirsion.popup.fields.find((item) => item.name === 'date' && item.value !== '');
+            const timeField = state.productionExcuirsion.popup.fields.find((item) => item.name === 'time' && item.value !== '');
+            const checkbox = state.productionExcuirsion.popup.policyActive;
+
+            if (nameField && nameField.valid && (phoneField && phoneField.valid) && 
+                (dateField && dateField.valid) && (timeField && timeField.valid) && checkbox) {
+                    state.productionExcuirsion.popup.sendBtnActive = true;
+                    return;
+            }
+            state.productionExcuirsion.popup.sendBtnActive = false;
         }
+
     },
     
     extraReducers: (builder) => {
@@ -2514,6 +2552,8 @@ export const {
     decorCosmQuestionFormValidate,
     excursionProductionPopup,
     excursionProductionPopupInput,
-    excursionProductionPopupClearInput
+    excursionProductionPopupClearInput,
+    excursionProductionPopupCheckbox,
+    excursionPorductionPopupValidateForm
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

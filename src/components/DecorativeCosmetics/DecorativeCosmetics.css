@@ -61,7 +61,8 @@
     border-radius: 50%;
 }
 .decorative-cosmetics-types-image-wrap img {
-    border-radius: 10px
+    border-radius: 10px;
+    max-width: 100%;
 }
 .decorative-cosmetics-how-to-work-row {
     display: flex;
@@ -211,30 +212,63 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    position: relative;
     width: 100%;
-    max-width: 1200px;
+    min-height: 336px;
+    max-height: 368px;
+    overflow: hidden;
     align-items: center;
     justify-content: space-between;
-    background-color: #f5f5f5;
-    padding: 20px;
     border-radius: 10px;
+    background: rgb(128, 128, 128);
 }
-.decorative-cosmetics-consult-form-wrap h3 {
+.decorative-cosmetics-consult-form-wrap::before {
+    content: url('../../img/questionsFormBg.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.7;
+}
+.decorative-cosmetics-consult-form-wrap::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    z-index: 5;
+    background: rgba(0, 0, 0, .6);
+}
+.decorative-cosmetics-consult-form-text {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+.decorative-cosmetics-consult-form-wrap h3,
+.decorative-cosmetics-consult-form-text h3 {
     font-size: 28px;
+    color: #3FD2C7;
 }
 .decorative-cosmetics-consult-form {
+    position: absolute;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 70%;
+    color: white;
+    width: 100%;
+    max-width: 750px;
+    height: 70%;
+    z-index: 5;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 .decorative-cosmetics-consult-form-input-wrap {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 30%;
+    width: 33%;
+    min-width:200px;
     max-width: 33%;
     margin-bottom: 15px;
 }
@@ -481,9 +515,15 @@
     flex-wrap: wrap;
     width: 100%;
 }
-.decorative-cosmetic-order-form-input-title-wrap label,
-.decorative-cosmetics-consult-form-input-wrap label {
+.decorative-cosmetic-order-form-input-title-wrap label {
     color: #00458B;
+    font-family: gothampro bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.decorative-cosmetics-consult-form-input-wrap label {
+    color: #3FD2C7;
     font-family: gothampro bold;
     font-size: 18px;
     margin-bottom: 5px;
@@ -557,6 +597,12 @@
     justify-content: center;
     margin-bottom: 20px;
 }
+.decor-cosmetic-quest-from-checkbox-wrap a {
+    color: white;
+}
+.decor-cosmetic-quest-from-checkbox-wrap a:hover {
+    color: #3FD2C7;
+}
 .decor-cosmetic-quest-from-checkbox {
     display: none;
 }
@@ -569,6 +615,7 @@
     color: #000;
     cursor: pointer;
     user-select: none;
+    filter: invert(79%) sepia(54%) saturate(513%) hue-rotate(115deg) brightness(85%) contrast(91%);
 }
 .decor-cosmetic-quest-from-checkbox + label:before {
     content: '';
@@ -585,3 +632,165 @@
     background-image: url('../../img/form_checkbox_checked.svg');
     background-size: contain;
 }
+
+@media (max-width: 1200px) { 
+    .decorative-cosmetics-btn {
+        max-width: 180px;
+        min-width: 180px;
+    }
+}
+@media (max-width: 1200px) { 
+    .decorative-cosmetic-order-popup-wrap {
+        top: 10%;
+    }
+}
+@media (max-width: 1024px) { 
+    .decorative-cosmetics-types-row,
+    .decorative-cosmetics-information-row,
+    .decorative-cosmetics-how-to-work-row,
+    .decorative-cosmetics-consult-form-wrap {
+        width: 95%;
+    }
+}
+@media (max-width: 900px) { 
+    .decorative-cosmetics-btn {
+        max-width: 170px;
+        min-width: 170px;
+        font-size: 16px;
+        padding: 0 20px;
+    }
+}
+@media (max-width: 900px) { 
+    .decorative-cosmetic-consult-popup-wrap {
+        left: 25%;
+    }
+}
+@media (max-width: 900px) { 
+    .decorative-cosmetic-order-popup-wrap {
+        top: 12%;
+        left: 18%;
+    }
+}
+@media (max-width: 850px) { 
+    .decorative-cosmetics-btns-row {
+        flex-direction: column;
+    }
+}
+@media (max-width: 850px) { 
+    .decorative-cosmetics-btn-wrap {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 800px) { 
+    .decorative-cosmetics-types-items-row {
+        width: 100%;
+
+    }
+}
+@media (max-width: 800px) { 
+    .decorative-cosmetics-types-image-wrap {
+        width: 100%;
+
+    }
+}
+@media (max-width: 800px) { 
+    .decorative-cosmetics-types-photo-wrap img {
+        min-height: auto;
+
+    }
+}
+@media (max-width: 800px) { 
+    .decorative-cosmetics-consult-form {
+        max-width: 700px
+
+    }
+}
+@media (max-width: 800px) { 
+    .decorative-cosmetics-consult-form-input-wrap input {
+        max-width: 180px;
+
+    }
+}
+@media (max-width: 800px) { 
+    .decorative-cosmetics-consult-form-input-wrap {
+        max-width: 180px;
+
+    }
+}
+@media (max-width: 800px) { 
+    .decorative-cosmetic-consult-popup-wrap {
+        left: 15%;
+    }
+}
+@media (max-width: 800px) { 
+    .decorative-cosmetic-order-popup-wrap {
+        left: 10%;
+    }
+}
+@media (max-width: 700px) { 
+    .decorative-cosmetics-consult-form {
+        max-width: 600px
+
+    }
+}
+@media (max-width: 700px) { 
+    .decorative-cosmetics-consult-form-input-wrap input {
+        max-width: 150px;
+    }
+}
+@media (max-width: 700px) { 
+    .decorative-cosmetics-consult-form-text {
+        text-align: center;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-information-text-wrap {
+        width: 100%;
+        order: 2;
+    }
+}
+
+@media (max-width: 600px) { 
+    .decorative-cosmetics-btns-row {
+        flex-direction: row;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-btn-wrap {
+        width: 50%;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-information-image-wrap {
+        width: 100%;
+        margin-bottom: 20px;
+        order: 1;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap {
+       max-width: 100%;
+       order: 1;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap,
+    .decorative-cosmetics-how-to-work-item-wrap {
+       max-width: 50%;
+       order: 1;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap:nth-child(even) {
+       order: 1;
+    }
+}
+
+/* @media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap:nth-child(4n) {
+       max-width: 100%;
+       order: 2;
+    }
+} */

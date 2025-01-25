@@ -1,11 +1,14 @@
 import React from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ExcursionToProductionPopup from "./ExcursionToProductionPopup";
 import { 
     excursionProductionPopup,
     excursionProductionPopupInput,
-    excursionProductionPopupClearInput
+    excursionProductionPopupClearInput,
+    excursionProductionPopupCheckbox,
+    excursionPorductionPopupValidateForm
 } from "../../redux/slices/innerPageSlice";
 
 
@@ -33,6 +36,24 @@ const ExcursionToProduction = () => {
         }
     };
 
+    const popupCheckboxHandler = () => {
+        dispatch(excursionProductionPopupCheckbox());
+    };
+
+    const popupSendFormHandler = () => {
+        const sendData = {
+            name: excusionState.popup.fields.find((item) => item.name === 'name' && item.valid).value,
+            phone: excusionState.popup.fields.find((item) => item.name === 'phone' && item.valid).value,
+            date: excusionState.popup.fields.find((item) => item.name === 'date' && item.valid).value,
+            time: excusionState.popup.fields.find((item) => item.name === 'time' && item.valid).value
+        };
+        console.log(sendData)
+    };
+
+    useEffect(() => {
+        dispatch(excursionPorductionPopupValidateForm());
+    }, [excusionState.popup]);
+
 
     return (
         <React.Fragment>
@@ -44,6 +65,8 @@ const ExcursionToProduction = () => {
                             popupHandler={popupHandler}
                             inputHandler={popupInputHandler}
                             clearInputHandler={popupClearInput}
+                            checkboxHandler={popupCheckboxHandler}
+                            sendFormHandler={popupSendFormHandler}
                         /> : null
                     }
                     <div className="excursion-production-text-wrap">

@@ -55,6 +55,7 @@ const ExcursionToProductionPopup = (props) => {
                     </div>
                     <div className="form-mode-get-excursion-popup-checkbox">
                         <input
+                            onChange={props.checkboxHandler}
                             type="checkbox" 
                             id="get-excursion-popup-checkbox" 
                             className="get-excursion-popup-checkbox"
@@ -65,7 +66,10 @@ const ExcursionToProductionPopup = (props) => {
                         <span>согласен с <Link to={'/policy'}>политикой конфидициальности</Link></span>
                     </div>
                     <div className="excursion-production-send-btn-wrap">
-                        <Link className="excursion-production-send-btn">Отправить</Link>
+                        <Link
+                            onClick={props.sendFormHandler}
+                            className={formState.sendBtnActive ? "excursion-production-send-btn" : "excursion-production-send-btn btnDisabled"}
+                        >Отправить</Link>
                     </div>
                 </div>
             </div>

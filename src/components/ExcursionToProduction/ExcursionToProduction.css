@@ -230,3 +230,56 @@
     justify-content: center;
     margin-bottom: 30px;
 }
+@media (max-width: 1024px) { 
+    .excursion-production-row {
+        width: 95%;
+        padding: 10px;
+    }
+}
+@media (max-width: 900px) { 
+    .excursion-production-btn {
+        padding: 0 20px;
+    }
+}
+@media (max-width: 900px) { 
+    .excursion-production-popup-wrap {
+        max-width: 750px;
+    }
+}
+@media (max-width: 850px) { 
+    .excursion-production-text-wrap{
+        max-width: 55%;
+        width: 55%;
+    }
+}
+@media (max-width: 850px) { 
+    .excursion-production-btn {
+        padding: 0 10px;
+    }
+}
+@media (max-width: 850px) { 
+    .excursion-production-btn {
+        padding: 0 10px;
+    }
+}
+@media (max-width: 800px) { 
+    .excursion-production-popup-wrap {
+        max-width: 700px;
+    }
+}
+@media (max-width: 800px) { 
+    .excursion-production-form-input-wrap {
+        max-width:22%
+    }
+}
+@media (max-width: 800px) { 
+    .excursion-production-popup-wrap {
+        max-width: 650px;
+    }
+}
+@media (max-width: 800px) { 
+    .excursion-production-btn {
+        padding: 0 10px;
+        font-size: 16px;
+    }
+}
