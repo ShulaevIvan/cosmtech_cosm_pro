@@ -9,7 +9,6 @@ import DecorativeCosmeticsQuestForm from "./DecorativeCosmeticsQuestForm";
 import DecorativeCosmeticsConsultPopup from "./DecorativeCosmeticsConsultPopup";
 import DecorativeCosmeticsOrderPopup from "./DecorativeCosmeticsOrderPopup";
 import DecorativeCosmeticsConsultHappyState from "./DecorativeCosmeticsConsultHappyState";
-import DecorativeQuestionHappyState from "./DecorativeQuestionHappyState";
 import fileToBase64 from "../../functions/fileToBase64";
 
 import { 
@@ -28,7 +27,9 @@ import {
     decorCosmQuestionFormCheckbox,
     decorCosmQuestionFormValidate,
     sendDecorativeConsultRequest,
-    decorativeConsultHappyState
+    decorativeConsultHappyState,
+    sendDecorativeQuestionRequest,
+    decorativeQuestionHappyState
 } from "../../redux/slices/innerPageSlice";
 
 import cosmeticTypesImg from '../../img/decoraticeCosmeticsImages/decorativeCosmeticType.jpg'
@@ -147,7 +148,7 @@ const DecorativeCosmetics = () => {
             phone: decorativeCosmState.questionForm.fields.find((item) => item.name === 'phone').value,
             email: decorativeCosmState.questionForm.fields.find((item) => item.name === 'email').value,
         };
-        console.log(data);
+        dispatch(sendDecorativeQuestionRequest(data));
     };
 
     const decorativeConsultHappyStateClose = () => {
@@ -155,7 +156,7 @@ const DecorativeCosmetics = () => {
     };
     
     const decorativeQuestionHappyStateClose = () => {
-        console.log('test')
+        dispatch(decorativeQuestionHappyState());
     };
 
     useEffect(() => {
@@ -323,19 +324,8 @@ const DecorativeCosmetics = () => {
                         clearInputHandler={questFromClearInputHandler}
                         policyHandler={questFromCheckboxHandler}
                         sendFormHandler={sendQuestFormHandler}
+                        happyStateClose={decorativeQuestionHappyStateClose}
                     />
-                    <DecorativeQuestionHappyState 
-                            title={decorativeCosmState.questionForm.happyState.title}
-                            description={decorativeCosmState.questionForm.happyState.description}
-                            closeHandler={decorativeQuestionHappyStateClose}
-                        />
-                    {/* {decorativeCosmState.questionForm.happyState.active ? 
-                        <DecorativeQuestionHappyState 
-                            title={decorativeCosmState.questionForm.happyState.title}
-                            description={decorativeCosmState.questionForm.happyState.description}
-                            closeHandler={decorativeQuestionHappyStateClose}
-                        />
-                    : null} */}
                 </section>
             </div>
             

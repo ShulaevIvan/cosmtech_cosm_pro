@@ -116,6 +116,15 @@
     right: 2%;
     cursor: pointer;
 }
+.excursion-production-close-btn:hover::before {
+    content: url('../../img/close_popup_hover.svg');
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    cursor: pointer;
+}
 .excursion-production-title-wrap {
     display: flex;
     flex-direction: column;

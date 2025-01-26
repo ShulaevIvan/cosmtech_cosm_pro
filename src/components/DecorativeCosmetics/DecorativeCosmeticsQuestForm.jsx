@@ -2,6 +2,8 @@ import React from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 
+import DecorativeQuestionHappyState from './DecorativeQuestionHappyState'
+
 const DecorativeCosmeticsQuestForm = (props) => {
     const formState = props.formState;
     const formRefs = [
@@ -13,12 +15,18 @@ const DecorativeCosmeticsQuestForm = (props) => {
     const findInputRef = (refType) => {
         return formRefs.find((item) => item.name === refType).ref;
     };
-
+    console.log(formState)
     return (
         <React.Fragment>
             <div className="container">
                 <div className="decorative-cosmetics-consult-form-wrap">
-                   
+                    {formState.happyState.active ? 
+                        <DecorativeQuestionHappyState 
+                            title={formState.happyState.title}
+                            description={formState.happyState.description}
+                            closeHandler={props.happyStateClose}
+                        /> 
+                    : null}
                     <div className="decorative-cosmetics-consult-form">
                         <div className="decorative-cosmetics-consult-form-text">
                             <h3>Остались вопросы?</h3>

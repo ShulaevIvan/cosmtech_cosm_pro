@@ -220,7 +220,7 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 10px;
-    background: rgb(128, 128, 128);
+    background: black;
 }
 .decorative-cosmetics-consult-form-wrap::before {
     content: url('../../img/questionsFormBg.jpg');
@@ -630,6 +630,34 @@
     border-color: #000;
     background-image: url('../../img/form_checkbox_checked.svg');
     background-size: contain;
+}
+.decorative-question-happy-state-popup-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 95%;
+    min-height: 65%;
+    max-width: 400px;
+    max-height: 254px;
+    border: 1px solid #00458B;
+    top: 10%;
+    position: absolute;
+    z-index: 6;
+    background-color: white;
+    padding: 20px;
+}
+.decorative-question-happy-state-popup-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+.decorative-question-happy-state-popup-body h3 {
+    color: #00458B;
 }
 
 @media (max-width: 1400px) { 
