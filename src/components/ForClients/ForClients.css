@@ -1123,7 +1123,7 @@ color: #1E1E1E;
 }
 @media (max-width: 800px) {
   .for-clients-faq-accordion-item-title {
-    width: 84%;
+    width: 80%;
   }
 }
 

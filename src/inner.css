@@ -1863,7 +1863,14 @@
     }
 }
 @media  (min-width: 200px) and (max-width: 900px) {
-    .inner-page-header-title-wrap h1{
+    .inner-page-header-title-wrap h1 {
+        font-size: 42px;
+        padding: 0 10px;
+    }
+}
+@media  (min-width: 200px) and (max-width: 600px) {
+    .inner-page-header-title-wrap h1 {
+        max-width: 400px;
         font-size: 42px;
         padding: 0 10px;
     }

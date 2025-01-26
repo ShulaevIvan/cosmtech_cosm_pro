@@ -8,7 +8,8 @@ import DecorativeCosmeticsFaq from "./DecorativeCosmeticsFaq";
 import DecorativeCosmeticsQuestForm from "./DecorativeCosmeticsQuestForm";
 import DecorativeCosmeticsConsultPopup from "./DecorativeCosmeticsConsultPopup";
 import DecorativeCosmeticsOrderPopup from "./DecorativeCosmeticsOrderPopup";
-import PopupHappyState from "./PopupHappyState";
+import DecorativeCosmeticsConsultHappyState from "./DecorativeCosmeticsConsultHappyState";
+import DecorativeQuestionHappyState from "./DecorativeQuestionHappyState";
 import fileToBase64 from "../../functions/fileToBase64";
 
 import { 
@@ -25,7 +26,9 @@ import {
     decorCosmQuestionFormInput,
     decorCosmQuestionFormClearInput,
     decorCosmQuestionFormCheckbox,
-    decorCosmQuestionFormValidate
+    decorCosmQuestionFormValidate,
+    sendDecorativeConsultRequest,
+    decorativeConsultHappyState
 } from "../../redux/slices/innerPageSlice";
 
 import cosmeticTypesImg from '../../img/decoraticeCosmeticsImages/decorativeCosmeticType.jpg'
@@ -68,6 +71,7 @@ const DecorativeCosmetics = () => {
             phone: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'phone').value,
             email: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'email').value
         };
+        dispatch(sendDecorativeConsultRequest(data));
     };
 
     const popupOrderInputHandler = async (fieldItem, fieldRef) => {
@@ -145,7 +149,14 @@ const DecorativeCosmetics = () => {
         };
         console.log(data);
     };
+
+    const decorativeConsultHappyStateClose = () => {
+        dispatch(decorativeConsultHappyState());
+    };
     
+    const decorativeQuestionHappyStateClose = () => {
+        console.log('test')
+    };
 
     useEffect(() => {
         dispatch(decorCosmConsultPopupValidate());
@@ -178,6 +189,13 @@ const DecorativeCosmetics = () => {
                                     policyHandler={popupConsultCheckboxHandler}
                                     sendFormHandler={sendConsultPopupFormHandler}
                                 />
+                            : null}
+                            {decorativeCosmState.consultPopup.happyState.active ? 
+                                <DecorativeCosmeticsConsultHappyState 
+                                    title={decorativeCosmState.consultPopup.happyState.title}
+                                    description={decorativeCosmState.consultPopup.happyState.description}
+                                    closeHandler={decorativeConsultHappyStateClose}
+                                /> 
                             : null}
                            
                             <div className="decorative-cosmetics-types-items-row">
@@ -306,6 +324,18 @@ const DecorativeCosmetics = () => {
                         policyHandler={questFromCheckboxHandler}
                         sendFormHandler={sendQuestFormHandler}
                     />
+                    <DecorativeQuestionHappyState 
+                            title={decorativeCosmState.questionForm.happyState.title}
+                            description={decorativeCosmState.questionForm.happyState.description}
+                            closeHandler={decorativeQuestionHappyStateClose}
+                        />
+                    {/* {decorativeCosmState.questionForm.happyState.active ? 
+                        <DecorativeQuestionHappyState 
+                            title={decorativeCosmState.questionForm.happyState.title}
+                            description={decorativeCosmState.questionForm.happyState.description}
+                            closeHandler={decorativeQuestionHappyStateClose}
+                        />
+                    : null} */}
                 </section>
             </div>
             

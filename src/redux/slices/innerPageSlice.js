@@ -767,7 +767,11 @@ const initialState = {
             popupActive: false,
             sendBtnActive: false,
             policyActive: false,
-            happyState: false,
+            happyState: {
+                active: false,
+                title: '',
+                description: '',
+            },
             fields: [
                 {
                     id: 1,
@@ -1076,7 +1080,11 @@ const initialState = {
             active: false,
             sendBtnActive: false,
             policyActive: false,
-            happyStateActive: false,
+            happyState: {
+                active: false,
+                title: '',
+                description: ''
+            },
             fields: [
                 {
                     id: 1,
@@ -1168,7 +1176,11 @@ const initialState = {
         questionForm: {
             sendBtnActive: false,
             policyActive: false,
-            happyStateActive: false,
+            happyState: {
+                active: false,
+                title: '',
+                description: ''
+            },
             fields: [
                 {
                     id: 1,
@@ -1205,6 +1217,41 @@ const initialState = {
         top: 0,
     }
 };
+
+export const sendDecorativeConsultRequest = createAsyncThunk(
+    'sendDecorativeConsult',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/decorative-cosmetic/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sendData)
+        });
+
+        const data = await response.json();
+        
+        return data;
+    }
+)
+
+export const sendExcursionPorductionRequest = createAsyncThunk(
+    'sendExcursionProductionReq',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/clients/excursion/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sendData)
+        });
+        const data = await response.json();
+
+        return data;
+    }
+);
 
 export const sendAboutProductionConsultForm = createAsyncThunk(
     'sendAboutProdConsult',
@@ -2355,7 +2402,7 @@ const innerPageSlice = createSlice({
         excursionProductionPopupCheckbox(state) {
             state.productionExcuirsion.popup.policyActive = state.productionExcuirsion.popup.policyActive ? false : true;
         },
-        excursionPorductionPopupValidateForm(state) {
+        excursionProductionPopupValidateForm(state) {
             const nameField = state.productionExcuirsion.popup.fields.find((item) => item.name === 'name' && item.value !== '');
             const phoneField = state.productionExcuirsion.popup.fields.find((item) => item.name === 'phone' && item.value !== '');
             const dateField = state.productionExcuirsion.popup.fields.find((item) => item.name === 'date' && item.value !== '');
@@ -2368,6 +2415,12 @@ const innerPageSlice = createSlice({
                     return;
             }
             state.productionExcuirsion.popup.sendBtnActive = false;
+        },
+        excursionProductionHappyState(state) {
+            state.productionExcuirsion.popup.happyState.active = state.productionExcuirsion.popup.happyState.active ? false : true;
+        },
+        decorativeConsultHappyState(state) {
+            state.decorativeCosmeticsPage.consultPopup.happyState.active = state.decorativeCosmeticsPage.consultPopup.happyState.active ? false : true;
         }
 
     },
@@ -2484,7 +2537,41 @@ const innerPageSlice = createSlice({
                 }
                 return;
             };
-            state.about.aboutProduction.productionForm.happyState = state.about.aboutProduction.productionForm.happyState;
+            state.about.aboutProduction.productionForm.happyState = initialState.about.aboutProduction.productionForm.happyState;
+        })
+        .addCase(sendExcursionPorductionRequest.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            if (status && status === 'ok') {
+                state.productionExcuirsion.popup = {
+                    ...initialState.productionExcuirsion.popup,
+                    happyState: {
+                        ...state.productionExcuirsion.popup.happyState,
+                        active: true,
+                        title: description.title,
+                        order: description.order,
+                        description: description.description
+                    }
+                };
+                return;
+            }
+            state.productionExcuirsion.popup.happyState = initialState.productionExcuirsion.popup.happyState;
+            
+        })
+        .addCase(sendDecorativeConsultRequest.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            if (status && status === 'ok') {
+                state.decorativeCosmeticsPage.consultPopup = {
+                    ...initialState.decorativeCosmeticsPage.consultPopup,
+                    happyState: {
+                        ...state.decorativeCosmeticsPage.consultPopup.happyState,
+                        active: true,
+                        title: description.title,
+                        description: description.description
+                    }
+                };
+                return;
+            }
+            state.decorativeCosmeticsPage.consultPopup.happyState = initialState.decorativeCosmeticsPage.consultPopup;
         })
     }
 });
@@ -2554,6 +2641,8 @@ export const {
     excursionProductionPopupInput,
     excursionProductionPopupClearInput,
     excursionProductionPopupCheckbox,
-    excursionPorductionPopupValidateForm
+    excursionProductionPopupValidateForm,
+    excursionProductionHappyState,
+    decorativeConsultHappyState
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

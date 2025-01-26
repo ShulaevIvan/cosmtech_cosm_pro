@@ -239,6 +239,12 @@
 @media (max-width: 900px) { 
     .excursion-production-btn {
         padding: 0 20px;
+        font-size: 16px;
+    }
+}
+@media (max-width: 900px) { 
+    .excursion-production-btn-wrap {
+        width: 30%;
     }
 }
 @media (max-width: 900px) { 
@@ -281,5 +287,95 @@
     .excursion-production-btn {
         padding: 0 10px;
         font-size: 16px;
+    }
+}
+@media (max-width: 600px) { 
+    .excursion-production-row {
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+@media (max-width: 600px) { 
+    .excursion-production-text-wrap {
+        width: 90%;
+        max-width: 90%;
+    }
+}
+@media (max-width: 600px) { 
+    .excursion-production-btn-wrap {
+        width: 90%;
+        max-width: 90%;
+        height: auto;
+    }
+}
+@media (max-width: 600px) { 
+    .excursion-production-row {
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 600px) { 
+    .excursion-production-popup-body {
+        max-width: 450px;
+    }
+}
+@media (max-width: 600px) { 
+    .excursion-production-form-row {
+        flex-direction: column;
+        align-items: center;
+        justify-content: baseline;
+    }
+}
+@media (max-width: 600px) { 
+    .excursion-production-form-input-wrap {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 600px) { 
+    .excursion-production-title-wrap {
+        text-align: center;
+        width: 100%;
+        max-width: 450px;
+        margin-top: 30px;
+    }
+}
+@media (max-width: 600px) { 
+    .excursion-production-form-input-wrap input {
+        min-width: 200px;
+        max-width: 300px;
+    }
+}
+@media (max-width: 600px) { 
+    .excursion-production-popup-wrap {
+        top: -25%;
+        left: -5%;
+    }
+}
+@media (max-width: 500px) { 
+    .excursion-production-popup-wrap {
+        max-width: 350px;
+    }
+}
+@media (max-width: 500px) { 
+    .form-mode-get-excursion-popup-checkbox {
+        flex-wrap: nowrap;
+        text-align: center;
+        width: 75%;
+    }
+}
+@media (max-width: 400px) { 
+    .excursion-production-popup-wrap {
+        max-width: 330px;
+        left: 2%;
+        margin: 0;
+    }
+}
+@media (max-width: 360px) { 
+    .excursion-production-popup-wrap {
+        left: 2%;
+        max-width: 300px;
     }
 }

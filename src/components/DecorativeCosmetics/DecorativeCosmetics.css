@@ -434,7 +434,6 @@
 .form-mode-decor-cosmetic-get-consult-checkbox {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -633,7 +632,7 @@
     background-size: contain;
 }
 
-@media (max-width: 1200px) { 
+@media (max-width: 1400px) { 
     .decorative-cosmetics-btn {
         max-width: 180px;
         min-width: 180px;
@@ -779,18 +778,163 @@
     .decorative-cosmetics-how-to-work-item-wrap,
     .decorative-cosmetics-how-to-work-item-wrap {
        max-width: 50%;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap:nth-child(1) {
        order: 1;
     }
 }
 @media (max-width: 600px) { 
-    .decorative-cosmetics-how-to-work-item-wrap:nth-child(even) {
+    .decorative-cosmetics-how-to-work-item-wrap:nth-child(2) {
        order: 1;
     }
 }
-
-/* @media (max-width: 600px) { 
-    .decorative-cosmetics-how-to-work-item-wrap:nth-child(4n) {
-       max-width: 100%;
+@media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap:nth-child(3) {
+       order: 1;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap:nth-child(4) {
+       order: 1;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap:nth-child(5) {
        order: 2;
     }
-} */
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap:nth-child(6) {
+       order: 2;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-how-to-work-item-wrap:nth-child(n)::before {
+        content: '';
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-consult-form-wrap {
+        max-height: auto;
+        height: auto;
+        min-height: 600px;
+        background-color:#171717;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-consult-form-wrap::before {
+        content: '';
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-consult-form-text {
+        flex-direction: column;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-consult-form {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-consult-form-input-wrap {
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetics-consult-form-input-wrap input {
+        min-width: 200px;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetic-consult-popup-wrap {
+        left: 8%;
+    }
+}
+@media (max-width: 600px) { 
+    .decorative-cosmetic-order-popup-wrap {
+        max-width: 450px;
+        left: 8%;
+    }
+}
+@media (max-width: 500px) { 
+    .decorative-cosmetics-type-item-row{
+        width: 100%;
+        max-width: 100%;
+    }
+}
+@media (max-width: 500px) { 
+    .decorative-cosmetics-btns-row {
+        flex-direction: column;
+    }
+}
+@media (max-width: 500px) { 
+    .decorative-cosmetics-btn {
+        max-width: 250px;
+        width: 250px;
+        min-width: 200px;
+    }
+}
+@media (max-width: 500px) { 
+    .for-clients-faq-accordion-item {
+        width: 90%;
+    }
+}
+@media (max-width: 500px) { 
+    .decorative-cosmetic-consult-popup-wrap{
+        max-width: 350px;
+        left: 4%;
+    }
+}
+@media (max-width: 500px) { 
+    .decor-cosmetic-get-consult-checkbox-wrap {
+        max-width: 75%;
+        text-align: center;
+    }
+}
+@media (max-width: 500px) { 
+    .decorative-cosmetic-consult-popup-form-wrap label {
+        padding-left: 13%;
+    }
+}
+@media (max-width: 500px) { 
+    .decorative-cosmetic-order-popup-wrap {
+        max-width: 350px;
+        left: 4%;
+    }
+}
+@media (max-width: 400px) { 
+    .decorative-cosmetic-order-popup-wrap,
+    .decorative-cosmetic-consult-popup-wrap {
+        left: 2%;
+        max-width: 330px;
+    }
+}
+@media (max-width: 400px) { 
+    .decor-cosmetic-quest-from-checkbox-wrap {
+        flex-wrap: nowrap;
+        text-align: center;
+        width: 80%;
+    }
+}
+
+@media (max-width: 380px) { 
+    .decorative-cosmetic-order-popup-wrap,
+    .decorative-cosmetic-consult-popup-wrap {
+        left: 0%;
+        top: 10%;
+        max-width: 330px;
+    }
+}
+@media (max-width: 360px) { 
+    .decorative-cosmetic-order-popup-wrap,
+    .decorative-cosmetic-consult-popup-wrap {
+        left: 2%;
+        max-width: 300px;
+    }
+}

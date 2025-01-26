@@ -3,12 +3,15 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ExcursionToProductionPopup from "./ExcursionToProductionPopup";
+import ExcursionToProductionHappyState from "./ExcursionToProductionHappyState";
 import { 
     excursionProductionPopup,
     excursionProductionPopupInput,
     excursionProductionPopupClearInput,
     excursionProductionPopupCheckbox,
-    excursionPorductionPopupValidateForm
+    excursionProductionPopupValidateForm,
+    sendExcursionPorductionRequest,
+    excursionProductionHappyState
 } from "../../redux/slices/innerPageSlice";
 
 
@@ -47,13 +50,16 @@ const ExcursionToProduction = () => {
             date: excusionState.popup.fields.find((item) => item.name === 'date' && item.valid).value,
             time: excusionState.popup.fields.find((item) => item.name === 'time' && item.valid).value
         };
-        console.log(sendData)
+        dispatch(sendExcursionPorductionRequest(sendData));
+    };
+
+    const happyStateCloseHandler = () => {
+        dispatch(excursionProductionHappyState());
     };
 
     useEffect(() => {
-        dispatch(excursionPorductionPopupValidateForm());
+        dispatch(excursionProductionPopupValidateForm());
     }, [excusionState.popup]);
-
 
     return (
         <React.Fragment>
@@ -69,6 +75,14 @@ const ExcursionToProduction = () => {
                             sendFormHandler={popupSendFormHandler}
                         /> : null
                     }
+                    {excusionState.popup.happyState.active ? 
+                        <ExcursionToProductionHappyState 
+                            title={excusionState.popup.happyState.title}
+                            order={excusionState.popup.happyState.order}
+                            description={excusionState.popup.happyState.description}
+                            closeHandler={happyStateCloseHandler}
+                        /> 
+                    : null}
                     <div className="excursion-production-text-wrap">
                         <h3>Экскурсия на производство</h3>
                         <p>
