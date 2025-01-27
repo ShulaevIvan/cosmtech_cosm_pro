@@ -11,15 +11,8 @@ import CallbackRequestPopup from "../CallbackRequestPopup/CallbackRequestPopup";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { setUrlToStorage, getUrlFromStorage } from "../../functions/urlToStorage";
 import { callbackPopupShow } from "../../redux/slices/headerSlice";
-import { 
-    submenuActive,
-    resetMenu 
-} from '../../redux/slices/menuSlice';
 
 const Header = () => {
-    const headerState = useSelector((state) => state.header);
-    const menuState = useSelector((state) => state.menu);
-    const callbackPopup = useSelector((state) => state.header.callbackHeader.callbackPopupActive);
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
@@ -28,17 +21,11 @@ const Header = () => {
     const openGraphDescriptionRef = useRef(window.document.querySelector('meta[property="og:description"]'));
     const openGraphUrlRef = useRef(window.document.querySelector('meta[property="og:url"]'));
     const canonicalUrlRef = useRef(window.document.querySelector('link[rel="canonical"]'));
-
+    const headerState = useSelector((state) => state.header);
+    const callbackPopup = useSelector((state) => state.header.callbackHeader.callbackPopupActive);
 
     const callbackPopupHandler = (status) => {
         dispatch(callbackPopupShow({ status: status }));
-    };
-
-    const submenuHandler = (menuId, menuName) => {
-        dispatch(submenuActive({menuId: menuId, menuName: menuName}));
-    };
-    const resetMenuHandler = () => {
-        dispatch(resetMenu());
     };
 
     useEffect(() => {
@@ -86,37 +73,10 @@ const Header = () => {
                         <div className="main-nav-wrap">
                             <nav className="main-nav">
                                 <ul className="main-nav-list">
-                                    {menuState.mainMenu.menuItems.map((menuItem) => {
-                                        return (
-                                            <React.Fragment key={menuItem.id}>
-                                                <li
-                                                    onClick={resetMenuHandler}
-                                                    className={
-                                                        menuItem.submenu ? 
-                                                            menuItem.submenu.active ? 'has-submenu-active' : 'has-submenu active': null
-                                                    }
-                                                    onMouseEnter={() => submenuHandler(menuItem.id, menuItem.name)}
-                                                    onMouseLeave={() => submenuHandler(menuItem.id, menuItem.name)} 
-                                                >
-                                                    <Link to={menuItem.url}>{menuItem.name}</Link>
-                                                    {menuItem.submenu && menuItem.submenu.active ? 
-                                                        <ul  
-                                                            className={menuItem.submenu && menuItem.submenu.active ? 
-                                                                "main-nav-submenu-list active": "main-nav-submenu-list"}
-                                                        >
-                                                            {menuItem.submenu.menuItems.map((submenuItem) => {
-                                                                return (
-                                                                    <React.Fragment key={submenuItem.id}>
-                                                                        <li><Link to={submenuItem.url}>{submenuItem.name}</Link></li>
-                                                                    </React.Fragment>
-                                                                )
-                                                            })}
-                                                        </ul>
-                                                    : null}
-                                                </li>
-                                            </React.Fragment>
-                                        )
-                                    })}
+                                    <li><Link to={'/'}>Контрактное производство</Link></li>
+                                    <li><Link to={'/services'}>Услуги</Link></li>
+                                    <li><Link to={'/about'}>О Нас</Link></li>
+                                    <li><Link to={'/contacts'}>Контакты</Link></li>
                                 </ul>
                             </nav>
                         </div>

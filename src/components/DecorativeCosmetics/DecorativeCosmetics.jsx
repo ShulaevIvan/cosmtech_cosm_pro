@@ -9,6 +9,7 @@ import DecorativeCosmeticsQuestForm from "./DecorativeCosmeticsQuestForm";
 import DecorativeCosmeticsConsultPopup from "./DecorativeCosmeticsConsultPopup";
 import DecorativeCosmeticsOrderPopup from "./DecorativeCosmeticsOrderPopup";
 import DecorativeCosmeticsConsultHappyState from "./DecorativeCosmeticsConsultHappyState";
+import DecorativeCosmeticsOrderHappyState from "./DecorativeCosmeticsOrderHappyState";
 import fileToBase64 from "../../functions/fileToBase64";
 
 import { 
@@ -29,7 +30,9 @@ import {
     sendDecorativeConsultRequest,
     decorativeConsultHappyState,
     sendDecorativeQuestionRequest,
-    decorativeQuestionHappyState
+    decorativeQuestionHappyState,
+    sendDecorativeOrderRequest,
+    decorativeOrderHappyState
 } from "../../redux/slices/innerPageSlice";
 
 import cosmeticTypesImg from '../../img/decoraticeCosmeticsImages/decorativeCosmeticType.jpg'
@@ -70,7 +73,8 @@ const DecorativeCosmetics = () => {
         const data = {
             name: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'name').value,
             phone: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'phone').value,
-            email: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'email').value
+            email: decorativeCosmState.consultPopup.fields.find((item) => item.name === 'email').value,
+            reqType: 'consult',
         };
         dispatch(sendDecorativeConsultRequest(data));
     };
@@ -114,9 +118,11 @@ const DecorativeCosmetics = () => {
             phone: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'phone').value,
             email: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'email').value,
             comment: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'comment').value,
-            file: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'file').fileData,
+            fileData: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'file').fileData,
+            reqType: 'order',
         };
-        console.log(data);
+        console.log(data)
+        dispatch(sendDecorativeOrderRequest(data));
     };
 
     const questFromInputHandler = (fieldId, fieldType, fieldRef) => {
@@ -147,6 +153,7 @@ const DecorativeCosmetics = () => {
             name: decorativeCosmState.questionForm.fields.find((item) => item.name === 'name').value,
             phone: decorativeCosmState.questionForm.fields.find((item) => item.name === 'phone').value,
             email: decorativeCosmState.questionForm.fields.find((item) => item.name === 'email').value,
+            reqType: 'consult',
         };
         dispatch(sendDecorativeQuestionRequest(data));
     };
@@ -157,6 +164,10 @@ const DecorativeCosmetics = () => {
     
     const decorativeQuestionHappyStateClose = () => {
         dispatch(decorativeQuestionHappyState());
+    };
+
+    const decorativeOrderHappyStateClose = () => {
+        dispatch(decorativeOrderHappyState());
     };
 
     useEffect(() => {
@@ -246,6 +257,14 @@ const DecorativeCosmetics = () => {
                                     policyHandler={popupOrderCheckboxHandler}
                                     sendFormHandler={sendOrderPopupFormHandler}
                                 /> 
+                            : null}
+                            {decorativeCosmState.orderPopup.happyState.active ? 
+                                <DecorativeCosmeticsOrderHappyState 
+                                    title={decorativeCosmState.orderPopup.happyState.title}
+                                    description={decorativeCosmState.orderPopup.happyState.description}
+                                    orderNumber={decorativeCosmState.orderPopup.happyState.orderNumber}
+                                    closeHandler={decorativeOrderHappyStateClose}
+                                />
                             : null}
                            
                             <div className="decorative-cosmetics-information-text-wrap">

@@ -1123,7 +1123,12 @@ const initialState = {
             active: false,
             sendBtnActive: false,
             policyActive: false,
-            happyStateActive: false,
+            happyState: {
+                active: false,
+                title: '',
+                description: '',
+                orderNumber: ''
+            },
             fields: [
                 {
                     id: 1,
@@ -1218,6 +1223,24 @@ const initialState = {
     }
 };
 
+export const sendDecorativeOrderRequest = createAsyncThunk(
+    'sendDecorativeOrder',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/decorative-cosmetic/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sendData)
+        });
+
+        const data = response.json();
+
+        return data;
+    }
+);
+
 export const sendDecorativeQuestionRequest = createAsyncThunk(
     'sendDecorativeQuestion',
     async (sendData) => {
@@ -1234,7 +1257,7 @@ export const sendDecorativeQuestionRequest = createAsyncThunk(
         
         return data;
     }
-)
+);
 
 export const sendDecorativeConsultRequest = createAsyncThunk(
     'sendDecorativeConsult',
@@ -2442,6 +2465,9 @@ const innerPageSlice = createSlice({
         },
         decorativeQuestionHappyState(state) {
             state.decorativeCosmeticsPage.questionForm.happyState.active = state.decorativeCosmeticsPage.questionForm.happyState.active ? false : true;
+        },
+        decorativeOrderHappyState(state) {
+            state.decorativeCosmeticsPage.orderPopup.happyState.active = state.decorativeCosmeticsPage.orderPopup.happyState.active ? false : true;
         }
 
     },
@@ -2610,6 +2636,21 @@ const innerPageSlice = createSlice({
             }
             state.decorativeCosmeticsPage.questionForm.happyState = initialState.decorativeCosmeticsPage.questionForm;
         })
+        .addCase(sendDecorativeOrderRequest.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            if (status && status === 'ok') {
+                state.decorativeCosmeticsPage.orderPopup = {
+                    ...initialState.decorativeCosmeticsPage.orderPopup,
+                    happyState: {
+                        ...state.decorativeCosmeticsPage.orderPopup.happyState,
+                        active: true,
+                        title: description.title,
+                        description: description.description,
+                        orderNumber: description.order
+                    }
+                };
+            }
+        })
     }
 });
 
@@ -2681,6 +2722,7 @@ export const {
     excursionProductionPopupValidateForm,
     excursionProductionHappyState,
     decorativeConsultHappyState,
-    decorativeQuestionHappyState
+    decorativeQuestionHappyState,
+    decorativeOrderHappyState
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
