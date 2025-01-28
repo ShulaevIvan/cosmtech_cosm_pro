@@ -1953,6 +1953,12 @@
       align-items: center;
     }
 }
+@media (max-width: 600px) {
+    .inner-page-main-title-description {
+        width: 100%;
+        max-width: none;
+    }
+}
 
 @keyframes slide-in-left {
   from {

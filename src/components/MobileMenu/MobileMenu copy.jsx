@@ -4,20 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { mobileMenuActive } from "../../redux/slices/menuSlice";
 import telegramIcon from '../../img/telegram-mobile.svg';
 import whatsappIcon from '../../img/whatsapp-mobile.svg';
-import whatsappMobileIcon from '../../img/mobileWhatsappMenu.svg'
-import telegramMobileIcon from '../../img/mobileTelegramMenu.svg'
 import vkIcon from '../../img/vk-mobile.svg'
 
 const MobileMenu = (props) => {
     const dispatch = useDispatch();
     const mobileMenuState = useSelector((state) => state.menu);
-
     const mobileMenuHandler = (status) => {
         dispatch(mobileMenuActive({status: status}));
-    };
-
-    const submenuHandler = () => {
-
     };
 
     return (
@@ -33,28 +26,11 @@ const MobileMenu = (props) => {
                                 <span></span>
                                 {mobileMenuState.mobileMenuActive ?
                                     <ul id="menu-mobile">
-                                        {mobileMenuState.mainMenu.menuItems.map((menuItem) => {
-                                            return (
-                                                <React.Fragment key={menuItem.id}>
-                                                    <li className={menuItem.submenu ? 'mobile-menu-item-has-submenu': null}>
-                                                        <Link to={menuItem.url}>{menuItem.name}</Link>
-                                                        {menuItem.submenu ? 
-                                                            <ul className="mobile-menu-submenu">
-                                                                {menuItem.submenu.menuItems.map((submenuItem) => {
-                                                                    return (
-                                                                        <React.Fragment key={submenuItem.id}>
-                                                                            <li><Link to={submenuItem.url}>{submenuItem.name}</Link></li>
-                                                                        </React.Fragment>
-                                                                    )
-                                                                })}
-                                                            </ul>
-                                                        
-                                                        : null}
-                                                    </li>
-                                                </React.Fragment>
-                                            )
-                                        })}
+                                    <li><Link to={'/'}>Контрактное производство</Link></li>
+                                    <li><Link to={'/services'}>Услуги</Link></li>
+                                    <li><Link to={'/about'}>О Нас</Link></li>
                                     <li><Link to={'/forclients'}>Клиентам</Link></li>
+                                    <li><Link to={'/contacts'}>Контакты</Link></li>
                                     <li id="mobile-contacts-wrap-li">
                                         <div className="mobile-contacts-wrap">
                                             <div className="mobile-contacts-email">
@@ -90,15 +66,14 @@ const MobileMenu = (props) => {
                                 
                             </div>
                         </nav>
-                        <div className="contacts-row">
-                            <div className="contact-item-mobile"><Link to={'tel:+78123630614'}>+7 (812) 363-06-14</Link></div>
-                            <div className="contact-item-mobile social">
-                                {mobileMenuState.mobileHeader.icons.map((iconItem) => {
-                                    return (
-                                        <Link key={iconItem.id} to={iconItem.url} target={'_blank'}><img src={iconItem.img} alt={iconItem.imgAlt} /></Link>
-                                    )
-                                })}
-                            </div>
+                    </div>
+
+                    <div className="contacts-row">
+                        <div className="contact-phone-mobile-wrap">
+                            <Link to={'tel:+78123630614'}>+7 (812) 363-06-14</Link>
+                        </div>
+                        <div className="contact-email-mobile-wrap">
+                            <Link to={'mailto:pro@cosmtech.ru&amp;body=text?subject=Вопрос'}>pro@cosmtech.ru</Link>
                         </div>
                         <div className="mobile-menu-logo-wrap">
                             <Link to={'/'}><img src={props.logo} alt="cosm_tech_mobile_logo" /></Link>

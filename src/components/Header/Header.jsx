@@ -72,7 +72,10 @@ const Header = () => {
 
     return (
         <React.Fragment>
-            <header className={"main-header"}>
+            <header 
+                className={"main-header"}  
+                onMouseLeave={resetMenuHandler}
+            >
                 {callbackPopup ?  
                     <CallbackRequestPopup 
                         callbackPopupHander = {callbackPopupHandler}

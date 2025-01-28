@@ -1,8 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAction } from "@reduxjs/toolkit";
+import mobileHeaderTelegrmIcon from '../../img/mobileTelegramMenu.svg'
+import mobileHeaderWhatsappIcon from '../../img/mobileWhatsappMenu.svg'
 
 const initialState = { 
     mobileMenuActive: false,
+    mobileHeader: {
+        icons: [
+            {
+                id: 1,
+                name: 'https://wa.me/+79643637272',
+                img: mobileHeaderWhatsappIcon,
+                imgAlt: 'Написать в whtasapp космотех',
+                url: ''
+            },
+            {
+                id: 2,
+                name: 'https://t.me/+79643637272',
+                img: mobileHeaderTelegrmIcon,
+                imgAlt: 'Написать в telegram космотех',
+                url: 'https://t.me/+79643637272'
+            },
+        ]
+    },
     mainMenu: {
         menuItems: [
             {
