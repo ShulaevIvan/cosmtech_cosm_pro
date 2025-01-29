@@ -36,11 +36,6 @@ const initialState = {
                             id: 1,
                             name: 'Декоративная косметика',
                             url: '/decorative-cosmetics'
-                        },
-                        {
-                            id: 2,
-                            name: 'Декоративная косметика',
-                            url: '/decorative-cosmetics'
                         }
                     ]
                 }
@@ -64,6 +59,22 @@ const initialState = {
                 submenu: false
             }
         ]
+    },
+    footerMenu: {
+        menuItems: [
+            {
+                id: 1,
+                name: 'Клиентам',
+                url: '/forclients',
+                submenu: false
+            },
+            {
+                id: 2,
+                name: 'Вакансии',
+                url: '/job',
+                submenu: false
+            },
+        ]
     }
 };
 
@@ -76,7 +87,7 @@ const menuSlice = createSlice({
             state.mobileMenuActive = status;
         },
         submenuActive(state, action) {
-            const { menuId, menuName} = action.payload;
+            const { menuId, menuName, mobile } = action.payload;
             const findActiveMenu = state.mainMenu.menuItems.find((item) => item.id === menuId && item.name === menuName && item.submenu);
             if (findActiveMenu && findActiveMenu.id === menuId && findActiveMenu.name === menuName) {
                 state.mainMenu.menuItems = state.mainMenu.menuItems.map((menuItem) => {

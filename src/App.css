@@ -294,6 +294,8 @@ section {
   transition: background .4s ease;
 }
 .video-mainpage-prezent-btn:hover {
+  width: 100%;
+  max-width: 200px;
   background-color: #00458B;
   color: white;
   transition: background .4s ease;
@@ -394,7 +396,8 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 130px;
+  width: 100%;
+  max-width: 200px;
   height: 40px;
   padding: 0 40px;
   font-size: 18px;

@@ -4,9 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { mobileMenuActive } from "../../redux/slices/menuSlice";
 import telegramIcon from '../../img/telegram-mobile.svg';
 import whatsappIcon from '../../img/whatsapp-mobile.svg';
-import whatsappMobileIcon from '../../img/mobileWhatsappMenu.svg'
-import telegramMobileIcon from '../../img/mobileTelegramMenu.svg'
 import vkIcon from '../../img/vk-mobile.svg'
+
+import { 
+    submenuActive,
+    resetMenu 
+} from '../../redux/slices/menuSlice';
 
 const MobileMenu = (props) => {
     const dispatch = useDispatch();
@@ -16,8 +19,12 @@ const MobileMenu = (props) => {
         dispatch(mobileMenuActive({status: status}));
     };
 
-    const submenuHandler = () => {
+    const submenuHandler = (menuId, menuName) => {
+        dispatch(submenuActive({menuId: menuId, menuName: menuName}))
+    };
 
+    const closeSubmenuHandler = () => {
+        dispatch(resetMenu());
     };
 
     return (
@@ -27,18 +34,28 @@ const MobileMenu = (props) => {
 
                     <div className="content-mobile">
                         <nav role="navigation-mobile">
-                            <div id="menuToggle-mobile" onClick={() => mobileMenuHandler(mobileMenuState.mobileMenuActive ? false : true)}>
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                            <div id="menuToggle-mobile">
+                                <div
+                                    className="menuToggle-" 
+                                    onClick={() => mobileMenuHandler(mobileMenuState.mobileMenuActive ? false : true)}
+                                >
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                              
                                 {mobileMenuState.mobileMenuActive ?
                                     <ul id="menu-mobile">
                                         {mobileMenuState.mainMenu.menuItems.map((menuItem) => {
                                             return (
                                                 <React.Fragment key={menuItem.id}>
-                                                    <li className={menuItem.submenu ? 'mobile-menu-item-has-submenu': null}>
+                                                    <li 
+                                                        className={menuItem.submenu ? 'mobile-menu-item-has-submenu': null}
+                                                        onClick={menuItem.submenu && !menuItem.submenu.active ? 
+                                                            () => submenuHandler(menuItem.id, menuItem.name) : closeSubmenuHandler}
+                                                    >
                                                         <Link to={menuItem.url}>{menuItem.name}</Link>
-                                                        {menuItem.submenu ? 
+                                                        {menuItem.submenu.active ? 
                                                             <ul className="mobile-menu-submenu">
                                                                 {menuItem.submenu.menuItems.map((submenuItem) => {
                                                                     return (
@@ -48,13 +65,23 @@ const MobileMenu = (props) => {
                                                                     )
                                                                 })}
                                                             </ul>
-                                                        
                                                         : null}
                                                     </li>
                                                 </React.Fragment>
                                             )
                                         })}
-                                    <li><Link to={'/forclients'}>Клиентам</Link></li>
+                                        <li id="mobile-footer-links-wrap">
+                                            <ul id="mobile-footer-links-menu">
+                                                {mobileMenuState.footerMenu.menuItems.map((menuItem) => {
+                                                return (
+                                                    <React.Fragment key={menuItem.id}>
+                                                        <li><Link to={menuItem.url}>{menuItem.name}</Link></li>
+                                                    </React.Fragment>
+                                                )
+                                            })}
+                                            </ul>
+                                        </li>
+                                        
                                     <li id="mobile-contacts-wrap-li">
                                         <div className="mobile-contacts-wrap">
                                             <div className="mobile-contacts-email">

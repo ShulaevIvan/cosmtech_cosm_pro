@@ -16,6 +16,7 @@ import AboutProduction from "./AboutProduction";
 import AboutConsultForm from './AboutConsultForm';
 import AboutTabs from "./AboutTabs";
 import ImageGallery from "../ImageGalery/ImageGallery";
+import ExcursionToProduction from "../ExcursionToProduction/ExcursionToProduction";
 // import OurTeam from "./OurTeam";
 
 import { 
@@ -131,6 +132,9 @@ const AboutPage = () => {
             </section>
             <section>
                 <AboutProduction />
+            </section>
+            <section>
+                <ExcursionToProduction />
             </section>
             <section>
                 <ImageGallery 

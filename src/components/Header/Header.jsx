@@ -1,15 +1,17 @@
 import React from "react";
+import { useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { setUrlToStorage, getUrlFromStorage } from "../../functions/urlToStorage";
+
 import callbackIcon from '../../img/callback.svg';
 import sendmailIcon from '../../img/send_mail.svg';
 import mainLogoIcon from '../../img/logo_cosm_back.jpeg';
 import mainLogoMinIcon from '../../img/logo_cosm.png';
+
 import CallbackRequestPopup from "../CallbackRequestPopup/CallbackRequestPopup";
 import MobileMenu from "../MobileMenu/MobileMenu";
-import { setUrlToStorage, getUrlFromStorage } from "../../functions/urlToStorage";
+
 import { callbackPopupShow } from "../../redux/slices/headerSlice";
 import { 
     submenuActive,
@@ -17,12 +19,11 @@ import {
 } from '../../redux/slices/menuSlice';
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
     const headerState = useSelector((state) => state.header);
     const menuState = useSelector((state) => state.menu);
-    const callbackPopup = useSelector((state) => state.header.callbackHeader.callbackPopupActive);
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const navigate = useNavigate();
     const descriptionRef = useRef(window.document.querySelector('meta[name="description"]'));
     const openGraphTitleRef = useRef(window.document.querySelector('meta[property="og:title"]'));
     const openGraphDescriptionRef = useRef(window.document.querySelector('meta[property="og:description"]'));
@@ -76,7 +77,7 @@ const Header = () => {
                 className={"main-header"}  
                 onMouseLeave={resetMenuHandler}
             >
-                {callbackPopup ?  
+                {headerState.callbackHeader.callbackPopupActive ?  
                     <CallbackRequestPopup 
                         callbackPopupHander = {callbackPopupHandler}
                         callbackState = {headerState.callbackHeader}
