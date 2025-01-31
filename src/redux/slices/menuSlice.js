@@ -36,7 +36,7 @@ const initialState = {
                             id: 1,
                             name: 'Декоративная косметика',
                             url: '/decorative-cosmetics'
-                        }
+                        },
                     ]
                 }
             },
@@ -75,6 +75,31 @@ const initialState = {
                 submenu: false
             },
         ]
+    },
+    sideMenu: {
+        menuItems: [
+            {
+                id: 1,
+                name: 'ТЗ на производство',
+                img: '',
+                imgAlt: '',
+                active: false
+            },
+            {
+                id: 2,
+                name: 'Кальклуятор',
+                img: '',
+                imgAlt: '',
+                active: false
+            },
+            {
+                id: 3,
+                name: 'Чат',
+                img: '',
+                imgAlt: '',
+                active: false
+            },
+        ]
     }
 };
 
@@ -108,6 +133,21 @@ const menuSlice = createSlice({
         },
         resetMenu(state) {
             state.mainMenu.menuItems = initialState.mainMenu.menuItems;
+        },
+        sidemenuActive(state, action) {
+            const { menuId, status } = action.payload;
+            state.sideMenu.menuItems = state.sideMenu.menuItems.map((menuItem) => {
+                if (menuId === menuItem.id) {
+                    return {
+                        ...menuItem,
+                        active: status
+                    }
+                }
+                return {
+                    ...menuItem,
+                    active: false
+                };
+            });
         }
     }
 });
@@ -116,6 +156,7 @@ const menuSlice = createSlice({
 export const {
     mobileMenuActive,
     submenuActive,
-    resetMenu
+    resetMenu,
+    sidemenuActive
 } = menuSlice.actions;
 export default menuSlice.reducer;

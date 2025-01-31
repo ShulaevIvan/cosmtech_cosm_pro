@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import Header from "../Header/Header";
 import PrefooterMainPage from "../PrefooterMainPage/PrefooterMainPage";
+import StickySideMenu from "../StickySideMenu/StickySideMenu";
 import Footer from "../Footer/Footer";
 import { setUrlToStorage } from "../../functions/urlToStorage";
 
@@ -28,6 +29,7 @@ const Layout = () => {
             <Header />
             <main>
                 <Outlet />
+                <StickySideMenu />
             </main>
             {location && location.pathname === '/' ? <PrefooterMainPage /> : null}
             <Footer />

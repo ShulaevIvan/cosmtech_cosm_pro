@@ -14,6 +14,7 @@ import './components/AboutPage/About.css';
 import './components/ImageGalery/ImageGallery.css';
 import './components/DecorativeCosmetics/DecorativeCosmetics.css';
 import './components/ExcursionToProduction/ExcursionToProduction.css';
+import './components/StickySideMenu/StickySideMenu.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';
@@ -43,7 +44,6 @@ function App() {
               <Route path='/decorative-cosmetics' element = {<DecorativeCosmetics />} />
               <Route path='/contacts' element = {<ContactsPage />} />
           </Route>
-         
         </Routes>
       </BrowserRouter>
     </div>

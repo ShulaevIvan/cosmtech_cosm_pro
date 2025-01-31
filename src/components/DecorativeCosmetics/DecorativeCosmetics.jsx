@@ -121,7 +121,6 @@ const DecorativeCosmetics = () => {
             fileData: decorativeCosmState.orderPopup.fields.find((item) => item.name === 'file').fileData,
             reqType: 'order',
         };
-        console.log(data)
         dispatch(sendDecorativeOrderRequest(data));
     };
 
@@ -291,7 +290,12 @@ const DecorativeCosmetics = () => {
                                         >Запросить рассчет</Link>
                                     </div>
                                     <div className="decorative-cosmetics-btn-wrap">
-                                        <Link to={'#'} className="decorative-cosmetics-btn">Скачать ТЗ</Link>
+                                        <Link 
+                                            to={'/static/media/tz_template.docx'} 
+                                            className="decorative-cosmetics-btn"
+                                            download={true}
+                                            target={'_blank'}
+                                        >Скачать ТЗ</Link>
                                     </div>
                                 </div>
                                 
