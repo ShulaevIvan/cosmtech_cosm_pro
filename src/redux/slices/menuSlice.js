@@ -2,6 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAction } from "@reduxjs/toolkit";
 import mobileHeaderTelegrmIcon from '../../img/mobileTelegramMenu.svg'
 import mobileHeaderWhatsappIcon from '../../img/mobileWhatsappMenu.svg'
+import tzIcon from '../../img/stickyMenu/tzIcon.svg';
+import calcIcon from '../../img/stickyMenu/calculatorIcon.svg';
+import communicationIcon from '../../img/stickyMenu/communication.svg';
+import demo from '../../img/decoraticeCosmeticsImages/demo.png';
 
 const initialState = { 
     mobileMenuActive: false,
@@ -81,25 +85,52 @@ const initialState = {
             {
                 id: 1,
                 name: 'ТЗ на производство',
-                img: '',
-                imgAlt: '',
+                img: tzIcon,
+                imgAlt: 'Заполнить тз на производство косметики онлайн',
+                type: 'tz',
                 active: false
             },
             {
                 id: 2,
                 name: 'Кальклуятор',
-                img: '',
-                imgAlt: '',
+                img: calcIcon,
+                imgAlt: '#',
+                type: 'calc',
                 active: false
             },
             {
                 id: 3,
-                name: 'Чат',
-                img: '',
+                name: 'Консультация',
+                img: communicationIcon,
                 imgAlt: '',
+                type: 'contact',
                 active: false
             },
-        ]
+        ],
+        tzPopup: {
+            active: false,
+            customerPopup: {
+                active: false,
+                allFieldsValid: true,
+                fields: [
+                    {
+                        id: 1,
+                        title: 'Название компании (ООО ИП ФИЗ.лицо)',
+                        name: 'comment',
+                        type: 'text',
+                        placeholder: 'Название компании',
+                        value: '',
+                        valid: true
+                    },
+                ],
+            }
+        },
+        calcPopup: {
+            active: false,
+        },
+        contactsPopup: {
+            active: false
+        }
     }
 };
 
@@ -148,6 +179,30 @@ const menuSlice = createSlice({
                     active: false
                 };
             });
+        },
+        sidemenuPopup(state, action) {
+            const { status, popupType } = action.payload;
+            switch (popupType) {
+                case 'tz' : 
+                    state.sideMenu.tzPopup = {
+                        ... state.sideMenu.tzPopup,
+                        active:  state.sideMenu.tzPopup.active ? false : true
+                    }
+                    break;
+                case 'calc' : 
+                    state.sideMenu.calcPopup = {
+                        ... state.sideMenu.calcPopup,
+                        active:  state.sideMenu.calcPopup.active ? false : true
+                    }
+                    break
+                case 'contact' :
+                    state.sideMenu.contactsPopup = {
+                        ...state.sideMenu.contactsPopup,
+                        active: state.sideMenu.contactsPopup.active ? false : true
+                    } 
+                    break
+                default : break;
+            }
         }
     }
 });
@@ -157,6 +212,8 @@ export const {
     mobileMenuActive,
     submenuActive,
     resetMenu,
-    sidemenuActive
+    sidemenuActive,
+    sidemenuTzPopupOpen,
+    sidemenuPopup
 } = menuSlice.actions;
 export default menuSlice.reducer;
