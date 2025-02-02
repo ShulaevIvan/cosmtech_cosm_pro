@@ -147,15 +147,17 @@
 .sticky-sidemenu-tz-title-wrap h2 {
     margin: 0 0 20px 0;
 }
-.sticky-sidemenu-tz-form-customer-row {
+.sticky-sidemenu-tz-form-customer-row,
+.sticky-sidemenu-tz-form-supplies-row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: baseline;
 }
-.sticky-sidemenu-tz-form-customer-row h3 {
+.sticky-sidemenu-tz-form-customer-row h3,
+.sticky-sidemenu-tz-form-supplies-row h3 {
     margin: 10px 0;
 }
 .sticky-sidemenu-tz-form-customer-wrap {
@@ -164,6 +166,7 @@
     flex-wrap: wrap;
     width: 45%;
     max-width: 50%;
+    margin-right: 20px;
 }
 .sticky-sidemenu-tz-form-product-type-wrap {
     display: flex;
@@ -171,8 +174,12 @@
     flex-wrap: wrap;
     width: 45%;
     max-width: 50%;
-    text-align: center;
 }
+.sticky-sidemenu-tz-form-customer-wrap,
+.sticky-sidemenu-tz-form-customer-wrap {
+    text-align: left;
+}
+
 .sticky-sidemenu-tz-form-customer-info-item {
     display: flex;
     flex-direction: row;
@@ -211,7 +218,7 @@
     content: url('../../img/stickyMenu/tz-add-btn.svg');
     cursor: pointer;
 }
-.sticky-sidemenu-tz-form-customer-add-btn-wrap {
+.sticky-sidemenu-tz-add-btn-wrap {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -266,6 +273,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 .tz-inner-popup-from-controls-btn-wrap {
     display: flex;

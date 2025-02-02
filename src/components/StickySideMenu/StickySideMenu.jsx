@@ -16,7 +16,7 @@ const StickySideMenu = () => {
     const menuState = useSelector((state) => state.menu.sideMenu);
     const customerRefs = [
         {name: 'company', ref: useRef()},
-        {name: 'position', ref: useRef()},
+        {name: 'city', ref: useRef()},
         {name: 'phone', ref: useRef()},
         {name: 'email', ref: useRef()}
     ];

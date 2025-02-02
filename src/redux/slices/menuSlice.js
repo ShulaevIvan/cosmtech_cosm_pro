@@ -111,6 +111,7 @@ const initialState = {
             active: false,
             resultData: {
                 customer: {
+                    allFieldsValid: false,
                     companyName: '',
                     customerName: '',
                     customerPhone: '',
@@ -133,10 +134,10 @@ const initialState = {
                     },
                     {
                         id: 2,
-                        title: 'Должность',
-                        name: 'position',
+                        title: 'Город',
+                        name: 'city',
                         type: 'text',
-                        placeholder: 'Должность или пустое поле',
+                        placeholder: 'Город',
                         value: '',
                         valid: true
                     },
@@ -274,8 +275,9 @@ const menuSlice = createSlice({
                 case 'customer':
                     state.sideMenu.tzPopup.resultData.customer = {
                         ...state.sideMenu.tzPopup.resultData.customer,
+                        allFieldsValid: true,
                         companyName:  state.sideMenu.tzPopup.customerPopup.fields.find((item) => item.name === 'company').value,
-                        customerName: state.sideMenu.tzPopup.customerPopup.fields.find((item) => item.name === 'position').value,
+                        customerName: state.sideMenu.tzPopup.customerPopup.fields.find((item) => item.name === 'city').value,
                         customerPhone: state.sideMenu.tzPopup.customerPopup.fields.find((item) => item.name === 'phone').value,
                         customerEmail: state.sideMenu.tzPopup.customerPopup.fields.find((item) => item.name === 'email').value,
                     }

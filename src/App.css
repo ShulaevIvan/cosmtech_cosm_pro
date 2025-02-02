@@ -293,12 +293,13 @@ section {
   background-color: #00458B;
   transition: background .4s ease;
 }
-.video-mainpage-prezent-btn:hover {
+.video-mainpage-prezent-btn a:hover {
   width: 100%;
-  max-width: 200px;
   background-color: #00458B;
   color: white;
+  padding: 0 40px;
   transition: background .4s ease;
+  
 }
 /* video */
 .video-mainpage-title-wrap {
@@ -393,6 +394,12 @@ section {
   justify-content: center;
 }
 .video-mainpage-prezent-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.video-mainpage-prezent-btn a {
   display: flex;
   align-items: center;
   justify-content: center;

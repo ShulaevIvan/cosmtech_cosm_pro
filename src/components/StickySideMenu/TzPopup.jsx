@@ -31,8 +31,8 @@ const TzPopup = (props) => {
                                     title={'Сведения о заказчике'}
                                 />
                             : null}
-                            {tzState.customerPopup.showAddBtn ? 
-                                <div className="sticky-sidemenu-tz-form-customer-add-btn-wrap">
+                            {!tzState.resultData.customer.allFieldsValid ? 
+                                <div className="sticky-sidemenu-tz-add-btn-wrap">
                                     <span 
                                         className="sticky-sidemenu-tz-add-btn"
                                         onClick={() => props.innerPopupHandler('customer', true)}
@@ -55,9 +55,14 @@ const TzPopup = (props) => {
                             : null}
                         </div>
                         <div className="sticky-sidemenu-tz-form-product-type-wrap">
-                            <h3>Тип продукта</h3>
+                            <h3>Производимые продукты</h3>
                             <div className="sticky-sidemenu-tz-form">
-                                
+                                <div className="sticky-sidemenu-tz-add-btn-wrap">
+                                    <span 
+                                        className="sticky-sidemenu-tz-add-btn"
+                                        onClick={() => props.innerPopupHandler('product', true)}
+                                    ></span>
+                                </div>
                             </div>
                         </div>
                     </div>
