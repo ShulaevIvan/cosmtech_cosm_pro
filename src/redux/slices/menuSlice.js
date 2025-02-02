@@ -109,16 +109,52 @@ const initialState = {
         ],
         tzPopup: {
             active: false,
+            resultData: {
+                customer: {
+                    companyName: '',
+                    customerName: '',
+                    customerPhone: '',
+                    customerEmail: '',
+                }
+            },
             customerPopup: {
                 active: false,
                 allFieldsValid: true,
+                showAddBtn: true,
                 fields: [
                     {
                         id: 1,
-                        title: 'Название компании (ООО ИП ФИЗ.лицо)',
-                        name: 'comment',
+                        title: 'Название компании (ООО, ИП, ФИЗ.лицо)',
+                        name: 'company',
                         type: 'text',
-                        placeholder: 'Название компании',
+                        placeholder: 'Название компании или ФИО',
+                        value: '',
+                        valid: true
+                    },
+                    {
+                        id: 2,
+                        title: 'Должность',
+                        name: 'position',
+                        type: 'text',
+                        placeholder: 'Должность или пустое поле',
+                        value: '',
+                        valid: true
+                    },
+                    {
+                        id: 3,
+                        title: 'Телефон',
+                        name: 'phone',
+                        type: 'text',
+                        placeholder: '8xxxxxxxxxx',
+                        value: '',
+                        valid: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Email',
+                        name: 'email',
+                        type: 'email',
+                        placeholder: 'demo@....ru',
                         value: '',
                         valid: true
                     },
@@ -203,7 +239,56 @@ const menuSlice = createSlice({
                     break
                 default : break;
             }
+        },
+        sidemenuTzInnerPopup(state, action) {
+            const { status, popupType } = action.payload;
+
+            switch (popupType) {
+                case 'customer':
+                    state.sideMenu.tzPopup.customerPopup = {
+                        ...state.sideMenu.tzPopup.customerPopup,
+                        active: status
+                    }
+                    break;
+                default : break;
+            }
+        },
+        tzInnerPopupCustomerInput(state, action) {
+            const { inputId, inputType, inputValue } = action.payload;
+            let validValue = inputValue;
+            let inputValid;
+            state.sideMenu.tzPopup.customerPopup.fields = state.sideMenu.tzPopup.customerPopup.fields.map((fieldItem) => {
+                if (fieldItem.id === inputId, fieldItem.name === inputType) {
+                    return {
+                        ...fieldItem,
+                        value: validValue
+                    }
+                }
+                return fieldItem;
+            });
+        },
+        saveTzInnerPopup(state, action) {
+            const { popupType } = action.payload;
+
+            switch (popupType) {
+                case 'customer':
+                    state.sideMenu.tzPopup.resultData.customer = {
+                        ...state.sideMenu.tzPopup.resultData.customer,
+                        companyName:  state.sideMenu.tzPopup.customerPopup.fields.find((item) => item.name === 'company').value,
+                        customerName: state.sideMenu.tzPopup.customerPopup.fields.find((item) => item.name === 'position').value,
+                        customerPhone: state.sideMenu.tzPopup.customerPopup.fields.find((item) => item.name === 'phone').value,
+                        customerEmail: state.sideMenu.tzPopup.customerPopup.fields.find((item) => item.name === 'email').value,
+                    }
+                    state.sideMenu.tzPopup.customerPopup.active = false;
+                    break;
+                default : break;
+            }
+        },
+        removeTzCustomerInfo(state) {
+            state.sideMenu.tzPopup.resultData.customer = initialState.sideMenu.tzPopup.resultData.customer;
+            state.sideMenu.tzPopup.customerPopup = initialState.sideMenu.tzPopup.customerPopup;
         }
+        
     }
 });
 
@@ -214,6 +299,10 @@ export const {
     resetMenu,
     sidemenuActive,
     sidemenuTzPopupOpen,
-    sidemenuPopup
+    sidemenuPopup,
+    sidemenuTzInnerPopup,
+    saveTzInnerPopup,
+    tzInnerPopupCustomerInput,
+    removeTzCustomerInfo
 } = menuSlice.actions;
 export default menuSlice.reducer;

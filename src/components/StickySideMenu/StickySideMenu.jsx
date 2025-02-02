@@ -1,14 +1,29 @@
 import React from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { 
     sidemenuActive, 
-    sidemenuPopup 
+    sidemenuPopup,
+    sidemenuTzInnerPopup,
+    saveTzInnerPopup,
+    tzInnerPopupCustomerInput,
+    removeTzCustomerInfo
 } from "../../redux/slices/menuSlice";
 import TzPopup from "./TzPopup";
 
 const StickySideMenu = () => {
     const dispatch = useDispatch();
     const menuState = useSelector((state) => state.menu.sideMenu);
+    const customerRefs = [
+        {name: 'company', ref: useRef()},
+        {name: 'position', ref: useRef()},
+        {name: 'phone', ref: useRef()},
+        {name: 'email', ref: useRef()}
+    ];
+
+    const findInputRef = (refArr, refName) => {
+        return refArr.find((item) => item.name === refName).ref;
+    }
 
     const sideMenuHandler = (menuId, status) => {
         console.log(status)
@@ -17,6 +32,23 @@ const StickySideMenu = () => {
 
     const sideMenuPopupHandler = (status, menuType) => {
         dispatch(sidemenuPopup({status: status, popupType: menuType}))
+    };
+
+    const tzInnerPopupHandler = (popupType, status) => {
+        dispatch(sidemenuTzInnerPopup({status: status, popupType: popupType}));
+    };
+
+    const saveInnerPopupHandler = (popupType) => {
+        dispatch(saveTzInnerPopup({popupType: popupType}))
+    };
+
+    const tzInnerPopupCustomerInputHandler = (inputId, inputType, inputRef) => {
+        console.log(inputRef)
+        dispatch(tzInnerPopupCustomerInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}))
+    };
+
+    const removeCustomerInfoHandler = () => {
+        dispatch(removeTzCustomerInfo());
     };
 
     return (
@@ -46,6 +78,12 @@ const StickySideMenu = () => {
                 <TzPopup 
                     closeHandler={sideMenuPopupHandler}
                     tzState={menuState.tzPopup}
+                    innerPopupHandler={tzInnerPopupHandler}
+                    innerPopupCustomerInputHandler={tzInnerPopupCustomerInputHandler}
+                    innerSavePopupHandler={saveInnerPopupHandler}
+                    customerRefs={customerRefs}
+                    findInputRef={findInputRef}
+                    removeCustomerInfoHandler={removeCustomerInfoHandler}
                 /> 
             : null}
         </React.Fragment>
