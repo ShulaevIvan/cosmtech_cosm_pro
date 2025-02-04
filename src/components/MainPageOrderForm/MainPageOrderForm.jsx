@@ -95,6 +95,7 @@ const MainPageOrderForm = (props) => {
     
     return (
         <React.Fragment>
+            <div className="hero-order-form-popup-background">
             <div className='hero-order-form-popup-wrap' ref={popupWrapRef}>
                 <div className="hero-order-form-popup-close-wrap">
                     <span
@@ -104,6 +105,7 @@ const MainPageOrderForm = (props) => {
                     ></span>
                 </div>
                 <div className="hero-order-form-wrap">
+                    <h2>Запросить рассчет</h2>
                     <form className="hero-order-form">
                         {/* <div className="hero-order-form-mode-wrap">
                             <div className="form-mode-checkbox">
@@ -188,6 +190,7 @@ const MainPageOrderForm = (props) => {
                         </div>
                     </form>
                 </div>
+            </div>
             </div>
         </React.Fragment>
     )

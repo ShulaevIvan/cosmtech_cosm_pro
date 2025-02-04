@@ -5,11 +5,16 @@ import {
     sidemenuActive, 
     sidemenuPopup,
     sidemenuTzInnerPopup,
+    sidemenuPolicyCheckboxHandler,
     saveTzInnerPopup,
     tzInnerPopupCustomerInput,
-    removeTzCustomerInfo
+    removeTzCustomerInfo,
+    consultFormInput,
+    consultFormClearInput,
+    validateConsultForm
 } from "../../redux/slices/menuSlice";
 import TzPopup from "./TzPopup";
+import ContactsPopup from "./ContactsPopup";
 
 const StickySideMenu = () => {
     const dispatch = useDispatch();
@@ -20,13 +25,16 @@ const StickySideMenu = () => {
         {name: 'phone', ref: useRef()},
         {name: 'email', ref: useRef()}
     ];
+    const consultRefs = [
+        {name: 'name', ref: useRef()},
+        {name: 'phone', ref: useRef()},
+    ];
 
     const findInputRef = (refArr, refName) => {
         return refArr.find((item) => item.name === refName).ref;
     }
 
     const sideMenuHandler = (menuId, status) => {
-        console.log(status)
         dispatch(sidemenuActive({menuId: menuId, status: status}));
     };
 
@@ -43,13 +51,39 @@ const StickySideMenu = () => {
     };
 
     const tzInnerPopupCustomerInputHandler = (inputId, inputType, inputRef) => {
-        console.log(inputRef)
         dispatch(tzInnerPopupCustomerInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}))
     };
 
     const removeCustomerInfoHandler = () => {
         dispatch(removeTzCustomerInfo());
     };
+
+    const consultInputHandler = (inputId, inputType, inputRef) => {
+        dispatch(consultFormInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
+    };
+
+    const consultClearInputHandler = (e, inputId, inputType) => {
+        if (e.key === 'Backspace') {
+            dispatch(consultFormClearInput({inputId: inputId, inputType: inputType}));
+            return;
+        }
+    };
+
+    const consultCheckboxHandler = () => {
+        dispatch(sidemenuPolicyCheckboxHandler({formName: 'consult'}))
+    };
+
+    const sendConsultFormHandler = () => {
+        const sendData = {
+            name: menuState.contactsPopup.fields.find((item) => item.name === 'name' && item.valid).value,
+            phone: menuState.contactsPopup.fields.find((item) => item.name === 'phone' && item.valid).value
+        };
+        console.log(sendData);
+    };
+
+    useEffect(() => {
+        dispatch(validateConsultForm());
+    }, [menuState.contactsPopup]);
 
     return (
         <React.Fragment>
@@ -84,6 +118,18 @@ const StickySideMenu = () => {
                     customerRefs={customerRefs}
                     findInputRef={findInputRef}
                     removeCustomerInfoHandler={removeCustomerInfoHandler}
+                /> 
+            : null}
+            {menuState.contactsPopup.active ? 
+                <ContactsPopup 
+                    closeHandler={sideMenuPopupHandler}
+                    consultState={menuState.contactsPopup}
+                    consultRefs={consultRefs}
+                    findInputRef={findInputRef}
+                    inputHandler={consultInputHandler}
+                    clearInputHandler={consultClearInputHandler}
+                    policyCheckboxHandler={consultCheckboxHandler}
+                    sendFormHandler={sendConsultFormHandler}
                 /> 
             : null}
         </React.Fragment>

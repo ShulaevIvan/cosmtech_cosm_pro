@@ -1472,31 +1472,26 @@ section {
   justify-content: center;
 }
 /* popup + order form */
-.hero-order-form-popup-background {
-  background-color: rgba(0, 0, 0, .8);
-  min-height: 200vh;
-  width: 100%;
-  position: fixed;
-  top: -50%;
-  z-index: 5;
-  animation: grow;
-  animation-duration: 0.3s;
-}
 .hero-order-form-popup-wrap {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  z-index: 6;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  background-color: gray;
   width: 425px;
   max-width: 450px;
   min-height: 400px;
+  position: absolute;
+  left: 30%;
   background-color: white;
   padding: 35px 25px;
   border: 1px solid #00458B;
   border-radius: 10px;
+  animation-duration: 0.3s;
+  animation-name: grow;
+  top: 2%;
 }
 .hero-order-form-options-title,
 .hero-order-form-options-title {
@@ -1509,11 +1504,6 @@ section {
   font-family: gothampro bold;
   font-size: 20px;
 }
-.hero-order-form-wrap h2 {
-  margin: 0 0 20px 0;
-  color: #00458B;
-  font-family: gothampro bold;
-}
 .hero-order-form-options-title label {
   cursor: pointer;
 }
@@ -1522,7 +1512,7 @@ section {
   margin-bottom: 5px;
   color: #00458B;
   font-family: gothampro bold;
-  font-size: 18px;
+  font-size: 20px;
 }
 .hero-order-main-fields-title-wrap label {
   cursor: pointer;
@@ -1564,12 +1554,7 @@ section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
   margin-bottom: 20px;
-}
-.form-mode-checkbox span {
-  max-width: 90%;
-  width: 90%;
 }
 .hero-order-main-fields-checkbox-wrap {
   display: flex;
@@ -1582,7 +1567,6 @@ section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
   justify-content: center;
   align-items: center;
 }
@@ -1788,6 +1772,7 @@ section {
   }
 }
 @media  (min-width: 380px) and (max-width: 1199.98px)  {
+  .hero-order-form-popup-wrap,
   .hero-order-form select,
   .hero-order-main-fields-title-wrap,
   .hero-order-form input,
@@ -1803,31 +1788,6 @@ section {
       min-width: 300px;
       left:auto;
       top: auto;
-  }
-}
-
-
-@media (max-width: 600px)  {
-  .hero-order-form-popup-wrap {
-    max-width: 350px;
-  }
-}
-@media (max-width: 600px)  {
-  .hero-order-main-fields-input-wrap input {
-    max-width: 250px;
-    min-width: 250px;
-  }
-}
-
-@media (max-width: 400px)  {
-  .hero-order-form-popup-wrap {
-    max-width: 320px;
-  }
-}
-@media (max-width: 360px)  {
-  .hero-order-form-popup-wrap {
-    max-width: 320px;
-    padding: 10px;
   }
 }
 @media (max-width: 991px)  {
@@ -2256,6 +2216,16 @@ section {
   }
 }
 
+
+
+@media (min-width: 200px) and (max-width: 1024px) { 
+  .hero-order-form-popup-wrap{
+    top: 2%;
+    left: 0%;
+    width: 85%;
+    max-width: 100%;
+  }
+}
 @media (min-width: 280px) and (max-width: 1024px) { 
   .contact-form-order-main-label-wrap,
   .contact-form-order-main-label-wrap label {
@@ -2575,6 +2545,11 @@ section {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+  }
+}
+@media (min-width: 700px) and (max-width: 1000px)  {
+  .hero-order-form-popup-wrap {
+    width: 55%!important;
   }
 }
 @media (min-width: 200px) and (max-width: 800px)  {

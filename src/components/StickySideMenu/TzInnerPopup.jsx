@@ -8,7 +8,7 @@ const TzInnerPopup = (props) => {
                 <div className="sticky-sidemenu-tz-popup-close-btn-wrap">
                     <span 
                         className="sticky-sidemenu-tz-popup-close-btn"
-                        onClick={() => props.closeHandler('customer', false)}
+                        onClick={() => props.closeHandler(false, 'customer')}
                     ></span>
                 </div>
                 <div className="sticky-sidemenu-tz-inner-popup-body">
