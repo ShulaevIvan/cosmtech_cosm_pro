@@ -9,6 +9,8 @@ import {
     saveTzInnerPopup,
     tzInnerPopupCustomerInput,
     removeTzCustomerInfo,
+    tzInnerPopupProductInput,
+    tzInnerPopupSelect,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm
@@ -25,6 +27,17 @@ const StickySideMenu = () => {
         {name: 'phone', ref: useRef()},
         {name: 'email', ref: useRef()}
     ];
+    const productRefs = [
+        {name: 'productStats', ref: useRef()},
+        {name: 'productLink', ref: useRef()},
+        {name: 'productSize', ref: useRef()},
+        {name: 'productDoc', ref: useRef()}
+    ];
+    const selectProductTypesRefs = [
+        {name: 'default', ref: useRef()},
+        {name: 'cosmetic', ref: useRef()},
+        {name: 'decorative', ref: useRef()},
+    ];
     const consultRefs = [
         {name: 'name', ref: useRef()},
         {name: 'phone', ref: useRef()},
@@ -39,7 +52,7 @@ const StickySideMenu = () => {
     };
 
     const sideMenuPopupHandler = (status, menuType) => {
-        dispatch(sidemenuPopup({status: status, popupType: menuType}))
+        dispatch(sidemenuPopup({status: status, popupType: menuType}));
     };
 
     const tzInnerPopupHandler = (popupType, status) => {
@@ -47,11 +60,23 @@ const StickySideMenu = () => {
     };
 
     const saveInnerPopupHandler = (popupType) => {
-        dispatch(saveTzInnerPopup({popupType: popupType}))
+        dispatch(saveTzInnerPopup({popupType: popupType}));
     };
 
     const tzInnerPopupCustomerInputHandler = (inputId, inputType, inputRef) => {
-        dispatch(tzInnerPopupCustomerInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}))
+        dispatch(tzInnerPopupCustomerInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
+    };
+
+    const tzInnerPopupProductInputHandler = (inputId, inputType, inputRef) => {
+        dispatch(tzInnerPopupProductInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
+    };
+
+    const tzInnerPopupProductSelectHandler = (selectType, selectRef, popupType) => {
+        dispatch(tzInnerPopupSelect({
+            selectType: selectType, 
+            selectValue: selectRef.value, 
+            popupType: popupType
+        }));
     };
 
     const removeCustomerInfoHandler = () => {
@@ -116,6 +141,10 @@ const StickySideMenu = () => {
                     innerPopupCustomerInputHandler={tzInnerPopupCustomerInputHandler}
                     innerSavePopupHandler={saveInnerPopupHandler}
                     customerRefs={customerRefs}
+                    productRefs={productRefs}
+                    selectProductTypesRefs={selectProductTypesRefs}
+                    innerPopupProductInputHandler={tzInnerPopupProductInputHandler}
+                    innerPopupProductSelectHandler={tzInnerPopupProductSelectHandler}
                     findInputRef={findInputRef}
                     removeCustomerInfoHandler={removeCustomerInfoHandler}
                 /> 

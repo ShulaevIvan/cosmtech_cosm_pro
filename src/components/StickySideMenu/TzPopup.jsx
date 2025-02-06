@@ -3,6 +3,7 @@ import TzInnerPopup from "./TzInnerPopup";
 
 const TzPopup = (props) => {
     const tzState = props.tzState;
+    
     return (
         <React.Fragment>
             <div className="sticky-sidemenu-tz-background">
@@ -15,18 +16,21 @@ const TzPopup = (props) => {
                 </div>
                 <div className="sticky-sidemenu-tz-popup-body">
                     <div className="sticky-sidemenu-tz-title-wrap">
-                        <h2>Заполнить тз онлайн</h2>
+                        <h2>Заполнить техзадание на производство</h2>
                     </div>
-                    <div className="sticky-sidemenu-tz-form-customer-row">
+                    <div className="sticky-sidemenu-tz-form-wrap">
+                    <div className="sticky-sidemenu-tz-form-row">
                         <div className="sticky-sidemenu-tz-form-customer-wrap">
                             <h3>Сведения о заказчике:</h3>
                             {tzState.customerPopup.active ? 
-                                <TzInnerPopup 
+                                <TzInnerPopup
+                                    popupType={'customer'} 
                                     closeHandler={props.innerPopupHandler}
                                     saveHandler={props.innerSavePopupHandler}
                                     form={tzState.customerPopup.fields}
+                                    innerPopupState={tzState.customerPopup}
                                     inputHandler={props.innerPopupCustomerInputHandler}
-                                    customerRefs={props.customerRefs}
+                                    refs={props.customerRefs}
                                     findInputRef={props.findInputRef}
                                     title={'Сведения о заказчике'}
                                 />
@@ -55,7 +59,7 @@ const TzPopup = (props) => {
                             : null}
                         </div>
                         <div className="sticky-sidemenu-tz-form-product-type-wrap">
-                            <h3>Производимые продукты</h3>
+                            <h3>Производимый продукт</h3>
                             <div className="sticky-sidemenu-tz-form">
                                 <div className="sticky-sidemenu-tz-add-btn-wrap">
                                     <span 
@@ -63,9 +67,40 @@ const TzPopup = (props) => {
                                         onClick={() => props.innerPopupHandler('product', true)}
                                     ></span>
                                 </div>
+                                {tzState.productPopup.active ? 
+                                    <TzInnerPopup
+                                        popupType={'product'}  
+                                        closeHandler={props.innerPopupHandler}
+                                        form={tzState.productPopup.fields}
+                                        innerPopupState={tzState.productPopup}
+                                        inputHandler={props.innerPopupProductInputHandler}
+                                        selectHandler={props.innerPopupProductSelectHandler}
+                                        refs={props.productRefs}
+                                        productTypesRefs={props.selectProductTypesRefs}
+                                        findInputRef={props.findInputRef}
+                                        title={'Сведения о продукте'}
+                                    />
+                                : null}
                             </div>
                         </div>
                     </div>
+                    <div className="sticky-sidemenu-tz-form-row">
+                        <div className="sticky-sidemenu-tz-form-customer-wrap">
+                            <h3>Дополнительные условия:</h3>
+                        </div>
+                        <div className="sticky-sidemenu-tz-form-customer-wrap">
+                            <h3>Упаковка:</h3>
+                        </div>
+                    </div>
+                    <div className="sticky-sidemenu-tz-form-row">
+                        <div className="sticky-sidemenu-tz-form-customer-wrap">
+                            <h3>Отгрузка/Доставка:</h3>
+                        </div>
+                        <div className="sticky-sidemenu-tz-form-customer-wrap">
+                            <h3>Ценовой сегмент:</h3>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
             </div>

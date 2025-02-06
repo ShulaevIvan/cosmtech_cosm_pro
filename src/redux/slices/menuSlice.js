@@ -112,6 +112,7 @@ const initialState = {
         ],
         tzPopup: {
             active: false,
+            allFieldsValid: true,
             resultData: {
                 customer: {
                     allFieldsValid: false,
@@ -163,7 +164,67 @@ const initialState = {
                         valid: true
                     },
                 ],
-            }
+            },
+            productPopup: {
+                active: false,
+                productTypes: [
+                    { id: 1, name: '--Выберите тип косметики--', type: 'default', value: '--Выберите тип косметики--', selected: true},
+                    { id: 2, name: 'косметика', type: 'cosmetic', value: 'косметика', selected: false },
+                    { id: 3, name: 'декоративная косметика', type: 'decorative', value: 'декоративная косметика', selected: false }
+                ],
+                cosmeticProducts: [
+                    { id: 1, name: 'косметика продукт 1', type: 'cosmetic', value: 'косметика продукт 1', selected: true },
+                    { id: 2, name: 'косметика продукт 2', type: 'cosmetic', value: 'косметика продукт 2', selected: false },
+                    { id: 3, name: 'косметика продукт 3', type: 'cosmetic', value: 'косметика продукт 3', selected: false },
+                    { id: 4, name: 'свой вариант', type: 'decorCosmetic', value: 'свой вариант', selected: false },
+                ],
+                decorProducts: [
+                    { id: 1, name: 'декор косметика продукт 1', type: 'decorCosmetic', selected: false },
+                    { id: 2, name: 'декор косметика продукт 2', type: 'decorCosmetic', selected: false },
+                    { id: 3, name: 'декор косметика продукт 3', type: 'decorCosmetic', selected: false },
+                    { id: 4, name: 'свой вариант', type: 'decorCosmetic', selected: false },
+                ],
+                priceSegment: [],
+                fields : [
+                    {
+                        id: 1,
+                        title: 'Желаемые характеристики',
+                        name: 'productStats',
+                        type: 'textarea',
+                        placeholder: 'Описание характеристики продукта',
+                        value: '',
+                        valid: true
+                    },
+                    {
+                        id: 2,
+                        title: 'Пример продукта (ссылка)',
+                        name: 'productLink',
+                        type: 'text',
+                        placeholder: 'https://my-site.com',
+                        value: '',
+                        valid: true
+                    },
+                    {
+                        id: 3,
+                        title: 'Объем единицы',
+                        name: 'productSize',
+                        type: 'text',
+                        placeholder: 'например 200мл',
+                        value: '',
+                        valid: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Прикрепить файл/фото',
+                        name: 'productDoc',
+                        type: 'file',
+                        placeholder: 'Описание характеристики продукта',
+                        value: '',
+                        valid: true
+                    },
+                ],
+    
+            },
         },
         calcPopup: {
             active: false,
@@ -293,6 +354,12 @@ const menuSlice = createSlice({
                         active: status
                     }
                     break;
+                case 'product':
+                    state.sideMenu.tzPopup.productPopup = {
+                        ...state.sideMenu.tzPopup.productPopup,
+                        active: status
+                    }
+
                 default : break;
             }
         },
@@ -345,6 +412,54 @@ const menuSlice = createSlice({
         removeTzCustomerInfo(state) {
             state.sideMenu.tzPopup.resultData.customer = initialState.sideMenu.tzPopup.resultData.customer;
             state.sideMenu.tzPopup.customerPopup = initialState.sideMenu.tzPopup.customerPopup;
+        },
+        tzInnerPopupProductInput(state, action) {
+            const { inputId, inputType, inputValue } = action.payload;
+            let validValue = inputValue;
+            let inputValid;
+
+            state.sideMenu.tzPopup.productPopup.fields = state.sideMenu.tzPopup.productPopup.fields.map((fieldItem) => {
+                if (inputId === fieldItem.id && inputType === fieldItem.name) {
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        valid: inputValid
+                    }
+                }
+                return fieldItem;
+            });
+        },
+        tzInnerPopupSelect(state, action) {
+            const { selectType, selectValue, popupType } = action.payload;
+            if (!popupType || !selectType) return;
+            if (popupType === 'product') {
+                state.sideMenu.tzPopup.productPopup[selectType] = state.sideMenu.tzPopup.productPopup[selectType].map((productType) => {
+                    if (productType.value === selectValue) {
+                        return {
+                            ...productType,
+                            selected: true
+                        }
+                    }
+                    return {
+                        ...productType,
+                        selected: false
+                    }
+                });
+            }
+            if (popupType === 'product' && selectType === 'cosmeticType') {
+                state.sideMenu.tzPopup.productPopup.productTypes = state.sideMenu.tzPopup.productPopup.productTypes.map((productType) => {
+                    if (productType.value === selectValue) {
+                        return {
+                            ...productType,
+                            selected: true
+                        }
+                    }
+                    return {
+                        ...productType,
+                        selected: false
+                    }
+                });
+            }
         },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
@@ -410,6 +525,8 @@ export const {
     saveTzInnerPopup,
     tzInnerPopupCustomerInput,
     removeTzCustomerInfo,
+    tzInnerPopupProductInput,
+    tzInnerPopupSelect,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,
