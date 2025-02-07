@@ -9,6 +9,7 @@ import telegramIcon from '../../img/telegram_footer.svg';
 
 import validateName from '../../functions/validateName'
 import validatePhone from '../../functions/validatePhone';
+import fileToBase64 from '../../functions/fileToBase64';
 
 const initialState = { 
     mobileMenuActive: false,
@@ -176,14 +177,39 @@ const initialState = {
                     { id: 1, name: 'косметика продукт 1', type: 'cosmetic', value: 'косметика продукт 1', selected: true },
                     { id: 2, name: 'косметика продукт 2', type: 'cosmetic', value: 'косметика продукт 2', selected: false },
                     { id: 3, name: 'косметика продукт 3', type: 'cosmetic', value: 'косметика продукт 3', selected: false },
-                    { id: 4, name: 'свой вариант', type: 'decorCosmetic', value: 'свой вариант', selected: false },
+                    { id: 4, name: 'свой вариант', type: 'cosmetic', value: 'свой вариант', selected: false, customField: true },
                 ],
                 decorProducts: [
-                    { id: 1, name: 'декор косметика продукт 1', type: 'decorCosmetic', selected: false },
-                    { id: 2, name: 'декор косметика продукт 2', type: 'decorCosmetic', selected: false },
-                    { id: 3, name: 'декор косметика продукт 3', type: 'decorCosmetic', selected: false },
-                    { id: 4, name: 'свой вариант', type: 'decorCosmetic', selected: false },
+                    { id: 1, name: 'декор косметика продукт 1', type: 'decorCosmetic', value: 'косметика продукт 1', selected: false },
+                    { id: 2, name: 'декор косметика продукт 2', type: 'decorCosmetic', value: 'косметика продукт 2', selected: false },
+                    { id: 3, name: 'декор косметика продукт 3', type: 'decorCosmetic', value: 'косметика продукт 3', selected: false },
+                    { id: 4, name: 'свой вариант', type: 'decorCosmetic', value: 'свой вариант', selected: false, customField: true, },
                 ],
+                productTypeCustomField: {
+                    id: 1,
+                    title: 'productTypeCustomField',
+                    name: 'productTypeCustomField',
+                    type: 'textarea',
+                    placeholder: 'Описание productTypeCustomField',
+                    value: '',
+                    valid: true
+                },
+                cosmeticProductsCustomField: {
+                    title: 'cosmeticProductsCustomField',
+                    name: 'cosmeticProductsCustomField',
+                    type: 'textarea',
+                    placeholder: 'Описание cosmeticProductsCustomField',
+                    value: '',
+                    valid: true
+                },
+                decorProductsCustomField: {
+                    title: 'decorProductsCustomField',
+                    name: 'decorProductsCustomField',
+                    type: 'textarea',
+                    placeholder: 'Описание decorProductsCustomField',
+                    value: '',
+                    valid: true
+                },
                 priceSegment: [],
                 fields : [
                     {
@@ -429,11 +455,14 @@ const menuSlice = createSlice({
                 return fieldItem;
             });
         },
+        tzInnerPopupProductInputFile(state, action) {
+
+        },
         tzInnerPopupSelect(state, action) {
             const { selectType, selectValue, popupType } = action.payload;
             if (!popupType || !selectType) return;
             if (popupType === 'product') {
-                state.sideMenu.tzPopup.productPopup[selectType] = state.sideMenu.tzPopup.productPopup[selectType].map((productType) => {
+                state.sideMenu.tzPopup.productPopup[selectType] = state.sideMenu.tzPopup.productPopup[selectType].map((productType, i) => {
                     if (productType.value === selectValue) {
                         return {
                             ...productType,
@@ -446,20 +475,11 @@ const menuSlice = createSlice({
                     }
                 });
             }
-            if (popupType === 'product' && selectType === 'cosmeticType') {
-                state.sideMenu.tzPopup.productPopup.productTypes = state.sideMenu.tzPopup.productPopup.productTypes.map((productType) => {
-                    if (productType.value === selectValue) {
-                        return {
-                            ...productType,
-                            selected: true
-                        }
-                    }
-                    return {
-                        ...productType,
-                        selected: false
-                    }
-                });
-            }
+        },
+        tzInnerPopupSelectCustomField(state, action) {
+            const checkCustomProductType = state.sideMenu.tzPopup.productPopup.productTypes.find((item) => item.selected && item.customField);
+            const checkCustomCosmeticProduct = state.sideMenu.tzPopup.productPopup.cosmeticProducts.find((item) => item.selected && item.customField);
+            const checkCustomDecorProduct = state.sideMenu.tzPopup.productPopup.decorProducts.find((item) => item.selected && item.customField);
         },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;

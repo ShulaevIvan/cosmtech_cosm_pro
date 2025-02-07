@@ -7,10 +7,8 @@ const TzInnerPopup = (props) => {
     const popupState = props.innerPopupState;
     const selectProductTypeRef = useRef();
     const selectProductRef = useRef();
-
-    useEffect(() => {
-        console.log(popupState.productTypes)
-    }, [popupState.productTypes])
+    const selectDecorProductRef = useRef();
+    const fileRef = useRef();
 
     return (
         <React.Fragment>
@@ -44,38 +42,64 @@ const TzInnerPopup = (props) => {
                                     </select>
                                 </div>
                                 <div className="tz-inner-popup-product-wrap">
-                                    <label htmlFor="tz-inner-popup-product-select">Продукт:</label>
                                     {popupState.productTypes.find((item) => item.selected && item.type === 'cosmetic') ? 
-                                        <select
-                                            ref={selectProductRef}  
-                                            name="product" 
-                                            id="tz-inner-popup-product-select"
-                                            onChange={() => props.selectHandler('cosmeticProducts', selectProductRef.current, props.popupType)}
-                                        >
-                                            {popupState.cosmeticProducts.map((productItem) => {
-                                                return (
-                                                    <React.Fragment key={productItem.id}>
-                                                        <option value={productItem.value}>{productItem.name}</option>
-                                                    </React.Fragment>
-                                                )
-                                            })}
-                                        </select>
+                                        <React.Fragment>
+                                            <label htmlFor="tz-inner-popup-product-select">Продукт:</label>
+                                            <select
+                                                ref={selectProductRef}  
+                                                name="product" 
+                                                id="tz-inner-popup-product-select"
+                                                onChange={() => props.selectHandler('cosmeticProducts', selectProductRef.current, props.popupType)}
+                                            >
+                                                {popupState.cosmeticProducts.map((productItem) => {
+                                                    return (
+                                                        <React.Fragment key={productItem.id}>
+                                                            <option value={productItem.value}>{productItem.name}</option>
+                                                        </React.Fragment>
+                                                    )
+                                                })}
+                                            </select>
+                                            {popupState.cosmeticProducts.find((selectedItem) => selectedItem.selected && selectedItem.customField) ?
+                                                <React.Fragment>
+                                                    <div className="tz-inner-popup-input-title">
+                                                        <label htmlFor={`tz-inner-popup-input-cosmetic-custom-field`}>Свой вариант</label>
+                                                    </div>
+                                                    <div className="tz-inner-popup-input-wrap">
+                                                        <input type="text" id="tz-inner-popup-input-decor-cosm-custom-field"></input>
+                                                    </div>
+                                                </React.Fragment> 
+                                            : null}
+                                        </React.Fragment>
                                     : null}
                                     {popupState.productTypes.find((item) => item.selected && item.type === 'decorative') ? 
-                                        <select
-                                            ref={selectProductRef}  
-                                            name="product" 
-                                            id="tz-inner-popup-product-select"
-                                            onChange={() => props.selectHandler('decorProducts', selectProductRef.current, props.popupType)}
-                                        >
-                                            {popupState.decorProducts.map((productItem) => {
-                                                return (
-                                                    <React.Fragment key={productItem.id}>
-                                                        <option value={productItem.value}>{productItem.name}</option>
-                                                    </React.Fragment>
-                                                )
-                                            })}
-                                        </select>
+                                        <React.Fragment>
+                                            <label htmlFor="tz-inner-popup-product-select">Продукт:</label>
+                                            <select
+                                                ref={selectDecorProductRef}  
+                                                name="product" 
+                                                id="tz-inner-popup-product-select"
+                                                onChange={() => props.selectHandler('decorProducts', selectDecorProductRef.current, props.popupType)}
+                                            >
+                                                {popupState.decorProducts.map((productItem) => {
+                                                    return (
+                                                        <React.Fragment key={productItem.id}>
+                                                            <option value={productItem.value}>{productItem.name}</option>
+                                                        </React.Fragment>
+                                                    )
+                                                })}
+                                            </select>
+                                            {popupState.decorProducts.find((selectedItem) => selectedItem.selected && selectedItem.customField) ? 
+                                                <React.Fragment>
+                                                    <div className="tz-inner-popup-input-title">
+                                                        <label htmlFor={`tz-inner-popup-input-decor-cosm-custom-field`}>Свой вариант</label>
+                                                    </div>
+                                                    <div className="tz-inner-popup-input-wrap">
+                                                        <input type="text" id="tz-inner-popup-input-decor-cosm-custom-field"></input>
+                                                    </div>
+                                                   
+                                                </React.Fragment>
+                                            : null}
+                                        </React.Fragment>
                                     : null}
                                 </div>
                             </React.Fragment>
@@ -106,7 +130,11 @@ const TzInnerPopup = (props) => {
                                                     <div className="tz-form-wrap-file-upload">
                                                         <label className="input-file">
                                                             <span className="input-file-text" type="text"></span>
-                                                            <input type="file" name="file" />
+                                                            <input
+                                                                ref={fileRef} 
+                                                                type="file" name="file"
+                                                                onChange={() => props.inputFileHandler(fileRef.current)} 
+                                                            />
                                                             <span className="input-file-btn">Прикрепить файл</span>
                                                         </label>
                                                     </div>

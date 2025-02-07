@@ -71,6 +71,12 @@ const StickySideMenu = () => {
         dispatch(tzInnerPopupProductInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
     };
 
+    const tzInnerPopupProductFileHandler = async (fileRef) => {
+        const files = fileRef.files;
+        if (!files || files.length < 1) return;
+        console.log(files)
+    };
+
     const tzInnerPopupProductSelectHandler = (selectType, selectRef, popupType) => {
         dispatch(tzInnerPopupSelect({
             selectType: selectType, 
@@ -145,6 +151,7 @@ const StickySideMenu = () => {
                     selectProductTypesRefs={selectProductTypesRefs}
                     innerPopupProductInputHandler={tzInnerPopupProductInputHandler}
                     innerPopupProductSelectHandler={tzInnerPopupProductSelectHandler}
+                    innerPopupProductFileHandler={tzInnerPopupProductFileHandler}
                     findInputRef={findInputRef}
                     removeCustomerInfoHandler={removeCustomerInfoHandler}
                 /> 

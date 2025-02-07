@@ -74,6 +74,7 @@ const TzPopup = (props) => {
                                         form={tzState.productPopup.fields}
                                         innerPopupState={tzState.productPopup}
                                         inputHandler={props.innerPopupProductInputHandler}
+                                        inputFileHandler={props.innerPopupProductFileHandler}
                                         selectHandler={props.innerPopupProductSelectHandler}
                                         refs={props.productRefs}
                                         productTypesRefs={props.selectProductTypesRefs}
