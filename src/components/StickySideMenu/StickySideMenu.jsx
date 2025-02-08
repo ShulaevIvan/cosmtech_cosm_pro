@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { uploadProductFile } from "../../redux/slices/menuSlice";
 import { 
     sidemenuActive, 
     sidemenuPopup,
@@ -72,9 +73,11 @@ const StickySideMenu = () => {
     };
 
     const tzInnerPopupProductFileHandler = async (fileRef) => {
-        const files = fileRef.files;
-        if (!files || files.length < 1) return;
-        console.log(files)
+        if (fileRef && fileRef.files && fileRef.files.length > 0) {
+            const file = fileRef.files[0];
+            dispatch(uploadProductFile(file));
+        }
+       
     };
 
     const tzInnerPopupProductSelectHandler = (selectType, selectRef, popupType) => {

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import mobileHeaderTelegrmIcon from '../../img/mobileTelegramMenu.svg'
 import mobileHeaderWhatsappIcon from '../../img/mobileWhatsappMenu.svg'
 import tzIcon from '../../img/stickyMenu/tzIcon.svg';
@@ -210,6 +211,14 @@ const initialState = {
                     value: '',
                     valid: true
                 },
+                cosmeticProductsCustomFile: {
+                    name: '',
+                    type: '',
+                    fileData: '',
+                    url: '',
+                    date: '',
+                    displayName: '',
+                },
                 priceSegment: [],
                 fields : [
                     {
@@ -241,7 +250,7 @@ const initialState = {
                     },
                     {
                         id: 4,
-                        title: 'Прикрепить файл/фото',
+                        title: 'Прикрепить файл / фото / тех.карта',
                         name: 'productDoc',
                         type: 'file',
                         placeholder: 'Описание характеристики продукта',
@@ -251,6 +260,49 @@ const initialState = {
                 ],
     
             },
+            additionalOptionsPopup: {
+                active: false,
+                allFieldsValid: true,
+                showAddBtn: true,
+                fields: [
+                    {
+                        id: 1,
+                        title: 'Название компании (ООО, ИП, ФИЗ.лицо)',
+                        name: 'company',
+                        type: 'text',
+                        placeholder: 'Название компании или ФИО',
+                        value: '',
+                        valid: true
+                    },
+                    {
+                        id: 2,
+                        title: 'Город',
+                        name: 'city',
+                        type: 'text',
+                        placeholder: 'Город',
+                        value: '',
+                        valid: true
+                    },
+                    {
+                        id: 3,
+                        title: 'Телефон',
+                        name: 'phone',
+                        type: 'text',
+                        placeholder: '8xxxxxxxxxx',
+                        value: '',
+                        valid: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Email',
+                        name: 'email',
+                        type: 'email',
+                        placeholder: 'demo@....ru',
+                        value: '',
+                        valid: true
+                    },
+                ],
+            }
         },
         calcPopup: {
             active: false,
@@ -298,6 +350,14 @@ const initialState = {
         }
     }
 };
+
+export const uploadProductFile = createAsyncThunk(
+    'uploadTzProductFile',
+    async (file) => {
+        const data = await fileToBase64(file);
+        return data;
+    }
+);
 
 const menuSlice = createSlice({
     name: 'menu',
@@ -372,7 +432,10 @@ const menuSlice = createSlice({
         },
         sidemenuTzInnerPopup(state, action) {
             const { status, popupType } = action.payload;
-
+            if (!status) {
+                state.sideMenu.tzPopup.customerPopup = initialState.sideMenu.tzPopup.customerPopup;
+                state.sideMenu.tzPopup.productPopup = initialState.sideMenu.tzPopup.productPopup;
+            }
             switch (popupType) {
                 case 'customer':
                     state.sideMenu.tzPopup.customerPopup = {
@@ -456,6 +519,11 @@ const menuSlice = createSlice({
             });
         },
         tzInnerPopupProductInputFile(state, action) {
+            const { displayFilename, fileData } = action.payload;
+            console.log(displayFilename)
+            // const nameLength = fileData.file.name.length;
+            // const displayFilename = nameLength > 10 ? `${fileData.name.match(/^.{10}/)}... ${fileData.name.match(/.\w+$/)[0]}` : fileData.name;
+            // console.log(displayFilename)
 
         },
         tzInnerPopupSelect(state, action) {
@@ -529,6 +597,23 @@ const menuSlice = createSlice({
             state.sideMenu.contactsPopup.sendBtnActive = false;
         }
         
+    },
+    extraReducers: (builder) => {
+        builder
+        .addCase(uploadProductFile.fulfilled, (state, action) => {
+            const { file, name, type, url, date } = action.payload;
+            const nameLength = name.length;
+            const displayFilename = nameLength > 10 ? `${name.match(/^.{10}/)}... ${name.match(/.\w+$/)[0]}` : name;
+            state.sideMenu.tzPopup.productPopup.cosmeticProductsCustomFile  = {
+                ...state.sideMenu.tzPopup.productPopup.cosmeticProductsCustomFile,
+                name: name,
+                type: type,
+                url: url,
+                date: date,
+                displayName: displayFilename,
+                fileData: file
+            }
+        })
     }
 });
 
@@ -547,6 +632,7 @@ export const {
     removeTzCustomerInfo,
     tzInnerPopupProductInput,
     tzInnerPopupSelect,
+    tzInnerPopupProductInputFile,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,

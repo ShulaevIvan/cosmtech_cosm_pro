@@ -65,7 +65,11 @@ const TzInnerPopup = (props) => {
                                                         <label htmlFor={`tz-inner-popup-input-cosmetic-custom-field`}>Свой вариант</label>
                                                     </div>
                                                     <div className="tz-inner-popup-input-wrap">
-                                                        <input type="text" id="tz-inner-popup-input-decor-cosm-custom-field"></input>
+                                                        <input 
+                                                            type="text" 
+                                                            id="tz-inner-popup-input-decor-cosm-custom-field"
+                                                            placeholder="Название желаемого продукта"
+                                                        ></input>
                                                     </div>
                                                 </React.Fragment> 
                                             : null}
@@ -94,7 +98,11 @@ const TzInnerPopup = (props) => {
                                                         <label htmlFor={`tz-inner-popup-input-decor-cosm-custom-field`}>Свой вариант</label>
                                                     </div>
                                                     <div className="tz-inner-popup-input-wrap">
-                                                        <input type="text" id="tz-inner-popup-input-decor-cosm-custom-field"></input>
+                                                        <input 
+                                                            type="text" 
+                                                            id="tz-inner-popup-input-decor-cosm-custom-field"
+                                                            placeholder="Название желаемого продукта"
+                                                        ></input>
                                                     </div>
                                                    
                                                 </React.Fragment>
@@ -126,18 +134,26 @@ const TzInnerPopup = (props) => {
                                             ></textarea>
                                         
                                         : 
-                                            formItem.type === 'file' ? 
-                                                    <div className="tz-form-wrap-file-upload">
-                                                        <label className="input-file">
-                                                            <span className="input-file-text" type="text"></span>
-                                                            <input
-                                                                ref={fileRef} 
-                                                                type="file" name="file"
-                                                                onChange={() => props.inputFileHandler(fileRef.current)} 
-                                                            />
-                                                            <span className="input-file-btn">Прикрепить файл</span>
-                                                        </label>
-                                                    </div>
+                                            formItem.type === 'file' ?
+                                                    <React.Fragment>
+                                                        <div className="tz-form-wrap-file-upload">
+                                                            <label className="input-file">
+                                                                <span className="input-file-text" type="text"></span>
+                                                                <input
+                                                                    ref={fileRef} 
+                                                                    type="file" name="file"
+                                                                    onChange={() => props.inputFileHandler(fileRef.current)} 
+                                                                />
+                                                                <span className="input-file-btn">Прикрепить файл</span>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            {popupState.cosmeticProductsCustomFile.displayName ? 
+                                                                `Прикреплен (${popupState.cosmeticProductsCustomFile.displayName})`
+                                                            : null}
+                                                        </div>
+                                                    </React.Fragment>
+                                                    
                                                 :
                                                     <input
                                                         ref={props.findInputRef(props.refs, formItem.name)}
