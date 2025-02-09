@@ -9,7 +9,7 @@ const TzInnerPopup = (props) => {
     const selectProductRef = useRef();
     const selectDecorProductRef = useRef();
     const fileRef = useRef();
-
+    
     return (
         <React.Fragment>
             <div className="sticky-sidemenu-tz-inner-popup">
@@ -65,11 +65,25 @@ const TzInnerPopup = (props) => {
                                                         <label htmlFor={`tz-inner-popup-input-cosmetic-custom-field`}>Свой вариант</label>
                                                     </div>
                                                     <div className="tz-inner-popup-input-wrap">
-                                                        <input 
-                                                            type="text" 
-                                                            id="tz-inner-popup-input-decor-cosm-custom-field"
-                                                            placeholder="Название желаемого продукта"
-                                                        ></input>
+                                                        {popupState.customCosmFields.map((fieldItem) => {
+                                                            return (
+                                                                <React.Fragment key={`${fieldItem.id}-custom-cosm`}>
+                                                                    <input
+                                                                        ref={props.findInputRef(props.refs, fieldItem.name)}  
+                                                                        id="tz-inner-popup-input-decor-cosm-custom-field"
+                                                                        type={fieldItem.type}
+                                                                        placeholder={fieldItem.placeholder}
+                                                                        value={fieldItem.value}
+                                                                        onChange={() => props.inputHandler(
+                                                                            fieldItem.id, 
+                                                                            fieldItem.name, 
+                                                                            props.findInputRef(props.refs, fieldItem.name).current)
+                                                                        }
+                                                                        onKeyDown={(e) => props.clearInputHandler(e, props.popupType, fieldItem.id, fieldItem.name)}        
+                                                                    />
+                                                                </React.Fragment>
+                                                            )
+                                                        })}
                                                     </div>
                                                 </React.Fragment> 
                                             : null}
@@ -98,11 +112,25 @@ const TzInnerPopup = (props) => {
                                                         <label htmlFor={`tz-inner-popup-input-decor-cosm-custom-field`}>Свой вариант</label>
                                                     </div>
                                                     <div className="tz-inner-popup-input-wrap">
-                                                        <input 
-                                                            type="text" 
-                                                            id="tz-inner-popup-input-decor-cosm-custom-field"
-                                                            placeholder="Название желаемого продукта"
-                                                        ></input>
+                                                        {popupState.customDecorFields.map((fieldItem) => {
+                                                            return (
+                                                                <React.Fragment key={`${fieldItem.id}-custom-decor`}>
+                                                                    <input
+                                                                        ref={props.findInputRef(props.refs, fieldItem.name)}  
+                                                                        id="tz-inner-popup-input-decor-cosm-custom-field"
+                                                                        type={fieldItem.type}
+                                                                        placeholder={fieldItem.placeholder}
+                                                                        value={fieldItem.value}
+                                                                        onChange={() => props.inputHandler(
+                                                                            fieldItem.id, 
+                                                                            fieldItem.name, 
+                                                                            props.findInputRef(props.refs, fieldItem.name).current)
+                                                                        }
+                                                                        onKeyDown={(e) => props.clearInputHandler(e, props.popupType, fieldItem.id, fieldItem.name)}
+                                                                    />
+                                                                </React.Fragment>
+                                                            )
+                                                        })}
                                                     </div>
                                                    
                                                 </React.Fragment>
@@ -131,6 +159,7 @@ const TzInnerPopup = (props) => {
                                                     formItem.name, 
                                                     props.findInputRef(props.refs, formItem.name).current)
                                                 }
+                                                onKeyDown={(e) => props.clearInputHandler(e, props.popupType, formItem.id, formItem.name)}
                                             ></textarea>
                                         
                                         : 
@@ -158,14 +187,16 @@ const TzInnerPopup = (props) => {
                                                     <input
                                                         ref={props.findInputRef(props.refs, formItem.name)}
                                                         id={`tz-inner-popup-input-${formItem.id}`} 
+                                                        className={formItem.valid ? '' : 'input-err'}
                                                         type={props.type}
                                                         placeholder={formItem.placeholder}
                                                         value={formItem.value}
-                                                            onChange={() => props.inputHandler(
+                                                        onChange={() => props.inputHandler(
                                                             formItem.id, 
                                                             formItem.name, 
                                                             props.findInputRef(props.refs, formItem.name).current)
                                                         }
+                                                        onKeyDown={(e) => props.clearInputHandler(e, props.popupType, formItem.id, formItem.name)}
                                                     />
                                         }
                                     </div>
@@ -175,8 +206,8 @@ const TzInnerPopup = (props) => {
                         <div className="tz-inner-popup-from-controls-row">
                             <div className="tz-inner-popup-from-controls-btn-wrap">
                                 <Link 
-                                    className="tz-inner-popup-from-controls-btn"
-                                    onClick={() => props.saveHandler('customer')}
+                                    className={popupState.allFieldsValid ? "tz-inner-popup-from-controls-btn" : "tz-inner-popup-from-controls-btn btnDisabled"}
+                                    onClick={() => props.saveHandler(props.popupType)}
                                 >сохранить</Link>
                             </div>
                         </div>

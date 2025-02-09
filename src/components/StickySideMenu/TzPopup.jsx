@@ -30,6 +30,7 @@ const TzPopup = (props) => {
                                     form={tzState.customerPopup.fields}
                                     innerPopupState={tzState.customerPopup}
                                     inputHandler={props.innerPopupCustomerInputHandler}
+                                    clearInputHandler={props.clearInputHandler}
                                     refs={props.customerRefs}
                                     findInputRef={props.findInputRef}
                                     title={'Сведения о заказчике'}
@@ -51,7 +52,7 @@ const TzPopup = (props) => {
                                             <span className="sticky-sidemenu-tz-edit-btn"></span>
                                             <span 
                                                 className="sticky-sidemenu-tz-remove-btn"
-                                                onClick={props.removeCustomerInfoHandler}
+                                                onClick={() => props.removeTzInnerPopupInfoHandler('customer')}
                                             ></span>
                                         </div>
                                     </div>
@@ -61,12 +62,28 @@ const TzPopup = (props) => {
                         <div className="sticky-sidemenu-tz-form-product-type-wrap">
                             <h3>Производимый продукт</h3>
                             <div className="sticky-sidemenu-tz-form">
-                                <div className="sticky-sidemenu-tz-add-btn-wrap">
-                                    <span 
-                                        className="sticky-sidemenu-tz-add-btn"
-                                        onClick={() => props.innerPopupHandler('product', true)}
-                                    ></span>
-                                </div>
+                                {!tzState.resultData.product.allFieldsValid ? 
+                                    <div className="sticky-sidemenu-tz-add-btn-wrap">
+                                        <span 
+                                            className="sticky-sidemenu-tz-add-btn"
+                                            onClick={() => props.innerPopupHandler('product', true)}
+                                        ></span>
+                                    </div>
+                                : null}
+                                {tzState.resultData.product.allFieldsValid && tzState.resultData.product && tzState.resultData.product.cosmeticName ? 
+                                    <React.Fragment>
+                                        <div className="sticky-sidemenu-tz-form-customer-info-item">
+                                            <div className="sticky-sidemenu-tz-form-customer-info-item-value">{tzState.resultData.product.cosmeticName}</div>
+                                            <div className="sticky-sidemenu-tz-form-customer-info-item-control">
+                                                <span className="sticky-sidemenu-tz-edit-btn"></span>
+                                                <span 
+                                                    className="sticky-sidemenu-tz-remove-btn"
+                                                    onClick={() => props.removeTzInnerPopupInfoHandler('product')}
+                                                ></span>
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
+                                : null}
                                 {tzState.productPopup.active ? 
                                     <TzInnerPopup
                                         popupType={'product'}  
@@ -74,7 +91,9 @@ const TzPopup = (props) => {
                                         form={tzState.productPopup.fields}
                                         innerPopupState={tzState.productPopup}
                                         inputHandler={props.innerPopupProductInputHandler}
+                                        clearInputHandler={props.clearInputHandler}
                                         inputFileHandler={props.innerPopupProductFileHandler}
+                                        saveHandler={props.innerSavePopupHandler}
                                         selectHandler={props.innerPopupProductSelectHandler}
                                         refs={props.productRefs}
                                         productTypesRefs={props.selectProductTypesRefs}

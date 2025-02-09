@@ -9,9 +9,12 @@ import {
     sidemenuPolicyCheckboxHandler,
     saveTzInnerPopup,
     tzInnerPopupCustomerInput,
-    removeTzCustomerInfo,
+    clearTzPopupInput,
+    validateTzPopupCustomer,
+    removeTzPopupInfo,
     tzInnerPopupProductInput,
     tzInnerPopupSelect,
+    validateTzPopupProduct,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm
@@ -32,7 +35,9 @@ const StickySideMenu = () => {
         {name: 'productStats', ref: useRef()},
         {name: 'productLink', ref: useRef()},
         {name: 'productSize', ref: useRef()},
-        {name: 'productDoc', ref: useRef()}
+        {name: 'productDoc', ref: useRef()},
+        {name: 'customCosm', ref: useRef()},
+        {name: 'customDecor', ref: useRef()}
     ];
     const selectProductTypesRefs = [
         {name: 'default', ref: useRef()},
@@ -68,6 +73,13 @@ const StickySideMenu = () => {
         dispatch(tzInnerPopupCustomerInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
     };
 
+    const tzInnerPopupClearInputHandler = (e, popupType, inputId, inputType) => {
+        if (e.key === 'Backspace') {
+            dispatch(clearTzPopupInput({popupType: popupType, inputId: inputId, inputType: inputType}));
+            return;
+        }
+    };
+
     const tzInnerPopupProductInputHandler = (inputId, inputType, inputRef) => {
         dispatch(tzInnerPopupProductInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
     };
@@ -88,8 +100,8 @@ const StickySideMenu = () => {
         }));
     };
 
-    const removeCustomerInfoHandler = () => {
-        dispatch(removeTzCustomerInfo());
+    const removeTzInnerPopupInfo = (popupType) => {
+        dispatch(removeTzPopupInfo({popupType: popupType}));
     };
 
     const consultInputHandler = (inputId, inputType, inputRef) => {
@@ -115,6 +127,14 @@ const StickySideMenu = () => {
         console.log(sendData);
     };
 
+    useEffect(() => {
+        dispatch(validateTzPopupCustomer());
+    }, [menuState.tzPopup.customerPopup]);
+
+    useEffect(() => {
+        dispatch(validateTzPopupProduct());
+    }, [menuState.tzPopup.productPopup]);
+    
     useEffect(() => {
         dispatch(validateConsultForm());
     }, [menuState.contactsPopup]);
@@ -148,6 +168,7 @@ const StickySideMenu = () => {
                     tzState={menuState.tzPopup}
                     innerPopupHandler={tzInnerPopupHandler}
                     innerPopupCustomerInputHandler={tzInnerPopupCustomerInputHandler}
+                    clearInputHandler={tzInnerPopupClearInputHandler}
                     innerSavePopupHandler={saveInnerPopupHandler}
                     customerRefs={customerRefs}
                     productRefs={productRefs}
@@ -156,7 +177,7 @@ const StickySideMenu = () => {
                     innerPopupProductSelectHandler={tzInnerPopupProductSelectHandler}
                     innerPopupProductFileHandler={tzInnerPopupProductFileHandler}
                     findInputRef={findInputRef}
-                    removeCustomerInfoHandler={removeCustomerInfoHandler}
+                    removeTzInnerPopupInfoHandler={removeTzInnerPopupInfo}
                 /> 
             : null}
             {menuState.contactsPopup.active ? 
