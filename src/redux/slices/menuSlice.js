@@ -133,6 +133,9 @@ const initialState = {
                     cosmeticSize: '',
                     cosmeticCustomUrl: '',
                     customFile: '',
+                },
+                additionalServices: {
+                    selectedServices: [],
                 }
             },
             customerPopup: {
@@ -288,48 +291,28 @@ const initialState = {
                 ]
     
             },
+            packageOptionsPopup: {
+                packageFormatOptions: [
+                    { id: 1, name: '--Выберите формат упаковки--', type: 'default', value: '--Выберите тип упаковки--', selected: false},
+                    { id: 2, name: 'формат упаковки 1', type: 'package', value: 'формат упаковки 1', selected: false },
+                    { id: 3, name: 'формат упаковки 2', type: 'package', value: 'формат упаковки 2', selected: false },
+                    { id: 4, name: 'формат упаковки 3', type: 'package', value: 'формат упаковки 3', selected: false },
+                    { id: 5, name: 'свой вариант', type: 'package', value: 'свой вариант', selected: false, customField: true, },
+                ]
+            },
             additionalOptionsPopup: {
                 active: false,
                 allFieldsValid: true,
                 showAddBtn: true,
-                fields: [
-                    {
-                        id: 1,
-                        title: 'Название компании (ООО, ИП, ФИЗ.лицо)',
-                        name: 'company',
-                        type: 'text',
-                        placeholder: 'Название компании или ФИО',
-                        value: '',
-                        valid: true
-                    },
-                    {
-                        id: 2,
-                        title: 'Город',
-                        name: 'city',
-                        type: 'text',
-                        placeholder: 'Город',
-                        value: '',
-                        valid: true
-                    },
-                    {
-                        id: 3,
-                        title: 'Телефон',
-                        name: 'phone',
-                        type: 'text',
-                        placeholder: '8xxxxxxxxxx',
-                        value: '',
-                        valid: true
-                    },
-                    {
-                        id: 4,
-                        title: 'Email',
-                        name: 'email',
-                        type: 'email',
-                        placeholder: 'demo@....ru',
-                        value: '',
-                        valid: true
-                    },
-                ],
+                saveBtnActive: true,
+                services: [
+                    { id: 1, name: 'Термоусадка',  selected: false },
+                    { id: 2, name: 'Доп. упаковка продукта',  selected: false },
+                    { id: 3, name: 'Услуга 3',  selected: false },
+                    { id: 4, name: 'Услуга 4',  selected: false },
+                    { id: 5, name: 'Услуга 5',  selected: false },
+                    { id: 6, name: 'Услуга 6',  selected: false },
+                ]
             }
         },
         calcPopup: {
@@ -768,6 +751,35 @@ const menuSlice = createSlice({
             }
             state.sideMenu.tzPopup.productPopup.allFieldsValid = false;
         },
+        optionsPopupShow(state) {
+            state.sideMenu.tzPopup.additionalOptionsPopup.active = state.sideMenu.tzPopup.additionalOptionsPopup.active ? false : true;
+        },
+        optionSelectItemPopup(state, action) {
+            const { optionId, optionName } = action.payload;
+            state.sideMenu.tzPopup.additionalOptionsPopup.services = state.sideMenu.tzPopup.additionalOptionsPopup.services.map((serviceItem) => {
+                if (optionId === serviceItem.id && optionName === serviceItem.name) {
+                    return {
+                        ...serviceItem,
+                        selected: serviceItem.selected ? false : true
+                    }
+                }
+                return serviceItem;
+            });
+        },
+        optionSelectSavePopup(state) {
+            state.sideMenu.tzPopup.resultData.additionalServices.selectedServices = [
+                ...state.sideMenu.tzPopup.additionalOptionsPopup.services.filter((serviceItem) => serviceItem.selected)
+            ];
+            state.sideMenu.tzPopup.additionalOptionsPopup.active = false;
+        },
+        validateAdditionalOptions(state) {
+            const countSelectedOptions = state.sideMenu.tzPopup.additionalOptionsPopup.services.filter((item) => item.selected).length;
+            if (countSelectedOptions === state.sideMenu.tzPopup.resultData.additionalServices.selectedServices.length) {
+                state.sideMenu.tzPopup.additionalOptionsPopup.saveBtnActive = false;
+                return;
+            }
+            state.sideMenu.tzPopup.additionalOptionsPopup.saveBtnActive = true;
+        },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
             let validValue = inputValue;
@@ -814,8 +826,7 @@ const menuSlice = createSlice({
                 return;
             }
             state.sideMenu.contactsPopup.sendBtnActive = false;
-        }
-        
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -854,6 +865,10 @@ export const {
     tzInnerPopupProductInput,
     tzInnerPopupSelect,
     validateTzPopupProduct,
+    optionsPopupShow,
+    optionSelectItemPopup,
+    optionSelectSavePopup,
+    validateAdditionalOptions,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,

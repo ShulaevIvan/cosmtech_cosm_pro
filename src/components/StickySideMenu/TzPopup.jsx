@@ -1,5 +1,6 @@
 import React from "react";
 import TzInnerPopup from "./TzInnerPopup";
+import OptionAddPopup from "./OptionAddPopup";
 
 const TzPopup = (props) => {
     const tzState = props.tzState;
@@ -106,10 +107,58 @@ const TzPopup = (props) => {
                     </div>
                     <div className="sticky-sidemenu-tz-form-row">
                         <div className="sticky-sidemenu-tz-form-customer-wrap">
-                            <h3>Дополнительные условия:</h3>
+                            <h3>Дополнительные услуги:</h3>
+                            {/* {tzState.additionalOptionsPopup.services.length > tzState.resultData.additionalServices.selectedServices.length ? 
+                                <React.Fragment>
+                                    <div className="sticky-sidemenu-tz-add-btn-wrap">
+                                        <span 
+                                            className="sticky-sidemenu-tz-add-btn"
+                                            onClick={props.additionalOptionsHandler}
+                                        ></span>
+                                    </div>
+                                </React.Fragment>
+                            
+                            : null} */}
+                            <div className="sticky-sidemenu-tz-add-btn-wrap">
+                                <span 
+                                    className="sticky-sidemenu-tz-add-btn"
+                                    onClick={props.additionalOptionsHandler}
+                                ></span>
+                            </div>
+                            
+                        
+                            {tzState.additionalOptionsPopup.active ? 
+                                <OptionAddPopup
+                                    popupState={tzState.additionalOptionsPopup}
+                                    closeHandler={props.additionalOptionsHandler}
+                                    services={tzState.additionalOptionsPopup.services}
+                                    selectHandler={props.additionalOptionSelectHandler}
+                                    saveHandler={props.additionalOptionSaveHandler}
+                                />
+                            : null}
+                            <div className="sticky-sidemenu-tz-additional-options-wrap">
+                                {tzState.resultData.additionalServices.selectedServices.map((selectedServiceItem) => {
+                                    return (
+                                        <React.Fragment key={selectedServiceItem.id}>
+                                            <div className="sticky-sidemenu-tz-additional-options-item">{selectedServiceItem.name}</div>
+                                        </React.Fragment>
+                                    )
+                                })}
+                            </div>
                         </div>
                         <div className="sticky-sidemenu-tz-form-customer-wrap">
-                            <h3>Упаковка:</h3>
+                            <h3>Упаковка</h3>
+                            <div className="sticky-sidemenu-package-options-wrap">
+                                <select>
+                                    {tzState.packageOptionsPopup.packageFormatOptions.map((optionItem) => {
+                                        return (
+                                            <React.Fragment key={optionItem.id}>
+                                                <option>{optionItem.name}</option>
+                                            </React.Fragment>
+                                        )
+                                    })}
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div className="sticky-sidemenu-tz-form-row">

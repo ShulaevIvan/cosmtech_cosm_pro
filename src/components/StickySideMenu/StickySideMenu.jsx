@@ -11,6 +11,10 @@ import {
     tzInnerPopupCustomerInput,
     clearTzPopupInput,
     validateTzPopupCustomer,
+    optionsPopupShow,
+    optionSelectItemPopup,
+    optionSelectSavePopup,
+    validateAdditionalOptions,
     removeTzPopupInfo,
     tzInnerPopupProductInput,
     tzInnerPopupSelect,
@@ -127,6 +131,18 @@ const StickySideMenu = () => {
         console.log(sendData);
     };
 
+    const additionalOptionsPopupHandler = () => {
+        dispatch(optionsPopupShow());
+    };
+
+    const selectOptionPopupHandler = (optionId, optionName) => {
+        dispatch(optionSelectItemPopup({optionId: optionId, optionName: optionName}))
+    };
+
+    const saveSelectOptionPopupHandler = () => {
+        dispatch(optionSelectSavePopup());
+    };
+
     useEffect(() => {
         dispatch(validateTzPopupCustomer());
     }, [menuState.tzPopup.customerPopup]);
@@ -134,6 +150,10 @@ const StickySideMenu = () => {
     useEffect(() => {
         dispatch(validateTzPopupProduct());
     }, [menuState.tzPopup.productPopup]);
+
+    useEffect(() => {
+        dispatch(validateAdditionalOptions());
+    }, [menuState.tzPopup.additionalOptionsPopup]);
     
     useEffect(() => {
         dispatch(validateConsultForm());
@@ -176,6 +196,9 @@ const StickySideMenu = () => {
                     innerPopupProductInputHandler={tzInnerPopupProductInputHandler}
                     innerPopupProductSelectHandler={tzInnerPopupProductSelectHandler}
                     innerPopupProductFileHandler={tzInnerPopupProductFileHandler}
+                    additionalOptionsHandler={additionalOptionsPopupHandler}
+                    additionalOptionSelectHandler={selectOptionPopupHandler}
+                    additionalOptionSaveHandler={saveSelectOptionPopupHandler}
                     findInputRef={findInputRef}
                     removeTzInnerPopupInfoHandler={removeTzInnerPopupInfo}
                 /> 

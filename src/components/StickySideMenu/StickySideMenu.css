@@ -251,6 +251,76 @@
     flex-wrap: wrap;
     width: 100%;
 }
+.sticky-sidemenu-tz-options-popup-wrap {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 400px;
+    min-height: 400px;
+    border: 1px solid #00458B;
+    background-color: white;
+    z-index: 6;
+    border-radius: 10px;
+}
+.sticky-sidemenu-tz-inner-services-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    margin-top: 5%;
+}
+.sticky-sidemenu-tz-inner-services-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 250px;
+    min-height: 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 5px;
+    position: relative;
+}
+.sticky-sidemenu-tz-inner-services-item.selected {
+    background-color: gray;
+    transition: background .4s ease;
+    color: white;
+    border-radius: 5px;
+}
+.sticky-sidemenu-tz-inner-services-item.selected::before {
+    position: absolute;
+    left: 2%;
+    top: 10%;
+    content: url('../../img/stickyMenu/option-ok.svg');
+    filter: invert(75%) sepia(84%) saturate(347%) hue-rotate(115deg) brightness(85%) contrast(92%);
+}
+.sticky-sidemenu-tz-inner-services-item:hover {
+    background-color: #00458B;
+    transition: background .4s ease;
+    color: white;
+    border-radius: 5px;
+}
+.sticky-sidemenu-tz-inner-services-item.selected:hover {
+    background-color: gray;
+}
+.sticky-sidemenu-tz-additional-options-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.sticky-sidemenu-tz-additional-options-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
 .sticky-sidemenu-tz-inner-popup {
     display: flex;
     align-items: center;
@@ -328,6 +398,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .tz-form-wrap-file-upload input[type='file'] {
     position: absolute;

@@ -1,7 +1,6 @@
 import React from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 const TzInnerPopup = (props) => {
     const popupState = props.innerPopupState;
