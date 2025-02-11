@@ -278,8 +278,9 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    text-align: center;
     width: 100%;
-    max-width: 250px;
+    max-width: 300px;
     min-height: 30px;
     margin-bottom: 10px;
     cursor: pointer;

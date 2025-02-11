@@ -307,11 +307,9 @@ const initialState = {
                 saveBtnActive: true,
                 services: [
                     { id: 1, name: 'Термоусадка',  selected: false },
-                    { id: 2, name: 'Доп. упаковка продукта',  selected: false },
-                    { id: 3, name: 'Услуга 3',  selected: false },
-                    { id: 4, name: 'Услуга 4',  selected: false },
-                    { id: 5, name: 'Услуга 5',  selected: false },
-                    { id: 6, name: 'Услуга 6',  selected: false },
+                    { id: 2, name: 'Cборка в пенал',  selected: false },
+                    { id: 3, name: 'Индукционная запайка',  selected: false },
+                    { id: 4, name: 'Поклейка этикеток на крышки/донышки',  selected: false },
                 ]
             }
         },
