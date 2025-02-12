@@ -1,9 +1,22 @@
 import React from "react";
+import { useRef, useEffect } from "react";
 import TzInnerPopup from "./TzInnerPopup";
 import OptionAddPopup from "./OptionAddPopup";
 
 const TzPopup = (props) => {
     const tzState = props.tzState;
+    const packageTypeOptions = tzState.packageOptions.packageTypeOptions;
+    const cosmeticPackageOptions = tzState.packageOptions.packageFormatOptions.cosmetic;
+    const decorativePackageOptions = tzState.packageOptions.packageFormatOptions.decorative;
+
+    const selectPackageTypeRef = useRef(null);
+    const selectPackageBodyCosmeticRef = useRef(null);
+    const selectPackageBodyDecorCosmeticRef = useRef(null);
+    const selectPackageHeadCosmeticRef = useRef(null);
+    const selectPackageHeadDecorCosmeticRef = useRef(null);
+
+    useEffect(() => {
+    }, [cosmeticPackageOptions, decorativePackageOptions]);
     
     return (
         <React.Fragment>
@@ -108,17 +121,6 @@ const TzPopup = (props) => {
                     <div className="sticky-sidemenu-tz-form-row">
                         <div className="sticky-sidemenu-tz-form-customer-wrap">
                             <h3>Дополнительные услуги:</h3>
-                            {/* {tzState.additionalOptionsPopup.services.length > tzState.resultData.additionalServices.selectedServices.length ? 
-                                <React.Fragment>
-                                    <div className="sticky-sidemenu-tz-add-btn-wrap">
-                                        <span 
-                                            className="sticky-sidemenu-tz-add-btn"
-                                            onClick={props.additionalOptionsHandler}
-                                        ></span>
-                                    </div>
-                                </React.Fragment>
-                            
-                            : null} */}
                             <div className="sticky-sidemenu-tz-add-btn-wrap">
                                 <span 
                                     className="sticky-sidemenu-tz-add-btn"
@@ -149,8 +151,11 @@ const TzPopup = (props) => {
                         <div className="sticky-sidemenu-tz-form-customer-wrap">
                             <h3>Упаковка</h3>
                             <div className="sticky-sidemenu-package-options-wrap">
-                                <select>
-                                    {tzState.packageOptionsPopup.packageFormatOptions.map((optionItem) => {
+                                <select
+                                    ref={selectPackageTypeRef}
+                                    onChange={() => props.packageSelectHandler('packageType', selectPackageTypeRef.current.value)}
+                                >
+                                    {packageTypeOptions.map((optionItem) => {
                                         return (
                                             <React.Fragment key={optionItem.id}>
                                                 <option>{optionItem.name}</option>
@@ -158,6 +163,73 @@ const TzPopup = (props) => {
                                         )
                                     })}
                                 </select>
+                                {packageTypeOptions.find((packageType) => packageType.selected && packageType.type !== 'default') ? 
+                                    <React.Fragment>
+                                        {packageTypeOptions.find((item) => item.type === 'cosmetic' && item.selected) ? 
+                                            <select
+                                                ref={selectPackageBodyCosmeticRef}
+                                                onChange={() => props.packageSelectHandler('cosmetic', selectPackageBodyCosmeticRef.current.value)}
+                                            >
+                                            {cosmeticPackageOptions.map((optionItem) => {
+                                                return (
+                                                    <React.Fragment key={optionItem.id}>
+                                                        <option>{optionItem.name}</option>
+                                                    </React.Fragment>
+                                                )
+                                            })}
+                                            </select>
+                                        : null}
+
+                                        {packageTypeOptions.find((item) => item.type === 'decorativeCosm' && item.selected) ? 
+                                            <select
+                                                ref={selectPackageBodyDecorCosmeticRef}
+                                                onChange={() => props.packageSelectHandler('decorative', selectPackageBodyDecorCosmeticRef.current.value)}
+                                            >
+                                            {decorativePackageOptions.map((optionItem) => {
+                                                return (
+                                                    <React.Fragment key={optionItem.id}>
+                                                        <option>{optionItem.name}</option>
+                                                    </React.Fragment>
+                                                )
+                                            })}
+                                            </select>
+                                        : null}
+                                        {cosmeticPackageOptions.find((item) => item.selected && item.additionalOptions && item.additionalOptions.length > 0) ? 
+                                            <React.Fragment>
+                                                <select
+                                                    ref={selectPackageHeadCosmeticRef}
+                                                    onChange={() => props.packageSelectHandler('cosmeticOption', selectPackageHeadCosmeticRef.current.value)}
+                                                >
+                                                    {cosmeticPackageOptions.find((item) => item.selected).additionalOptions.map((optionItem) => {
+                                                        return (
+                                                            <React.Fragment key={optionItem.id}>
+                                                                <option>{optionItem.name}</option>
+                                                            </React.Fragment>
+                                                    )
+                                                    })}
+                                                </select>
+
+                                            </React.Fragment>
+                                        : null}
+
+                                        {decorativePackageOptions.find((item) => item.selected && item.additionalOptions && item.additionalOptions.length > 0) ? 
+                                            <React.Fragment>
+                                                <select
+                                                    ref={selectPackageHeadDecorCosmeticRef}
+                                                    onChange={() => props.packageSelectHandler('decorativeOption', selectPackageHeadDecorCosmeticRef.current.value)}
+                                                >
+                                                {decorativePackageOptions.find((item) => item.selected).additionalOptions.map((optionItem) => {
+                                                    return (
+                                                        <React.Fragment key={optionItem.id}>
+                                                            <option>{optionItem.name}</option>
+                                                        </React.Fragment>
+                                                    )
+                                                })}
+                                                </select>
+                                            </React.Fragment>
+                                        : null}
+                                    </React.Fragment>
+                                : null}
                             </div>
                         </div>
                     </div>

@@ -280,7 +280,7 @@
     justify-content: center;
     text-align: center;
     width: 100%;
-    max-width: 300px;
+    max-width: 270px;
     min-height: 30px;
     margin-bottom: 10px;
     cursor: pointer;
@@ -387,7 +387,21 @@
     margin-bottom: 10px;
     max-width: 400px;
 }
-.tz-inner-popup-product-wrap select {
+.sticky-sidemenu-package-options-wrap  {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+    max-width: 400px;
+}
+.sticky-sidemenu-package-options-wrap select {
+    max-width: 250px;
+    margin-bottom: 10px;
+}
+.tz-inner-popup-product-wrap select,
+.sticky-sidemenu-package-options-wrap select {
     min-height: 30px;
 }
 .tz-inner-popup-from-controls-row,

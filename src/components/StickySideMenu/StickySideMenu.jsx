@@ -19,6 +19,7 @@ import {
     tzInnerPopupProductInput,
     tzInnerPopupSelect,
     validateTzPopupProduct,
+    packageSelect,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm
@@ -44,6 +45,11 @@ const StickySideMenu = () => {
         {name: 'customDecor', ref: useRef()}
     ];
     const selectProductTypesRefs = [
+        {name: 'default', ref: useRef()},
+        {name: 'cosmetic', ref: useRef()},
+        {name: 'decorative', ref: useRef()},
+    ];
+    const selectPackageTypesRefs = [
         {name: 'default', ref: useRef()},
         {name: 'cosmetic', ref: useRef()},
         {name: 'decorative', ref: useRef()},
@@ -143,6 +149,10 @@ const StickySideMenu = () => {
         dispatch(optionSelectSavePopup());
     };
 
+    const chanagePackageHandler = (optionType, optionValue) => {
+        dispatch(packageSelect({selectType: optionType, selectValue: optionValue}));
+    };
+
     useEffect(() => {
         dispatch(validateTzPopupCustomer());
     }, [menuState.tzPopup.customerPopup]);
@@ -193,9 +203,11 @@ const StickySideMenu = () => {
                     customerRefs={customerRefs}
                     productRefs={productRefs}
                     selectProductTypesRefs={selectProductTypesRefs}
+                    selectPackageTypesRefs={selectPackageTypesRefs}
                     innerPopupProductInputHandler={tzInnerPopupProductInputHandler}
                     innerPopupProductSelectHandler={tzInnerPopupProductSelectHandler}
                     innerPopupProductFileHandler={tzInnerPopupProductFileHandler}
+                    packageSelectHandler={chanagePackageHandler}
                     additionalOptionsHandler={additionalOptionsPopupHandler}
                     additionalOptionSelectHandler={selectOptionPopupHandler}
                     additionalOptionSaveHandler={saveSelectOptionPopupHandler}

@@ -291,14 +291,388 @@ const initialState = {
                 ]
     
             },
-            packageOptionsPopup: {
-                packageFormatOptions: [
-                    { id: 1, name: '--Выберите формат упаковки--', type: 'default', value: '--Выберите тип упаковки--', selected: false},
-                    { id: 2, name: 'формат упаковки 1', type: 'package', value: 'формат упаковки 1', selected: false },
-                    { id: 3, name: 'формат упаковки 2', type: 'package', value: 'формат упаковки 2', selected: false },
-                    { id: 4, name: 'формат упаковки 3', type: 'package', value: 'формат упаковки 3', selected: false },
-                    { id: 5, name: 'свой вариант', type: 'package', value: 'свой вариант', selected: false, customField: true, },
-                ]
+            packageOptions: {
+                packageTypeOptions: [
+                    { 
+                        id: 1, 
+                        name: '--Выберите тип косметики--',
+                        type: 'default', 
+                        value: '--Выберите тип косметики--',
+                        additionalOptions: [],
+                        selected: true
+                    },
+                    { 
+                        id: 2, 
+                        name: 'Косметика', 
+                        type: 'cosmetic', 
+                        value: 'Косметика', 
+                        selected: false 
+                    },
+                    { 
+                        id: 3, 
+                        name: 'Декоративная косметика', 
+                        type: 'decorativeCosm', 
+                        value: 'Декоративная косметика', 
+                        selected: false 
+                    },
+                ],
+                packageFormatOptions: {
+                    cosmetic: [
+                        { 
+                            id: 1, 
+                            name: '--Выберите формат упаковки--',
+                            type: 'default', 
+                            value: '--Выберите тип упаковки--',
+                            additionalOptions: [],
+                            selected: true
+                        },
+                        { 
+                            id: 2, 
+                            name: 'Флакон D20', 
+                            type: 'package', 
+                            value: 'Флакон D20', 
+                            additionalOptions: [
+                                {
+                                    id: 1, 
+                                    name: '--Выберите формат головы--',
+                                    type: 'default', 
+                                    value: '--Выберите формат головы--',
+                                    selected: true 
+                                },
+                                { 
+                                    id: 2, 
+                                    name: 'Дозатор 20', 
+                                    type: 'head', 
+                                    value: 'Дозатор 20', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 3, 
+                                    name: 'Флип-топ 20', 
+                                    type: 'head', 
+                                    value: 'Флип-топ 20', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 4, 
+                                    name: 'Дозатор 20', 
+                                    type: 'head', 
+                                    value: 'Дозатор 20', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 5, 
+                                    name: 'Спрей 20', 
+                                    type: 'head', 
+                                    value: 'Спрей 20', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 6, 
+                                    name: 'Носик 20', 
+                                    type: 'head', 
+                                    value: 'Носик 20', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 7, 
+                                    name: 'Мини-триггер 20', 
+                                    type: 'head', 
+                                    value: 'Мини-триггер 20', 
+                                    selected: false 
+                                },
+                            ],
+                            selected: false 
+                        },
+                        { 
+                            id: 3, 
+                            name: 'Флакон D24', 
+                            type: 'package', 
+                            value: 'Флакон D24', 
+                            additionalOptions: [
+                                {
+                                    id: 1, 
+                                    name: '--Выберите формат головы--',
+                                    type: 'default', 
+                                    value: '--Выберите формат головы--',
+                                    selected: true 
+                                },
+                                { 
+                                    id: 2, 
+                                    name: 'Дозатор 24', 
+                                    type: 'head', 
+                                    value: 'Дозатор 24', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 3, 
+                                    name: 'Флип-топ 24', 
+                                    type: 'head', 
+                                    value: 'Флип-топ 24', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 4, 
+                                    name: 'Дозатор 24', 
+                                    type: 'head', 
+                                    value: 'Дозатор 24', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 5, 
+                                    name: 'Спрей 24', 
+                                    type: 'head', 
+                                    value: 'Спрей 24', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 6, 
+                                    name: 'Носик 24', 
+                                    type: 'head', 
+                                    value: 'Носик 24', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 7, 
+                                    name: 'Мини-триггер 24', 
+                                    type: 'head', 
+                                    value: 'Мини-триггер 24', 
+                                    selected: false 
+                                },
+                            ],
+                            selected: false 
+                        },
+                        { 
+                            id: 4, 
+                            name: 'Флакон D28', 
+                            type: 'package', 
+                            value: 'Флакон D28', 
+                            additionalOptions: [
+                                {
+                                    id: 1, 
+                                    name: '--Выберите формат головы--',
+                                    type: 'default', 
+                                    value: '--Выберите формат головы--',
+                                    selected: true 
+                                },
+                                { 
+                                    id: 2, 
+                                    name: 'Дозатор 28', 
+                                    type: 'head', 
+                                    value: 'Дозатор 28', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 3, 
+                                    name: 'Флип-топ 28', 
+                                    type: 'head', 
+                                    value: 'Флип-топ 28', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 4, 
+                                    name: 'Дозатор 28', 
+                                    type: 'head', 
+                                    value: 'Дозатор 28', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 5, 
+                                    name: 'Спрей 28', 
+                                    type: 'head', 
+                                    value: 'Спрей 28', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 6, 
+                                    name: 'Носик 28', 
+                                    type: 'head', 
+                                    value: 'Носик 28', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 7, 
+                                    name: 'Мини-триггер 28', 
+                                    type: 'head', 
+                                    value: 'Мини-триггер 28', 
+                                    selected: false 
+                                },
+                            ],
+                            selected: false 
+                        },
+                        { 
+                            id: 5, 
+                            name: 'Флакон D42 пенный + помпа', 
+                            type: 'package', 
+                            value: 'Флакон D42 пенный + помпа', 
+                            additionalOptions: [
+                                {
+                                    id: 1, 
+                                    name: '--Выберите формат головы--',
+                                    type: 'default', 
+                                    value: '--Выберите формат головы--',
+                                    selected: true 
+                                },
+                                { 
+                                    id: 2, 
+                                    name: 'В сборе', 
+                                    type: 'head', 
+                                    value: 'В сборе', 
+                                    selected: false 
+                                },
+                            ],
+                            selected: false 
+                        },
+                        { 
+                            id: 6, 
+                            name: 'Банка', 
+                            type: 'package', 
+                            value: 'Банка', 
+                            additionalOptions: [
+                                {
+                                    id: 1, 
+                                    name: '--Выберите формат головы--',
+                                    type: 'default', 
+                                    value: '--Выберите формат головы--',
+                                    selected: true 
+                                },
+                                { 
+                                    id: 2, 
+                                    name: 'В сборе', 
+                                    type: 'head', 
+                                    value: 'В сборе', 
+                                    selected: false 
+                                },
+                            ],
+                            selected: false 
+                        },
+                        { 
+                            id: 7, 
+                            name: 'Вакуумный диспенсер', 
+                            type: 'package', 
+                            value: 'Вакуумный диспенсер', 
+                            additionalOptions: [
+                                {
+                                    id: 1, 
+                                    name: '--Выберите формат головы--',
+                                    type: 'default', 
+                                    value: '--Выберите формат головы--',
+                                    selected: true 
+                                },
+                                { 
+                                    id: 2, 
+                                    name: 'В сборе', 
+                                    type: 'head', 
+                                    value: 'В сборе', 
+                                    selected: false 
+                                },
+                            ],
+                            selected: false 
+                        },
+                        { 
+                            id: 8, 
+                            name: 'Флакон стекло D18', 
+                            type: 'package', 
+                            value: 'Флакон стекло D18', 
+                            additionalOptions: [
+                                {
+                                    id: 1, 
+                                    name: '--Выберите формат головы--',
+                                    type: 'default', 
+                                    value: '--Выберите формат головы--',
+                                    selected: true 
+                                },
+                                { 
+                                    id: 2, 
+                                    name: 'Пипетка', 
+                                    type: 'head', 
+                                    value: 'Пипетка', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 3, 
+                                    name: 'Крышка накрутка', 
+                                    type: 'head', 
+                                    value: 'Крышка накрутка', 
+                                    selected: false 
+                                },
+                            ],
+                            selected: false 
+                        },
+                        { 
+                            id: 9, 
+                            name: 'Туба', 
+                            type: 'package', 
+                            value: 'Туба', 
+                            additionalOptions: [
+                                {
+                                    id: 1, 
+                                    name: '--Выберите формат головы--',
+                                    type: 'default', 
+                                    value: '--Выберите формат головы--',
+                                    selected: true 
+                                },
+                                { 
+                                    id: 2, 
+                                    name: 'Диаметр D25', 
+                                    type: 'head', 
+                                    value: 'Диаметр D25', 
+                                    selected: false 
+                                },
+                                { 
+                                    id: 3, 
+                                    name: 'Диаметр D50', 
+                                    type: 'head', 
+                                    value: 'Диаметр D50', 
+                                    selected: false 
+                                },
+                            ],
+                            selected: false 
+                        },
+                        { 
+                            id: 11, 
+                            name: 'Предложите мне вариант', 
+                            type: 'customField', 
+                            value: 'Предложите мне вариант', 
+                            additionalOptions: [],
+                            selected: false 
+                        },
+                        { 
+                            id: 10, 
+                            name: 'Cвой вариант', 
+                            type: 'customField', 
+                            value: 'Cвой вариант', 
+                            additionalOptions: [],
+                            selected: false 
+                        },
+                    ],
+                    decorative: [
+                        { 
+                            id: 1, 
+                            name: '--Выберите формат упаковки--',
+                            type: 'default', 
+                            value: '--Выберите тип упаковки--',
+                            additionalOptions: [],
+                            selected: true
+                        },
+                        { 
+                            id: 2, 
+                            name: 'Предложите мне вариант', 
+                            type: 'customField', 
+                            value: 'Предложите мне вариант', 
+                            additionalOptions: [],
+                            selected: false 
+                        },
+                        { 
+                            id: 3, 
+                            name: 'Cвой вариант', 
+                            type: 'customField', 
+                            value: 'Cвой вариант', 
+                            additionalOptions: [],
+                            selected: false 
+                        },
+                    ]
+                }
             },
             additionalOptionsPopup: {
                 active: false,
@@ -309,7 +683,7 @@ const initialState = {
                     { id: 1, name: 'Термоусадка',  selected: false },
                     { id: 2, name: 'Cборка в пенал',  selected: false },
                     { id: 3, name: 'Индукционная запайка',  selected: false },
-                    { id: 4, name: 'Поклейка этикеток на крышки/донышки',  selected: false },
+                    { id: 4, name: 'Поклейка этикеток крышки / донышки',  selected: false },
                 ]
             }
         },
@@ -778,6 +1152,74 @@ const menuSlice = createSlice({
             }
             state.sideMenu.tzPopup.additionalOptionsPopup.saveBtnActive = true;
         },
+        packageSelect(state, action) {
+            const { selectType, selectValue } = action.payload;
+
+            switch(selectType) {
+                case 'packageType':
+                    state.sideMenu.tzPopup.packageOptions.packageFormatOptions = initialState.sideMenu.tzPopup.packageOptions.packageFormatOptions;
+                    state.sideMenu.tzPopup.packageOptions.packageTypeOptions = 
+                        state.sideMenu.tzPopup.packageOptions.packageTypeOptions.map((packageType) => {
+                            if (selectValue === packageType.value) {
+                                return {
+                                    ...packageType,
+                                    selected: true
+                                }
+                            }
+                            return {
+                                ...packageType,
+                                selected: false
+                            }  
+                    });
+                    break
+                case 'cosmetic':
+                case 'decorative':
+                    state.sideMenu.tzPopup.packageOptions.packageFormatOptions[selectType] = 
+                        state.sideMenu.tzPopup.packageOptions.packageFormatOptions[selectType].map((formatItem) => {
+                            if (formatItem.value === selectValue) {
+                                return {
+                                    ...formatItem,
+                                    additionalOptions: formatItem.additionalOptions ? [...formatItem.additionalOptions] : [],
+                                    selected: true
+                                }
+                            }
+                            return {
+                                ...formatItem,
+                                additionalOptions: formatItem.additionalOptions ? [...formatItem.additionalOptions] : [],
+                                selected: false
+                            }
+                    });
+                    break
+                case 'cosmeticOption':
+                case 'decorativeOption':
+                    const param = selectType === 'cosmeticOption' ? 'cosmetic' : 'decorative';
+                    const selectedItem = state.sideMenu.tzPopup.packageOptions.packageFormatOptions[param].find((item) => item.selected);
+                    state.sideMenu.tzPopup.packageOptions.packageFormatOptions[param] = 
+                        state.sideMenu.tzPopup.packageOptions.packageFormatOptions[param].map((cosmeticItem) => {
+                            if (cosmeticItem.id === selectedItem.id) {
+                                return {
+                                    ...cosmeticItem,
+                                    additionalOptions: cosmeticItem.additionalOptions.map((additionalOption) => {
+                                        if (additionalOption.value === selectValue) {
+                                            return {
+                                                ...additionalOption,
+                                                selected: true
+                                            }
+                                        }
+                                        return {
+                                            ...additionalOption,
+                                            selected: false
+                                        }
+                                    })
+                                }
+                            }
+                            return cosmeticItem;
+                    });
+                    break;
+                default:
+                    break
+            }
+        },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
             let validValue = inputValue;
@@ -867,6 +1309,7 @@ export const {
     optionSelectItemPopup,
     optionSelectSavePopup,
     validateAdditionalOptions,
+    packageSelect,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,
