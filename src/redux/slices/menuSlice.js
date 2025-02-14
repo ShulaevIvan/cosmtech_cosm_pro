@@ -292,6 +292,15 @@ const initialState = {
     
             },
             packageOptions: {
+                packageCustomField: {
+                    id: 1,
+                    title: 'Желаемые характеристики',
+                    name: 'requestPackage',
+                    type: 'text',
+                    placeholder: 'Ваш формат упаковки',
+                    value: '',
+                    valid: true
+                },
                 packageTypeOptions: [
                     { 
                         id: 1, 
@@ -632,7 +641,7 @@ const initialState = {
                         { 
                             id: 11, 
                             name: 'Предложите мне вариант', 
-                            type: 'customField', 
+                            type: 'requestPackage', 
                             value: 'Предложите мне вариант', 
                             additionalOptions: [],
                             selected: false 
@@ -658,7 +667,7 @@ const initialState = {
                         { 
                             id: 2, 
                             name: 'Предложите мне вариант', 
-                            type: 'customField', 
+                            type: 'requestPackage', 
                             value: 'Предложите мне вариант', 
                             additionalOptions: [],
                             selected: false 
@@ -1220,6 +1229,40 @@ const menuSlice = createSlice({
                     break
             }
         },
+        customPackageInput(state, action) {
+            const { inputValue } = action.payload;
+            state.sideMenu.tzPopup.packageOptions.packageCustomField = {
+                ...state.sideMenu.tzPopup.packageOptions.packageCustomField,
+                value: inputValue
+            }
+        },
+        validateTzPackage(state) {
+            const cosmPackageSelected = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.cosmetic.find(
+                (item) => item.selected && item.type !== 'default'
+            );
+            const decorPackageSelected = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.decorative.find(
+                (item) => item.selected && item.type !== 'default'
+            );
+            const customField = state.sideMenu.tzPopup.packageOptions.packageCustomField;
+
+            const cosmPackageAdditional = cosmPackageSelected && cosmPackageSelected.additionalOptions ? 
+                cosmPackageSelected.additionalOptions.find((item) => item.selected) : null;
+
+            const decorPackageAdditional = decorPackageSelected && decorPackageSelected.additionalOptions ? 
+            decorPackageSelected.additionalOptions.find((item) => item.selected) : null;
+
+            const cosmeticPackageValid = (cosmPackageSelected && cosmPackageSelected.value 
+                && cosmPackageAdditional && cosmPackageAdditional.type !== 'default') ||  customField.value !== '';
+
+            const decorativePackageValid = (decorPackageSelected && decorPackageSelected.value 
+                && decorPackageAdditional && decorPackageAdditional.type !== 'default') ||  customField.value !== '';
+
+            if (cosmeticPackageValid || decorativePackageValid) {
+                state.sideMenu.tzPopup.packageOptions.allFieldsValid = true;
+                return;
+            }
+            state.sideMenu.tzPopup.packageOptions.allFieldsValid = false;
+        },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
             let validValue = inputValue;
@@ -1310,6 +1353,8 @@ export const {
     optionSelectSavePopup,
     validateAdditionalOptions,
     packageSelect,
+    customPackageInput,
+    validateTzPackage,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,

@@ -373,11 +373,16 @@
     margin-bottom: 10px;
 }
 .tz-inner-popup-input-wrap input,
-.consult-inner-popup-input-wrap input  {
+.consult-inner-popup-input-wrap input,
+.sticky-sidemenu-package-options-custom-input-wrap input {
     min-height: 30px;
 }
 .tz-inner-popup-input-wrap textarea {
     min-height: 100px;
+}
+.sticky-sidemenu-package-options-custom-input-wrap input {
+    max-width: 250px;
+    min-width: 238px;
 }
 .tz-inner-popup-product-wrap {
     display: flex;
@@ -464,7 +469,7 @@
     margin-top: 0;
 }
 .tz-inner-popup-from-controls-btn-wrap,
-.consult-popup-from-controls-btn-wrap {
+.consult-popup-from-controls-btn-wrap{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -474,7 +479,8 @@
     align-items: center;
 }
 .tz-inner-popup-from-controls-btn,
-.consult-popup-from-controls-btn {
+.consult-popup-from-controls-btn,
+.sticky-sidemenu-package-save-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -494,9 +500,22 @@
     text-align: center;
     border-radius: 4px;
 }
+.sticky-sidemenu-package-save-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 85%;
+    justify-content: center;
+    align-items: center;
+}
+.sticky-sidemenu-package-save-btn {
+    height: 30px;
+    max-width: 120px;
+}
 .tz-inner-popup-from-controls-btn:hover,
 .consult-popup-from-controls-btn:hover,
-.tz-form-wrap-file-upload:hover  {
+.tz-form-wrap-file-upload:hover,
+.sticky-sidemenu-package-save-btn:hover  {
     background-color: #00458B;
     transition: background .4s ease;
     color: white;

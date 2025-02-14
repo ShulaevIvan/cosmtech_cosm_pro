@@ -1,7 +1,8 @@
 import React from "react";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import TzInnerPopup from "./TzInnerPopup";
 import OptionAddPopup from "./OptionAddPopup";
+import { Link } from "react-router-dom";
 
 const TzPopup = (props) => {
     const tzState = props.tzState;
@@ -14,10 +15,8 @@ const TzPopup = (props) => {
     const selectPackageBodyDecorCosmeticRef = useRef(null);
     const selectPackageHeadCosmeticRef = useRef(null);
     const selectPackageHeadDecorCosmeticRef = useRef(null);
+    const customPackageInputRef = useRef(null);
 
-    useEffect(() => {
-    }, [cosmeticPackageOptions, decorativePackageOptions]);
-    
     return (
         <React.Fragment>
             <div className="sticky-sidemenu-tz-background">
@@ -228,6 +227,28 @@ const TzPopup = (props) => {
                                                 </select>
                                             </React.Fragment>
                                         : null}
+                                        {cosmeticPackageOptions.find((item) => item.selected && item.type === 'customField') ||
+                                            decorativePackageOptions.find((item) => item.selected && item.type === 'customField') ? 
+                                            <React.Fragment>
+                                                <div className="sticky-sidemenu-package-options-custom-input-wrap">
+                                                    <input
+                                                        ref={customPackageInputRef}
+                                                        type={tzState.packageOptions.packageCustomField.type}
+                                                        placeholder={tzState.packageOptions.packageCustomField.placeholder} 
+                                                        value={tzState.packageOptions.packageCustomField.value}
+                                                        onChange={() => props.customPackageInputHandler(customPackageInputRef.current.value)}
+                                                    />
+                                                </div>
+                                            </React.Fragment>
+                                        : null}
+                                        <div className="sticky-sidemenu-package-save-btn-wrap">
+                                            <Link
+                                                className={tzState.packageOptions.allFieldsValid ? 
+                                                    "sticky-sidemenu-package-save-btn" : "sticky-sidemenu-package-save-btn btnDisabled"
+                                                } 
+                                            >Сохранить</Link>
+                                        </div>
+                                        
                                     </React.Fragment>
                                 : null}
                             </div>

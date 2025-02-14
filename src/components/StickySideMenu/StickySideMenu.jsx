@@ -20,6 +20,8 @@ import {
     tzInnerPopupSelect,
     validateTzPopupProduct,
     packageSelect,
+    customPackageInput,
+    validateTzPackage,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm
@@ -153,6 +155,10 @@ const StickySideMenu = () => {
         dispatch(packageSelect({selectType: optionType, selectValue: optionValue}));
     };
 
+    const customPackageInputHandler = (inputValue) => {
+        dispatch(customPackageInput({inputValue: inputValue}));
+    };
+
     useEffect(() => {
         dispatch(validateTzPopupCustomer());
     }, [menuState.tzPopup.customerPopup]);
@@ -164,6 +170,11 @@ const StickySideMenu = () => {
     useEffect(() => {
         dispatch(validateAdditionalOptions());
     }, [menuState.tzPopup.additionalOptionsPopup]);
+
+    useEffect(() => {
+        dispatch(validateTzPackage());
+        console.log(menuState.tzPopup.packageOptions)
+    }, [menuState.tzPopup.packageOptions]);
     
     useEffect(() => {
         dispatch(validateConsultForm());
@@ -204,6 +215,7 @@ const StickySideMenu = () => {
                     productRefs={productRefs}
                     selectProductTypesRefs={selectProductTypesRefs}
                     selectPackageTypesRefs={selectPackageTypesRefs}
+                    customPackageInputHandler={customPackageInputHandler}
                     innerPopupProductInputHandler={tzInnerPopupProductInputHandler}
                     innerPopupProductSelectHandler={tzInnerPopupProductSelectHandler}
                     innerPopupProductFileHandler={tzInnerPopupProductFileHandler}
