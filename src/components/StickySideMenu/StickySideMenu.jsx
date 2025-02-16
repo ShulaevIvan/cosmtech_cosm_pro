@@ -21,7 +21,9 @@ import {
     validateTzPopupProduct,
     packageSelect,
     customPackageInput,
+    clearPackageInput,
     validateTzPackage,
+    savePackageResult,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm
@@ -159,6 +161,17 @@ const StickySideMenu = () => {
         dispatch(customPackageInput({inputValue: inputValue}));
     };
 
+    const customPackageClearInput = (e) => {
+        if (e.key === 'Backspace') {
+            dispatch(clearPackageInput());
+            return;
+        }
+    };
+
+    const savePackageResultHandler = () => {
+        dispatch(savePackageResult());
+    };
+
     useEffect(() => {
         dispatch(validateTzPopupCustomer());
     }, [menuState.tzPopup.customerPopup]);
@@ -173,8 +186,7 @@ const StickySideMenu = () => {
 
     useEffect(() => {
         dispatch(validateTzPackage());
-        console.log(menuState.tzPopup.packageOptions)
-    }, [menuState.tzPopup.packageOptions]);
+    }, [menuState.tzPopup.packageOptions, menuState.tzPopup.resultData.package]);
     
     useEffect(() => {
         dispatch(validateConsultForm());
@@ -216,10 +228,12 @@ const StickySideMenu = () => {
                     selectProductTypesRefs={selectProductTypesRefs}
                     selectPackageTypesRefs={selectPackageTypesRefs}
                     customPackageInputHandler={customPackageInputHandler}
+                    customPackageClearInputHandler={customPackageClearInput}
                     innerPopupProductInputHandler={tzInnerPopupProductInputHandler}
                     innerPopupProductSelectHandler={tzInnerPopupProductSelectHandler}
                     innerPopupProductFileHandler={tzInnerPopupProductFileHandler}
                     packageSelectHandler={chanagePackageHandler}
+                    savePackageHandler={savePackageResultHandler}
                     additionalOptionsHandler={additionalOptionsPopupHandler}
                     additionalOptionSelectHandler={selectOptionPopupHandler}
                     additionalOptionSaveHandler={saveSelectOptionPopupHandler}

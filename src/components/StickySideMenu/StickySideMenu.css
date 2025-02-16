@@ -372,6 +372,13 @@
     max-width: 400px;
     margin-bottom: 10px;
 }
+.sticky-sidemenu-package-options-custom-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 84%;
+    margin-bottom: 20px;
+}
 .tz-inner-popup-input-wrap input,
 .consult-inner-popup-input-wrap input,
 .sticky-sidemenu-package-options-custom-input-wrap input {

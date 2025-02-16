@@ -134,6 +134,14 @@ const initialState = {
                     cosmeticCustomUrl: '',
                     customFile: '',
                 },
+                package: {
+                    allFieldsValid: false,
+                    packageType: '',
+                    packageCategory: '',
+                    packageName: '',
+                    packageCustom: '',
+                    packageRequest: '',
+                },
                 additionalServices: {
                     selectedServices: [],
                 }
@@ -801,6 +809,10 @@ const menuSlice = createSlice({
             const { status, popupType } = action.payload;
             switch (popupType) {
                 case 'tz' : 
+                    if (!status) {
+                        state.sideMenu.tzPopup = initialState.sideMenu.tzPopup;
+                        return;
+                    }
                     state.sideMenu.tzPopup = {
                         ... state.sideMenu.tzPopup,
                         active:  state.sideMenu.tzPopup.active ? false : true
@@ -1163,7 +1175,7 @@ const menuSlice = createSlice({
         },
         packageSelect(state, action) {
             const { selectType, selectValue } = action.payload;
-
+            state.sideMenu.tzPopup.resultData.package = initialState.sideMenu.tzPopup.resultData.package;
             switch(selectType) {
                 case 'packageType':
                     state.sideMenu.tzPopup.packageOptions.packageFormatOptions = initialState.sideMenu.tzPopup.packageOptions.packageFormatOptions;
@@ -1236,6 +1248,12 @@ const menuSlice = createSlice({
                 value: inputValue
             }
         },
+        clearPackageInput(state) {
+            state.sideMenu.tzPopup.packageOptions.packageCustomField = {
+                ...state.sideMenu.tzPopup.packageOptions.packageCustomField,
+                value: ''
+            }
+        },
         validateTzPackage(state) {
             const cosmPackageSelected = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.cosmetic.find(
                 (item) => item.selected && item.type !== 'default'
@@ -1243,6 +1261,12 @@ const menuSlice = createSlice({
             const decorPackageSelected = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.decorative.find(
                 (item) => item.selected && item.type !== 'default'
             );
+            const decorativeRequestPackage = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.decorative.find(
+                (item) => item.selected && item.type === 'requestPackage');
+
+            const cosmRequestPackage = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.cosmetic.find(
+                (item) => item.selected && item.type === 'requestPackage');
+
             const customField = state.sideMenu.tzPopup.packageOptions.packageCustomField;
 
             const cosmPackageAdditional = cosmPackageSelected && cosmPackageSelected.additionalOptions ? 
@@ -1257,11 +1281,66 @@ const menuSlice = createSlice({
             const decorativePackageValid = (decorPackageSelected && decorPackageSelected.value 
                 && decorPackageAdditional && decorPackageAdditional.type !== 'default') ||  customField.value !== '';
 
-            if (cosmeticPackageValid || decorativePackageValid) {
+            if ((cosmeticPackageValid || decorativePackageValid) || (decorativeRequestPackage || cosmRequestPackage)) {
                 state.sideMenu.tzPopup.packageOptions.allFieldsValid = true;
                 return;
             }
             state.sideMenu.tzPopup.packageOptions.allFieldsValid = false;
+        },
+        savePackageResult(state) {
+            const cosmPackageSelected = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.cosmetic.find(
+                (item) => item.selected && item.type !== 'default' && item.type !== 'customField'
+            );
+            const decorPackageSelected = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.decorative.find(
+                (item) => item.selected && item.type !== 'default' && item.type !== 'customField'
+            );
+            const customField = state.sideMenu.tzPopup.packageOptions.packageCustomField;
+            const packageType = state.sideMenu.tzPopup.packageOptions.packageTypeOptions.find((item) => item.selected).value;
+            let packageCategory;
+
+
+            if (cosmPackageSelected && cosmPackageSelected.selected && cosmPackageSelected.value) {
+                packageCategory = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.cosmetic.find((item) => item.selected);
+
+                state.sideMenu.tzPopup.resultData.package = {
+                    ...state.sideMenu.tzPopup.resultData.package,
+                    packageType: packageType,
+                    packageCategory: packageCategory ? packageCategory.value : '',
+                    packageName: packageCategory.additionalOptions && packageCategory.additionalOptions.length > 0 ?  
+                        packageCategory.additionalOptions.find((optionItem) => optionItem.selected).value : '',
+                    packageRequest: '',
+                    packageCustom: '',
+                    allFieldsValid: true
+                }
+
+                return;
+            }
+            else if (decorPackageSelected && decorPackageSelected.selected && decorPackageSelected.value) {
+                packageCategory = state.sideMenu.tzPopup.packageOptions.packageFormatOptions.decorative.find((item) => item.selected);
+                state.sideMenu.tzPopup.resultData.package = {
+                    ...state.sideMenu.tzPopup.resultData.package,
+                    packageType: packageType,
+                    packageCategory: packageCategory ? packageCategory.value : '',
+                    packageName: packageCategory.additionalOptions && packageCategory.additionalOptions.length > 0 ?  
+                        packageCategory.additionalOptions.find((optionItem) => optionItem.selected).value : '',
+                    packageRequest: '',
+                    packageCustom: '',
+                    allFieldsValid: true
+                }
+                return;
+            }
+            else if (customField && customField.value) {
+                state.sideMenu.tzPopup.resultData.package = {
+                    ...state.sideMenu.tzPopup.resultData.package,
+                    packageType: packageType,
+                    packageCategory: '',
+                    packageName: '',
+                    packageCustom: customField.value,
+                    allFieldsValid: true
+                }
+                return;
+            }
+            state.sideMenu.tzPopup.resultData.package = initialState.sideMenu.tzPopup.resultData.package;
         },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
@@ -1354,7 +1433,9 @@ export const {
     validateAdditionalOptions,
     packageSelect,
     customPackageInput,
+    clearPackageInput,
     validateTzPackage,
+    savePackageResult,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,
