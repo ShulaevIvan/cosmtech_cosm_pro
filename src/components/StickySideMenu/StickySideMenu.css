@@ -519,6 +519,79 @@
     height: 30px;
     max-width: 120px;
 }
+.sticky-sidemenu-price-segment-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.sticky-sidemenu-price-segment-row {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.sticky-sidemenu-price-segment-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    min-height: 20px;
+    padding: 2px 4px;
+    border: 1px solid;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.sticky-sidemenu-price-segment-item:hover {
+    color: #00458B;
+}
+.sticky-sidemenu-price-segment-item.selected {
+    background-color: #00458B;
+    color: white;
+}
+.sticky-sidemenu-price-segment-item-name {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80%;
+}
+.sticky-sidemenu-price-segment-item-img-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 10%;
+    cursor: pointer;
+}
+.sticky-sidemenu-price-segment-item-img-wrap img {
+    max-width: 20px;
+    filter: invert(18%) sepia(96%) saturate(2022%) hue-rotate(197deg) brightness(85%) contrast(101%);
+}
+.sticky-sidemenu-price-segment-item-img-wrap img:hover {
+    transition: filter .4s ease;
+    filter: invert(68%) sepia(99%) saturate(294%) hue-rotate(121deg) brightness(90%) contrast(90%);
+}
+.sticky-sidemenu-price-segment-item-description-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    padding: 20px;
+    z-index: 5;
+    left: 0%;
+    top: -50%;
+    color: white;
+    background-color: #00458B;
+}
 .tz-inner-popup-from-controls-btn:hover,
 .consult-popup-from-controls-btn:hover,
 .tz-form-wrap-file-upload:hover,

@@ -702,6 +702,32 @@ const initialState = {
                     { id: 3, name: 'Индукционная запайка',  selected: false },
                     { id: 4, name: 'Поклейка этикеток крышки / донышки',  selected: false },
                 ]
+            },
+            priceSegment: {
+                allFieldsValid: true,
+                segments: [
+                    {
+                        id: 1,
+                        name: 'Mass market',
+                        selected: true,
+                        descriptionActive: false,
+                        description: 'недорогая косметика со средними по качеству активными компонентами, зачастую состав не имеет особой эффективности.',
+                    },
+                    {
+                        id: 2,
+                        name: 'Middle market',
+                        selected: false,
+                        descriptionActive: false,
+                        description: 'более дорогая косметика, состав не отличается от категории mass market, могут быть добавлены компоненты лучшего качества и эффективности.',
+                    },
+                    {
+                        id: 3,
+                        name: 'Lux',
+                        selected: false,
+                        descriptionActive: false,
+                        description: 'при изготовлении продуктов данной категории используется сырье высокого качества, натуральные ингредиенты, консерванты, активные компоненты имеют высокий процент ввода',
+                    }
+                ]
             }
         },
         calcPopup: {
@@ -1342,6 +1368,36 @@ const menuSlice = createSlice({
             }
             state.sideMenu.tzPopup.resultData.package = initialState.sideMenu.tzPopup.resultData.package;
         },
+        selectTzPriceSegment(state, action) {
+            const { segmentId, segmentName } = action.payload;
+            state.sideMenu.tzPopup.priceSegment.segments = state.sideMenu.tzPopup.priceSegment.segments.map((segmentItem) => {
+                if (segmentId === segmentItem.id && segmentName === segmentItem.name) {
+                    return {
+                        ...segmentItem,
+                        selected: segmentItem.selected ? false : true
+                    }
+                }
+                return {
+                    ...segmentItem,
+                    selected: false
+                }
+            })
+        },
+        tzPriceSegmentDescription(state, action) {
+            const { segmentId, segmentName, status } = action.payload;
+            state.sideMenu.tzPopup.priceSegment.segments = state.sideMenu.tzPopup.priceSegment.segments.map((segmentItem) => {
+                if (segmentId === segmentItem.id && segmentName === segmentItem.name && status) {
+                    return {
+                        ...segmentItem,
+                        descriptionActive: status
+                    }
+                }
+                return {
+                    ...segmentItem,
+                    descriptionActive: false
+                }
+            })
+        },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
             let validValue = inputValue;
@@ -1436,6 +1492,8 @@ export const {
     clearPackageInput,
     validateTzPackage,
     savePackageResult,
+    selectTzPriceSegment,
+    tzPriceSegmentDescription,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,

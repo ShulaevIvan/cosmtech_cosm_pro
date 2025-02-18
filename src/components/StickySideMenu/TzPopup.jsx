@@ -2,22 +2,13 @@ import React from "react";
 import { useRef } from "react";
 import TzInnerPopup from "./TzInnerPopup";
 import TzPackage from "./TzPackage";
+import TzPriceSegment from "./TzPriceSegment";
 import OptionAddPopup from "./OptionAddPopup";
 
 import { Link } from "react-router-dom";
 
 const TzPopup = (props) => {
     const tzState = props.tzState;
-    const packageTypeOptions = tzState.packageOptions.packageTypeOptions;
-    const cosmeticPackageOptions = tzState.packageOptions.packageFormatOptions.cosmetic;
-    const decorativePackageOptions = tzState.packageOptions.packageFormatOptions.decorative;
-
-    const selectPackageTypeRef = useRef(null);
-    const selectPackageBodyCosmeticRef = useRef(null);
-    const selectPackageBodyDecorCosmeticRef = useRef(null);
-    const selectPackageHeadCosmeticRef = useRef(null);
-    const selectPackageHeadDecorCosmeticRef = useRef(null);
-    const customPackageInputRef = useRef(null);
 
     return (
         <React.Fragment>
@@ -166,6 +157,11 @@ const TzPopup = (props) => {
                         </div>
                         <div className="sticky-sidemenu-tz-form-customer-wrap">
                             <h3>Ценовой сегмент:</h3>
+                            <TzPriceSegment 
+                                tzState={tzState}
+                                selectSegmentHandler={props.selectSegmentHandler}
+                                descriptionHandler={props.segmentDescriptionHandler}
+                            />
                         </div>
                     </div>
                 </div>
