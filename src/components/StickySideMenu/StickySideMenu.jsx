@@ -26,6 +26,7 @@ import {
     savePackageResult,
     selectTzPriceSegment,
     tzPriceSegmentDescription,
+    tzDeliveryReqCheckbox,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm
@@ -182,6 +183,10 @@ const StickySideMenu = () => {
         dispatch(tzPriceSegmentDescription({segmentId: segmentId, segmentName: segmentName, status: status}));
     };
 
+    const deliveryCheboxHandler = (deliveryType) => {
+        dispatch(tzDeliveryReqCheckbox({deliveryType: deliveryType}));
+    };
+
     useEffect(() => {
         dispatch(validateTzPopupCustomer());
     }, [menuState.tzPopup.customerPopup]);
@@ -246,6 +251,7 @@ const StickySideMenu = () => {
                     savePackageHandler={savePackageResultHandler}
                     selectSegmentHandler={selectPriceSegmentHandler}
                     segmentDescriptionHandler={segmentDescriptionHandler}
+                    deliveryCheckbox={deliveryCheboxHandler}
                     additionalOptionsHandler={additionalOptionsPopupHandler}
                     additionalOptionSelectHandler={selectOptionPopupHandler}
                     additionalOptionSaveHandler={saveSelectOptionPopupHandler}

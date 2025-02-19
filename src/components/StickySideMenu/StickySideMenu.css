@@ -100,7 +100,7 @@
     transform: translate(-50%, -50%);
     width: 50%;
     max-width: 800px;
-    min-height: 800px;
+    min-height: 900px;
     border: 1px solid #00458B;
     background-color: white;
     z-index: 6;
@@ -132,7 +132,9 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin-top: 10%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
     width: 100%;
     overflow: hidden;
     min-height: 700px;
@@ -169,7 +171,7 @@
     width: 100%;
     max-width: 700px;
     align-items: center;
-    padding: 0 40px;
+    padding: 0 0 0 5%;
 }
 .sticky-sidemenu-tz-form-customer-row,
 .sticky-sidemenu-tz-form-supplies-row,
@@ -186,21 +188,15 @@
 .sticky-sidemenu-tz-form-supplies-row h3,
 .sticky-sidemenu-tz-form-row {
     margin: 10px 0;
+    justify-content: space-between;
 }
-.sticky-sidemenu-tz-form-customer-wrap {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 42%;
-    max-width: 50%;
-    margin-right: 20px;
-}
+.sticky-sidemenu-tz-form-customer-wrap,
 .sticky-sidemenu-tz-form-product-type-wrap {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     width: 45%;
-    max-width: 50%;
+    margin-right: 20px;
 }
 .sticky-sidemenu-tz-form-customer-wrap,
 .sticky-sidemenu-tz-form-customer-wrap {
@@ -558,6 +554,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    user-select: none;
     width: 80%;
 }
 .sticky-sidemenu-price-segment-item-img-wrap {
@@ -592,6 +589,90 @@
     color: white;
     background-color: #00458B;
 }
+.sticky-sidemenu-delivery-checkbox-wrap,
+.sticky-sidemenu-self-delivery-checkbox-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.sticky-sidemenu-delivery-checkbox-wrap span,
+.sticky-sidemenu-self-delivery-checkbox-wrap span {
+    width: 80%;
+}
+.sticky-sidemenu-delivery-checkbox,
+.sticky-sidemenu-self-delivery-checkbox {
+    display: none;
+}
+.sticky-sidemenu-delivery-checkbox + label,
+.sticky-sidemenu-self-delivery-checkbox + label  {
+    position: relative;
+    padding-left: 15px;
+    height: 1.5em;
+    display: flex;
+    align-items: center;
+    color: #000;
+    cursor: pointer;
+    user-select: none;
+    width: 5%;
+}
+.sticky-sidemenu-delivery-checkbox + label:before,
+.sticky-sidemenu-self-delivery-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.4em;
+    height: 1.4em;
+    background-image: url('../../img/form_checkbox.svg');
+    background-size: contain;
+}
+.sticky-sidemenu-delivery-checkbox:checked + label::before,
+.sticky-sidemenu-self-delivery-checkbox:checked + label::before {
+    border-color: #000;
+    background-image: url('../../img/form_checkbox_checked.svg');
+    background-size: contain;
+}
+.sticky-sidemenu-tz-delivery-form-input-wrap {
+    margin: 10px 0;
+}
+.sticky-sidemenu-tz-delivery-form-wrap label {
+    font-family: gothampro bold;
+    font-weight: bold;
+    color: #1E1E1E;
+}
+.sticky-sidemenu-tz-delivery-form-wrap input {
+    min-height: 25px;
+}
+.sticky-sidemenu-tz-product-quantity-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.sticky-sidemenu-tz-quantity-title-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+    
+}
+.sticky-sidemenu-tz-quantity-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 600px;
+    justify-content: space-between;
+}
+.sticky-sidemenu-tz-quantity-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    align-items: center;
+}
 .tz-inner-popup-from-controls-btn:hover,
 .consult-popup-from-controls-btn:hover,
 .tz-form-wrap-file-upload:hover,
@@ -625,7 +706,7 @@
     justify-content: flex-start;
     margin-bottom: 5px;
 }
-.sticky-sidemenu-consult-form-label-wrap label{
+.sticky-sidemenu-consult-form-label-wrap label {
     color: #00458B;
     font-family: gothampro bold;
     cursor: pointer;

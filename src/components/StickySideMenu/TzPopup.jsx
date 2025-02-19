@@ -1,11 +1,8 @@
 import React from "react";
-import { useRef } from "react";
 import TzInnerPopup from "./TzInnerPopup";
 import TzPackage from "./TzPackage";
 import TzPriceSegment from "./TzPriceSegment";
 import OptionAddPopup from "./OptionAddPopup";
-
-import { Link } from "react-router-dom";
 
 const TzPopup = (props) => {
     const tzState = props.tzState;
@@ -153,7 +150,53 @@ const TzPopup = (props) => {
                     </div>
                     <div className="sticky-sidemenu-tz-form-row">
                         <div className="sticky-sidemenu-tz-form-customer-wrap">
-                            <h3>Отгрузка/Доставка:</h3>
+                            <h3>Отгрузка / Доставка:</h3>
+                            <div className="sticky-sidemenu-consult-checkbox-wrap">
+                                <div className="sticky-sidemenu-self-delivery-checkbox-wrap">
+                                    <input
+                                        id="sticky-sidemenu-self-delivery-checkbox" 
+                                        onClick={() => props.deliveryCheckbox('selfDelivery')}
+                                        type="checkbox" 
+                                        className="sticky-sidemenu-self-delivery-checkbox"
+                                    />
+                                    <label
+                                        htmlFor="sticky-sidemenu-self-delivery-checkbox"
+                                    ></label>
+                                    <span>Самовывоз с производства</span>
+                                </div>
+                            </div>
+                            <div className="sticky-sidemenu-consult-checkbox-wrap">
+                                <div className="sticky-sidemenu-delivery-checkbox-wrap">
+                                    <input
+                                        id="sticky-sidemenu-delivery-checkbox" 
+                                        onClick={() => props.deliveryCheckbox('delivery')}
+                                        type="checkbox" 
+                                        className="sticky-sidemenu-delivery-checkbox"
+                                    />
+                                    <label
+                                        htmlFor="sticky-sidemenu-delivery-checkbox"
+                                    ></label>
+                                    <span>Требуется доставка</span>
+                                </div>
+                            </div>
+                            {tzState.delivery.deliveryReq ?
+                                <React.Fragment>
+                                    <div className="sticky-sidemenu-tz-delivery-form-wrap">
+                                        <label htmlFor={`${tzState.delivery.deliveryCityInput.name}-${tzState.delivery.deliveryCityInput.id}`}>
+                                            Город доставки
+                                        </label>
+                                        <div className="sticky-sidemenu-tz-delivery-form-input-wrap">
+                                            <input
+                                                id={`${tzState.delivery.deliveryCityInput.name}-${tzState.delivery.deliveryCityInput.id}`} 
+                                                type={tzState.delivery.deliveryCityInput.type}
+                                                value={tzState.delivery.deliveryCityInput.value}
+                                                placeholder={tzState.delivery.deliveryCityInput.placeholder}
+                                            />
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            : null}
+                            
                         </div>
                         <div className="sticky-sidemenu-tz-form-customer-wrap">
                             <h3>Ценовой сегмент:</h3>
@@ -163,6 +206,31 @@ const TzPopup = (props) => {
                                 descriptionHandler={props.segmentDescriptionHandler}
                             />
                         </div>
+                    </div>
+                    <div className="sticky-sidemenu-tz-product-quantity-wrap">
+                        <div className="sticky-sidemenu-tz-quantity-row">
+                            <div className="sticky-sidemenu-tz-quantity-title-wrap">
+                                <h3>Количество едитниц продукции</h3>
+                            </div>
+                            <div className="sticky-sidemenu-tz-quantity-row">
+                                <div className="sticky-sidemenu-tz-quantity-item">
+                                    <label>Test 1</label>
+                                    <div className="sticky-sidemenu-tz-quantity-item-input-wrap">
+                                        <input type="text" disabled value={1000}/>
+                                        <span className="sticky-sidemenu-tz-quantity-item-input-q">шт</span>
+                                    </div>
+                                </div>
+                                <div className="sticky-sidemenu-tz-quantity-item">
+                                    <label>Test 2</label>
+                                    <div className="sticky-sidemenu-tz-quantity-item-input-wrap">
+                                        <input type="text" disabled value={1000}/>
+                                        <span className="sticky-sidemenu-tz-quantity-item-input-q">шт</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 </div>

@@ -709,7 +709,7 @@ const initialState = {
                     {
                         id: 1,
                         name: 'Mass market',
-                        selected: true,
+                        selected: false,
                         descriptionActive: false,
                         description: 'недорогая косметика со средними по качеству активными компонентами, зачастую состав не имеет особой эффективности.',
                     },
@@ -728,6 +728,19 @@ const initialState = {
                         description: 'при изготовлении продуктов данной категории используется сырье высокого качества, натуральные ингредиенты, консерванты, активные компоненты имеют высокий процент ввода',
                     }
                 ]
+            },
+            delivery: {
+                allFieldsValid: true,
+                selfDelivery: false,
+                deliveryReq: false,
+                deliveryCityInput: {
+                    id: 1,
+                    name: 'city',
+                    type: 'text',
+                    value: '',
+                    placeholder: 'Город...',
+                    valid: true
+                }
             }
         },
         calcPopup: {
@@ -1398,6 +1411,22 @@ const menuSlice = createSlice({
                 }
             })
         },
+        tzDeliveryReqCheckbox(state, action) {
+            const { deliveryType } = action.payload;
+            switch(deliveryType) {
+                case 'selfDelivery':
+                    state.sideMenu.tzPopup.delivery.selfDelivery = state.sideMenu.tzPopup.delivery.selfDelivery ? false : true;;
+                    state.sideMenu.tzPopup.delivery.deliveryReq = false;
+                    break;
+                case 'delivery':
+                    state.sideMenu.tzPopup.delivery.deliveryReq = state.sideMenu.tzPopup.delivery.deliveryReq ? false : true;
+                    state.sideMenu.tzPopup.delivery.selfDelivery = false;
+                    break
+                default:
+                    break
+            }
+            
+        },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
             let validValue = inputValue;
@@ -1494,6 +1523,7 @@ export const {
     savePackageResult,
     selectTzPriceSegment,
     tzPriceSegmentDescription,
+    tzDeliveryReqCheckbox,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,
