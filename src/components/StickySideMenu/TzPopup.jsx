@@ -3,9 +3,12 @@ import TzInnerPopup from "./TzInnerPopup";
 import TzPackage from "./TzPackage";
 import TzPriceSegment from "./TzPriceSegment";
 import OptionAddPopup from "./OptionAddPopup";
+import { Link } from "react-router-dom";
 
 const TzPopup = (props) => {
     const tzState = props.tzState;
+    const checkCityInput = tzState.delivery.deliveryCityInput.valid && tzState.delivery.deliveryCityInput.value !== '';
+    const checkCitySaved = tzState.resultData.delivery.saved;
 
     return (
         <React.Fragment>
@@ -187,11 +190,20 @@ const TzPopup = (props) => {
                                         </label>
                                         <div className="sticky-sidemenu-tz-delivery-form-input-wrap">
                                             <input
+                                                className={tzState.delivery.deliveryCityInput.valid ? null : 'input-err'}
+                                                ref={props.deliveryInputRef}
+                                                onKeyDown={(e) => props.deliveryClearInputHandler(e)}
+                                                onChange={() => props.deliveryInputHandler(props.deliveryInputRef.current)}
                                                 id={`${tzState.delivery.deliveryCityInput.name}-${tzState.delivery.deliveryCityInput.id}`} 
                                                 type={tzState.delivery.deliveryCityInput.type}
                                                 value={tzState.delivery.deliveryCityInput.value}
                                                 placeholder={tzState.delivery.deliveryCityInput.placeholder}
+                                                disabled={tzState.resultData.delivery.saved ? true : null}
                                             />
+                                            <Link
+                                                onClick={props.deliverySaveHandler} 
+                                                className={`sticky-sidemenu-tz-delivery-save-btn ${!checkCityInput || checkCitySaved ? 'btnDisabled' : null }`}
+                                            >{checkCitySaved ? 'Сохранено': 'Сохранить'}</Link>
                                         </div>
                                     </div>
                                 </React.Fragment>
@@ -208,29 +220,45 @@ const TzPopup = (props) => {
                         </div>
                     </div>
                     <div className="sticky-sidemenu-tz-product-quantity-wrap">
-                        <div className="sticky-sidemenu-tz-quantity-row">
-                            <div className="sticky-sidemenu-tz-quantity-title-wrap">
-                                <h3>Количество едитниц продукции</h3>
+                        <div className="sticky-sidemenu-tz-quantity-title-wrap">
+                            <h3>Количество едитниц продукции</h3>
+                        </div>
+                        <div className="sticky-sidemenu-tz-final-row">
+                            <div className="sticky-sidemenu-tz-quantity-wrap">
+                                <div className="sticky-sidemenu-tz-quantity-input-row">
+                                    <div className="sticky-sidemenu-tz-quantity-input-description">Итого:</div>
+                                    <div className="sticky-sidemenu-tz-quantity-input-wrap">
+                                        <input type="text" placeholder="1000"/>
+                                    </div>
+                                    <div className="sticky-sidemenu-tz-quantity-input-unit">шт</div>
+                                </div>
                             </div>
-                            <div className="sticky-sidemenu-tz-quantity-row">
-                                <div className="sticky-sidemenu-tz-quantity-item">
-                                    <label>Test 1</label>
-                                    <div className="sticky-sidemenu-tz-quantity-item-input-wrap">
-                                        <input type="text" disabled value={1000}/>
-                                        <span className="sticky-sidemenu-tz-quantity-item-input-q">шт</span>
-                                    </div>
-                                </div>
-                                <div className="sticky-sidemenu-tz-quantity-item">
-                                    <label>Test 2</label>
-                                    <div className="sticky-sidemenu-tz-quantity-item-input-wrap">
-                                        <input type="text" disabled value={1000}/>
-                                        <span className="sticky-sidemenu-tz-quantity-item-input-q">шт</span>
-                                    </div>
-                                </div>
-
+                            <div className="sticky-sidemenu-tz-quantity-description">
+                                <p>
+                                    Минимальная партия производства 50 кг. Мин. кол-во в заказе от  
+                                    <span className="sticky-sidemenu-tz-quantity-min-value"> 100 000 </span> 
+                                    шт
+                                </p>
                             </div>
                         </div>
-                        
+                    </div>
+                    <div className="sticky-sidemenu-tz-send-form-wrap">
+                        <div className="sticky-sidemenu-tz-send-btn-wrap">
+                            <div className="sticky-sidemenu-tz-policy-checkbox-wrap">
+                                <input
+                                    id="sticky-sidemenu-tz-policy-checkbox" 
+                                    type="checkbox" 
+                                    className="sticky-sidemenu-tz-policy-checkbox"
+                                />
+                                <label
+                                    htmlFor="sticky-sidemenu-tz-policy-checkbox"
+                                ></label>
+                                <span>
+                                    согласен с <Link to={"/policy"} target={"_blank"}>политикой конфидициальности</Link>
+                                </span>
+                            </div>
+                            <Link className="sticky-sidemenu-tz-send-btn">Отправить</Link>
+                        </div>
                     </div>
                 </div>
                 </div>

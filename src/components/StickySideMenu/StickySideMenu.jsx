@@ -27,6 +27,8 @@ import {
     selectTzPriceSegment,
     tzPriceSegmentDescription,
     tzDeliveryReqCheckbox,
+    tzDeliveryReqInput,
+    tzDeliveryReqSave,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm
@@ -43,6 +45,7 @@ const StickySideMenu = () => {
         {name: 'phone', ref: useRef()},
         {name: 'email', ref: useRef()}
     ];
+
     const productRefs = [
         {name: 'productStats', ref: useRef()},
         {name: 'productLink', ref: useRef()},
@@ -51,20 +54,25 @@ const StickySideMenu = () => {
         {name: 'customCosm', ref: useRef()},
         {name: 'customDecor', ref: useRef()}
     ];
+
     const selectProductTypesRefs = [
         {name: 'default', ref: useRef()},
         {name: 'cosmetic', ref: useRef()},
         {name: 'decorative', ref: useRef()},
     ];
+
     const selectPackageTypesRefs = [
         {name: 'default', ref: useRef()},
         {name: 'cosmetic', ref: useRef()},
         {name: 'decorative', ref: useRef()},
     ];
+
     const consultRefs = [
         {name: 'name', ref: useRef()},
         {name: 'phone', ref: useRef()},
     ];
+
+    const tzDeliveryInputRef = useRef(null);
 
     const findInputRef = (refArr, refName) => {
         return refArr.find((item) => item.name === refName).ref;
@@ -187,6 +195,21 @@ const StickySideMenu = () => {
         dispatch(tzDeliveryReqCheckbox({deliveryType: deliveryType}));
     };
 
+    const deliveryCityInputHandler = (inputRef) => {
+        dispatch(tzDeliveryReqInput({inputValue: inputRef.value}));
+    };
+
+    const deliveryCitySaveHandler = () => {
+        dispatch(tzDeliveryReqSave());
+    };
+    
+    const deliveryCityClearInput = (e) => {
+        if (e.key === 'Backspace') {
+            dispatch(tzDeliveryReqInput({inputValue: ''}));
+            return;
+        }
+    };
+
     useEffect(() => {
         dispatch(validateTzPopupCustomer());
     }, [menuState.tzPopup.customerPopup]);
@@ -202,6 +225,10 @@ const StickySideMenu = () => {
     useEffect(() => {
         dispatch(validateTzPackage());
     }, [menuState.tzPopup.packageOptions, menuState.tzPopup.resultData.package]);
+
+    useEffect(() => {
+        console.log(menuState.tzPopup.resultData)
+    }, [menuState.tzPopup.resultData])
     
     useEffect(() => {
         dispatch(validateConsultForm());
@@ -252,6 +279,10 @@ const StickySideMenu = () => {
                     selectSegmentHandler={selectPriceSegmentHandler}
                     segmentDescriptionHandler={segmentDescriptionHandler}
                     deliveryCheckbox={deliveryCheboxHandler}
+                    deliveryInputHandler={deliveryCityInputHandler}
+                    deliveryClearInputHandler={deliveryCityClearInput}
+                    deliverySaveHandler={deliveryCitySaveHandler}
+                    deliveryInputRef={tzDeliveryInputRef}
                     additionalOptionsHandler={additionalOptionsPopupHandler}
                     additionalOptionSelectHandler={selectOptionPopupHandler}
                     additionalOptionSaveHandler={saveSelectOptionPopupHandler}

@@ -100,17 +100,21 @@
     transform: translate(-50%, -50%);
     width: 50%;
     max-width: 800px;
-    min-height: 900px;
     border: 1px solid #00458B;
     background-color: white;
     z-index: 6;
     border-radius: 10px;
+    padding: 40px;
+    min-height: 650px;
+}
+.sticky-sidemenu-tz-popup-wrap h3 {
+    margin: 0 0 10px 0;
 }
 .sticky-sidemenu-tz-popup-close-btn-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
+    width: 95%;
     height: 40px;
     position: absolute;
     top: 5%;
@@ -134,10 +138,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 5%;
     width: 100%;
     overflow: hidden;
-    min-height: 700px;
 }
 .sticky-sidemenu-tz-popup-body.consult {
     min-height: 200px;
@@ -162,7 +164,7 @@
     margin: 0;
 }
 .sticky-sidemenu-tz-title-wrap {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .sticky-sidemenu-tz-form-wrap {
     display: flex;
@@ -171,7 +173,6 @@
     width: 100%;
     max-width: 700px;
     align-items: center;
-    padding: 0 0 0 5%;
 }
 .sticky-sidemenu-tz-form-customer-row,
 .sticky-sidemenu-tz-form-supplies-row,
@@ -187,7 +188,7 @@
 .sticky-sidemenu-tz-form-customer-row h3,
 .sticky-sidemenu-tz-form-supplies-row h3,
 .sticky-sidemenu-tz-form-row {
-    margin: 10px 0;
+    margin-bottom: 10px;
     justify-content: space-between;
 }
 .sticky-sidemenu-tz-form-customer-wrap,
@@ -196,7 +197,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 45%;
-    margin-right: 20px;
+    max-width: 300px;
 }
 .sticky-sidemenu-tz-form-customer-wrap,
 .sticky-sidemenu-tz-form-customer-wrap {
@@ -208,6 +209,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    max-width: 280px;
     justify-content: space-between;
 }
 .sticky-sidemenu-tz-form-customer-info-item-value {
@@ -215,6 +217,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 70%;
+    max-width: 290px;
 }
 .sticky-sidemenu-tz-form-customer-info-item-control {
     display: flex;
@@ -483,13 +486,15 @@
 }
 .tz-inner-popup-from-controls-btn,
 .consult-popup-from-controls-btn,
-.sticky-sidemenu-package-save-btn {
+.sticky-sidemenu-package-save-btn,
+.sticky-sidemenu-tz-send-btn,
+.sticky-sidemenu-tz-delivery-save-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 150px;
     max-width: 150px;
-    height: 40px;
+    height: 35px;
     padding: 0 20px;
     font-size: 18px;
     color: #fff;
@@ -502,6 +507,11 @@
     cursor: pointer;
     text-align: center;
     border-radius: 4px;
+}
+.sticky-sidemenu-tz-delivery-save-btn {
+    min-width: 100px;
+    max-width: 100px;
+    height: 28px;
 }
 .sticky-sidemenu-package-save-btn-wrap {
     display: flex;
@@ -526,7 +536,8 @@
     flex-direction: column;
     flex-wrap: wrap;
     position: relative;
-    width: 100%;
+    width: 85%;
+    max-width: 255px;
     justify-content: space-between;
     align-items: center;
 }
@@ -596,16 +607,23 @@
     flex-wrap: wrap;
     width: 100%;
 }
+.sticky-sidemenu-tz-policy-checkbox-wrap  {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
 .sticky-sidemenu-delivery-checkbox-wrap span,
 .sticky-sidemenu-self-delivery-checkbox-wrap span {
     width: 80%;
 }
 .sticky-sidemenu-delivery-checkbox,
-.sticky-sidemenu-self-delivery-checkbox {
+.sticky-sidemenu-self-delivery-checkbox,
+.sticky-sidemenu-tz-policy-checkbox {
     display: none;
 }
 .sticky-sidemenu-delivery-checkbox + label,
-.sticky-sidemenu-self-delivery-checkbox + label  {
+.sticky-sidemenu-self-delivery-checkbox + label {
     position: relative;
     padding-left: 15px;
     height: 1.5em;
@@ -617,7 +635,8 @@
     width: 5%;
 }
 .sticky-sidemenu-delivery-checkbox + label:before,
-.sticky-sidemenu-self-delivery-checkbox + label:before {
+.sticky-sidemenu-self-delivery-checkbox + label:before,
+.sticky-sidemenu-tz-policy-checkbox + label::before {
     content: '';
     position: absolute;
     left: 0;
@@ -628,12 +647,16 @@
     background-size: contain;
 }
 .sticky-sidemenu-delivery-checkbox:checked + label::before,
-.sticky-sidemenu-self-delivery-checkbox:checked + label::before {
+.sticky-sidemenu-self-delivery-checkbox:checked + label::before,
+.sticky-sidemenu-tz-policy-checkbox:checked + label::before {
     border-color: #000;
     background-image: url('../../img/form_checkbox_checked.svg');
     background-size: contain;
 }
 .sticky-sidemenu-tz-delivery-form-input-wrap {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     margin: 10px 0;
 }
 .sticky-sidemenu-tz-delivery-form-wrap label {
@@ -643,6 +666,7 @@
 }
 .sticky-sidemenu-tz-delivery-form-wrap input {
     min-height: 25px;
+    margin-right: 10px;
 }
 .sticky-sidemenu-tz-product-quantity-wrap {
     display: flex;
@@ -655,28 +679,91 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    margin-top: 20px;
-    
 }
-.sticky-sidemenu-tz-quantity-row {
+.sticky-sidemenu-tz-quantity-title-wrap p {
+    margin: 0 0 10px 0;
+}
+.sticky-sidemenu-tz-final-row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 600px;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
-.sticky-sidemenu-tz-quantity-item {
+.sticky-sidemenu-tz-quantity-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 50%;
+}
+.sticky-sidemenu-tz-quantity-description {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 50%;
+    max-width: 50%;
+}
+.sticky-sidemenu-tz-quantity-description p {
+    margin: 0;
+}
+.sticky-sidemenu-tz-send-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.sticky-sidemenu-tz-quantity-input-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-right: 10px;
+}
+.sticky-sidemenu-tz-quantity-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.sticky-sidemenu-tz-quantity-input-description {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 20%;
+}
+.sticky-sidemenu-tz-quantity-input-unit {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 20px;
+}
+
+.sticky-sidemenu-tz-quantity-input-wrap input {
+    max-width: 150px;
+    min-height: 30px;
+}
+.sticky-sidemenu-tz-send-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
     align-items: center;
 }
 .tz-inner-popup-from-controls-btn:hover,
 .consult-popup-from-controls-btn:hover,
 .tz-form-wrap-file-upload:hover,
-.sticky-sidemenu-package-save-btn:hover  {
+.sticky-sidemenu-package-save-btn:hover,
+.tz-inner-popup-from-controls-btn:hover,
+.consult-popup-from-controls-btn:hover,
+.sticky-sidemenu-package-save-btn:hover,
+.sticky-sidemenu-tz-send-btn:hover,
+.sticky-sidemenu-tz-delivery-save-btn:hover {
     background-color: #00458B;
     transition: background .4s ease;
     color: white;
@@ -771,4 +858,50 @@
     border-color: #000;
     background-image: url('../../img/form_checkbox_checked.svg');
     background-size: contain;
+}
+.sticky-sidemenu-tz-policy-checkbox-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+.sticky-sidemenu-tz-policy-checkbox {
+    display: none;
+}
+.sticky-sidemenu-tz-policy-checkbox + label {
+    position: relative;
+    padding-left: 15px;
+    height: 1.5em;
+    display: flex;
+    align-items: center;
+    color: #000;
+    cursor: pointer;
+    user-select: none;
+    width: 5%;
+}
+.sticky-sidemenu-tz-policy-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.4em;
+    height: 1.4em;
+    background-image: url('../../img/form_checkbox.svg');
+    background-size: contain;
+}
+.sticky-sidemenu-tz-policy-checkbox:checked + label::before {
+    border-color: #000;
+    background-image: url('../../img/form_checkbox_checked.svg');
+    background-size: contain;
+}
+.sticky-sidemenu-tz-policy-checkbox-wrap span {
+    width: 80%;
+}
+.sticky-sidemenu-tz-quantity-min-value,
+.sticky-sidemenu-tz-quantity-input-description {
+    font-weight: bold;
 }

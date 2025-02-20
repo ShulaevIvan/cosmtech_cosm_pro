@@ -142,6 +142,10 @@ const initialState = {
                     packageCustom: '',
                     packageRequest: '',
                 },
+                delivery: {
+                    deliveryValue: '',
+                    saved: false,
+                },
                 additionalServices: {
                     selectedServices: [],
                 }
@@ -1415,16 +1419,45 @@ const menuSlice = createSlice({
             const { deliveryType } = action.payload;
             switch(deliveryType) {
                 case 'selfDelivery':
-                    state.sideMenu.tzPopup.delivery.selfDelivery = state.sideMenu.tzPopup.delivery.selfDelivery ? false : true;;
-                    state.sideMenu.tzPopup.delivery.deliveryReq = false;
+                    state.sideMenu.tzPopup.delivery.deliveryCityInput = initialState.sideMenu.tzPopup.delivery.deliveryCityInput;
+                    state.sideMenu.tzPopup.delivery.selfDelivery = state.sideMenu.tzPopup.delivery.selfDelivery ? false : true;
+                    if (state.sideMenu.tzPopup.delivery.selfDelivery) {
+                        state.sideMenu.tzPopup.resultData.delivery.deliveryValue = 'Самовывоз из спб салова 27 АБ';
+                        return;
+                    }
+                    state.sideMenu.tzPopup.resultData.delivery = initialState.sideMenu.tzPopup.resultData.delivery;
+                    
+                    
                     break;
                 case 'delivery':
+                    if (!state.sideMenu.tzPopup.delivery.deliveryReq) {
+                        state.sideMenu.tzPopup.resultData.delivery = initialState.sideMenu.tzPopup.resultData.delivery;
+                        state.sideMenu.tzPopup.delivery.deliveryCityInput = initialState.sideMenu.tzPopup.delivery.deliveryCityInput;
+                        state.sideMenu.tzPopup.delivery.deliveryReq = true;
+                        return
+                    }
                     state.sideMenu.tzPopup.delivery.deliveryReq = state.sideMenu.tzPopup.delivery.deliveryReq ? false : true;
-                    state.sideMenu.tzPopup.delivery.selfDelivery = false;
                     break
                 default:
                     break
             }
+            
+        },
+        tzDeliveryReqInput(state, action) {
+            const { inputValue } = action.payload;
+            state.sideMenu.tzPopup.delivery.deliveryCityInput = {
+                ...state.sideMenu.tzPopup.delivery.deliveryCityInput,
+                value: inputValue,
+                valid: inputValue.trim() ? true : false
+            }
+        },
+        tzDeliveryReqSave(state) {
+            const deliveryInput = state.sideMenu.tzPopup.delivery.deliveryCityInput;
+            state.sideMenu.tzPopup.resultData.delivery = {
+                ...state.sideMenu.tzPopup.resultData.delivery,
+                value: deliveryInput.value,
+                saved: true
+            };
             
         },
         consultFormInput(state, action) {
@@ -1524,6 +1557,8 @@ export const {
     selectTzPriceSegment,
     tzPriceSegmentDescription,
     tzDeliveryReqCheckbox,
+    tzDeliveryReqInput,
+    tzDeliveryReqSave,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,
