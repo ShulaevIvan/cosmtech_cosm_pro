@@ -29,6 +29,8 @@ import {
     tzDeliveryReqCheckbox,
     tzDeliveryReqInput,
     tzDeliveryReqSave,
+    tzQuantityInput,
+    tzQuantityCalc,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm
@@ -73,6 +75,8 @@ const StickySideMenu = () => {
     ];
 
     const tzDeliveryInputRef = useRef(null);
+
+    const tzQuantityInputRef = useRef(null);
 
     const findInputRef = (refArr, refName) => {
         return refArr.find((item) => item.name === refName).ref;
@@ -210,6 +214,10 @@ const StickySideMenu = () => {
         }
     };
 
+    const tzProductQuantityHandler = (quantityRef) => {
+        dispatch(tzQuantityInput({inputValue: quantityRef.value}));
+    };
+
     useEffect(() => {
         dispatch(validateTzPopupCustomer());
     }, [menuState.tzPopup.customerPopup]);
@@ -227,8 +235,8 @@ const StickySideMenu = () => {
     }, [menuState.tzPopup.packageOptions, menuState.tzPopup.resultData.package]);
 
     useEffect(() => {
-        console.log(menuState.tzPopup.resultData)
-    }, [menuState.tzPopup.resultData])
+        dispatch(tzQuantityCalc());
+    }, [menuState.tzPopup.resultData.product.cosmeticSize, menuState.tzPopup.quantity.quantityInput]);
     
     useEffect(() => {
         dispatch(validateConsultForm());
@@ -283,6 +291,8 @@ const StickySideMenu = () => {
                     deliveryClearInputHandler={deliveryCityClearInput}
                     deliverySaveHandler={deliveryCitySaveHandler}
                     deliveryInputRef={tzDeliveryInputRef}
+                    quantityInputRef={tzQuantityInputRef}
+                    quantityHandler={tzProductQuantityHandler}
                     additionalOptionsHandler={additionalOptionsPopupHandler}
                     additionalOptionSelectHandler={selectOptionPopupHandler}
                     additionalOptionSaveHandler={saveSelectOptionPopupHandler}

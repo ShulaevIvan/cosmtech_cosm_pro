@@ -228,16 +228,25 @@ const TzPopup = (props) => {
                                 <div className="sticky-sidemenu-tz-quantity-input-row">
                                     <div className="sticky-sidemenu-tz-quantity-input-description">Итого:</div>
                                     <div className="sticky-sidemenu-tz-quantity-input-wrap">
-                                        <input type="text" placeholder="1000"/>
+                                        <input
+                                            className={tzState.quantity.quantityInput.valid ? null : 'input-err'}
+                                            ref={props.quantityInputRef}
+                                            onChange={() => props.quantityHandler(props.quantityInputRef.current)} 
+                                            type={tzState.quantity.quantityInput.type}
+                                            value={tzState.quantity.quantityInput.value}
+                                            placeholder={tzState.quantity.quantityInput.placeholder}
+                                        />
                                     </div>
                                     <div className="sticky-sidemenu-tz-quantity-input-unit">шт</div>
                                 </div>
                             </div>
                             <div className="sticky-sidemenu-tz-quantity-description">
                                 <p>
-                                    Минимальная партия производства 50 кг. Мин. кол-во в заказе от  
-                                    <span className="sticky-sidemenu-tz-quantity-min-value"> 100 000 </span> 
-                                    шт
+                                    Минимальная партия производства 50 кг. Мин. кол-во в заказе  
+                                    <span className="sticky-sidemenu-tz-quantity-min-value"> 
+                                        {tzState.quantity.minOrderProductQnt && tzState.quantity.minOrderProductQnt > 0 ? 
+                                            ` от ${tzState.quantity.minOrderProductQnt} шт` : ' не определено'}
+                                    </span> 
                                 </p>
                             </div>
                         </div>

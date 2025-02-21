@@ -146,6 +146,10 @@ const initialState = {
                     deliveryValue: '',
                     saved: false,
                 },
+                quantity: {
+                    minQnt: 50000,
+                    productQnt: 0,
+                },
                 additionalServices: {
                     selectedServices: [],
                 }
@@ -745,7 +749,20 @@ const initialState = {
                     placeholder: 'Город...',
                     valid: true
                 }
-            }
+            },
+            quantity: {
+                allFieldsValid: true,
+                minOrderWeight: 50000,
+                minOrderProductQnt: 0,
+                quantityInput: {
+                    id: 1,
+                    name: 'qnt',
+                    type: 'text',
+                    value: '',
+                    placeholder: '1000',
+                    valid: true
+                }
+            },
         },
         calcPopup: {
             active: false,
@@ -1067,6 +1084,7 @@ const menuSlice = createSlice({
                         cosmeticCustomUrl: state.sideMenu.tzPopup.productPopup.fields.find((item) => item.name === 'productLink').value,
                         customFile: state.sideMenu.tzPopup.productPopup.cosmeticProductsCustomFile,
                     };
+                    state.sideMenu.tzPopup.quantity.quantityInput.value = initialState.sideMenu.tzPopup.quantity.quantityInput.value;
                     state.sideMenu.tzPopup.productPopup.active = false;
                     break;
                 default : break;
@@ -1460,6 +1478,32 @@ const menuSlice = createSlice({
             };
             
         },
+        tzQuantityInput(state, action) {
+            const { inputValue } = action.payload;
+            const minOrderProductQnt = state.sideMenu.tzPopup.quantity.minOrderProductQnt;
+            const checkInput = isNaN(Number(inputValue)) || Number(inputValue) === 0 || inputValue.trim() === '';
+
+            state.sideMenu.tzPopup.quantity.quantityInput = {
+                ...state.sideMenu.tzPopup.quantity.quantityInput,
+                value: checkInput ? '' : inputValue,
+                valid: Number(inputValue) >= state.sideMenu.tzPopup.quantity.minOrderProductQnt && !isNaN(inputValue) ? true : false
+            };     
+        },
+        tzQuantityCalc(state) {
+            const minWeightValue = state.sideMenu.tzPopup.quantity.minOrderWeight;
+            const qntInputValue = Number(state.sideMenu.tzPopup.quantity.quantityInput.value);
+            const productSize = state.sideMenu.tzPopup.resultData.product.cosmeticSize;
+            const productSizeValue = productSize.replace(/[а-я]*$|[a-z]*$|[А-Я]$|[A-Z]*$/, '');
+
+            if (productSizeValue) {
+                const minOrderProductQnt = (Number(minWeightValue) / Number(productSizeValue)).toFixed();
+                state.sideMenu.tzPopup.quantity = {
+                    ...state.sideMenu.tzPopup.quantity,
+                    minOrderProductQnt: minOrderProductQnt
+                }
+            }
+            
+        },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
             let validValue = inputValue;
@@ -1559,6 +1603,8 @@ export const {
     tzDeliveryReqCheckbox,
     tzDeliveryReqInput,
     tzDeliveryReqSave,
+    tzQuantityInput,
+    tzQuantityCalc,
     consultFormInput,
     consultFormClearInput,
     validateConsultForm,
