@@ -30,8 +30,11 @@ import {
     tzDeliveryReqInput,
     tzDeliveryReqSave,
     tzQuantityInput,
+    tzQuantityClearInput,
     tzQuantityCalc,
     consultFormInput,
+    tzPopupValidateResult,
+    tzPopupPolicy,
     consultFormClearInput,
     validateConsultForm
 } from "../../redux/slices/menuSlice";
@@ -218,6 +221,22 @@ const StickySideMenu = () => {
         dispatch(tzQuantityInput({inputValue: quantityRef.value}));
     };
 
+    const tzProductQuantityClearInput = (e) => {
+        if (e.key === 'Backspace') {
+            dispatch(tzQuantityClearInput());
+            return;
+        }
+    };
+
+    const tzPolicyHandler = () => {
+        dispatch(tzPopupPolicy());
+    };
+
+    const sendTzHandler = () => {
+        const sendData = menuState.tzPopup.resultData;
+        console.log(sendData);
+    };
+
     useEffect(() => {
         dispatch(validateTzPopupCustomer());
     }, [menuState.tzPopup.customerPopup]);
@@ -237,6 +256,11 @@ const StickySideMenu = () => {
     useEffect(() => {
         dispatch(tzQuantityCalc());
     }, [menuState.tzPopup.resultData.product.cosmeticSize, menuState.tzPopup.quantity.quantityInput]);
+
+    useEffect(() => {
+        dispatch(tzPopupValidateResult());
+        console.log(menuState.tzPopup.resultData)
+    }, [menuState.tzPopup.resultData, menuState.tzPopup.policyActive])
     
     useEffect(() => {
         dispatch(validateConsultForm());
@@ -293,11 +317,14 @@ const StickySideMenu = () => {
                     deliveryInputRef={tzDeliveryInputRef}
                     quantityInputRef={tzQuantityInputRef}
                     quantityHandler={tzProductQuantityHandler}
+                    quantityClearHandler={tzProductQuantityClearInput}
+                    policyHandler={tzPolicyHandler}
                     additionalOptionsHandler={additionalOptionsPopupHandler}
                     additionalOptionSelectHandler={selectOptionPopupHandler}
                     additionalOptionSaveHandler={saveSelectOptionPopupHandler}
                     findInputRef={findInputRef}
                     removeTzInnerPopupInfoHandler={removeTzInnerPopupInfo}
+                    sendTzHandler={sendTzHandler}
                 /> 
             : null}
             {menuState.contactsPopup.active ? 

@@ -221,23 +221,28 @@ const TzPopup = (props) => {
                     </div>
                     <div className="sticky-sidemenu-tz-product-quantity-wrap">
                         <div className="sticky-sidemenu-tz-quantity-title-wrap">
-                            <h3>Количество едитниц продукции</h3>
+                            <h3>Количество единиц продукции</h3>
                         </div>
                         <div className="sticky-sidemenu-tz-final-row">
                             <div className="sticky-sidemenu-tz-quantity-wrap">
                                 <div className="sticky-sidemenu-tz-quantity-input-row">
                                     <div className="sticky-sidemenu-tz-quantity-input-description">Итого:</div>
-                                    <div className="sticky-sidemenu-tz-quantity-input-wrap">
-                                        <input
-                                            className={tzState.quantity.quantityInput.valid ? null : 'input-err'}
-                                            ref={props.quantityInputRef}
-                                            onChange={() => props.quantityHandler(props.quantityInputRef.current)} 
-                                            type={tzState.quantity.quantityInput.type}
-                                            value={tzState.quantity.quantityInput.value}
-                                            placeholder={tzState.quantity.quantityInput.placeholder}
-                                        />
-                                    </div>
-                                    <div className="sticky-sidemenu-tz-quantity-input-unit">шт</div>
+                                    {tzState.productPopup.fields.find((item) => item.name === 'productSize' && item.value) ? 
+                                        <React.Fragment>
+                                            <div className="sticky-sidemenu-tz-quantity-input-wrap">
+                                                <input
+                                                    className={tzState.quantity.quantityInput.valid ? null : 'input-err'}
+                                                    ref={props.quantityInputRef}
+                                                    onChange={() => props.quantityHandler(props.quantityInputRef.current)}
+                                                    onKeyDown={(e) => props.quantityClearHandler(e)}
+                                                    type={tzState.quantity.quantityInput.type}
+                                                    value={tzState.quantity.quantityInput.value}
+                                                    placeholder={tzState.quantity.quantityInput.placeholder}
+                                                />
+                                            </div>
+                                            <div className="sticky-sidemenu-tz-quantity-input-unit">шт</div>
+                                        </React.Fragment>
+                                    : null}
                                 </div>
                             </div>
                             <div className="sticky-sidemenu-tz-quantity-description">
@@ -255,6 +260,7 @@ const TzPopup = (props) => {
                         <div className="sticky-sidemenu-tz-send-btn-wrap">
                             <div className="sticky-sidemenu-tz-policy-checkbox-wrap">
                                 <input
+                                    onChange={props.policyHandler}
                                     id="sticky-sidemenu-tz-policy-checkbox" 
                                     type="checkbox" 
                                     className="sticky-sidemenu-tz-policy-checkbox"
@@ -266,7 +272,10 @@ const TzPopup = (props) => {
                                     согласен с <Link to={"/policy"} target={"_blank"}>политикой конфидициальности</Link>
                                 </span>
                             </div>
-                            <Link className="sticky-sidemenu-tz-send-btn">Отправить</Link>
+                            <Link
+                                onClick={props.sendTzHandler} 
+                                className={`sticky-sidemenu-tz-send-btn ${tzState.allFieldsValid ? null : 'btnDisabled'}`}
+                            >Отправить</Link>
                         </div>
                     </div>
                 </div>

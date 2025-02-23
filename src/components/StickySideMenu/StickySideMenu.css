@@ -104,7 +104,7 @@
     background-color: white;
     z-index: 6;
     border-radius: 10px;
-    padding: 40px;
+    padding: 40px 40px 0 40px;
     min-height: 650px;
 }
 .sticky-sidemenu-tz-popup-wrap h3 {
@@ -172,6 +172,7 @@
     flex-wrap: wrap;
     width: 100%;
     max-width: 700px;
+    padding: 20px;
     align-items: center;
 }
 .sticky-sidemenu-tz-form-customer-row,
@@ -257,7 +258,7 @@
     transform: translate(-50%, -50%);
     width: 50%;
     max-width: 400px;
-    min-height: 400px;
+    min-height: 350px;
     border: 1px solid #00458B;
     background-color: white;
     z-index: 6;
@@ -279,7 +280,7 @@
     justify-content: center;
     text-align: center;
     width: 100%;
-    max-width: 270px;
+    max-width: 300px;
     min-height: 30px;
     margin-bottom: 10px;
     cursor: pointer;
@@ -559,6 +560,8 @@
 }
 .sticky-sidemenu-price-segment-item.selected {
     background-color: #00458B;
+    border: 1px solid #00458B;
+    width: 95%;
     color: white;
 }
 .sticky-sidemenu-price-segment-item-name {

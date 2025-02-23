@@ -118,6 +118,7 @@ const initialState = {
         tzPopup: {
             active: false,
             allFieldsValid: false,
+            policyActive: false,
             resultData: {
                 customer: {
                     allFieldsValid: false,
@@ -142,12 +143,17 @@ const initialState = {
                     packageCustom: '',
                     packageRequest: '',
                 },
+                priceSegment: {
+                    allFieldsValid: false,
+                    segmentName: '',
+                },
                 delivery: {
+                    allFieldsValid: false,
                     deliveryValue: '',
                     saved: false,
                 },
                 quantity: {
-                    minQnt: 50000,
+                    allFieldsValid: false,
                     productQnt: 0,
                 },
                 additionalServices: {
@@ -203,22 +209,39 @@ const initialState = {
                 showAddBtn: true,
                 productTypes: [
                     { id: 1, name: '--Выберите тип косметики--', type: 'default', value: '--Выберите тип косметики--', selected: false},
-                    { id: 2, name: 'косметика', type: 'cosmetic', value: 'косметика', selected: false },
-                    { id: 3, name: 'декоративная косметика', type: 'decorative', value: 'декоративная косметика', selected: false }
+                    { id: 2, name: 'Косметика', type: 'cosmetic', value: 'косметика', selected: false },
+                    { id: 3, name: 'Декоративная косметика', type: 'decorative', value: 'декоративная косметика', selected: false }
                 ],
                 cosmeticProducts: [
                     { id: 1, name: '--Выберите тип продукта--', type: 'default', value: '--Выберите тип продукта--', selected: false},
-                    { id: 2, name: 'косметика продукт 1', type: 'cosmetic', value: 'косметика продукт 1', selected: false },
-                    { id: 3, name: 'косметика продукт 2', type: 'cosmetic', value: 'косметика продукт 2', selected: false },
-                    { id: 4, name: 'косметика продукт 3', type: 'cosmetic', value: 'косметика продукт 3', selected: false },
-                    { id: 5, name: 'свой вариант', type: 'cosmetic', value: 'свой вариант', selected: false, customField: true },
+                    { id: 2, name: 'Аппаратная косметика', type: 'cosmetic', value: 'Аппаратная косметика', selected: false },
+                    { id: 3, name: 'Детская косметика', type: 'cosmetic', value: 'Детская косметика', selected: false },
+                    { id: 4, name: 'Очищающая косметика для тела', type: 'cosmetic', value: 'Очищающая косметика для тела', selected: false },
+                    { id: 5, name: 'Пилинги', type: 'cosmetic', value: 'Пилинги', selected: false},
+                    { id: 6, name: 'Солнцезащитные средства', type: 'cosmetic', value: 'Солнцезащитные средства', selected: false },
+                    { id: 7, name: 'Средства для ухода за волосами', type: 'cosmetic', value: 'Средства для ухода за волосами', selected: false },
+                    { id: 8, name: 'Средства для ухода за кожей ног', type: 'cosmetic', value: 'Средства для ухода за кожей ног', selected: false },
+                    { id: 9, name: 'Средства для ухода за кожей рук', type: 'cosmetic', value: 'Средства для ухода за кожей рук', selected: false },
+                    { id: 10, name: 'Уходовая косметика для лица', type: 'cosmetic', value: 'Уходовая косметика для лица', selected: false },
+                    { id: 11, name: 'Уходовая косметика для тела', type: 'cosmetic', value: 'Уходовая косметика для тела', selected: false },
+                    { id: 12, name: 'Свой вариант', type: 'cosmetic', value: 'Свой вариант', selected: false, customField: true },
                 ],
                 decorProducts: [
                     { id: 1, name: '--Выберите тип продукта--', type: 'default', value: '--Выберите тип продукта--', selected: false},
-                    { id: 2, name: 'декор косметика продукт 1', type: 'decorCosmetic', value: 'декор косметика продукт 1', selected: false },
-                    { id: 3, name: 'декор косметика продукт 2', type: 'decorCosmetic', value: 'декор косметика продукт 2', selected: false },
-                    { id: 4, name: 'декор косметика продукт 3', type: 'decorCosmetic', value: 'декор косметика продукт 3', selected: false },
-                    { id: 5, name: 'свой вариант', type: 'decorCosmetic', value: 'свой вариант', selected: false, customField: true, },
+                    { id: 2, name: 'Блеск для губ', type: 'decorCosmetic', value: 'Блеск для губ', selected: false },
+                    { id: 3, name: 'Гелевые тени', type: 'decorCosmetic', value: 'Гелевые тени', selected: false },
+                    { id: 4, name: 'Гелевый хайлайтер', type: 'decorCosmetic', value: 'Гелевый хайлайтер', selected: false },
+                    { id: 5, name: 'Гель для бровей', type: 'decorCosmetic', value: 'Гель для бровей', selected: false },
+                    { id: 6, name: 'Жидкая подводка для глаз', type: 'decorCosmetic', value: 'Жидкая подводка для глаз', selected: false },
+                    { id: 7, name: 'Консилер', type: 'decorCosmetic', value: 'Консилер', selected: false },
+                    { id: 8, name: 'Кремовые румяна', type: 'decorCosmetic', value: 'Кремовые румяна', selected: false },
+                    { id: 9, name: 'Масло для ногтей', type: 'decorCosmetic', value: 'Масло для ногтей', selected: false },
+                    { id: 10, name: 'Основа под макияж', type: 'decorCosmetic', value: 'Основа под макияж', selected: false },
+                    { id: 11, name: 'Помада гигиеническая', type: 'decorCosmetic', value: 'Помада гигиеническая', selected: false },
+                    { id: 12, name: 'Помада декоративная', type: 'decorCosmetic', value: 'Помада декоративная', selected: false },
+                    { id: 13, name: 'Тональный крем', type: 'decorCosmetic', value: 'Тональный крем', selected: false },
+                    { id: 14, name: 'Тушь для ресниц', type: 'decorCosmetic', value: 'Тушь для ресниц', selected: false },
+                    { id: 15, name: 'Свой вариант', type: 'decorCosmetic', value: 'свой вариант', selected: false, customField: true, },
                 ],
                 cosmeticProductsCustomField: {
                     title: 'cosmeticProductsCustomField',
@@ -308,6 +331,7 @@ const initialState = {
     
             },
             packageOptions: {
+                allFieldsValid: false,
                 packageCustomField: {
                     id: 1,
                     title: 'Желаемые характеристики',
@@ -759,7 +783,7 @@ const initialState = {
                     name: 'qnt',
                     type: 'text',
                     value: '',
-                    placeholder: '1000',
+                    placeholder: 'количество...',
                     valid: true
                 }
             },
@@ -1194,12 +1218,13 @@ const menuSlice = createSlice({
             const checkDecorativeProduct = state.sideMenu.tzPopup.productPopup.decorProducts.find(
                 (item) => item.selected && item.type !== 'default' && !item.customField
             );
+            const checkProductSize = state.sideMenu.tzPopup.productPopup.fields.find((item) => item.name === 'productSize' && item.value && item.valid);
             
             const checkCustomCosmFields = state.sideMenu.tzPopup.productPopup.customCosmFields.find((item) => item.value && item.valid);
             const checkCustomDecorFields = state.sideMenu.tzPopup.productPopup.customDecorFields.find((item) => item.value && item.valid);
            
-            if ((checkProductType && checkCosmeticProduct) || (checkProductType && checkDecorativeProduct) ||
-                (checkProductType && checkCustomCosmFields) || (checkProductType && checkCustomDecorFields)) {
+            if ((checkProductType && checkCosmeticProduct && checkProductSize) || (checkProductType && checkDecorativeProduct && checkProductSize) ||
+                (checkProductType && checkCustomCosmFields && checkProductSize) || (checkProductType && checkCustomDecorFields && checkProductSize)) {
                 state.sideMenu.tzPopup.productPopup.allFieldsValid = true;
                 return;
             }
@@ -1221,10 +1246,12 @@ const menuSlice = createSlice({
             });
         },
         optionSelectSavePopup(state) {
+            state.sideMenu.tzPopup.additionalOptionsPopup.active = false;
             state.sideMenu.tzPopup.resultData.additionalServices.selectedServices = [
                 ...state.sideMenu.tzPopup.additionalOptionsPopup.services.filter((serviceItem) => serviceItem.selected)
             ];
-            state.sideMenu.tzPopup.additionalOptionsPopup.active = false;
+            const selectedServices = state.sideMenu.tzPopup.additionalOptionsPopup.services.filter((item) => item.selected);
+            state.sideMenu.tzPopup.resultData.additionalServices.selectedServices = selectedServices;
         },
         validateAdditionalOptions(state) {
             const countSelectedOptions = state.sideMenu.tzPopup.additionalOptionsPopup.services.filter((item) => item.selected).length;
@@ -1416,7 +1443,15 @@ const menuSlice = createSlice({
                     ...segmentItem,
                     selected: false
                 }
-            })
+            });
+
+            const checkSelected = state.sideMenu.tzPopup.priceSegment.segments.find((item) => item.selected);
+
+            state.sideMenu.tzPopup.resultData.priceSegment = {
+                ...state.sideMenu.tzPopup.resultData.priceSegment,
+                allFieldsValid: checkSelected ? true : false,
+                segmentName: checkSelected ? checkSelected.name : ''
+            }
         },
         tzPriceSegmentDescription(state, action) {
             const { segmentId, segmentName, status } = action.payload;
@@ -1440,16 +1475,18 @@ const menuSlice = createSlice({
                     state.sideMenu.tzPopup.delivery.deliveryCityInput = initialState.sideMenu.tzPopup.delivery.deliveryCityInput;
                     state.sideMenu.tzPopup.delivery.selfDelivery = state.sideMenu.tzPopup.delivery.selfDelivery ? false : true;
                     if (state.sideMenu.tzPopup.delivery.selfDelivery) {
-                        state.sideMenu.tzPopup.resultData.delivery.deliveryValue = 'Самовывоз из спб салова 27 АБ';
+                        state.sideMenu.tzPopup.resultData.delivery = {
+                            ...state.sideMenu.tzPopup.resultData.delivery,
+                            deliveryValue: 'Самовывоз из спб салова 27 АБ',
+                            allFieldsValid: true
+                        }
                         return;
                     }
                     state.sideMenu.tzPopup.resultData.delivery = initialState.sideMenu.tzPopup.resultData.delivery;
-                    
-                    
                     break;
                 case 'delivery':
+                    state.sideMenu.tzPopup.resultData.delivery = initialState.sideMenu.tzPopup.resultData.delivery;
                     if (!state.sideMenu.tzPopup.delivery.deliveryReq) {
-                        state.sideMenu.tzPopup.resultData.delivery = initialState.sideMenu.tzPopup.resultData.delivery;
                         state.sideMenu.tzPopup.delivery.deliveryCityInput = initialState.sideMenu.tzPopup.delivery.deliveryCityInput;
                         state.sideMenu.tzPopup.delivery.deliveryReq = true;
                         return
@@ -1473,25 +1510,42 @@ const menuSlice = createSlice({
             const deliveryInput = state.sideMenu.tzPopup.delivery.deliveryCityInput;
             state.sideMenu.tzPopup.resultData.delivery = {
                 ...state.sideMenu.tzPopup.resultData.delivery,
-                value: deliveryInput.value,
+                allFieldsValid: true,
+                deliveryValue: deliveryInput.value,
                 saved: true
             };
-            
         },
         tzQuantityInput(state, action) {
             const { inputValue } = action.payload;
             const minOrderProductQnt = state.sideMenu.tzPopup.quantity.minOrderProductQnt;
             const checkInput = isNaN(Number(inputValue)) || Number(inputValue) === 0 || inputValue.trim() === '';
+            const validInput = Number(inputValue) >= state.sideMenu.tzPopup.quantity.minOrderProductQnt && !isNaN(inputValue) ? true : false;
 
             state.sideMenu.tzPopup.quantity.quantityInput = {
                 ...state.sideMenu.tzPopup.quantity.quantityInput,
                 value: checkInput ? '' : inputValue,
-                valid: Number(inputValue) >= state.sideMenu.tzPopup.quantity.minOrderProductQnt && !isNaN(inputValue) ? true : false
-            };     
+                valid: validInput ? true : false
+            };
+            if (validInput) {
+                state.sideMenu.tzPopup.resultData.quantity = {
+                    ...state.sideMenu.tzPopup.resultData.quantity,
+                    allFieldsValid: true,
+                    productQnt: Number(inputValue)
+                }
+                return;
+            }
+            state.sideMenu.tzPopup.resultData.quantity.productQnt = initialState.sideMenu.tzPopup.resultData.quantity.productQnt;
+        },
+        tzQuantityClearInput(state) {
+            state.sideMenu.tzPopup.quantity.quantityInput = {
+                ...state.sideMenu.tzPopup.quantity.quantityInput,
+                value: '',
+                valid: false
+            };
+            state.sideMenu.tzPopup.resultData.quantity.allFieldsValid = false;
         },
         tzQuantityCalc(state) {
             const minWeightValue = state.sideMenu.tzPopup.quantity.minOrderWeight;
-            const qntInputValue = Number(state.sideMenu.tzPopup.quantity.quantityInput.value);
             const productSize = state.sideMenu.tzPopup.resultData.product.cosmeticSize;
             const productSizeValue = productSize.replace(/[а-я]*$|[a-z]*$|[А-Я]$|[A-Z]*$/, '');
 
@@ -1502,7 +1556,24 @@ const menuSlice = createSlice({
                     minOrderProductQnt: minOrderProductQnt
                 }
             }
-            
+        },
+        tzPopupValidateResult(state) {
+            const checkCustomerInfo = state.sideMenu.tzPopup.resultData.customer.allFieldsValid;
+            const checkProductInfo = state.sideMenu.tzPopup.resultData.product.allFieldsValid;
+            const checkPackageInfo = state.sideMenu.tzPopup.resultData.package.allFieldsValid;
+            const checkPriceSegment = state.sideMenu.tzPopup.resultData.priceSegment.allFieldsValid;
+            const checkDelivery = state.sideMenu.tzPopup.resultData.delivery.allFieldsValid;
+            const checkQuantity = state.sideMenu.tzPopup.resultData.quantity.allFieldsValid;
+            const checkPolicy = state.sideMenu.tzPopup.policyActive;
+
+            if (checkCustomerInfo && checkProductInfo && checkPackageInfo && checkPriceSegment && checkDelivery && checkQuantity && checkPolicy) {
+                state.sideMenu.tzPopup.allFieldsValid = true;
+                return;
+            }
+            state.sideMenu.tzPopup.allFieldsValid = false;
+        },
+        tzPopupPolicy(state) {
+            state.sideMenu.tzPopup.policyActive = state.sideMenu.tzPopup.policyActive ? false : true;
         },
         consultFormInput(state, action) {
             const { inputId, inputType, inputValue } = action.payload;
@@ -1604,9 +1675,12 @@ export const {
     tzDeliveryReqInput,
     tzDeliveryReqSave,
     tzQuantityInput,
+    tzQuantityClearInput,
     tzQuantityCalc,
     consultFormInput,
     consultFormClearInput,
+    tzPopupValidateResult,
+    tzPopupPolicy,
     validateConsultForm,
 } = menuSlice.actions;
 export default menuSlice.reducer;
