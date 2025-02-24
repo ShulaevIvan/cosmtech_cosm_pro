@@ -130,6 +130,7 @@ const initialState = {
                 product: {
                     cosmeticCategory: '',
                     cosmeticName: '',
+                    productNameByUser: '',
                     cosmeticParam: '',
                     cosmeticSize: '',
                     cosmeticCustomUrl: '',
@@ -306,13 +307,21 @@ const initialState = {
                         valid: true
                     },
                 ],
+                productNameField: {
+                    title: 'Название продукта',
+                    name: 'customDecor',
+                    type: 'text',
+                    placeholder: 'Название продукта пример "шампунь"',
+                    value: '',
+                    valid: true
+                },
                 customDecorFields: [
                     {
                         id: 1,
-                        title: 'Свой вариант',
+                        title: 'Ваша категория продукта',
                         name: 'customDecor',
                         type: 'text',
-                        placeholder: 'Название желаемого продукта',
+                        placeholder: 'Название желаемой категории',
                         value: '',
                         valid: true
                     },
@@ -320,10 +329,10 @@ const initialState = {
                 customCosmFields: [
                     {
                         id: 1,
-                        title: 'Свой вариант',
+                        title: 'Ваша категория продукта',
                         name: 'customCosm',
                         type: 'text',
-                        placeholder: 'Название желаемого продукта',
+                        placeholder: 'Название желаемой категории',
                         value: '',
                         valid: true
                     },
@@ -333,7 +342,7 @@ const initialState = {
             packageOptions: {
                 allFieldsValid: false,
                 packageCustomField: {
-                    id: 1,
+                    id: 99,
                     title: 'Желаемые характеристики',
                     name: 'requestPackage',
                     type: 'text',
@@ -1103,6 +1112,7 @@ const menuSlice = createSlice({
                         allFieldsValid: true,
                         cosmeticCategory: cosmeticTypeSelected.value,
                         cosmeticName: productName,
+                        productNameByUser: state.sideMenu.tzPopup.productPopup.productNameField.value,
                         cosmeticParam: state.sideMenu.tzPopup.productPopup.fields.find((item) => item.name === 'productStats').value,
                         cosmeticSize: state.sideMenu.tzPopup.productPopup.fields.find((item) => item.name === 'productSize').value,
                         cosmeticCustomUrl: state.sideMenu.tzPopup.productPopup.fields.find((item) => item.name === 'productLink').value,
@@ -1222,13 +1232,30 @@ const menuSlice = createSlice({
             
             const checkCustomCosmFields = state.sideMenu.tzPopup.productPopup.customCosmFields.find((item) => item.value && item.valid);
             const checkCustomDecorFields = state.sideMenu.tzPopup.productPopup.customDecorFields.find((item) => item.value && item.valid);
-           
-            if ((checkProductType && checkCosmeticProduct && checkProductSize) || (checkProductType && checkDecorativeProduct && checkProductSize) ||
-                (checkProductType && checkCustomCosmFields && checkProductSize) || (checkProductType && checkCustomDecorFields && checkProductSize)) {
+            const checkProductName = state.sideMenu.tzPopup.productPopup.productNameField.valid && state.sideMenu.tzPopup.productPopup.productNameField.value;
+            const cosmeticTypeValidCondition = checkProductType && checkProductSize && checkProductName;
+            
+            const validateFields = (cosmeticTypeValidCondition && checkCosmeticProduct && checkProductName) || 
+            (cosmeticTypeValidCondition && checkDecorativeProduct) ||(cosmeticTypeValidCondition && checkCustomCosmFields) || 
+            (cosmeticTypeValidCondition && checkCustomDecorFields);
+
+            if (validateFields) {
                 state.sideMenu.tzPopup.productPopup.allFieldsValid = true;
                 return;
             }
             state.sideMenu.tzPopup.productPopup.allFieldsValid = false;
+        },
+        tzPopupChangeProductName(state, action) {
+            const { inputValue } = action.payload;
+            let validValue = validateName(inputValue)
+            state.sideMenu.tzPopup.productPopup.productNameField = {
+                ...state.sideMenu.tzPopup.productNameField,
+                value: inputValue,
+                valid: validValue
+            }
+        },
+        tzPopupClearProductName(state) {
+            state.sideMenu.tzPopup.productPopup.productNameField = initialState.sideMenu.tzPopup.productPopup.productNameField;
         },
         optionsPopupShow(state) {
             state.sideMenu.tzPopup.additionalOptionsPopup.active = state.sideMenu.tzPopup.additionalOptionsPopup.active ? false : true;
@@ -1681,6 +1708,8 @@ export const {
     consultFormClearInput,
     tzPopupValidateResult,
     tzPopupPolicy,
+    tzPopupChangeProductName,
+    tzPopupClearProductName,
     validateConsultForm,
 } = menuSlice.actions;
 export default menuSlice.reducer;

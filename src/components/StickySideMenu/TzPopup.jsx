@@ -92,7 +92,8 @@ const TzPopup = (props) => {
                                 : null}
                                 {tzState.productPopup.active ? 
                                     <TzInnerPopup
-                                        popupType={'product'}  
+                                        popupType={'product'}
+                                        title={'Сведения о продукте'}
                                         closeHandler={props.innerPopupHandler}
                                         form={tzState.productPopup.fields}
                                         innerPopupState={tzState.productPopup}
@@ -104,7 +105,9 @@ const TzPopup = (props) => {
                                         refs={props.productRefs}
                                         productTypesRefs={props.selectProductTypesRefs}
                                         findInputRef={props.findInputRef}
-                                        title={'Сведения о продукте'}
+                                        changeProductNameHandler={props.changeProductNameHandler}
+                                        clearProductNameHandler={props.clearProductNameHandler}
+                                        productNameRef={props.productNameRef}
                                     />
                                 : null}
                             </div>

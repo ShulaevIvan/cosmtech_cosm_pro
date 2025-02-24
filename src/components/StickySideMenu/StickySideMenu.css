@@ -104,11 +104,11 @@
     background-color: white;
     z-index: 6;
     border-radius: 10px;
-    padding: 40px 40px 0 40px;
-    min-height: 650px;
+    padding: 20px;
+    min-height: 690px;
 }
 .sticky-sidemenu-tz-popup-wrap h3 {
-    margin: 0 0 10px 0;
+    margin: 0 0 5px 0;
 }
 .sticky-sidemenu-tz-popup-close-btn-wrap {
     display: flex;
@@ -172,7 +172,6 @@
     flex-wrap: wrap;
     width: 100%;
     max-width: 700px;
-    padding: 20px;
     align-items: center;
 }
 .sticky-sidemenu-tz-form-customer-row,
@@ -370,7 +369,7 @@
     flex-wrap: wrap;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .sticky-sidemenu-package-options-custom-input-wrap {
     display: flex;
@@ -396,8 +395,12 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 10px;
     max-width: 400px;
+}
+.tz-inner-popup-product-wrap select,
+.tz-inner-popup-product-wrap label,
+.tz-inner-popup-input-wrap label {
+    margin-bottom: 5px;
 }
 .sticky-sidemenu-package-options-wrap  {
     display: flex;
@@ -523,7 +526,9 @@
     align-items: center;
 }
 .sticky-sidemenu-package-save-btn {
-    height: 30px;
+    height: 18px;
+    font-size: 16px;
+    padding: 5px;
     max-width: 120px;
 }
 .sticky-sidemenu-price-segment-wrap {

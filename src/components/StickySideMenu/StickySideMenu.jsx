@@ -35,6 +35,8 @@ import {
     consultFormInput,
     tzPopupValidateResult,
     tzPopupPolicy,
+    tzPopupChangeProductName,
+    tzPopupClearProductName,
     consultFormClearInput,
     validateConsultForm
 } from "../../redux/slices/menuSlice";
@@ -78,8 +80,8 @@ const StickySideMenu = () => {
     ];
 
     const tzDeliveryInputRef = useRef(null);
-
     const tzQuantityInputRef = useRef(null);
+    const productNameInputRef = useRef(null);
 
     const findInputRef = (refArr, refName) => {
         return refArr.find((item) => item.name === refName).ref;
@@ -237,6 +239,18 @@ const StickySideMenu = () => {
         console.log(sendData);
     };
 
+    const changeProductNameHandler = (inputRef) => {
+        console.log(inputRef.value)
+        dispatch(tzPopupChangeProductName({inputValue: inputRef.value}))
+    };
+    
+    const clearProductNameHandler = (e) => {
+        if (e.key === 'Backspace') {
+            dispatch(tzPopupClearProductName());
+            return;
+        }
+    };
+
     useEffect(() => {
         dispatch(validateTzPopupCustomer());
     }, [menuState.tzPopup.customerPopup]);
@@ -316,6 +330,7 @@ const StickySideMenu = () => {
                     deliverySaveHandler={deliveryCitySaveHandler}
                     deliveryInputRef={tzDeliveryInputRef}
                     quantityInputRef={tzQuantityInputRef}
+                    productNameRef={productNameInputRef}
                     quantityHandler={tzProductQuantityHandler}
                     quantityClearHandler={tzProductQuantityClearInput}
                     policyHandler={tzPolicyHandler}
@@ -324,6 +339,8 @@ const StickySideMenu = () => {
                     additionalOptionSaveHandler={saveSelectOptionPopupHandler}
                     findInputRef={findInputRef}
                     removeTzInnerPopupInfoHandler={removeTzInnerPopupInfo}
+                    changeProductNameHandler={changeProductNameHandler}
+                    clearProductNameHandler={clearProductNameHandler}
                     sendTzHandler={sendTzHandler}
                 /> 
             : null}
