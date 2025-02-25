@@ -26,7 +26,7 @@ const TzPopup = (props) => {
                     </div>
                     <div className="sticky-sidemenu-tz-form-wrap">
                     <div className="sticky-sidemenu-tz-form-row">
-                        <div className="sticky-sidemenu-tz-form-customer-wrap">
+                        <div className={`sticky-sidemenu-tz-form-customer-wrap ${props.validateBlockIcon('customer')}`}>
                             <h3>Сведения о заказчике:</h3>
                             {tzState.customerPopup.active ? 
                                 <TzInnerPopup
@@ -55,7 +55,6 @@ const TzPopup = (props) => {
                                     <div className="sticky-sidemenu-tz-form-customer-info-item">
                                         <div className="sticky-sidemenu-tz-form-customer-info-item-value">{tzState.resultData.customer.companyName}</div>
                                         <div className="sticky-sidemenu-tz-form-customer-info-item-control">
-                                            <span className="sticky-sidemenu-tz-edit-btn"></span>
                                             <span 
                                                 className="sticky-sidemenu-tz-remove-btn"
                                                 onClick={() => props.removeTzInnerPopupInfoHandler('customer')}
@@ -65,8 +64,8 @@ const TzPopup = (props) => {
                                 </React.Fragment>
                             : null}
                         </div>
-                        <div className="sticky-sidemenu-tz-form-product-type-wrap">
-                            <h3>Производимый продукт</h3>
+                        <div className={`sticky-sidemenu-tz-form-customer-wrap ${props.validateBlockIcon('product')}`}>
+                            <h3>Производимый продукт:</h3>
                             <div className="sticky-sidemenu-tz-form">
                                 {!tzState.resultData.product.allFieldsValid ? 
                                     <div className="sticky-sidemenu-tz-add-btn-wrap">
@@ -81,7 +80,6 @@ const TzPopup = (props) => {
                                         <div className="sticky-sidemenu-tz-form-customer-info-item">
                                             <div className="sticky-sidemenu-tz-form-customer-info-item-value">{tzState.resultData.product.cosmeticName}</div>
                                             <div className="sticky-sidemenu-tz-form-customer-info-item-control">
-                                                <span className="sticky-sidemenu-tz-edit-btn"></span>
                                                 <span 
                                                     className="sticky-sidemenu-tz-remove-btn"
                                                     onClick={() => props.removeTzInnerPopupInfoHandler('product')}
@@ -114,11 +112,11 @@ const TzPopup = (props) => {
                         </div>
                     </div>
                     <div className="sticky-sidemenu-tz-form-row">
-                        <div className="sticky-sidemenu-tz-form-customer-wrap">
+                        <div className={`sticky-sidemenu-tz-form-customer-wrap ${props.validateBlockIcon('service')}`}>
                             <h3>Дополнительные услуги:</h3>
                             <div className="sticky-sidemenu-tz-add-btn-wrap">
                                 <span 
-                                    className="sticky-sidemenu-tz-add-btn"
+                                    className={tzState.resultData.additionalServices.selectedServices.length > 0 ? 'sticky-sidemenu-tz-edit-btn': 'sticky-sidemenu-tz-add-btn'}
                                     onClick={props.additionalOptionsHandler}
                                 ></span>
                             </div>
@@ -133,18 +131,9 @@ const TzPopup = (props) => {
                                     saveHandler={props.additionalOptionSaveHandler}
                                 />
                             : null}
-                            <div className="sticky-sidemenu-tz-additional-options-wrap">
-                                {tzState.resultData.additionalServices.selectedServices.map((selectedServiceItem) => {
-                                    return (
-                                        <React.Fragment key={selectedServiceItem.id}>
-                                            <div className="sticky-sidemenu-tz-additional-options-item">{selectedServiceItem.name}</div>
-                                        </React.Fragment>
-                                    )
-                                })}
-                            </div>
                         </div>
-                        <div className="sticky-sidemenu-tz-form-customer-wrap">
-                            <h3>Упаковка</h3>
+                        <div className={`sticky-sidemenu-tz-form-customer-wrap ${props.validateBlockIcon('package')}`}>
+                            <h3>Упаковка:</h3>
                             <TzPackage
                                 tzState={tzState} 
                                 packageSelectHandler={props.packageSelectHandler}
@@ -155,7 +144,7 @@ const TzPopup = (props) => {
                         </div>
                     </div>
                     <div className="sticky-sidemenu-tz-form-row">
-                        <div className="sticky-sidemenu-tz-form-customer-wrap">
+                        <div className={`sticky-sidemenu-tz-form-customer-wrap ${props.validateBlockIcon('delivery')}`}>
                             <h3>Отгрузка / Доставка:</h3>
                             <div className="sticky-sidemenu-consult-checkbox-wrap">
                                 <div className="sticky-sidemenu-self-delivery-checkbox-wrap">
@@ -203,17 +192,20 @@ const TzPopup = (props) => {
                                                 placeholder={tzState.delivery.deliveryCityInput.placeholder}
                                                 disabled={tzState.resultData.delivery.saved ? true : null}
                                             />
-                                            <Link
-                                                onClick={props.deliverySaveHandler} 
-                                                className={`sticky-sidemenu-tz-delivery-save-btn ${!checkCityInput || checkCitySaved ? 'btnDisabled' : null }`}
-                                            >{checkCitySaved ? 'Сохранено': 'Сохранить'}</Link>
+                                            {!checkCitySaved ? 
+                                                <Link
+                                                    onClick={props.deliverySaveHandler} 
+                                                    className={`sticky-sidemenu-tz-delivery-save-btn ${!checkCityInput || checkCitySaved ? 'btnDisabled' : null }`}
+                                                >{checkCitySaved ? 'Сохранено': 'Сохранить'}</Link>
+                                            : null}
+                                            
                                         </div>
                                     </div>
                                 </React.Fragment>
                             : null}
                             
                         </div>
-                        <div className="sticky-sidemenu-tz-form-customer-wrap">
+                        <div className={`sticky-sidemenu-tz-form-customer-wrap ${props.validateBlockIcon('segment')}`}>
                             <h3>Ценовой сегмент:</h3>
                             <TzPriceSegment 
                                 tzState={tzState}
@@ -222,9 +214,9 @@ const TzPopup = (props) => {
                             />
                         </div>
                     </div>
-                    <div className="sticky-sidemenu-tz-product-quantity-wrap">
+                    <div className={`sticky-sidemenu-tz-product-quantity-wrap ${props.validateBlockIcon('qnt')}`}>
                         <div className="sticky-sidemenu-tz-quantity-title-wrap">
-                            <h3>Количество единиц продукции</h3>
+                            <h3>Количество единиц:</h3>
                         </div>
                         <div className="sticky-sidemenu-tz-final-row">
                             <div className="sticky-sidemenu-tz-quantity-wrap">

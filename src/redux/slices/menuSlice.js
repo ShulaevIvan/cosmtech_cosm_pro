@@ -158,6 +158,7 @@ const initialState = {
                     productQnt: 0,
                 },
                 additionalServices: {
+                    allFieldsValid: false,
                     selectedServices: [],
                 }
             },
@@ -229,20 +230,13 @@ const initialState = {
                 ],
                 decorProducts: [
                     { id: 1, name: '--Выберите тип продукта--', type: 'default', value: '--Выберите тип продукта--', selected: false},
-                    { id: 2, name: 'Блеск для губ', type: 'decorCosmetic', value: 'Блеск для губ', selected: false },
-                    { id: 3, name: 'Гелевые тени', type: 'decorCosmetic', value: 'Гелевые тени', selected: false },
-                    { id: 4, name: 'Гелевый хайлайтер', type: 'decorCosmetic', value: 'Гелевый хайлайтер', selected: false },
-                    { id: 5, name: 'Гель для бровей', type: 'decorCosmetic', value: 'Гель для бровей', selected: false },
-                    { id: 6, name: 'Жидкая подводка для глаз', type: 'decorCosmetic', value: 'Жидкая подводка для глаз', selected: false },
-                    { id: 7, name: 'Консилер', type: 'decorCosmetic', value: 'Консилер', selected: false },
-                    { id: 8, name: 'Кремовые румяна', type: 'decorCosmetic', value: 'Кремовые румяна', selected: false },
-                    { id: 9, name: 'Масло для ногтей', type: 'decorCosmetic', value: 'Масло для ногтей', selected: false },
-                    { id: 10, name: 'Основа под макияж', type: 'decorCosmetic', value: 'Основа под макияж', selected: false },
-                    { id: 11, name: 'Помада гигиеническая', type: 'decorCosmetic', value: 'Помада гигиеническая', selected: false },
-                    { id: 12, name: 'Помада декоративная', type: 'decorCosmetic', value: 'Помада декоративная', selected: false },
-                    { id: 13, name: 'Тональный крем', type: 'decorCosmetic', value: 'Тональный крем', selected: false },
-                    { id: 14, name: 'Тушь для ресниц', type: 'decorCosmetic', value: 'Тушь для ресниц', selected: false },
-                    { id: 15, name: 'Свой вариант', type: 'decorCosmetic', value: 'свой вариант', selected: false, customField: true, },
+                    { id: 2, name: 'Cредс­тва для ног­тей', type: 'decorCosmetic', value: 'Cредс­тва для ног­тей', selected: false },
+                    { id: 3, name: 'Средства для бровей', type: 'decorCosmetic', value: 'Средства для бровей', selected: false },
+                    { id: 4, name: 'Средства для глаз', type: 'decorCosmetic', value: 'Средства для глаз', selected: false },
+                    { id: 5, name: 'Средства для губ', type: 'decorCosmetic', value: 'Средства для губ', selected: false },
+                    { id: 6, name: 'Средства для лица', type: 'decorCosmetic', value: 'Средства для лица', selected: false },
+                    { id: 7, name: 'Средства для ресниц', type: 'decorCosmetic', value: 'Средства для ресниц', selected: false },
+                    { id: 8, name: 'Свой вариант', type: 'decorCosmetic', value: 'свой вариант', selected: false, customField: true, },
                 ],
                 cosmeticProductsCustomField: {
                     title: 'cosmeticProductsCustomField',
@@ -1544,9 +1538,9 @@ const menuSlice = createSlice({
         },
         tzQuantityInput(state, action) {
             const { inputValue } = action.payload;
-            const minOrderProductQnt = state.sideMenu.tzPopup.quantity.minOrderProductQnt;
+            const minOrderProductQnt = Number(state.sideMenu.tzPopup.quantity.minOrderProductQnt);
             const checkInput = isNaN(Number(inputValue)) || Number(inputValue) === 0 || inputValue.trim() === '';
-            const validInput = Number(inputValue) >= state.sideMenu.tzPopup.quantity.minOrderProductQnt && !isNaN(inputValue) ? true : false;
+            const validInput = Number(inputValue) >= minOrderProductQnt && !isNaN(inputValue) ? true : false;
 
             state.sideMenu.tzPopup.quantity.quantityInput = {
                 ...state.sideMenu.tzPopup.quantity.quantityInput,

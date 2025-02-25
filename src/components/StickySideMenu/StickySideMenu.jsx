@@ -83,6 +83,27 @@ const StickySideMenu = () => {
     const tzQuantityInputRef = useRef(null);
     const productNameInputRef = useRef(null);
 
+    const checkTzValidIncon = (blockName) => {
+        switch(blockName) {
+            case 'customer':
+                return menuState.tzPopup.resultData.customer.allFieldsValid ? 'valid' : null;
+            case 'product':
+                return menuState.tzPopup.resultData.product.allFieldsValid ? 'valid': null;
+            case 'service':
+                return menuState.tzPopup.resultData.additionalServices.selectedServices.length > 0 ? 'valid': null;
+            case 'delivery':
+                return menuState.tzPopup.resultData.delivery.allFieldsValid ? 'valid' : null;
+            case 'package':
+                return menuState.tzPopup.resultData.package.allFieldsValid ? 'valid' : null;
+            case 'segment':
+                return menuState.tzPopup.resultData.priceSegment.allFieldsValid ? 'valid' : null;
+            case 'qnt':
+                return menuState.tzPopup.resultData.quantity.allFieldsValid ? 'valid' : null;
+            default:
+                break;
+        }
+    };
+
     const findInputRef = (refArr, refName) => {
         return refArr.find((item) => item.name === refName).ref;
     }
@@ -342,6 +363,7 @@ const StickySideMenu = () => {
                     changeProductNameHandler={changeProductNameHandler}
                     clearProductNameHandler={clearProductNameHandler}
                     sendTzHandler={sendTzHandler}
+                    validateBlockIcon={checkTzValidIncon}
                 /> 
             : null}
             {menuState.contactsPopup.active ? 

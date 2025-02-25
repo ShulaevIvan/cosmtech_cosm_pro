@@ -112,23 +112,16 @@ const TzPackage = (props) => {
                                 </React.Fragment>
                         : null}
 
-                        <div className="sticky-sidemenu-package-save-btn-wrap">
-                            {tzState.resultData.package.allFieldsValid ? 
-                                <Link
-                                    className={"sticky-sidemenu-package-save-btn btnDisabled"}
-                                    onClick={props.savePackageHandler} 
-                                >{'Сохранено'}</Link>
-                            : 
+                        {!tzState.resultData.package.allFieldsValid ? 
+                            <div className="sticky-sidemenu-package-save-btn-wrap">
                                 <Link
                                     className={tzState.packageOptions.allFieldsValid ? 
                                     "sticky-sidemenu-package-save-btn" : "sticky-sidemenu-package-save-btn btnDisabled"
                                     }
                                     onClick={props.savePackageHandler} 
                                 >{tzState.resultData.package.allFieldsValid ? 'Сохранено': 'Сохранить'}</Link>
-                            }
-                        </div>
-
-
+                            </div>
+                        : null}
                     </React.Fragment>
                 
                 : null}
