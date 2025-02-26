@@ -3,6 +3,7 @@ import infoIcon from '../../img/service-info-icon.svg';
 
 const TzPriceSegment = (props) => {
     const tzState = props.tzState;
+    const deviceWidth = window.innerWidth;
 
     return (
         <React.Fragment>
@@ -17,7 +18,10 @@ const TzPriceSegment = (props) => {
                                     {segmentItem.descriptionActive ? 
                                         <div 
                                             className="sticky-sidemenu-price-segment-item-description-wrap"
-                                            onMouseLeave={() => props.descriptionHandler(segmentItem.id, segmentItem.name, false)}
+                                            onMouseLeave={
+                                                deviceWidth >= 1024 ? 
+                                                    () => props.descriptionHandler(segmentItem.id, segmentItem.name, false) : null
+                                            }
                                             onClick={() => props.descriptionHandler(segmentItem.id, segmentItem.name, false)}
                                         >
                                             {segmentItem.description}
@@ -31,7 +35,10 @@ const TzPriceSegment = (props) => {
                                         <div className="sticky-sidemenu-price-segment-item-img-wrap">
                                             {!segmentItem.descriptionActive ? 
                                                 <img
-                                                    onMouseEnter={() => props.descriptionHandler(segmentItem.id, segmentItem.name, true)}
+                                                    onMouseEnter={
+                                                        deviceWidth >= 1024 ? 
+                                                            () => props.descriptionHandler(segmentItem.id, segmentItem.name, true) : null
+                                                    }
                                                     onClick={() => props.descriptionHandler(segmentItem.id, segmentItem.name, true)}
                                                     src={infoIcon}
                                                     alt={`описание ценовой политики ${segmentItem.name}`} 

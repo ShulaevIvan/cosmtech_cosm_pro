@@ -100,14 +100,6 @@ const initialState = {
             },
             {
                 id: 2,
-                name: 'Кальклуятор',
-                img: calcIcon,
-                imgAlt: '#',
-                type: 'calc',
-                active: false
-            },
-            {
-                id: 3,
                 name: 'Консультация',
                 img: communicationIcon,
                 imgAlt: '',

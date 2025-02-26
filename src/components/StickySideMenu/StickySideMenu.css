@@ -51,7 +51,6 @@
     -o-transition: margin 0.5s;
     -webkit-transition: margin 0.5s;
     transition: margin 0.5s;
-    margin-bottom: 10px;
 }
 .sticky-sidemenu-item-row.active {
     margin-right: 0;
@@ -94,6 +93,8 @@
     animation-duration: 0.3s;
 }
 .sticky-sidemenu-tz-popup-wrap {
+    display: flex;
+    align-items: center;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -104,7 +105,7 @@
     background-color: white;
     z-index: 6;
     border-radius: 10px;
-    min-height: 600px;
+    min-height: 700px;
     padding: 20px;
 }
 .sticky-sidemenu-tz-popup-wrap h3 {
@@ -120,6 +121,12 @@
     width: 20px;
     content: url('../../img/stickyMenu/option-ok.svg');
     filter: invert(36%) sepia(45%) saturate(1537%) hue-rotate(137deg) brightness(99%) contrast(95%);
+}
+.tz-inner-popup-input-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
 }
 .sticky-sidemenu-tz-inner-services-wrap h3::before {
     content: ''!important;
@@ -345,8 +352,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    max-width: 600px;
-    min-height: 600px;
+    max-width: 500px;
+    min-height: 500px;
     border: 1px solid #00458B;
     background-color: white;
     z-index: 6;
@@ -683,7 +690,7 @@
     color: #1E1E1E;
 }
 .sticky-sidemenu-tz-delivery-form-wrap input {
-    min-height: 25px;
+    min-height: 30px;
     margin-right: 10px;
     max-width: 170px;
 }
@@ -962,7 +969,13 @@
 @media (max-width: 1250px) {
     .tz-inner-popup-product-wrap select, 
     .sticky-sidemenu-package-options-wrap select {
-        min-height: 25px;
+        min-height: 30px;
+        margin-bottom: 15px;
+    }
+}
+@media (max-width: 1250px) {
+    .sticky-sidemenu-tz-delivery-form-wrap input {
+        min-height: 30px;
     }
 }
 @media (max-width: 1250px) {
@@ -989,11 +1002,6 @@
         height: 16px;
     }
 }
-@media (max-width: 1200px) {
-    .sticky-sidemenu-tz-delivery-form-wrap input {
-        min-height: 22px;
-    }
-}
 @media (max-width: 1100px) {
     .sticky-sidemenu-tz-popup-wrap {
         width: 80%;
@@ -1012,9 +1020,263 @@
         top: 10%;
     }
 }
-@media (max-width: 1050px) {
+@media (max-width: 1090px) {
+    .sticky-sidemenu-tz-popup-wrap {
+        top: 50%;
+    }
+}
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1024px) and (orientation : portrait) {
+    .sticky-sidemenu-item-1 {
+        top: 30%;
+    }
+}
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1024px) and (orientation : portrait) {
+    .sticky-sidemenu-item-2{
+        top: 33.7%;
+    }
+}
+@media (max-width: 1023px) {
     .sticky-sidemenu-tz-popup-wrap {
         top: 55%;
     }
 }
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1024px) and (orientation : portrait) {
+    .sticky-sidemenu-tz-popup-wrap {
+        top: 33%;
+    }
+}
+@media only screen and (min-device-width : 820px) and (max-device-width : 820px) and (orientation : portrait) {
+    .sticky-sidemenu-tz-popup-wrap {
+        top: 40%;
+    }
+}
+@media (max-width: 820px) {
+    .sticky-sidemenu-item-1{
+        top: 51%;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-popup-wrap {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        padding: 10px;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-popup-close-btn-wrap {
+        top: 2%;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-background {
+        z-index: 99;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-popup-body {
+        min-height: 100vh;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-form-customer-wrap {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
 
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-title-wrap {
+        justify-content: flex-start;
+        text-align: left;
+        width: 89%;
+        margin-top: 40px;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-title-wrap.consult-title {
+        justify-content: center;
+        width: 100%;
+        margin:0 0 20px 0;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-form-wrap {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 90%;
+        overflow-y: scroll;
+        padding: 0 15px;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-form-customer-wrap {
+        width: 100%;
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-form-customer-info-item {
+        max-width: 350px;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-form-customer-wrap {
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-quantity-wrap,
+    .sticky-sidemenu-tz-quantity-description {
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-form-row h3, 
+    .sticky-sidemenu-tz-product-quantity-wrap h3, 
+    .sticky-sidemenu-tz-quantity-description, 
+    .sticky-sidemenu-tz-additional-options-item, 
+    .sticky-sidemenu-price-segment-item-name {
+        font-size: 18px;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-delivery-form-wrap input {
+        min-height: 30px;
+    }
+}
+@media (max-width: 800px) {
+    .tz-inner-popup-product-wrap select, 
+    .sticky-sidemenu-package-options-wrap select {
+        min-height: 35px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-quantity-description {
+        order: -1;
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 800px) {
+    .sticky-sidemenu-tz-inner-popup,
+    .tz-inner-popup-input-title {
+        width: 90%;
+    }
+}
+@media (max-width: 800px) {
+    .tz-inner-popup-product-wrap,
+    .tz-inner-popup-input-title {
+        align-items: center;
+        justify-content: flex-start;
+    }
+}
+@media (max-width: 800px) {
+    .tz-inner-popup-input-wrap,
+    .tz-inner-popup-input-title,
+    .tz-inner-popup-product-wrap select,
+    .tz-inner-popup-product-wrap label {
+        width: 80%;
+        border: 1px;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-item-1{
+        top: 50%;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-tz-inner-popup.consult {
+        width: 100%;
+        min-height: 400px;
+        max-width: 95%;
+        border: 1px;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-tz-popup-body.consult {
+        width: 100%;
+        min-height: 400px;
+        border: 1px;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-consult-form-row,
+    .sticky-sidemenu-consult-form-input-wrap,
+    .sticky-sidemenu-consult-form-label-wrap {
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-consult-form-label-wrap {
+        margin-bottom: 5px;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-consult-checkbox-wrap {
+        width: 80%;
+    }
+}
+
+@media (max-width: 600px) {
+    .sticky-sidemenu-consult-form-row {
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-consult-form-item {
+        width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-consult-form-input-wrap {
+        width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-consult-form-input-wrap input {
+        max-width: 300px;
+        width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-consult-messagers-row {
+        right: 31.8%;
+    }
+}
+@media (max-width: 400px) {
+    .sticky-sidemenu-tz-popup-body{
+        max-height: 600px;
+    }
+}
+
+@media (max-width: 400px) {
+    .sticky-sidemenu-item-1{
+        top: 49%;
+    }
+}
+@media (max-width: 400px) {
+    .sticky-sidemenu-tz-final-row {
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+}
+@media (max-width: 375px) {
+    .sticky-sidemenu-item-1{
+        top: 48%;
+    }
+}

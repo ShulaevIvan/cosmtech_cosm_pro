@@ -15,7 +15,7 @@ const ContactsPopup = (props) => {
                     ></span>
                 </div>
                 <div className="sticky-sidemenu-tz-popup-body consult">
-                    <div className="sticky-sidemenu-tz-title-wrap">
+                    <div className="sticky-sidemenu-tz-title-wrap consult-title">
                         <h2>Получить консультацию</h2>
                     </div>
                     <div className="sticky-sidemenu-consult-messagers-row">
