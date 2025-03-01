@@ -131,7 +131,8 @@
 .sticky-sidemenu-tz-inner-services-wrap h3::before {
     content: ''!important;
 }
-.sticky-sidemenu-tz-popup-close-btn-wrap {
+.sticky-sidemenu-tz-popup-close-btn-wrap,
+.sticky-sidemenu-happy-state-popup-close-btn-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -932,6 +933,48 @@
 .sticky-sidemenu-tz-quantity-input-description {
     font-weight: bold;
 }
+.sticky-sidemenu-happy-state-wrap {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 400px;
+    border: 1px solid #00458B;
+    background-color: white;
+    z-index: 6;
+    border-radius: 10px;
+    min-height: 400px;
+    padding: 20px;
+}
+.sticky-sidemenu-happy-state-title-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.sticky-sidemenu-happy-state-title-wrap h3 {
+    color: #00458B;
+}
+.sticky-sidemenu-tz-happy-state-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+.sticky-sidemenu-tz-happy-state-body p {
+    padding: 10px;
+    line-height: 1.8;
+}
 @media (max-width: 1600px) {
     .sticky-sidemenu-tz-popup-wrap {
         padding: 30px;
@@ -1184,6 +1227,11 @@
     .tz-inner-popup-product-wrap label {
         width: 80%;
         border: 1px;
+    }
+}
+@media (max-width: 600px) {
+    .sticky-sidemenu-happy-state-wrap {
+        width: 80%;
     }
 }
 @media (max-width: 600px) {

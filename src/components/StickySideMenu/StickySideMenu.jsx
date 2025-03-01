@@ -38,7 +38,9 @@ import {
     tzPopupChangeProductName,
     tzPopupClearProductName,
     consultFormClearInput,
-    validateConsultForm
+    validateConsultForm,
+    sendSpecificationOrder,
+    sideMenuHappyStateActive
 } from "../../redux/slices/menuSlice";
 import TzPopup from "./TzPopup";
 import ContactsPopup from "./ContactsPopup";
@@ -255,13 +257,31 @@ const StickySideMenu = () => {
         dispatch(tzPopupPolicy());
     };
 
-    const sendTzHandler = () => {
-        const sendData = menuState.tzPopup.resultData;
-        console.log(sendData);
+    const sendTzHandler = async () => {
+        const sendData = {
+            customerName: menuState.tzPopup.resultData.customer.companyName,
+            customerPhone: menuState.tzPopup.resultData.customer.customerPhone,
+            customerEmail: menuState.tzPopup.resultData.customer.customerEmail,
+            services: menuState.tzPopup.resultData.additionalServices.selectedServices.map((item) => item.name),
+            productSegment: menuState.tzPopup.resultData.priceSegment.segmentName,
+            productType: menuState.tzPopup.resultData.product.cosmeticCategory,
+            productCategory: menuState.tzPopup.resultData.product.cosmeticName,
+            productName: menuState.tzPopup.resultData.product.productNameByUser,
+            productSize: menuState.tzPopup.resultData.product.cosmeticSize,
+            productParams: menuState.tzPopup.resultData.product.cosmeticParam,
+            productExampleUrl: menuState.tzPopup.resultData.product.cosmeticCustomUrl,
+            productExampleFile: menuState.tzPopup.resultData.product.customFile,
+            packageType : menuState.tzPopup.resultData.package.packageType,
+            packageCategory : menuState.tzPopup.resultData.package.packageCategory,
+            packageName : menuState.tzPopup.resultData.package.packageName,
+            packageForUser : menuState.tzPopup.resultData.package.packageCustom,
+            quantity: menuState.tzPopup.resultData.quantity.productQnt,
+            delivery: menuState.tzPopup.resultData.delivery.deliveryValue,
+        };
+        dispatch(sendSpecificationOrder(sendData));
     };
 
     const changeProductNameHandler = (inputRef) => {
-        console.log(inputRef.value)
         dispatch(tzPopupChangeProductName({inputValue: inputRef.value}))
     };
     
@@ -270,6 +290,10 @@ const StickySideMenu = () => {
             dispatch(tzPopupClearProductName());
             return;
         }
+    };
+
+    const happyStatePopupHandler = (popupType) => {
+        dispatch(sideMenuHappyStateActive({popupType: popupType}));
     };
 
     useEffect(() => {
@@ -294,7 +318,6 @@ const StickySideMenu = () => {
 
     useEffect(() => {
         dispatch(tzPopupValidateResult());
-        console.log(menuState.tzPopup.resultData)
     }, [menuState.tzPopup.resultData, menuState.tzPopup.policyActive])
     
     useEffect(() => {
@@ -364,6 +387,7 @@ const StickySideMenu = () => {
                     clearProductNameHandler={clearProductNameHandler}
                     sendTzHandler={sendTzHandler}
                     validateBlockIcon={checkTzValidIncon}
+                    happyStateHandler={happyStatePopupHandler}
                 /> 
             : null}
             {menuState.contactsPopup.active ? 

@@ -3,7 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import mobileHeaderTelegrmIcon from '../../img/mobileTelegramMenu.svg'
 import mobileHeaderWhatsappIcon from '../../img/mobileWhatsappMenu.svg'
 import tzIcon from '../../img/stickyMenu/tzIcon.svg';
-import calcIcon from '../../img/stickyMenu/calculatorIcon.svg';
 import communicationIcon from '../../img/stickyMenu/communication.svg';
 import whatsappIcon from '../../img/whatsapp_footer.svg';
 import telegramIcon from '../../img/telegram_footer.svg';
@@ -14,6 +13,9 @@ import validateMail from '../../functions/validateMail';
 import validateCity from "../../functions/validateCity";
 import fileToBase64 from '../../functions/fileToBase64';
 import validateUrl from "../../functions/validateUrl";
+import validateCompany from "../../functions/validateCompany";
+import validateProductName from "../../functions/validateProductName";
+
 
 const initialState = { 
     mobileMenuActive: false,
@@ -111,6 +113,11 @@ const initialState = {
             active: false,
             allFieldsValid: false,
             policyActive: false,
+            happyState: {
+                active: false,
+                title: '',
+                description: ''
+            },
             resultData: {
                 customer: {
                     allFieldsValid: false,
@@ -203,8 +210,8 @@ const initialState = {
                 showAddBtn: true,
                 productTypes: [
                     { id: 1, name: '--Выберите тип косметики--', type: 'default', value: '--Выберите тип косметики--', selected: false},
-                    { id: 2, name: 'Косметика', type: 'cosmetic', value: 'косметика', selected: false },
-                    { id: 3, name: 'Декоративная косметика', type: 'decorative', value: 'декоративная косметика', selected: false }
+                    { id: 2, name: 'Косметика', type: 'cosmetic', value: 'Косметика', selected: false },
+                    { id: 3, name: 'Декоративная косметика', type: 'decorative', value: 'Декоративная косметика', selected: false }
                 ],
                 cosmeticProducts: [
                     { id: 1, name: '--Выберите тип продукта--', type: 'default', value: '--Выберите тип продукта--', selected: false},
@@ -228,7 +235,7 @@ const initialState = {
                     { id: 5, name: 'Средства для губ', type: 'decorCosmetic', value: 'Средства для губ', selected: false },
                     { id: 6, name: 'Средства для лица', type: 'decorCosmetic', value: 'Средства для лица', selected: false },
                     { id: 7, name: 'Средства для ресниц', type: 'decorCosmetic', value: 'Средства для ресниц', selected: false },
-                    { id: 8, name: 'Свой вариант', type: 'decorCosmetic', value: 'свой вариант', selected: false, customField: true, },
+                    { id: 8, name: 'Свой вариант', type: 'decorCosmetic', value: 'Свой вариант', selected: false, customField: true, },
                 ],
                 cosmeticProductsCustomField: {
                     title: 'cosmeticProductsCustomField',
@@ -276,7 +283,7 @@ const initialState = {
                     },
                     {
                         id: 3,
-                        title: 'Объем единицы',
+                        title: 'Объем единицы (мл)',
                         name: 'productSize',
                         type: 'text',
                         placeholder: 'например 200мл',
@@ -790,6 +797,11 @@ const initialState = {
             active: false,
             sendBtnActive: false,
             checkboxActive: false,
+            happyState: {
+                active: false,
+                title: '',
+                description: ''
+            },
             messagers: [
                 {
                     id: 1,
@@ -834,6 +846,23 @@ export const uploadProductFile = createAsyncThunk(
     'uploadTzProductFile',
     async (file) => {
         const data = await fileToBase64(file);
+        return data;
+    }
+);
+
+export const sendSpecificationOrder = createAsyncThunk(
+    'specificationOrder',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/specification/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sendData)
+        });
+        const data = await response.json();
+
         return data;
     }
 );
@@ -957,7 +986,7 @@ const menuSlice = createSlice({
             
             switch(inputType) {
                 case 'company':
-                    inputValid = validateName(inputValue);
+                    inputValid = validateCompany(inputValue);
                     validValue = inputValue;
                     break;
                 case 'email':
@@ -1158,7 +1187,7 @@ const menuSlice = createSlice({
 
             switch(inputType) {
                 case 'productSize':
-                    inputValid = /^\d{0,4}\w[а-я]{2,4}$/.test(inputValue);
+                    inputValid = /^\d*\мл|\ml/.test(inputValue);
                     validValue = inputValue;
                     break;
                 case 'productLink':
@@ -1233,7 +1262,8 @@ const menuSlice = createSlice({
         },
         tzPopupChangeProductName(state, action) {
             const { inputValue } = action.payload;
-            let validValue = validateName(inputValue)
+            let validValue = validateProductName(inputValue)
+            console.log(validValue)
             state.sideMenu.tzPopup.productPopup.productNameField = {
                 ...state.sideMenu.tzPopup.productNameField,
                 value: inputValue,
@@ -1635,6 +1665,36 @@ const menuSlice = createSlice({
             }
             state.sideMenu.contactsPopup.sendBtnActive = false;
         },
+        sideMenuHappyStateActive(state, action) {
+            const { popupType } = action.payload;
+
+            if (!popupType) return;
+
+            switch(popupType) {
+                case 'tz':
+                    if (state.sideMenu.tzPopup.happyState.active) {
+                        state.sideMenu.tzPopup = initialState.sideMenu.tzPopup;
+                        return;
+                    }
+                    state.sideMenu.tzPopup.happyState = {
+                        ...state.sideMenu.tzPopup.happyState,
+                        active: state.sideMenu.tzPopup.happyState.active ? false : true,
+                    }
+                    break;
+                case 'consult':
+                    if (state.sideMenu.contactsPopup.happyState.active) {
+                        state.sideMenu.contactsPopup = initialState.sideMenu.contactsPopup;
+                        return;
+                    }
+                    state.sideMenu.tzPopup.happyState = {
+                        ...state.sideMenu.tzPopup.happyState,
+                        active: state.sideMenu.contactsPopup.happyState.active ? false : true,
+                    };
+                    break;
+                default:
+                    break
+            }
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -1650,6 +1710,19 @@ const menuSlice = createSlice({
                 date: date,
                 displayName: displayFilename,
                 fileData: file
+            }
+        })
+        .addCase(sendSpecificationOrder.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            
+            if (status === 'ok' && description.title && description.description) {
+                state.sideMenu.tzPopup.happyState = {
+                    ...state.sideMenu.tzPopup.happyState,
+                    active: true,
+                    title: description.title,
+                    description: description.description,
+                }
+                return;
             }
         })
     }
@@ -1697,5 +1770,6 @@ export const {
     tzPopupChangeProductName,
     tzPopupClearProductName,
     validateConsultForm,
+    sideMenuHappyStateActive
 } = menuSlice.actions;
 export default menuSlice.reducer;
