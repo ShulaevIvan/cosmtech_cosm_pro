@@ -15,7 +15,7 @@ const DecorativeCosmeticsQuestForm = (props) => {
     const findInputRef = (refType) => {
         return formRefs.find((item) => item.name === refType).ref;
     };
-    console.log(formState)
+    
     return (
         <React.Fragment>
             <div className="container">

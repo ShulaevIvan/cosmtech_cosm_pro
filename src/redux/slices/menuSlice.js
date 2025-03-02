@@ -857,7 +857,7 @@ export const sendSpecificationOrder = createAsyncThunk(
             method: 'POST',
             headers: {
                 'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(sendData)
         });
@@ -866,6 +866,23 @@ export const sendSpecificationOrder = createAsyncThunk(
         return data;
     }
 );
+
+export const sendSidemenuConsultReq = createAsyncThunk(
+    'specificationConsultReq',
+    async (sendData) => {
+        const respone = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/consultreq/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sendData)
+        });
+        const data = await respone.json();
+
+        return data;
+    }
+)
 
 const menuSlice = createSlice({
     name: 'menu',
@@ -1263,7 +1280,6 @@ const menuSlice = createSlice({
         tzPopupChangeProductName(state, action) {
             const { inputValue } = action.payload;
             let validValue = validateProductName(inputValue)
-            console.log(validValue)
             state.sideMenu.tzPopup.productPopup.productNameField = {
                 ...state.sideMenu.tzPopup.productNameField,
                 value: inputValue,
@@ -1712,6 +1728,9 @@ const menuSlice = createSlice({
                 fileData: file
             }
         })
+        .addCase(sendSpecificationOrder.pending, (state) => {
+            state.sideMenu.tzPopup = initialState.sideMenu.tzPopup;
+        })
         .addCase(sendSpecificationOrder.fulfilled, (state, action) => {
             const { status, description } = action.payload;
             
@@ -1721,10 +1740,24 @@ const menuSlice = createSlice({
                     active: true,
                     title: description.title,
                     description: description.description,
-                }
+                };
                 return;
             }
         })
+        .addCase(sendSidemenuConsultReq.pending, (state) => {
+            state.sideMenu.contactsPopup = initialState.sideMenu.contactsPopup;
+        })
+        .addCase(sendSidemenuConsultReq.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            if (status === 'ok' && description) {
+                state.sideMenu.contactsPopup.happyState = {
+                    ...state.sideMenu.contactsPopup.happyState,
+                    active: true,
+                    title: 'Запрос отправлен!',
+                    description: description,
+                };
+            }
+        });
     }
 });
 

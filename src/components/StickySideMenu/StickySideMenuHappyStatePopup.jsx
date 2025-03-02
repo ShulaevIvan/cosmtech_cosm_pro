@@ -7,7 +7,7 @@ const StickySideMenuHappyState = (props) => {
                 <div className="sticky-sidemenu-happy-state-popup-close-btn-wrap">
                     <span 
                         className="sticky-sidemenu-tz-popup-close-btn"
-                        onClick={() => props.closeHandler('tz')}
+                        onClick={() => props.closeHandler(props.popupType)}
                     ></span>
                 </div>
                 <div className="sticky-sidemenu-happy-state-title-wrap">

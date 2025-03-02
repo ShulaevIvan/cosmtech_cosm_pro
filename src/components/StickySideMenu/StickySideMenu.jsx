@@ -40,10 +40,12 @@ import {
     consultFormClearInput,
     validateConsultForm,
     sendSpecificationOrder,
-    sideMenuHappyStateActive
+    sideMenuHappyStateActive,
+    sendSidemenuConsultReq
 } from "../../redux/slices/menuSlice";
 import TzPopup from "./TzPopup";
 import ContactsPopup from "./ContactsPopup";
+import StickySideMenuHappyState from "./StickySideMenuHappyStatePopup";
 
 const StickySideMenu = () => {
     const dispatch = useDispatch();
@@ -181,7 +183,7 @@ const StickySideMenu = () => {
             name: menuState.contactsPopup.fields.find((item) => item.name === 'name' && item.valid).value,
             phone: menuState.contactsPopup.fields.find((item) => item.name === 'phone' && item.valid).value
         };
-        console.log(sendData);
+        dispatch(sendSidemenuConsultReq(sendData));
     };
 
     const additionalOptionsPopupHandler = () => {
@@ -258,10 +260,12 @@ const StickySideMenu = () => {
     };
 
     const sendTzHandler = async () => {
+        console.log(menuState.tzPopup.resultData)
         const sendData = {
             customerName: menuState.tzPopup.resultData.customer.companyName,
             customerPhone: menuState.tzPopup.resultData.customer.customerPhone,
             customerEmail: menuState.tzPopup.resultData.customer.customerEmail,
+            customerCity: menuState.tzPopup.resultData.customer.customerName,          
             services: menuState.tzPopup.resultData.additionalServices.selectedServices.map((item) => item.name),
             productSegment: menuState.tzPopup.resultData.priceSegment.segmentName,
             productType: menuState.tzPopup.resultData.product.cosmeticCategory,
@@ -326,6 +330,22 @@ const StickySideMenu = () => {
 
     return (
         <React.Fragment>
+            {menuState.contactsPopup.happyState.active ? 
+                <StickySideMenuHappyState 
+                    popupType={'consult'} 
+                    title={menuState.contactsPopup.happyState.title}
+                    description={menuState.contactsPopup.happyState.description}
+                    closeHandler={happyStatePopupHandler}
+                />
+            : null}
+            {menuState.tzPopup.happyState.active ? 
+                <StickySideMenuHappyState 
+                    popupType={'tz'} 
+                    title={menuState.tzPopup.happyState.title}
+                    description={menuState.tzPopup.happyState.description}
+                    closeHandler={happyStatePopupHandler}
+                />
+            : null}
             {menuState.menuItems.map((menuItem) => {
                 return (
                     <React.Fragment key={menuItem.id}>
@@ -400,6 +420,7 @@ const StickySideMenu = () => {
                     clearInputHandler={consultClearInputHandler}
                     policyCheckboxHandler={consultCheckboxHandler}
                     sendFormHandler={sendConsultFormHandler}
+                    happyStateHandler={happyStatePopupHandler}
                 /> 
             : null}
         </React.Fragment>

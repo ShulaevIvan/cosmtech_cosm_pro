@@ -2267,7 +2267,6 @@ const innerPageSlice = createSlice({
             else if (fieldType === 'file' && fieldValue) {
                 state.decorativeCosmeticsPage.orderPopup.fields = state.decorativeCosmeticsPage.orderPopup.fields.map((fieldItem) => {
                     if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
-                        console.log(fieldValue)
                         return {
                             ...fieldItem,
                             fileData: fieldValue,
