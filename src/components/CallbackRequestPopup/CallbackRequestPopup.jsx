@@ -40,7 +40,7 @@ const CallbackRequestPopup = (props) => {
     const sendCallbackReq = () => {
         if (callbackState.callbackInputValid && callbackState.checkboxPolicyActive) {
             dispatch(fetchCallbackThunk({phone: callbackState.callbackInputValue}));
-            sendMetrik('reachGoal','headerConsultRequest');
+            // sendMetrik('reachGoal','headerConsultRequest');
         }
     };
 
