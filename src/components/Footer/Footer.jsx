@@ -128,6 +128,7 @@ const Footer = () => {
                             </div>
                             <ul className="main-footer-submenu">
                                 <li><Link onClick={goToTopHandler} to={'/forclients'}>Клиентам</Link></li>
+                                <li><Link onClick={goToTopHandler} to={'/articles'}>Полезное</Link></li>
                                 <li><Link onClick={goToTopHandler} to={'/about'}>О Компании</Link></li>
                                 <li><Link onClick={goToTopHandler} to={'/job'}>Вакансии</Link></li>
                                 <li><Link onClick={goToTopHandler} to={'/contacts'}>Контакты</Link></li>

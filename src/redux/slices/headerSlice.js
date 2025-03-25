@@ -79,6 +79,22 @@ const initialState = {
             title: 'test',
             canonical: 'https://cosmtech.ru/decorative-cosmetics',
             description: 'Контрактное производство декоративной косметики',
+        },
+        {
+            id: 9,
+            name: 'Статьи на тему производства косметики',
+            path: '/articles',
+            title: 'test',
+            canonical: 'https://cosmtech.ru/articles',
+            description: 'Полезная информация по заказу и производству косметики',
+        },
+        {
+            id: 10,
+            name: 'STM cosmetic',
+            path: '/stm-cosmetic',
+            title: 'test',
+            canonical: 'https://cosmtech.ru/stm-cosmetic',
+            description: 'Полезная информация по заказу и производству косметики',
         }
     ],
     currentPathUrl: '',

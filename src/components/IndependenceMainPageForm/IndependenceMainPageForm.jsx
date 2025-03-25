@@ -4,8 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { 
     independenceFromInputValidate, 
     clearIndependenceFormInput,
-    sendConsultRequest
+    sendConsultRequest,
+    independenceHappyState
 } from "../../redux/slices/mainPageSlice";
+
+import IndependenceMainPageFormHappyState from "./IndependenceMainPageFormHappyState";
 
 const IndependenceMainPageForm = (props) => {
     const independenceFormState = props.formState;
@@ -23,6 +26,10 @@ const IndependenceMainPageForm = (props) => {
             fieldRef.current.value = '';
             dispatch(clearIndependenceFormInput({fieldType: fieldType, fieldValue: fieldRef.current.value}));
         }
+    };
+
+    const happyStateHandler = () => {
+        dispatch(independenceHappyState());
     };
 
     const sendConsultReqHandler = () => {
@@ -116,6 +123,13 @@ const IndependenceMainPageForm = (props) => {
                         </div>
                     </div>
                 </form>
+                {independenceFormState.happyState.active ? 
+                    <IndependenceMainPageFormHappyState
+                        title={independenceFormState.happyState.title}
+                        description={independenceFormState.happyState.description} 
+                        closeHandler={happyStateHandler}
+                    />
+                : null}
             </div>
         </React.Fragment>
     )

@@ -618,6 +618,56 @@ section {
   max-width: 1024px;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+.independence-main-order-form-happy-state-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 5;
+  background-color: white;
+  border: 1px solid #00458B;
+  border-radius: 10px;
+  padding: 20px;
+}
+.independence-main-order-form-happy-state-close-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+  top: 0;
+  right: 0;
+  margin-top: 10px;
+  height: 40px;
+}
+
+.independence-main-order-form-happy-state-close-btn::before {
+  content: url('../src/img/close_popup.svg');
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top:10%;
+  right: 2%;
+  cursor: pointer;
+}
+.independence-min-order-form-happy-state-body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.independence-min-order-form-happy-state-body h3 {
+  align-items: center;
+  color: #00458B;
+  font-size: 24px;
+  margin: 0 0 20px 0;
 }
 /* services */
 .services-mainpage-title-wrap {
@@ -1265,6 +1315,7 @@ section {
   width: 100%;
   position: relative;
   align-items: center;
+  text-align: center;
 }
 .prefooter-order-form-background {
   min-width: 380px;
@@ -1295,13 +1346,12 @@ section {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-width: 600px;
-  background-color: #fff;
-  min-width: 600px;
-  padding: 40px;
-  border: 1px solid;
+  max-width: 420px;
   min-height: 500px;
   min-width: 300px;
+  background-color: #fff;
+  padding: 40px;
+  border: 1px solid;
   border: 1px solid #00458B;
 }
 .prefooter-form-wrap form input {
@@ -1913,6 +1963,12 @@ section {
 @media (min-width: 200px) and (max-width: 1024px)  {
   .independence-main-row {
       justify-content: center;
+  }
+}
+@media (max-width: 1023px)  {
+  .independence-main-order-form-happy-state-wrap {
+    width: 85%;
+    text-align: center;
   }
 }
 @media (min-width: 600px) and (max-width: 991px)  {

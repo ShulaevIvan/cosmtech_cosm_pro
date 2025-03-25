@@ -230,6 +230,54 @@ const initialState = {
                     active: true,
                 },
             ]
+        },
+        {
+            page: '/articles',
+            page: '/articles', 
+            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            title: 'Статьи на тему производства косметики',
+            description: 'Статьи на тему производства косметики',
+            seoDescription: 'Полезная информация для тех, кто работает в сфере косметики',
+            breadcrumbs: [
+                {
+                    id: 1,
+                    name: 'Контрактное производство',
+                    url: '/',
+                    main: true,
+                    active: false,
+                },
+                {
+                    id: 2,
+                    name: 'Статьи',
+                    url: '/articles',
+                    main: false,
+                    active: true,
+                },
+            ]
+        },
+        {
+            page: '/stm-cosmetic',
+            page: '/stm-cosmetic', 
+            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            title: 'Статьи на тему производства косметики',
+            description: 'Статьи на тему производства косметики',
+            seoDescription: 'Полезная информация для тех, кто работает в сфере косметики',
+            breadcrumbs: [
+                {
+                    id: 1,
+                    name: 'Контрактное производство',
+                    url: '/',
+                    main: true,
+                    active: false,
+                },
+                {
+                    id: 2,
+                    name: 'Статьи',
+                    url: '/stm-cosmetic',
+                    main: false,
+                    active: true,
+                },
+            ]
         }
     ],
     activeBackground: innerHeaderImg,

@@ -15,6 +15,7 @@ import './components/ImageGalery/ImageGallery.css';
 import './components/DecorativeCosmetics/DecorativeCosmetics.css';
 import './components/ExcursionToProduction/ExcursionToProduction.css';
 import './components/StickySideMenu/StickySideMenu.css';
+import './components/Articles/Articles.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';
@@ -26,6 +27,8 @@ import PolicyPage from './components/PolicyPage/PolicyPage';
 import JobPage from './components/JobPage/JobPage';
 import ForClients from './components/ForClients/ForClients';
 import DecorativeCosmetics from './components/DecorativeCosmetics/DecorativeCosmetics';
+import Articles from './components/Articles/Articles';
+import StmCosmetic from './components/Articles/StmCosmetic';
 
 function App() {
   
@@ -42,6 +45,8 @@ function App() {
               <Route path='/about' element = {<AboutPage />} />
               <Route path='/forclients' element = {<ForClients />} />
               <Route path='/decorative-cosmetics' element = {<DecorativeCosmetics />} />
+              <Route path='/articles' element={<Articles />} />
+              <Route path='/stm-cosmetic' element={<StmCosmetic />} />
               <Route path='/contacts' element = {<ContactsPage />} />
           </Route>
         </Routes>

@@ -408,6 +408,11 @@ const initialState = {
            commentFieldValue: '',
            allFieldsValid: false,
            sendBtnActive: false,
+           happyState: {
+            active: false,
+            title: '',
+            description: ''
+           }
         },
     },
     reviews: {
@@ -1061,6 +1066,12 @@ const mainPageSlice = createSlice({
                 return;
             }
         },
+        independenceHappyState(state) {
+            state.independence.independenceForm.happyState = {
+                ...state.independence.independenceForm.happyState,
+                active: state.independence.independenceForm.happyState.active ? false : true
+            }
+        },
         addVideoBlob(state, action) {
             const { blobData } = action.payload;
             if (!blobData) return;
@@ -1214,9 +1225,18 @@ const mainPageSlice = createSlice({
             state.error = null;
           })
           .addCase(sendConsultRequest.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
             state.loadingStatus = 'ready';
             state.error = null;
-            state.independence.independenceForm = initialState.independence.independenceForm;
+            state.independence.independenceForm = {
+                ...initialState.independence.independenceForm,
+                happyState: {
+                    ...state.independence.independenceForm.happyState,
+                    active: description ? true: false,
+                    title: 'Ваш запрос отправлен!',
+                    description: description,
+                }
+            }
           })
            .addCase(sendOrderThunkServiceMainPage.pending, (state) => {
             state.loadingStatus = 'loading';
@@ -1247,6 +1267,7 @@ export const {
     orderFormPolicyCheckbox,
     independenceFromInputValidate,
     clearIndependenceFormInput,
+    independenceHappyState,
     addVideoBlob,
     mainOrderFormHappyState,
     sendIndependenceFormBtnStatus,
