@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 
 const Articles = () => {
@@ -11,10 +12,63 @@ const Articles = () => {
             <div className="inner-page-main-wrapper">
                 <section>
                     <div className="container">
-                        <div className="articles-main-row">
-                            <div className="articles-main-item">
-                                1
+                        <div className="articles-control-wrap">
+                            <div className="article-filters-row">
+                                <div className="filter-description">
+                                    <h4>Сортировка:</h4>
+                                </div>
+                                <div className="article-filter-item">
+                                    <span>Дата</span>
+                                </div>
+                                <div className="article-filter-item">
+                                    <span>Автор</span>
+                                </div>
+                                <div className="article-filter-item">
+                                    <span>Сбросить</span>
+                                </div>
                             </div>
+                            <div className="article-theme-filter-wrap">
+                                <select name="pets" id="pet-select">
+                                    {articlesState.articleCategories.map((catItem) => {
+                                        return (
+                                            <React.Fragment key={catItem.id}>
+                                                <option>{catItem.title}</option>
+                                            </React.Fragment>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                        </div>
+                        <div className="articles-main-row">
+                            {articlesState.articles.map((articleItem) => {
+                                return (
+                                    <React.Fragment key={articleItem.id}>
+                                        <article className="article-main-item">
+                                            <div className="article-min-item-img-wrap">
+                                                <Link to={articleItem.url}><img src={articleItem.imgMini} alt="#" /></Link>
+                                            </div>
+                                            <div className="article-main-item-info-wrap">
+                                                <div className="article-author">
+                                                    <span>Автор: <strong>{articleItem.author}</strong></span>
+                                                </div>
+                                                <div className="article-date">
+                                                    <span>Дата публикации: <strong>{articleItem.articleDate}</strong></span>
+                                                </div>
+                                                <div className="article-main-item-info-content">
+                                                    <h3>{articleItem.title}</h3>
+                                                    <p>{articleItem.shortDescription}</p>
+                                                </div>
+                                                <div className="article-main-item-info-btn-wrap">
+                                                    <Link 
+                                                        className="article-main-item-info-btn"
+                                                        to={articleItem.url}
+                                                    >Читать далее</Link>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </React.Fragment>
+                                )
+                            })}
                         </div>
                     </div>
                 </section>
