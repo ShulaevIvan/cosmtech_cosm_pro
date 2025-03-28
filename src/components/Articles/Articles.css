@@ -88,6 +88,7 @@
     background-color: #00458B;
     transition: background .4s ease;
     color: white;
+    max-width: 100%;
 }
 .article-main-item-info-content h3 {
     font-size: 24px;
@@ -191,10 +192,18 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+    user-select: none;
     width: 20%;
     max-width: 100px;
     color: white;
     background-color: #3FD2C7;
     border-radius: 10px;
     cursor: pointer;
+}
+.article-filter-item  span {
+    width: 100%;
+    text-align: center;
+}
+.article-filter-item.active {
+    background-color: #00458B;
 }

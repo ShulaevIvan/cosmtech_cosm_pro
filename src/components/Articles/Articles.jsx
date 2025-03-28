@@ -1,10 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { articlesSort } from "../../redux/slices/articlesSlice";
+
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 
 const Articles = () => {
+    const dispatch = useDispatch();
     const articlesState = useSelector((state) => state.articles);
+
+    const articlesSortHandler = (sortType) => {
+        dispatch(articlesSort({sortType: sortType}));
+    };
 
     return (
         <React.Fragment>
@@ -17,14 +24,14 @@ const Articles = () => {
                                 <div className="filter-description">
                                     <h4>Сортировка:</h4>
                                 </div>
-                                <div className="article-filter-item">
-                                    <span>Дата</span>
+                                <div className={articlesState.articlesSorted.byDate ? "article-filter-item active" : "article-filter-item"}>
+                                    <span onClick={() => articlesSortHandler('dateSort')}>Дата</span>
+                                </div>
+                                <div className={articlesState.articlesSorted.byAuthor ? "article-filter-item active" : "article-filter-item"}>
+                                    <span onClick={() => articlesSortHandler('authorSort')}>Автор</span>
                                 </div>
                                 <div className="article-filter-item">
-                                    <span>Автор</span>
-                                </div>
-                                <div className="article-filter-item">
-                                    <span>Сбросить</span>
+                                    <span onClick={articlesSortHandler}>Сбросить</span>
                                 </div>
                             </div>
                             <div className="article-theme-filter-wrap">
@@ -52,7 +59,9 @@ const Articles = () => {
                                                     <span>Автор: <strong>{articleItem.author}</strong></span>
                                                 </div>
                                                 <div className="article-date">
-                                                    <span>Дата публикации: <strong>{articleItem.articleDate}</strong></span>
+                                                    <span>Дата публикации: 
+                                                        <strong>{articleItem.articleDate.toLocaleDateString('ru')}</strong>
+                                                    </span>
                                                 </div>
                                                 <div className="article-main-item-info-content">
                                                     <h3>{articleItem.title}</h3>
