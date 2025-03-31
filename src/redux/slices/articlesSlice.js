@@ -1,6 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import demoImg from '../../img/articles/articleItemDemo.png';
 
+const importAllImages = (ctxWebpuck) => {
+    const images = {};
+    ctxWebpuck.keys().forEach((item, index) => { images[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
+    return images;
+};
+
+const articlesImages = importAllImages(require.context('../../img/articles', false, /\.(png|jpe?g|svg)$/));
+
+const { 
+    independenceContractMin,
+    stmCosmeticBanner,
+    stmCosmeticBanner2,
+} = articlesImages;
+
 const initialState = {
     articlesSorted: {
         byDate: false,
@@ -20,10 +34,12 @@ const initialState = {
             title: 'Преимущества контрактного производства косметики для малого бизнеса',
             shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
             url: '/stm-cosmetic',
-            imgMini: demoImg,
+            imgMini: independenceContractMin,
+            mainBanner: {img: stmCosmeticBanner, alt: 'Преимущества контрактного производства косметики для малого бизнеса'},
             author: 'Автор 1',
             articleDate: new Date(2025, 11, 10),
-            articleCategory: 'production'
+            articleCategory: 'production',
+            selected: false
         },
         {
             id: 2,
@@ -32,53 +48,63 @@ const initialState = {
             shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
             url: '/stm-cosmetic',
             imgMini: demoImg,
+            mainBanner: {img: stmCosmeticBanner, alt: 'Как создать свой косметический бренд с нуля: пошаговое руководство'},
             author: 'Автор 2',
             articleDate: new Date(2022, 1, 1),
-            articleCategory: 'production'
+            articleCategory: 'production',
+            selected: false
         },
         {
             id: 3,
             name: '',
             title: 'Article Title',
             shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
-            url: '/stm-cosmetic',
+            url: '/stm-cosmetic3',
             imgMini: demoImg,
+            mainBanner: {img: stmCosmeticBanner, alt: 'Article Title'},
             author: 'Автор 3',
             articleDate: new Date(2021, 2, 25),
-            articleCategory: ''
+            articleCategory: '',
+            selected: false
         },
         {
             id: 4,
             name: '',
             title: 'Article Title sales 1',
             shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
-            url: '/stm-cosmetic',
+            url: '/stm-cosmetic4',
             imgMini: demoImg,
+            mainBanner: {img: stmCosmeticBanner, alt: 'Article Title sales 1'},
             author: 'Автор 4',
             articleDate:  new Date(2022, 2, 10),
-            articleCategory: 'sales'
+            articleCategory: 'sales',
+            selected: false
         },
         {
             id: 5,
             name: '',
             title: 'Article Title sales 2',
             shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
-            url: '/stm-cosmetic',
+            url: '/stm-cosmetic5',
             imgMini: demoImg,
+            mainBanner: {img: stmCosmeticBanner, alt: 'Article Title sales 2'},
             author: 'Автор 1',
             articleDate: new Date(2023, 3, 15),
-            articleCategory: 'sales'
+            articleCategory: 'sales',
+            selected: false
         },
         {
             id: 6,
             name: '',
             title: 'Article Title manual',
             shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
-            url: '/stm-cosmetic',
+            url: '/stm-cosmetic6',
             imgMini: demoImg,
+            mainBanner: {img: stmCosmeticBanner, alt: 'Article Title manual'},
             author: 'Автор 6',
             articleDate: new Date(2025, 1, 15),
-            articleCategory: 'manual'
+            articleCategory: 'manual',
+            selected: false
         }
     ]
 };
@@ -113,16 +139,55 @@ const articlesSlice = createSlice({
                 default:
                     state.articles = initialState.articles;
                     state.articlesSorted = initialState.articlesSorted;
+                    state.articleCategories = initialState.articleCategories;
                     break;
             }
         },
-        testHandler(state, action) {
-            const { status } = action.payload;
-        }
+        articleCategory(state, action) {
+            const { category } = action.payload;
+            if (!category || category === 'default') {
+                state.articles = initialState.articles;
+                return;
+            }
+            state.articleCategories = state.articleCategories.map((catItem) => {
+                if (catItem.name === category) {
+                    return {
+                        ...catItem,
+                        selected: true
+                    }
+                }
+                return {
+                    ...catItem,
+                    selected: false
+                }
+            });
+            state.articles = initialState.articles.filter((articleItem) => articleItem.articleCategory === category);
+        },
+        selectArticle(state, action) {
+            const { articleId } = action.payload;
+            if (!articleId) {
+                state.articles = initialState.articles;
+                return;
+            }
+            state.articles = state.articles.map((articleItem) => {
+                if (articleItem.id === articleId) {
+                    return {
+                        ...articleItem,
+                        selected: true
+                    }
+                }
+                return {
+                    ...articleItem,
+                    selected: false
+                }
+            });
+        },
     }
 });
 
 export const {
-    articlesSort
+    articlesSort,
+    articleCategory,
+    selectArticle
 } = articlesSlice.actions;
 export default articlesSlice.reducer;

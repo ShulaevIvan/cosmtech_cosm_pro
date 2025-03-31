@@ -1,7 +1,8 @@
 import React from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { articlesSort } from "../../redux/slices/articlesSlice";
+import { Link, useLocation } from "react-router-dom";
+import { articlesSort, articleCategory, selectArticle } from "../../redux/slices/articlesSlice";
 
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 
@@ -11,6 +12,10 @@ const Articles = () => {
 
     const articlesSortHandler = (sortType) => {
         dispatch(articlesSort({sortType: sortType}));
+    };
+
+    const selectCategoryHandler = (catType) => {
+        dispatch(articleCategory({category: catType}))
     };
 
     return (
@@ -35,11 +40,15 @@ const Articles = () => {
                                 </div>
                             </div>
                             <div className="article-theme-filter-wrap">
-                                <select name="pets" id="pet-select">
+                                <select 
+                                    name="article-catigories" 
+                                    id="select-article-catigories"
+                                    onChange={(e) => selectCategoryHandler(e.target.value)}
+                                >
                                     {articlesState.articleCategories.map((catItem) => {
                                         return (
                                             <React.Fragment key={catItem.id}>
-                                                <option>{catItem.title}</option>
+                                                <option value={catItem.name}>{catItem.title}</option>
                                             </React.Fragment>
                                         )
                                     })}
@@ -52,7 +61,9 @@ const Articles = () => {
                                     <React.Fragment key={articleItem.id}>
                                         <article className="article-main-item">
                                             <div className="article-min-item-img-wrap">
-                                                <Link to={articleItem.url}><img src={articleItem.imgMini} alt="#" /></Link>
+                                                <Link to={articleItem.url}>
+                                                    <img className="test123" src={articleItem.imgMini} alt="#" />
+                                                </Link>
                                             </div>
                                             <div className="article-main-item-info-wrap">
                                                 <div className="article-author">
@@ -64,7 +75,9 @@ const Articles = () => {
                                                     </span>
                                                 </div>
                                                 <div className="article-main-item-info-content">
-                                                    <h3>{articleItem.title}</h3>
+                                                    <Link to={articleItem.url}>
+                                                        <h3>{articleItem.title}</h3>
+                                                    </Link>
                                                     <p>{articleItem.shortDescription}</p>
                                                 </div>
                                                 <div className="article-main-item-info-btn-wrap">
