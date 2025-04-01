@@ -11,6 +11,7 @@ const articlesImages = importAllImages(require.context('../../img/articles', fal
 
 const { 
     independenceContractMin,
+    stmCosmeticMin,
     stmCosmeticBanner,
     stmCosmeticBanner2,
 } = articlesImages;
@@ -39,7 +40,8 @@ const initialState = {
             author: 'Автор 1',
             articleDate: new Date(2025, 11, 10),
             articleCategory: 'production',
-            selected: false
+            selected: false,
+            readingTime: 15
         },
         {
             id: 2,
@@ -47,12 +49,13 @@ const initialState = {
             title: 'Как создать свой косметический бренд с нуля: пошаговое руководство',
             shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
             url: '/stm-cosmetic',
-            imgMini: demoImg,
+            imgMini: stmCosmeticMin,
             mainBanner: {img: stmCosmeticBanner, alt: 'Как создать свой косметический бренд с нуля: пошаговое руководство'},
             author: 'Автор 2',
             articleDate: new Date(2022, 1, 1),
             articleCategory: 'production',
-            selected: false
+            selected: false,
+            readingTime: 15
         },
         {
             id: 3,
@@ -65,7 +68,8 @@ const initialState = {
             author: 'Автор 3',
             articleDate: new Date(2021, 2, 25),
             articleCategory: '',
-            selected: false
+            selected: false,
+            readingTime: 15
         },
         {
             id: 4,
@@ -78,7 +82,8 @@ const initialState = {
             author: 'Автор 4',
             articleDate:  new Date(2022, 2, 10),
             articleCategory: 'sales',
-            selected: false
+            selected: false,
+            readingTime: 15
         },
         {
             id: 5,
@@ -91,7 +96,8 @@ const initialState = {
             author: 'Автор 1',
             articleDate: new Date(2023, 3, 15),
             articleCategory: 'sales',
-            selected: false
+            selected: false,
+            readingTime: 15
         },
         {
             id: 6,
@@ -104,7 +110,8 @@ const initialState = {
             author: 'Автор 6',
             articleDate: new Date(2025, 1, 15),
             articleCategory: 'manual',
-            selected: false
+            selected: false,
+            readingTime: 15
         }
     ]
 };

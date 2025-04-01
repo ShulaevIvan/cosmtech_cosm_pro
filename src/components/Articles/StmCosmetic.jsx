@@ -1,7 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 import InnerPageHeader from '../InnerPageHeader/InnerPageHeader';
 import ArticleInfoHeader from './ArticleInfoHeader';
 import ArticlesRightSide from './ArticlesRightSide';
@@ -11,7 +9,8 @@ import banner3 from '../../img/articles/stmCosmeticBanner3.jpg';
 
 const StmCosmetic = () => {
     const articleState = useSelector((state) => state.articles);
-    console.log(articleState.articles.find((item) => item.selected))
+    const selectedArticle = articleState.articles.find((item) => item.selected);
+
 
     return (
         <React.Fragment>
@@ -19,9 +18,16 @@ const StmCosmetic = () => {
             <div className="inner-page-main-wrapper">
                 <section>
                     <div className="container">
-                        <ArticleInfoHeader />
                         <div className="article-page-row">
                             <div className="article-page-content">
+                                {selectedArticle ? 
+                                    <ArticleInfoHeader
+                                        author={selectedArticle.author}
+                                        date={selectedArticle.articleDate.toLocaleDateString('ru')}
+                                        time={selectedArticle.readingTime}
+                                    />
+                                : null}
+                                
                                 <div className="article-table-content-wrap">
                                     <div className="article-table-content">
                                         <h3>Оглавление:</h3>
@@ -126,7 +132,9 @@ const StmCosmetic = () => {
                                     </div>
                                 </div>
                             </div>
-                            <ArticlesRightSide />
+                            <ArticlesRightSide 
+                                selectedArticle={selectedArticle}
+                            />
                         </div>
                     </div>
                 </section>
