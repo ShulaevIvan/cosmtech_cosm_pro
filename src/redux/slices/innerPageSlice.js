@@ -209,7 +209,6 @@ const initialState = {
         },
         {
             page: '/decorative-cosmetics',
-            page: '/decorative-cosmetics', 
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
             title: 'Производство декоративной косметики',
             description: 'Услуги по контрактному производству декоративной косметики в Санкт-Петербурге',
@@ -233,7 +232,6 @@ const initialState = {
         },
         {
             page: '/articles',
-            page: '/articles', 
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
             title: 'Статьи на тему производства косметики',
             description: 'Статьи на тему производства косметики',
@@ -256,12 +254,11 @@ const initialState = {
             ]
         },
         {
-            page: '/stm-cosmetic',
-            page: '/stm-cosmetic', 
+            page: '/how-to-create-cosmetic-brand',
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
-            title: 'Статьи на тему производства косметики',
-            description: 'Статьи на тему производства косметики',
-            seoDescription: 'Полезная информация для тех, кто работает в сфере косметики',
+            title: 'Cвой косметический бренд с нуля.',
+            description: 'Как создать свой косметический бренд с нуля: пошаговое руководство.',
+            seoDescription: 'Как создать свой косметический бренд с нуля: пошаговое руководство.',
             breadcrumbs: [
                 {
                     id: 1,
@@ -272,8 +269,31 @@ const initialState = {
                 },
                 {
                     id: 2,
-                    name: 'Статьи',
-                    url: '/stm-cosmetic',
+                    name: 'Как создать свой косметический бренд с нуля',
+                    url: '/how-to-create-cosmetic-brand',
+                    main: false,
+                    active: true,
+                },
+            ]
+        },
+        {
+            page: '/advantages-of-contract-cosmetics-for-small-businesses',
+            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            title: 'Преимущества контрактного производства косметики для малого бизнеса.',
+            description: 'Преимущества контрактного производства косметики для малого бизнеса.',
+            seoDescription: 'Преимущества контрактного производства косметики для малого бизнеса.',
+            breadcrumbs: [
+                {
+                    id: 1,
+                    name: 'Контрактное производство',
+                    url: '/',
+                    main: true,
+                    active: false,
+                },
+                {
+                    id: 2,
+                    name: 'Преимущества контрактного производства косметики для малого бизнеса',
+                    url: '/advantages-of-contract-cosmetics-for-small-businesses',
                     main: false,
                     active: true,
                 },

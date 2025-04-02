@@ -90,10 +90,18 @@ const initialState = {
         },
         {
             id: 10,
-            name: 'STM cosmetic',
-            path: '/stm-cosmetic',
+            name: 'how-to-create-cosmetic-brand',
+            path: '/how-to-create-cosmetic-brand',
             title: 'test',
-            canonical: 'https://cosmtech.ru/stm-cosmetic',
+            canonical: 'https://cosmtech.ru/how-to-create-cosmetic-brand',
+            description: 'Полезная информация по заказу и производству косметики',
+        },
+        {
+            id: 11,
+            name: 'advantages-of-contract-cosmetics-for-small-businesses',
+            path: '/advantages-of-contract-cosmetics-for-small-businesses',
+            title: 'test',
+            canonical: 'https://cosmtech.ru/how-to-create-cosmetic-brand',
             description: 'Полезная информация по заказу и производству косметики',
         }
     ],

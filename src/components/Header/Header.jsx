@@ -47,12 +47,27 @@ const Header = () => {
             (headerTitleObj) => location.pathname !== '/' ? headerTitleObj.path === location.pathname.replace(/\/$/, '') : 
                 headerTitleObj.path === location.pathname
         );
-        document.title = targetTitle ? targetTitle.name : '';
-        openGraphTitleRef.current.content = targetTitle.name;
-        descriptionRef.current.content = targetTitle.description;
-        canonicalUrlRef.current.href = targetTitle.canonical;
-        openGraphDescriptionRef.current.content = targetTitle.description;
-        openGraphUrlRef.current.content = `https://cosmtech.ru${targetTitle.path}`;
+        if (targetTitle) {
+            document.title = targetTitle ? targetTitle.name : '';
+            openGraphTitleRef.current.content = targetTitle.name;
+            descriptionRef.current.content = targetTitle.description;
+            canonicalUrlRef.current.href = targetTitle.canonical;
+            openGraphDescriptionRef.current.content = targetTitle.description;
+            openGraphUrlRef.current.content = `https://cosmtech.ru${targetTitle.path}`;
+            return;
+        }
+        else if (!targetTitle) {
+            const mainPage = headerState.pageTitles.find((headerTitleObj) => headerTitleObj.path === '/');
+            document.title = mainPage.name;
+            openGraphTitleRef.current.content = mainPage.name;
+            descriptionRef.current.content = mainPage.description;
+            canonicalUrlRef.current.href = mainPage.canonical;
+            openGraphDescriptionRef.current.content = mainPage.description;
+            openGraphUrlRef.current.content = `https://cosmtech.ru`;
+            window.location.pathname = '/';
+            return;
+        }
+
     }, [location.pathname]);
 
     useEffect(() => {

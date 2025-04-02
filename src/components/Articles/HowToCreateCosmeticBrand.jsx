@@ -7,7 +7,7 @@ import banner1 from '../../img/articles/stmCosmeticBanner.jpg';
 import banner2 from '../../img/articles/stmCosmeticBanner2.jpg';
 import banner3 from '../../img/articles/stmCosmeticBanner3.jpg';
 
-const StmCosmetic = () => {
+const HowToCreateCosmeticBrand = () => {
     const articleState = useSelector((state) => state.articles);
     const selectedArticle = articleState.articles.find((item) => item.selected);
 
@@ -145,4 +145,4 @@ const StmCosmetic = () => {
 };
 
 
-export default StmCosmetic;
+export default HowToCreateCosmeticBrand;
