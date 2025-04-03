@@ -113,6 +113,80 @@ const initialState = {
             selected: false,
             readingTime: 15
         }
+    ],
+    articleForm: [
+        {
+            id: 1,
+            inputType: 'text',
+            inputTag: 'input',
+            inputName: 'name',
+            inputValue: '',
+            inputTitle: 'Имя',
+            placeholder: 'Ваше имя',
+            valid: true,
+        },
+        {
+            id: 2,
+            inputType: 'text',
+            inputTag: 'input',
+            inputName: 'phone',
+            inputValue: '',
+            inputTitle: 'Телефон',
+            placeholder: '8 xxx xxx xx xx',
+            valid: true,
+        },
+        {
+            id: 3,
+            inputType: 'fieldset',
+            inputTag: 'fieldset',
+            inputName: 'contactType',
+            inputValue: '',
+            inputTitle: 'Способ связи:',
+            placeholder: '',
+            valid: true,
+            radioButtons: [
+                {
+                    id: 1,
+                    radioGroup: 'acticleContactRadio',
+                    inputType: 'radio',
+                    inputTag: 'radio',
+                    inputName: 'radio-phone',
+                    inputValue: 'phone',
+                    inputTitle: 'Телефон',
+                    selected: false
+                },
+                {
+                    id: 2,
+                    radioGroup: 'acticleContactRadio',
+                    inputType: 'radio',
+                    inputTag: 'radio',
+                    inputName: 'radio-wp',
+                    inputValue: 'wp',
+                    inputTitle: 'Whatsapp',
+                    selected: false
+                },
+                {
+                    id: 3,
+                    radioGroup: 'acticleContactRadio',
+                    inputType: 'radio',
+                    inputTag: 'radio',
+                    inputName: 'radio-tg',
+                    inputValue: 'tg',
+                    inputTitle: 'Telegram',
+                    selected: false
+                },
+            ]
+        },
+        {
+            id: 4,
+            inputType: 'textarea',
+            inputTag: 'textarea',
+            inputName: 'comment',
+            inputValue: '',
+            inputTitle: 'Ваш вопрос',
+            placeholder: 'Ваш вопрос...',
+            valid: true,
+        },
     ]
 };
 

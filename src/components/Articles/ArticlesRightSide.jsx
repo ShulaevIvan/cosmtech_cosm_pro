@@ -7,7 +7,6 @@ import test from '../../img/articles/independenceContractMin.png'
 const ArticlesRightSide = (props) => {
     const articles = useSelector((state) => state.articles);
     const selectedArticle = props.selectedArticle;
-    console.log(articles.articles)
 
     return (
         <React.Fragment>
