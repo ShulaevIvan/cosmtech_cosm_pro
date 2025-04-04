@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import InnerPageHeader from '../InnerPageHeader/InnerPageHeader';
 import ArticleInfoHeader from './ArticleInfoHeader';
 import ArticlesRightSide from './ArticlesRightSide';
+import ArticleNavbar from './ArticleNavbar';
 import ArticleForm from './ArticleForm';
 
 import banner1 from '../../img/articles/stmCosmeticBanner.jpg';
@@ -18,7 +19,7 @@ const HowToCreateCosmeticBrand = () => {
         <React.Fragment>
             <InnerPageHeader />
             <div className="inner-page-main-wrapper">
-
+                <ArticleNavbar />
                 <div className="container">
                     <div className="article-page-row">
                         <div className="article-page-content">

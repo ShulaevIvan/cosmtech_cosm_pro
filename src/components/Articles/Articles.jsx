@@ -15,7 +15,7 @@ const Articles = () => {
     };
 
     const selectCategoryHandler = (catType) => {
-        dispatch(articleCategory({category: catType}))
+        dispatch(articleCategory({category: catType}));
     };
 
     return (
