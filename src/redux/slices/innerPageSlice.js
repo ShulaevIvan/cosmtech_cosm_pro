@@ -279,7 +279,7 @@ const initialState = {
         {
             page: '/advantages-of-contract-cosmetics-for-small-businesses',
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
-            title: 'Преимущества контрактного производства косметики для малого бизнеса.',
+            title: 'Производство косметики для малого бизнеса',
             description: 'Преимущества контрактного производства косметики для малого бизнеса.',
             seoDescription: 'Преимущества контрактного производства косметики для малого бизнеса.',
             breadcrumbs: [

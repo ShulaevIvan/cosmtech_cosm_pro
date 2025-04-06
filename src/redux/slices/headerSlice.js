@@ -90,7 +90,7 @@ const initialState = {
         },
         {
             id: 10,
-            name: 'how-to-create-cosmetic-brand',
+            name: 'Как создать свой косметический бренд с нуля',
             path: '/how-to-create-cosmetic-brand',
             title: 'test',
             canonical: 'https://cosmtech.ru/how-to-create-cosmetic-brand',
@@ -98,7 +98,7 @@ const initialState = {
         },
         {
             id: 11,
-            name: 'advantages-of-contract-cosmetics-for-small-businesses',
+            name: 'Преимущества контрактного производства косметики для малого бизнеса',
             path: '/advantages-of-contract-cosmetics-for-small-businesses',
             title: 'test',
             canonical: 'https://cosmtech.ru/how-to-create-cosmetic-brand',

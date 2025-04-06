@@ -22,6 +22,7 @@ const initialState = {
         byAuthor: false,
     },
     sorted: false,
+    selectedCategory: {name: 'default', autoSelect: false},
     articleCategories: [
         {id: 1, name: 'default', title: '-- Выберите категорию --', selected: true},
         {id: 2, name: 'production', title: 'Производство', selected: false},
@@ -196,6 +197,7 @@ const articlesSlice = createSlice({
     reducers: {
         articlesSort(state, action) {
             const { sortType } = action.payload;
+            state.selectedCategory = initialState.selectedCategory;
             switch (sortType) {
                 case 'dateSort':
                     state.articlesSorted.byAuthor = false;
@@ -243,6 +245,32 @@ const articlesSlice = createSlice({
                 }
             });
             state.articles = initialState.articles.filter((articleItem) => articleItem.articleCategory === category);
+            state.selectedCategory = {
+                ...state.selectedCategory,
+                name: category,
+                autoSelect: false
+            }
+        },
+        selectArticleCategory(state, action) {
+            const { category } = action.payload;
+            
+            state.articleCategories = state.articleCategories.map((catItem) => {
+                if (catItem.name === category) {
+                    return {
+                        ...catItem,
+                        selected: true
+                    }
+                }
+                return {
+                    ...catItem,
+                    selected: false
+                }
+            });
+            state.selectedCategory = {
+                ...state.selectedCategory,
+                name: category,
+                autoSelect: true
+            }
         },
         selectArticle(state, action) {
             const { articleId } = action.payload;
@@ -269,6 +297,7 @@ const articlesSlice = createSlice({
 export const {
     articlesSort,
     articleCategory,
+    selectArticleCategory,
     selectArticle
 } = articlesSlice.actions;
 export default articlesSlice.reducer;

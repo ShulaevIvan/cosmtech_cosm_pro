@@ -18,6 +18,11 @@ const Articles = () => {
         dispatch(articleCategory({category: catType}));
     };
 
+    useEffect(() => {
+        const selectedCategory = articlesState.articleCategories.find((item) => item.selected);
+        dispatch(articleCategory({category: selectedCategory.name}));
+    }, [articlesState.selectedCategory.autoSelect]);
+
     return (
         <React.Fragment>
             <InnerPageHeader />
@@ -43,6 +48,7 @@ const Articles = () => {
                                 <select 
                                     name="article-catigories" 
                                     id="select-article-catigories"
+                                    value={articlesState.selectedCategory.name}
                                     onChange={(e) => selectCategoryHandler(e.target.value)}
                                 >
                                     {articlesState.articleCategories.map((catItem) => {

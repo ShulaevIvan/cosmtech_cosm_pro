@@ -72,37 +72,6 @@ const ArticleForm = () => {
                                     </React.Fragment>
                                 )
                             })}
-                            {/* <div className="article-inner-form-input">
-                                <label>Имя</label>
-                                <input type="text" />
-                            </div>
-                            <div className="article-inner-form-input">
-                                <label>Телефон</label>
-                                <input type="tel" />
-                            </div>
-                            <div className="article-inner-form-input">
-                                <fieldset>
-                                    <legend>Способ связи:</legend>
-                                    <div className="article-inner-form-contact-radio">
-                                        <input type="radio" id="acticle-contact-phone" name="acticle-contact-radio" value="phone" />
-                                        <label htmlFor="acticle-contact-phone">Телефон</label>
-                                    </div>
-                                    <div className="article-inner-form-contact-radio">
-                                        <input type="radio" id="acticle-contact-wp" name="acticle-contact-radio" value="wp" />
-                                        <label htmlFor="acticle-contact-wp">Whatsapp</label>
-                                    </div>
-                                    <div className="article-inner-form-contact-radio">
-                                        <input type="radio" id="acticle-contact-tg" name="acticle-contact-radio" value="tg" />
-                                        <label htmlFor="acticle-contact-tg">Telegram</label>
-                                    </div>
-
-                                    
-                                </fieldset>
-                            </div>
-                            <div className="article-inner-form-input">
-                                <label>Вопрос</label>
-                                <textarea></textarea>
-                            </div> */}
                         </form>
                         <div className="article-inner-form-send-btn-wrap">
                             <Link className="article-inner-form-send-btn">Отправить</Link>

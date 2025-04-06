@@ -191,7 +191,7 @@
     margin-left: 5px;
 }
 .article-inner-form-input input {
-    min-height: 25px;
+    min-height: 30px;
     max-width: 250px;
 }
 .article-inner-form-input input[type='radio'] {
@@ -328,6 +328,9 @@
 .inner-page-article-content-wrap.left {
    flex-direction: row-reverse;
 }
+.inner-page-article-text-content h3 {
+    max-width: 600px;
+}
 .inner-page-article-img-content {
     display: flex;
     flex-direction: column;
@@ -383,7 +386,7 @@
     flex-wrap: wrap;
     width: 100%;
     max-width: 900px;
-    margin-bottom: 40px;
+    margin: 40px 0;
 }
 .inner-page-article-banner-img-wrap img {
     max-width: 100%;

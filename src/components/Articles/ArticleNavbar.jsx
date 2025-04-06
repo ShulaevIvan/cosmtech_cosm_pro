@@ -1,4 +1,5 @@
 import React from "react";
+import { selectArticleCategory } from "../../redux/slices/articlesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,11 +8,7 @@ const ArticleNavbar = () => {
     const articleCategory = useSelector((state) => state.articles.articleCategories);
 
     const filterArticlesHandler = (catType) => {
-        dispatch(articleCategory({category: catType}));
-    };
-
-    const goToArticlesHandler = () => {
-
+        dispatch(selectArticleCategory({category: catType}));
     };
 
     return (
@@ -23,7 +20,7 @@ const ArticleNavbar = () => {
                     </div>
                     {articleCategory.filter((item) => item.name !== 'default').map((catItem) => {
                         return (
-                            <React.Fragment>
+                            <React.Fragment key={catItem.id}>
                                 <div className="inner-article-navbar-item">
                                     <Link
                                         to={`/articles`}

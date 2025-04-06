@@ -21,7 +21,7 @@ const ArticlesRightSide = (props) => {
                                 <React.Fragment key={articleItem.id}>
                                     <Link to={articleItem.url}>
                                         <div className="other-article-item">
-                                            <img src={demoImg} alt="test" />
+                                            <img src={articleItem.imgMini} alt="test" />
                                             <div className="other-article-item-date">
                                                     {`от ${articleItem.articleDate.toLocaleDateString('ru')}`}
                                                 </div>
