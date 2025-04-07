@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import validateName from '../../functions/validateName';
+import validatePhone from '../../functions/validatePhone';
 import demoImg from '../../img/articles/articleItemDemo.png';
 
 const importAllImages = (ctxWebpuck) => {
@@ -133,7 +135,7 @@ const initialState = {
             inputName: 'phone',
             inputValue: '',
             inputTitle: 'Телефон',
-            placeholder: '8 xxx xxx xx xx',
+            placeholder: '8xxxxxxxxxx',
             valid: true,
         },
         {
@@ -152,7 +154,7 @@ const initialState = {
                     inputType: 'radio',
                     inputTag: 'radio',
                     inputName: 'radio-phone',
-                    inputValue: 'phone',
+                    inputValue: 'contactPhone',
                     inputTitle: 'Телефон',
                     selected: false
                 },
@@ -162,9 +164,9 @@ const initialState = {
                     inputType: 'radio',
                     inputTag: 'radio',
                     inputName: 'radio-wp',
-                    inputValue: 'wp',
+                    inputValue: 'contactWp',
                     inputTitle: 'Whatsapp',
-                    selected: false
+                    selected: true
                 },
                 {
                     id: 3,
@@ -172,7 +174,7 @@ const initialState = {
                     inputType: 'radio',
                     inputTag: 'radio',
                     inputName: 'radio-tg',
-                    inputValue: 'tg',
+                    inputValue: 'contactTg',
                     inputTitle: 'Telegram',
                     selected: false
                 },
@@ -188,7 +190,14 @@ const initialState = {
             placeholder: 'Ваш вопрос...',
             valid: true,
         },
-    ]
+    ],
+    formSendData: {
+        name: '',
+        phone: '',
+        comment: '',
+        contactType: ''
+    },
+    sendBtnActive: false
 };
 
 const articlesSlice = createSlice({
@@ -291,6 +300,99 @@ const articlesSlice = createSlice({
                 }
             });
         },
+        articleFormInput(state, action) {
+            const { inputType, inputValue } = action.payload;
+            let validValue = '';
+            let inputValid = false
+
+            if (inputType && !inputValue) {
+                state.articleForm = state.articleForm.map((formItem) => {
+                    if (formItem.inputName === inputType && inputType !== 'contactType') {
+                        return {
+                            ...formItem,
+                            inputValue: '',
+                            valid: false
+                        }
+                    }
+                    return formItem;
+                });
+            }
+            if (inputType && inputType === 'contactType') {
+                state.articleForm = state.articleForm.map((formItem) => {
+                    if (formItem.inputName === inputType) {
+                        return {
+                            ...formItem,
+                            radioButtons: formItem.radioButtons.map((radioItem) => {
+                                if (radioItem.inputValue === inputValue) {
+                                    return {
+                                        ...radioItem,
+                                        selected: true
+                                    }
+                                }
+                                return {
+                                    ...radioItem,
+                                    selected: false
+                                }
+                            })
+                        }
+                    }
+                    return {
+                        ...formItem,
+                        selected:false
+                    }
+                })
+            }
+
+            switch (inputType) {
+                case 'name':
+                    inputValid = validateName(inputValue);
+                    validValue = inputValue;
+                    break;
+                case 'phone':
+                    if (inputValue.length !== 18) {
+                        const phoneStr = validatePhone(inputValue);
+                        inputValid = phoneStr.length === 18 ? true : false
+                        validValue = phoneStr;
+                    }
+                    break;
+                case 'comment':
+                    inputValid = validateName(inputValue);
+                    validValue = inputValue;
+                    break;
+            }
+            
+            state.articleForm = state.articleForm.map((formItem) => {
+                if (formItem.inputName === inputType && inputType !== 'contactType') {
+                    return {
+                        ...formItem,
+                        inputValue: validValue,
+                        valid: inputValid
+                    }
+                }
+                return {
+                    ...formItem
+                }
+            });
+        },
+        validateArticleForm(state) {
+            const contactType = state.articleForm.find((item) => item.inputName === 'contactType')
+            .radioButtons.find((item) => item.selected);
+            const clientName = state.articleForm.find((item) => item.inputName === 'name' && item.valid && item.inputValue);
+            const clientPhone = state.articleForm.find((item) => item.inputName === 'phone' && item.valid && item.inputValue);
+            const clientComment = state.articleForm.find((item) => item.inputName === 'comment' && item.valid && item.inputValue);
+
+            if ((clientPhone && clientPhone.valid) && (clientName && clientName.valid)) {
+                state.sendBtnActive = true;
+                state.formSendData = {
+                    name: clientName.inputValue,
+                    phone: clientPhone.inputValue,
+                    comment: clientComment ? clientComment.inputValue : '',
+                    contactType: contactType ? contactType.inputValue : '',
+                }
+                return;
+            }
+            state.sendBtnActive = false;
+        }
     }
 });
 
@@ -298,6 +400,8 @@ export const {
     articlesSort,
     articleCategory,
     selectArticleCategory,
-    selectArticle
+    selectArticle,
+    articleFormInput,
+    validateArticleForm
 } = articlesSlice.actions;
 export default articlesSlice.reducer;
