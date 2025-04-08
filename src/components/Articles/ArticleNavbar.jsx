@@ -13,24 +13,26 @@ const ArticleNavbar = () => {
 
     return (
         <React.Fragment>
-            <div className="inner-article-navbar-wrap">
-                <div className="inner-article-navbar-row">
-                    <div className="inner-article-navbar-item">
-                        <Link  to={`/articles`} className="inner-article-navbar-btn">Назад к статьям</Link>
+            <div className="container">
+                <div className="inner-article-navbar-wrap">
+                    <div className="inner-article-navbar-row">
+                        <div className="inner-article-navbar-item">
+                            <Link  to={`/articles`} className="inner-article-navbar-btn">Назад к статьям</Link>
+                        </div>
+                        {articleCategory.filter((item) => item.name !== 'default').map((catItem) => {
+                            return (
+                                <React.Fragment key={catItem.id}>
+                                    <div className="inner-article-navbar-item">
+                                        <Link
+                                            to={`/articles`}
+                                            onClick={() => filterArticlesHandler(catItem.name)} 
+                                            className="inner-article-navbar-btn"
+                                        >{catItem.title}</Link>
+                                    </div>
+                                </React.Fragment>
+                            )
+                        })}
                     </div>
-                    {articleCategory.filter((item) => item.name !== 'default').map((catItem) => {
-                        return (
-                            <React.Fragment key={catItem.id}>
-                                <div className="inner-article-navbar-item">
-                                    <Link
-                                        to={`/articles`}
-                                        onClick={() => filterArticlesHandler(catItem.name)} 
-                                        className="inner-article-navbar-btn"
-                                    >{catItem.title}</Link>
-                                </div>
-                            </React.Fragment>
-                        )
-                    })}
                 </div>
             </div>
         </React.Fragment>

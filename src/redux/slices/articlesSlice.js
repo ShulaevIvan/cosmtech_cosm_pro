@@ -197,6 +197,11 @@ const initialState = {
         comment: '',
         contactType: ''
     },
+    happyState: {
+        active: false,
+        title: 'Test title',
+        description: 'test description'
+    },
     sendBtnActive: false
 };
 
@@ -392,6 +397,12 @@ const articlesSlice = createSlice({
                 return;
             }
             state.sendBtnActive = false;
+        },
+        articleFormHappyState(state) {
+            state.happyState = {
+                ...state.happyState,
+                active: state.happyState.active ? false : true
+            }
         }
     }
 });
@@ -402,6 +413,7 @@ export const {
     selectArticleCategory,
     selectArticle,
     articleFormInput,
-    validateArticleForm
+    validateArticleForm,
+    articleFormHappyState
 } = articlesSlice.actions;
 export default articlesSlice.reducer;

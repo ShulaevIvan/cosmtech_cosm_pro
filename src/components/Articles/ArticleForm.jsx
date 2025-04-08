@@ -2,9 +2,11 @@ import React from "react";
 import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import ArticleFormHappyState from "./ArticleFormHappyState";
 import { 
     articleFormInput,
-    validateArticleForm
+    validateArticleForm,
+    articleFormHappyState
 } from "../../redux/slices/articlesSlice";
 
 const ArticleForm = () => {
@@ -42,6 +44,10 @@ const ArticleForm = () => {
         console.log(sendData)
     };
 
+    const happyStateCloseHandler = () => {
+        dispatch(articleFormHappyState());
+    };
+
     useEffect(() => {
         dispatch(validateArticleForm());
     }, [articleState.articleForm]);
@@ -50,6 +56,11 @@ const ArticleForm = () => {
         <React.Fragment>
             <section>
                 <div className="article-inner-form-row">
+                {articleState.happyState.active ? 
+                    <ArticleFormHappyState 
+                        closeHander={happyStateCloseHandler}
+                    /> 
+                : null}
                     <div className="article-inner-form-content">
                         <h3>Требуется помощь ?</h3>
                         <p>Заполните форму и получите ответ на свой вопрос по телефону или через мессаджер.</p>
