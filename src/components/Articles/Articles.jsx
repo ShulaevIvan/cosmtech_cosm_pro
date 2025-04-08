@@ -18,6 +18,17 @@ const Articles = () => {
         dispatch(articleCategory({category: catType}));
     };
 
+    const cutArticleShortDescription = (text) => {
+        const textLength = String(text).length;
+        if (textLength > 100) {
+            const newText = `${text.slice(0, 70)} ...`
+            return newText
+        }
+        console.log(textLength);
+        
+        return text ? text : '';
+    };
+
     useEffect(() => {
         const selectedCategory = articlesState.articleCategories.find((item) => item.selected);
         dispatch(articleCategory({category: selectedCategory.name}));
@@ -84,7 +95,7 @@ const Articles = () => {
                                                     <Link to={articleItem.url}>
                                                         <h3>{articleItem.title}</h3>
                                                     </Link>
-                                                    <p>{articleItem.shortDescription}</p>
+                                                    <p>{cutArticleShortDescription(articleItem.shortDescription)}</p>
                                                 </div>
                                                 <div className="article-main-item-info-btn-wrap">
                                                     <Link 

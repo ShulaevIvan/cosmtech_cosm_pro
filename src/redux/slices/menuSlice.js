@@ -64,7 +64,26 @@ const initialState = {
                 id: 3,
                 name: 'О Нас',
                 url: '/about',
-                submenu: false
+                submenu: {
+                    active: false,
+                    menuItems: [
+                        {
+                            id: 1,
+                            name: 'Клиентам',
+                            url: '/forclients'
+                        },
+                        {
+                            id: 2,
+                            name: 'Статьи',
+                            url: '/articles'
+                        },
+                        {
+                            id: 3,
+                            name: 'Новости',
+                            url: '/news'
+                        },
+                    ]
+                }
             },
             {
                 id: 4,
