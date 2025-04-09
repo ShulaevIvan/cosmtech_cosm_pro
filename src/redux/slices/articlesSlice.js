@@ -60,62 +60,6 @@ const initialState = {
             selected: false,
             readingTime: 15
         },
-        {
-            id: 3,
-            name: '',
-            title: 'Article Title',
-            shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
-            url: '/stm-cosmetic3',
-            imgMini: demoImg,
-            mainBanner: {img: stmCosmeticBanner, alt: 'Article Title'},
-            author: 'Автор 3',
-            articleDate: new Date(2021, 2, 25),
-            articleCategory: '',
-            selected: false,
-            readingTime: 15
-        },
-        {
-            id: 4,
-            name: '',
-            title: 'Article Title sales 1',
-            shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
-            url: '/stm-cosmetic4',
-            imgMini: demoImg,
-            mainBanner: {img: stmCosmeticBanner, alt: 'Article Title sales 1'},
-            author: 'Автор 4',
-            articleDate:  new Date(2022, 2, 10),
-            articleCategory: 'sales',
-            selected: false,
-            readingTime: 15
-        },
-        {
-            id: 5,
-            name: '',
-            title: 'Article Title sales 2',
-            shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
-            url: '/stm-cosmetic5',
-            imgMini: demoImg,
-            mainBanner: {img: stmCosmeticBanner, alt: 'Article Title sales 2'},
-            author: 'Автор 1',
-            articleDate: new Date(2023, 3, 15),
-            articleCategory: 'sales',
-            selected: false,
-            readingTime: 15
-        },
-        {
-            id: 6,
-            name: '',
-            title: 'Article Title manual',
-            shortDescription: 'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.',
-            url: '/stm-cosmetic6',
-            imgMini: demoImg,
-            mainBanner: {img: stmCosmeticBanner, alt: 'Article Title manual'},
-            author: 'Автор 6',
-            articleDate: new Date(2025, 1, 15),
-            articleCategory: 'manual',
-            selected: false,
-            readingTime: 15
-        }
     ],
     articleForm: [
         {
@@ -244,6 +188,11 @@ const articlesSlice = createSlice({
             const { category } = action.payload;
             if (!category || category === 'default') {
                 state.articles = initialState.articles;
+                state.selectedCategory = {
+                    ...state.selectedCategory,
+                    name: 'default',
+                    autoSelect: false
+                }
                 return;
             }
             state.articleCategories = state.articleCategories.map((catItem) => {

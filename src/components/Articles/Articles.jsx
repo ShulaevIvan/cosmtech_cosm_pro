@@ -2,13 +2,17 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { articlesSort, articleCategory, selectArticle } from "../../redux/slices/articlesSlice";
+
+import { articlesSort, articleCategory } from "../../redux/slices/articlesSlice";
 
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 
 const Articles = () => {
     const dispatch = useDispatch();
     const articlesState = useSelector((state) => state.articles);
+    const articleCategories = useSelector((state) => state.articles.articleCategories.filter(
+        (item) => articlesState.articles.some((aticleItem) => aticleItem.articleCategory === item.name || aticleItem.articleCategory === 'default'))
+    );
 
     const articlesSortHandler = (sortType) => {
         dispatch(articlesSort({sortType: sortType}));
@@ -22,9 +26,8 @@ const Articles = () => {
         const textLength = String(text).length;
         if (textLength > 100) {
             const newText = `${text.slice(0, 70)} ...`
-            return newText
+            return newText;
         }
-        console.log(textLength);
         
         return text ? text : '';
     };

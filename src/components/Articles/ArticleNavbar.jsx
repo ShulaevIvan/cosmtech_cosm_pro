@@ -2,10 +2,14 @@ import React from "react";
 import { selectArticleCategory } from "../../redux/slices/articlesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const ArticleNavbar = () => {
     const dispatch = useDispatch();
-    const articleCategory = useSelector((state) => state.articles.articleCategories);
+    const articles = useSelector((state) => state.articles.articles);
+    const articleCategory = useSelector((state) => state.articles.articleCategories.filter(
+        (item) => articles.some((articleItem) => articleItem.articleCategory === item.name))
+    );
 
     const filterArticlesHandler = (catType) => {
         dispatch(selectArticleCategory({category: catType}));
