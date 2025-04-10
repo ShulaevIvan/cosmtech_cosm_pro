@@ -298,7 +298,30 @@ const initialState = {
                     active: true,
                 },
             ]
-        }
+        },
+        {
+            page: '/news',
+            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            title: 'Новости компании Космотех',
+            description: `Последние новости на дату ${new Date().toLocaleDateString('ru')}`,
+            seoDescription: `Новости и анонсы компании  ООО Космотех`,
+            breadcrumbs: [
+                {
+                    id: 1,
+                    name: 'Контрактное производство',
+                    url: '/',
+                    main: true,
+                    active: false,
+                },
+                {
+                    id: 2,
+                    name: 'Новости',
+                    url: '/news',
+                    main: false,
+                    active: true,
+                },
+            ]
+        },
     ],
     activeBackground: innerHeaderImg,
     servicesPage: {

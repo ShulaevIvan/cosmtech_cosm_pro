@@ -1,0 +1,194 @@
+.news-preview-main-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 500px;
+}
+.news-preview-main-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 70%;
+}
+.news-preview-main-asside-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 25%;
+}
+.news-preview-main-item-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    min-height: 300px;
+    max-height: 300px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.news-preview-main-item-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 60%;
+    max-width: 700px;
+    padding: 20px;
+}
+.news-preview-main-item-content-description {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-height: 70px;
+    overflow: hidden;
+}
+.news-preview-main-item-content-description p {
+    margin: 0;
+}
+.news-preview-main-item-img {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 300px;
+}
+.news-preview-main-item-img img {
+    max-width: 100%;
+    border-radius: 0 10px 10px 0;
+}
+.news-preview-show-more-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #3FD2C7;
+    color: white;
+    border-radius: 10px;
+    min-height: 40px;
+    cursor: pointer;
+}
+.news-preview-show-more-wrap::after {
+    content: '';
+    position: absolute;
+    bottom:-15px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top:15px solid #3FD2C7;
+}
+.news-preview-show-more-wrap a {
+    width: 100%;
+    min-width: 100%;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+.news-preview-show-more-wrap:hover {
+    background-color: #00458B;
+    color: white;
+    max-width: 100%;
+}
+.news-preview-show-more-wrap:hover::after {
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top:15px solid #00458B;
+}
+.news-company-social-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.news-company-social-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.news-company-social-item,
+.news-company-currency-item {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    width: 100%;
+    align-items: center;
+}
+.news-company-social-item img,
+.news-company-currency-item img {
+    margin-right: 10px;
+}
+.news-company-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.news-company-form-item-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+.news-company-form label {
+    color: #00458B;
+    font-family: gothampro bold;
+    font-size: 18px;
+}
+.news-company-form-item-wrap input {
+    max-width: 200px;
+    min-height: 25px;
+}
+.news-company-form-item-wrap textarea {
+    min-height: 100px;
+}
+.news-company-form-send-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+}
+.news-company-form-send-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    font-size: 14px;
+    max-width: 150px;
+    width: 150px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    min-height: 14px;
+    border-radius: 2px;
+}
+.news-company-form-send-btn:hover {
+    background-color: #00458B;
+    transition: background .4s ease;
+    color: white;
+    max-width: 100%;
+}
+.news-company-currency-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+}

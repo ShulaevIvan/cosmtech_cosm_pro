@@ -49,7 +49,7 @@ const HowToCreateCosmeticBrand = () => {
                                 </article>
                                 <article>
                                     <div className="inner-page-article-banner-img-wrap">
-                                        <img src={banner2} alt={'test1'} />
+                                        <img src={banner2} alt='Как создать свой косметический бренд с нуля: пошаговое руководство' />
                                     </div>
 
                                     <div className="inner-page-article-content-wrap">
@@ -98,7 +98,7 @@ const HowToCreateCosmeticBrand = () => {
                                         </div>
                                     </div>
                                     <div className="inner-page-article-banner-img-wrap">
-                                        <img src={banner3} alt={'test'} />
+                                        <img src={banner3} alt='Определить концепцию и позиционирование бренда' />
                                     </div>
                                 </article>
 
@@ -141,7 +141,7 @@ const HowToCreateCosmeticBrand = () => {
                                         </div>
                                     </div>
                                     <div className="inner-page-article-banner-img-wrap">
-                                        <img src={banner1} alt={'test'} />
+                                        <img src={banner1} alt='Контрактное производство сертификация' />
                                     </div>
                                 </article>
                                 

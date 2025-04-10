@@ -334,6 +334,7 @@ const articlesSlice = createSlice({
             const clientName = state.articleForm.find((item) => item.inputName === 'name' && item.valid && item.inputValue);
             const clientPhone = state.articleForm.find((item) => item.inputName === 'phone' && item.valid && item.inputValue);
             const clientComment = state.articleForm.find((item) => item.inputName === 'comment' && item.valid && item.inputValue);
+            const article = state.articles.find((item) => item.selected);
 
             if ((clientPhone && clientPhone.valid) && (clientName && clientName.valid)) {
                 state.sendBtnActive = true;
@@ -342,6 +343,7 @@ const articlesSlice = createSlice({
                     phone: clientPhone.inputValue,
                     comment: clientComment ? clientComment.inputValue : '',
                     contactType: contactType ? contactType.inputValue : '',
+                    articleName: article.title,
                 }
                 return;
             }

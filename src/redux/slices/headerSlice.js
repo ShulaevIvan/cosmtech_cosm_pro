@@ -103,6 +103,14 @@ const initialState = {
             title: 'test',
             canonical: 'https://cosmtech.ru/how-to-create-cosmetic-brand',
             description: 'Полезная информация по заказу и производству косметики',
+        },
+        {
+            id: 12,
+            name: 'Новости компании ООО Космотех',
+            path: '/news',
+            title: 'test',
+            canonical: 'https://cosmtech.ru/news',
+            description: 'Последние новости а анонсы компании космотех',
         }
     ],
     currentPathUrl: '',
@@ -189,7 +197,7 @@ const headerSlice = createSlice({
         setPathUrl(state, action) {
             const { url } = action.payload;
             state.currentPathUrl = url;
-        }
+        },
     },
     extraReducers: (builder) => {
         builder

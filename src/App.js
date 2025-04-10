@@ -16,6 +16,7 @@ import './components/DecorativeCosmetics/DecorativeCosmetics.css';
 import './components/ExcursionToProduction/ExcursionToProduction.css';
 import './components/StickySideMenu/StickySideMenu.css';
 import './components/Articles/Articles.css';
+import './components/News/News.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';
@@ -30,6 +31,7 @@ import DecorativeCosmetics from './components/DecorativeCosmetics/DecorativeCosm
 import Articles from './components/Articles/Articles';
 import HowToCreateCosmeticBrand from './components/Articles/HowToCreateCosmeticBrand';
 import AdvantagesContractCosmetics from './components/Articles/AdvantagesContractCosmetics';
+import News from './components/News/News';
 
 function App() {
   
@@ -49,6 +51,7 @@ function App() {
               <Route path='/articles' element={<Articles />} />
               <Route path='/how-to-create-cosmetic-brand' element={<HowToCreateCosmeticBrand />} />
               <Route path='/advantages-of-contract-cosmetics-for-small-businesses' element={<AdvantagesContractCosmetics />} />
+              <Route path='/news' element={<News />} />
               <Route path='/contacts' element = {<ContactsPage />} />
           </Route>
         </Routes>
