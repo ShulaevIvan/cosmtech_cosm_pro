@@ -3,17 +3,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
-
+import NewsArticle from "./NewsArticle";
 import demoIcon from '../../img/news/30x30.png';
 
 import { 
     hideExcessNews,
-    showMoreNews 
+    showMoreNews,
+    showNewsPopup
 } from "../../redux/slices/newsSlice";
 
 const News = () => {
     const dispatch = useDispatch();
     const newsState = useSelector((state) => state.news);
+
+    const showNewsPopupHandler = (newsId) => {
+        dispatch(showNewsPopup({newsId: newsId}));
+    };
     
     const showMoreNewsHandler = () => {
         dispatch(showMoreNews());
@@ -34,6 +39,13 @@ const News = () => {
                                 {newsState.newsItems.map((newsItem) => {
                                     return (
                                         <React.Fragment key={newsItem.id}>
+                                            {newsItem.newsPopup.active ? 
+                                                <NewsArticle
+                                                    articleId={newsItem.id} 
+                                                    closeHandler={showNewsPopupHandler} 
+                                                    newsContent={newsItem.newsContent}
+                                                /> 
+                                            : null}
                                             <div className="news-preview-main-item-row">
                                                 <div className="news-preview-main-item-content">
                                                     <div className="news-preview-main-item-content-title">
@@ -44,7 +56,7 @@ const News = () => {
                                                         <p>{newsItem.shortDescription}</p>
                                                     </div>
                                                     <div className="news-preview-main-item-btn">
-                                                        <Link>Подробнее</Link>
+                                                        <Link onClick={() => showNewsPopupHandler(newsItem.id)}>Подробнее</Link>
                                                     </div>
                                                 </div>
                                                 <div className="news-preview-main-item-img">
