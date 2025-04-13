@@ -44,6 +44,7 @@ const News = () => {
                                                     articleId={newsItem.id} 
                                                     closeHandler={showNewsPopupHandler} 
                                                     newsContent={newsItem.newsContent}
+                                                    newsDate={newsItem.date.toLocaleDateString('ru')}
                                                 /> 
                                             : null}
                                             <div className="news-preview-main-item-row">

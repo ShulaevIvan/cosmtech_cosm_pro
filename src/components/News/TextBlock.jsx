@@ -12,6 +12,7 @@ const TextBlock = (props) => {
                 {paragraphContents.map((item) => {
                     return (
                         <React.Fragment key={Math.random()}>
+                            {item.title ? <h3>{item.title}</h3> : null}
                             <p>{item.content}</p>
                         </React.Fragment>
                     )

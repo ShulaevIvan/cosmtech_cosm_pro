@@ -264,6 +264,9 @@
 .article-news-text-block-wrap p {
     margin-bottom: 20px;
 }
+.article-news-text-block-wrap h3 {
+    margin: 0;
+}
 .news-article-title-wrap {
     display: flex;
     flex-direction: row;
