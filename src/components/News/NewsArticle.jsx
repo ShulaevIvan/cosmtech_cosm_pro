@@ -35,8 +35,8 @@ const NewsArticle = (props) => {
                                 return (
                                     <React.Fragment key={Math.random()}>
                                         <BannerBlock 
-                                            banner={banner.img}
-                                            altText={banner.alt}
+                                            banner={banner.blobData}
+                                            altText={banner.alt_text}
                                         />
                                     </React.Fragment>
                                 )
@@ -53,11 +53,13 @@ const NewsArticle = (props) => {
                             videos.map((videoItem) => {
                                 return (
                                     <React.Fragment key={Math.random()}>
-                                        <VideoBlock 
-                                            displayMode={videoItem.mode}
-                                            videoUrl={videoItem.url}
+                                        <VideoBlock
+                                            newsId={props.articleId}
+                                            videoFile={videoItem.file} 
+                                            displayMode={videoItem.displayMode}
+                                            videoUrl={videoItem.blobData}
                                             videoText={videoItem.text}
-                                            videoTitle={videoItem.title}
+                                            videoTitle={videoItem.videoTitle}
                                         />
                                     </React.Fragment>
                                 )

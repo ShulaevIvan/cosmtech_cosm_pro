@@ -59,6 +59,7 @@
 }
 .news-preview-main-item-img img {
     max-width: 100%;
+    max-height: 300px;
     border-radius: 0 10px 10px 0;
 }
 .news-preview-show-more-wrap {
@@ -214,7 +215,7 @@
     flex-wrap: wrap;
     max-width: 1024px;
     width: 75vw;
-    min-height: 90vh;
+    min-height: 96vh;
     position: fixed;
     align-items: center;
     justify-content: center;

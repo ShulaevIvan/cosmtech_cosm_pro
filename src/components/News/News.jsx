@@ -9,7 +9,8 @@ import demoIcon from '../../img/news/30x30.png';
 import { 
     hideExcessNews,
     showMoreNews,
-    showNewsPopup
+    showNewsPopup,
+    fetchAllNews
 } from "../../redux/slices/newsSlice";
 
 const News = () => {
@@ -28,6 +29,11 @@ const News = () => {
         dispatch(hideExcessNews());
     }, []);
 
+    useEffect(() => {
+        dispatch(fetchAllNews());
+        console.log(newsState.newsItems)
+    }, [])
+
     return (
         <React.Fragment>
             <InnerPageHeader />
@@ -36,9 +42,9 @@ const News = () => {
                     <div className="container">
                         <div className="news-preview-main-row">
                             <div className="news-preview-main-content">
-                                {newsState.newsItems.map((newsItem) => {
+                                {newsState.newsItems && newsState.newsItems.length > 0 ? newsState.newsItems.map((newsItem) => {
                                     return (
-                                        <React.Fragment key={newsItem.id}>
+                                        <React.Fragment key={Math.random()}>
                                             {newsItem.newsPopup.active ? 
                                                 <NewsArticle
                                                     articleId={newsItem.id} 
@@ -66,7 +72,7 @@ const News = () => {
                                             </div>
                                         </React.Fragment>
                                     )
-                                })}
+                                }) : null}
                                 {!newsState.showMoreBtnDisabled ? 
                                     <React.Fragment>
                                         <div 

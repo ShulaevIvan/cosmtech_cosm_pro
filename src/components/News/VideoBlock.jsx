@@ -1,16 +1,18 @@
 import React from "react";
-
+import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import promo_video from '../../video/compress_promo_video.mp4';
 
 const VideoBlock = (props) => {
-    const videoSrc = props.videoUrl ? props.videoUrl : '/static/media/compress_promo_video.051eb1070a3ecf4d0690.mp4';
     const mode = props.displayMode;
+    const checkVideo = props.videoUrl && props.videoFile.mime
     return (
         <React.Fragment>
-            {mode === 'textVideo' ? 
+            {checkVideo && mode === 'textVideo' ? 
                 <React.Fragment>
                      {props.videoTitle ? <h3>{props.videoTitle}</h3>: null}
                     <div className="article-news-video-block-row">
-                        <div className="article-news-video-block-item video"><video controls><source src={videoSrc} type="video/mp4"/></video></div>
+                        <div className="article-news-video-block-item video"><video controls><source src={props.videoUrl} type={props.videoFile.mime}/></video></div>
                         <div className="article-news-video-block-item">
                         <p>{props.videoText}</p>
                         </div>
@@ -18,11 +20,11 @@ const VideoBlock = (props) => {
                 </ React.Fragment>
             
             : null}
-            {!mode || mode === 'video' ? 
+            {checkVideo && mode === 'video' ? 
                 <React.Fragment>
                     <div className="article-news-video-block-wrap">
                     {props.videoTitle ? <h3>{props.videoTitle}</h3>: null}
-                        <video controls><source src={videoSrc} type="video/mp4"/></video>
+                        <video controls><source src={props.videoUrl} type={props.videoFile.mime} /></video>
                     </div>
                 </React.Fragment>
             

@@ -1,323 +1,31 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import base64ToFile from "../../functions/base64ToFile";
 import demo from '../../img/news/300x300.png'
 import banner1 from '../../img/articles/stmCosmeticBanner.jpg';
 
 const initialState = {
     allnewsItems: [],
-    newsItems: [
-        {
-            id: 1,
-            fullUrl: '/news/news-item-1',
-            title: 'Мы любим животных и стараемся поддерживать тех из них 1',
-            date: new Date("2024-01-01"),
-            minImg: {img: demo, alt: 'test'},
-            newsContent: {
-                title: 'Мы любим животных и стараемся поддерживать тех из них 1',
-                paragraphs: [ 
-                    {
-                        title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                    {   title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                    {   title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                ],
-                links: [
-                    {
-                        text: 'link 1',
-                        url: 'link url'
-                    },
-                    {
-                        text: 'link 1',
-                        url: 'link url'
-                    },
-                    {
-                        text: 'link 1',
-                        url: 'link url'
-                    }
-                ],
-                banners: [
-                    {
-                        num: 1,
-                        img: banner1,
-                        alt: 'test 1'
-                    },
-                ],
-                videos: [
-                    {
-                        num: 1,
-                        title: 'test1',
-                        videoUrl: '/static/media/compress_promo_video.051eb1070a3ecf4d0690.mp4',
-                        mode: 'video',
-                        text: ''
-                    }
-                ]
-            },
-            newsPopup: {
-               active: false 
-            },
-            shortDescription: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь'
-        },
-        {
-            id: 2,
-            fullUrl: '/news/news-item-2',
-            title: 'Мы любим животных и стараемся поддерживать тех из них 2',
-            date: new Date("2024-01-14"),
-            minImg: {img: demo, alt: 'test'},
-            newsContent: {
-                title: 'Мы любим животных и стараемся поддерживать тех из них 2',
-                paragraphs: [ 
-                    {
-                        title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                    {
-                        title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                    {
-                        title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                    {
-                        title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                    {
-                        title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                    
-                ],
-                links: [
-                    {
-                        text: 'link 1',
-                        url: 'link url'
-                    },
-                    {
-                        text: 'link 1',
-                        url: 'link url'
-                    },
-                    {
-                        text: 'link 1',
-                        url: 'link url'
-                    }
-                ],
-                banners: [
-                    {
-                        num: 1,
-                        img: banner1,
-                        alt: 'test 1'
-                    },
-                ],
-                videos: [
-                    {
-                        num: 1,
-                        title: '',
-                        videoUrl: '/static/media/compress_promo_video.051eb1070a3ecf4d0690.mp4',
-                        mode: 'video',
-                        text: ''
-                    }
-                ]
-            },
-            newsPopup: {
-                active: false 
-            },
-            shortDescription: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь'
-        },
-        {
-            id: 3,
-            fullUrl: '/news/news-item-3',
-            title: 'Мы любим животных и стараемся поддерживать тех из них 3',
-            date: new Date("2021-01-03"),
-            minImg: {img: demo, alt: 'test'},
-            newsContent: {
-                title: 'Мы любим животных и стараемся поддерживать тех из них 3',
-                paragraphs: [],
-                links: [],
-                banners: [
-                    {
-                        num: 1,
-                        img: banner1,
-                        alt: 'test 1'
-                    },
-                ],
-                videos: [
-                    {
-                        num: 1,
-                        title: 'test1',
-                        videoUrl: '/static/media/compress_promo_video.051eb1070a3ecf4d0690.mp4',
-                        mode: 'video',
-                        text: ''
-                    },
-                ]
-            },
-            newsPopup: {
-                active: false 
-            },
-            shortDescription: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь'
-        },
-        {
-            id: 4,
-            fullUrl: '/news/news-item-4',
-            title: 'Мы любим животных и стараемся поддерживать тех из них 4',
-            date: new Date("2023-01-21"),
-            minImg: {img: demo, alt: 'test'},
-            newsContent: {
-                title: 'Мы любим животных и стараемся поддерживать тех из них 4',
-                paragraphs: [],
-                links: [],
-                banners: [
-                    {
-                        num: 1,
-                        img: banner1,
-                        alt: 'test 1'
-                    },
-                ],
-                videos: [
-                    {
-                        num: 1,
-                        title: 'test1',
-                        videoUrl: '/static/media/compress_promo_video.051eb1070a3ecf4d0690.mp4',
-                        mode: 'video',
-                        text: ''
-                    }
-                ]
-            },
-            newsPopup: {
-                active: false 
-            },
-            shortDescription: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь'
-        },
-        {
-            id: 5,
-            fullUrl: '/news/news-item-5',
-            title: 'Мы любим животных и стараемся поддерживать тех из них 5',
-            date: new Date("2022-05-13"),
-            minImg: {img: demo, alt: 'test'},
-            newsContent: {
-                title: 'Мы любим животных и стараемся поддерживать тех из них 5',
-                paragraphs: [
-                    {
-                        title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                ],
-                links: [],
-                banners: [
-                    {
-                        num: 1,
-                        img: banner1,
-                        alt: 'test 1'
-                    },
-                ],
-                videos: [
-                    {
-                        num: 1,
-                        title: 'test1',
-                        videoUrl: '/static/media/compress_promo_video.051eb1070a3ecf4d0690.mp4',
-                        mode: 'textVideo',
-                        text: ''
-                    }
-                ]
-            },
-            newsPopup: {
-                active: false 
-            },
-            shortDescription: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь'
-        },
-        {
-            id: 6,
-            fullUrl: '/news/news-item-6',
-            title: 'Мы любим животных и стараемся поддерживать тех из них 6',
-            date: new Date("2024-02-19"),
-            minImg: {img: demo, alt: 'test'},
-            newsContent: {
-                title: 'Мы любим животных и стараемся поддерживать тех из них 6',
-                paragraphs: [
-                    {
-                        title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                ],
-                links: [
-                    {
-                        text: 'link 1',
-                        url: 'link url'
-                    },
-                ],
-                banners: [
-                    {
-                        num: 1,
-                        img: banner1,
-                        alt: 'test 1'
-                    },
-                ],
-                videos: [
-                    {
-                        num: 1,
-                        title: 'test1',
-                        videoUrl: '/static/media/compress_promo_video.051eb1070a3ecf4d0690.mp4',
-                        mode: 'video',
-                        text: ''
-                    }
-                ]
-            },
-            newsPopup: {
-                active: false 
-            },
-            shortDescription: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь'
-        },
-        {
-            id: 7,
-            fullUrl: '/news/news-item-7',
-            title: 'Мы любим животных и стараемся поддерживать тех из них 7',
-            date: new Date("2023-04-03"),
-            minImg: {img: demo, alt: 'test'},
-            newsContent: {
-                title: 'Мы любим животных и стараемся поддерживать тех из них 7',
-                paragraphs: [
-                    {
-                        title: '',
-                        content: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь благотворительному фонду «Луч Добра». Благодаря их труду ежегодно сотни питомцев находят свой новый дом.'
-                    },
-                ],
-                links: [
-                    {
-                        text: 'link 1',
-                        url: 'link url'
-                    },
-                ],
-                banners: [
-                    {
-                        num: 1,
-                        img: banner1,
-                        alt: 'test 1'
-                    },
-                ],
-                videos: [
-                    {
-                        num: 1,
-                        title: 'test1',
-                        videoUrl: '/static/media/compress_promo_video.051eb1070a3ecf4d0690.mp4',
-                        mode: 'video',
-                        text: ''
-                    }
-                ]
-            },
-            newsPopup: {
-                active: false 
-            },
-            shortDescription: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. Один из проверенных способов это сделать — помочь'
-        },
-    ],
+    newsItems: [],
     showNewsStep: 1,
     maxNewsLength: 0,
-    showMoreBtnDisabled: false
+    showMoreBtnDisabled: false,
 };
+
+export const fetchAllNews = createAsyncThunk(
+    'loadAllNews',
+    async () => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/news/`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = response.json();
+        return data;
+    }
+);
 
 const newsSlice = createSlice({
     name: 'articles',
@@ -382,8 +90,66 @@ const newsSlice = createSlice({
                 }
             });
         }
-    }
+    },
+    extraReducers: (builder) => {
+        builder
+        .addCase(fetchAllNews.fulfilled, (state, action) => {
+            const { status, news } = action.payload;
+            let newsData;
+            if (status === 'ok') {
+                newsData = news.map((newsItem) => {
+                    const minImgBlob = base64ToFile(newsItem.min_img.file, newsItem.min_img.mime)
+                    const minImgBlobUrl = URL.createObjectURL(minImgBlob);
+                    return {
+                        id: newsItem.id,
+                        shortDescription: newsItem.short_description,
+                        minImg: {img: minImgBlobUrl, alt: 'test'},
+                        title: newsItem.title,
+                        date: new Date(newsItem.date),
+                        newsContent: {
+                            title: newsItem.title,
+                            paragraphs: newsItem.text_content.map((parItem) => {
+                                return {
+                                    title: '',
+                                    content: parItem     
+                                }
+                            }),
+                            links: newsItem.urls.map((urlItem) => {
+                                return {
+                                    text: urlItem.url_text,
+                                    url: urlItem.news_url
+                                }
+                            }),
+                            banners: newsItem.banners.map((bannerItem) => {
+                                const blob = base64ToFile(bannerItem.banner_file.file, bannerItem.banner_file.mime);
+                                const blobUrl = URL.createObjectURL(blob);
+                                return {
+                                    ...bannerItem,
+                                    blobData: blobUrl
+                                }
+                            }),
+                            videos: newsItem.videos.map((videoItem) => {
+                                const blob = base64ToFile(videoItem.video_file.file, videoItem.video_file.mime);
+                                const blobUrl = URL.createObjectURL(blob);
+                                return {
+                                    blobData: blobUrl,
+                                    file: videoItem.video_file,
+                                    displayMode: videoItem.mode,
+                                    videoTitle: videoItem.title
 
+                                }
+                            }),
+                        },
+                        newsPopup: {
+                            active: false 
+                        },
+                    }
+                });
+                state.newsItems = [...newsData]
+                
+            }
+        })
+    }
 });
 
 export const {
