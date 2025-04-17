@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import base64ToFile from "../../functions/base64ToFile";
-import demo from '../../img/news/300x300.png'
-import banner1 from '../../img/articles/stmCosmeticBanner.jpg';
+import yaNews from '../../img/news/yaNews.png';
+import vkNews from '../../img/news/vkNews.png';
 
 const initialState = {
     allnewsItems: [],
@@ -9,6 +9,55 @@ const initialState = {
     showNewsStep: 1,
     maxNewsLength: 0,
     showMoreBtnDisabled: false,
+    currencyData: [],
+    socialBlock: [
+        {
+            id: 1,
+            name: 'vk',
+            img: yaNews,
+            imgAlt: 'test',
+            urlText: 'Яндекс',
+            url: 'https://yandex.ru/maps/org/kosmeticheskiye_tekhnologii/238223588879/?ll=30.374016%2C59.895998&z=17'
+        },
+        {
+            id: 1,
+            name: 'yandex',
+            img: vkNews,
+            imgAlt: 'Контрактное производство косметики в Санкт-Петербурге Космотех группа вконтакте',
+            urlText: 'Вконтакте',
+            url: 'https://vk.com/cosmtech'
+        }
+    ],
+    newsFormMainFields: [
+        {
+            id: 1,
+            title: 'Имя',
+            type: 'text',
+            fieldType: 'name',
+            value: '',
+            placeholder: 'Ваше имя',
+            fieldValid: true
+        },
+        {
+            id: 2,
+            title: 'Телефон',
+            type: 'text',
+            fieldType: 'phone',
+            value: '',
+            placeholder: '8xxxxxxxxxx',
+            fieldValid: true
+        },
+        {
+            id: 3,
+            type: 'textarea',
+            title: 'Комментарий',
+            fieldType: 'comment',
+            value: '',
+            placeholder: 'Комментарий...',
+            fieldValid: true
+        },
+    ],
+    newsFormMainSendBtnActive: false
 };
 
 export const fetchAllNews = createAsyncThunk(
@@ -26,6 +75,22 @@ export const fetchAllNews = createAsyncThunk(
         return data;
     }
 );
+
+export const fetchCurrencyData = createAsyncThunk(
+    'loadCurrencyCourse',
+    async () => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/currency/`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = response.json();
+        return data;
+    }
+)
 
 const newsSlice = createSlice({
     name: 'articles',
@@ -89,6 +154,18 @@ const newsSlice = createSlice({
                     }
                 }
             });
+        },
+        mainNewsInput(state, action) {
+            const { fieldId, fieldType, fieldValue } = action.payload;
+            state.newsFormMainFields = state.newsFormMainFields.map((fieldItem) => {
+                if (fieldItem.id === fieldId && fieldItem.fieldType === fieldType) {
+                    return {
+                        ...fieldItem,
+                        value: fieldValue
+                    }
+                }
+                return fieldItem;
+            });
         }
     },
     extraReducers: (builder) => {
@@ -96,7 +173,7 @@ const newsSlice = createSlice({
         .addCase(fetchAllNews.fulfilled, (state, action) => {
             const { status, news } = action.payload;
             let newsData;
-            if (status === 'ok') {
+            if (status === 'ok' && news) {
                 newsData = news.map((newsItem) => {
                     const minImgBlob = base64ToFile(newsItem.min_img.file, newsItem.min_img.mime)
                     const minImgBlobUrl = URL.createObjectURL(minImgBlob);
@@ -145,8 +222,18 @@ const newsSlice = createSlice({
                         },
                     }
                 });
-                state.newsItems = [...newsData]
                 
+                state.newsItems = [...newsData.sort((a, b) => Number(a.date) - Number(b.date)).reverse()];
+                return;
+            }
+            state.newsItems = [];
+        })
+        .addCase(fetchCurrencyData.fulfilled, (state, action) => {
+            const { status, data } = action.payload;
+
+            if (status === 'ok') {
+                state.currencyData = data;
+                return;
             }
         })
     }
@@ -156,7 +243,8 @@ export const {
     hideExcessNews,
     showMoreNews,
     generateNewsLinks,
-    showNewsPopup
+    showNewsPopup,
+    mainNewsInput
 } = newsSlice.actions;
 
 export default newsSlice.reducer;

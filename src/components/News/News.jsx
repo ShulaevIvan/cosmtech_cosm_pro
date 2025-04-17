@@ -1,21 +1,29 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import NewsArticle from "./NewsArticle";
-import demoIcon from '../../img/news/30x30.png';
+import CurrencyCourse from "./CurrencyCourse";
+import NewsMainForm from "./NewsMainForm";
 
 import { 
     hideExcessNews,
     showMoreNews,
     showNewsPopup,
-    fetchAllNews
+    fetchAllNews,
+    mainNewsInput
 } from "../../redux/slices/newsSlice";
 
 const News = () => {
     const dispatch = useDispatch();
     const newsState = useSelector((state) => state.news);
+    const newsFormRefs = [
+        {name: 'name', ref: useRef(null)},
+        {name: 'phone', ref: useRef(null)},
+        {name: 'comment', ref: useRef(null)},
+    ];
 
     const showNewsPopupHandler = (newsId) => {
         dispatch(showNewsPopup({newsId: newsId}));
@@ -25,14 +33,25 @@ const News = () => {
         dispatch(showMoreNews());
     };
 
+    const findInputRef = (inputName) => {
+        return newsFormRefs.find((item) => item.name === inputName).ref;
+    };
+
+    const newsFormMainHandler = (inputId, inputType, inputRef) => {
+        dispatch(mainNewsInput({
+            fieldId: inputId,
+            fieldType: inputType, 
+            fieldValue: inputRef.value
+        }));
+    };
+
     useEffect(() => {
         dispatch(hideExcessNews());
     }, []);
 
     useEffect(() => {
         dispatch(fetchAllNews());
-        console.log(newsState.newsItems)
-    }, [])
+    }, []);
 
     return (
         <React.Fragment>
@@ -89,42 +108,26 @@ const News = () => {
                                 <div className="news-company-social-wrap">
                                     <h3>Мы в соцсетях:</h3>
                                     <div className="news-company-social-column">
-                                        <div className="news-company-social-item"><img src={demoIcon} alt="" /> <Link>Вконтакте</Link></div>
-                                        <div className="news-company-social-item"><img src={demoIcon} alt="" /> <Link>Яндекс</Link></div>
+                                        {newsState.socialBlock.map((socialItem) => {
+                                            return (
+                                                <React.Fragment key={Math.random()}>
+                                                    <div className="news-company-social-item">
+                                                        <img src={socialItem.img} alt={socialItem.imgAlt} /> 
+                                                        <Link to={socialItem.url} target={'_blank'}>
+                                                            {socialItem.urlText}
+                                                        </Link>
+                                                    </div>
+                                                </React.Fragment>
+                                            )
+                                        })}
                                     </div>
                                 </div>
-
-                                <div className="news-company-currency-wrap">
-                                    <h3>Курсы валют на сегодня</h3>
-                                    <div className="news-company-currency-item">
-                                        <img src={demoIcon} alt="test" /> Доллар США: 84.84 руб
-                                    </div>
-                                    <div className="news-company-currency-item">
-                                        <img src={demoIcon} alt="test" /> Евро: 86.33 руб
-                                    </div>
-                                    <p>Данные взяты c <Link to={'https://www.cbr.ru'} target={'_blank'}>cbr.ru</Link>.</p>
-                                </div>
-
-                                <div className="news-company-form-wrap">
-                                    <h3>Обратная связь</h3>
-                                    <form className="news-company-form">
-                                        <label>Имя</label>
-                                        <div className="news-company-form-item-wrap">
-                                            <input type="text" />
-                                        </div>
-                                        <label>Email</label>
-                                        <div className="news-company-form-item-wrap">
-                                            <input type="text" />
-                                        </div>
-                                        <label>Комментарий</label>
-                                        <div className="news-company-form-item-wrap">
-                                            <textarea></textarea>
-                                        </div>
-                                        <div className="news-company-form-send-btn-wrap">
-                                            <Link className="news-company-form-send-btn">Отправить</Link>
-                                        </div>
-                                    </form>
-                                </div>
+                                <CurrencyCourse />
+                                <NewsMainForm
+                                    newsState={newsState} 
+                                    findInputRef={findInputRef}
+                                    inputHandler={newsFormMainHandler}
+                                />
                             </aside>
                         </div>
                     </div>
