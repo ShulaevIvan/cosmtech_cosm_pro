@@ -133,6 +133,16 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
+    position: relative;
+}
+.news-company-form-wrap form {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: whitesmoke;
+}
+.news-company-form from h3 {
+    margin: 0;
 }
 .news-company-form-item-wrap {
     display: flex;
@@ -150,7 +160,7 @@
 }
 .news-company-form-item-wrap input {
     max-width: 200px;
-    min-height: 25px;
+    min-height: 30px;
 }
 .news-company-form-item-wrap textarea {
     min-height: 100px;
@@ -197,6 +207,48 @@
 }
 .news-company-currency-wrap h3 {
     margin: 0;
+}
+.news-company-form-happy-state-popup-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    min-height: 400px;
+    background-color: white;
+    border: 1px solid #00458B;
+    border-radius: 10px;
+    padding: 20px;
+}
+.news-company-form-happy-state-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 400px;
+}
+.news-company-form-happy-state-close-btn-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 40px;
+}
+.news-company-form-happy-state-close-btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    right: 0;
+    background-image: url('../../img/close_popup.svg');
+}
+.news-company-form-happy-state-description {
+    text-align: center;
 }
 .news-article-popup-background {
     background-color: rgba(0, 0, 0, .8);

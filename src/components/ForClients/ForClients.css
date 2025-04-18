@@ -672,7 +672,7 @@ color: #1E1E1E;
   width: 100%;
   max-width: 460px;
   min-height: 300px;
-  padding: 20px;
+  padding: 40px;
   position: relative;
   margin: 0 auto;
   background-color: white;
@@ -724,7 +724,7 @@ color: #1E1E1E;
 }
 .for-clients-consult-input-wrap input {
   max-width: 260px;
-  min-height: 25px;
+  min-height: 30px;
 }
 .for-clients-consult-main-title-form {
   display: flex;
@@ -838,7 +838,7 @@ color: #1E1E1E;
   width: 100%;
   max-width: 450px;
   min-height: 450px;
-  padding: 20px;
+  padding: 40px;
   position: relative;
   margin: 0 auto;
   background-color: white;
@@ -878,7 +878,7 @@ color: #1E1E1E;
 .for-clients-detail-input-wrap input {
   min-width: 200px;
   max-width: 200px;
-  min-height: 25px;
+  min-height: 30px;
 }
 .for-clients-detail-input-wrap textarea {
   min-width: 250px;

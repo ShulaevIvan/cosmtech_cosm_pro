@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NewsMainFormHappyState from "./NewsMainFormHappyState";
 
 const NewsMainForm = (props) => {
     const newsState = props.newsState;
@@ -7,8 +8,16 @@ const NewsMainForm = (props) => {
     return (
         <React.Fragment>
             <div className="news-company-form-wrap">
-                <h3>Обратная связь</h3>
+                {newsState.newsFormMainHappyState.active ? 
+                    <NewsMainFormHappyState  
+                        closeHandler={props.happyStateHandler} 
+                        title={newsState.newsFormMainHappyState.title}
+                        description={newsState.newsFormMainHappyState.description}
+                    />
+                : null}
+               
                 <form className="news-company-form">
+                    <h3>Обратная связь</h3>
                     {newsState.newsFormMainFields.map((formItem) => {
                         return (
                             <React.Fragment key={formItem.id}>
@@ -16,7 +25,9 @@ const NewsMainForm = (props) => {
                                 <div className="news-company-form-item-wrap">
                                     {formItem.type === 'textarea' ? 
                                         <textarea
+                                            className={!formItem.fieldValid ? 'input-err' : ''}
                                             ref={props.findInputRef(formItem.fieldType)}
+                                            onKeyDown={(e) => props.clearInputHandler(e, formItem.id, formItem.fieldType, true)}
                                             onChange={() => props.inputHandler(
                                                 formItem.id,
                                                 formItem.fieldType,
@@ -31,7 +42,9 @@ const NewsMainForm = (props) => {
                     
                                     {formItem.type === 'text' ? 
                                         <input
+                                            className={!formItem.fieldValid ? 'input-err' : ''}
                                             ref={props.findInputRef(formItem.fieldType)}
+                                            onKeyDown={(e) => props.clearInputHandler(e, formItem.id, formItem.fieldType, true)}
                                             onChange={() => props.inputHandler(
                                                 formItem.id,
                                                 formItem.fieldType,
@@ -48,7 +61,8 @@ const NewsMainForm = (props) => {
                         )
                     })}
                     <div className="news-company-form-send-btn-wrap">
-                        <Link 
+                        <Link
+                            onClick={props.sendFormHandler} 
                             className={`news-company-form-send-btn ${!newsState.newsFormMainSendBtnActive ? 'btnDisabled' : ''}`}
                         >Отправить</Link>
                     </div>

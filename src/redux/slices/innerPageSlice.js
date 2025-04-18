@@ -2342,7 +2342,7 @@ const innerPageSlice = createSlice({
             let inputValid;
             let validValue;
 
-            if (fieldValue && (fieldType === 'name' || fieldType === 'comment')) {
+            if (fieldValue && fieldType === 'name') {
                 inputValid = validateName(fieldValue)
                 validValue = fieldValue
             }
@@ -2366,6 +2366,10 @@ const innerPageSlice = createSlice({
                     }
                     return fieldItem;
                 });
+            }
+            else if (fieldType === 'comment') {
+                inputValid = fieldValue.length > 3 && fieldValue !== ' ' ? true : false
+                validValue = fieldValue;
             }
 
             state.decorativeCosmeticsPage.orderPopup.fields = state.decorativeCosmeticsPage.orderPopup.fields.map((fieldItem) => {
@@ -2414,7 +2418,7 @@ const innerPageSlice = createSlice({
             let inputValid;
             let validValue;
 
-            if (fieldValue && (fieldType === 'name' || fieldType === 'comment')) {
+            if (fieldValue && fieldType === 'name') {
                 inputValid = validateName(fieldValue)
                 validValue = fieldValue
             }

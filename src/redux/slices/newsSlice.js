@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import base64ToFile from "../../functions/base64ToFile";
+import validateName from "../../functions/validateName";
+import validatePhone from "../../functions/validatePhone";
 import yaNews from '../../img/news/yaNews.png';
 import vkNews from '../../img/news/vkNews.png';
 
@@ -57,6 +59,11 @@ const initialState = {
             fieldValid: true
         },
     ],
+    newsFormMainHappyState: {
+        title: 'Title',
+        description: 'Спасибо, с вами свяжутся в ближайшее время!',
+        active: true
+    },
     newsFormMainSendBtnActive: false
 };
 
@@ -156,16 +163,63 @@ const newsSlice = createSlice({
             });
         },
         mainNewsInput(state, action) {
-            const { fieldId, fieldType, fieldValue } = action.payload;
+            const { fieldId, fieldType, fieldValue, clear } = action.payload;
+            let inputValid;
+            let validValue;
+            if (fieldId && fieldType && clear) {
+                state.newsFormMainFields = state.newsFormMainFields.map((fieldItem) => {
+                    if (fieldItem.id === fieldId && fieldItem.fieldType === fieldType) {
+                        return {
+                            ...fieldItem,
+                            value: '',
+                            fieldValid: false
+                        }
+                    }
+                    return fieldItem;
+                });
+                return;
+            }
+            if ((fieldType === 'name') && fieldValue) {
+                inputValid = validateName(fieldValue);
+                validValue = fieldValue
+            }
+            else if (fieldType === 'phone' && fieldValue && fieldValue.length !== 18) {
+                const phoneStr = validatePhone(fieldValue);
+                inputValid = phoneStr.length === 18 ? true : false
+                validValue = phoneStr;
+            }
+            else if (fieldType === 'comment') {
+                const phoneStr = validatePhone(fieldValue);
+                inputValid = fieldValue.length > 3 && fieldValue !== ' ' ? true : false
+                validValue = fieldValue;
+            }
             state.newsFormMainFields = state.newsFormMainFields.map((fieldItem) => {
                 if (fieldItem.id === fieldId && fieldItem.fieldType === fieldType) {
                     return {
                         ...fieldItem,
-                        value: fieldValue
+                        value: validValue,
+                        fieldValid: inputValid
                     }
                 }
                 return fieldItem;
             });
+        },
+        validateMainNewsForm(state) {
+            const nameInput = state.newsFormMainFields.find((item) => item.fieldType === 'name' && item.fieldValid && item.value);
+            const phoneInput = state.newsFormMainFields.find((item) => item.fieldType === 'phone' && item.fieldValid && item.value);
+            const commentInput = state.newsFormMainFields.find((item) => item.fieldType === 'comment' && item.fieldValid && item.value);
+            
+            if ((nameInput && phoneInput) || (phoneInput && commentInput)) {
+                state.newsFormMainSendBtnActive = true;
+                return;
+            }
+            state.newsFormMainSendBtnActive = false;
+        },
+        mainNewsFormHappyStatePopup(state) {
+            state.newsFormMainHappyState = {
+                ...state.newsFormMainHappyState,
+                active: state.newsFormMainHappyState.active ? false : true
+            };
         }
     },
     extraReducers: (builder) => {
@@ -244,7 +298,9 @@ export const {
     showMoreNews,
     generateNewsLinks,
     showNewsPopup,
-    mainNewsInput
+    mainNewsInput,
+    validateMainNewsForm,
+    mainNewsFormHappyStatePopup
 } = newsSlice.actions;
 
 export default newsSlice.reducer;

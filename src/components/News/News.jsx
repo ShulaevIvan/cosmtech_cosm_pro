@@ -13,7 +13,9 @@ import {
     showMoreNews,
     showNewsPopup,
     fetchAllNews,
-    mainNewsInput
+    mainNewsInput,
+    validateMainNewsForm,
+    mainNewsFormHappyStatePopup
 } from "../../redux/slices/newsSlice";
 
 const News = () => {
@@ -37,12 +39,33 @@ const News = () => {
         return newsFormRefs.find((item) => item.name === inputName).ref;
     };
 
-    const newsFormMainHandler = (inputId, inputType, inputRef) => {
+    const newsFormMainHandler = (inputId, inputType, inputRef, clearInput) => {
         dispatch(mainNewsInput({
             fieldId: inputId,
             fieldType: inputType, 
-            fieldValue: inputRef.value
+            fieldValue: inputRef.value,
+            clear: clearInput ? true : false
         }));
+    };
+
+    const newsFormMainClearHandler = (e, inputId, inputType) => {
+        if (e.key === 'Backspace') {
+            dispatch(mainNewsInput({
+                fieldId: inputId,
+                fieldType: inputType, 
+                fieldValue:'',
+                clear: true
+            }));
+            return;
+        }
+    };
+
+    const newsFormMainSendHandler = () => {
+        console.log('etst')
+    };
+
+    const newsMainFormHappyStateHandler = () => {
+        dispatch(mainNewsFormHappyStatePopup());
     };
 
     useEffect(() => {
@@ -52,6 +75,10 @@ const News = () => {
     useEffect(() => {
         dispatch(fetchAllNews());
     }, []);
+
+    useEffect(() => {
+        dispatch(validateMainNewsForm());
+    }, [newsState.newsFormMainFields])
 
     return (
         <React.Fragment>
@@ -127,6 +154,9 @@ const News = () => {
                                     newsState={newsState} 
                                     findInputRef={findInputRef}
                                     inputHandler={newsFormMainHandler}
+                                    clearInputHandler={newsFormMainClearHandler}
+                                    sendFormHandler={newsFormMainSendHandler}
+                                    happyStateHandler={newsMainFormHappyStateHandler}
                                 />
                             </aside>
                         </div>
