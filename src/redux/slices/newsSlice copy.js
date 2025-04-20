@@ -8,9 +8,8 @@ import vkNews from '../../img/news/vkNews.png';
 const initialState = {
     allnewsItems: [],
     newsItems: [],
-    currentNewsStep: 0,
     showNewsStep: 1,
-    newsLoadEnd: true,
+    maxNewsLength: 0,
     showMoreBtnDisabled: false,
     currencyData: [],
     socialBlock: [
@@ -113,31 +112,35 @@ const newsSlice = createSlice({
             })
         },
         hideExcessNews(state) {
-            if (state.newsItems.length <= 3) {
+            const newsLength = state.newsItems.length;
+            if (state.maxNewsLength === 0) {
+                state.allnewsItems = state.newsItems.sort((a, b) => Number(a.date) - Number(b.date)).reverse();
+                state.maxNewsLength = newsLength
                 return;
             }
-            const sortNews = state.newsItems.slice(0, state.currentNewsStep);
-            
-            if (sortNews.length !== state.allnewsItems.length) {
+            if (state.maxNewsLength > 3) {
+                console.log('test')
+                const sortNews = state.newsItems.slice(0, 3);
                 state.newsItems = [...sortNews];
-                state.showMoreBtnDisabled = false;
+                if (newsLength === state.maxNewsLength) {
+                    state.showMoreBtnDisabled = false;
+                    return;
+                }
                 return;
             }
             state.showMoreBtnDisabled = true;
-            
         },
         showMoreNews(state) {
             const currentNews = state.newsItems;
+            const nextIndex = state.newsItems.length;
             const step = state.showNewsStep;
-            const nextIndex = currentNews.length + step;
-
-            if (nextIndex <= state.allnewsItems.length) {
-                state.newsItems = [...state.allnewsItems.slice(0, nextIndex)]
-                state.currentNewsStep = nextIndex;
-                state.showMoreBtnDisabled = false;
+            if (state.newsItems.length + step === state.allnewsItems.length) state.showMoreBtnDisabled = true;
+            if (nextIndex + step <= state.allnewsItems.length) {
+                const addNews = state.allnewsItems.slice(nextIndex, nextIndex + step);
+                state.newsItems = [...currentNews, ...addNews];
                 return;
             }
-            state.showMoreBtnDisabled = true;
+            state.newsItems = [...currentNews, ...state.allnewsItems.slice(nextIndex)];
         },
         showNewsPopup(state, action) {
             const { newsId } = action.payload;
@@ -277,15 +280,11 @@ const newsSlice = createSlice({
                 });
                 
                 state.newsItems = [...newsData.sort((a, b) => Number(a.date) - Number(b.date)).reverse()];
-                state.allnewsItems =  [...newsData];
-                state.currentNewsStep = 3;
-                state.newsLoadEnd = true;
+                state.maxNewsLength = state.newsItems.length;
                 return;
             }
-            state.allnewsItems = [];
             state.newsItems = [];
-            state.currentNewsStep = 0;
-            state.newsLoadEnd = true;
+            state.maxNewsLength = 0;
         })
         .addCase(fetchCurrencyData.fulfilled, (state, action) => {
             const { status, data } = action.payload;

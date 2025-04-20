@@ -10,7 +10,13 @@ const LinksBlock = (props) => {
                <div className="article-news-link-block-links-wrap">
                     {links.map((item) => {
                         return (
-                            <p key={Math.random()}><strong>{item.text}</strong>: <Link>{item.url}</Link></p>
+                            <p key={Math.random()}><strong>{item.text}</strong>:  
+                                    <Link 
+                                        to={item.url}
+                                        target={'_blank'}
+                                
+                                    > {item.url}</Link>
+                            </p>
                         )
                     })}
                </div>

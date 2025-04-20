@@ -24,13 +24,13 @@ const CurrencyCourse = () => {
                 <h3>{`Курсы валют на сегодня`}</h3>
                 <p>Данные взяты c <Link to={'https://www.cbr.ru'} target={'_blank'}>cbr.ru</Link> на {new Date().toLocaleDateString('ru')}.</p>
                 <div className="news-company-currency-item">
-                    <img src={usdIcon} alt="test" /> Доллар США: {usdData ? usdData.value : null} руб
+                    <img src={usdIcon} alt="test" /> Доллар США: {usdData ? `${usdData.value} руб` : 'данные не получены'}
                 </div>
                 <div className="news-company-currency-item">
-                    <img src={eurIcon} alt="test" /> Евро: {eurData ? eurData.value : null} руб
+                    <img src={eurIcon} alt="test" /> Евро: {eurData ? `${eurData.value} руб` : 'данные не получены'}
                 </div>
                 <div className="news-company-currency-item">
-                    <img src={chinIcon} alt="test" /> Юань: {chinData ? chinData.value : null} руб
+                    <img src={chinIcon} alt="test" /> Юань: {chinData ? `${chinData.value} руб` : 'данные не получены'}
                 </div>
             </div>
         </React.Fragment>

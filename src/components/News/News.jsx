@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import NewsArticle from "./NewsArticle";
 import CurrencyCourse from "./CurrencyCourse";
@@ -67,14 +66,18 @@ const News = () => {
     const newsMainFormHappyStateHandler = () => {
         dispatch(mainNewsFormHappyStatePopup());
     };
-
-    useEffect(() => {
-        dispatch(hideExcessNews());
-    }, []);
-
+    
     useEffect(() => {
         dispatch(fetchAllNews());
     }, []);
+
+    useEffect(() => {
+        dispatch(hideExcessNews());
+    }, [
+        newsState.newsItems.length, 
+        newsState.currentNewsStep,
+        newsState.showMoreBtnDisabled
+    ]);
 
     useEffect(() => {
         dispatch(validateMainNewsForm());
@@ -88,6 +91,13 @@ const News = () => {
                     <div className="container">
                         <div className="news-preview-main-row">
                             <div className="news-preview-main-content">
+                                {newsState.newsItems.length === 0 ? 
+                                    <React.Fragment>
+                                        <div className="empty-news-wrap">
+                                            <p>В данный момент новостей нет</p>
+                                        </div>
+                                    </React.Fragment>
+                                : null}
                                 {newsState.newsItems && newsState.newsItems.length > 0 ? newsState.newsItems.map((newsItem) => {
                                     return (
                                         <React.Fragment key={Math.random()}>
@@ -102,18 +112,24 @@ const News = () => {
                                             <div className="news-preview-main-item-row">
                                                 <div className="news-preview-main-item-content">
                                                     <div className="news-preview-main-item-content-title">
-                                                        <h3>{newsItem.title}</h3>
+                                                        <Link onClick={() => showNewsPopupHandler(newsItem.id)}>
+                                                            <h3>{newsItem.title}</h3>
+                                                        </Link>
                                                         <h4>Дата: {newsItem.date.toLocaleDateString('ru')}</h4>
                                                     </div>
                                                     <div className="news-preview-main-item-content-description">
                                                         <p>{newsItem.shortDescription}</p>
                                                     </div>
                                                     <div className="news-preview-main-item-btn">
-                                                        <Link onClick={() => showNewsPopupHandler(newsItem.id)}>Подробнее</Link>
+                                                        <Link onClick={() => showNewsPopupHandler(newsItem.id)}>
+                                                            Подробнее
+                                                        </Link>
                                                     </div>
                                                 </div>
                                                 <div className="news-preview-main-item-img">
-                                                    <Link><img src={newsItem.minImg.img} alt={newsItem.minImg.alt} /></Link>
+                                                    <Link onClick={() => showNewsPopupHandler(newsItem.id)}>
+                                                        <img src={newsItem.minImg.img} alt={newsItem.minImg.alt} />
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </React.Fragment>

@@ -410,7 +410,7 @@
     flex-direction: column;
     width: 100%;
     min-width: 430px;
-    min-height: 450px;
+    min-height: 550px;
     background-color: white;
     z-index: 6;
     border-top: none;
@@ -502,7 +502,8 @@
     justify-content: center;
     margin-bottom: 20px;
 }
-.mobile-menu-item-has-submenu:first-child:after {
+.mobile-menu-item-has-submenu:first-child:after,
+#menu-mobile .mobile-menu-item-has-submenu::after {
     content: url('../../img/submenuBtn.svg');
     position: absolute;
     top: -2%;
@@ -587,6 +588,7 @@
 @media (max-width: 500px) {
     .mobile-contacts-wrap {
         width: 100%;
+        margin-top: 20px;
     }
 }
 @media (max-width: 399px) {
