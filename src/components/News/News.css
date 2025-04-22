@@ -236,6 +236,9 @@
     width: 100%;
     min-height: 400px;
 }
+.news-company-form-happy-state-body h3 {
+    text-align: center;
+}
 .news-company-form-happy-state-close-btn-wrap {
     width: 100%;
     display: flex;

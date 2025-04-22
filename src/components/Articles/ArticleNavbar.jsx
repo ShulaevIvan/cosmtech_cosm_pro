@@ -7,9 +7,7 @@ import { useEffect } from "react";
 const ArticleNavbar = () => {
     const dispatch = useDispatch();
     const articles = useSelector((state) => state.articles.articles);
-    const articleCategory = useSelector((state) => state.articles.articleCategories.filter(
-        (item) => articles.some((articleItem) => articleItem.articleCategory === item.name))
-    );
+    const articleCategory = useSelector((state) => state.articles.articleCategories);
 
     const filterArticlesHandler = (catType) => {
         dispatch(selectArticleCategory({category: catType}));
@@ -23,7 +21,10 @@ const ArticleNavbar = () => {
                         <div className="inner-article-navbar-item">
                             <Link  to={`/articles`} className="inner-article-navbar-btn">Назад к статьям</Link>
                         </div>
-                        {articleCategory.filter((item) => item.name !== 'default').map((catItem) => {
+                        {articleCategory.filter(
+                            (articleCat) => articles.some((articleItem) => articleItem.articleCategory === articleCat.name)
+                        )
+                        .filter((item) => item.name !== 'default').map((catItem) => {
                             return (
                                 <React.Fragment key={catItem.id}>
                                     <div className="inner-article-navbar-item">

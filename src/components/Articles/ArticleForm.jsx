@@ -6,7 +6,8 @@ import ArticleFormHappyState from "./ArticleFormHappyState";
 import { 
     articleFormInput,
     validateArticleForm,
-    articleFormHappyState
+    articleFormHappyState,
+    sendArticleFormInner
 } from "../../redux/slices/articlesSlice";
 
 const ArticleForm = () => {
@@ -41,7 +42,7 @@ const ArticleForm = () => {
 
     const sendFormHandler = () => {
         const sendData = articleState.formSendData;
-        console.log(sendData)
+        dispatch(sendArticleFormInner(sendData));
     };
 
     const happyStateCloseHandler = () => {

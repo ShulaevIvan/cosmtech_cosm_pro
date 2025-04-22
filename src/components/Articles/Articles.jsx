@@ -10,10 +10,6 @@ import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 const Articles = () => {
     const dispatch = useDispatch();
     const articlesState = useSelector((state) => state.articles);
-    const articleCategories = useSelector((state) => state.articles.articleCategories.filter(
-        (item) => articlesState.articles.some((aticleItem) => aticleItem.articleCategory === item.name || aticleItem.articleCategory === 'default'))
-    );
-
     const articlesSortHandler = (sortType) => {
         dispatch(articlesSort({sortType: sortType}));
     };

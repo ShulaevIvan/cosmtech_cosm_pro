@@ -149,6 +149,24 @@ const initialState = {
     sendBtnActive: false
 };
 
+export const sendArticleFormInner = createAsyncThunk(
+    'sendInnerArticeForm',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/articles/?sendform=true`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sendData)
+        });
+
+        const data = response.json();
+
+        return data;
+    }
+);
+
 const articlesSlice = createSlice({
     name: 'articles',
     initialState,
@@ -355,6 +373,25 @@ const articlesSlice = createSlice({
                 active: state.happyState.active ? false : true
             }
         }
+    },
+    extraReducers: (builder) => {
+        builder
+        .addCase(sendArticleFormInner.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+
+            if (status === 'ok') {
+                state.happyState = {
+                    ...state.happyState,
+                    title: description.title,
+                    description: description.description,
+                    active: true
+                };
+                state.articleForm = initialState.articleForm;
+                return;
+            }
+            state.happyState = initialState.happyState;
+            state.articleForm = initialState.articleForm;
+        })
     }
 });
 

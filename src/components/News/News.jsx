@@ -14,7 +14,8 @@ import {
     fetchAllNews,
     mainNewsInput,
     validateMainNewsForm,
-    mainNewsFormHappyStatePopup
+    mainNewsFormHappyStatePopup,
+    sendMainNewsForm
 } from "../../redux/slices/newsSlice";
 
 const News = () => {
@@ -60,7 +61,17 @@ const News = () => {
     };
 
     const newsFormMainSendHandler = () => {
-        console.log('etst')
+        const name = newsState.newsFormMainFields.find((item) => item.fieldType === 'name' && item.fieldValid);
+        const phone = newsState.newsFormMainFields.find((item) => item.fieldType === 'phone' && item.fieldValid);
+        const comment = newsState.newsFormMainFields.find((item) => item.fieldType === 'comment' && item.fieldValid);
+
+        const data = {
+            name: name ? name.value : '',
+            phone: phone ? phone.value : '',
+            comment: comment ? comment.value : '',
+        };
+
+        dispatch(sendMainNewsForm({sendData: data}));
     };
 
     const newsMainFormHappyStateHandler = () => {
@@ -135,7 +146,7 @@ const News = () => {
                                         </React.Fragment>
                                     )
                                 }) : null}
-                                {!newsState.showMoreBtnDisabled ? 
+                                {!newsState.showMoreBtnDisabled && newsState.newsItems.length > 0 ? 
                                     <React.Fragment>
                                         <div 
                                             className="news-preview-show-more-wrap" 

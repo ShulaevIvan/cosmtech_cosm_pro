@@ -4,6 +4,7 @@ import validateName from "../../functions/validateName";
 import validatePhone from "../../functions/validatePhone";
 import yaNews from '../../img/news/yaNews.png';
 import vkNews from '../../img/news/vkNews.png';
+import { json } from "react-router-dom";
 
 const initialState = {
     allnewsItems: [],
@@ -61,9 +62,9 @@ const initialState = {
         },
     ],
     newsFormMainHappyState: {
-        title: 'Title',
-        description: 'Спасибо, с вами свяжутся в ближайшее время!',
-        active: true
+        title: '',
+        description: '',
+        active: false
     },
     newsFormMainSendBtnActive: false
 };
@@ -84,6 +85,23 @@ export const fetchAllNews = createAsyncThunk(
     }
 );
 
+export const sendMainNewsForm = createAsyncThunk(
+    'sendMainNewsForm',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/news/?sendform=true`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sendData)
+        });
+
+        const data = response.json();
+        return data;
+    }
+)
+
 export const fetchCurrencyData = createAsyncThunk(
     'loadCurrencyCourse',
     async () => {
@@ -98,7 +116,7 @@ export const fetchCurrencyData = createAsyncThunk(
         const data = response.json();
         return data;
     }
-)
+);
 
 const newsSlice = createSlice({
     name: 'articles',
@@ -286,6 +304,22 @@ const newsSlice = createSlice({
             state.newsItems = [];
             state.currentNewsStep = 0;
             state.newsLoadEnd = true;
+        })
+        .addCase(sendMainNewsForm.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            
+            if (status === 'ok') {
+                state.newsFormMainHappyState = {
+                    ...state.newsFormMainHappyState,
+                    title: description.title,
+                    description: description.description,
+                    active: true
+                }
+                state.newsFormMainFields = initialState.newsFormMainFields;
+                return;
+            }
+            state.newsFormMainFields = initialState.newsFormMainFields;
+            state.newsFormMainHappyState = initialState.state.newsFormMainHappyState;
         })
         .addCase(fetchCurrencyData.fulfilled, (state, action) => {
             const { status, data } = action.payload;
