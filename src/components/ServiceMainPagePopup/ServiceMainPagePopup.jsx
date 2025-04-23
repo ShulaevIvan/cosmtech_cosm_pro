@@ -61,7 +61,7 @@ const ServicesMainPagePopup = (props) => {
 
     useEffect(() => {
         dispatch(serviceFormSendBtnActive());
-    }, [serviceState.servicePopupForm.formFields])
+    }, [serviceState.servicePopupForm.formFields, formRefs])
 
     useEffect(() => {
         const optionsObj = serviceState.servicePopupForm.formFields.find((item) => item.fieldName === 'options');

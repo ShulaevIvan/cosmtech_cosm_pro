@@ -119,7 +119,7 @@ const footerSlice = createSlice({
             }
             else if (fieldType === 'email') isValid = !validateMail(fieldValue);
             else if (fieldType === 'city') isValid = (validateCity(fieldValue));
-            else if (fieldType === 'comment') isValid = !/^\s|\s+/.test(fieldValue);
+            else if (fieldType === 'comment') isValid = /^\w+/.test(fieldValue.trim()) && fieldValue.trim().length > 8;
 
             state.preFooterForm.inputs = state.preFooterForm.inputs.map((fieldObj) => {
                 if (fieldObj.id === fieldId && fieldObj.fieldType === fieldType) {

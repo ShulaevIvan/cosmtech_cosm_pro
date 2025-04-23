@@ -1010,9 +1010,11 @@ const mainPageSlice = createSlice({
         serviceFormSendBtnActive(state) {
             const checkEmpty = state.services.servicePopupForm.formFields.filter((item) => item.value === '');
             const checkFieldsErr = state.services.servicePopupForm.formFields.filter(
-                (formField) => formField.err && (formField.fieldName === 'email' | formField.fieldName === 'phone')
+                (formField) => formField.err
             );
-            if (checkFieldsErr.length === 0 && checkEmpty.length < 3) {
+            const findPhoneErr = checkFieldsErr.find((item) => item.fieldName === 'phone' && item.err);
+            const findEmailErr = checkFieldsErr.find((item) => item.fieldName === 'email' && item.err)
+            if (checkFieldsErr.length === 0 && checkEmpty.length <= 3 && (!findPhoneErr | !findEmailErr)) {
                 state.services.servicePopupForm.sendBtnActive = true;
                 return;
             }

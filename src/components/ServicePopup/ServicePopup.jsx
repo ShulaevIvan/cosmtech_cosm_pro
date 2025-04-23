@@ -24,7 +24,6 @@ const ServicePopup = (props) => {
     ];
 
     const formInputHandler = (fieldName, targetRef) => {
-        console.log(targetRef.current.value)
         dispatch(serviceOrderValidateInput({fieldType: fieldName, fieldValue: targetRef.current.value}));
     };
 
