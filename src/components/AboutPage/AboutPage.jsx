@@ -17,6 +17,7 @@ import AboutConsultForm from './AboutConsultForm';
 import AboutTabs from "./AboutTabs";
 import ImageGallery from "../ImageGalery/ImageGallery";
 import ExcursionToProduction from "../ExcursionToProduction/ExcursionToProduction";
+import VideoFromProduction from "../VideoFromProduction/VideoFromProduction";
 // import OurTeam from "./OurTeam";
 
 import { 
@@ -145,6 +146,9 @@ const AboutPage = () => {
                     imagePopupNextSlide={galleryPopupImageNextSlide}
                     title={'Фото c производства'}
                 />
+            </section>
+            <section>
+                <VideoFromProduction />
             </section>
             <section>
                 <AboutTabs

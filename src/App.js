@@ -17,6 +17,7 @@ import './components/ExcursionToProduction/ExcursionToProduction.css';
 import './components/StickySideMenu/StickySideMenu.css';
 import './components/Articles/Articles.css';
 import './components/News/News.css';
+import './components/VideoFromProduction/VideoFromProduction.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';
