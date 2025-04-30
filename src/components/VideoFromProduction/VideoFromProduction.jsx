@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import testVideo from '../../video/compress_promo_video.mp4';
 
@@ -12,15 +13,16 @@ const VideoFromProduction = () => {
     const dispatch = useDispatch();
     const videoProductionState = useSelector((state) => state.innerPage.about.aboutVideoProduction);
     const selectedMenu = videoProductionState.menuCategories.find((item) => item.selected);
-    const selectedVideo = selectedMenu.videos.find((videoItem) => videoItem.selected);
     const maxSelectedVideo = selectedMenu.videos.length > 0 ? selectedMenu.videos.length : 0;
+    const selectedVideo = selectedMenu.videos.find((videoItem) => videoItem.selected);
+    const selectedVideoIndex = selectedMenu.videos.findIndex((item) => item.id === selectedVideo.id) + 1;
 
     const videoMenuHandler = (id, name) => {
         dispatch(aboutProductionVideoMenu({catId: id, catName: name}));
     };
 
-    const slideVideoHandler = (videoId) => {
-        dispatch(aboutProductionSelectVideo({videoId: videoId}));
+    const slideVideoHandler = () => {
+        dispatch(aboutProductionSelectVideo());
     };
 
     return (
@@ -54,12 +56,12 @@ const VideoFromProduction = () => {
                             <div className="video-content-controls-btn-wrap">
                                 <span 
                                     className="video-content-controls-btn-prev"
-                                    onClick={() => slideVideoHandler(selectedVideo.video.id)}
+                                    onClick={slideVideoHandler}
                                 ></span>
-                                <span className="video-content-controls-counter">{`1 / ${maxSelectedVideo}`}</span>
+                                <span className="video-content-controls-counter">{`${selectedVideoIndex} / ${maxSelectedVideo}`}</span>
                                 <span 
                                     className="video-content-controls-btn-next"
-                                    onClick={() => slideVideoHandler(selectedVideo.video.id)}
+                                    onClick={slideVideoHandler}
                                 ></span>
                             </div>
                         </div>

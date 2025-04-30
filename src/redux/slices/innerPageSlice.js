@@ -890,6 +890,11 @@ const initialState = {
                             id: 2,
                             video: testVideoProd,
                             selected: false,
+                        },
+                        {
+                            id: 3,
+                            video: testVideoProd,
+                            selected: false,
                         }
                     ],
                     currentSelectedVideo: 0,
@@ -2706,13 +2711,26 @@ const innerPageSlice = createSlice({
                 }
             })
         },
-        aboutProductionSelectVideo(state, action) {
-            const { videoId } = action.payload;
+        aboutProductionSelectVideo(state) {
             const selectedMenu = state.about.aboutVideoProduction.menuCategories.find((item) => item.selected);
-            const videos = selectedMenu.videos;
             const selectedVideo = selectedMenu.videos.find((item) => item.selected);
             const currentIndex = selectedMenu.videos.indexOf(selectedVideo);
-            console.log(currentIndex)
+            const nextIndex = Number(currentIndex) + 1  <= Number(selectedMenu.videos.length) - 1 ? Number(currentIndex) + 1 : 0;
+
+            state.about.aboutVideoProduction.menuCategories = state.about.aboutVideoProduction.menuCategories.map((menuItem) => {
+                if (menuItem.id === selectedMenu.id) {
+                    return {
+                        ...menuItem,
+                        videos: menuItem.videos.map((videoItem, i) => {
+                            return {
+                                ...videoItem,
+                                selected: i === nextIndex ? true : false
+                            }
+                        })
+                    }
+                }
+                return menuItem;
+            });
         }
 
     },
