@@ -28,6 +28,8 @@ import aboutIconReq from '../../img/about_requirements.svg';
 import aboutIconMoney from '../../img/about_money.svg';
 import aboutIconOk from '../../img/about_ok.svg';
 
+import testVideoProd from '../../video/compress_promo_video.mp4';
+
 const importAllImages = (ctxWebpuck) => {
     const images = {};
     ctxWebpuck.keys().forEach((item, index) => { images[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
@@ -864,7 +866,121 @@ const initialState = {
                 tabHeader: 'Контактная информация',
                 active: false
             }
-        ]
+        ],
+        aboutVideoProduction: {
+            menuCategories: [
+                {
+                    id: 1,
+                    name: 'tubMachine',
+                    title: 'Тупозапаечные машины',
+                    content: {
+                        title: 'testTitle1',
+                        textParagraphs: [
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.',
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.'
+                        ],
+                    },
+                    videos: [
+                        {
+                            id: 1,
+                            video: testVideoProd,
+                            selected: true,
+                        },
+                        {
+                            id: 2,
+                            video: testVideoProd,
+                            selected: false,
+                        }
+                    ],
+                    currentSelectedVideo: 0,
+                    selected: true
+                },
+                {
+                    id: 2,
+                    name: 'tubMachine',
+                    title: 'Тупозапаечные машины',
+                    content: {
+                        title: 'testTitle2',
+                        textParagraphs: [
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.',
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.'
+                        ],
+                    },
+                    videos: [
+                        {
+                            id: 1,
+                            video: testVideoProd,
+                            selected: true,
+                        }
+                    ],
+                    currentSelectedVideo: 0,
+                    selected: false
+                },
+                {
+                    id: 3,
+                    name: 'tubMachine',
+                    title: 'Тупозапаечные машины',
+                    content: {
+                        title: 'testTitle3',
+                        textParagraphs: [
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.',
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.'
+                        ],
+                    },
+                    videos: [
+                        {
+                            id: 1,
+                            video: testVideoProd,
+                            selected: true,
+                        }
+                    ],
+                    currentSelectedVideo: 0,
+                    selected: false
+                },
+                {
+                    id: 4,
+                    name: 'tubMachine',
+                    title: 'Тупозапаечные машины',
+                    content: {
+                        title: 'testTitle4',
+                        textParagraphs: [
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.',
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.'
+                        ],
+                    },
+                    videos: [
+                        {
+                            id: 1,
+                            video: testVideoProd,
+                            selected: true,
+                        }
+                    ],
+                    currentSelectedVideo: 0,
+                    selected: false
+                },
+                {
+                    id: 5,
+                    name: 'tubMachine',
+                    title: 'Тупозапаечные машины',
+                    content: {
+                        title: 'testTitle5',
+                        textParagraphs: [
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.',
+                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.'
+                        ],
+                    },
+                    videos: [
+                        {
+                            id: 1,
+                            video: testVideoProd,
+                            selected: true,
+                        }
+                    ],
+                    currentSelectedVideo: 0,
+                    selected: false
+                }
+            ]
+        }
     },
     productionExcuirsion: {
         popup: {
@@ -2574,6 +2690,29 @@ const innerPageSlice = createSlice({
         },
         decorativeOrderHappyState(state) {
             state.decorativeCosmeticsPage.orderPopup.happyState.active = state.decorativeCosmeticsPage.orderPopup.happyState.active ? false : true;
+        },
+        aboutProductionVideoMenu(state, action) {
+            const { catId, catName } = action.payload;
+            state.about.aboutVideoProduction.menuCategories = state.about.aboutVideoProduction.menuCategories.map((videoCategory) => {
+                if (videoCategory.id === catId && videoCategory.name === catName) {
+                    return {
+                        ...videoCategory,
+                        selected: true
+                    }
+                }
+                return {
+                    ...videoCategory,
+                    selected: false
+                }
+            })
+        },
+        aboutProductionSelectVideo(state, action) {
+            const { videoId } = action.payload;
+            const selectedMenu = state.about.aboutVideoProduction.menuCategories.find((item) => item.selected);
+            const videos = selectedMenu.videos;
+            const selectedVideo = selectedMenu.videos.find((item) => item.selected);
+            const currentIndex = selectedMenu.videos.indexOf(selectedVideo);
+            console.log(currentIndex)
         }
 
     },
@@ -2829,6 +2968,8 @@ export const {
     excursionProductionHappyState,
     decorativeConsultHappyState,
     decorativeQuestionHappyState,
-    decorativeOrderHappyState
+    decorativeOrderHappyState,
+    aboutProductionVideoMenu,
+    aboutProductionSelectVideo
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
