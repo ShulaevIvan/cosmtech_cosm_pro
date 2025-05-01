@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import testVideo from '../../video/compress_promo_video.mp4';
+import { useEffect, useRef } from "react";
 
+import labView from '../../video/labView.mp4';
+
+import filePathToBlob from '../../functions/filePathToBlob';
 import { 
     aboutProductionVideoMenu,
     aboutProductionSelectVideo
@@ -16,6 +18,7 @@ const VideoFromProduction = () => {
     const maxSelectedVideo = selectedMenu.videos.length > 0 ? selectedMenu.videos.length : 0;
     const selectedVideo = selectedMenu.videos.find((videoItem) => videoItem.selected);
     const selectedVideoIndex = selectedMenu.videos.findIndex((item) => item.id === selectedVideo.id) + 1;
+    const videoRef = useRef(selectedVideo.video);
 
     const videoMenuHandler = (id, name) => {
         dispatch(aboutProductionVideoMenu({catId: id, catName: name}));
@@ -24,6 +27,8 @@ const VideoFromProduction = () => {
     const slideVideoHandler = () => {
         dispatch(aboutProductionSelectVideo());
     };
+    console.log(selectedVideo)
+
 
     return (
         <React.Fragment>
@@ -49,9 +54,11 @@ const VideoFromProduction = () => {
                 </div>
                 <div className="video-from-production-content-row">
                     <div className="video-content-wrap">
-                        <video controls>
-                            <source src={selectedVideo.video ? selectedVideo.video : null} />
-                        </video>
+                        <React.Fragment key={selectedVideo.video}>
+                            <video controls>
+                                <source src={selectedVideo.video} type='video/mp4;' />
+                            </video>
+                        </React.Fragment>
                         <div className="video-content-controls-wrap">
                             <div className="video-content-controls-btn-wrap">
                                 <span 

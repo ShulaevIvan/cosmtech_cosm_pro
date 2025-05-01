@@ -28,19 +28,34 @@ import aboutIconReq from '../../img/about_requirements.svg';
 import aboutIconMoney from '../../img/about_money.svg';
 import aboutIconOk from '../../img/about_ok.svg';
 
-import testVideoProd from '../../video/compress_promo_video.mp4';
+import labView from '../../video/labView.mp4';
+import prodView from '../../video/prodView.mp4';
+import prodView2 from '../../video/prodView2.mp4';
+import equipView from '../../video/equipView.mp4';
+import equipView2 from '../../video/equipView2.mp4';
+import equipView3 from '../../video/equipView3.mp4';
+import equipView4 from '../../video/equipView4.mp4';
 
 const importAllImages = (ctxWebpuck) => {
     const images = {};
     ctxWebpuck.keys().forEach((item, index) => { images[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
     return images;
 };
+
+const importAllVideos = (ctxWebpuck) => {
+    const videos = {}
+    ctxWebpuck.keys().forEach((item, index) => { videos[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
+
+    return videos;
+};
+
 const suppliersImages = importAllImages(require.context('../../img/supplersImages', false, /\.(png|jpe?g|svg)$/));
 const reviewPlaces = importAllImages(require.context('../../img/reviewPlaces', false, /\.(png|jpe?g|svg)$/));
 const aboutProductionImages = importAllImages(require.context('../../img/aboutProductionImages', false, /\.(png|jpe?g|jpeg|svg)$/));
 const aboutUsGaleryImages = importAllImages(require.context('../../img/imageGalery/aboutUsImages/', false, /\.(png|jpe?g|jpeg|svg)$/));
 const decorativeCosmeticsImages = importAllImages(require.context('../../img/decoraticeCosmeticsImages/cosmeticsTypes', false, /\.(png|jpe?g|jpeg|svg)$/));
 const decorativeCosmeticsIcons = importAllImages(require.context('../../img/decoraticeCosmeticsImages/howToWorkIcons', false, /\.(png|jpe?g|jpeg|svg)$/));
+const aboutVideos = importAllVideos(require.context('../../video/', false, /\.(mp4)$/));
 
 const { 
     protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
@@ -67,6 +82,7 @@ const {
     mascara, eyeliner, eyelashGel, eyebrowGel, сoncealer, blush, highlighter, 
     foundationСream, creamBlush, makeupBase, lipGloss, lipstickForLips, hygenicLipstick,
     eyeShadow } = decorativeCosmeticsImages;
+
 const { 
     deliveryIcon, recipeIcon, certificationIcon, breafIcon, 
     developIcon, orderIcon, sebesIcon, suppliesIcon
@@ -871,8 +887,8 @@ const initialState = {
             menuCategories: [
                 {
                     id: 1,
-                    name: 'tubMachine',
-                    title: 'Тупозапаечные машины',
+                    name: 'production',
+                    title: 'Производство',
                     content: {
                         title: 'testTitle1',
                         textParagraphs: [
@@ -883,27 +899,24 @@ const initialState = {
                     videos: [
                         {
                             id: 1,
-                            video: testVideoProd,
+                            video: prodView,
+                            type: 'video/mp4',
                             selected: true,
                         },
                         {
                             id: 2,
-                            video: testVideoProd,
+                            video: prodView2,
+                            type: 'video/mp4',
                             selected: false,
                         },
-                        {
-                            id: 3,
-                            video: testVideoProd,
-                            selected: false,
-                        }
                     ],
                     currentSelectedVideo: 0,
                     selected: true
                 },
                 {
                     id: 2,
-                    name: 'tubMachine',
-                    title: 'Тупозапаечные машины',
+                    name: 'lab',
+                    title: 'Лаборатория',
                     content: {
                         title: 'testTitle2',
                         textParagraphs: [
@@ -914,7 +927,8 @@ const initialState = {
                     videos: [
                         {
                             id: 1,
-                            video: testVideoProd,
+                            video: labView,
+                            type: 'video/mp4',
                             selected: true,
                         }
                     ],
@@ -923,8 +937,8 @@ const initialState = {
                 },
                 {
                     id: 3,
-                    name: 'tubMachine',
-                    title: 'Тупозапаечные машины',
+                    name: 'eqip',
+                    title: 'Оборудование',
                     content: {
                         title: 'testTitle3',
                         textParagraphs: [
@@ -935,55 +949,26 @@ const initialState = {
                     videos: [
                         {
                             id: 1,
-                            video: testVideoProd,
+                            video: equipView,
+                            type: 'video/mp4',
                             selected: true,
+                        },
+                        {
+                            id: 2,
+                            video: equipView2,
+                            type: 'video/mp4',
+                            selected: false,
+                        },
+                        {
+                            id: 3,
+                            video: equipView3,
+                            type: 'video/mp4',
+                            selected: false,
                         }
                     ],
                     currentSelectedVideo: 0,
                     selected: false
                 },
-                {
-                    id: 4,
-                    name: 'tubMachine',
-                    title: 'Тупозапаечные машины',
-                    content: {
-                        title: 'testTitle4',
-                        textParagraphs: [
-                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.',
-                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.'
-                        ],
-                    },
-                    videos: [
-                        {
-                            id: 1,
-                            video: testVideoProd,
-                            selected: true,
-                        }
-                    ],
-                    currentSelectedVideo: 0,
-                    selected: false
-                },
-                {
-                    id: 5,
-                    name: 'tubMachine',
-                    title: 'Тупозапаечные машины',
-                    content: {
-                        title: 'testTitle5',
-                        textParagraphs: [
-                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.',
-                            'Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым. Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста или продемонстрировать типографику в деле.'
-                        ],
-                    },
-                    videos: [
-                        {
-                            id: 1,
-                            video: testVideoProd,
-                            selected: true,
-                        }
-                    ],
-                    currentSelectedVideo: 0,
-                    selected: false
-                }
             ]
         }
     },
