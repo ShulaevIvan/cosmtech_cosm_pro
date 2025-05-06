@@ -18,7 +18,7 @@ const VideoFromProduction = () => {
     const maxSelectedVideo = selectedMenu.videos.length > 0 ? selectedMenu.videos.length : 0;
     const selectedVideo = selectedMenu.videos.find((videoItem) => videoItem.selected);
     const selectedVideoIndex = selectedMenu.videos.findIndex((item) => item.id === selectedVideo.id) + 1;
-    const videoRef = useRef(selectedVideo.video);
+    console.log(selectedVideo)
 
     const videoMenuHandler = (id, name) => {
         dispatch(aboutProductionVideoMenu({catId: id, catName: name}));
@@ -27,11 +27,11 @@ const VideoFromProduction = () => {
     const slideVideoHandler = () => {
         dispatch(aboutProductionSelectVideo());
     };
-    console.log(selectedVideo)
 
 
     return (
         <React.Fragment>
+            <div className="video-from-production-main-wrap">
             <div className="container">
                 <div className="video-from-production-wrap">
                     <div className="video-from-production-title-wrap">
@@ -55,7 +55,7 @@ const VideoFromProduction = () => {
                 <div className="video-from-production-content-row">
                     <div className="video-content-wrap">
                         <React.Fragment key={selectedVideo.video}>
-                            <video controls>
+                            <video controls className="video-content-ani">
                                 <source src={selectedVideo.video} type='video/mp4;' />
                             </video>
                         </React.Fragment>
@@ -78,12 +78,13 @@ const VideoFromProduction = () => {
                         {selectedMenu.content.textParagraphs.map((textItem) => {
                             return (
                                 <React.Fragment key={Math.random()}>
-                                    <p>{textItem}</p>
+                                    <p className="video-content-ani">{textItem}</p>
                                 </React.Fragment>
                             )
                         })}
                     </div>
                 </div>
+            </div>
             </div>
           
         </React.Fragment>
