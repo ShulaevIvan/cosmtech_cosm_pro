@@ -1,0 +1,54 @@
+.custom-tms-main-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.custom-tm-main-item-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.custom-tm-item-content-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 60%;
+}
+.custom-tm-item-stats {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 35%;
+}
+.custom-tm-item-logo-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.custom-tm-item-logo {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    max-width: 150px;
+}
+.custom-tm-item-title {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 70%;
+}
+.custom-tm-item-promo-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}

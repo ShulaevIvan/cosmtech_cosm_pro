@@ -111,6 +111,14 @@ const initialState = {
             title: 'test',
             canonical: 'https://cosmtech.ru/news',
             description: 'Последние новости а анонсы компании космотех',
+        },
+         {
+            id: 13,
+            name: 'Собственные разработки компании ООО Космотех',
+            path: '/tm',
+            title: 'test',
+            canonical: 'https://cosmtech.ru/tm',
+            description: 'Собственные разработки косметики компании ООО Космотех. Список брендов и их презентация.',
         }
     ],
     currentPathUrl: '',

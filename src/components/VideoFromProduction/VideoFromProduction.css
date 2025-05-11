@@ -108,6 +108,7 @@
     max-width: 500px;
     padding: 20px;
     min-height: 400px;
+    border-radius: 10px;
     background-color: whitesmoke;
 }
 .video-content-controls-counter {

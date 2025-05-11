@@ -82,6 +82,16 @@ const initialState = {
                             name: 'Новости',
                             url: '/news'
                         },
+                        {
+                            id: 4,
+                            name: 'Собственные разработки',
+                            url: '/tm'
+                        },
+                        {
+                            id: 5,
+                            name: 'Вакансии',
+                            url: '/job'
+                        },
                     ]
                 }
             },
