@@ -1,5 +1,8 @@
 import React from "react";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
+import logoStm from '../../img/customTm/logo_new.png';
+import pdfIcon from '../../img/pdficon.svg';
+import linkIcon from '../../img/linkicon.svg';
 
 const CustomTm = () => {
     return (
@@ -12,7 +15,14 @@ const CustomTm = () => {
                             <div className="custom-tm-main-item-row">
                                 <div className="custom-tm-item-content-wrap">
                                     <div className="custom-tm-item-description">
-                                        description
+                                        <h3>SM Professional</h3>
+                                        <p>Более 100 профессиональных средств для специалистов индустрии красоты, 
+                                            которые решают основные эстетические проблемы кожи для всех возрастов и типов кожи. 
+                                            Продукция SM professional используются в медицинских клиниках и центрах пластической хирургии, салонах красоты, 
+                                            фитнес центрах.
+                                        </p>
+                                        <p>Продукты линии SM professional разработаны на основе широкого спектра природных компонентов в сочетании с последними достижениями биотехнологий.
+                                        </p>
                                     </div>
                                     <div className="custom-tm-item-gallery">
                                         gallery
@@ -23,17 +33,15 @@ const CustomTm = () => {
                                 </div>
                                 <div className="custom-tm-item-stats">
                                     <div className="custom-tm-item-logo-row">
-                                        <div className="custom-tm-item-logo">logo</div>
-                                        <div className="custom-tm-item-title">Title</div>
+                                        <div className="custom-tm-item-logo">
+                                            <img src={logoStm} alt="#" />
+                                        </div>
                                     </div>
-                                    <div className="custom-tm-item-promo-wrap">
-                                        <a>Prezentation</a>    
+                                    <div className="custom-tm-item-promo-row">
+                                        <div className="custom-tm-prezentation">Презентация: <a>скачать</a></div>
+                                        <div className="custom-tm-site">Сайт: <a>smprof.ru</a></div> 
                                     </div>
-                                    <div className="custom-tm-item-contacts-wrap">
-                                        <ul>
-                                            <li><a>Site</a></li>
-                                        </ul>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
