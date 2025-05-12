@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import logoStm from '../../img/customTm/logo_new.png';
-import pdfIcon from '../../img/pdficon.svg';
-import linkIcon from '../../img/linkicon.svg';
+import demoImg from '../../img/customTm/demoImg.png';
+import demoVideo from '../../video/compress_promo_video.mp4';
 
 const CustomTm = () => {
     return (
@@ -24,11 +25,36 @@ const CustomTm = () => {
                                         <p>Продукты линии SM professional разработаны на основе широкого спектра природных компонентов в сочетании с последними достижениями биотехнологий.
                                         </p>
                                     </div>
-                                    <div className="custom-tm-item-gallery">
-                                        gallery
+                                    <div className="custom-tm-more-btn-wrap">
+                                        <Link href="#">подробнее</Link>
                                     </div>
-                                    <div className="custom-tm-item-video">
-                                        video
+                                    <div className="custom-tm-more-content-wrap">
+                                        <div className="custom-tm-gallery-wrap">
+                                            <h3>Примеры продукции</h3>
+                                            <div className="custom-tm-galley-row">
+                                                <div className="custom-tm-galley-item">
+                                                    <Link><img src={demoImg} alt="#" /></Link> 
+                                                </div>
+                                                <div className="custom-tm-galley-item">
+                                                    <Link><img src={demoImg} alt="#" /></Link> 
+                                                </div>
+                                                <div className="custom-tm-galley-item">
+                                                    <Link><img src={demoImg} alt="#" /></Link> 
+                                                </div>
+                                                <div className="custom-tm-galley-item">
+                                                    <Link><img src={demoImg} alt="#" /></Link> 
+                                                </div>
+                                                <div className="custom-tm-galley-item">
+                                                    <Link><img src={demoImg} alt="#" /></Link> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="custom-tm-video-wrap">
+                                            <h3>Промовидео</h3>
+                                            <video controls>
+                                                <source src={demoVideo} type='video/mp4;' />
+                                            </video>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="custom-tm-item-stats">
@@ -38,8 +64,8 @@ const CustomTm = () => {
                                         </div>
                                     </div>
                                     <div className="custom-tm-item-promo-row">
-                                        <div className="custom-tm-prezentation">Презентация: <a>скачать</a></div>
-                                        <div className="custom-tm-site">Сайт: <a>smprof.ru</a></div> 
+                                        <div className="custom-tm-prezentation">Презентация: <Link>скачать</Link></div>
+                                        <div className="custom-tm-site">Сайт: <Link>smprof.ru</Link></div> 
                                     </div>
                                     
                                 </div>
