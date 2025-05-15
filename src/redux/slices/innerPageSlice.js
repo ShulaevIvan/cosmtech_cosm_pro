@@ -48,6 +48,8 @@ const aboutProductionImages = importAllImages(require.context('../../img/aboutPr
 const aboutUsGaleryImages = importAllImages(require.context('../../img/imageGalery/aboutUsImages/', false, /\.(png|jpe?g|jpeg|svg)$/));
 const decorativeCosmeticsImages = importAllImages(require.context('../../img/decoraticeCosmeticsImages/cosmeticsTypes', false, /\.(png|jpe?g|jpeg|svg)$/));
 const decorativeCosmeticsIcons = importAllImages(require.context('../../img/decoraticeCosmeticsImages/howToWorkIcons', false, /\.(png|jpe?g|jpeg|svg)$/));
+const customTmGalleryImages = importAllImages(require.context('../../img/customTm/gallery', false, /\.(png|jpe?g|jpeg|svg)$/));
+const customTmLogoImages = importAllImages(require.context('../../img/customTm', false, /\.(png|jpe?g|jpeg|svg)$/));
 const aboutVideos = importAllVideos(require.context('../../video/', false, /\.(mp4)$/));
 
 const { 
@@ -60,6 +62,7 @@ const {
     productionHands, productionBaby, productionMan, productionSuncare, productionSaloon,
     productionAnimal, productionCosmetic
 } = aboutProductionImages;
+
 const { gisPlace, zoonPlace, yellPlace, yandexPlace } = reviewPlaces;
 
 const { 
@@ -72,7 +75,7 @@ const {
 } = aboutUsGaleryImages;
 
 const { 
-    mascara, eyeliner, eyelashGel, eyebrowGel, сoncealer, blush, highlighter, 
+    mascara, eyeliner, eyebrowGel, сoncealer, blush, highlighter, 
     foundationСream, creamBlush, makeupBase, lipGloss, lipstickForLips, hygenicLipstick,
     eyeShadow } = decorativeCosmeticsImages;
 
@@ -82,6 +85,11 @@ const {
 } = decorativeCosmeticsIcons;
 
 const { labView, prodView, prodView2, equipView, equipView2, equipView3 } = aboutVideos;
+const { logoSmProf } = customTmLogoImages;
+const { 
+    smMinImg1, smMinImg2, smMinImg3, smMinImg4, smMinImg5,
+    smImg1, smImg2, smImg3, smImg4, smImg5,
+} = customTmGalleryImages;
 
 
 const initialState = { 
@@ -1443,6 +1451,75 @@ const initialState = {
             ]
         }
     },
+    customTmPage: {
+        tmItems: [
+            {
+                id: 1,
+                name: 'sm',
+                title: 'SM-Professional',
+                logo: {
+                    img: logoSmProf,
+                    altImg: 'SM-Professional лаборатория космецевтических инноваций',
+                },
+                prezentationFileUrl: '',
+                siteUrl: 'https://smprof.ru',
+                siteName: 'smprof.ru',
+                paragraphs: ['test', 'test2'],
+                gallery: [
+                    {
+                        id: 1,
+                        minImg: smMinImg1,
+                        altMinImg: '',
+                        fullImg: smImg1,
+                        altFullImg: 'alt 1',
+                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 1',
+                        popupActive: false
+                    },
+                    {
+                        id: 2,
+                        minImg: smMinImg2,
+                        altMinImg: '',
+                        fullImg: smImg2,
+                        altFullImg: 'alt 2',
+                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 2',
+                        popupActive: false
+                    },
+                    {
+                        id: 3,
+                        minImg: smMinImg3,
+                        altMinImg: '',
+                        fullImg: smImg3,
+                        altFullImg: 'alt 3',
+                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 3',
+                        popupActive: false
+                    },
+                    {
+                        id: 4,
+                        minImg: smMinImg4,
+                        altMinImg: '',
+                        fullImg: smImg4,
+                        altFullImg: 'alt 4',
+                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 4',
+                        popupActive: false
+                    },
+                    {
+                        id: 5,
+                        minImg: smMinImg5,
+                        altMinImg: '',
+                        fullImg: smImg5,
+                        altFullImg: 'alt 5',
+                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 5',
+                        popupActive: false
+                    },
+                ],
+                video: {
+                    file: promoVideo,
+                    format: 'video/mp4'
+                },
+                showMoreActive: false
+            }
+        ]
+    },
     mousePosition: {
         left: 0,
         top: 0,
@@ -2733,6 +2810,47 @@ const innerPageSlice = createSlice({
                 }
                 return menuItem;
             });
+        },
+        showMoreTmItem(state, action) {
+           const { tmId, tmName } = action.payload;
+           
+           state.customTmPage.tmItems = state.customTmPage.tmItems.map((mainTmItem) => {
+                if (mainTmItem.id === tmId && mainTmItem.name === tmName) {
+                    return {
+                        ...mainTmItem,
+                        showMoreActive: mainTmItem.showMoreActive ? false : true
+                    }
+                }
+                return {
+                    ...mainTmItem,
+                    showMoreActive: false
+                }
+           });
+        },
+        customTmLightbox(state, action) {
+            const { tmId, tmName, imageId, status } = action.payload;
+            console.log(tmId)
+            state.customTmPage.tmItems =  state.customTmPage.tmItems.map((mainTmItem) => {
+                if (mainTmItem.id === tmId && mainTmItem.name === tmName) {
+                    return {
+                        ...mainTmItem,
+                        gallery: mainTmItem.gallery.map((galleryItem) => {
+                            if (galleryItem.id === imageId) {
+                                return {
+                                    ...galleryItem,
+                                    popupActive: status ? true : false,
+                                }
+                            }
+                            return {
+                                ...galleryItem,
+                                popupActive: false
+                            }
+                        })
+                    }
+                }
+                return mainTmItem;
+             })
+
         }
 
     },
@@ -2990,6 +3108,8 @@ export const {
     decorativeQuestionHappyState,
     decorativeOrderHappyState,
     aboutProductionVideoMenu,
-    aboutProductionSelectVideo
+    aboutProductionSelectVideo,
+    showMoreTmItem,
+    customTmLightbox
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

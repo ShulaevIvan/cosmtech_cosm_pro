@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    position: relative;
     width: 100%;
     justify-content: space-between;
     padding: 20px;
@@ -63,12 +64,34 @@
     align-items: center;
     width: 100%;
 }
+.custom-tm-item-promo-row a {
+    padding-left: 5px;
+}
 .custom-tm-more-btn-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 20px;
+}
+.custom-tm-more-btn {
+    position: relative;
+    text-decoration: none;
+}
+.custom-tm-more-btn::after {
+    content: url('../../img/moreInfo.svg');
+    width: 20px;
+    top: -7px;
+    position: absolute;
+    filter: invert(14%) sepia(84%) saturate(3269%) hue-rotate(199deg) brightness(93%) contrast(101%);
+}
+.custom-tm-more-btn:hover::after {
+    transition: all ease-in-out 0.3s;
+    filter: invert(78%) sepia(58%) saturate(502%) hue-rotate(115deg) brightness(88%) contrast(85%);
+}
+.custom-tm-more-btn:hover {
+    color: #3FD2C7;
+     transition: all ease-in-out 0.3s;
 }
 .custom-tm-more-content-wrap {
     display: flex;
@@ -91,4 +114,76 @@
     width: 18%;
     max-width: 130px;
     min-height: 130px;
+}
+.custom-tm-img-popup-background-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100%;
+    position:fixed;
+    left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform:translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background-color: black;
+    z-index: 5;
+    background-color:rgba(0, 0, 0, 0.9);
+}
+.custom-tm-img-popup-body-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    min-height: 500px;
+    max-width: 1300px;
+    min-width: 900px;
+    max-height: 800px;
+    background-color: white;
+    z-index: 6;
+    padding: 20px;
+}
+.custom-tm-img-popup-close-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 6;
+    width: 100%;
+    min-height: 40px;
+}
+.custom-tm-img-popup-close-btn {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    right: 0;
+    background-image: url('../../img/close_popup.svg');
+}
+.custom-tm-img-popup-close-btn:hover {
+    background-image: url('../../img/close_popup_hover.svg');
+}
+.custom-tm-img-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+}
+.custom-tm-img-wrap img {
+    max-width: 800px;
+    width: 100%;
+}
+.custom-tm-img-description {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
 }
