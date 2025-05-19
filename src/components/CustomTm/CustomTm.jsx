@@ -36,7 +36,7 @@ const CustomTm = () => {
                                             <div className="custom-tm-item-content-wrap">
                                                 <div className="custom-tm-item-description">
                                                     <h3>SM Professional</h3>
-                                                    <p>Более 100 профессиональных средств для специалистов индустрии красоты, 
+                                                    <p>Более <strong>100 профессиональных средств для специалистов</strong> индустрии красоты, 
                                                         которые решают основные эстетические проблемы кожи для всех возрастов и типов кожи. 
                                                         Продукция SM professional используются в медицинских клиниках и центрах пластической хирургии, салонах красоты, 
                                                         фитнес центрах.
@@ -51,7 +51,7 @@ const CustomTm = () => {
                                                         className="custom-tm-more-btn" 
                                                         href="#" 
                                                         onClick={() => showMoreTmHandler(mainTmItem)}
-                                                    >подробнее</Link>
+                                                    >{mainTmItem.showMoreActive ? 'свернуть': 'подробнее'}</Link>
                                                 </div>
                                                 {mainTmItem.showMoreActive ? 
                                                     <React.Fragment>

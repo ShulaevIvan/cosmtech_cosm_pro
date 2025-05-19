@@ -74,18 +74,18 @@ const initialState = {
                         },
                         {
                             id: 2,
+                            name: 'Собственные бренды',
+                            url: '/tm'
+                        },
+                        {
+                            id: 3,
                             name: 'Статьи',
                             url: '/articles'
                         },
                         {
-                            id: 3,
+                            id: 4,
                             name: 'Новости',
                             url: '/news'
-                        },
-                        {
-                            id: 4,
-                            name: 'Собственные разработки',
-                            url: '/tm'
                         },
                         {
                             id: 5,

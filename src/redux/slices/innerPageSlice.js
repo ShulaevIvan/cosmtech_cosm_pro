@@ -1471,8 +1471,8 @@ const initialState = {
                         minImg: smMinImg1,
                         altMinImg: '',
                         fullImg: smImg1,
-                        altFullImg: 'alt 1',
-                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 1',
+                        altFullImg: 'Производитель термоактивное массажное масло со скваланом SM prof',
+                        shortDescr: 'Термоактивное массажное масло со скваланом, красным перцем чили, натуральными маслами и экстрактами, предназначено для разогревающих, моделирующих процедур.',
                         popupActive: false
                     },
                     {
@@ -1480,8 +1480,8 @@ const initialState = {
                         minImg: smMinImg2,
                         altMinImg: '',
                         fullImg: smImg2,
-                        altFullImg: 'alt 2',
-                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 2',
+                        altFullImg: 'Производитель Обертывание «СкинКонтур SM prof',
+                        shortDescr: 'Обертывание «СкинКонтур» предназначено для тонизирующего и антиоксидантного ухода за кожей. Содержит концентрированный, активный комплекс Provislim, который предотвращает отложение липидов в обрабатываемых зонах, оказывает стимулирующее действие.',
                         popupActive: false
                     },
                     {
@@ -1489,8 +1489,8 @@ const initialState = {
                         minImg: smMinImg3,
                         altMinImg: '',
                         fullImg: smImg3,
-                        altFullImg: 'alt 3',
-                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 3',
+                        altFullImg: 'Производитель пилингов smprof',
+                        shortDescr: 'Линейка профессиональных пилингов SM prof.',
                         popupActive: false
                     },
                     {
@@ -1498,8 +1498,8 @@ const initialState = {
                         minImg: smMinImg4,
                         altMinImg: '',
                         fullImg: smImg4,
-                        altFullImg: 'alt 4',
-                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 4',
+                        altFullImg: 'Производитель косметики для тела SM prof',
+                        shortDescr: 'Линейка косметики для тела SM prof.',
                         popupActive: false
                     },
                     {
@@ -1507,8 +1507,8 @@ const initialState = {
                         minImg: smMinImg5,
                         altMinImg: '',
                         fullImg: smImg5,
-                        altFullImg: 'alt 5',
-                        shortDescr: 'Мы любим животных и стараемся поддерживать тех из них, кому не посчастливилось иметь ласковых хозяев и тёплый кров. 5',
+                        altFullImg: 'Производитель косметики для лица SM prof',
+                        shortDescr: 'Линейка професcиональной косметики для лица smprof.',
                         popupActive: false
                     },
                 ],
