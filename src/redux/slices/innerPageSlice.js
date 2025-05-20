@@ -777,21 +777,125 @@ const initialState = {
                 image: '',
             },
             images: [
-                {id: 1, img: demo1, imgAlt: 'gallery-img', active: false, imgFull: demo1Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 2, img: demo2, imgAlt: 'gallery-img', active: false, imgFull: demo2Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 3, img: demo3, imgAlt: 'gallery-img', active: false, imgFull: demo3Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 4, img: demo4, imgAlt: 'gallery-img', active: false, imgFull: demo4Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 5, img: demo5, imgAlt: 'gallery-img', active: false, imgFull: demo5Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 6, img: demo6, imgAlt: 'gallery-img', active: false, imgFull: demo6Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 8, img: demo8, imgAlt: 'gallery-img', active: false, imgFull: demo8Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 9, img: demo9, imgAlt: 'gallery-img', active: false, imgFull: demo9Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 10, img: demo10, imgAlt: 'gallery-img', active: false, imgFull: demo10Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 11, img: demo11, imgAlt: 'gallery-img', active: false, imgFull: demo11Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 12, img: demo12, imgAlt: 'gallery-img', active: false, imgFull: demo12Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 13, img: demo13, imgAlt: 'gallery-img', active: false, imgFull: demo13Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 14, img: demo14, imgAlt: 'gallery-img', active: false, imgFull: demo14Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 15, img: demo15, imgAlt: 'gallery-img', active: false, imgFull: demo15Full, imgDescription: 'Фото с производственной площадки космотех'},
-                {id: 16, img: demo16, imgAlt: 'gallery-img', active: false, imgFull: demo16Full, imgDescription: 'Фото с производственной площадки космотех'},
+                {
+                    id: 1, 
+                    img: demo1, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo1Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 2, 
+                    img: demo2, 
+                    imgAlt: 'Фото с производственной площадки ООО космоте', 
+                    active: false, 
+                    imgFull: demo2Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 3, 
+                    img: demo3, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, imgFull: demo3Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 4, 
+                    img: demo4, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo4Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 5, 
+                    img: demo5, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo5Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 6, 
+                    img: demo6, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false,
+                    imgFull: demo6Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 8, 
+                    img: demo8, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo8Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 9, 
+                    img: demo9, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo9Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 10, 
+                    img: demo10, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo10Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 11, 
+                    img: demo11, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo11Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 12, 
+                    img: demo12, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo12Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 13, 
+                    img: demo13, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех',
+                    active: false, 
+                    imgFull: demo13Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 14, 
+                    img: demo14, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo14Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 15, 
+                    img: demo15, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo15Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
+                {
+                    id: 16, 
+                    img: demo16, 
+                    imgAlt: 'Фото с производственной площадки ООО космотех', 
+                    active: false, 
+                    imgFull: demo16Full, 
+                    imgDescription: 'Фото с производственной площадки космотех'
+                },
             ].sort((() => Math.random() - 0.5)),
         },
         innerForm: {

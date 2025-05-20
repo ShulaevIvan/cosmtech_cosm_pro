@@ -170,6 +170,7 @@
     min-width: 900px;
     max-height: 800px;
     background-color: white;
+    border: 1px solid #00458B;
     z-index: 6;
     padding: 20px;
     border-radius: 10px;
