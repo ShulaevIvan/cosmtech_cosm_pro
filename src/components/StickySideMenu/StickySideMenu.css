@@ -1099,6 +1099,11 @@
     }
 }
 @media (max-width: 800px) {
+    .sticky-sidemenu-item-1{
+        top: 50%;
+    }
+}
+@media (max-width: 800px) {
     .sticky-sidemenu-tz-popup-wrap {
         position: absolute;
         width: 100%;

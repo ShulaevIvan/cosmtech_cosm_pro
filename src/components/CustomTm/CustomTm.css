@@ -316,6 +316,12 @@
 }
 @media (max-width: 800px) { 
     .custom-tm-galley-item {
+        width: 33%;
+        max-width: 33%;
+    }
+}
+@media (max-width: 600px) { 
+    .custom-tm-galley-item {
         width: 50%;
         max-width: 50%;
     }
