@@ -17,6 +17,7 @@ import serviceStm from '../../img/service_stm.jpg';
 import serviceTestLab from '../../img/service_test_lab.jpg';
 import servicePacking from '../../img/service_packing.jpg';
 import servicePacking2 from '../../img/packing_service.jpg';
+import productionDesign from '../../img/production_design.jpg';
 
 import aboutFactFirst from '../../img/prize_cosm.svg';
 import aboutFactSecond from '../../img/production_cosm.svg';
@@ -255,6 +256,29 @@ const initialState = {
                 },
             ]
         },
+         {
+            page: '/design-cosmetics',
+            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            title: 'Дизайн и упаковка',
+            description: 'Услуги по дизайну этикеток и упаковки для косметических продуктов, в Санкт-Петербурге',
+            seoDescription: 'Если Вы ищете надежного партнера, способного создать успешный образ вашего бренда и обеспечить полный цикл производства по упаковке косметических продуктов, обращайтесь.',
+            breadcrumbs: [
+                {
+                    id: 1,
+                    name: 'Контрактное производство',
+                    url: '/',
+                    main: true,
+                    active: false,
+                },
+                {
+                    id: 2,
+                    name: 'Дизайн и упаковка для косметических продуктов',
+                    url: '/design-cosmetics',
+                    main: false,
+                    active: true,
+                },
+            ]
+        },
         {
             page: '/articles',
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
@@ -283,7 +307,7 @@ const initialState = {
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
             title: 'Cвой косметический бренд с нуля.',
             description: 'Как создать свой косметический бренд с нуля: пошаговое руководство.',
-            seoDescription: 'Как создать свой косметический бренд с нуля: пошаговое руководство.',
+            seoDescription: 'Руководство: как создать свой косметический бренд с нуля. Статья по теме контраткное производство косметики.',
             breadcrumbs: [
                 {
                     id: 1,
@@ -306,7 +330,7 @@ const initialState = {
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
             title: 'Производство косметики для малого бизнеса',
             description: 'Преимущества контрактного производства косметики для малого бизнеса.',
-            seoDescription: 'Преимущества контрактного производства косметики для малого бизнеса.',
+            seoDescription: 'Преимущества контрактного производства косметики для малого бизнеса. Статья по теме контраткное производство косметики.',
             breadcrumbs: [
                 {
                     id: 1,
@@ -352,7 +376,7 @@ const initialState = {
             backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
             title: 'Собственные разработки компании',
             description: `Косметические бренды выпускаемые нашей копанией`,
-            seoDescription: 'Косметические бренды выпускаемые ООО Космотех. Список брендов и краткая презентация.',
+            seoDescription: 'Косметические бренды выпускаемые компанией ООО Космотех. Список брендов и краткая презентация.',
             breadcrumbs: [
                 {
                     id: 1,
@@ -418,6 +442,7 @@ const initialState = {
                         { id: 2, name: 'Разработка косметических рецептур', value: 'Разработка косметических рецептур', selected: false },
                         { id: 3, name: 'Химический анализ косметической продукции согласно ГОСТ', value: 'Химический анализ', selected: false },
                         { id: 4, name: 'Консультации по выбору упаковки и сопровождение на этапе сертификации готовой продукции', value: 'Упаковка и соправождение', selected: false },
+                        { id: 5, name: 'Дизайн и фирменный стиль', value: 'Дизайн и фирменный стиль', selected: false },
                     ],
                     err: false
                 },
@@ -526,9 +551,30 @@ const initialState = {
             },
             {
                 id: 4,
+                name: 'Дизайн и фирменный стиль',
+                image: productionDesign,
+                position: 'right',
+                serviceItemHover: {
+                    active: false,
+                    minPrice: 1000,
+                    descriptionTitle: 'Что входит в услугу',
+                    descriptionList: [
+                        { id: 1, name: 'Бриф и быстрый аудит ниши/конкурентов.' },
+                        { id: 2, name: 'Запуск бренда: фирменный стиль и логотип под ДНК продукта и целевую аудиторию.' },
+                        { id: 3, name: 'Дизайн упаковки: архитектура линейки, ключевые SKU, расширение ассортимента.' },
+                        { id: 4, name: 'Производство: подбор материалов и отделок, колор-менеджмент, взаимодействие с типографиями, сопровождение тиража.' },
+                    ],
+                    header: 'test header',
+                    content: 'test 1',
+                },
+                description: 'Упаковка для косметики под ключ: от стратегии до тиража.',
+                descriptionMini: 'Создадим успешный образ вашего бренда и обеспечим полный цикл реализации проекта по упаковке косметических продуктов. Цена за 1 SKU.'
+            },
+            {
+                id: 5,
                 name: 'Химический анализ косметической продукции согласно ГОСТ',
                 image: serviceTestLab,
-                position: 'right',
+                position: 'left',
                 serviceItemHover: {
                     active: false,
                     minPrice: 0,
@@ -548,10 +594,10 @@ const initialState = {
                 descriptionMini: 'Придерживаемся демократичной политики цен и не завышаем стоимость услуг.',
             },
             {
-                id: 5,
+                id: 6,
                 name: 'Консультации по выбору упаковки и сопровождение на этапе сертификации готовой продукции',
                 image: servicePacking,
-                position: 'left',
+                position: 'right',
                 serviceItemHover: {
                     active: false,
                     minPrice: 0,
@@ -1565,7 +1611,7 @@ const initialState = {
                     img: logoSmProf,
                     altImg: 'SM-Professional лаборатория космецевтических инноваций',
                 },
-                prezentationFileUrl: '',
+                prezentationFileUrl: '/static/media/smprof_prezentation.pdf',
                 siteUrl: 'https://smprof.ru',
                 siteName: 'smprof.ru',
                 paragraphs: ['test', 'test2'],
@@ -1594,7 +1640,7 @@ const initialState = {
                         altMinImg: '',
                         fullImg: smImg3,
                         altFullImg: 'Производитель пилингов smprof',
-                        shortDescr: 'Линейка профессиональных пилингов SM prof.',
+                        shortDescr: 'Линия профессиональных пилингов SM prof.',
                         popupActive: false
                     },
                     {
@@ -1603,7 +1649,7 @@ const initialState = {
                         altMinImg: '',
                         fullImg: smImg4,
                         altFullImg: 'Производитель косметики для тела SM prof',
-                        shortDescr: 'Линейка косметики для тела SM prof.',
+                        shortDescr: 'Линия косметики для тела SM prof.',
                         popupActive: false
                     },
                     {
@@ -1612,13 +1658,13 @@ const initialState = {
                         altMinImg: '',
                         fullImg: smImg5,
                         altFullImg: 'Производитель косметики для лица SM prof',
-                        shortDescr: 'Линейка професcиональной косметики для лица smprof.',
+                        shortDescr: 'Линия професcиональной косметики для лица smprof.',
                         popupActive: false
                     },
                 ],
                 video: {
-                    file: promoVideo,
-                    format: 'video/mp4'
+                    file: '',
+                    format: ''
                 },
                 showMoreActive: false
             }
@@ -2933,7 +2979,7 @@ const innerPageSlice = createSlice({
         },
         customTmLightbox(state, action) {
             const { tmId, tmName, imageId, status } = action.payload;
-            console.log(tmId)
+            
             state.customTmPage.tmItems =  state.customTmPage.tmItems.map((mainTmItem) => {
                 if (mainTmItem.id === tmId && mainTmItem.name === tmName) {
                     return {

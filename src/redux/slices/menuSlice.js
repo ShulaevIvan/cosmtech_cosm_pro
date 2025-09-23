@@ -51,6 +51,11 @@ const initialState = {
                             name: 'Декоративная косметика',
                             url: '/decorative-cosmetics'
                         },
+                        {
+                            id: 2,
+                            name: 'Дизайн и упаковка',
+                            url: '/design-cosmetics'
+                        },
                     ]
                 }
             },

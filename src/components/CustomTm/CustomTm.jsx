@@ -53,7 +53,6 @@ const CustomTm = () => {
                                                         onClick={() => showMoreTmHandler(mainTmItem)}
                                                     >{mainTmItem.showMoreActive ? 'свернуть': 'подробнее'}</Link>
                                                 </div>
-                                                {console.log('test')}
                                                 {mainTmItem.showMoreActive ? 
                                                     <React.Fragment>
                                                         <div className="custom-tm-more-content-wrap">

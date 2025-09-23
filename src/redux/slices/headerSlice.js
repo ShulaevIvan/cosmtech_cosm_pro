@@ -94,7 +94,7 @@ const initialState = {
             path: '/how-to-create-cosmetic-brand',
             title: 'test',
             canonical: 'https://cosmtech.ru/how-to-create-cosmetic-brand',
-            description: 'Полезная информация по заказу и производству косметики',
+            description: 'Руководство: как создать свой косметический бренд с нуля. Статья по теме контраткное производство косметики.',
         },
         {
             id: 11,
@@ -102,7 +102,7 @@ const initialState = {
             path: '/advantages-of-contract-cosmetics-for-small-businesses',
             title: 'test',
             canonical: 'https://cosmtech.ru/how-to-create-cosmetic-brand',
-            description: 'Полезная информация по заказу и производству косметики',
+            description: 'Преимущества контрактного производства косметики для малого бизнеса. Статья по теме контраткное производство косметики.',
         },
         {
             id: 12,
@@ -112,13 +112,21 @@ const initialState = {
             canonical: 'https://cosmtech.ru/news',
             description: 'Последние новости а анонсы компании космотех',
         },
-         {
+        {
             id: 13,
             name: 'Собственные разработки компании ООО Космотех',
             path: '/tm',
             title: 'test',
             canonical: 'https://cosmtech.ru/tm',
             description: 'Собственные разработки косметики компании ООО Космотех. Список брендов и их презентация.',
+        },
+        {
+            id: 14,
+            name: 'Дизайн и упаковка для СТМ',
+            path: '/design-cosmetics',
+            title: 'test',
+            canonical: 'https://cosmtech.ru/design-cosmetics',
+            description: 'Если Вы ищете надежного партнера, способного создать успешный образ вашего бренда и обеспечить полный цикл производства по упаковке косметических продуктов, обращайтесь.',
         }
     ],
     currentPathUrl: '',

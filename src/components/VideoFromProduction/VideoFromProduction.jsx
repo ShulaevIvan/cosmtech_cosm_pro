@@ -1,11 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useRef } from "react";
 
-import labView from '../../video/labView.mp4';
-
-import filePathToBlob from '../../functions/filePathToBlob';
 import { 
     aboutProductionVideoMenu,
     aboutProductionSelectVideo
@@ -18,7 +14,6 @@ const VideoFromProduction = () => {
     const maxSelectedVideo = selectedMenu.videos.length > 0 ? selectedMenu.videos.length : 0;
     const selectedVideo = selectedMenu.videos.find((videoItem) => videoItem.selected);
     const selectedVideoIndex = selectedMenu.videos.findIndex((item) => item.id === selectedVideo.id) + 1;
-    console.log(selectedVideo)
 
     const videoMenuHandler = (id, name) => {
         dispatch(aboutProductionVideoMenu({catId: id, catName: name}));

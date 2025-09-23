@@ -1,0 +1,168 @@
+.contract-design-main-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.contract-design-text-row,
+.contract-design-what-we-do-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: space-between;
+}
+.contract-design-text-row h2 {
+    font-size: 32px;
+    margin: 0;
+}
+.contract-design-text-wrap,
+.contract-design-image-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 50%;
+}
+.contract-design-image-wrap img {
+    max-width: 100%;
+    width: 450px;
+}
+.contract-design-advantage-items-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.contract-design-advantage-items-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.contract-design-advantage-item-icon-wrap,
+.contract-design-advantage-item-description {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 20%;
+}
+.contract-design-advantage-item-icon-wrap {
+    padding: 0 10px;
+}
+.contract-design-advantage-item-description {
+    max-width: 70%;
+}
+.contract-design-what-we-do,
+.contract-design-what-you-get {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 45%;
+    min-height: 500px;
+    padding: 10px;
+    background-color: whitesmoke;
+}
+.contract-design-what-we-do-title-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.design-fits-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.design-main-services-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.design-main-services-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    max-width: 32%;
+    position: relative;
+    margin-right: 20px;
+}
+.design-main-services-item:nth-child(3n) {
+    margin: 0;
+}
+.design-main-services-item-img-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.design-main-services-item-img-wrap img {
+    width: 100%;
+    max-width: 400px;
+}
+.design-main-services-item-title-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    z-index: 5;
+    bottom: 0;
+}
+.design-main-services-item-title-wrap h3 {
+    font-size: 24px;
+    text-align: center;
+}
+.design-fits-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.design-fits-text-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 60%;
+    max-width: 800px;
+}
+.design-portfolio-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.design-portfolio-item-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 22%;
+    margin-bottom: 40px;
+}
+.design-portfolio-item-wrap img {
+    max-width: 100%;
+    width: 270px;
+}
+.design-portfolio-item-wrap:nth-child(4n) {
+    margin-right: 0;
+}

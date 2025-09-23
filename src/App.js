@@ -19,6 +19,7 @@ import './components/Articles/Articles.css';
 import './components/News/News.css';
 import './components/VideoFromProduction/VideoFromProduction.css';
 import './components/CustomTm/CustomTm.css';
+import './components/ContractDesign/ContractDesign.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';
@@ -35,6 +36,7 @@ import HowToCreateCosmeticBrand from './components/Articles/HowToCreateCosmeticB
 import AdvantagesContractCosmetics from './components/Articles/AdvantagesContractCosmetics';
 import News from './components/News/News';
 import CustomTm from './components/CustomTm/CustomTm';
+import ContractDesign from './components/ContractDesign/ContractDesign';
 
 function App() {
   
@@ -51,6 +53,7 @@ function App() {
               <Route path='/about' element = {<AboutPage />} />
               <Route path='/forclients' element = {<ForClients />} />
               <Route path='/decorative-cosmetics' element = {<DecorativeCosmetics />} />
+              <Route path='/design-cosmetics' element = {<ContractDesign />} />
               <Route path='/articles' element={<Articles />} />
               <Route path='/how-to-create-cosmetic-brand' element={<HowToCreateCosmeticBrand />} />
               <Route path='/advantages-of-contract-cosmetics-for-small-businesses' element={<AdvantagesContractCosmetics />} />
