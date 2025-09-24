@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import contractDesign from '../../img/contractDesign/test.jpg';
 import portfolioDemo from '../../img/contractDesign/portfolioDemo.png';
 import servicesDemo from '../../img/contractDesign/servicesDemo.png';
+import supportIcon from '../../img/contractDesign/support.svg';
+import expIcon from '../../img/contractDesign/exp.svg';
+import firmsIcon from '../../img/contractDesign/firms.svg';
+import itemDesign from '../../img/contractDesign/predmetCamera.jpg'
+import reDesign from '../../img/contractDesign/redesign.jpg';
+import cosmeticBrand from '../../img/contractDesign/cosmeticBrand.jpg';
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 
 const ContractDesign = () => {
@@ -23,7 +29,7 @@ const ContractDesign = () => {
                                     <div className="contract-design-advantage-items-wrap">
                                         <div className="contract-design-advantage-items-row">
                                             <div className="contract-design-advantage-item-icon-wrap">
-                                                <img src="#" alt="#" />
+                                                <img src={expIcon} alt="#" />
                                             </div>
                                             <div className="contract-design-advantage-item-description">
                                                 <p>Опыт работы с более чем пятнадцатью брендами, включающими разработку сотен уникальных SKU  в федеральном ритейле. </p>
@@ -31,7 +37,7 @@ const ContractDesign = () => {
                                         </div>
                                         <div className="contract-design-advantage-items-row">
                                             <div className="contract-design-advantage-item-icon-wrap">
-                                                <img src="#" alt="#" />
+                                                <img src={firmsIcon} alt="#" />
                                             </div>
                                             <div className="contract-design-advantage-item-description">
                                                 <p>Обширные знания рынка и тенденции развития сферы. </p>
@@ -39,7 +45,7 @@ const ContractDesign = () => {
                                         </div>
                                         <div className="contract-design-advantage-items-row">
                                             <div className="contract-design-advantage-item-icon-wrap">
-                                                <img src="#" alt="#" />
+                                                <img src={supportIcon} alt="#" />
                                             </div>
                                             <div className="contract-design-advantage-item-description">
                                                 <p>Поддержу Вас на каждом этапе процесса, гарантируя своевременное выполнение заказа и высокий уровень исполнения. </p>
@@ -91,7 +97,10 @@ const ContractDesign = () => {
                                     <h3>Запуск бренда с нуля</h3>
                                 </div>
                                 <div className="design-main-services-item-img-wrap">
-                                    <img src={servicesDemo} alt="#" />
+                                    <img src={cosmeticBrand} alt="#" />
+                                </div>
+                                <div className="design-main-services-order-btn-wrap">
+                                    <a>Получить консультацию</a>
                                 </div>
                             </div>
                             <div className="design-main-services-item">
@@ -99,7 +108,7 @@ const ContractDesign = () => {
                                     <h3>Редизайн и расширение</h3>
                                 </div>
                                 <div className="design-main-services-item-img-wrap">
-                                    <img src={servicesDemo} alt="#" />
+                                    <img src={reDesign} alt="#" />
                                 </div>
                             </div>
                             <div className="design-main-services-item">
@@ -107,7 +116,7 @@ const ContractDesign = () => {
                                     <h3>Предметная съемка</h3>
                                 </div>
                                 <div className="design-main-services-item-img-wrap">
-                                    <img src={servicesDemo} alt="#" />
+                                    <img src={itemDesign} alt="#" />
                                 </div>
                             </div>
                         </div>

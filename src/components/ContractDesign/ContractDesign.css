@@ -10,7 +10,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 1200px;
     justify-content: space-between;
 }
 .contract-design-text-row h2 {
@@ -27,7 +26,8 @@
 }
 .contract-design-image-wrap img {
     max-width: 100%;
-    width: 450px;
+    width: 500px;
+    border-radius: 10px;
 }
 .contract-design-advantage-items-wrap {
     display: flex;
@@ -56,6 +56,10 @@
 .contract-design-advantage-item-icon-wrap {
     padding: 0 10px;
 }
+.contract-design-advantage-item-icon-wrap img {
+    max-width: 70px;
+    filter: invert(13%) sepia(92%) saturate(3410%) hue-rotate(197deg) brightness(90%) contrast(104%);
+}
 .contract-design-advantage-item-description {
     max-width: 70%;
 }
@@ -64,19 +68,42 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    justify-content: flex-start;
     width: 100%;
-    max-width: 45%;
+    max-width: 40%;
     min-height: 500px;
-    padding: 10px;
+    padding: 20px 40px;
     background-color: whitesmoke;
+    border-radius: 10px;
 }
 .contract-design-what-we-do-title-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    margin-top: 10px;
     justify-content: center;
     align-items: center;
+}
+.contract-design-what-we-do-text-wrap p {
+    display: flex;
+    align-items: center;
+    line-height: 1.8;
+    line-height: 1.8;
+}
+.contract-design-what-we-do-text-wrap p::before {
+    content: url('../../img/contractDesign/check.svg');
+    filter: invert(59%) sepia(14%) saturate(2147%) hue-rotate(127deg) brightness(96%) contrast(87%);
+    margin-right: 40px;
+    width: 20px;
+    max-width: 20px;
+}
+.contract-design-what-we-do-text-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20%;
 }
 .design-fits-row {
     display: flex;
@@ -101,6 +128,7 @@
     max-width: 32%;
     position: relative;
     margin-right: 20px;
+    cursor: pointer;
 }
 .design-main-services-item:nth-child(3n) {
     margin: 0;
@@ -114,6 +142,12 @@
 .design-main-services-item-img-wrap img {
     width: 100%;
     max-width: 400px;
+    border-radius: 10px;
+    filter: grayscale();
+}
+.design-main-services-item-img-wrap img:hover {
+    filter: none;
+    transition: all ease-in-out 0.3s;
 }
 .design-main-services-item-title-wrap {
     display: flex;
@@ -121,13 +155,56 @@
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+    max-height: 40px;
     position: absolute;
     z-index: 5;
     bottom: 0;
+    background-color: darkgray;
+    border-radius: 0 0 10px 10px;
+}
+.design-main-services-item:hover .design-main-services-item-title-wrap {
+    transition: all ease-in-out 0.3s;
+    background-color: #3FD2C7;
+}
+.design-main-services-item:hover .design-main-services-item-img-wrap img {
+    filter: none;
+    transition: all ease-in-out 0.3s;
 }
 .design-main-services-item-title-wrap h3 {
-    font-size: 24px;
+    font-size: 22px;
     text-align: center;
+    color: white;
+    margin: 0;
+}
+.design-main-services-order-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 45%;
+    z-index: 5;
+}
+.design-main-services-order-btn-wrap a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 200px;
+    height: 28px;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    min-height: 18px;
+    border-radius: 5px;
 }
 .design-fits-row {
     display: flex;
