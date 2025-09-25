@@ -232,6 +232,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    cursor: pointer;
     width: 100%;
     max-width: 22%;
     margin-bottom: 40px;
@@ -239,7 +240,256 @@
 .design-portfolio-item-wrap img {
     max-width: 100%;
     width: 270px;
+    border-radius: 10px;
+    filter: grayscale();
+}
+.design-portfolio-item-wrap img:hover {
+    transition: all ease-in-out 0.3s;
+    filter: none;
 }
 .design-portfolio-item-wrap:nth-child(4n) {
     margin-right: 0;
+}
+.popup-design-service-background-wrap,
+.contract-design-portfolio-background-popup-wrap {
+    background-color: rgba(0, 0, 0, .8);
+    min-height: 200vh;
+    width: 100%;
+    position: fixed;
+    top: -50%;
+    z-index: 5;
+    animation: grow;
+    animation-duration: 0.3s;
+}
+.contract-design-portfolio-background-popup-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contract-design-portfolio-popup-close-btn::before {
+    content:  url('../../img/close_popup.svg');
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    right: 5%;
+    top: 5%;
+    z-index: 15;
+}
+.contract-design-portfolio-popup-close-btn:hover::before {
+    content:  url('../../img/close_popup_hover.svg');
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    right: 5%;
+    top: 5%;
+    z-index: 15;
+}
+.contract-design-portfolio-popup-next-btn::before {
+    content:  url('../../img/slide_arrow_left.svg');
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    left: -10%;
+    top: 48%;
+    z-index: 15;
+}
+.contract-design-portfolio-popup-prev-btn::before {
+    content:  url('../../img/slide_arrow_right.svg');
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    right: -9%;
+    top: 48%;
+    z-index: 15;
+}
+.contract-design-portfolio-popup-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+.contract-design-portfolio-popup-img-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.contract-design-portfolio-popup-img-wrap img {
+    width: 800px;
+    max-width: 100%;
+    max-height: 800px;
+}
+.popup-design-service-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 400px;
+    border: 1px solid #00458B;
+    background-color: white;
+    z-index: 6;
+    border-radius: 10px;
+    min-height: 450px;
+    padding: 20px;
+}
+.popup-design-service-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.popup-design-service-body form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 300px;
+}
+.popup-design-service-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.popup-design-service-checkbox-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+}
+.popup-design-service-body form label,
+.design-fits-form-input-wrap label {
+    color: #00458B;
+    font-size: 20px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-family: gothampro bold;
+}
+.popup-design-service-body form input {
+    min-width: 250px;
+    min-height: 30px;
+    width: 100%;
+    max-width: 280px;
+}
+.popup-design-service-order-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+.popup-design-service-select-wrap select{
+    min-height: 37px;
+    max-width: 292px;
+    min-width: 292px;
+    border-color: #00458B;
+    outline-color: #00458B;
+}
+.popup-design-service-order-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 40px;
+    padding: 0 40px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
+}
+.popup-design-service-order-btn:hover,
+.design-main-services-order-btn-wrap a:hover {
+    background-color: #00458B;
+    transition: background .4s ease;
+}
+.popup-service-design-service-policy {
+  display: none;
+}
+.popup-service-design-service-policy + label {
+  position: relative;
+  padding-left: 30px;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  color: #000;
+  cursor: pointer;
+  user-select: none;
+}
+.popup-service-design-service-policy + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.4em;
+  height: 1.4em;
+  background-image: url('../../img/form_checkbox.svg');
+  background-size: contain;
+}
+.popup-service-design-service-policy:checked + label::before {
+  border-color: #000;
+  background-image: url('../../img/form_checkbox_checked.svg');
+  background-size: contain;
+}
+.design-fits-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 40%;
+    align-items: flex-end;
+}
+.design-fits-form-wrap form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    min-height: 400px;
+    max-width: 100%;
+    padding: 20px;
+    background-color: whitesmoke;
+}
+.design-fits-form-input-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 286px;
+    margin-bottom: 10px;
+}
+.design-fits-form-input-wrap input {
+    min-width: 250px;
+    min-height: 30px;
+    width: 100%;
+    max-width: 300px;
+}
+.design-fits-form-input-wrap textarea {
+    width: 300px;
+}
+.form-mode-for-clients-get-detail-checkbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }

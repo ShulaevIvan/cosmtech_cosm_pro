@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import contractDesign from '../../img/contractDesign/test.jpg';
-import portfolioDemo from '../../img/contractDesign/portfolioDemo.png';
-import servicesDemo from '../../img/contractDesign/servicesDemo.png';
 import supportIcon from '../../img/contractDesign/support.svg';
 import expIcon from '../../img/contractDesign/exp.svg';
 import firmsIcon from '../../img/contractDesign/firms.svg';
 import itemDesign from '../../img/contractDesign/predmetCamera.jpg'
 import reDesign from '../../img/contractDesign/redesign.jpg';
 import cosmeticBrand from '../../img/contractDesign/cosmeticBrand.jpg';
+
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
+import ContractDesignPopup from "./ContractDesignPopup";
+import ContractDesignPortfolio from "./ContractDesignPortfolio";
 
 const ContractDesign = () => {
     return (
@@ -120,40 +121,16 @@ const ContractDesign = () => {
                                 </div>
                             </div>
                         </div>
+                        {/* <ContractDesignPopup /> */}
                     </div>
                 </section>
 
-                 <section>
+                <section>
                     <div className="container">
                         <div className="about-company-production-title-wrap">
                             <h2>Примеры работ</h2>
                         </div>
-                        <div className="design-portfolio-row">
-                            <div className="design-portfolio-item-wrap">
-                                <img src={portfolioDemo} alt="#" />
-                            </div>
-                             <div className="design-portfolio-item-wrap">
-                                <img src={portfolioDemo} alt="#" />
-                            </div>
-                             <div className="design-portfolio-item-wrap">
-                                <img src={portfolioDemo} alt="#" />
-                            </div>
-                             <div className="design-portfolio-item-wrap">
-                                <img src={portfolioDemo} alt="#" />
-                            </div>
-                             <div className="design-portfolio-item-wrap">
-                                <img src={portfolioDemo} alt="#" />
-                            </div>
-                            <div className="design-portfolio-item-wrap">
-                                <img src={portfolioDemo} alt="#" />
-                            </div>
-                             <div className="design-portfolio-item-wrap">
-                                <img src={portfolioDemo} alt="#" />
-                            </div>
-                            <div className="design-portfolio-item-wrap">
-                                <img src={portfolioDemo} alt="#" />
-                            </div>
-                        </div>
+                        <ContractDesignPortfolio />
                     </div>
                 </section>
 
@@ -171,14 +148,18 @@ const ContractDesign = () => {
                             </div>
                             <div className="design-fits-form-wrap">
                                 <form>
-                                    <div>
+                                    <h3>Отправить запрос</h3>
+                                    <div className="design-fits-form-input-wrap">
+                                        <label>Имя</label>
                                         <input type="text" placeholder="input" />
                                     </div>
-                                    <div>
+                                    <div className="design-fits-form-input-wrap">
+                                        <label>Телефон</label>
                                         <input type="text" placeholder="input" />
                                     </div>
-                                    <div>
-                                        <textarea type="text" placeholder="input" />
+                                    <div className="design-fits-form-input-wrap">
+                                        <label>Комментарий</label>
+                                        <textarea id="test" placeholder="input" />
                                     </div>
                                     <div className="form-mode-for-clients-get-detail-checkbox">
                                         <input
@@ -190,8 +171,8 @@ const ContractDesign = () => {
                                         ></label>
                                         <span>согласен с <Link to={'/policy'}>политикой конфидициальности</Link></span>
                                     </div>
-                                    <div>
-                                        <button>Отправить</button>
+                                    <div className="popup-design-service-order-btn-wrap">
+                                        <span className="popup-design-service-order-btn">Отправить</span>
                                     </div>
                                 </form>
                             </div>
