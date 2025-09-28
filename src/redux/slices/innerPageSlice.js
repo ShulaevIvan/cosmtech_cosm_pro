@@ -11,6 +11,7 @@ import promoVideo from '../../video/compress_promo_video.mp4';
 import backgroundServices from '../../img/services_bg.jpg';
 import backgroundAbout from '../../img/about.jpg';
 import backgroundContacts from '../../img/contacts.jpg';
+import backgroundDesign from '../../img/design_bg.jpg';
 import innerHeaderImg from '../../img/1920x400.png';
 import serviceLabImg from '../../img/service_lab.jpg';
 import serviceStm from '../../img/service_stm.jpg';
@@ -189,7 +190,7 @@ const initialState = {
         },
         { 
             page: '/job', 
-            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            backgroundImg: backgroundServices, 
             title: 'Вакансии',
             description: 'Работа в ООО "Косметические Технологии" ',
             seoDescription: 'Вакансии в компании ООО "Косметические Технологии"',
@@ -212,7 +213,7 @@ const initialState = {
         },
         { 
             page: '/forclients', 
-            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            backgroundImg: backgroundAbout, 
             title: 'Для клиентов',
             description: 'Полезная информация и дополнительные услуги ',
             seoDescription: 'Полезная информация и дополнительная выгода для клиентов компании "Косметические Технологии"',
@@ -235,7 +236,7 @@ const initialState = {
         },
         {
             page: '/decorative-cosmetics',
-            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            backgroundImg: backgroundServices, 
             title: 'Производство декоративной косметики',
             description: 'Услуги по контрактному производству декоративной косметики в Санкт-Петербурге',
             seoDescription: 'Контрактное производство декоративной косметики',
@@ -258,7 +259,7 @@ const initialState = {
         },
          {
             page: '/design-cosmetics',
-            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            backgroundImg: backgroundDesign, 
             title: 'Дизайн и упаковка',
             description: 'Услуги по дизайну этикеток и упаковки для косметических продуктов, в Санкт-Петербурге',
             seoDescription: 'Если Вы ищете надежного партнера, способного создать успешный образ вашего бренда и обеспечить полный цикл производства по упаковке косметических продуктов, обращайтесь.',
@@ -281,7 +282,7 @@ const initialState = {
         },
         {
             page: '/articles',
-            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            backgroundImg: backgroundServices, 
             title: 'Статьи на тему производства косметики',
             description: 'Статьи на тему производства косметики',
             seoDescription: 'Полезная информация для тех, кто работает в сфере косметики',
@@ -304,7 +305,7 @@ const initialState = {
         },
         {
             page: '/how-to-create-cosmetic-brand',
-            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            backgroundImg: backgroundServices, 
             title: 'Cвой косметический бренд с нуля.',
             description: 'Как создать свой косметический бренд с нуля: пошаговое руководство.',
             seoDescription: 'Руководство: как создать свой косметический бренд с нуля. Статья по теме контраткное производство косметики.',
@@ -327,7 +328,7 @@ const initialState = {
         },
         {
             page: '/advantages-of-contract-cosmetics-for-small-businesses',
-            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            backgroundImg: backgroundServices, 
             title: 'Производство косметики для малого бизнеса',
             description: 'Преимущества контрактного производства косметики для малого бизнеса.',
             seoDescription: 'Преимущества контрактного производства косметики для малого бизнеса. Статья по теме контраткное производство косметики.',
@@ -350,7 +351,7 @@ const initialState = {
         },
         {
             page: '/news',
-            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            backgroundImg: backgroundServices, 
             title: 'Новости компании Космотех',
             description: `Последние новости на дату ${new Date().toLocaleDateString('ru')}`,
             seoDescription: `Новости и анонсы компании  ООО Космотех`,
@@ -373,7 +374,7 @@ const initialState = {
         },
         {
             page: '/tm',
-            backgroundImg: '/static/media/services_bg.d242bb9d20339ff0fbff.jpg', 
+            backgroundImg: backgroundServices, 
             title: 'Собственные разработки компании',
             description: `Косметические бренды выпускаемые нашей копанией`,
             seoDescription: 'Косметические бренды выпускаемые компанией ООО Космотех. Список брендов и краткая презентация.',

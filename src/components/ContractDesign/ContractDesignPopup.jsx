@@ -1,35 +1,59 @@
 import React from "react";
 
-const ContractDesignPopup = () => {
+const ContractDesignPopup = (props) => {
+
+    const serviceItem = props.serviceItem;
+    const orderForm = serviceItem.orderForm;
+    console.log(serviceItem)
     return (
         <React.Fragment>
             <div className="popup-design-service-background-wrap">
                 <div className="popup-design-service-wrap">
                     <div className="sticky-sidemenu-tz-popup-close-btn-wrap">
-                        <span className="sticky-sidemenu-tz-popup-close-btn"></span>
+                        <span 
+                            className="sticky-sidemenu-tz-popup-close-btn"
+                            onClick={() => props.popupHandler(serviceItem.id)}
+                        ></span>
                     </div>
                     <div className="popup-design-service-body">
                         <form>
-                            <label htmlFor="popup-design-service-input-name">Имя</label>
-                            <div className="popup-design-service-input-wrap">
-                                <input type="text" placeholder="test" id="popup-design-service-input-name" />
-                            </div>
-                            <label htmlFor="popup-design-service-input-phone">Телефон</label>
-                            <div className="popup-design-service-input-wrap">
-                                <input type="text" placeholder="test"  id="popup-design-service-input-phone" />
-                            </div>
-                            <label id="popup-design-service-input-email">Услуга</label>
-                            <div className="popup-design-service-select-wrap">
-                                <select>
-                                    <option>Запуск бренда с нуля</option>
-                                    <option>Услуги по дизайну</option>
-                                    <option>Фото/Видео съемка</option>
-                                </select>
-                            </div>
+                            {orderForm.fields.map((formItem) => {
+                                return (
+                                    <React.Fragment key={`form-item-design-${formItem.id}`}>
+                                        {formItem.type === 'options' ? 
+                                            <React.Fragment>
+                                                <label id="popup-design-service-input-email">Услуга</label>
+                                                <div className="popup-design-service-select-wrap">
+                                                    <select>
+                                                        {formItem.services.map((optionItem) => {
+                                                            return (
+                                                                <React.Fragment key={optionItem.id}>
+                                                                    <option>{optionItem.title}</option>
+                                                                </React.Fragment>
+                                                            )
+                                                        })}
+                                                    </select>
+                                                </div>
+                                            </React.Fragment>
+                                        
+                                        : 
+                                            <React.Fragment>
+                                                <label htmlFor="popup-design-service-input-name">{formItem.title}</label>
+                                                <div className="popup-design-service-input-wrap">
+                                                    <input type="text" placeholder="test" id="popup-design-service-input-name" />
+                                                </div>
+                                            </React.Fragment>
+                                        
+                                        }
+                                        
+                                        
+                                    </React.Fragment>
+                                )
+                            })}
                             <div className="popup-design-service-checkbox-wrap">
                                 <div className="form-mode-checkbox">
                                     <input type="checkbox" id="popup-service-design-service-policy" className="popup-service-design-service-policy" />
-                                    <label for="popup-service-design-service-policy"></label>
+                                    <label htmlFor="popup-service-design-service-policy"></label>
                                     <span>согласен с <a href="/policy">политикой конфидициальности</a></span>
                                 </div>
                             </div>

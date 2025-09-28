@@ -187,6 +187,10 @@
     top: 45%;
     z-index: 5;
 }
+.design-main-services-order-btn-wrap.active {
+    animation-duration: 0.5s;
+    animation-name: grow;
+}
 .design-main-services-order-btn-wrap a {
     display: flex;
     align-items: center;
@@ -465,6 +469,7 @@
     min-height: 400px;
     max-width: 100%;
     padding: 20px;
+    border-radius: 10px;
     background-color: whitesmoke;
 }
 .design-fits-form-input-wrap {

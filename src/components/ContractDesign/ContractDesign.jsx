@@ -1,18 +1,32 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { 
+    serviceFormBtnActive,
+    serviceFormPopupActive
+} from "../../redux/slices/designPageSlice";
 import contractDesign from '../../img/contractDesign/test.jpg';
 import supportIcon from '../../img/contractDesign/support.svg';
 import expIcon from '../../img/contractDesign/exp.svg';
 import firmsIcon from '../../img/contractDesign/firms.svg';
-import itemDesign from '../../img/contractDesign/predmetCamera.jpg'
-import reDesign from '../../img/contractDesign/redesign.jpg';
-import cosmeticBrand from '../../img/contractDesign/cosmeticBrand.jpg';
 
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import ContractDesignPopup from "./ContractDesignPopup";
 import ContractDesignPortfolio from "./ContractDesignPortfolio";
 
 const ContractDesign = () => {
+    const designState = useSelector((state) => state.design);
+    const dispatch = useDispatch();
+
+    const designServiceFormHandler = (serviceId, status=false) => {
+        dispatch(serviceFormBtnActive({ serviceId: serviceId, hide: status }));
+    };
+
+    const servicePopupFormHandler = (serviceId) => {
+        dispatch(serviceFormPopupActive({ serviceId: serviceId }));
+    };
+
+
     return (
         <React.Fragment>
             <InnerPageHeader />
@@ -90,45 +104,57 @@ const ContractDesign = () => {
                 <section>
                     <div className="container">
                         <div className="about-company-production-title-wrap">
-                            <h2>Основные направления дизайна и упаковки</h2>
+                            <h2>Услуги по дизайну упаковки</h2>
                         </div>
                         <div className="design-main-services-row">
-                            <div className="design-main-services-item">
-                                <div className="design-main-services-item-title-wrap">
-                                    <h3>Запуск бренда с нуля</h3>
-                                </div>
-                                <div className="design-main-services-item-img-wrap">
-                                    <img src={cosmeticBrand} alt="#" />
-                                </div>
-                                <div className="design-main-services-order-btn-wrap">
-                                    <a>Получить консультацию</a>
-                                </div>
-                            </div>
-                            <div className="design-main-services-item">
-                                <div className="design-main-services-item-title-wrap">
-                                    <h3>Редизайн и расширение</h3>
-                                </div>
-                                <div className="design-main-services-item-img-wrap">
-                                    <img src={reDesign} alt="#" />
-                                </div>
-                            </div>
-                            <div className="design-main-services-item">
-                                <div className="design-main-services-item-title-wrap">
-                                    <h3>Предметная съемка</h3>
-                                </div>
-                                <div className="design-main-services-item-img-wrap">
-                                    <img src={itemDesign} alt="#" />
-                                </div>
-                            </div>
+                            {designState.mainServices.map((serviceItem) => {
+                                return (
+                                    <React.Fragment key={serviceItem.id}>
+                                        <div 
+                                            className="design-main-services-item"
+                                            onMouseEnter={
+                                                !designState.mainServices.find((item) => item.orderForm.popupFormActive) ? 
+                                                () => designServiceFormHandler(serviceItem.id) : null
+                                            }
+                                            onMouseLeave={
+                                                !designState.mainServices.find((item) => item.orderForm.popupFormActive) ? 
+                                                () => designServiceFormHandler(serviceItem.id, true) : null
+                                            }
+                                        >
+                                            <div
+                                                id={serviceItem.id}
+                                                className="design-main-services-item-title-wrap"
+                                            >
+                                                <h3>{serviceItem.title}</h3>
+                                            </div>
+                                            <div className="design-main-services-item-img-wrap">
+                                                <img src={serviceItem.bgImage.src} alt={serviceItem.bgImage.alt} />
+                                            </div>
+                                            {serviceItem.orderForm && serviceItem.orderForm.active ? 
+                                                <React.Fragment>
+                                                    <div className={`design-main-services-order-btn-wrap ${serviceItem.orderForm.active ? 'active' : ''}`}>
+                                                        <a onClick={() => servicePopupFormHandler(serviceItem.id)}>Получить консультацию</a>
+                                                    </div>
+                                                </React.Fragment>
+                                            : null}
+                                        </div>
+                                    </React.Fragment>
+                                )
+                            })}
                         </div>
-                        {/* <ContractDesignPopup /> */}
+                        {designState.mainServices.find((item) => item.orderForm.popupFormActive) ? 
+                            <ContractDesignPopup 
+                                popupHandler={servicePopupFormHandler}
+                                serviceItem={designState.mainServices.find((item) => item.orderForm.popupFormActive)}
+                            /> 
+                        : null}
                     </div>
                 </section>
 
                 <section>
                     <div className="container">
                         <div className="about-company-production-title-wrap">
-                            <h2>Примеры работ</h2>
+                            <h2>Примеры работ с описанием</h2>
                         </div>
                         <ContractDesignPortfolio />
                     </div>
