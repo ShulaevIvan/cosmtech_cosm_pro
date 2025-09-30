@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import brandServiceImg from '../../img/contractDesign/cosmeticBrand.jpg';
 import predmetCameraServiceImg from '../../img/contractDesign/predmetCamera.jpg';
 import redesignServiceImg from '../../img/contractDesign/redesign.jpg';
+import portfolioDemoImg from '../../img/contractDesign/portfolio/portfolioDemo.jpg'
 const importAllImages = (ctxWebpuck) => {
     const images = {};
     ctxWebpuck.keys().forEach((item, index) => { images[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
@@ -192,7 +193,87 @@ const initialState = {
                 ],
             }
         }
-    ]
+    ],
+    portfolio: {
+        portfolioItems: [
+            {
+                id: 1,
+                name: 'Дизайн упаковки мыла',
+                title: '',
+                img: portfolioDemoImg,
+                imgAlt: '#',
+                imgBig: portfolioDemoImg,
+                imgBigAlt: '#',
+            },
+            {
+                id: 2,
+                name: 'Дизайн подарочного набора',
+                title: '',
+                img: portfolioDemoImg,
+                imgAlt: '#',
+                imgBig: portfolioDemoImg,
+                imgBigAlt: '#',
+            },
+            {
+                id: 3,
+                name: 'Дизайн линии антиперспирантов',
+                title: '',
+                img: portfolioDemoImg,
+                imgAlt: '#',
+                imgBig: portfolioDemoImg,
+                imgBigAlt: '#',
+            },
+            {
+                id: 4,
+                name: 'Дизайн упаковки мыла',
+                title: '',
+                img: portfolioDemoImg,
+                imgAlt: '#',
+                imgBig: portfolioDemoImg,
+                imgBigAlt: '#',
+            },
+            {
+                id: 5,
+                name: 'Дизайн упаковки кремов для рук',
+                title: '',
+                img: portfolioDemoImg,
+                imgAlt: '#',
+                imgBig: portfolioDemoImg,
+                imgBigAlt: '#',
+            },
+            {
+                id: 6,
+                name: 'Дизайн упаковки мыла',
+                title: '',
+                img: portfolioDemoImg,
+                imgAlt: '#',
+                imgBig: portfolioDemoImg,
+                imgBigAlt: '#',
+            },
+            {
+                id: 7,
+                name: 'Дизайн упаковки кремов для рук',
+                title: '',
+                img: portfolioDemoImg,
+                imgAlt: '#',
+                imgBig: portfolioDemoImg,
+                imgBigAlt: '#',
+            },
+            {
+                id: 8,
+                name: 'Дизайн упаковки кремов для рук',
+                title: '',
+                img: portfolioDemoImg,
+                imgAlt: '#',
+                imgBig: portfolioDemoImg,
+                imgBigAlt: '#',
+            }
+        ],
+        portfolioPopupInfo: {
+            popupActive: false,
+            selectedPortfolio: false
+        }
+    }
 };
 
 
@@ -251,6 +332,12 @@ const designPageSlice = createSlice({
                 }
             })
         },
+        portfolioPopupHandler(state) {
+            state.portfolio.portfolioPopupInfo =  {
+                popupActive: state.portfolio.portfolioPopupInfo.popupActive ? false : true,
+                selectedPortfolio: false
+            }
+        },
         testRed(state, action) {
 
         }
@@ -260,6 +347,7 @@ const designPageSlice = createSlice({
 export const {
     serviceFormBtnActive,
     serviceFormPopupActive,
+    portfolioPopupHandler,
     testRed
 } = designPageSlice.actions;
 export default designPageSlice.reducer;

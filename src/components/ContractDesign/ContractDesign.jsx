@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { 
     serviceFormBtnActive,
-    serviceFormPopupActive
+    serviceFormPopupActive,
+    portfolioPopupHandler
 } from "../../redux/slices/designPageSlice";
 import contractDesign from '../../img/contractDesign/test.jpg';
 import supportIcon from '../../img/contractDesign/support.svg';
@@ -24,6 +25,10 @@ const ContractDesign = () => {
 
     const servicePopupFormHandler = (serviceId) => {
         dispatch(serviceFormPopupActive({ serviceId: serviceId }));
+    };
+
+    const portfolioPopupHandler = (portfolioId) => {
+        dispatch(portfolioPopupHandler());
     };
 
 
@@ -156,7 +161,10 @@ const ContractDesign = () => {
                         <div className="about-company-production-title-wrap">
                             <h2>Примеры работ с описанием</h2>
                         </div>
-                        <ContractDesignPortfolio />
+                        <ContractDesignPortfolio 
+                            portfolioItems={designState.portfolio.portfolioItems}
+                            portfolioInfoPopupHandler={portfolioPopupHandler}
+                        />
                     </div>
                 </section>
 

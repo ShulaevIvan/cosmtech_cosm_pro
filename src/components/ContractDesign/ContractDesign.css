@@ -231,6 +231,7 @@
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    align-items: end;
 }
 .design-portfolio-item-wrap {
     display: flex;
@@ -240,6 +241,18 @@
     width: 100%;
     max-width: 22%;
     margin-bottom: 40px;
+}
+.design-portfolio-item-title-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+.design-portfolio-item-title-wrap h4 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
 }
 .design-portfolio-item-wrap img {
     max-width: 100%;
@@ -317,6 +330,66 @@
     position: relative;
     width: 100%;
     max-width: 800px;
+}
+.contract-design-portfolio-workcase-body {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    max-width: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: white;
+}
+.contract-design-portfolio-workcase-img-big-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.contract-design-portfolio-workcase-text-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0 20px;
+}
+.contract-design-portfolio-workcase-text-wrap p {
+    margin: 10px;
+}
+.contract-design-portfolio-workcase-img-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.contract-design-portfolio-workcase-img-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+}
+.contract-design-portfolio-workcase-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+.contract-design-portfolio-workcase-img-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 48%;
+    margin-bottom: 5px;
+}
+.contract-design-portfolio-workcase-img-item:nth-child(odd) {
+    margin-right: 5px;
+}
+.contract-design-portfolio-workcase-img-item img  {
+    max-height: 200px;
 }
 .contract-design-portfolio-popup-img-wrap {
     display: flex;
