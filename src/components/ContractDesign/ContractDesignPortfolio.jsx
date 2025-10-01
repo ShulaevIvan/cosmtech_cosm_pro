@@ -7,20 +7,28 @@ import ContractDesignWorkCase from "./ContractDesignWorkCase";
 
 const ContractDesignPortfolio = (props) => {
     const portfolioState = props.portfolioState;
-    const portfolioItems = props.portfolioItems;
+
     return (
         <React.Fragment>
-            {portfolioState.portfolioPopupInfo.active ? <ContractDesignPortfolioPopup /> : null}
-            <ContractDesignWorkCase />
+            {/* {portfolioState.portfolioPopupInfo.popupActive ? <ContractDesignPortfolioPopup /> : null} */}
+            {portfolioState.portfolioPopupInfo.popupActive ? 
+                <ContractDesignWorkCase 
+                    popupHandler={props.portfolioInfoPopupHandler}
+                    portfolioInfo={portfolioState.portfolioPopupInfo}
+                />
+            : null}
             <div className="design-portfolio-row">
-                {portfolioItems.map((portfolioItem) => {
+                {portfolioState.portfolioItems.map((portfolioItem) => {
                     return (
                         <React.Fragment key={portfolioItem.id}>
-                            <div className="design-portfolio-item-wrap">
+                            <div 
+                                className="design-portfolio-item-wrap"
+                                onClick={() => props.portfolioInfoPopupHandler(portfolioItem.id)}
+                            >
                                 <div className="design-portfolio-item-title-wrap">
                                 <h4>{portfolioItem.name}</h4>
                             </div>
-                            <img src={portfolioItem.img} alt={portfolioItem.imgAlt} />
+                            <img src={portfolioItem.mainImg} alt={portfolioItem.mainImgAlt} />
                         </div>
                         </React.Fragment>
                     )

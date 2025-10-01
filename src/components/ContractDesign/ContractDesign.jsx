@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { 
     serviceFormBtnActive,
     serviceFormPopupActive,
-    portfolioPopupHandler
+    portfolioWorkCasePopup
 } from "../../redux/slices/designPageSlice";
 import contractDesign from '../../img/contractDesign/test.jpg';
 import supportIcon from '../../img/contractDesign/support.svg';
@@ -28,7 +28,7 @@ const ContractDesign = () => {
     };
 
     const portfolioPopupHandler = (portfolioId) => {
-        dispatch(portfolioPopupHandler());
+        dispatch(portfolioWorkCasePopup({portfolioId: portfolioId}));
     };
 
 
@@ -161,7 +161,8 @@ const ContractDesign = () => {
                         <div className="about-company-production-title-wrap">
                             <h2>Примеры работ с описанием</h2>
                         </div>
-                        <ContractDesignPortfolio 
+                        <ContractDesignPortfolio
+                            portfolioState={designState.portfolio} 
                             portfolioItems={designState.portfolio.portfolioItems}
                             portfolioInfoPopupHandler={portfolioPopupHandler}
                         />
