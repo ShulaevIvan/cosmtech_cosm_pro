@@ -6,7 +6,7 @@ const ContractDesignWorkCase = (props) => {
     const portfolioState = props.portfolioInfo;
     const portfolioData = portfolioState.selectedPortfolio;
     const portfolioContent = portfolioData.content;
-    console.log(portfolioContent.paragraphs)
+    
     return (
         <React.Fragment>
             {/* <ContractDesignPortfolioPopup /> */}
@@ -34,7 +34,7 @@ const ContractDesignWorkCase = (props) => {
                             return (
                                 <React.Fragment key={galItem.id}>
                                     <div className="contract-design-portfolio-workcase-img-item">
-                                        <img src={demo} alt="#" />
+                                        <img src={galItem.img} alt={galItem.alt} />
                                     </div>
                                 </React.Fragment>
                             )

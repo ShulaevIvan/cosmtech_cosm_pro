@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { 
     serviceFormBtnActive,
     serviceFormPopupActive,
-    portfolioWorkCasePopup
+    portfolioWorkCasePopup,
+    designServiceFormInput
 } from "../../redux/slices/designPageSlice";
 import contractDesign from '../../img/contractDesign/test.jpg';
 import supportIcon from '../../img/contractDesign/support.svg';
@@ -27,9 +28,15 @@ const ContractDesign = () => {
         dispatch(serviceFormPopupActive({ serviceId: serviceId }));
     };
 
+    const servicePopupFormInputHandler = (inputId, inputType, inputRef, formId) => {
+        console.log(inputType)
+        dispatch(designServiceFormInput({ inputId: inputId, inputType: inputType, inputValue: inputRef.value, formId}));
+    };
+
     const portfolioPopupHandler = (portfolioId) => {
         dispatch(portfolioWorkCasePopup({portfolioId: portfolioId}));
     };
+
 
 
     return (
@@ -40,10 +47,10 @@ const ContractDesign = () => {
                     <div className="container">
                         <div className="contract-design-text-row">
                             <div className="contract-design-image-wrap">
-                                <img src={contractDesign} alt="test" />
+                                <img src={contractDesign} alt="Услуги дизайна упаковки для косметики в Санкт-Петербурге" />
                             </div>
                             <div className="contract-design-text-wrap">
-                                <h3>Упаковка косметики под ключ</h3>
+                                <h3>Разарботка дизайна упаковки под ключ</h3>
                                 <p>Если вы ищете надежного партнера, способного создать успешный образ вашего бренда и обеспечить полный цикл работ по дизайну косметических продуктов, обращайтесь к профессиональному дизайнеру упаковки с шестилетним опытом работы в сфере косметики и бытовой химии.</p>
                                 <div className="contract-design-advantage-wrap">
                                     <div className="contract-design-advantage-items-wrap">
@@ -150,7 +157,9 @@ const ContractDesign = () => {
                         {designState.mainServices.find((item) => item.orderForm.popupFormActive) ? 
                             <ContractDesignPopup 
                                 popupHandler={servicePopupFormHandler}
+                                inputHandler={servicePopupFormInputHandler}
                                 serviceItem={designState.mainServices.find((item) => item.orderForm.popupFormActive)}
+                                formId={designState.mainServices.find((item) => item.orderForm.popupFormActive).id}
                             /> 
                         : null}
                     </div>

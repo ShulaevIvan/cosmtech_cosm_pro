@@ -1,17 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import validateName from "../../functions/validateName";
+import validatePhone from "../../functions/validatePhone";
+
+
 import brandServiceImg from '../../img/contractDesign/cosmeticBrand.jpg';
 import predmetCameraServiceImg from '../../img/contractDesign/predmetCamera.jpg';
 import redesignServiceImg from '../../img/contractDesign/redesign.jpg';
 import portfolioDemoImg from '../../img/contractDesign/portfolio/portfolioDemo.jpg'
-import workcaseBigImg from '../../img/contractDesign/workcase/demo.png';
-import workcase1MainMin from '../../img/contractDesign/workcase/case_1/workcase_1_main_min.jpg';
-import workcase2MainMin from '../../img/contractDesign/workcase/case_2/workcase_2_main_min.jpg';
-import workcase3MainMin from '../../img/contractDesign/workcase/case_3/workcase_3_main_min.jpg';
-import workcase4MainMin from '../../img/contractDesign/workcase/case_4/workcase_4_main_min.jpg';
-import workcase5MainMin from '../../img/contractDesign/workcase/case_5/workcase_5_main_min.jpg';
-import workcase6MainMin from '../../img/contractDesign/workcase/case_6/workcase_6_main_min.jpg';
-import workcase7MainMin from '../../img/contractDesign/workcase/case_7/workcase_7_main_min.jpg';
-import workcase8MainMin from '../../img/contractDesign/workcase/case_8/workcase_8_main_min.jpg';
 
 
 const importAllImages = (ctxWebpuck) => {
@@ -19,14 +14,41 @@ const importAllImages = (ctxWebpuck) => {
     ctxWebpuck.keys().forEach((item, index) => { images[item.replace('./', '').replace(/.\w+$/, '')] = ctxWebpuck(item); });
     return images;
 };
-const designImages = importAllImages(require.context('../../img/articles', false, /\.(png|jpe?g|svg)$/));
 
-// const { 
-//     independenceContractMin,
-//     stmCosmeticMin,
-//     stmCosmeticBanner,
-//     stmCosmeticBanner2,
-// } = articlesImages;
+const workcaseMain1Img = importAllImages(require.context('../../img/contractDesign/workcase/case_1/', false, /\.(png|jpe?g|svg)$/));
+const workcaseMain2Img = importAllImages(require.context('../../img/contractDesign/workcase/case_2/', false, /\.(png|jpe?g|svg)$/));
+const workcaseMain3Img = importAllImages(require.context('../../img/contractDesign/workcase/case_3/', false, /\.(png|jpe?g|svg)$/));
+const workcaseMain4Img = importAllImages(require.context('../../img/contractDesign/workcase/case_4/', false, /\.(png|jpe?g|svg)$/));
+const workcaseMain5Img = importAllImages(require.context('../../img/contractDesign/workcase/case_5/', false, /\.(png|jpe?g|svg)$/));
+const workcaseMain6Img = importAllImages(require.context('../../img/contractDesign/workcase/case_6/', false, /\.(png|jpe?g|svg)$/));
+const workcaseMain7Img = importAllImages(require.context('../../img/contractDesign/workcase/case_7/', false, /\.(png|jpe?g|svg)$/));
+const workcaseMain8Img = importAllImages(require.context('../../img/contractDesign/workcase/case_8/', false, /\.(png|jpe?g|svg)$/));
+const workcaseOther1 = importAllImages(require.context('../../img/contractDesign/workcase/case_1/other', false, /\.(png|jpe?g|svg)$/));
+const workcaseOther2 = importAllImages(require.context('../../img/contractDesign/workcase/case_2/other', false, /\.(png|jpe?g|svg)$/));
+const workcaseOther3 = importAllImages(require.context('../../img/contractDesign/workcase/case_3/other', false, /\.(png|jpe?g|svg)$/));
+const workcaseOther4 = importAllImages(require.context('../../img/contractDesign/workcase/case_4/other', false, /\.(png|jpe?g|svg)$/));
+const workcaseOther5 = importAllImages(require.context('../../img/contractDesign/workcase/case_5/other', false, /\.(png|jpe?g|svg)$/));
+const workcaseOther6 = importAllImages(require.context('../../img/contractDesign/workcase/case_6/other', false, /\.(png|jpe?g|svg)$/));
+const workcaseOther7 = importAllImages(require.context('../../img/contractDesign/workcase/case_7/other', false, /\.(png|jpe?g|svg)$/));
+const workcaseOther8 = importAllImages(require.context('../../img/contractDesign/workcase/case_8/other', false, /\.(png|jpe?g|svg)$/));
+
+const { workcase_1_main_min, workcase_1_main } = workcaseMain1Img
+const { workcase_2_main_min, workcase_2_main } = workcaseMain2Img
+const { workcase_3_main_min, workcase_3_main } = workcaseMain3Img
+const { workcase_4_main_min, workcase_4_main } = workcaseMain4Img
+const { workcase_5_main_min, workcase_5_main } = workcaseMain5Img
+const { workcase_6_main_min, workcase_6_main } = workcaseMain6Img
+const { workcase_7_main_min, workcase_7_main } = workcaseMain7Img
+const { workcase_8_main_min, workcase_8_main } = workcaseMain8Img
+const { workcase1Other1, workcase1Other2, workcase1Other3, workcase1Other4, workcase1Other5,} = workcaseOther1;
+const { workcase2Other1, workcase2Other2, workcase2Other3, workcase2Other4, workcase2Other5, workcase2Other6 } = workcaseOther2;
+const { workcase3Other1, workcase3Other2, workcase3Other3, workcase3Other4, workcase3Other5, workcase3Other6 } = workcaseOther3;
+const { workcase4Other1, workcase4Other2, } = workcaseOther4;
+const { workcase5Other1, workcase5Other2, workcase5Other3 } = workcaseOther5;
+const { workcase6Other1, workcase6Other2, workcase6Other4, workcase6Other5, } = workcaseOther6;
+const { workcase7Other1, workcase7Other2, workcase7Other3, workcase7Other4, } = workcaseOther7;
+const { workcase8Other1, workcase8Other2, workcase8Other3, workcase8Other4, workcase8Other5, workcase8Other6} = workcaseOther8;
+
 
 const initialState = {
     mainServices: [
@@ -67,20 +89,20 @@ const initialState = {
                         services: [
                             {
                                 id: 1,
-                                name: 'service1',
-                                title: 'Услуга 1',
-                                selected: false
+                                name: 'brand',
+                                value: 'Запуск бренда с нуля',
+                                selected: true
                             },
                             {
                                 id: 2,
-                                name: 'service2',
-                                title: 'Услуга 2',
-                                 selected: false
+                                name: 'design',
+                                value: 'Усулги дизайна',
+                                selected: false
                             },
                             {
                                 id: 3,
-                                name: 'service3',
-                                title: 'Услуга 3',
+                                name: 'camera',
+                                value: 'Предметная съемка косметики',
                                 selected: false
                             }
                         ]
@@ -125,22 +147,22 @@ const initialState = {
                         services: [
                             {
                                 id: 1,
-                                name: 'service1',
-                                title: 'Услуга 1',
+                                name: 'brand',
+                                value: 'Запуск бренда с нуля',
                                 selected: false
                             },
                             {
                                 id: 2,
-                                name: 'service2',
-                                title: 'Услуга 2',
-                                 selected: false
+                                name: 'design',
+                                value: 'Усулги дизайна',
+                                selected: true
                             },
                             {
                                 id: 3,
-                                name: 'service3',
-                                title: 'Услуга 3',
+                                name: 'camera',
+                                value: 'Предметная съемка косметики',
                                 selected: false
-                            },
+                            }
                         ]
                     }
                 ],
@@ -183,22 +205,22 @@ const initialState = {
                         services: [
                             {
                                 id: 1,
-                                name: 'service1',
-                                title: 'Услуга 1',
+                                name: 'brand',
+                                value: 'Запуск бренда с нуля',
                                 selected: false
                             },
                             {
                                 id: 2,
-                                name: 'service2',
-                                title: 'Услуга 2',
-                                 selected: false
+                                name: 'design',
+                                value: 'Усулги дизайна',
+                                selected: false
                             },
                             {
                                 id: 3,
-                                name: 'service3',
-                                title: 'Услуга 3',
-                                selected: false
-                            },
+                                name: 'camera',
+                                value: 'Предметная съемка косметики',
+                                selected: true
+                            }
                         ]
                     }
                 ],
@@ -211,9 +233,9 @@ const initialState = {
                 id: 1,
                 name: 'Фирменный стиль уходовой косметики',
                 title: '',
-                mainImg: workcase1MainMin,
+                mainImg: workcase_1_main_min,
                 mainImgAlt: '#',
-                mainImgBig: workcaseBigImg,
+                mainImgBig: workcase_1_main,
                 mainImgBigAlt: '#',
                 selected: false,
                 content: {
@@ -226,43 +248,36 @@ const initialState = {
                     gallery: [
                         {
                             id: 1,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase1Other1,
+                            imgAlt: 'Услуги по созданию фирменного стиля для уходовой косметики портфолио дизайна космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 2,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase1Other2,
+                            imgAlt: 'Услуги по созданию фирменного стиля для уходовой косметики портфолио дизайна космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 3,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase1Other3,
+                            imgAlt: 'Услуги по созданию фирменного стиля для уходовой косметики портфолио дизайна космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                             {
                             id: 4,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase1Other4,
+                            imgAlt: 'Фирменный стиль для уходовой косметики портфолио дизайна космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 5,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
-                            imgBig: portfolioDemoImg,
-                            imgBigAlt: '#',
-                        },
-                        {
-                            id: 6,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase1Other5,
+                            imgAlt: 'Услуги по созданию фирменного стиля для уходовой косметики портфолио дизайна космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
@@ -273,9 +288,9 @@ const initialState = {
                 id: 2,
                 name: 'Дизайн подарочного набора  «House of Elegance»',
                 title: '',
-                mainImg: workcase2MainMin,
+                mainImg: workcase_2_main_min,
                 mainImgAlt: '#',
-                mainImgBig: workcaseBigImg,
+                mainImgBig: workcase_2_main,
                 mainImgBigAlt: '#',
                 selected: false,
                 content: {
@@ -288,29 +303,43 @@ const initialState = {
                     gallery: [
                         {
                             id: 1,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase2Other1,
+                            imgAlt: 'Услуги дизайна упаковки для подарочного набора  «House of Elegance» портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 2,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase2Other2,
+                            imgAlt: 'Услуги дизайна упаковки для подарочного набора  «House of Elegance» портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 3,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase2Other3,
+                            imgAlt: 'Услуги дизайна упаковки для подарочного набора  «House of Elegance» портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
-                            {
+                        {
                             id: 4,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase2Other4,
+                            imgAlt: 'Услуги дизайна упаковки для подарочного набора  «House of Elegance» портфолио космотех',
+                            imgBig: portfolioDemoImg,
+                            imgBigAlt: '#',
+                        },
+                        {
+                            id: 5,
+                            img: workcase2Other5,
+                            imgAlt: 'Услуги дизайна упаковки для подарочного набора  «House of Elegance» портфолио космотех',
+                            imgBig: portfolioDemoImg,
+                            imgBigAlt: '#',
+                        },
+                        {
+                            id: 6,
+                            img: workcase2Other6,
+                            imgAlt: 'Услуги дизайна упаковки для подарочного набора  «House of Elegance» портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
@@ -321,9 +350,9 @@ const initialState = {
                 id: 3,
                 name: 'Дизайн упаковки антивозрастных кремов',
                 title: '',
-                mainImg: workcase6MainMin,
+                mainImg: workcase_6_main_min,
                 mainImgAlt: '#',
-                mainImgBig: workcaseBigImg,
+                mainImgBig: workcase_6_main,
                 mainImgBigAlt: '#',
                 selected: false,
                 content: {
@@ -336,43 +365,29 @@ const initialState = {
                     gallery: [
                         {
                             id: 1,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase6Other1,
+                            imgAlt: 'Услуги для дизайна упаковки антивозрастных кремов портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 2,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase6Other2,
+                            imgAlt: 'Услуги для дизайна упаковки антивозрастных кремов портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 3,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase6Other4,
+                            imgAlt: 'Услуги для дизайна упаковки антивозрастных кремов портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
-                            {
+                        {
                             id: 4,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
-                            imgBig: portfolioDemoImg,
-                            imgBigAlt: '#',
-                        },
-                        {
-                            id: 5,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
-                            imgBig: portfolioDemoImg,
-                            imgBigAlt: '#',
-                        },
-                        {
-                            id: 6,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase6Other5,
+                            imgAlt: 'Услуги для дизайна упаковки антивозрастных кремов портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
@@ -383,9 +398,9 @@ const initialState = {
                 id: 4,
                 name: 'Дизайн упаковки кремов для рук',
                 title: '',
-                mainImg: workcase4MainMin,
+                mainImg: workcase_4_main_min,
                 mainImgAlt: '#',
-                mainImgBig: workcaseBigImg,
+                mainImgBig: workcase_4_main,
                 mainImgBigAlt: '#',
                 selected: false,
                 content: {
@@ -398,22 +413,15 @@ const initialState = {
                     gallery: [
                         {
                             id: 1,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase4Other1,
+                            imgAlt: 'Усулги по дизайну упаковки кремов для рук портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 2,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
-                            imgBig: portfolioDemoImg,
-                            imgBigAlt: '#',
-                        },
-                        {
-                            id: 3,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase4Other2,
+                            imgAlt: 'Усулги по дизайну упаковки кремов для рук портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
@@ -424,9 +432,9 @@ const initialState = {
                 id: 5,
                 name: 'Дизайн упаковки мыла',
                 title: '',
-                mainImg: workcase5MainMin,
+                mainImg: workcase_5_main_min,
                 mainImgAlt: '#',
-                mainImgBig: workcaseBigImg,
+                mainImgBig: workcase_5_main,
                 mainImgBigAlt: '#',
                 selected: false,
                 content: {
@@ -439,32 +447,25 @@ const initialState = {
                     gallery: [
                         {
                             id: 1,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase5Other1,
+                            imgAlt: 'Усулги дизайна упаковки мыла портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 2,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase5Other2,
+                            imgAlt: 'Усулги дизайна упаковки мыла портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 3,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase5Other3,
+                            imgAlt: 'Усулги дизайна упаковки мыла портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
-                        },
-                            {
-                            id: 4,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
-                            imgBig: portfolioDemoImg,
-                            imgBigAlt: '#',
-                        },
+                        }
                     ]
                 }
             },
@@ -472,9 +473,9 @@ const initialState = {
                 id: 6,
                 name: 'Дизайн линии антиперспирантов',
                 title: '',
-                mainImg: workcase3MainMin,
+                mainImg: workcase_3_main_min,
                 mainImgAlt: '#',
-                mainImgBig: workcaseBigImg,
+                mainImgBig: workcase_3_main,
                 mainImgBigAlt: '#',
                 selected: false,
                 content: {
@@ -487,22 +488,43 @@ const initialState = {
                     gallery: [
                         {
                             id: 1,
-                            img: portfolioDemoImg,
+                            img: workcase3Other1,
                             imgAlt: '#',
                             imgBig: portfolioDemoImg,
-                            imgBigAlt: '#',
+                            imgBigAlt: 'Усулги по дизайну упаковки для антиперспирантов космотех',
                         },
                         {
                             id: 2,
-                            img: portfolioDemoImg,
+                            img: workcase3Other2,
                             imgAlt: '#',
+                            imgBig: portfolioDemoImg,
+                            imgBigAlt: 'Усулги по дизайну упаковки для антиперспирантов космотех',
+                        },
+                        {
+                            id: 3,
+                            img: workcase3Other3,
+                            imgAlt: 'Усулги по дизайну упаковки для антиперспирантов космотех',
+                            imgBig: portfolioDemoImg,
+                            imgBigAlt: '#',
+                        },
+                         {
+                            id: 4,
+                            img: workcase3Other4,
+                            imgAlt: '#',
+                            imgBig: portfolioDemoImg,
+                            imgBigAlt: 'Усулги по дизайну упаковки для антиперспирантов космотех',
+                        },
+                        {
+                            id: 5,
+                            img: workcase3Other5,
+                            imgAlt: 'Усулги по дизайну упаковки для антиперспирантов космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
-                            id: 3,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            id: 6,
+                            img: workcase3Other6,
+                            imgAlt: 'Усулги по дизайну упаковки для антиперспирантов космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
@@ -513,9 +535,9 @@ const initialState = {
                 id: 7,
                 name: 'Фирменный стиль для космецевтики',
                 title: '',
-                mainImg: workcase7MainMin,
+                mainImg: workcase_7_main_min,
                 mainImgAlt: '#',
-                mainImgBig: workcaseBigImg,
+                mainImgBig: workcase_7_main,
                 mainImgBigAlt: '#',
                 selected: false,
                 content: {
@@ -528,22 +550,28 @@ const initialState = {
                     gallery: [
                         {
                             id: 1,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
-                            imgBig: portfolioDemoImg,
+                            img: workcase7Other1,
+                            imgAlt: 'Усулги по дизайну упаковки для косметики портфолио космотех',
                             imgBigAlt: '#',
                         },
                         {
                             id: 2,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase7Other2,
+                            imgAlt: 'Усулги по дизайну упаковки для косметики портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 3,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase7Other3,
+                            imgAlt: 'Усулги по дизайну упаковки для косметики портфолио космотех',
+                            imgBig: portfolioDemoImg,
+                            imgBigAlt: '#',
+                        },
+                        {
+                            id: 4,
+                            img: workcase7Other4,
+                            imgAlt: 'Усулги по дизайну упаковки для косметики портфолио космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
@@ -554,9 +582,9 @@ const initialState = {
                 id: 8,
                 name: 'Фирменный стиль гипоаллергенной косметики',
                 title: '',
-                mainImg: workcase8MainMin,
+                mainImg: workcase_8_main_min,
                 mainImgAlt: '#',
-                mainImgBig: workcaseBigImg,
+                mainImgBig: workcase_8_main,
                 mainImgBigAlt: '#',
                 selected: false,
                 content: {
@@ -569,22 +597,43 @@ const initialState = {
                     gallery: [
                         {
                             id: 1,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase8Other1,
+                            imgAlt: 'Услуги создание фирменного стиля для гипоаллергенной косметики космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 2,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase8Other2,
+                            imgAlt: 'Услуги создание фирменного стиля для гипоаллергенной косметики космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
                         {
                             id: 3,
-                            img: portfolioDemoImg,
-                            imgAlt: '#',
+                            img: workcase8Other3,
+                            imgAlt: 'Услуги создание фирменного стиля для гипоаллергенной косметики космотех',
+                            imgBig: portfolioDemoImg,
+                            imgBigAlt: '#',
+                        },
+                        {
+                            id: 4,
+                            img: workcase8Other4,
+                            imgAlt: 'Услуги создание фирменного стиля для гипоаллергенной косметики космотех',
+                            imgBig: portfolioDemoImg,
+                            imgBigAlt: '#',
+                        },
+                        {
+                            id: 5,
+                            img: workcase8Other5,
+                            imgAlt: 'Услуги создание фирменного стиля для гипоаллергенной косметики космотех',
+                            imgBig: portfolioDemoImg,
+                            imgBigAlt: '#',
+                        },
+                        {
+                            id: 6,
+                            img: workcase8Other6,
+                            imgAlt: 'Услуги создание фирменного стиля для гипоаллергенной косметики космотех',
                             imgBig: portfolioDemoImg,
                             imgBigAlt: '#',
                         },
@@ -634,14 +683,14 @@ const designPageSlice = createSlice({
         },
         serviceFormPopupActive(state, action) {
             const { serviceId } = action.payload;
-
+            console.log(serviceId)
             state.mainServices = state.mainServices.map((serviceItem) => {
                 if (serviceItem && serviceItem.id === serviceId && !serviceItem.orderForm.popupFormActive) {
                     return {
                         ...serviceItem,
                         orderForm: {
                             ...serviceItem.orderForm,
-                            active: false,
+                            active: true,
                             popupFormActive: true
                         }
                     }
@@ -683,6 +732,33 @@ const designPageSlice = createSlice({
                 selectedPortfolio: state.portfolio.portfolioItems.find((item) => item.selected)
             };
         },
+        designServiceFormInput(state, action) {
+            const { inputId, inputType, inputValue, formId } = action.payload;
+            let valid;
+            if (inputType !== 'options') {
+                state.mainServices = state.mainServices.map((mainService) => {
+                    if (formId === mainService.id) {
+                        return {
+                            ...mainService,
+                            orderForm: {
+                                ...mainService.orderForm,
+                                fields: mainService.orderForm.fields.map((fieldItem) => {
+                                    if  (inputId === fieldItem.id && fieldItem.name === inputType) {
+                                        return {
+                                            ...fieldItem,
+                                            value: inputValue
+                                        }
+                                    }
+                                    return fieldItem;
+                                })
+                            }
+                        }
+                    }
+                    return mainService;
+                })
+            }
+
+        },
     }
 });
 
@@ -690,6 +766,7 @@ export const {
     serviceFormBtnActive,
     serviceFormPopupActive,
     portfolioWorkCasePopup,
-    testRed
+    designServiceFormInput,
+
 } = designPageSlice.actions;
 export default designPageSlice.reducer;

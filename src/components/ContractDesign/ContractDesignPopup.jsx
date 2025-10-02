@@ -1,10 +1,27 @@
 import React from "react";
+import { useEffect, useRef } from "react";
 
 const ContractDesignPopup = (props) => {
 
     const serviceItem = props.serviceItem;
     const orderForm = serviceItem.orderForm;
-    console.log(serviceItem)
+    const selectedServiceRef = useRef('test');
+    const inputRefs = [
+        { id: 1, name: 'name', ref: useRef(null) },
+        { id: 2, name: 'phone', ref: useRef(null) },
+        { id: 3, name: 'services', ref: useRef(null) },
+    ];
+    const findInputRef = (inputType) => {
+        console.log(inputRefs.find((item) => item.name === inputType).ref)
+        return inputRefs.find((item) => item.name === inputType).ref;
+    };
+
+    useEffect(() => {
+        const targetService = orderForm.fields.find((item) => item.name === 'services');
+        const selectedService = targetService.services.find((service) => service.selected);
+        selectedServiceRef.current.value = selectedService.value;
+    }, [selectedServiceRef.current])
+
     return (
         <React.Fragment>
             <div className="popup-design-service-background-wrap">
@@ -22,13 +39,25 @@ const ContractDesignPopup = (props) => {
                                     <React.Fragment key={`form-item-design-${formItem.id}`}>
                                         {formItem.type === 'options' ? 
                                             <React.Fragment>
-                                                <label id="popup-design-service-input-email">Услуга</label>
+                                                <label id="popup-design-service-input-services">Услуга</label>
                                                 <div className="popup-design-service-select-wrap">
-                                                    <select>
+                                                    <select
+                                                        ref={selectedServiceRef}
+                                                        htmlFor={"popup-design-service-input-services"}
+                                                        defaultValue={formItem.services.find((item) => item.selected).value}
+                                                        onChange={() => props.inputHandler(
+                                                            formItem.id, 
+                                                            formItem.type, 
+                                                            selectedServiceRef.current,
+                                                            props.formId
+                                                        )}
+                                                    >
                                                         {formItem.services.map((optionItem) => {
                                                             return (
                                                                 <React.Fragment key={optionItem.id}>
-                                                                    <option>{optionItem.title}</option>
+                                                                    <option 
+                                                                        value={optionItem.value}
+                                                                    >{optionItem.value}</option>
                                                                 </React.Fragment>
                                                             )
                                                         })}
@@ -38,9 +67,21 @@ const ContractDesignPopup = (props) => {
                                         
                                         : 
                                             <React.Fragment>
-                                                <label htmlFor="popup-design-service-input-name">{formItem.title}</label>
+                                                <label htmlFor={`popup-design-service-input-${formItem.name}`}>{formItem.title}</label>
                                                 <div className="popup-design-service-input-wrap">
-                                                    <input type="text" placeholder="test" id="popup-design-service-input-name" />
+                                                    <input
+                                                        ref={findInputRef(formItem.name)}
+                                                        onChange={() => props.inputHandler(
+                                                            formItem.id, 
+                                                            formItem.name, 
+                                                            findInputRef(formItem.name).current,
+                                                            props.formId
+                                                        )}
+                                                        id={`popup-design-service-input-${formItem.name}`}
+                                                        type={formItem.type} 
+                                                        value={formItem.value}
+                                                        placeholder={formItem.placeholder}
+                                                    />
                                                 </div>
                                             </React.Fragment>
                                         
