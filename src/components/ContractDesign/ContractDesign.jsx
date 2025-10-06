@@ -5,7 +5,10 @@ import {
     serviceFormBtnActive,
     serviceFormPopupActive,
     portfolioWorkCasePopup,
-    designServiceFormInput
+    designServiceFormInput,
+    designServiceFormClearInput,
+    designServicePolicy,
+    designServiceValidateForm
 } from "../../redux/slices/designPageSlice";
 import contractDesign from '../../img/contractDesign/test.jpg';
 import supportIcon from '../../img/contractDesign/support.svg';
@@ -29,8 +32,22 @@ const ContractDesign = () => {
     };
 
     const servicePopupFormInputHandler = (inputId, inputType, inputRef, formId) => {
-        console.log(inputType)
         dispatch(designServiceFormInput({ inputId: inputId, inputType: inputType, inputValue: inputRef.value, formId}));
+    };
+
+    const servicePopupFormInputClear = (e, inputId, inputType, inputRef, formId) => {
+        if (e.key === 'Backspace') {
+            inputRef.value = '';
+            dispatch(designServiceFormClearInput({ inputId: inputId, inputType: inputType, formId}));
+        }
+    };
+
+    const servicePopupFormPolicyHandler = (formId) => {
+        dispatch(designServicePolicy({ formId: formId}));
+    };
+
+    const servicePopupFormValidate = (formId) => {
+        dispatch(designServiceValidateForm({formId : formId}));
     };
 
     const portfolioPopupHandler = (portfolioId) => {
@@ -158,6 +175,10 @@ const ContractDesign = () => {
                             <ContractDesignPopup 
                                 popupHandler={servicePopupFormHandler}
                                 inputHandler={servicePopupFormInputHandler}
+                                clearInputHandler={servicePopupFormInputClear}
+                                policyHandler={servicePopupFormPolicyHandler}
+                                validateForm={servicePopupFormValidate}
+                                stateT={designState}
                                 serviceItem={designState.mainServices.find((item) => item.orderForm.popupFormActive)}
                                 formId={designState.mainServices.find((item) => item.orderForm.popupFormActive).id}
                             /> 

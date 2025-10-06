@@ -62,6 +62,7 @@ const initialState = {
             orderForm: {
                 popupFormActive: false,
                 active: false,
+                policyActive: false,
                 fields: [
                     {
                         id: 1,
@@ -120,6 +121,7 @@ const initialState = {
             orderForm: {
                 popupFormActive: false,
                 active: false,
+                policyActive: false,
                 fields: [
                     {
                         id: 1,
@@ -178,6 +180,7 @@ const initialState = {
             orderForm: {
                 popupFormActive: false,
                 active: false,
+                policyActive: false,
                 fields: [
                     {
                         id: 1,
@@ -225,8 +228,14 @@ const initialState = {
                     }
                 ],
             }
-        }
+        },
     ],
+    orderServiceForm: {
+        clientName: '',
+        clientPhone: '',
+        selectedService: '',
+        allFieldsValid: false
+    },
     portfolio: {
         portfolioItems: [
             {
@@ -683,7 +692,6 @@ const designPageSlice = createSlice({
         },
         serviceFormPopupActive(state, action) {
             const { serviceId } = action.payload;
-            console.log(serviceId)
             state.mainServices = state.mainServices.map((serviceItem) => {
                 if (serviceItem && serviceItem.id === serviceId && !serviceItem.orderForm.popupFormActive) {
                     return {
@@ -700,7 +708,8 @@ const designPageSlice = createSlice({
                     orderForm: {
                         ...serviceItem.orderForm,
                         active: false,
-                        popupFormActive:false
+                        popupFormActive:false,
+                        fields: initialState.mainServices.find((item) => item.id === serviceItem.id).orderForm.fields,
                     }
                 }
             })
@@ -734,7 +743,8 @@ const designPageSlice = createSlice({
         },
         designServiceFormInput(state, action) {
             const { inputId, inputType, inputValue, formId } = action.payload;
-            let valid;
+            let validValue;
+            let inputValid;
             if (inputType !== 'options') {
                 state.mainServices = state.mainServices.map((mainService) => {
                     if (formId === mainService.id) {
@@ -743,22 +753,100 @@ const designPageSlice = createSlice({
                             orderForm: {
                                 ...mainService.orderForm,
                                 fields: mainService.orderForm.fields.map((fieldItem) => {
-                                    if  (inputId === fieldItem.id && fieldItem.name === inputType) {
+                                    if (inputId === fieldItem.id && inputType === 'name') {
+                                        inputValid = validateName(inputValue);
+                                        validValue = inputValue;
                                         return {
                                             ...fieldItem,
-                                            value: inputValue
-                                        }
+                                            valid: inputValid,
+                                            value: validValue,
+                                        };
                                     }
+                                    if (inputId === fieldItem.id && inputType === 'phone') {
+                                        const phoneNumber = validValue = validatePhone(inputValue);
+                                        return {
+                                            ...fieldItem,
+                                            valid: phoneNumber.length === 18 ? true : false,
+                                            value: phoneNumber,
+                                        };
+                                    }
+                                    
                                     return fieldItem;
                                 })
                             }
                         }
                     }
                     return mainService;
-                })
+                });
             }
 
         },
+        designServiceFormClearInput(state, action) {
+            const { inputId, inputType, formId } = action.payload;
+            state.mainServices = state.mainServices.map((mainService) => {
+                if (formId === mainService.id) {
+                    return {
+                        ...mainService,
+                        orderForm: {
+                            ...mainService.orderForm,
+                            fields: mainService.orderForm.fields.map((fieldItem) => {
+                                if (fieldItem.id === inputId && fieldItem.name === inputType) {
+                                    return {
+                                        ...fieldItem,
+                                        value: '',
+                                        valid: false
+                                    }
+                                }
+                                return fieldItem;
+                            })
+                        }
+                    }
+                }
+                return mainService;
+            })
+        },
+        designServicePolicy(state, action) {
+            const { formId } = action.payload;
+            state.mainServices = state.mainServices.map((serviceItem) => {
+                if (serviceItem.id === formId) {
+                    return {
+                        ...serviceItem,
+                        orderForm: {
+                            ...serviceItem.orderForm,
+                            policyActive: serviceItem.orderForm.policyActive ? false : true
+                        }
+                    }
+                }
+                return serviceItem;
+            })
+        },
+        designServiceValidateForm(state, action) {
+            const { formId } = action.payload;
+            const targetService = state.mainServices.find((service) => service.id === formId);
+            const checkClientName = targetService.orderForm.fields.find(
+                (item) => item.name === 'name' && item.value !== '' && item.valid
+            );
+            const checkClientPhone = targetService.orderForm.fields.find(
+                (item) => item.name === 'phone' && item.value !== '' && item.valid
+            );
+            const checkPolicy = !targetService.orderForm.policyActive;
+
+            if (checkClientName && checkClientPhone && checkPolicy) {
+                state.orderServiceForm = {
+                    ...state.orderServiceForm,
+                    clientName: checkClientName,
+                    clientPhone: checkClientPhone,
+                    allFieldsValid: true,
+                    sendBtnactive: true
+                }
+                return;
+            }
+            state.orderServiceForm = {
+                ...state.orderServiceForm,
+                allFieldsValid: false,
+                sendBtnactive: false
+            };
+        }
     }
 });
 
@@ -767,6 +855,9 @@ export const {
     serviceFormPopupActive,
     portfolioWorkCasePopup,
     designServiceFormInput,
+    designServiceFormClearInput,
+    designServicePolicy,
+    designServiceValidateForm
 
 } = designPageSlice.actions;
 export default designPageSlice.reducer;
