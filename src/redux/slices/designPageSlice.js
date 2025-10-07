@@ -236,6 +236,42 @@ const initialState = {
         selectedService: '',
         allFieldsValid: false
     },
+    consultServiceForm: {
+        clientName: '',
+        clientPhone: '',
+        clientComment: '',
+        policyActive: false,
+        sendBtnActive: false,
+        fields: [
+            {
+                id: 1,
+                name: 'name',
+                type: 'text',
+                title: 'Имя',
+                placeholder: 'Ваше имя',
+                value: '',
+                valid: true
+            },
+            {
+                id: 2,
+                name: 'phone',
+                title: 'Телефон',
+                type: 'text',
+                placeholder: '8xxxxxxxxxx',
+                value: '',
+                valid: true
+            },
+            {
+                id: 3,
+                name: 'comment',
+                title: 'Комментарий',
+                type: 'textarea',
+                placeholder: 'Комментарий',
+                value: '',
+                valid: true
+            },
+        ]
+    },
     portfolio: {
         portfolioItems: [
             {
@@ -813,7 +849,7 @@ const designPageSlice = createSlice({
                         ...serviceItem,
                         orderForm: {
                             ...serviceItem.orderForm,
-                            policyActive: serviceItem.orderForm.policyActive ? false : true
+                            policyActive: !serviceItem.orderForm.policyActive ? true : false
                         }
                     }
                 }
@@ -829,7 +865,7 @@ const designPageSlice = createSlice({
             const checkClientPhone = targetService.orderForm.fields.find(
                 (item) => item.name === 'phone' && item.value !== '' && item.valid
             );
-            const checkPolicy = !targetService.orderForm.policyActive;
+            const checkPolicy = targetService.orderForm.policyActive;
 
             if (checkClientName && checkClientPhone && checkPolicy) {
                 state.orderServiceForm = {
@@ -837,15 +873,76 @@ const designPageSlice = createSlice({
                     clientName: checkClientName,
                     clientPhone: checkClientPhone,
                     allFieldsValid: true,
-                    sendBtnactive: true
+                    sendBtnActive: true
                 }
                 return;
             }
             state.orderServiceForm = {
                 ...state.orderServiceForm,
                 allFieldsValid: false,
-                sendBtnactive: false
+                sendBtnActive: false
             };
+        },
+        designFormInput(state, action) {
+            const { inputId, inputType, inputValue } = action.payload;
+            let validValue;
+            let inputValid;
+            state.consultServiceForm.fields = state.consultServiceForm.fields.map((fieldItem) => {
+                if (inputId === fieldItem.id && fieldItem.name === inputType) {
+                    switch(inputType){
+                        case 'name':
+                            inputValid = validateName(inputValue);
+                            validValue = inputValue;
+                            break;
+                        case 'phone':
+                            validValue = validatePhone(inputValue);
+                            inputValid = validValue.length === 18 ? true : false;
+                            break;
+                        case 'comment':
+                            validValue = inputValue;
+                            inputValid = inputType && inputValue.length > 3 ? true : false;
+                            break;
+                        default:
+                            break;
+                    }
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        valid: inputValid
+                    }
+                }
+                return fieldItem;
+            });
+            state.consultServiceForm.clientName = state.consultServiceForm.fields.find((item) => item.name === 'name').value
+            state.consultServiceForm.clientPhone = state.consultServiceForm.fields.find((item) => item.name === 'phone').value
+            state.consultServiceForm.clientComment = state.consultServiceForm.fields.find((item) => item.name === 'comment').value
+        },
+        designFormClearInput(state, action) {
+            const { inputId } = action.payload;
+            state.consultServiceForm.fields = state.consultServiceForm.fields.map((fieldItem) => {
+                if (inputId === fieldItem.id) {
+                    return {
+                        ...fieldItem,
+                        value: '',
+                        valid: false
+                    }
+                }
+                return fieldItem;
+            }) 
+        },
+        designFormPolicy(state) {
+            state.consultServiceForm.policyActive = state.consultServiceForm.policyActive ? false : true;
+        },
+        designFormValidate(state) {
+            const checkClientName = state.consultServiceForm.fields.find((item) => item.name === 'name' && item.valid);
+            const checkClientPhone = state.consultServiceForm.fields.find((item) => item.name === 'phone' && item.valid);
+            const checkPolicy = state.consultServiceForm.policyActive;
+
+            if (checkClientName && checkClientPhone && checkPolicy) {
+                state.consultServiceForm.sendBtnActive = true;
+                return;
+            }
+            state.consultServiceForm.sendBtnActive = false;
         }
     }
 });
@@ -857,7 +954,10 @@ export const {
     designServiceFormInput,
     designServiceFormClearInput,
     designServicePolicy,
-    designServiceValidateForm
-
+    designServiceValidateForm,
+    designFormInput,
+    designFormClearInput,
+    designFormPolicy,
+    designFormValidate
 } = designPageSlice.actions;
 export default designPageSlice.reducer;

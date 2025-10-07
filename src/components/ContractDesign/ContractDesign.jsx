@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
     serviceFormBtnActive,
@@ -8,7 +9,11 @@ import {
     designServiceFormInput,
     designServiceFormClearInput,
     designServicePolicy,
-    designServiceValidateForm
+    designServiceValidateForm,
+    designFormInput,
+    designFormClearInput,
+    designFormPolicy,
+    designFormValidate
 } from "../../redux/slices/designPageSlice";
 import contractDesign from '../../img/contractDesign/test.jpg';
 import supportIcon from '../../img/contractDesign/support.svg';
@@ -22,6 +27,22 @@ import ContractDesignPortfolio from "./ContractDesignPortfolio";
 const ContractDesign = () => {
     const designState = useSelector((state) => state.design);
     const dispatch = useDispatch();
+
+    const contractDesignFormInputRefs = [
+        { id: 1, name: 'name', ref: useRef(null) },
+        { id: 2, name: 'phone', ref: useRef(null) },
+        { id: 3, name: 'services', ref: useRef(null) },
+    ];
+    const contractDesignConsultInputRefs = [
+        { id: 1, name: 'name', ref: useRef(null) },
+        { id: 2, name: 'phone', ref: useRef(null) },
+        { id: 3, name: 'comment', ref: useRef(null) },
+    ];
+    const selectedServiceRef = useRef(null);
+
+    const findInputRef = (inputType, inputRefs) => {
+        return inputRefs.find((item) => item.name === inputType).ref;
+    };
 
     const designServiceFormHandler = (serviceId, status=false) => {
         dispatch(serviceFormBtnActive({ serviceId: serviceId, hide: status }));
@@ -50,11 +71,45 @@ const ContractDesign = () => {
         dispatch(designServiceValidateForm({formId : formId}));
     };
 
+    const servicePopupFormSend = () => {
+        const clientData = {
+            clientName: designState.orderServiceForm.clientName.value,
+            clientPhone: designState.orderServiceForm.clientPhone.value,
+            service: selectedServiceRef.current.value,
+        };
+        console.log(clientData)
+    };
+
+    const designFormInputHandler = (inputId, inputType, inputRef) => {
+        dispatch(designFormInput({ inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
+    };
+
+    const designFormClearInputHandler = (e, inputId) => {
+        if (e.key === 'Backspace') {
+            dispatch(designFormClearInput({inputId: inputId}));
+        }
+    };
+
+    const designFormPolicyHandler = () => {
+        dispatch(designFormPolicy());
+    };
+
+    const sendDesignFormHandler = () => {
+        const clientData = {
+            clientName: designState.consultServiceForm.clientName,
+            clientPhone: designState.consultServiceForm.clientPhone,
+            clientComment: designState.consultServiceForm.clientComment,
+        };
+        console.log(clientData)
+    };
+
     const portfolioPopupHandler = (portfolioId) => {
         dispatch(portfolioWorkCasePopup({portfolioId: portfolioId}));
     };
 
-
+    useEffect(() => {
+        dispatch(designFormValidate());
+    }, [designState.consultServiceForm]);
 
     return (
         <React.Fragment>
@@ -172,14 +227,18 @@ const ContractDesign = () => {
                             })}
                         </div>
                         {designState.mainServices.find((item) => item.orderForm.popupFormActive) ? 
-                            <ContractDesignPopup 
+                            <ContractDesignPopup
+                                designState={designState}
+                                serviceItem={designState.mainServices.find((item) => item.orderForm.popupFormActive)}
+                                inputRefs={contractDesignFormInputRefs}
+                                selectedServiceRef={selectedServiceRef}
+                                findInputRef={findInputRef} 
                                 popupHandler={servicePopupFormHandler}
                                 inputHandler={servicePopupFormInputHandler}
                                 clearInputHandler={servicePopupFormInputClear}
                                 policyHandler={servicePopupFormPolicyHandler}
                                 validateForm={servicePopupFormValidate}
-                                stateT={designState}
-                                serviceItem={designState.mainServices.find((item) => item.orderForm.popupFormActive)}
+                                sendFormHandler={servicePopupFormSend}
                                 formId={designState.mainServices.find((item) => item.orderForm.popupFormActive).id}
                             /> 
                         : null}
@@ -214,18 +273,43 @@ const ContractDesign = () => {
                             <div className="design-fits-form-wrap">
                                 <form>
                                     <h3>Отправить запрос</h3>
-                                    <div className="design-fits-form-input-wrap">
-                                        <label>Имя</label>
-                                        <input type="text" placeholder="input" />
-                                    </div>
-                                    <div className="design-fits-form-input-wrap">
-                                        <label>Телефон</label>
-                                        <input type="text" placeholder="input" />
-                                    </div>
-                                    <div className="design-fits-form-input-wrap">
-                                        <label>Комментарий</label>
-                                        <textarea id="test" placeholder="input" />
-                                    </div>
+                                    {designState.consultServiceForm.fields.map((fieldItem) => {
+                                        return (
+                                            <React.Fragment key={fieldItem.id}>
+                                                <div className="design-fits-form-input-wrap">
+                                                    <label>{fieldItem.title}</label>
+                                                    {fieldItem.type === 'textarea' ? 
+                                                        <textarea
+                                                            ref={findInputRef(fieldItem.name, contractDesignConsultInputRefs)}
+                                                            className={fieldItem.valid ? '' : 'input-err'}
+                                                            onChange={() => designFormInputHandler(
+                                                                fieldItem.id, 
+                                                                fieldItem.name, 
+                                                                findInputRef(fieldItem.name, contractDesignConsultInputRefs).current
+                                                            )}
+                                                            onKeyDown={(e) => designFormClearInputHandler(e, fieldItem.id)}
+                                                            value={fieldItem.value}
+                                                            placeholder={fieldItem.placeholder}
+                                                        ></textarea>
+                                                        
+                                                    : 
+                                                    <input
+                                                        ref={findInputRef(fieldItem.name, contractDesignConsultInputRefs)}
+                                                        className={fieldItem.valid ? '' : 'input-err'}
+                                                        onChange={() => designFormInputHandler(
+                                                            fieldItem.id, 
+                                                            fieldItem.name, 
+                                                            findInputRef(fieldItem.name, contractDesignConsultInputRefs).current
+                                                        )}
+                                                        onKeyDown={(e) => designFormClearInputHandler(e, fieldItem.id)}
+                                                        type={fieldItem.type}
+                                                        value={fieldItem.value} 
+                                                        placeholder={fieldItem.placeholder}
+                                                    />}
+                                                </div>
+                                            </React.Fragment>
+                                        )
+                                    })}
                                     <div className="form-mode-for-clients-get-detail-checkbox">
                                         <input
                                             type="checkbox" 
@@ -233,11 +317,17 @@ const ContractDesign = () => {
                                         />
                                         <label
                                             htmlFor="for-clients-get-detail-checkbox"
+                                            onClick={designFormPolicyHandler}
                                         ></label>
                                         <span>согласен с <Link to={'/policy'}>политикой конфидициальности</Link></span>
                                     </div>
                                     <div className="popup-design-service-order-btn-wrap">
-                                        <span className="popup-design-service-order-btn">Отправить</span>
+                                        <span 
+                                            className={
+                                                `popup-design-service-order-btn ${!designState.consultServiceForm.sendBtnActive ? 'btnDisabled': ''}`
+                                            }
+                                            onClick={sendDesignFormHandler}
+                                        >Отправить</span>
                                     </div>
                                 </form>
                             </div>

@@ -1,31 +1,20 @@
 import React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 const ContractDesignPopup = (props) => {
 
     const serviceItem = props.serviceItem;
     const orderForm = serviceItem.orderForm;
-    const selectedServiceRef = useRef(null);
-    const inputRefs = [
-        { id: 1, name: 'name', ref: useRef(null) },
-        { id: 2, name: 'phone', ref: useRef(null) },
-        { id: 3, name: 'services', ref: useRef(null) },
-    ];
-    const findInputRef = (inputType) => {
-        console.log(inputRefs.find((item) => item.name === inputType).ref)
-        return inputRefs.find((item) => item.name === inputType).ref;
-    };
 
     useEffect(() => {
-        props.validateForm(serviceItem.id)
-        console.log(props.stateT)
+        props.validateForm(serviceItem.id);
     }, [serviceItem.orderForm]);
 
     useEffect(() => {
         const targetService = orderForm.fields.find((item) => item.name === 'services');
         const selectedService = targetService.services.find((service) => service.selected);
-        selectedServiceRef.current.value = selectedService.value;
-    }, [selectedServiceRef.current]);
+        props.selectedServiceRef.current.value = selectedService.value;
+    }, [props.selectedServiceRef.current]);
 
     return (
         <React.Fragment>
@@ -47,13 +36,13 @@ const ContractDesignPopup = (props) => {
                                                 <label id="popup-design-service-input-services">Услуга</label>
                                                 <div className="popup-design-service-select-wrap">
                                                     <select
-                                                        ref={selectedServiceRef}
+                                                        ref={props.selectedServiceRef}
                                                         htmlFor={"popup-design-service-input-services"}
                                                         defaultValue={formItem.services.find((item) => item.selected).value}
                                                         onChange={() => props.inputHandler(
                                                             formItem.id, 
                                                             formItem.type, 
-                                                            selectedServiceRef.current,
+                                                            props.selectedServiceRef.current,
                                                             props.formId
                                                         )}
                                                     >
@@ -75,19 +64,19 @@ const ContractDesignPopup = (props) => {
                                                 <label htmlFor={`popup-design-service-input-${formItem.name}`}>{formItem.title}</label>
                                                 <div className="popup-design-service-input-wrap">
                                                     <input
-                                                        ref={findInputRef(formItem.name)}
+                                                        ref={props.findInputRef(formItem.name, props.inputRefs)}
                                                         className={!formItem.valid ? 'input-err' : null}
                                                         onChange={() => props.inputHandler(
                                                             formItem.id, 
                                                             formItem.name, 
-                                                            findInputRef(formItem.name).current,
+                                                            props.findInputRef(formItem.name, props.inputRefs).current,
                                                             props.formId
                                                         )}
                                                         onKeyDown={(e) => props.clearInputHandler(
                                                             e,
                                                             formItem.id, 
                                                             formItem.name, 
-                                                            selectedServiceRef.current,
+                                                            props.selectedServiceRef.current,
                                                             props.formId
                                                         )}
                                                         id={`popup-design-service-input-${formItem.name}`}
@@ -116,7 +105,10 @@ const ContractDesignPopup = (props) => {
                             </div>
                         </form>
                         <div className="popup-design-service-order-btn-wrap">
-                            <span className="popup-design-service-order-btn">Отправить</span>
+                            <span 
+                                className={`popup-design-service-order-btn ${!props.designState.orderServiceForm.sendBtnActive ? 'btnDisabled' : ''}`}
+                                onClick={props.sendFormHandler}
+                            >Отправить</span>
                         </div>
                     </div>
                 </div>

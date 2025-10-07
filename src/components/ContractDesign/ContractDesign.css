@@ -424,6 +424,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
+    margin-top: 20px;
     justify-content: center;
     align-items: center;
 }
@@ -561,6 +562,7 @@
 }
 .design-fits-form-input-wrap textarea {
     width: 300px;
+    min-height: 80px;
 }
 .form-mode-for-clients-get-detail-checkbox {
     display: flex;
