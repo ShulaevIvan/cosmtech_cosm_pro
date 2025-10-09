@@ -13,7 +13,9 @@ import {
     designFormInput,
     designFormClearInput,
     designFormPolicy,
-    designFormValidate
+    designFormValidate,
+    sendDesignServiceForm,
+    sendDesignConsultForm
 } from "../../redux/slices/designPageSlice";
 import contractDesign from '../../img/contractDesign/test.jpg';
 import supportIcon from '../../img/contractDesign/support.svg';
@@ -77,7 +79,7 @@ const ContractDesign = () => {
             clientPhone: designState.orderServiceForm.clientPhone.value,
             service: selectedServiceRef.current.value,
         };
-        console.log(clientData)
+        dispatch(sendDesignServiceForm(clientData));
     };
 
     const designFormInputHandler = (inputId, inputType, inputRef) => {
@@ -100,7 +102,7 @@ const ContractDesign = () => {
             clientPhone: designState.consultServiceForm.clientPhone,
             clientComment: designState.consultServiceForm.clientComment,
         };
-        console.log(clientData)
+        dispatch(sendDesignConsultForm(clientData));
     };
 
     const portfolioPopupHandler = (portfolioId) => {
@@ -322,9 +324,10 @@ const ContractDesign = () => {
                                         <span>согласен с <Link to={'/policy'}>политикой конфидициальности</Link></span>
                                     </div>
                                     <div className="popup-design-service-order-btn-wrap">
+                                        {console.log(designState)}
                                         <span 
                                             className={
-                                                `popup-design-service-order-btn ${!designState.consultServiceForm.sendBtnActive ? 'btnDisabled': ''}`
+                                                `popup-design-service-order-btn ${designState.consultServiceForm.sendBtnActive ? '' : 'btnDisabled'}`
                                             }
                                             onClick={sendDesignFormHandler}
                                         >Отправить</span>

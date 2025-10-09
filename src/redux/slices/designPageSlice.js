@@ -694,6 +694,50 @@ const initialState = {
     }
 };
 
+export const sendDesignServiceForm = createAsyncThunk(
+    'sendDesignServiceForm',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/design-service/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+            },
+            body: JSON.stringify({
+                name: sendData.clientName,
+                phone: sendData.clientPhone,
+                service: sendData.service,
+                orderType: 'order',
+            }),
+        });
+        const data = await response.json();
+
+        return data;
+    }
+);
+
+export const sendDesignConsultForm = createAsyncThunk(
+    'sendDesignConsultForm',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/design-service/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+            },
+            body: JSON.stringify({
+                name: sendData.clientName,
+                phone: sendData.clientPhone,
+                comment: sendData.comment,
+                orderType: 'consult',
+            }),
+        });
+        const data = await response.json();
+
+        return data;
+    }
+);
+
 
 const designPageSlice = createSlice({
     name: 'designPage',
@@ -937,13 +981,25 @@ const designPageSlice = createSlice({
             const checkClientName = state.consultServiceForm.fields.find((item) => item.name === 'name' && item.valid);
             const checkClientPhone = state.consultServiceForm.fields.find((item) => item.name === 'phone' && item.valid);
             const checkPolicy = state.consultServiceForm.policyActive;
-
-            if (checkClientName && checkClientPhone && checkPolicy) {
+            if (checkClientName && checkClientName.value && checkClientName.valid && 
+                checkClientPhone && checkClientPhone.value && checkClientPhone.valid && checkPolicy) {
                 state.consultServiceForm.sendBtnActive = true;
                 return;
             }
             state.consultServiceForm.sendBtnActive = false;
         }
+    },
+
+    extraReducers: (builder) => {
+        builder
+        .addCase(sendDesignServiceForm.fulfilled, (state, action) => {
+            const { message, description } = action.payload;
+            console.log(message);
+        })
+        .addCase(sendDesignConsultForm.fulfilled, (state, action) => {
+            const { message, description } = action.payload;
+            console.log(message);
+        })
     }
 });
 
