@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-
+import ContractDesignHappyStatePopup from "./ContractDesignHappyStatePopup";
 const ContractDesignPopup = (props) => {
 
     const serviceItem = props.serviceItem;
@@ -19,7 +19,13 @@ const ContractDesignPopup = (props) => {
     return (
         <React.Fragment>
             <div className="popup-design-service-background-wrap">
+                
                 <div className="popup-design-service-wrap">
+                    {props.happyStatePopup.active ? 
+                        <ContractDesignHappyStatePopup 
+                            closePopupHandler={props.happyStatePopupHandler}
+                        /> 
+                    : null}
                     <div className="sticky-sidemenu-tz-popup-close-btn-wrap">
                         <span 
                             className="sticky-sidemenu-tz-popup-close-btn"

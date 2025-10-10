@@ -234,7 +234,12 @@ const initialState = {
         clientName: '',
         clientPhone: '',
         selectedService: '',
-        allFieldsValid: false
+        allFieldsValid: false,
+        happyStatePopup: {
+            active: false,
+            title: 'Test Title',
+            message: 'Message'
+        }
     },
     consultServiceForm: {
         clientName: '',
@@ -242,6 +247,11 @@ const initialState = {
         clientComment: '',
         policyActive: false,
         sendBtnActive: false,
+        happyStatePopup: {
+            active: false,
+            title: 'Test Title',
+            message: 'Message'
+        },
         fields: [
             {
                 id: 1,
@@ -794,6 +804,13 @@ const designPageSlice = createSlice({
                 }
             })
         },
+        serviceFormHappyState(state) {
+            state.orderServiceForm.happyStatePopup = {
+                ...state.orderServiceForm.happyStatePopup,
+                active: state.orderServiceForm.happyStatePopup.active ? false : true
+            }
+            state.mainServices = initialState.mainServices;
+        },
         portfolioWorkCasePopup(state, action) {
             const { portfolioId } = action.payload;
             if (!portfolioId) {
@@ -987,18 +1004,59 @@ const designPageSlice = createSlice({
                 return;
             }
             state.consultServiceForm.sendBtnActive = false;
+        },
+        designFormHappyState(state) {
+            state.consultServiceForm.happyStatePopup = {
+                ...state.consultServiceForm.happyStatePopup,
+                active: state.consultServiceForm.happyStatePopup.active ? false : true
+            }
         }
     },
 
     extraReducers: (builder) => {
         builder
+        .addCase(sendDesignServiceForm.pending, (state) => {
+            state.orderServiceForm = initialState.orderServiceForm;
+        })
         .addCase(sendDesignServiceForm.fulfilled, (state, action) => {
-            const { message, description } = action.payload;
-            console.log(message);
+            const { status, message, description } = action.payload;
+            if (status === 'ok') {
+                state.orderServiceForm.happyStatePopup = {
+                    ...state.orderServiceForm.happyStatePopup,
+                    active: true,
+                    message: message,
+                    description: description
+                }
+                return;
+            }
+            state.consultServiceForm.happyStatePopup = {
+                ...state.consultServiceForm.happyStatePopup,
+                active: false,
+                message: '',
+                description: ''
+            }
+        })
+        .addCase(sendDesignConsultForm.pending, (state) => {
+           state.consultServiceForm = initialState.consultServiceForm;
         })
         .addCase(sendDesignConsultForm.fulfilled, (state, action) => {
-            const { message, description } = action.payload;
-            console.log(message);
+            const { status, message, description } = action.payload;
+            if (status === 'ok') {
+                state.consultServiceForm.happyStatePopup = {
+                    ...state.consultServiceForm.happyStatePopup,
+                    active: true,
+                    message: message,
+                    description: description
+                }
+                return;
+            }
+            state.consultServiceForm.happyStatePopup = {
+                ...state.consultServiceForm.happyStatePopup,
+                active: false,
+                message: '',
+                description: ''
+            }
+            
         })
     }
 });
@@ -1014,6 +1072,8 @@ export const {
     designFormInput,
     designFormClearInput,
     designFormPolicy,
-    designFormValidate
+    designFormValidate,
+    designFormHappyState,
+    serviceFormHappyState
 } = designPageSlice.actions;
 export default designPageSlice.reducer;

@@ -15,7 +15,9 @@ import {
     designFormPolicy,
     designFormValidate,
     sendDesignServiceForm,
-    sendDesignConsultForm
+    sendDesignConsultForm,
+    designFormHappyState,
+    serviceFormHappyState
 } from "../../redux/slices/designPageSlice";
 import contractDesign from '../../img/contractDesign/test.jpg';
 import supportIcon from '../../img/contractDesign/support.svg';
@@ -25,11 +27,11 @@ import firmsIcon from '../../img/contractDesign/firms.svg';
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import ContractDesignPopup from "./ContractDesignPopup";
 import ContractDesignPortfolio from "./ContractDesignPortfolio";
+import ContractDesignHappyStatePopup from "./ContractDesignHappyStatePopup";
 
 const ContractDesign = () => {
     const designState = useSelector((state) => state.design);
     const dispatch = useDispatch();
-
     const contractDesignFormInputRefs = [
         { id: 1, name: 'name', ref: useRef(null) },
         { id: 2, name: 'phone', ref: useRef(null) },
@@ -82,6 +84,10 @@ const ContractDesign = () => {
         dispatch(sendDesignServiceForm(clientData));
     };
 
+    const sendFormServiceHappyStateHandler = () => {
+        dispatch(serviceFormHappyState());
+    };
+
     const designFormInputHandler = (inputId, inputType, inputRef) => {
         dispatch(designFormInput({ inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
     };
@@ -105,9 +111,14 @@ const ContractDesign = () => {
         dispatch(sendDesignConsultForm(clientData));
     };
 
+    const sendDesignFormHappyStateHandler = () => {
+        dispatch(designFormHappyState());
+    };
+
     const portfolioPopupHandler = (portfolioId) => {
         dispatch(portfolioWorkCasePopup({portfolioId: portfolioId}));
     };
+    
 
     useEffect(() => {
         dispatch(designFormValidate());
@@ -242,6 +253,8 @@ const ContractDesign = () => {
                                 validateForm={servicePopupFormValidate}
                                 sendFormHandler={servicePopupFormSend}
                                 formId={designState.mainServices.find((item) => item.orderForm.popupFormActive).id}
+                                happyStatePopup={designState.orderServiceForm.happyStatePopup}
+                                happyStatePopupHandler={sendFormServiceHappyStateHandler}
                             /> 
                         : null}
                     </div>
@@ -273,6 +286,11 @@ const ContractDesign = () => {
                                 </div>
                             </div>
                             <div className="design-fits-form-wrap">
+                                {designState.consultServiceForm.happyStatePopup.active ? 
+                                    <ContractDesignHappyStatePopup 
+                                        closePopupHandler={sendDesignFormHappyStateHandler}
+                                    />
+                                : null}
                                 <form>
                                     <h3>Отправить запрос</h3>
                                     {designState.consultServiceForm.fields.map((fieldItem) => {
