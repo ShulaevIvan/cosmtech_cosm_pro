@@ -43,6 +43,7 @@ const ContractDesign = () => {
         { id: 3, name: 'comment', ref: useRef(null) },
     ];
     const selectedServiceRef = useRef(null);
+    const designConsultPolicyRef = useRef(null);
 
     const findInputRef = (inputType, inputRefs) => {
         return inputRefs.find((item) => item.name === inputType).ref;
@@ -108,7 +109,9 @@ const ContractDesign = () => {
             clientPhone: designState.consultServiceForm.clientPhone,
             clientComment: designState.consultServiceForm.clientComment,
         };
+        console.log(clientData)
         dispatch(sendDesignConsultForm(clientData));
+        designConsultPolicyRef.current.click();
     };
 
     const sendDesignFormHappyStateHandler = () => {
@@ -289,6 +292,8 @@ const ContractDesign = () => {
                                 {designState.consultServiceForm.happyStatePopup.active ? 
                                     <ContractDesignHappyStatePopup 
                                         closePopupHandler={sendDesignFormHappyStateHandler}
+                                        title={designState.consultServiceForm.happyStatePopup.title}
+                                        description={designState.consultServiceForm.happyStatePopup.description}
                                     />
                                 : null}
                                 <form>
@@ -332,6 +337,7 @@ const ContractDesign = () => {
                                     })}
                                     <div className="form-mode-for-clients-get-detail-checkbox">
                                         <input
+                                            ref={designConsultPolicyRef}
                                             type="checkbox" 
                                             id="for-clients-get-detail-checkbox" className="for-clients-get-detail-checkbox"
                                         />

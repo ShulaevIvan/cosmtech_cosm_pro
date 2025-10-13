@@ -9,9 +9,9 @@ const ContractDesignHappyStatePopup = (props) => {
                     onClick={props.closePopupHandler}
                 ></span>
                 <div className="popup-design-service-happystate-body">
-                    <h3>Спасибо, Ваш запрос отправлен</h3>
+                    <h3>{props.title}</h3>
                     <div className="popup-design-service-happystate-text-wrap">
-                        <p>Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.</p>
+                        <p>{props.description}</p>
                     </div>
                     
                 </div>

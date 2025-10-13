@@ -238,7 +238,7 @@ const initialState = {
         happyStatePopup: {
             active: false,
             title: 'Test Title',
-            message: 'Message'
+            description: 'Message'
         }
     },
     consultServiceForm: {
@@ -250,7 +250,7 @@ const initialState = {
         happyStatePopup: {
             active: false,
             title: 'Test Title',
-            message: 'Message'
+            description: 'Message'
         },
         fields: [
             {
@@ -738,7 +738,7 @@ export const sendDesignConsultForm = createAsyncThunk(
             body: JSON.stringify({
                 name: sendData.clientName,
                 phone: sendData.clientPhone,
-                comment: sendData.comment,
+                comment: sendData.clientComment,
                 orderType: 'consult',
             }),
         });
@@ -1024,7 +1024,7 @@ const designPageSlice = createSlice({
                 state.orderServiceForm.happyStatePopup = {
                     ...state.orderServiceForm.happyStatePopup,
                     active: true,
-                    message: message,
+                    title: message,
                     description: description
                 }
                 return;
@@ -1032,7 +1032,7 @@ const designPageSlice = createSlice({
             state.consultServiceForm.happyStatePopup = {
                 ...state.consultServiceForm.happyStatePopup,
                 active: false,
-                message: '',
+                title: '',
                 description: ''
             }
         })
@@ -1045,7 +1045,7 @@ const designPageSlice = createSlice({
                 state.consultServiceForm.happyStatePopup = {
                     ...state.consultServiceForm.happyStatePopup,
                     active: true,
-                    message: message,
+                    title: message,
                     description: description
                 }
                 return;
@@ -1053,7 +1053,7 @@ const designPageSlice = createSlice({
             state.consultServiceForm.happyStatePopup = {
                 ...state.consultServiceForm.happyStatePopup,
                 active: false,
-                message: '',
+                title: '',
                 description: ''
             }
             

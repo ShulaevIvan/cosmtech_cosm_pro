@@ -24,6 +24,8 @@ const ContractDesignPopup = (props) => {
                     {props.happyStatePopup.active ? 
                         <ContractDesignHappyStatePopup 
                             closePopupHandler={props.happyStatePopupHandler}
+                            title={props.happyStatePopup.title}
+                            description={props.happyStatePopup.description}
                         /> 
                     : null}
                     <div className="sticky-sidemenu-tz-popup-close-btn-wrap">
