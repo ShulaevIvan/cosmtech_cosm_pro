@@ -221,7 +221,8 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 60%;
+    width: 50%;
+    padding: 0 20px 0 0;
     max-width: 800px;
 }
 .design-portfolio-row {
@@ -601,3 +602,223 @@
     width: 100%;
     margin-top: 20px;
 }
+.design-main-services-title-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.design-main-services-title-wrap h2 {
+    font-size: 34px;
+    margin: 0 0 20px 0;
+}
+.design-fits-personal-contacts-send-message-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.design-fits-personal-contacts {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.design-fits-personal-contacts span {
+    padding-right: 10px;
+}
+.design-fits-personal-contacts p {
+    display: flex;
+    align-items: center;
+    margin: 0 0 10px 0;
+}
+.design-fits-personal-contacts-send-message-item p img {
+    padding-right: 10px;
+}
+.design-fits-personal-contacts-send-message-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 200px;
+    max-width: 300px;
+    max-height: 30px;
+    margin-bottom: 20px;
+}
+.design-fits-personal-contacts-messages-item p {
+    margin: 0 0 10px 0;
+}
+
+@media (max-width: 1024px)  {
+  .design-fits-row,
+  .design-portfolio-row,
+  .design-main-services-row,
+  .contract-design-what-we-do-row,
+  .contract-design-text-row {
+    width: 95%;
+    justify-content: space-between;
+  }
+  .design-fits-form-wrap form {
+    padding: 20px 0;
+  }
+  .design-main-services-item {
+    max-width: 31%;
+  }
+  .contract-design-text-wrap {
+    max-width: 45%;
+    padding: 0 20px;
+  }
+  .contract-design-image-wrap img {
+    max-width: 450px;
+  }
+}
+@media (max-width: 900px)  {
+    .contract-design-image-wrap img {
+        max-width: 400px;
+    }
+}
+@media (max-width: 899px)  { 
+    .contract-design-image-wrap {
+        max-width: 40%;
+        padding: 0;
+    }
+    .contract-design-image-wrap img {
+        max-width: 370px;
+    }
+    .contract-design-what-we-do,
+    .contract-design-what-you-get {
+        padding: 15px 30px;
+    }
+    .design-portfolio-item-wrap {
+        max-width: 33%;
+    } 
+    .design-portfolio-item-wrap img {
+        max-width: 230px;
+    }
+    .design-fits-form-wrap {
+        padding: 20px;
+    }
+    .design-main-services-order-btn-wrap {
+        max-width: 212px;
+    }
+    .design-main-services-order-btn-wrap a {
+        font-size: 16px;
+        text-align: center;
+    }
+}
+@media (max-width: 800px) {
+    .contract-design-text-row {
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 90%;
+    }
+    .contract-design-image-wrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 100%;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+    .contract-design-text-wrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+    .contract-design-what-we-do-row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 95%;
+        max-width: 100%;
+    }
+    .contract-design-what-we-do,
+    .contract-design-what-you-get {
+        width: 95%;
+        max-width: 100%;
+        margin-bottom: 40px;
+        position: relative;
+        padding: 0 10px;
+    }
+    .contract-design-what-we-do-text-wrap,
+    .contract-design-what-you-get-text-wrap {
+        margin-top: 0;
+    }
+    .contract-design-what-we-do-text-wrap p {
+        margin-bottom: 5px;
+    }
+    .design-main-services-row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    
+    .design-main-services-item {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+    .design-main-services-item-img-wrap,
+    .design-main-services-item-title-wrap {
+        max-width: 300px;
+    }
+    .design-main-services-item img {
+        max-width: 300px;
+    }
+    .design-portfolio-row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .design-portfolio-item-wrap {
+        width: 100%;
+        max-width: 300px;
+        align-items: center;
+    }
+    .design-portfolio-item-wrap img {
+        max-width: 100%;
+    }
+    .design-fits-row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+    }
+    .design-fits-text-wrap {
+        width: 90%;
+        max-width: 100%;
+        align-items: center;
+        margin-bottom: 40px;
+        padding: 0;
+    }
+    .design-fits-form-wrap {
+        padding: 0;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+    }
+    .design-fits-form-wrap form {
+        max-width: 100%;
+    }
+    .design-fits-text-wrap h3 {
+        text-align: center;
+    }
+    .popup-design-service-wrap {
+        width: 80%;
+    }
+} 

@@ -420,7 +420,7 @@ const initialState = {
                     fieldType: 'tel',
                     fieldName: 'phone',
                     fieldValue: '',
-                    placeholder: '8 xxx xxx xx xx',
+                    placeholder: '8xxxxxxxxxx',
                     err: false
                 },
                 {

@@ -1,4 +1,6 @@
 import React from "react";
+import whatsappImg from '../../img/contractDesign/whatsapp_footer.svg'
+import telegramImg from '../../img/contractDesign/telegram_footer.svg'
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -203,8 +205,8 @@ const ContractDesign = () => {
 
                 <section>
                     <div className="container">
-                        <div className="about-company-production-title-wrap">
-                            <h2>Услуги по дизайну упаковки</h2>
+                        <div className="design-main-services-title-wrap">
+                            <h2>Услуги по дизайну</h2>
                         </div>
                         <div className="design-main-services-row">
                             {designState.mainServices.map((serviceItem) => {
@@ -265,7 +267,7 @@ const ContractDesign = () => {
 
                 <section>
                     <div className="container">
-                        <div className="about-company-production-title-wrap">
+                        <div className="design-main-services-title-wrap">
                             <h2>Примеры работ с описанием</h2>
                         </div>
                         <ContractDesignPortfolio
@@ -284,8 +286,13 @@ const ContractDesign = () => {
                                 <p>Опишите вашу задачу и дедлайны — я пришлю релевантное портфолио и предложу решение.</p>
                                 <p>Могу встретиться с вами лично, если находитесь в Санкт-Петербурге, и/или созвонимся для оценки бюджета и таймлайна.</p>
                                 <div className="design-fits-personal-contacts">
-                                    <p>phone: +7 xxx xxx xx xx</p>
-                                    <p>messages: +7 xxx xxx xx xx</p>
+                                    <h3>Контакты дизайнера:</h3>
+                                    <p><span>Телефон:</span>  <a href="#">+7 (923) 674-69-14</a></p>
+                                    <div className="design-fits-personal-contacts-send-message-wrap">
+                                        <div className="design-fits-personal-contacts-send-message-item">
+                                            <p><img src={whatsappImg}  alt="whatsapp"/>  <img src={telegramImg}  alt="whatsapp"/></p>
+                                        </div>               
+                                    </div>
                                 </div>
                             </div>
                             <div className="design-fits-form-wrap">
