@@ -306,6 +306,7 @@
     margin: 0;
     padding: 0;
     position: relative;
+    margin-top: auto;
 }
 #mobile-footer-links-wrap {
     display: flex;
@@ -445,7 +446,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     margin-top: auto;
 }
@@ -588,7 +589,6 @@
 @media (max-width: 500px) {
     .mobile-contacts-wrap {
         width: 100%;
-        margin-top: 20px;
     }
 }
 @media (max-width: 399px) {

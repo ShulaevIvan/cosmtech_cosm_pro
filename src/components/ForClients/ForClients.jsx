@@ -28,7 +28,6 @@ import ForClientsFormHappyState from "./ForClientsFromHappyState";
 const ForClients = () => {
     const forClientsState = useSelector((state) => state.innerPage.forClientsPage);
     const staticFilesPath = useSelector((state) => state.header.staticFilesPath);
-    console.log(staticFilesPath)
     const dispatch = useDispatch();
 
     const faqDescriptionHandler = (faqItem) => {

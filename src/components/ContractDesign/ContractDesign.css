@@ -640,6 +640,11 @@
 }
 .design-fits-personal-contacts-send-message-item p img {
     padding-right: 10px;
+    filter: grayscale();
+    transition: all ease-in-out 0.3s;
+}
+.design-fits-personal-contacts-send-message-item p img:hover {
+    filter: none;
 }
 .design-fits-personal-contacts-send-message-item {
     display: flex;
@@ -677,6 +682,9 @@
   .contract-design-image-wrap img {
     max-width: 450px;
   }
+  .contract-design-portfolio-background-popup-wrap {
+    top: -49%;
+}
 }
 @media (max-width: 900px)  {
     .contract-design-image-wrap img {
@@ -710,6 +718,9 @@
     .design-main-services-order-btn-wrap a {
         font-size: 16px;
         text-align: center;
+    }
+    .contract-design-portfolio-background-popup-wrap {
+        top: -47%;
     }
 }
 @media (max-width: 800px) {
@@ -750,6 +761,9 @@
         position: relative;
         padding: 0 10px;
     }
+    .contract-design-what-you-get {
+        margin-bottom: 0;
+    }
     .contract-design-what-we-do-text-wrap,
     .contract-design-what-you-get-text-wrap {
         margin-top: 0;
@@ -776,16 +790,8 @@
     .design-main-services-item img {
         max-width: 300px;
     }
-    .design-portfolio-row {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
     .design-portfolio-item-wrap {
-        width: 100%;
+        width: 50%;
         max-width: 300px;
         align-items: center;
     }
@@ -820,5 +826,31 @@
     }
     .popup-design-service-wrap {
         width: 80%;
+    }
+    .design-fits-personal-contacts {
+        align-items: center;
+    }
+    .design-fits-personal-contacts-send-message-wrap,
+    .design-fits-personal-contacts-send-message-item {
+        width: 100%;
+        align-items: center;
+    }
+}
+@media (max-width: 600px) {
+    .design-portfolio-row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .design-portfolio-item-wrap {
+        width: 100%;
+        max-width: 300px;
+        align-items: center;
+    }
+    .design-portfolio-item-wrap img {
+        max-width: 100%;
     }
 } 

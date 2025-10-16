@@ -6,8 +6,10 @@ import validatePhone from "../../functions/validatePhone";
 import brandServiceImg from '../../img/contractDesign/cosmeticBrand.jpg';
 import predmetCameraServiceImg from '../../img/contractDesign/predmetCamera.jpg';
 import redesignServiceImg from '../../img/contractDesign/redesign.jpg';
-import portfolioDemoImg from '../../img/contractDesign/portfolio/portfolioDemo.jpg'
-
+import portfolioDemoImg from '../../img/contractDesign/portfolio/portfolioDemo.jpg';
+import supportIcon from '../../img/contractDesign/support.svg';
+import expIcon from '../../img/contractDesign/exp.svg';
+import firmsIcon from '../../img/contractDesign/firms.svg';
 
 const importAllImages = (ctxWebpuck) => {
     const images = {};
@@ -51,6 +53,29 @@ const { workcase8Other1, workcase8Other2, workcase8Other3, workcase8Other4, work
 
 
 const initialState = {
+    advantages: [
+        {
+            id: 1,
+            title: '',
+            iconImg: supportIcon,
+            iconImgAlt: 'Дизайн упаковки услуги опыт работы',
+            text: 'Опыт работы с более чем пятнадцатью брендами, включающими разработку сотен уникальных SKU  в федеральном ритейле'
+        },
+        {
+            id: 2,
+            title: '',
+            iconImg: expIcon,
+            iconImgAlt: 'Разарботка дизайна упаковки под ключ в Санкт-Петербурге',
+            text: 'Обширные знания рынка и тенденции развития сферы. '
+        },
+        {
+            id: 3,
+            title: '',
+            iconImg: firmsIcon,
+            iconImgAlt: 'Услуги дизайна для упаковки косметики',
+            text: 'Поддержим вас на каждом этапе процесса, гарантируя своевременное выполнение заказа и высокий уровень исполнения.'
+        },
+    ],
     mainServices: [
         {
             id: 1,
@@ -1016,47 +1041,67 @@ const designPageSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(sendDesignServiceForm.pending, (state) => {
-            state.orderServiceForm = initialState.orderServiceForm;
+            state.orderServiceForm = {
+                ...state.orderServiceForm,
+                fields: initialState.orderServiceForm.fields
+            }
         })
         .addCase(sendDesignServiceForm.fulfilled, (state, action) => {
             const { status, message, description } = action.payload;
             if (status === 'ok') {
-                state.orderServiceForm.happyStatePopup = {
-                    ...state.orderServiceForm.happyStatePopup,
-                    active: true,
-                    title: message,
-                    description: description
+                state.orderServiceForm = {
+                    ...state.orderServiceForm,
+                    happyStatePopup: {
+                        ...state.orderServiceForm.happyStatePopup,
+                        active: true,
+                        title: message,
+                        description: description
+                    },
+                    fields: initialState.orderServiceForm.fields
                 }
                 return;
             }
-            state.consultServiceForm.happyStatePopup = {
-                ...state.consultServiceForm.happyStatePopup,
-                active: false,
-                title: '',
-                description: ''
+            state.orderServiceForm = {
+                ...state.orderServiceForm,
+                happyStatePopup: {
+                    ...state.orderServiceForm.happyStatePopup,
+                    active: false,
+                    title: '',
+                    description: ''
+                },
+                fields: initialState.orderServiceForm.fields
             }
         })
         .addCase(sendDesignConsultForm.pending, (state) => {
-           state.consultServiceForm = initialState.consultServiceForm;
+           state.consultServiceForm = {
+            ...state.consultServiceForm,
+            fields: initialState.consultServiceForm.fields
+           }
         })
         .addCase(sendDesignConsultForm.fulfilled, (state, action) => {
             const { status, message, description } = action.payload;
             if (status === 'ok') {
-                state.consultServiceForm.happyStatePopup = {
-                    ...state.consultServiceForm.happyStatePopup,
-                    active: true,
-                    title: message,
-                    description: description
+                state.consultServiceForm = {
+                    fields: initialState.consultServiceForm.fields,
+                    happyStatePopup: {
+                        ...state.consultServiceForm.happyStatePopup,
+                        active: true,
+                        title: message,
+                        description: description
+                    },
+                   
                 }
                 return;
             }
-            state.consultServiceForm.happyStatePopup = {
-                ...state.consultServiceForm.happyStatePopup,
-                active: false,
-                title: '',
-                description: ''
+            state.consultServiceForm = {
+                fields: initialState.consultServiceForm.fields,
+                happyStatePopup: {
+                    ...state.consultServiceForm.happyStatePopup,
+                    active: false,
+                    title: '',
+                    description: ''
+                },   
             }
-            
         })
     }
 });

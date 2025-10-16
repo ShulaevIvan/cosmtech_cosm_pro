@@ -557,7 +557,7 @@ const initialState = {
                 position: 'right',
                 serviceItemHover: {
                     active: false,
-                    minPrice: 1000,
+                    minPrice: 0,
                     descriptionTitle: 'Что входит в услугу',
                     descriptionList: [
                         { id: 1, name: 'Бриф и быстрый аудит ниши/конкурентов.' },
@@ -569,7 +569,7 @@ const initialState = {
                     content: 'test 1',
                 },
                 description: 'Упаковка для косметики под ключ: от стратегии до тиража.',
-                descriptionMini: 'Создадим успешный образ вашего бренда и обеспечим полный цикл реализации проекта по упаковке косметических продуктов. Цена за 1 SKU.'
+                descriptionMini: 'Создадим успешный образ вашего бренда и обеспечим полный цикл реализации проекта по упаковке косметических продуктов.'
             },
             {
                 id: 5,
@@ -3013,7 +3013,7 @@ const innerPageSlice = createSlice({
           state.error = null;
         })
         .addCase(sendServiceOrderThunk.fulfilled, (state, action) => {
-          const { message, description } = action.payload;
+          const { description } = action.payload;
           state.loadingStatus = 'ready';
           state.error = null;
           state.servicesPage.serviceForm.serviceFormHappyState = true;
@@ -3025,7 +3025,7 @@ const innerPageSlice = createSlice({
             state.error = null;
           })
         .addCase(sendInnerConsultThunk.fulfilled, (state, action) => {
-            const { message, description } = action.payload;
+            const { description } = action.payload;
             state.loadingStatus = 'ready';
             state.error = null;
             state.about.innerForm.innerConsultFormHappyState = true;
@@ -3039,7 +3039,7 @@ const innerPageSlice = createSlice({
             state.contacts.contactsForm.contactFormFileUpload = [];
           })
         .addCase(sendContactUsOrder.fulfilled, (state, action) => {
-            const { message, description } = action.payload;
+            const { description } = action.payload;
             state.loadingStatus = 'ready';
             state.error = null;
             state.contacts.contactsForm.contactFormHappyState = true;

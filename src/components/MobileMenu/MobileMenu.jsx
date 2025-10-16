@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { mobileMenuActive } from "../../redux/slices/menuSlice";
@@ -26,6 +27,10 @@ const MobileMenu = (props) => {
     const closeSubmenuHandler = () => {
         dispatch(resetMenu());
     };
+
+    useEffect(() => {
+        dispatch(mobileMenuActive({status: false}));
+    }, [window.location.pathname]);
 
     return (
         <React.Fragment>

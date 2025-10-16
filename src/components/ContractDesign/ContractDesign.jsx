@@ -1,6 +1,4 @@
 import React from "react";
-import whatsappImg from '../../img/contractDesign/whatsapp_footer.svg'
-import telegramImg from '../../img/contractDesign/telegram_footer.svg'
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -22,10 +20,8 @@ import {
     serviceFormHappyState
 } from "../../redux/slices/designPageSlice";
 import contractDesign from '../../img/contractDesign/test.jpg';
-import supportIcon from '../../img/contractDesign/support.svg';
-import expIcon from '../../img/contractDesign/exp.svg';
-import firmsIcon from '../../img/contractDesign/firms.svg';
-
+import whatsappImg from '../../img/contractDesign/whatsapp_footer.svg'
+import telegramImg from '../../img/contractDesign/telegram_footer.svg'
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
 import ContractDesignPopup from "./ContractDesignPopup";
 import ContractDesignPortfolio from "./ContractDesignPortfolio";
@@ -34,6 +30,7 @@ import ContractDesignHappyStatePopup from "./ContractDesignHappyStatePopup";
 const ContractDesign = () => {
     const designState = useSelector((state) => state.design);
     const dispatch = useDispatch();
+    
     const contractDesignFormInputRefs = [
         { id: 1, name: 'name', ref: useRef(null) },
         { id: 2, name: 'phone', ref: useRef(null) },
@@ -111,7 +108,6 @@ const ContractDesign = () => {
             clientPhone: designState.consultServiceForm.clientPhone,
             clientComment: designState.consultServiceForm.clientComment,
         };
-        console.log(clientData)
         dispatch(sendDesignConsultForm(clientData));
         designConsultPolicyRef.current.click();
     };
@@ -144,30 +140,21 @@ const ContractDesign = () => {
                                 <p>Если вы ищете надежного партнера, способного создать успешный образ вашего бренда и обеспечить полный цикл работ по дизайну косметических продуктов, обращайтесь к профессиональному дизайнеру упаковки с шестилетним опытом работы в сфере косметики и бытовой химии.</p>
                                 <div className="contract-design-advantage-wrap">
                                     <div className="contract-design-advantage-items-wrap">
-                                        <div className="contract-design-advantage-items-row">
-                                            <div className="contract-design-advantage-item-icon-wrap">
-                                                <img src={expIcon} alt="#" />
-                                            </div>
-                                            <div className="contract-design-advantage-item-description">
-                                                <p>Опыт работы с более чем пятнадцатью брендами, включающими разработку сотен уникальных SKU  в федеральном ритейле. </p>
-                                            </div>
-                                        </div>
-                                        <div className="contract-design-advantage-items-row">
-                                            <div className="contract-design-advantage-item-icon-wrap">
-                                                <img src={firmsIcon} alt="#" />
-                                            </div>
-                                            <div className="contract-design-advantage-item-description">
-                                                <p>Обширные знания рынка и тенденции развития сферы. </p>
-                                            </div>
-                                        </div>
-                                        <div className="contract-design-advantage-items-row">
-                                            <div className="contract-design-advantage-item-icon-wrap">
-                                                <img src={supportIcon} alt="#" />
-                                            </div>
-                                            <div className="contract-design-advantage-item-description">
-                                                <p>Поддержу Вас на каждом этапе процесса, гарантируя своевременное выполнение заказа и высокий уровень исполнения. </p>
-                                            </div>
-                                        </div>
+                                        {designState.advantages.map((advItem) => {
+                                            return (
+                                            <React.Fragment key={advItem.id}>
+                                                <div className="contract-design-advantage-items-row">
+                                                    <div className="contract-design-advantage-item-icon-wrap">
+                                                        <img src={advItem.iconImg} alt="Дизайн упаковки услуги опыт работы" />
+                                                    </div>
+                                                    <div className="contract-design-advantage-item-description">
+                                                        <p>{advItem.text}</p>
+                                                    </div>
+                                                </div>
+
+                                            </React.Fragment>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             </div>
@@ -287,10 +274,17 @@ const ContractDesign = () => {
                                 <p>Могу встретиться с вами лично, если находитесь в Санкт-Петербурге, и/или созвонимся для оценки бюджета и таймлайна.</p>
                                 <div className="design-fits-personal-contacts">
                                     <h3>Контакты дизайнера:</h3>
-                                    <p><span>Телефон:</span>  <a href="#">+7 (923) 674-69-14</a></p>
+                                    <p><span>Телефон:</span>  <a href="tel:+79236746914">+7 (923) 674-69-14</a></p>
                                     <div className="design-fits-personal-contacts-send-message-wrap">
                                         <div className="design-fits-personal-contacts-send-message-item">
-                                            <p><img src={whatsappImg}  alt="whatsapp"/>  <img src={telegramImg}  alt="whatsapp"/></p>
+                                            <p>
+                                                <a href="https://wa.me/+79236746914?" target="__blank">
+                                                    <img src={whatsappImg}  alt="контакты дизайнера whatsapp"/>
+                                                </a> 
+                                                <a href="https://t.me/+79312979774 " target="__blank">
+                                                    <img src={telegramImg}  alt="контакты дизайнера telegram"/>
+                                                </a>
+                                            </p>
                                         </div>               
                                     </div>
                                 </div>
@@ -355,7 +349,6 @@ const ContractDesign = () => {
                                         <span>согласен с <Link to={'/policy'}>политикой конфидициальности</Link></span>
                                     </div>
                                     <div className="popup-design-service-order-btn-wrap">
-                                        {console.log(designState)}
                                         <span 
                                             className={
                                                 `popup-design-service-order-btn ${designState.consultServiceForm.sendBtnActive ? '' : 'btnDisabled'}`
