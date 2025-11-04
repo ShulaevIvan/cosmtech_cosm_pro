@@ -257,7 +257,30 @@ const initialState = {
                 },
             ]
         },
-         {
+        {
+            page: '/care-cosmetics',
+            backgroundImg: backgroundServices, 
+            title: 'Производство уходовой косметики',
+            description: 'Услуги по контрактному производству уходовой косметики в Санкт-Петербурге',
+            seoDescription: 'Контрактное производство уходовой косметики',
+            breadcrumbs: [
+                {
+                    id: 1,
+                    name: 'Контрактное производство',
+                    url: '/',
+                    main: true,
+                    active: false,
+                },
+                {
+                    id: 2,
+                    name: 'производство уходовой косметики',
+                    url: '/care-cosmetics',
+                    main: false,
+                    active: true,
+                },
+            ]
+        },
+        {
             page: '/design-cosmetics',
             backgroundImg: backgroundDesign, 
             title: 'Дизайн и упаковка',
@@ -1601,6 +1624,34 @@ const initialState = {
                 },
             ]
         }
+    },
+    careCosmetic: {
+        cosmeticTypes: [
+            {id: 1, name: 'Мицеллярная вода ', img: eyeShadow, imgAlt: 'Контрактное производство гелевых теней пример'},
+            {id: 2, name: 'Гель/пенка для умывания', img: hygenicLipstick, imgAlt: 'Контрактное производство помады гигиенической пример'},
+            {id: 3, name: 'Тоник ', img: lipstickForLips, imgAlt: 'Контрактное производство помады декоративной пример'},
+            {id: 4, name: 'Блеск для губ', img: lipGloss, imgAlt: 'Контрактное производство блеск для губ пример'},
+            {id: 5, name: 'Скрабы', img: makeupBase, imgAlt: 'Контрактное производство основы под макияж пример'},
+            {id: 6, name: 'Химические пилинги', img: foundationСream, imgAlt: 'Контрактное производство тонального крема пример'},
+            {id: 7, name: 'Сыворотки', img: highlighter, imgAlt: 'Контрактное производство гелевых теней пример'},
+            {id: 8, name: 'Эмульсии', img: blush, imgAlt: 'Контрактное производство кремовых румян пример'},
+            {id: 9, name: 'Крем дневной', img: mascara, imgAlt: 'Контрактное производство nушь для ресниц пример'},
+            {id: 10, name: 'Крем ночной ', img: сoncealer, imgAlt: 'Контрактное производство консилера пример'},
+            {id: 11, name: 'Крем вокруг глаз', img: creamBlush, imgAlt: 'Контрактное производство масла для ногтей пример'},
+            {id: 12, name: 'Маска для лица', img: eyebrowGel, imgAlt: 'Контрактное производство гелей для бровей пример'},
+            {id: 13, name: 'Солнцезащитный крем', img: eyeliner, imgAlt: 'Контрактное производство Жидкая подводки для глаз пример'},
+            {id: 14, name: 'Бальзам для губ', img: eyeliner, imgAlt: 'Контрактное производство Жидкая подводки для глаз пример'}
+        ],
+        howToWorkIcons: [
+            {id: 1, name: 'Отправляете заявку', img: orderIcon, imgAlt: 'testAlt'},
+            {id: 2, name: 'Получение консультации и заполнение брифа', img: breafIcon, imgAlt: 'testAlt'},
+            {id: 3, name: 'Расчет себестоимости', img: sebesIcon, imgAlt: 'testAlt'},
+            {id: 4, name: 'Создание рецептуры', img: recipeIcon, imgAlt: 'testAlt'},
+            {id: 5, name: 'Доставка и отгрузка', img: deliveryIcon, imgAlt: 'testAlt'},
+            {id: 6, name: 'Сертификация', img: certificationIcon, imgAlt: 'testAlt'},
+            {id: 7, name: 'Разработка продукта', img: developIcon, imgAlt: 'testAlt'},
+            {id: 8, name: 'Закупка необходимого сырья', img: suppliesIcon, imgAlt: 'testAlt'}
+        ],
     },
     customTmPage: {
         tmItems: [

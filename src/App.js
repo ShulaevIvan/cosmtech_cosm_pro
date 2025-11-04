@@ -31,6 +31,7 @@ import PolicyPage from './components/PolicyPage/PolicyPage';
 import JobPage from './components/JobPage/JobPage';
 import ForClients from './components/ForClients/ForClients';
 import DecorativeCosmetics from './components/DecorativeCosmetics/DecorativeCosmetics';
+import CareCosmetics from './components/CareCosmetics/CareCosmetics';
 import Articles from './components/Articles/Articles';
 import HowToCreateCosmeticBrand from './components/Articles/HowToCreateCosmeticBrand';
 import AdvantagesContractCosmetics from './components/Articles/AdvantagesContractCosmetics';
@@ -53,6 +54,7 @@ function App() {
               <Route path='/about' element = {<AboutPage />} />
               <Route path='/forclients' element = {<ForClients />} />
               <Route path='/decorative-cosmetics' element = {<DecorativeCosmetics />} />
+              <Route path='/care-cosmetics' element={<CareCosmetics />} />
               <Route path='/design-cosmetics' element = {<ContractDesign />} />
               <Route path='/articles' element={<Articles />} />
               <Route path='/how-to-create-cosmetic-brand' element={<HowToCreateCosmeticBrand />} />

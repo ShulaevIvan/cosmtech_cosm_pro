@@ -53,6 +53,11 @@ const initialState = {
                         },
                         {
                             id: 2,
+                            name: 'Уходовая косметика',
+                            url: '/care-cosmetics'
+                        },
+                        {
+                            id: 3,
                             name: 'Дизайн и упаковка',
                             url: '/design-cosmetics'
                         },

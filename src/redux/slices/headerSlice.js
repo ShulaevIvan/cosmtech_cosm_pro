@@ -127,6 +127,14 @@ const initialState = {
             title: 'test',
             canonical: 'https://cosmtech.ru/design-cosmetics',
             description: 'Разработка дизайна упаковки и этикетки для косметики. Мы предлагаем креативные концепции, которые помогут подчеркнуть индивидуальность вашего бренда и привлечь покупателей.',
+        },
+         {
+            id: 15,
+            name: 'Производство уходовой косметики',
+            path: '/care-cosmetics',
+            title: 'test',
+            canonical: 'https://cosmtech.ru/care-cosmetics',
+            description: 'Контрактное производство уходовой косметики.',
         }
     ],
     currentPathUrl: '',
