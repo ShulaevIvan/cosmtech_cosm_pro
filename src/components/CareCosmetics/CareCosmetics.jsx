@@ -6,11 +6,11 @@ import careImgTest from '../../img/careCosmeticsImages/test.jpg';
 import decorativeCosmeticBrand from '../../img/decoraticeCosmeticsImages/decorativeStm.jpg';
 
 import InnerPageHeader from "../InnerPageHeader/InnerPageHeader";
+import TrueZnak from "../TrueZnak/TrueZnak";
 
 const CareCosmetics = () => {
 
     const careCosmeticState = useSelector((state) => state.innerPage.careCosmetic);
-    console.log(careCosmeticState)
     return (
         <React.Fragment>
             <InnerPageHeader />
@@ -100,6 +100,7 @@ const CareCosmetics = () => {
                         </div>
                     </div>
                 </section>
+                <TrueZnak />
 
                 <section>
                     <div className="container">
