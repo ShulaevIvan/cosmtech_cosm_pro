@@ -20,6 +20,7 @@ import './components/News/News.css';
 import './components/VideoFromProduction/VideoFromProduction.css';
 import './components/CustomTm/CustomTm.css';
 import './components/ContractDesign/ContractDesign.css';
+import './components/TrueZnak/TrueZnak.css';
 
 import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
 import Layout from './components/Layout/Layout';

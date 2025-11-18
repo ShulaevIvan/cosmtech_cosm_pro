@@ -35,8 +35,8 @@ import {
     decorativeOrderHappyState
 } from "../../redux/slices/innerPageSlice";
 
-import cosmeticTypesImg from '../../img/decoraticeCosmeticsImages/decorativeCosmeticType.jpg'
-import decorativeCosmeticBrand from '../../img/decoraticeCosmeticsImages/decorativeStm.jpg'
+import cosmeticTypesImg from '../../img/decoraticeCosmeticsImages/decorativeCosmeticType.jpg';
+import decorativeCosmeticBrand from '../../img/decoraticeCosmeticsImages/decorativeStm.jpg';
 
 const DecorativeCosmetics = () => {
     const decorativeCosmState = useSelector((state) => state.innerPage.decorativeCosmeticsPage);

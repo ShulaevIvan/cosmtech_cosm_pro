@@ -1627,20 +1627,20 @@ const initialState = {
     },
     careCosmetic: {
         cosmeticTypes: [
-            {id: 1, name: 'Мицеллярная вода ', img: eyeShadow, imgAlt: 'Контрактное производство гелевых теней пример'},
-            {id: 2, name: 'Гель/пенка для умывания', img: hygenicLipstick, imgAlt: 'Контрактное производство помады гигиенической пример'},
-            {id: 3, name: 'Тоник ', img: lipstickForLips, imgAlt: 'Контрактное производство помады декоративной пример'},
-            {id: 4, name: 'Блеск для губ', img: lipGloss, imgAlt: 'Контрактное производство блеск для губ пример'},
-            {id: 5, name: 'Скрабы', img: makeupBase, imgAlt: 'Контрактное производство основы под макияж пример'},
-            {id: 6, name: 'Химические пилинги', img: foundationСream, imgAlt: 'Контрактное производство тонального крема пример'},
-            {id: 7, name: 'Сыворотки', img: highlighter, imgAlt: 'Контрактное производство гелевых теней пример'},
-            {id: 8, name: 'Эмульсии', img: blush, imgAlt: 'Контрактное производство кремовых румян пример'},
-            {id: 9, name: 'Крем дневной', img: mascara, imgAlt: 'Контрактное производство nушь для ресниц пример'},
-            {id: 10, name: 'Крем ночной ', img: сoncealer, imgAlt: 'Контрактное производство консилера пример'},
-            {id: 11, name: 'Крем вокруг глаз', img: creamBlush, imgAlt: 'Контрактное производство масла для ногтей пример'},
-            {id: 12, name: 'Маска для лица', img: eyebrowGel, imgAlt: 'Контрактное производство гелей для бровей пример'},
-            {id: 13, name: 'Солнцезащитный крем', img: eyeliner, imgAlt: 'Контрактное производство Жидкая подводки для глаз пример'},
-            {id: 14, name: 'Бальзам для губ', img: eyeliner, imgAlt: 'Контрактное производство Жидкая подводки для глаз пример'}
+            {id: 1, name: 'Мицеллярная вода ', img: eyeShadow, imgAlt: 'Контрактное мицеллярной воды пример'},
+            {id: 2, name: 'Гель/пенка для умывания', img: hygenicLipstick, imgAlt: 'Контрактное производство гелей для умывания пример'},
+            {id: 3, name: 'Тоник', img: lipstickForLips, imgAlt: 'Контрактное производство тоника пример'},
+            {id: 4, name: 'Скрабы', img: makeupBase, imgAlt: 'Контрактное производство скрабы пример'},
+            {id: 5, name: 'Химические пилинги', img: foundationСream, imgAlt: 'Контрактное производство пилингов пример'},
+            {id: 6, name: 'Сыворотки', img: highlighter, imgAlt: 'Контрактное производство сыворотки пример'},
+            {id: 7, name: 'Эмульсии', img: blush, imgAlt: 'Контрактное производство эмульсии пример'},
+            {id: 8, name: 'Крем дневной', img: mascara, imgAlt: 'Контрактное производство крем дневной пример'},
+            {id: 9, name: 'Крем ночной ', img: сoncealer, imgAlt: 'Контрактное производство крем ночной пример'},
+            {id: 10, name: 'Крем вокруг глаз', img: creamBlush, imgAlt: 'Контрактное производство крема вокруг глаз пример'},
+            {id: 11, name: 'Маска для лица', img: eyebrowGel, imgAlt: 'Контрактное производство маска для лица пример'},
+            {id: 12, name: 'Солнцезащитный крем', img: eyeliner, imgAlt: 'Контрактное производство солнцезащитного крема для глаз пример'},
+            {id: 13, name: 'Бальзам для губ', img: eyeliner, imgAlt: 'Контрактное производство бальзама для губ пример'},
+            {id: 14, name: 'Масла для лица', img: eyebrowGel, imgAlt: 'Контрактное производство масла для лица пример'},
         ],
         howToWorkIcons: [
             {id: 1, name: 'Отправляете заявку', img: orderIcon, imgAlt: 'testAlt'},
@@ -1725,6 +1725,59 @@ const initialState = {
     mousePosition: {
         left: 0,
         top: 0,
+    },
+    trueZnak: {
+        questions: [
+             {
+                id: 1,
+                quest: 'Косметика подлежащая обязательной маркировке',
+                ans: 'С 1 марта 2025 года в России действует обязательная маркировка косметической продукции в системе «Честный знак». Это следует из постановления Правительства РФ от 30.11.2024 №1681.',
+                linkUrl: 'https://xn--80ajghhoc2aj1c8b.xn--p1ai/business/projects/cosmetics/marking/',
+                linkName: 'Подробнее на честныйзнак.рф',
+                active: false
+            },
+            {
+                id: 2,
+                quest: 'Сроки обязательной маркировки',
+                ans: 'с 1 мая 2025 года в отношении мыла, моющих средств, с 1 июля 2025 года в отношении средств для волос, средств для бритья, дезодорантов, с 1 октября 2025 года в отношении косметики, зубной пасты.',
+                linkUrl: 'https://xn--80ajghhoc2aj1c8b.xn--p1ai/business/projects/cosmetics/marking/',
+                linkName: 'Подробнее на честныйзнак.рф',
+                active: false
+            },
+            {
+                id: 3,
+                quest: 'Какой срок жизни у кода маркировки ?',
+                ans: 'Срок жизни кода маркировки от момента эмиссии до успешной обработки отчета о нанесении: 60 дней – при нанесении КМ самостоятельно, 545 дней – при нанесении КМ в типографии.',
+                linkUrl: 'https://xn--80ajghhoc2aj1c8b.xn--p1ai/business/projects/cosmetics/faq/',
+                linkName: 'Подробнее на честныйзнак.рф',
+                active: false
+            },
+            {
+                id: 4,
+                quest: 'Маркетплейсы являются участниками оборота товаров ?',
+                ans: 'Да, с 16 октября 2025 года маркетплейсы являются полноценными участниками оборота товаров. Это предусмотрено новым законом, который регулирует их деятельность в России',
+                linkUrl: 'https://xn--80ajghhoc2aj1c8b.xn--p1ai/business/projects/cosmetics/faq/',
+                linkName: 'Подробнее на честныйзнак.рф',
+                active: false
+            },
+            {
+                id: 5,
+                quest: 'Какие способы нанесения СИ возможны',
+                ans: 'Предусмотрены три способа нанесения маркировки: Типографский способ — печать кодов в типографии; Этикетирование — печать кодов на стикерах; Прямое нанесение — нанесение кодов на производственной линии непосредственно на этикетку упаковку методом прямой печати.',
+                linkUrl: 'https://xn--80ajghhoc2aj1c8b.xn--p1ai/business/projects/cosmetics/faq/',
+                linkName: 'Подробнее на честный знак.рф',
+                active: false
+            },
+        ],
+        popup: {
+            active: false,
+            fields: [],
+        },
+        happyStatePopup: {
+            active: false,
+            title: 'Test Title',
+            description: 'Message'
+        },
     }
 };
 
@@ -3053,8 +3106,24 @@ const innerPageSlice = createSlice({
                 return mainTmItem;
              })
 
+        },
+        znakOpen(state, action) {
+            const { questId } = action.payload;
+            state.trueZnak.questions = state.trueZnak.questions.map((questItem) => {
+                if (questItem.id === questId) {
+                    return {
+                        ...questItem,
+                        active: questItem.active ? false : true
+                    }
+                }
+                return questItem
+            });
+        },
+        znakPopup(state) {
+            state.trueZnak.popup = {
+                active: state.trueZnak.popup.active ? false : true
+            }
         }
-
     },
     
     extraReducers: (builder) => {
@@ -3312,6 +3381,8 @@ export const {
     aboutProductionVideoMenu,
     aboutProductionSelectVideo,
     showMoreTmItem,
-    customTmLightbox
+    customTmLightbox,
+    znakOpen,
+    znakPopup
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

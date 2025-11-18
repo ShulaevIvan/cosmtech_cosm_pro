@@ -1,0 +1,261 @@
+.true-znak-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 40px 0;
+    justify-content: space-between;
+}
+.true-znak-image-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 585px;
+}
+.true-znak-image-wrap img,
+.true-znak-img-wrap img {
+    max-width: 585px;
+}
+.true-znak-img-wrap {
+    width: 100%;
+    margin-bottom: 80px;
+}
+.true-znak-content-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 575px;
+}
+.true-znak-text-min {
+    margin: 0;
+    margin-bottom: 20px;
+}
+.true-znak-question-item-wrap {
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    max-width: 550px;
+    border: 1px solid #00458B;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.true-znak-question-item-wrap p {
+    margin: 0;
+    padding: 0;
+}
+.true-znak-question-item-header {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 90%;
+}
+.true-znak-question-item-icon-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 10%;
+    max-width: 10%;
+    cursor: pointer;
+}
+
+.true-znak-question-item-header p {
+    cursor: default;
+}
+.true-znak-question-item-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 550px;
+    padding: 10px;
+    background-color: whitesmoke;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    border-radius: 0 0 5px 5px;
+    transition: margin 0.3s;
+}
+.true-znak-question-item-body.hidden {
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+.true-znak-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+.true-znak-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    max-width: 280px;
+    height: 40px;
+    padding: 0 40px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+}
+.true-znak-btn:hover {
+    background-color: #00458B;
+    transition: background .4s ease;
+    color: white;
+}
+.true-znak-questions-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.true-znak-link-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+.true-znak-link-wrap span {
+    margin-right: 10px;
+    font-weight: bold;
+}
+.popup-znak-background-wrap {
+    background-color: rgba(0, 0, 0, .8);
+    min-height: 200vh;
+    width: 100%;
+    position: fixed;
+    top: -50%;
+    z-index: 5;
+    animation: grow;
+    animation-duration: 0.3s;
+}
+.popup-znak-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 400px;
+    border: 1px solid #00458B;
+    background-color: white;
+    z-index: 6;
+    border-radius: 10px;
+    min-height: 450px;
+    padding: 20px;
+}
+.popup-znak-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+}
+.popup-znak-body form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 300px;
+}
+.popup-znak-body label {
+    color: #00458B;
+    font-size: 20px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-family: gothampro bold
+}
+.znak-form-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.znak-form-input-wrap input {
+    min-width: 250px;
+    min-height: 30px;
+    width: 100%;
+    max-width: 280px
+}
+.znak-form-send-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+}
+.znak-form-send-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 40px;
+    padding: 0 40px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #3FD2C7;
+    padding: 0 40px;
+    outline: none;
+    cursor: pointer;
+}
+.popup-znak-checkbox-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+}
+.popup-znak-policy {
+  display: none;
+}
+.popup-znak-policy + label {
+  position: relative;
+  padding-left: 30px;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  color: #000;
+  cursor: pointer;
+  user-select: none;
+}
+.popup-znak-policy + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.4em;
+  height: 1.4em;
+  background-image: url('../../img/form_checkbox.svg');
+  background-size: contain;
+}
+.popup-znak-policy:checked + label::before {
+  border-color: #000;
+  background-image: url('../../img/form_checkbox_checked.svg');
+  background-size: contain;
+}
