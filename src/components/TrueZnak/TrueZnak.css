@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 20px;
-    padding: 40px 0;
+    padding: 80px 0 0 0;
     justify-content: space-between;
 }
 .true-znak-image-wrap {
@@ -16,7 +16,8 @@
 }
 .true-znak-image-wrap img,
 .true-znak-img-wrap img {
-    max-width: 585px;
+    width: 585px;
+    max-width: 100%;
 }
 .true-znak-img-wrap {
     width: 100%;
@@ -39,8 +40,8 @@
     flex-wrap: wrap;
     position: relative;
     align-items: center;
-    width: 100%;
-    max-width: 550px;
+    width: 550px;
+    max-width: 100%;
     border: 1px solid #00458B;
     border-radius: 5px;
     padding: 10px;
@@ -67,7 +68,7 @@
 }
 
 .true-znak-question-item-header p {
-    cursor: default;
+    cursor: pointer;
 }
 .true-znak-question-item-body {
     display: flex;
@@ -224,6 +225,11 @@
     outline: none;
     cursor: pointer;
 }
+.znak-form-send-btn:hover {
+    background-color: #00458B;
+    transition: background .4s ease;
+    color: white;
+}
 .popup-znak-checkbox-wrap {
     display: flex;
     flex-direction: row;
@@ -258,4 +264,62 @@
   border-color: #000;
   background-image: url('../../img/form_checkbox_checked.svg');
   background-size: contain;
+}
+
+@media (max-width: 1200px) {
+    .true-znak-question-item-wrap {
+        width: 450px;
+        max-width: 100%;
+    }
+}
+@media (max-width: 980px) {
+    .true-znak-image-wrap img, 
+    .true-znak-img-wrap img {
+        max-width: 400px;
+    }
+    .true-znak-question-item-wrap {
+        width: 350px;
+    }
+}
+
+@media (max-width: 880px) {
+    .true-znak-image-wrap img, 
+    .true-znak-img-wrap img {
+        max-width: 400px;
+    }
+    .true-znak-question-item-wrap {
+        width: 325px;
+    }
+}
+
+@media (max-width: 700px) {
+    .true-znak-row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 90%;
+        padding: 0;
+    }
+    .true-znak-image-wrap,
+    .true-znak-content-wrap {
+        width: 100%;
+    }
+    .true-znak-questions-wrap {
+        align-items: center;
+    }
+    .true-znak-img-wrap {
+        margin-bottom: 20px;
+    }
+    .true-znak-question-item-wrap {
+        max-width: 400px;
+    }
+    .true-znak-image-wrap {
+        order: 1;
+        margin-top: 40px;
+    }
+    .true-znak-image-wrap img, 
+    .true-znak-img-wrap img {
+        max-width: 100%;
+    }
 }

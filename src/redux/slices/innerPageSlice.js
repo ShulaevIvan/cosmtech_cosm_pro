@@ -1771,7 +1771,28 @@ const initialState = {
         ],
         popup: {
             active: false,
-            fields: [],
+            policyActive: false,
+            sendBtnActive: false,
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    name: 'name',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'Ваше имя',
+                    valid: true,
+                },
+                {
+                    id: 2,
+                    title: 'Телефон',
+                    name: 'phone',
+                    type: 'text',
+                    placeholder: '8xxxxxxxxxx',
+                    value: '',
+                    valid: true
+                },
+            ],
         },
         happyStatePopup: {
             active: false,
@@ -3121,8 +3142,76 @@ const innerPageSlice = createSlice({
         },
         znakPopup(state) {
             state.trueZnak.popup = {
+                ...state.trueZnak.popup,
                 active: state.trueZnak.popup.active ? false : true
             }
+            if (!state.trueZnak.popup.active) state.trueZnak.popup = initialState.trueZnak.popup;
+        },
+        znakPopupInput(state, action) {
+            const { fieldId, fieldType, fieldValue } = action.payload;
+            let inputValid;
+            let validValue;
+
+            state.trueZnak.popup.fields = state.trueZnak.popup.fields.map((fieldItem) => {
+                if (fieldItem.id === fieldId && fieldItem.name === fieldType) {
+                    switch(fieldType){
+                        case 'name':
+                            inputValid = validateName(fieldValue);
+                            validValue = fieldValue;
+                            break;
+                        case 'phone':
+                            validValue = validatePhone(fieldValue);
+                            inputValid = validValue.length === 18 ? true : false;
+                            break;
+                        default:
+                            break;
+                    }
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        valid: inputValid
+                    }
+                }
+                return fieldItem;
+            });
+        },
+        znakClearPopupInput(state, action) {
+            const { inputId } = action.payload;
+
+            state.trueZnak.popup.fields = state.trueZnak.popup.fields.map((fieldItem) => {
+                if (fieldItem.id === inputId) {
+                    return {
+                        ...fieldItem,
+                        value: '',
+                        inputValid: false
+                    }
+                }
+                return fieldItem;
+            });
+
+        },
+        znakPopupPolicy(state) {
+            state.trueZnak.popup = {
+                ...state.trueZnak.popup,
+                policyActive: state.trueZnak.popup.policyActive ? false : true
+            }
+        },
+        validateZnakPopupForm(state) {
+            const checkName = state.trueZnak.popup.fields.find((item) => item.name === 'name' && item.value !== '' && item.valid);
+            const checkPhone = state.trueZnak.popup.fields.find((item) => item.name === 'phone' && item.value !== '' && item.valid);
+            const checkPolicy = state.trueZnak.popup.policyActive;
+
+            if (checkName && checkPhone && checkPolicy) {
+                state.trueZnak.popup = {
+                    ...state.trueZnak.popup,
+                    sendBtnActive: true
+                };
+                return;
+            }
+            state.trueZnak.popup = {
+                ...state.trueZnak.popup,
+                sendBtnActive: false
+            };
         }
     },
     
@@ -3383,6 +3472,10 @@ export const {
     showMoreTmItem,
     customTmLightbox,
     znakOpen,
-    znakPopup
+    znakPopup,
+    znakPopupPolicy,
+    znakPopupInput,
+    znakClearPopupInput,
+    validateZnakPopupForm
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;
