@@ -53,6 +53,7 @@ const decorativeCosmeticsIcons = importAllImages(require.context('../../img/deco
 const customTmGalleryImages = importAllImages(require.context('../../img/customTm/gallery', false, /\.(png|jpe?g|jpeg|svg)$/));
 const customTmLogoImages = importAllImages(require.context('../../img/customTm', false, /\.(png|jpe?g|jpeg|svg)$/));
 const aboutVideos = importAllVideos(require.context('../../video/', false, /\.(mp4)$/));
+const careCosmeticImages = importAllImages(require.context('../../img/careCosmeticsImages/cosmeticsTypes', false, /\.(png|jpe?g|jpeg|svg)$/));
 
 const { 
     protei, plasticKit, vitaplast, calculate, cosmopack, upakovka24, 
@@ -92,6 +93,10 @@ const {
     smMinImg1, smMinImg2, smMinImg3, smMinImg4, smMinImg5,
     smImg1, smImg2, smImg3, smImg4, smImg5,
 } = customTmGalleryImages;
+const { 
+    creamDay, creamNight, emuls, gel, balsamLips, maslo, 
+    pil, siv, skrab, mask, sfp, eyeCream, foam, mWhater
+} = careCosmeticImages;
 
 
 const initialState = { 
@@ -1627,20 +1632,20 @@ const initialState = {
     },
     careCosmetic: {
         cosmeticTypes: [
-            {id: 1, name: 'Мицеллярная вода ', img: eyeShadow, imgAlt: 'Контрактное мицеллярной воды пример'},
-            {id: 2, name: 'Гель/пенка для умывания', img: hygenicLipstick, imgAlt: 'Контрактное производство гелей для умывания пример'},
-            {id: 3, name: 'Тоник', img: lipstickForLips, imgAlt: 'Контрактное производство тоника пример'},
-            {id: 4, name: 'Скрабы', img: makeupBase, imgAlt: 'Контрактное производство скрабы пример'},
-            {id: 5, name: 'Химические пилинги', img: foundationСream, imgAlt: 'Контрактное производство пилингов пример'},
-            {id: 6, name: 'Сыворотки', img: highlighter, imgAlt: 'Контрактное производство сыворотки пример'},
-            {id: 7, name: 'Эмульсии', img: blush, imgAlt: 'Контрактное производство эмульсии пример'},
-            {id: 8, name: 'Крем дневной', img: mascara, imgAlt: 'Контрактное производство крем дневной пример'},
-            {id: 9, name: 'Крем ночной ', img: сoncealer, imgAlt: 'Контрактное производство крем ночной пример'},
-            {id: 10, name: 'Крем вокруг глаз', img: creamBlush, imgAlt: 'Контрактное производство крема вокруг глаз пример'},
-            {id: 11, name: 'Маска для лица', img: eyebrowGel, imgAlt: 'Контрактное производство маска для лица пример'},
-            {id: 12, name: 'Солнцезащитный крем', img: eyeliner, imgAlt: 'Контрактное производство солнцезащитного крема для глаз пример'},
-            {id: 13, name: 'Бальзам для губ', img: eyeliner, imgAlt: 'Контрактное производство бальзама для губ пример'},
-            {id: 14, name: 'Масла для лица', img: eyebrowGel, imgAlt: 'Контрактное производство масла для лица пример'},
+            {id: 1, name: 'Мицеллярная вода ', img: mWhater, imgAlt: 'Контрактное мицеллярной воды пример'},
+            {id: 2, name: 'Гель/пенка для умывания', img: foam, imgAlt: 'Контрактное производство гелей для умывания пример'},
+            {id: 3, name: 'Тоник', img: gel, imgAlt: 'Контрактное производство тоника пример'},
+            {id: 4, name: 'Скрабы', img: skrab, imgAlt: 'Контрактное производство скрабы пример'},
+            {id: 5, name: 'Химические пилинги', img: pil, imgAlt: 'Контрактное производство пилингов пример'},
+            {id: 6, name: 'Сыворотки', img: siv, imgAlt: 'Контрактное производство сыворотки пример'},
+            {id: 7, name: 'Эмульсии', img: emuls, imgAlt: 'Контрактное производство эмульсии пример'},
+            {id: 8, name: 'Крем дневной', img: creamDay, imgAlt: 'Контрактное производство крем дневной пример'},
+            {id: 9, name: 'Крем ночной ', img: creamNight, imgAlt: 'Контрактное производство крем ночной пример'},
+            {id: 10, name: 'Крем вокруг глаз', img: eyeCream, imgAlt: 'Контрактное производство крема вокруг глаз пример'},
+            {id: 11, name: 'Маска для лица', img: mask, imgAlt: 'Контрактное производство маска для лица пример'},
+            {id: 12, name: 'Солнцезащитный крем', img: sfp, imgAlt: 'Контрактное производство солнцезащитного крема для глаз пример'},
+            {id: 13, name: 'Бальзам для губ', img: balsamLips, imgAlt: 'Контрактное производство бальзама для губ пример'},
+            {id: 14, name: 'Масла для лица', img: maslo, imgAlt: 'Контрактное производство масла для лица пример'},
         ],
         howToWorkIcons: [
             {id: 1, name: 'Отправляете заявку', img: orderIcon, imgAlt: 'testAlt'},
@@ -1652,6 +1657,108 @@ const initialState = {
             {id: 7, name: 'Разработка продукта', img: developIcon, imgAlt: 'testAlt'},
             {id: 8, name: 'Закупка необходимого сырья', img: suppliesIcon, imgAlt: 'testAlt'}
         ],
+        consultPopup: {
+            active: false,
+            sendBtnActive: false,
+            policyActive: false,
+            happyState: {
+                active: false,
+                title: '',
+                description: ''
+            },
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    name: 'name',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'Ваше имя',
+                    valid: true,
+                },
+                {
+                    id: 2,
+                    title: 'Телефон',
+                    name: 'phone',
+                    type: 'text',
+                    placeholder: '8xxxxxxxxxx',
+                    value: '',
+                    valid: true
+                },
+                {
+                    id: 3,
+                    title: 'Email',
+                    name: 'email',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'demo@....ru',
+                    valid: true,
+                },
+            ],
+            happyState: {
+                active: false,
+                description: ''
+            }
+        },
+        orderPopup: {
+            active: false,
+            sendBtnActive: false,
+            policyActive: false,
+            happyState: {
+                active: false,
+                title: '',
+                description: '',
+                orderNumber: ''
+            },
+            fields: [
+                {
+                    id: 1,
+                    title: 'Имя',
+                    name: 'name',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'Ваше имя',
+                    valid: true,
+                },
+                {
+                    id: 2,
+                    title: 'Телефон',
+                    name: 'phone',
+                    type: 'text',
+                    placeholder: '8xxxxxxxxxx',
+                    value: '',
+                    valid: true
+                },
+                {
+                    id: 3,
+                    title: 'Email',
+                    name: 'email',
+                    value: '',
+                    type: 'text',
+                    placeholder: 'demo@....ru',
+                    valid: true,
+                },
+                {
+                    id: 4,
+                    title: 'Прикрепить тз',
+                    name: 'file',
+                    type: 'file',
+                    fileData: {},
+                    displayName: '',
+                    value: '',
+                    valid: true
+                },
+                {
+                    id: 5,
+                    title: 'Комментарий',
+                    name: 'comment',
+                    type: 'textarea',
+                    placeholder: 'Комментарий....',
+                    value: '',
+                    valid: true
+                },
+            ],
+        },
     },
     customTmPage: {
         tmItems: [
@@ -3051,6 +3158,20 @@ const innerPageSlice = createSlice({
         decorativeOrderHappyState(state) {
             state.decorativeCosmeticsPage.orderPopup.happyState.active = state.decorativeCosmeticsPage.orderPopup.happyState.active ? false : true;
         },
+        careCosmeticsConsultPopup(state) {
+            state.careCosmetic.consultPopup.active = state.careCosmetic.consultPopup.active ? false : true;
+            if (!state.careCosmetic.consultPopup.active) {
+                state.careCosmetic.consultPopup = initialState.careCosmetic.consultPopup;
+                return;
+            }
+        },
+        careCosmeticsOrderPopup(state) {
+            state.careCosmetic.orderPopup.active = state.careCosmetic.orderPopup.active ? false : true;
+            if (!state.careCosmetic.orderPopup.active) {
+                state.careCosmetic.orderPopup = initialState.careCosmetic.orderPopup;
+                return;
+            }
+        },
         aboutProductionVideoMenu(state, action) {
             const { catId, catName } = action.payload;
             state.about.aboutVideoProduction.menuCategories = state.about.aboutVideoProduction.menuCategories.map((videoCategory) => {
@@ -3467,6 +3588,8 @@ export const {
     decorativeConsultHappyState,
     decorativeQuestionHappyState,
     decorativeOrderHappyState,
+    careCosmeticsConsultPopup,
+    careCosmeticsOrderPopup,
     aboutProductionVideoMenu,
     aboutProductionSelectVideo,
     showMoreTmItem,
