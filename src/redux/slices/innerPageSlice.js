@@ -3165,12 +3165,123 @@ const innerPageSlice = createSlice({
                 return;
             }
         },
+        careCosmeticsConsultInput(state, action) {
+            const { inputId, inputType, inputValue, clear } = action.payload;
+            let validValue;
+            let inputValid;
+
+            if (clear) {
+                state.careCosmetic.consultPopup.fields = state.careCosmetic.consultPopup.fields.map((fieldItem) => {
+                    if (fieldItem.id === inputId && fieldItem.name === inputType) {
+                        return {
+                            ...fieldItem,
+                            value: '',
+                            valid: false
+                        }
+                    }
+                    return fieldItem;
+                })
+                return;
+            }
+
+            state.careCosmetic.consultPopup.fields = state.careCosmetic.consultPopup.fields.map((fieldItem) => {
+                if (fieldItem.id === inputId && fieldItem.name === inputType) {
+                    switch(inputType) {
+                        case 'name':
+                            inputValid = validateName(inputValue);
+                            validValue = inputValue;
+                            break;
+                        case 'phone':
+                            const phoneStr = validatePhone(inputValue);
+                            inputValid = phoneStr.length === 18 ? true : false
+                            validValue = phoneStr;
+                            break;
+                        case 'email':
+                            inputValid = !validateMail(inputValue) ? true : false
+                            validValue = inputValue;
+                        default:
+                            break;
+                    }
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        valid: inputValid
+                    };
+                }
+                return fieldItem;
+            });
+        },
+        careCosmeticConsultPolicyHandler(state) {
+            state.careCosmetic.consultPopup.policyActive = state.careCosmetic.consultPopup.policyActive ? false : true;
+        },
+        careCosmeticConsultPopupValidate(state) {
+            const consultName = state.careCosmetic.consultPopup.fields.find((item) => item.name === 'name' && item.value && item.valid);
+            const consultPhone= state.careCosmetic.consultPopup.fields.find((item) => item.name === 'phone' && item.value && item.valid);
+            const consultEmail = state.careCosmetic.consultPopup.fields.find((item) => item.name === 'email' && item.value && item.valid);
+            const policyActive = state.careCosmetic.consultPopup.policyActive;
+
+            if (consultName && policyActive && (consultEmail && consultEmail.valid || consultPhone && consultPhone.valid)) {
+                state.careCosmetic.consultPopup.sendBtnActive = true;
+                return;
+            }
+            state.careCosmetic.consultPopup.sendBtnActive = false;
+
+        },
         careCosmeticsOrderPopup(state) {
             state.careCosmetic.orderPopup.active = state.careCosmetic.orderPopup.active ? false : true;
             if (!state.careCosmetic.orderPopup.active) {
                 state.careCosmetic.orderPopup = initialState.careCosmetic.orderPopup;
                 return;
             }
+        },
+        careCosmeticsOrderInput(state, action) {
+            const { inputId, inputType, inputValue, clear } = action.payload;
+            let validValue;
+            let inputValid;
+            
+            if (clear) {
+                state.careCosmetic.orderPopup.fields = state.careCosmetic.orderPopup.fields.map((fieldItem) => {
+                    if (fieldItem.id === inputId && fieldItem.name === inputType) {
+                        return {
+                            ...fieldItem,
+                            value: '',
+                            valid: false
+                        }
+                    }
+                    return fieldItem;
+                });
+                return;
+            }
+            state.careCosmetic.orderPopup.fields = state.careCosmetic.orderPopup.fields.map((fieldItem) => {
+                if (fieldItem.id === inputId && fieldItem.name === inputType) {
+                    switch(inputType) {
+                        case 'name':
+                            inputValid = validateName(inputValue);
+                            validValue = inputValue;
+                            break;
+                        case 'comment':
+                            inputValid = inputValue.length > 3 ? true : false
+                            validValue = inputValue;
+                            break;
+                        case 'phone':
+                            const phoneStr = validatePhone(inputValue);
+                            inputValid = phoneStr.length === 18 ? true : false
+                            validValue = phoneStr;
+                            break;
+                        case 'email':
+                            inputValid = !validateMail(inputValue) ? true : false
+                            validValue = inputValue;
+                        default:
+                            break;
+                    }
+                    return {
+                        ...fieldItem,
+                        value: validValue,
+                        valid: inputValid
+                    }
+                }
+                return fieldItem;
+            })
         },
         aboutProductionVideoMenu(state, action) {
             const { catId, catName } = action.payload;
@@ -3589,7 +3700,11 @@ export const {
     decorativeQuestionHappyState,
     decorativeOrderHappyState,
     careCosmeticsConsultPopup,
+    careCosmeticsConsultInput,
+    careCosmeticConsultPolicyHandler,
+    careCosmeticConsultPopupValidate,
     careCosmeticsOrderPopup,
+    careCosmeticsOrderInput,
     aboutProductionVideoMenu,
     aboutProductionSelectVideo,
     showMoreTmItem,

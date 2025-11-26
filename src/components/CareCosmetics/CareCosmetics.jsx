@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import careImgTest from '../../img/careCosmeticsImages/test.jpg';
 import decorativeCosmeticBrand from '../../img/decoraticeCosmeticsImages/decorativeStm.jpg';
@@ -13,7 +14,11 @@ import CareCosmeticsOrderPopup  from "./CareCosmeticsOrderPopup";
 
 import { 
     careCosmeticsConsultPopup,
-    careCosmeticsOrderPopup
+    careCosmeticsConsultInput,
+    careCosmeticConsultPolicyHandler,
+    careCosmeticConsultPopupValidate,
+    careCosmeticsOrderPopup,
+    careCosmeticsOrderInput
 } from '../../redux/slices/innerPageSlice';
 
 const CareCosmetics = () => {
@@ -22,13 +27,74 @@ const CareCosmetics = () => {
     const consultPopupState = useSelector((state) => state.innerPage.careCosmetic.consultPopup);
     const orderPopupState = useSelector((state) => state.innerPage.careCosmetic.orderPopup);
 
+    const consultPopupRefs = [
+        {name: 'name', ref: useRef(null)},
+        {name: 'phone', ref: useRef(null)},
+        {name: 'email', ref: useRef(null)},
+    ];
+
+    const orderPopupRefs = [
+        {name: 'name', ref: useRef(null)},
+        {name: 'phone', ref: useRef(null)},
+        {name: 'email', ref: useRef(null)},
+        {name: 'comment', ref: useRef(null)},
+        {name: 'file', ref: useRef(null)},
+    ];
+
+    const findInputRef = (inputType, inputRefs) => {
+        if (!inputRefs || (inputRefs && inputRefs.length === 0)) return;
+        return inputRefs.find((item) => item.name === inputType).ref;
+    };
+
     const careCosmeticConsultPopupHandler = () => {
         dispatch(careCosmeticsConsultPopup());
+    };
+
+    const careCosmeticConsultInputHandler = (inputId, inputType, inputRef) => {
+        dispatch(careCosmeticsConsultInput({inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
+    };
+
+    const careCosmeticConsultClearInputHandler = (e, inputId, inputType) => {
+        if (e.key === 'Backspace') {
+            dispatch(careCosmeticsConsultInput({inputId: inputId, inputType: inputType, inputValue: '', clear: true}));
+            return;
+        }
+    };
+
+    const careCosmeticPolicyHandler = () => {
+        dispatch(careCosmeticConsultPolicyHandler());
+    };
+
+    const careCosmeticConsultSendFormHandler = () => {
+        const sendData = {
+            'clientName': consultPopupState.fields.find((item) => item.name === 'name' && item.valid).value,
+            'clientPhone': consultPopupState.fields.find((item) => item.name === 'phone' && item.valid).value,
+            'clientEmail': consultPopupState.fields.find((item) => item.name === 'email' && item.valid).value
+        };
+        console.log(sendData);
     };
 
     const careCosmeticOrderPopupHandler = () => {
         dispatch(careCosmeticsOrderPopup());
     };
+
+    const careCosmeticOrderInputHandler = (inputId, inputType, inputRef, clear) => {
+        if (inputType === 'file') {
+            return;
+        }
+        dispatch(careCosmeticsOrderInput({ inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
+    };
+
+    const careCosmeticOrderClearInputHandler = (e, inputId, inputType, inputValue) => {
+        if (e.key === 'Backspace') {
+            dispatch(careCosmeticsOrderInput({inputId: inputId, inputType: inputType, inputValue: inputValue, clear: true}));
+            return;
+        }
+    }
+
+    useEffect(() => {
+        dispatch(careCosmeticConsultPopupValidate());
+    }, [consultPopupState])
 
     return (
         <React.Fragment>
@@ -44,6 +110,13 @@ const CareCosmetics = () => {
                             {consultPopupState.active ? 
                                 <CareCosmeticsConsultPopup
                                     closeHandler={careCosmeticConsultPopupHandler}
+                                    formState={consultPopupState}
+                                    findInputRef={findInputRef}
+                                    inputHandler={careCosmeticConsultInputHandler}
+                                    clearInputHandler={careCosmeticConsultClearInputHandler}
+                                    policyHandler={careCosmeticPolicyHandler}
+                                    sendFormHandler={careCosmeticConsultSendFormHandler}
+                                    formRefs={consultPopupRefs}
                                 />
                             : null}
                            
@@ -87,7 +160,12 @@ const CareCosmetics = () => {
                         <div className="decorative-cosmetics-information-row">
                             {orderPopupState.active ? 
                                 <CareCosmeticsOrderPopup
+                                    formState={orderPopupState}
+                                    formRefs={orderPopupRefs}
+                                    findInputRef={findInputRef}
                                     closeHandler={careCosmeticOrderPopupHandler}
+                                    inputHandler={careCosmeticOrderInputHandler}
+                                    clearInputHandler={careCosmeticOrderClearInputHandler}
                                 />
                             : null}
                             <div className="decorative-cosmetics-information-text-wrap">

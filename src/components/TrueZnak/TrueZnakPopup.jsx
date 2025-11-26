@@ -21,7 +21,7 @@ const TrueZnakPopup = (props) => {
                             {formState.fields.map((formItem) => {
                                 return (
                                     <React.Fragment key={formItem.id}>
-                                        <label htmlFor={`znak-input-${formItem.id}`}>Имя</label>
+                                        <label htmlFor={`znak-input-${formItem.id}`}>{formItem.title}</label>
                                         <div className="znak-form-input-wrap">
                                             <input
                                                 className={!formItem.valid ? 'input-err' : ''}

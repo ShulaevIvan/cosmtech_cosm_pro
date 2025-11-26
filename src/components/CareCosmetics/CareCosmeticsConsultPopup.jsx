@@ -1,6 +1,9 @@
 import React from "react";
 
 const CareCosmeticsConsultPopup = (props) => {
+    const formState = props.formState;
+    const formRefs = props.formRefs;
+
     return (
         <React.Fragment>
             <div className="decorative-cosmetic-consult-popup-wrap">
@@ -14,28 +17,44 @@ const CareCosmeticsConsultPopup = (props) => {
                     <h3>Получить консультацию</h3>
                 </div>
                 <div className="decorative-cosmetic-consult-popup-form-wrap">
-                    <label htmlFor="decorative-cosmetic-consult-popup-form-input-1">Имя</label>
-                    <div className="decorative-cosmetic-consult-popup-form-input">
-                        <input className="" id="decorative-cosmetic-consult-popup-form-input-1" type="text" placeholder="Ваше имя" />
-                    </div>
-                    <label htmlFor="decorative-cosmetic-consult-popup-form-input-2">Телефон</label>
-                    <div className="decorative-cosmetic-consult-popup-form-input">
-                        <input className="" id="decorative-cosmetic-consult-popup-form-input-2" type="text" placeholder="8xxxxxxxxxx" />
-                    </div>
-                    <label htmlFor="decorative-cosmetic-consult-popup-form-input-3">Email</label>
-                    <div className="decorative-cosmetic-consult-popup-form-input">
-                        <input className="" id="decorative-cosmetic-consult-popup-form-input-3" type="text" placeholder="demo@....ru" />
-                    </div>
+                    {formState.fields.map((formItem) => {
+                        return (
+                            <React.Fragment key={formItem.id}>
+                                <label htmlFor={`care-cosmetic-consult-popup-form-input-${formItem.id}`}>
+                                    {formItem.title}
+                                </label>
+                                    <div className="decorative-cosmetic-consult-popup-form-input">
+                                        <input
+                                            className={!formItem.valid ? 'input-err' : ''}
+                                            ref={props.findInputRef(formItem.name, formRefs)}
+                                            onChange={() => props.inputHandler(formItem.id, formItem.name, props.findInputRef(formItem.name, formRefs).current)}
+                                            onKeyDown={(e) => props.clearInputHandler(e, formItem.id, formItem.name, null, true)}
+                                            id={`care-cosmetic-consult-popup-form-input-${formItem.id}`} 
+                                            type={formItem.type}
+                                            value={formItem.value}
+                                            placeholder={formItem.placeholder}
+                                        />
+                                    </div>
+                            </React.Fragment>
+                        )
+                    })}
                 </div>
                 <div className="decor-cosmetic-get-consult-checkbox-wrap">
                     <div className="form-mode-decor-cosmetic-get-consult-checkbox">
                         <input type="checkbox" id="decor-cosmetic-consult-checkbox" className="decor-cosmetic-get-consult-checkbox" />
-                        <label htmlFor="decor-cosmetic-consult-checkbox"></label>
+                        <label 
+                            htmlFor="decor-cosmetic-consult-checkbox"
+                            onClick={props.policyHandler}
+                        ></label>
                         <span>согласен с <a href="/policy">политикой конфидициальности</a></span>
                     </div>
                 </div>
                 <div className="decorative-cosmetic-consult-popup-form-send-btn-wrap">
-                    <a className="decorative-cosmetic-consult-popup-form-send-btn btnDisabled" href="/decorative-cosmetics">Отправить</a>
+                    <a 
+                        className={`decorative-cosmetic-consult-popup-form-send-btn ${!formState.sendBtnActive ? 'btnDisabled': ''}`} 
+                        onClick={props.sendFormHandler}
+                        href="#"
+                    >Отправить</a>
                 </div>
             </div>
         </React.Fragment>
