@@ -47,6 +47,7 @@ const TrueZnakPopup = (props) => {
                             <div className="znak-form-send-btn-wrap">
                                 <span 
                                     className={props.formState.sendBtnActive ? 'znak-form-send-btn' : "znak-form-send-btn btnDisabled"}
+                                    onClick={props.sendFormHandler}
                                 >Отправить</span>
                             </div>
                            

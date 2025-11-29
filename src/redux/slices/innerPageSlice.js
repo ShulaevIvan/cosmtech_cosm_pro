@@ -1904,7 +1904,8 @@ const initialState = {
         happyStatePopup: {
             active: false,
             title: 'Test Title',
-            description: 'Message'
+            description: 'Message',
+            orderNumber: ''
         },
     }
 };
@@ -2172,6 +2173,29 @@ export const sendContactUsOrder = createAsyncThunk(
         return data;
     }
 );
+
+export const sendZnakConsult = createAsyncThunk(
+    'sendZnakConsult',
+    async (sendData) => {
+        console.log(sendData)
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/true-znak-service/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: sendData.clientName,
+                phone: sendData.clientPhone
+            }),
+        });
+
+        const data = await response.json();
+        return data;
+    }
+);
+
+
 const innerPageSlice = createSlice({
     name: 'innerPage',
     initialState,
@@ -3379,6 +3403,9 @@ const innerPageSlice = createSlice({
             }
             if (!state.trueZnak.popup.active) state.trueZnak.popup = initialState.trueZnak.popup;
         },
+        znakPopupHappyState(state) {
+            state.trueZnak = initialState.trueZnak;
+        },
         znakPopupInput(state, action) {
             const { fieldId, fieldType, fieldValue } = action.payload;
             let inputValid;
@@ -3626,6 +3653,20 @@ const innerPageSlice = createSlice({
                 };
             }
         })
+        .addCase(sendZnakConsult.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+            if (status && status === 'ok') {
+                state.trueZnak.happyStatePopup = {
+                    ...state.trueZnak.happyStatePopup,
+                    active: true,
+                    title: description.title,
+                    description: description.description,
+                    orderNumber: description.order
+                }
+                return;
+            }
+            state.trueZnak.happyStatePopup = initialState.trueZnak.happyStatePopup;
+        })
     }
 });
 
@@ -3714,6 +3755,7 @@ export const {
     znakPopupPolicy,
     znakPopupInput,
     znakClearPopupInput,
+    znakPopupHappyState,
     validateZnakPopupForm
 } = innerPageSlice.actions;
 export default innerPageSlice.reducer;

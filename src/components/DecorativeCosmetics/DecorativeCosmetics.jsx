@@ -10,6 +10,7 @@ import DecorativeCosmeticsConsultPopup from "./DecorativeCosmeticsConsultPopup";
 import DecorativeCosmeticsOrderPopup from "./DecorativeCosmeticsOrderPopup";
 import DecorativeCosmeticsConsultHappyState from "./DecorativeCosmeticsConsultHappyState";
 import DecorativeCosmeticsOrderHappyState from "./DecorativeCosmeticsOrderHappyState";
+import TrueZnak from "../TrueZnak/TrueZnak";
 import fileToBase64 from "../../functions/fileToBase64";
 
 import { 
@@ -306,6 +307,7 @@ const DecorativeCosmetics = () => {
                         </div>
                     </div>
                 </section>
+                <TrueZnak />
                 <section>
                     <div className="container">
                         <div className="about-company-production-title-wrap">

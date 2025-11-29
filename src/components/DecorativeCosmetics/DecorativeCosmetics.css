@@ -353,6 +353,7 @@
 }
 .decorative-cosmetic-consult-popup-body h3 {
     margin-bottom: 20px;
+    text-align: center;
 }
 .decorative-cosmetic-consult-popup-form-wrap {
     display: flex;
@@ -714,6 +715,8 @@
 @media (max-width: 800px) { 
     .decorative-cosmetics-types-items-row {
         width: 100%;
+        order: 2;
+        margin-top: 40px;
 
     }
 }

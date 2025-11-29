@@ -9,7 +9,9 @@ import {
     znakPopupPolicy,
     znakPopupInput,
     znakClearPopupInput,
-    validateZnakPopupForm
+    znakPopupHappyState,
+    validateZnakPopupForm,
+    sendZnakConsult
 } from "../../redux/slices/innerPageSlice";
 
 import TrueZnakPopup from "./TrueZnakPopup";
@@ -22,6 +24,7 @@ import TrueZnakMinus from '../../img/minus-icon-quest.svg'
 const TrueZnak = () => {
     const znakState = useSelector((state) => state.innerPage.trueZnak);
     const znakPopupForm = useSelector((state) => state.innerPage.trueZnak.popup);
+    const znakHappyState = useSelector((state) => state.innerPage.trueZnak.happyStatePopup);
     const dispatch = useDispatch();
 
     const znakPopupFormRefs = [
@@ -41,6 +44,10 @@ const TrueZnak = () => {
         dispatch(znakPopup());
     };
 
+    const happyStatePopupCloseHandler = () => {
+        dispatch(znakPopupHappyState())
+    };
+
     const znakPolicyHandler = () => {
         dispatch(znakPopupPolicy());
     };
@@ -53,6 +60,14 @@ const TrueZnak = () => {
         if (e.key === 'Backspace') {
             dispatch(znakClearPopupInput({inputId: inputId}))
         }
+    };
+
+    const znakSendFormHandler = () => {
+        const sendData =  {
+            clientName : znakPopupForm.fields.find((item) => item.name === 'name' && item.valid).value,
+            clientPhone : znakPopupForm.fields.find((item) => item.name === 'phone' && item.valid).value
+        };
+        dispatch(sendZnakConsult(sendData));
     };
 
     useEffect(() => {
@@ -69,11 +84,14 @@ const TrueZnak = () => {
                     clearInputHandler={znakClearInputHandler}
                     policyHandler={znakPolicyHandler}
                     findInputRef={findInputRef}
+                    sendFormHandler={znakSendFormHandler}
                 /> 
             : null}
             {znakState.happyStatePopup.active ? 
-                <TrueZnakHappyState 
-                    closeHandler={znakPopupHandler}
+                <TrueZnakHappyState
+                    title={znakHappyState.title}
+                    description={znakHappyState.description} 
+                    closeHandler={happyStatePopupCloseHandler}
                 /> 
             : null}
             <section>
@@ -82,7 +100,7 @@ const TrueZnak = () => {
                         
                         <div className="true-znak-image-wrap">
                             <div className="true-znak-img-wrap">
-                                <img src={TrueZnakLogo2} alt="#" />
+                                <img src={TrueZnakLogo2} alt="Контрактное производство косметики под Честный Знак. Маркировка косметики честный знак" />
                             </div>
                             <div className="true-znak-btn-wrap">
                                 <Link 
@@ -94,10 +112,10 @@ const TrueZnak = () => {
                         <div className="true-znak-content-wrap">
                             <h3>Производство косметики и «Честный знак»</h3>
                             <p className="true-znak-text-min">
-                                На нашем производстве полностью внедрена система <strong>«Честный знак»</strong>.
+                                На нашем производстве полностью внедрена система цифровой маркировки товаров <strong>«Честный знак»</strong>.
                                 Вся выпускаемая продукция для ваших покупателей отвечает всем нормативным требованиям.
                             </p>
-                            <p className="true-znak-text-min">Специфику работы можно уточнить у менеджера.</p>
+                            <p className="true-znak-text-min">Специфику работы по системе «ЧЗ» можно уточнить у менеджера.</p>
                             <h3>Часто задаваемые вопросы</h3>
                             <div className="true-znak-questions-wrap">
                                 {znakState.questions.map((questItem) => {
