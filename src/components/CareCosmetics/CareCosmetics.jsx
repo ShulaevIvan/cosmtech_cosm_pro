@@ -11,14 +11,20 @@ import TrueZnak from "../TrueZnak/TrueZnak";
 import ExcursionToProduction from "../ExcursionToProduction/ExcursionToProduction";
 import CareCosmeticsConsultPopup from "./CareCosmeticsConsultPopup";
 import CareCosmeticsOrderPopup  from "./CareCosmeticsOrderPopup";
+import CareCosmeticsConsultPopupHappyState from "./CareCosmeticsConsultPopupHappyState";
 
 import { 
     careCosmeticsConsultPopup,
     careCosmeticsConsultInput,
     careCosmeticConsultPolicyHandler,
     careCosmeticConsultPopupValidate,
+    careCosmeticConsultPopupHappyState,
+    sendCareCosmeticConsult,
     careCosmeticsOrderPopup,
-    careCosmeticsOrderInput
+    careCosmeticsOrderInput,
+    careCosmeticOrderPolicy,
+    careCosmeticOrderPopupValidate,
+    sendCareCosmeticOrder
 } from '../../redux/slices/innerPageSlice';
 
 const CareCosmetics = () => {
@@ -37,12 +43,13 @@ const CareCosmetics = () => {
         {name: 'name', ref: useRef(null)},
         {name: 'phone', ref: useRef(null)},
         {name: 'email', ref: useRef(null)},
-        {name: 'comment', ref: useRef(null)},
         {name: 'file', ref: useRef(null)},
+        {name: 'comment', ref: useRef(null)},
     ];
 
     const findInputRef = (inputType, inputRefs) => {
         if (!inputRefs || (inputRefs && inputRefs.length === 0)) return;
+
         return inputRefs.find((item) => item.name === inputType).ref;
     };
 
@@ -66,12 +73,23 @@ const CareCosmetics = () => {
     };
 
     const careCosmeticConsultSendFormHandler = () => {
+        const clientName = consultPopupState.fields.find((item) => item.name === 'name' && item.valid);
+        const clientPhone = consultPopupState.fields.find((item) => item.name === 'phone' && item.valid);
+        const clientEmail = consultPopupState.fields.find((item) => item.name === 'email' && item.valid);
+
+        if ((clientPhone && !clientPhone.value) && (clientEmail && !clientEmail.value)) return;
+
         const sendData = {
-            'clientName': consultPopupState.fields.find((item) => item.name === 'name' && item.valid).value,
-            'clientPhone': consultPopupState.fields.find((item) => item.name === 'phone' && item.valid).value,
-            'clientEmail': consultPopupState.fields.find((item) => item.name === 'email' && item.valid).value
+            clientName: clientName && clientName.value ? clientName.value : '',
+            clientPhone: clientPhone && clientPhone.value ? clientPhone.value : '',
+            clientEmail: clientEmail && clientEmail.value ? clientEmail.value : '',
+            orderType: 'consult'
         };
-        console.log(sendData);
+        dispatch(sendCareCosmeticConsult(sendData));
+    };
+
+    const careCosmeticConsultHappyStateHandler = () => {
+        dispatch(careCosmeticConsultPopupHappyState());
     };
 
     const careCosmeticOrderPopupHandler = () => {
@@ -79,7 +97,8 @@ const CareCosmetics = () => {
     };
 
     const careCosmeticOrderInputHandler = (inputId, inputType, inputRef, clear) => {
-        if (inputType === 'file') {
+        if (inputType === 'file' && inputRef.files && inputRef.files.length > 0) {
+            dispatch(careCosmeticsOrderInput({ inputId: inputId, inputType: inputType, inputValue: inputRef.files[0]}));
             return;
         }
         dispatch(careCosmeticsOrderInput({ inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
@@ -90,11 +109,38 @@ const CareCosmetics = () => {
             dispatch(careCosmeticsOrderInput({inputId: inputId, inputType: inputType, inputValue: inputValue, clear: true}));
             return;
         }
-    }
+    };
+
+    const careCosmeticOrderPolicyHandler = () => {
+        dispatch(careCosmeticOrderPolicy());
+    };
+
+    const careCosmeticOrderSendForm = () => {
+        const clientName = orderPopupState.fields.find((item) => item.name === 'name' && item.valid);
+        const clientPhone = orderPopupState.fields.find((item) => item.name === 'phone' && item.valid);
+        const clientEmail = orderPopupState.fields.find((item) => item.name === 'email' && item.valid);
+        const clientFile = orderPopupState.fields.find((item) => item.name === 'file' && item.fileData);
+
+        if ((clientPhone && !clientPhone.value) && (clientEmail && !clientEmail.value)) return;
+
+        const sendData = {
+            clientName: clientName,
+            clientPhone: clientPhone,
+            clientEmail: clientEmail,
+            fileData: clientFile,
+            orderType: 'order'
+        }
+
+        dispatch(sendCareCosmeticOrder(sendData));
+    };
 
     useEffect(() => {
         dispatch(careCosmeticConsultPopupValidate());
-    }, [consultPopupState])
+    }, [consultPopupState]);
+
+    useEffect(() => {
+        dispatch(careCosmeticOrderPopupValidate());
+    }, [orderPopupState]);
 
     return (
         <React.Fragment>
@@ -119,7 +165,14 @@ const CareCosmetics = () => {
                                     formRefs={consultPopupRefs}
                                 />
                             : null}
-                           
+
+                            {consultPopupState.happyState.active ? 
+                                <CareCosmeticsConsultPopupHappyState 
+                                    title={consultPopupState.happyState.title}
+                                    description={consultPopupState.happyState.description}
+                                    closeHandler={careCosmeticConsultHappyStateHandler}
+                                /> 
+                            : null}
                             <div className="decorative-cosmetics-types-items-row">
                                 {careCosmeticState.cosmeticTypes.map((cosmeticItem) => {
                                     return (
@@ -142,8 +195,7 @@ const CareCosmetics = () => {
                                 </div>
                                 <div className="decorative-cosmetics-types-btn-wrap">
                                     <Link
-                                        onClick={careCosmeticConsultPopupHandler} 
-                                        to={'#'} 
+                                        onClick={careCosmeticConsultPopupHandler}
                                         className="decorative-cosmetics-types-btn"
                                     >Получить консультацию</Link>
                                 </div>
@@ -166,6 +218,8 @@ const CareCosmetics = () => {
                                     closeHandler={careCosmeticOrderPopupHandler}
                                     inputHandler={careCosmeticOrderInputHandler}
                                     clearInputHandler={careCosmeticOrderClearInputHandler}
+                                    policyHandler={careCosmeticOrderPolicyHandler}
+                                    sendFormHandler={careCosmeticOrderSendForm}
                                 />
                             : null}
                             <div className="decorative-cosmetics-information-text-wrap">

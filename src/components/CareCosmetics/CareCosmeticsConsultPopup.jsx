@@ -53,7 +53,6 @@ const CareCosmeticsConsultPopup = (props) => {
                     <a 
                         className={`decorative-cosmetic-consult-popup-form-send-btn ${!formState.sendBtnActive ? 'btnDisabled': ''}`} 
                         onClick={props.sendFormHandler}
-                        href="#"
                     >Отправить</a>
                 </div>
             </div>

@@ -1493,11 +1493,6 @@ const initialState = {
             active: false,
             sendBtnActive: false,
             policyActive: false,
-            happyState: {
-                active: false,
-                title: '',
-                description: ''
-            },
             fields: [
                 {
                     id: 1,
@@ -1529,8 +1524,9 @@ const initialState = {
             ],
             happyState: {
                 active: false,
+                title: '',
                 description: ''
-            }
+            },
         },
         orderPopup: {
             active: false,
@@ -1661,11 +1657,6 @@ const initialState = {
             active: false,
             sendBtnActive: false,
             policyActive: false,
-            happyState: {
-                active: false,
-                title: '',
-                description: ''
-            },
             fields: [
                 {
                     id: 1,
@@ -1697,8 +1688,9 @@ const initialState = {
             ],
             happyState: {
                 active: false,
+                title: '',
                 description: ''
-            }
+            },
         },
         orderPopup: {
             active: false,
@@ -2177,7 +2169,6 @@ export const sendContactUsOrder = createAsyncThunk(
 export const sendZnakConsult = createAsyncThunk(
     'sendZnakConsult',
     async (sendData) => {
-        console.log(sendData)
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/true-znak-service/`, {
             method: 'POST',
             headers: {
@@ -2188,6 +2179,51 @@ export const sendZnakConsult = createAsyncThunk(
                 name: sendData.clientName,
                 phone: sendData.clientPhone
             }),
+        });
+
+        const data = await response.json();
+        return data;
+    }
+);
+
+export const sendCareCosmeticConsult = createAsyncThunk(
+    'sendCareCosmeticConsult',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/care-cosmetic/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: sendData.clientName,
+                phone: sendData.clientPhone,
+                email: sendData.clientEmail,
+                orderType: sendData.orderType
+            })
+        });
+
+        const data = await response.json();
+        return data;
+    }
+);
+
+export const sendCareCosmeticOrder = createAsyncThunk(
+    'sendCareCosmeticOrder',
+    async (sendData) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/care-cosmetic/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: sendData.clientName,
+                phone: sendData.clientPhone,
+                email: sendData.clientEmail,
+                file: sendData.fileData ? sendData.fileData : '',
+                orderType: sendData.orderType
+            })
         });
 
         const data = await response.json();
@@ -2318,7 +2354,7 @@ const innerPageSlice = createSlice({
             });
         },
         clearContactsInput(state, action) {
-            const { inputType, inputValue } = action.payload;
+            const { inputType } = action.payload;
             state.contacts.contactsForm.fields = state.contacts.contactsForm.fields.map((fieldItem) => {
                 if (fieldItem.fieldName === inputType) {
                     return {
@@ -3251,6 +3287,9 @@ const innerPageSlice = createSlice({
             state.careCosmetic.consultPopup.sendBtnActive = false;
 
         },
+        careCosmeticConsultPopupHappyState(state) {
+            state.careCosmetic.consultPopup = initialState.careCosmetic.consultPopup;
+        },
         careCosmeticsOrderPopup(state) {
             state.careCosmetic.orderPopup.active = state.careCosmetic.orderPopup.active ? false : true;
             if (!state.careCosmetic.orderPopup.active) {
@@ -3277,7 +3316,7 @@ const innerPageSlice = createSlice({
                 return;
             }
             state.careCosmetic.orderPopup.fields = state.careCosmetic.orderPopup.fields.map((fieldItem) => {
-                if (fieldItem.id === inputId && fieldItem.name === inputType) {
+                if (fieldItem.id === inputId && fieldItem.name === inputType && fieldItem.name !== 'file') {
                     switch(inputType) {
                         case 'name':
                             inputValid = validateName(inputValue);
@@ -3295,6 +3334,7 @@ const innerPageSlice = createSlice({
                         case 'email':
                             inputValid = !validateMail(inputValue) ? true : false
                             validValue = inputValue;
+                            break;
                         default:
                             break;
                     }
@@ -3304,8 +3344,30 @@ const innerPageSlice = createSlice({
                         valid: inputValid
                     }
                 }
+                else if (fieldItem.id === inputId && fieldItem.name === inputType && fieldItem.name === 'file') {
+                    return {
+                        ...fieldItem,
+                        fileData: inputValue,
+                        displayName: inputValue.name
+                    }
+                }
                 return fieldItem;
-            })
+            });
+        },
+        careCosmeticOrderPolicy(state) {
+            state.careCosmetic.orderPopup.policyActive = state.careCosmetic.orderPopup.policyActive ? false : true;
+        },
+        careCosmeticOrderPopupValidate(state) {
+            const clientName = state.careCosmetic.orderPopup.fields.find((item) => item.name === 'name' && item.valid && item.value);
+            const clientPhone = state.careCosmetic.orderPopup.fields.find((item) => item.name === 'phone' && item.valid && item.value);
+            const clientEmail = state.careCosmetic.orderPopup.fields.find((item) => item.name === 'email' && item.valid && item.value);
+            const policyActive = state.careCosmetic.orderPopup.policyActive;
+
+            if ((clientName && clientName.valid && policyActive) && (clientPhone && clientPhone.valid) || (clientEmail && clientEmail.valid)) {
+                state.careCosmetic.orderPopup.sendBtnActive = true;
+                return;
+            }
+            state.careCosmetic.orderPopup.sendBtnActive = false;
         },
         aboutProductionVideoMenu(state, action) {
             const { catId, catName } = action.payload;
@@ -3667,6 +3729,21 @@ const innerPageSlice = createSlice({
             }
             state.trueZnak.happyStatePopup = initialState.trueZnak.happyStatePopup;
         })
+        .addCase(sendCareCosmeticConsult.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+
+            if (status && status === 'ok') {
+                state.careCosmetic.consultPopup.happyState = {
+                    ...state.careCosmetic.consultPopup.happyState,
+                    active: true,
+                    title: description.title,
+                    description: description.description,
+                    orderNumber: description.order
+                }
+                return;
+            }
+            state.careCosmetic.consultPopup = initialState.careCosmetic.consultPopup;
+        })
     }
 });
 
@@ -3744,8 +3821,11 @@ export const {
     careCosmeticsConsultInput,
     careCosmeticConsultPolicyHandler,
     careCosmeticConsultPopupValidate,
+    careCosmeticConsultPopupHappyState,
     careCosmeticsOrderPopup,
     careCosmeticsOrderInput,
+    careCosmeticOrderPolicy,
+    careCosmeticOrderPopupValidate,
     aboutProductionVideoMenu,
     aboutProductionSelectVideo,
     showMoreTmItem,

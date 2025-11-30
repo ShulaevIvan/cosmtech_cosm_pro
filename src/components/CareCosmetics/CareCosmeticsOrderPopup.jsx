@@ -3,7 +3,7 @@ import React from "react";
 const CareCosmeticsOrderPopup = (props) => {
     const formState = props.formState;
     const formRefs = props.formRefs;
-
+    
     return (
         <React.Fragment>
             <div className="decorative-cosmetic-order-popup-wrap">
@@ -37,7 +37,7 @@ const CareCosmeticsOrderPopup = (props) => {
                                                         )}
                                                     />
                                                     <span className="input-file-btn">Прикрепить ТЗ</span>
-                                                    <span className="input-file-display-name"></span>
+                                                    <span className="input-file-display-name">{fieldItem.displayName}</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -101,13 +101,17 @@ const CareCosmeticsOrderPopup = (props) => {
                         <input 
                             type="checkbox" 
                             id="decor-cosmetic-consult-checkbox" 
-                            className="decor-cosmetic-get-consult-checkbox" 
+                            className="decor-cosmetic-get-consult-checkbox"
+                            onChange={props.policyHandler} 
                         />
                         <label htmlFor="decor-cosmetic-consult-checkbox"></label>
                         <span>согласен с <a href="/policy">политикой конфидициальности</a></span>
                     </div>
                     <div className="decorative-cosmetic-order-form-btn-wrap">
-                        <a className="decorative-cosmetic-order-form-btn btnDisabled">Отправить</a>
+                        <a 
+                            className={`decorative-cosmetic-order-form-btn ${!formState.sendBtnActive ? 'btnDisabled' : null}`}
+                            onClick={props.sendFormHandler}
+                        >Отправить</a>
                     </div>
                 </div>
             </div>
