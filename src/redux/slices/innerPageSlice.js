@@ -2217,13 +2217,7 @@ export const sendCareCosmeticOrder = createAsyncThunk(
                 'Authorization': `Token ${process.env.REACT_APP_API_TOKEN}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                name: sendData.clientName,
-                phone: sendData.clientPhone,
-                email: sendData.clientEmail,
-                file: sendData.fileData ? sendData.fileData : '',
-                orderType: sendData.orderType
-            })
+            body: JSON.stringify(sendData)
         });
 
         const data = await response.json();
@@ -3362,12 +3356,20 @@ const innerPageSlice = createSlice({
             const clientPhone = state.careCosmetic.orderPopup.fields.find((item) => item.name === 'phone' && item.valid && item.value);
             const clientEmail = state.careCosmetic.orderPopup.fields.find((item) => item.name === 'email' && item.valid && item.value);
             const policyActive = state.careCosmetic.orderPopup.policyActive;
-
-            if ((clientName && clientName.valid && policyActive) && (clientPhone && clientPhone.valid) || (clientEmail && clientEmail.valid)) {
+            console.log(policyActive)
+            if ((clientName && clientName.valid && policyActive) && ((clientPhone && clientPhone.valid) || (clientEmail && clientEmail.valid))) {
                 state.careCosmetic.orderPopup.sendBtnActive = true;
                 return;
             }
             state.careCosmetic.orderPopup.sendBtnActive = false;
+        },
+        careCosmeticOrderPopupHappyState(state) {
+            state.careCosmetic.orderPopup.happyState = {
+                ...state.careCosmetic.orderPopup.happyState,
+                active: state.careCosmetic.orderPopup.happyState.active ? false : true
+            }
+            if (!state.careCosmetic.orderPopup.happyState.active) state.careCosmetic.orderPopup = initialState.careCosmetic.orderPopup;
+
         },
         aboutProductionVideoMenu(state, action) {
             const { catId, catName } = action.payload;
@@ -3744,6 +3746,20 @@ const innerPageSlice = createSlice({
             }
             state.careCosmetic.consultPopup = initialState.careCosmetic.consultPopup;
         })
+        .addCase(sendCareCosmeticOrder.fulfilled, (state, action) => {
+            const { status, description } = action.payload;
+
+            if (status && status === 'ok') {
+                state.careCosmetic.orderPopup.happyState = {
+                    ...state.careCosmetic.orderPopup.happyState,
+                    active: true,
+                    title: description.title,
+                    description: description.description,
+                    orderNumber: description.order
+                }
+                return;
+            }
+        });
     }
 });
 
@@ -3826,6 +3842,7 @@ export const {
     careCosmeticsOrderInput,
     careCosmeticOrderPolicy,
     careCosmeticOrderPopupValidate,
+    careCosmeticOrderPopupHappyState,
     aboutProductionVideoMenu,
     aboutProductionSelectVideo,
     showMoreTmItem,

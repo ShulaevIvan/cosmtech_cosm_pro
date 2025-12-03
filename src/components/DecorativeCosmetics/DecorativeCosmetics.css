@@ -493,6 +493,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    text-align: center;
     justify-content: center;
 }
 .decorative-cosmetic-order-form-wrap {

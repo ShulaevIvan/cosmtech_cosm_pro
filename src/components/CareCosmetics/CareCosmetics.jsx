@@ -12,6 +12,7 @@ import ExcursionToProduction from "../ExcursionToProduction/ExcursionToProductio
 import CareCosmeticsConsultPopup from "./CareCosmeticsConsultPopup";
 import CareCosmeticsOrderPopup  from "./CareCosmeticsOrderPopup";
 import CareCosmeticsConsultPopupHappyState from "./CareCosmeticsConsultPopupHappyState";
+import CareCosmeticsOrderPopupHappyState from "./CareCosmeticsOrderPopupHappyState";
 
 import { 
     careCosmeticsConsultPopup,
@@ -24,15 +25,18 @@ import {
     careCosmeticsOrderInput,
     careCosmeticOrderPolicy,
     careCosmeticOrderPopupValidate,
-    sendCareCosmeticOrder
+    sendCareCosmeticOrder,
+    careCosmeticOrderPopupHappyState
 } from '../../redux/slices/innerPageSlice';
+
+import fileToBase64 from "../../functions/fileToBase64";
 
 const CareCosmetics = () => {
     const dispatch = useDispatch();
     const careCosmeticState = useSelector((state) => state.innerPage.careCosmetic);
     const consultPopupState = useSelector((state) => state.innerPage.careCosmetic.consultPopup);
     const orderPopupState = useSelector((state) => state.innerPage.careCosmetic.orderPopup);
-
+    console.log(orderPopupState)
     const consultPopupRefs = [
         {name: 'name', ref: useRef(null)},
         {name: 'phone', ref: useRef(null)},
@@ -96,9 +100,14 @@ const CareCosmetics = () => {
         dispatch(careCosmeticsOrderPopup());
     };
 
-    const careCosmeticOrderInputHandler = (inputId, inputType, inputRef, clear) => {
+    const careCosmeticOrderInputHandler = async (inputId, inputType, inputRef, clear) => {
         if (inputType === 'file' && inputRef.files && inputRef.files.length > 0) {
-            dispatch(careCosmeticsOrderInput({ inputId: inputId, inputType: inputType, inputValue: inputRef.files[0]}));
+            if (inputRef.files && inputRef.files.length > 0) {
+                await fileToBase64(inputRef.files[0])
+                .then((data) => {
+                    dispatch(careCosmeticsOrderInput({ inputId: inputId, inputType: inputType, inputValue: data}));
+                });
+            }
             return;
         }
         dispatch(careCosmeticsOrderInput({ inputId: inputId, inputType: inputType, inputValue: inputRef.value}));
@@ -119,19 +128,25 @@ const CareCosmetics = () => {
         const clientName = orderPopupState.fields.find((item) => item.name === 'name' && item.valid);
         const clientPhone = orderPopupState.fields.find((item) => item.name === 'phone' && item.valid);
         const clientEmail = orderPopupState.fields.find((item) => item.name === 'email' && item.valid);
+        const clientComment = orderPopupState.fields.find((item) => item.name === 'comment' && item.valid);
         const clientFile = orderPopupState.fields.find((item) => item.name === 'file' && item.fileData);
 
         if ((clientPhone && !clientPhone.value) && (clientEmail && !clientEmail.value)) return;
 
         const sendData = {
-            clientName: clientName,
-            clientPhone: clientPhone,
-            clientEmail: clientEmail,
-            fileData: clientFile,
+            name: clientName.value,
+            phone: clientPhone.value,
+            email: clientEmail.value,
+            comment: clientComment.value,
+            fileData: clientFile ? clientFile.fileData : '',
             orderType: 'order'
-        }
+        };
 
         dispatch(sendCareCosmeticOrder(sendData));
+    };
+
+    const careCosmeticOrderHappyStateHandler = () => {
+        dispatch(careCosmeticOrderPopupHappyState());
     };
 
     useEffect(() => {
@@ -221,6 +236,14 @@ const CareCosmetics = () => {
                                     policyHandler={careCosmeticOrderPolicyHandler}
                                     sendFormHandler={careCosmeticOrderSendForm}
                                 />
+                            : null}
+                            {orderPopupState.happyState.active ?  
+                                <CareCosmeticsOrderPopupHappyState
+                                    closeHandler={careCosmeticOrderHappyStateHandler}
+                                    title={orderPopupState.happyState.title}
+                                    description={orderPopupState.happyState.description}
+                                    orderNumber={orderPopupState.happyState.orderNumber}
+                                /> 
                             : null}
                             <div className="decorative-cosmetics-information-text-wrap">
                                 
