@@ -3715,7 +3715,9 @@ const innerPageSlice = createSlice({
                         orderNumber: description.order
                     }
                 };
+                return;
             }
+            state.decorativeCosmeticsPage.orderPopup = initialState.decorativeCosmeticsPage.orderPopup;
         })
         .addCase(sendZnakConsult.fulfilled, (state, action) => {
             const { status, description } = action.payload;
@@ -3735,6 +3737,7 @@ const innerPageSlice = createSlice({
             const { status, description } = action.payload;
 
             if (status && status === 'ok') {
+                state.careCosmetic.consultPopup.active = false;
                 state.careCosmetic.consultPopup.happyState = {
                     ...state.careCosmetic.consultPopup.happyState,
                     active: true,
@@ -3750,6 +3753,7 @@ const innerPageSlice = createSlice({
             const { status, description } = action.payload;
 
             if (status && status === 'ok') {
+                state.careCosmetic.orderPopup.active = false;
                 state.careCosmetic.orderPopup.happyState = {
                     ...state.careCosmetic.orderPopup.happyState,
                     active: true,

@@ -313,6 +313,16 @@
     transition: background .4s ease;
     color: white;
 }
+.decorative-cosmetic-popup-bg-wrap {
+    background-color: rgba(0, 0, 0, .8);
+    min-height: 200vh;
+    width: 100vw;
+    top:0;
+    left:0;
+    position: fixed;
+    top: -50%;
+    z-index: 99;
+}
 .decorative-cosmetic-consult-popup-wrap {
     display: flex;
     flex-direction: column;

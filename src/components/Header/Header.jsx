@@ -8,8 +8,7 @@ import callbackIcon from '../../img/callback.svg';
 import sendmailIcon from '../../img/send_mail.svg';
 import mainLogoIcon from '../../img/logo_cosm_back.jpeg';
 import mainLogoMinIcon from '../../img/logo_cosm.png';
-import Snow from "../../functions/snow";
-import { getSeasonByDate } from "../../functions/getSeasonByDate";
+import { findEventScriptByDate } from "../../functions/findEventScriptByDate";
 
 import CallbackRequestPopup from "../CallbackRequestPopup/CallbackRequestPopup";
 import MobileMenu from "../MobileMenu/MobileMenu";
@@ -85,9 +84,8 @@ const Header = () => {
     }, []);
 
     useEffect(() => {
-        getSeasonByDate();
-        // new Snow();
-    }, [])
+        findEventScriptByDate();
+    }, []);
 
     // useEffect(() => {
     //     window.ym(97856473, 'hit', location.pathname);
